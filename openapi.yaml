@@ -1,0 +1,5070 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Metarisc API
+  contact:
+    email: contact@metarisc.fr
+    name: Metarisc
+    url: https://metarisc.fr
+  license:
+    url: http://www.cecill.info/licences/Licence_CeCILL-B_V1-fr.html
+    name: CECILL-B
+servers:
+  - url: https://api.metarisc.fr
+    description: Production
+  - url: https://testlp7ijwog-gateway.functions.fnc.fr-par.scw.cloud
+    description: Développement
+  - url: https://testlp7ijwog-mock.functions.fnc.fr-par.scw.cloud
+    description: Mock Server
+paths:
+  /anomalies:
+    get:
+      tags:
+        - Anomalies API
+      summary: Liste des anomalies
+      description: Liste des anomalies.
+      operationId: PaginateAnomalies
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: texte
+          in: query
+          description: Filtre sur le texte de l'anomalie
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AnomalieDECI'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: anomalies
+      x-extension-metarisc-codegen-operation: paginate-anomalies
+    post:
+      tags:
+        - Anomalies API
+      summary: Ajout d'une anomalie
+      description: Ajout d'une nouvelle anomalie DECI type pour une organisation.
+      operationId: PostAnomalies
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnomalieDECI'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalieDECI'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: anomalies
+      x-extension-metarisc-codegen-operation: post-anomalie
+  /anomalies/{anomalie_id}:
+    delete:
+      tags:
+        - Anomalies API
+      summary: Suppression d'une anomalie
+      description: Suppression d'une anomalie DECI type.
+      operationId: DeleteAnomalieAnomalies
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: anomalie_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: anomalies
+      x-extension-metarisc-codegen-operation: delete-anomalie
+    get:
+      tags:
+        - Anomalies API
+      summary: Détails d'une anomalie
+      description: Détails d'une anomalie type DECI.
+      operationId: GetAnomalieAnomalies
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: anomalie_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalieDECI'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: anomalies
+      x-extension-metarisc-codegen-operation: get-anomalie
+  /commissions:
+    get:
+      tags:
+        - Commissions API
+      summary: Liste des commissions
+      description: Liste des commissions.
+      operationId: PaginateCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Commission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: paginate-commissions
+    post:
+      tags:
+        - Commissions API
+      summary: Ajouter une commission
+      description: Ajoute une commission.
+      operationId: PostCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commission'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commission'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: post-commission
+  /commissions/{commission_id}/dates:
+    get:
+      tags:
+        - Commissions API
+      summary: Liste des dates de passage prévues de la commission
+      description: Récupération de la liste des dates de passage de la commission.
+      operationId: PaginateDatesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PassageCommission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: paginate-commission-dates
+    post:
+      tags:
+        - Commissions API
+      summary: Ajout d'une date de passage en commission
+      description: Ajout d'une date de passage en commission.
+      operationId: PostDatesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PassageCommission'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommission'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: post-commission-date
+  /commissions/{commission_id}/dates/{date_id}:
+    get:
+      tags:
+        - Commissions API
+      summary: Détail d'une date de passage en commission
+      description: Récupération d'une date de passage en commission.
+      operationId: GetDateDatesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommission'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: get-commission-date
+  /commissions/{commission_id}/dates/{date_id}/ordre_du_jour:
+    get:
+      tags:
+        - Commissions API
+      summary: Liste des dossiers d'une date de passage en commission
+      description: >-
+        Récupération d'une liste de dossiers à l'ordre du jour liés à une date
+        de passage en commission.
+      operationId: PaginateOrdreDuJourDateDatesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PassageCommissionDossier'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: paginate-commission-date-dossiers
+    post:
+      tags:
+        - Commissions API
+      summary: Ajout d'un dossier à l'ordre du jour
+      description: Ajout d'un dossier à l'ordre du jour d'un passage en commission.
+      operationId: PostOrdreDuJourDateDatesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PassageCommissionDossier'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommissionDossier'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: post-commission-date-dossier
+  /commissions/{commission_id}/dates/{date_id}/ordre_du_jour/{dossier_id}:
+    post:
+      tags:
+        - Commissions API
+      summary: Mise à jour d'un dossier lié à une date de passage en commission
+      description: >-
+        Mise à jour des détails d'un dossier lié à une date de passage en
+        commission
+      operationId: PostDossierOrdreDuJourDateDatesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PassageCommissionDossier'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommissionDossier'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: update-commission-date-dossier
+  /commissions/{commission_id}:
+    get:
+      tags:
+        - Commissions API
+      summary: Détails de la commission
+      description: Récupération des détails de la commission.
+      operationId: GetCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commission'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: get-commission
+  /contacts:
+    get:
+      tags:
+        - Contacts API
+      summary: Liste des contacts
+      description: Récupération de la liste des contacts.
+      operationId: PaginateContacts
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: contacts
+      x-extension-metarisc-codegen-operation: paginate-contacts
+      x-extension-metarisc-codegen-visibility: public
+  /contacts/{contact_id}:
+    delete:
+      tags:
+        - Contacts API
+      summary: Suppression d'un contact
+      description: Suppression d'une fiche contact existante.
+      operationId: DeleteContactContacts
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: contact_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: contacts
+      x-extension-metarisc-codegen-operation: delete-contact
+    get:
+      tags:
+        - Contacts API
+      summary: Détails d'un contact
+      description: Récupération d'une fiche contact.
+      operationId: GetContactContacts
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: contact_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: contacts
+      x-extension-metarisc-codegen-operation: get-contact
+    post:
+      tags:
+        - Contacts API
+      summary: Mise à jour d'un contact
+      description: Mise à jour d'une fiche contact existante.
+      operationId: PostContactContacts
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: contact_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: contacts
+      x-extension-metarisc-codegen-operation: update-contact
+  /documents:
+    get:
+      tags:
+        - Documents API
+      summary: Liste des documents
+      description: Récupération de la liste des documents.
+      operationId: PaginateDocuments
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PieceJointe'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: documents
+      x-extension-metarisc-codegen-operation: paginate
+      x-extension-metarisc-codegen-visibility: public
+  /documents/{document_id}:
+    delete:
+      tags:
+        - Documents API
+      summary: Suppression d'un document
+      description: Suppression d'un document existant.
+      operationId: DeleteDocumentDocuments
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: documents
+      x-extension-metarisc-codegen-operation: delete-document
+    get:
+      tags:
+        - Documents API
+      summary: Détails d'un document
+      description: Récupération d'un document.
+      operationId: GetDocumentDocuments
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PieceJointe'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: documents
+      x-extension-metarisc-codegen-operation: get-document
+    post:
+      tags:
+        - Documents API
+      summary: Mise à jour d'un document
+      description: Mise à jour d'un document existant.
+      operationId: PostDocumentDocuments
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PieceJointe'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PieceJointe'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: documents
+      x-extension-metarisc-codegen-operation: post-document
+  /dossiers:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des dossiers
+      description: Récupération de la liste des dossiers selon des critères de recherche.
+      operationId: PaginateDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dossier'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossiers
+      x-extension-metarisc-codegen-visibility: public
+  /dossiers/{dossier_id}/contacts:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des contacts
+      description: Récupération de la liste des contacts.
+      operationId: PaginateContactsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossier-contacts
+    post:
+      tags:
+        - Dossiers API
+      summary: Ajout d'un contact
+      description: Ajout d'un contact.
+      operationId: PostContactsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-contacts-dossier
+  /dossiers/{dossier_id}/documents:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des documents
+      description: Récupération de la liste des documents.
+      operationId: PaginateDocumentsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PieceJointe'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossier-documents
+    post:
+      tags:
+        - Dossiers API
+      summary: Ajout d'un document
+      description: Ajout d'un document.
+      operationId: PostDocumentsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PieceJointe'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PieceJointe'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-documents-dossier
+  /dossiers/{dossier_id}:
+    get:
+      tags:
+        - Dossiers API
+      summary: Détails d'un dossier
+      description: Récupération de l'ensemble des données d'un dossier.
+      operationId: GetDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-dossier
+      x-extension-metarisc-codegen-visibility: public
+    post:
+      tags:
+        - Dossiers API
+      summary: Mettre à jour un dossier
+      description: Modification d'un dossier existant
+      operationId: PostDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dossier'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: patch-dossier
+      x-extension-metarisc-codegen-visibility: public
+  /dossiers/{dossier_id}/tags:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des tags
+      description: Récupération de la liste des tags d'un dossier.
+      operationId: PaginateTagsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossier-tags
+      x-extension-metarisc-codegen-visibility: public
+  /dossiers/{dossier_id}/workflows:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des workflows
+      description: Récupération de la liste des workflows d'un dossier.
+      operationId: PaginateWorkflowsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: dossier_id
+          in: path
+          description: Identifiant unique du Dossier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workflow'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossier-workflows
+      x-extension-metarisc-codegen-visibility: public
+  /dossiers/{dossier_id}/workflows/{workflow_id}/documents:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des documents
+      description: Récupération de la liste des documents.
+      operationId: PaginateDocumentsWorkflowWorkflowsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflow_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PieceJointe'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossier-workflows-workflow-documents
+    post:
+      tags:
+        - Dossiers API
+      summary: Ajout d'un document
+      description: Ajout d'un document.
+      operationId: PostDocumentsWorkflowWorkflowsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflow_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PieceJointe'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PieceJointe'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-documents-workflow-workflows-dossier
+  /dossiers/{dossier_id}/workflows/{workflow_id}:
+    get:
+      tags:
+        - Dossiers API
+      summary: Détails d'un workflow
+      description: Récupération des détails d'un workflow.
+      operationId: GetWorkflowWorkflowsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          description: Identifiant unique du Dossier
+          required: true
+          schema:
+            type: string
+        - name: workflow_id
+          in: path
+          description: Identifiant unique du Workflow
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-dossier-workflows-details
+    post:
+      tags:
+        - Dossiers API
+      summary: Mise à jour d'un workflow
+      description: Mise à jour d'un workflow.
+      operationId: PostWorkflowWorkflowsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          description: Identifiant unique du Dossier
+          required: true
+          schema:
+            type: string
+        - name: workflow_id
+          in: path
+          description: Identifiant unique du Workflow
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workflow'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: update-dossier-workflows-details
+  /dossiers/{dossier_id}/workflows/{workflow_id}/terminer:
+    post:
+      tags:
+        - Dossiers API
+      summary: Terminer un workflow
+      description: >-
+        Terminer un workflow d'un dossier. Cela met à jour l'ensemble de son
+        traitement.
+      operationId: PostTerminerWorkflowWorkflowsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflow_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-terminer-workflow-workflows-dossier
+  /erp:
+    get:
+      tags:
+        - ERP API
+      summary: Liste des ERP
+      description: Récupération de la liste des ERP.
+      operationId: PaginateErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ERP'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: paginate-erp
+    post:
+      tags:
+        - ERP API
+      summary: Créer un ERP
+      description: Création d'un nouveau ERP.
+      operationId: PostErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ERP'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERP'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: post-erp
+      x-extension-metarisc-codegen-visibility: public
+  /erp/{erp_id}/contacts:
+    get:
+      tags:
+        - ERP API
+      summary: Liste des contacts
+      description: Récupération de la liste des contacts.
+      operationId: PaginateContactsErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: paginate-erp-contacts
+    post:
+      tags:
+        - ERP API
+      summary: Ajout d'un contact
+      description: Ajout d'un contact.
+      operationId: PostContactsErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: post-contacts-erp
+  /erp/{erp_id}/documents:
+    get:
+      tags:
+        - ERP API
+      summary: Liste des documents
+      description: Récupération de la liste des documents.
+      operationId: PaginateDocumentsErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PieceJointe'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: paginate-erp-documents
+    post:
+      tags:
+        - ERP API
+      summary: Ajout d'un document
+      description: Ajout d'un document.
+      operationId: PostDocumentsErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PieceJointe'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PieceJointe'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: post-documents-erp
+  /erp/{erp_id}/dossiers:
+    get:
+      tags:
+        - ERP API
+      summary: Liste des dossiers
+      description: Récupération de la liste des dossiers.
+      operationId: PaginateDossiersErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dossier'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: paginate-erp-dossiers
+    post:
+      tags:
+        - ERP API
+      summary: Ajout d'un dossier
+      description: Ajout d'un dossier.
+      operationId: PostDossiersErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dossier'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: post-dossiers-erp
+  /erp/{erp_id}:
+    get:
+      tags:
+        - ERP API
+      summary: Récupération des détails de l'ERP
+      description: Récupération des détails de l'ERP.
+      operationId: GetErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERP'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: get-erp
+  /erp/{erp_id}/historique:
+    get:
+      tags:
+        - ERP API
+      summary: Historique d'un ERP
+      description: Récupération de l'historique d'un ERP.
+      operationId: PaginateHistoriqueErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: erp_id
+          in: path
+          description: Identifiant unique de l'ERP
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DescriptifTechniqueERP'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: paginate-erp-historique
+  /evenements:
+    get:
+      tags:
+        - Evenements API
+      summary: Liste des événements
+      description: Récupération des détails de tous les événements calendaires existants.
+      operationId: PaginateEvenements
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: period
+          in: query
+          description: >-
+            La période (ISO 8601) séparée par un slash (/) pendant laquelle
+            l'événement se déroule. Exemple 2004-12-02T23:00/2005-01-01T12:30.
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Le type d'événement.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Evenement'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: evenements
+      x-extension-metarisc-codegen-operation: paginate-evenements
+    post:
+      tags:
+        - Evenements API
+      summary: Ajout d'un événement
+      description: Création d'un événement.
+      operationId: PostEvenements
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evenement'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evenement'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: evenements
+      x-extension-metarisc-codegen-operation: post-evenement
+  /evenements/{evenement_id}:
+    delete:
+      tags:
+        - Evenements API
+      summary: Suppression d'un événement
+      description: Suppression d'un événement.
+      operationId: DeleteEvenementEvenements
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: evenement_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: evenements
+      x-extension-metarisc-codegen-operation: delete-evenement
+    get:
+      tags:
+        - Evenements API
+      summary: Récupération des détails d'un événement
+      description: Récupération des détails d'un événement correspondant à l'id donné.
+      operationId: GetEvenementEvenements
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: evenement_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evenement'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evenement'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: evenements
+      x-extension-metarisc-codegen-operation: get-evenement-details
+  /evenements/{evenement_id}/utilisateurs:
+    get:
+      tags:
+        - Evenements API
+      summary: Liste des utilisateurs liés à un événement
+      description: >-
+        Récupération d'une liste paginée d'utilisateurs liés à un événement
+        calendaire.
+      operationId: PaginateUtilisateursEvenementEvenements
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: evenement_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Utilisateur'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: evenements
+      x-extension-metarisc-codegen-operation: paginate-evenement-utilisateurs
+  /feed:
+    get:
+      tags:
+        - Feed API
+      summary: Liste des messages du feed
+      description: >-
+        Récupération d'une liste de message composant un flux d'activité pour
+        l'utilisateur connecté.
+      operationId: PaginateFeed
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FeedMessage'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: feed
+      x-extension-metarisc-codegen-operation: paginate-feed-messages
+    post:
+      tags:
+        - Feed API
+      summary: Ajoute un message dans le feed
+      description: Ajoute un message dans le feed général.
+      operationId: PostFeed
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedMessage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: feed
+      x-extension-metarisc-codegen-operation: post-message
+  /notifications:
+    get:
+      tags:
+        - Notifications API
+      summary: Liste des notifications
+      description: >-
+        Récupération des détails de toutes les notifications existantes pour
+        l'utilisateur connecté.
+      operationId: PaginateNotifications
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: notifications
+      x-extension-metarisc-codegen-operation: paginate-notifications
+    post:
+      tags:
+        - Notifications API
+      summary: Déclenchement d'une notification
+      description: Création d'une notification.
+      operationId: PostNotifications
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: notifications
+      x-extension-metarisc-codegen-operation: post-notification
+  /notifications/{notification_id}:
+    delete:
+      tags:
+        - Notifications API
+      summary: Suppression d'une notification
+      description: Suppression d'une notification correspondante à l'id donné.
+      operationId: DeleteNotificationNotifications
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: notification_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: notifications
+      x-extension-metarisc-codegen-operation: delete-notification
+    get:
+      tags:
+        - Notifications API
+      summary: Récupération des détails d'une notification
+      description: Récupération des détails d'une notification correspondante à l'id donné.
+      operationId: GetNotificationNotifications
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: notification_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: notifications
+      x-extension-metarisc-codegen-operation: get-notification
+  /organisations:
+    get:
+      tags:
+        - Organisations API
+      summary: Liste des organisations
+      description: Liste paginée des organisations.
+      operationId: PaginateOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organisation'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: paginate-organisations
+  /organisations/{org_id}/dossiers-workflows-suites:
+    get:
+      tags:
+        - Organisations API
+      summary: Référentiel des workflows d'un dossier
+      description: >-
+        Retourne le référentiel du paramétrage des workflows pour
+        l'organisation.
+      operationId: PaginateDossiersWorkflowsSuitesOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkflowType'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: paginate-organisation-dossiers-workflows-suites
+  /organisations/{org_id}/geoservices:
+    get:
+      tags:
+        - Organisations API
+      summary: Liste des géo-services d'une organisation
+      description: Récupération de la liste des géo-services d'une organisation.
+      operationId: PaginateGeoservicesOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganisationGeoservice'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: paginate-organisation-geoservices
+  /organisations/{org_id}:
+    get:
+      tags:
+        - Organisations API
+      summary: Détails d'une organisation
+      description: Récupération des détails d'une organisation.
+      operationId: GetOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisation'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: get-organisation
+  /organisations/{org_id}/membres:
+    get:
+      tags:
+        - Organisations API
+      summary: Liste des membres d'une organisation
+      description: Récupération de la liste des membres d'une organisation.
+      operationId: PaginateMembresOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganisationMembre'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: paginate-organisation-membres
+    post:
+      tags:
+        - Organisations API
+      summary: Ajout d'un membre
+      description: Ajout d'un utilisateur comme membre dans une organisation.
+      operationId: PostMembresOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganisationMembre'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationMembre'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: add-organisation-membres
+  /organisations/{org_id}/regles-deci:
+    get:
+      tags:
+        - Organisations API
+      summary: Ensemble de règles DECI
+      description: >-
+        Ensemble de règles utilisées pour le calcul de la conformité et de la
+        performance DECI.
+      operationId: GetReglesDeciOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pibi_conformite_matrice_seuil_pesee_1bar_par_nature:
+                    type: object
+                  pibi_performance_natures_performance_restreinte:
+                    type: array
+                    items:
+                      type: string
+                  pibi_performance_natures_a_reformer:
+                    type: array
+                    items:
+                      type: string
+                  pibi_performance_seuil_pesee_1bar:
+                    type: integer
+                  pibi_conformite_seuil_surpression:
+                    type: integer
+                  pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
+                    type: integer
+                  pena_conformite_seuil_volume_citerne:
+                    type: integer
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: get-organisation-regles-deci
+  /pei:
+    get:
+      tags:
+        - PEI API
+      summary: Liste des Points d'Eau Incendie
+      description: >-
+        Récupération de la liste des Points d'Eau Incendie (PEI) selon des
+        critères de recherche.
+      operationId: PaginatePei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: geojson
+          in: query
+          description: Filtre sur la position des PEI
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PEI'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: paginate-pei
+    post:
+      tags:
+        - PEI API
+      summary: Ajout d'un PEI
+      description: Ajout d'un PEI.
+      operationId: PostPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PEI'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PEI'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: post-pei
+  /pei/{pei_id}/contacts:
+    get:
+      tags:
+        - PEI API
+      summary: Liste des contacts
+      description: Récupération de la liste des contacts.
+      operationId: PaginateContactsPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: paginate-pei-contacts
+    post:
+      tags:
+        - PEI API
+      summary: Ajout d'un contact
+      description: Ajout d'un contact.
+      operationId: PostContactsPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: post-contacts-pei
+  /pei/{pei_id}/documents:
+    get:
+      tags:
+        - PEI API
+      summary: Liste des documents
+      description: Récupération de la liste des documents.
+      operationId: PaginateDocumentsPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PieceJointe'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: paginate-pei-documents
+    post:
+      tags:
+        - PEI API
+      summary: Ajout d'un document
+      description: Ajout d'un document.
+      operationId: PostDocumentsPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PieceJointe'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PieceJointe'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: post-documents-pei
+  /pei/{pei_id}/dossiers:
+    get:
+      tags:
+        - PEI API
+      summary: Liste des dossiers
+      description: Récupération de la liste des dossiers.
+      operationId: PaginateDossiersPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dossier'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: paginate-pei-dossiers
+    post:
+      tags:
+        - PEI API
+      summary: Ajout d'un dossier
+      description: Ajout d'un dossier.
+      operationId: PostDossiersPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dossier'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: post-dossiers-pei
+  /pei/{pei_id}:
+    get:
+      tags:
+        - PEI API
+      summary: Récupération des détails d'un Point d'Eau Incendie
+      description: Récupération de l'ensemble des données d'un PEI.
+      operationId: GetPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PEI'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: get-pei
+  /pei/{pei_id}/historique:
+    get:
+      tags:
+        - PEI API
+      summary: Historique d'un Point d'Eau Incendie
+      description: Récupération de l'historique d'un POI.
+      operationId: PaginateHistoriquePeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: pei_id
+          in: path
+          description: Identifiant unique du PEI
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DescriptifTechniqueDECI'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: paginate-pei-historique
+  /prescriptions:
+    get:
+      tags:
+        - Prescriptions API
+      summary: Liste des prescriptions
+      description: Liste des prescriptions.
+      operationId: PaginatePrescriptions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Prescription'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: prescriptions
+      x-extension-metarisc-codegen-operation: paginate-prescriptions
+    post:
+      tags:
+        - Prescriptions API
+      summary: Ajout d'une prescription type
+      description: Ajout d'une nouvelle prescription type dans la bibliothèque.
+      operationId: PostPrescriptions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Prescription'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prescription'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: prescriptions
+      x-extension-metarisc-codegen-operation: post-prescription
+  /prescriptions/{prescription_id}:
+    delete:
+      tags:
+        - Prescriptions API
+      summary: Suppression d'une prescription type
+      description: Suppression d'une prescription type de la bibliothèque.
+      operationId: DeletePrescriptionPrescriptions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: prescription_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: prescriptions
+      x-extension-metarisc-codegen-operation: delete-prescription
+    get:
+      tags:
+        - Prescriptions API
+      summary: Détails d'une prescription type
+      description: Récupération des détails d'une prescription dans la bibliothèque.
+      operationId: GetPrescriptionPrescriptions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: prescription_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prescription'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: prescriptions
+      x-extension-metarisc-codegen-operation: get-prescription
+  /supports_reglementaires:
+    get:
+      tags:
+        - Prescriptions API
+      summary: Liste des supports réglementaires
+      description: Liste des supports réglementaires.
+      operationId: PaginateSupportsReglementaires
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: supports_reglementaires
+      x-extension-metarisc-codegen-operation: paginate-supports-reglementaires
+    post:
+      tags:
+        - Prescriptions API
+      summary: Ajout d'un support réglementaire
+      description: Ajouter un support réglementaire.
+      operationId: PostSupportsReglementaires
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: supports_reglementaires
+      x-extension-metarisc-codegen-operation: post-support-reglementaire
+  /supports_reglementaires/{support_reglementaire_id}:
+    delete:
+      tags:
+        - Prescriptions API
+      summary: Suppression d'un support réglementaire
+      description: Suppression d'un support réglementaire.
+      operationId: DeleteSupportReglementaireSupportsReglementaires
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: support_reglementaire_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: supports_reglementaires
+      x-extension-metarisc-codegen-operation: delete-support-reglementaire
+    get:
+      tags:
+        - Prescriptions API
+      summary: Détails d'un support réglementaire
+      description: Récupération des détails d'un support réglementaire.
+      operationId: GetSupportReglementaireSupportsReglementaires
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: support_reglementaire_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: supports_reglementaires
+      x-extension-metarisc-codegen-operation: get-support-reglementaire
+  /tournees_deci:
+    get:
+      tags:
+        - Tournées DECI API
+      summary: Liste des tournées DECI
+      description: Liste des tournées DECI.
+      operationId: PaginateTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: libelle
+          in: query
+          description: Filtre sur le libellé
+          schema:
+            type: string
+        - name: periode
+          in: query
+          description: Filtre sur les dates
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TourneeDeci'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: paginate-tournees-deci
+    post:
+      tags:
+        - Tournées DECI API
+      summary: Ajout d'une Tournée DECI
+      description: Ajout d'une nouvelle tournée DECI.
+      operationId: PostTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TourneeDeci'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourneeDeci'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: post-tournee-deci
+  /tournees_deci/{tournee_deci_id}:
+    get:
+      tags:
+        - Tournées DECI API
+      summary: Détails de la tournée DECI
+      description: Récupération des détails de la tournée DECI.
+      operationId: GetTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourneeDeci'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: get-tournee-deci
+    post:
+      tags:
+        - Tournées DECI API
+      summary: Mise à jour de la tournée DECI
+      description: Mise à jour de la tournée DECI.
+      operationId: PostTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TourneeDeci'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourneeDeci'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: update-tournee-deci
+  /tournees_deci/{tournee_deci_id}/livret_de_tournee:
+    get:
+      tags:
+        - Tournées DECI API
+      summary: Récupération d'un livret de tournée
+      description: Génération d'un livret de tournée pour une tournée DECI.
+      operationId: GetLivretDeTourneeTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/pdf:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: get-tournee-deci-livret-de-tournee
+  /tournees_deci/{tournee_deci_id}/pei:
+    get:
+      tags:
+        - Tournées DECI API
+      summary: Liste des PEI liés à la tournée DECI
+      description: Récupération de la liste des contrôles PEI liés à la tournée DECI.
+      operationId: PaginatePeiTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TourneeDeciPei'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: paginate-tournee-deci-pei
+    post:
+      tags:
+        - Tournées DECI API
+      summary: Ajout d'un PEI sur la tournée DECI
+      description: Ajout d'un PEI sur la tournée DECI.
+      operationId: PostPeiTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TourneeDeciPei'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourneeDeciPei'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: post-tournee-deci-pei
+  /tournees_deci/{tournee_deci_id}/pei/{pei_id}:
+    delete:
+      tags:
+        - Tournées DECI API
+      summary: Suppression du contrôle PEI
+      description: Suppression du contrôle PEI de la tournée DECI.
+      operationId: DeletePeiPeiTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: delete-tournee-deci-pei
+    get:
+      tags:
+        - Tournées DECI API
+      summary: Détail du PEI contrôlé
+      description: Récupération des détails liés au contrôle d'un PEI d'une tournée.
+      operationId: GetPeiPeiTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourneeDeciPei'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: get-tournee-deci-pei
+    post:
+      tags:
+        - Tournées DECI API
+      summary: Mise à jour du PEI contrôlé
+      description: Mise à jour du PEI contrôlé dans une tournée DECI.
+      operationId: PostPeiPeiTourneeDeciTourneesDeci
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: tournee_deci_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pei_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TourneeDeciPei'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourneeDeciPei'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: tournees_deci
+      x-extension-metarisc-codegen-operation: update-tournee-deci-pei
+  /utilisateurs/@moi/emails:
+    get:
+      tags:
+        - Utilisateurs API
+      summary: Liste des adresses mail de l'utilisateur connecté
+      description: >-
+        Liste toutes les adresses mail de l'utilisateur connecté, y compris les
+        adresses non publiquement accessibles.
+      operationId: PaginateEmailsMoiUtilisateurs
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Email'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: utilisateurs
+      x-extension-metarisc-codegen-operation: paginate-moi-emails
+  /utilisateurs/@moi:
+    get:
+      tags:
+        - Utilisateurs API
+      summary: Utilisateur connecté
+      description: >-
+        L'utilisateur connecté retourné par ce point de terminaison utilise le
+        token d'accès généré par le service OpenID Connect afin de le lier à une
+        identité connue de Metarisc. Si l'utilisateur est inconnu une erreur est
+        retournée.
+      operationId: GetMoiUtilisateurs
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilisateur'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: utilisateurs
+      x-extension-metarisc-codegen-operation: get-utilisateurs-moi
+  /utilisateurs/{utilisateur_id}/emails:
+    get:
+      tags:
+        - Utilisateurs API
+      summary: Liste des adresses mail d'un utilisateur
+      description: Retourne une liste des adresses mail publiques d'un utilisateur.
+      operationId: PaginateEmailsUtilisateurUtilisateurs
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: utilisateur_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Email'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: utilisateurs
+      x-extension-metarisc-codegen-operation: paginate-utilisateur-emails
+  /utilisateurs/{utilisateur_id}:
+    get:
+      tags:
+        - Utilisateurs API
+      summary: Détails d'un utilisateur
+      description: Retourne un utilisateur Metarisc.
+      operationId: GetUtilisateurUtilisateurs
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: utilisateur_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilisateur'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: utilisateurs
+      x-extension-metarisc-codegen-operation: get-utilisateur-details
+  /utilisateurs/{utilisateur_id}/organisations:
+    get:
+      tags:
+        - Utilisateurs API
+      summary: Liste des organisations d'un utilisateur
+      description: Retourne une liste d'organisations dont l'utilisateur est membre.
+      operationId: PaginateOrganisationsUtilisateurUtilisateurs
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: utilisateur_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganisationMembre'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: utilisateurs
+      x-extension-metarisc-codegen-operation: paginate-utilisateur-organisations
+tags:
+  - name: Anomalies API
+  - name: Commissions API
+  - name: Contacts API
+  - name: Documents API
+  - name: Dossiers API
+  - name: ERP API
+  - name: Evenements API
+  - name: Feed API
+  - name: Notifications API
+  - name: Organisations API
+  - name: PEI API
+  - name: Prescriptions API
+  - name: Supports Reglementaires API
+  - name: Tournées DECI API
+  - name: Utilisateurs API
+components:
+  schemas:
+    ActiviteErp:
+      type: object
+      title: ActiviteErp
+      properties:
+        type:
+          type: string
+          readOnly: true
+          enum:
+            - J
+            - L
+            - M
+            - 'N'
+            - O
+            - P
+            - R
+            - S
+            - T
+            - U
+            - V
+            - W
+            - X
+            - 'Y'
+            - PE
+            - PO
+            - PU
+            - PX
+            - PA
+            - CTS
+            - SG
+            - OA
+            - REF
+            - PS
+            - GA
+            - EF
+            - GEEM
+            - EP
+            - R. 143-15
+            - EIRP
+        activite:
+          type: string
+          readOnly: true
+    AdressePostale:
+      type: object
+      title: Objet Adresse Postale
+      description: Représente une adresse postale permettant de localiser un POI.
+      properties:
+        code_postal:
+          type: string
+          readOnly: true
+        commune:
+          type: string
+          readOnly: true
+        voie:
+          type: string
+          readOnly: true
+        code_insee:
+          type: string
+          readOnly: true
+        arrondissement:
+          type: string
+          readOnly: true
+        latitude:
+          type: number
+          readOnly: true
+        longitude:
+          type: number
+          readOnly: true
+        localisation_operationnelle:
+          type: string
+          readOnly: true
+        complement:
+          type: string
+          readOnly: true
+    AnomalieDECI:
+      type: object
+      title: Objet Anomalie
+      properties:
+        code:
+          type: integer
+        texte:
+          type: string
+        indice_de_gravite:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+          description: |-
+            Nomenclature de l'indice de gravité :
+            - 0 : Réserve ;
+            - 1 : Anomalie ;
+            - 2 : Anomalie bloquante.
+    AnomaliePEI:
+      type: object
+      title: Objet Anomalie PEI
+      properties:
+        anomalie:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/AnomalieDECI'
+        date_debut:
+          type: string
+          format: date-time
+          readOnly: true
+        date_fin:
+          type: string
+          format: date-time
+          readOnly: true
+        est_programmee:
+          type: boolean
+          readOnly: true
+        date_pose:
+          type: string
+          format: date-time
+          readOnly: true
+    Avis:
+      type: object
+      title: Avis
+      properties:
+        avis_exploitation:
+          type: string
+          enum:
+            - favorable_exploitation
+            - defavorable_exploitation
+          readOnly: true
+    Commission:
+      type: object
+      title: Objet Commission
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - Sous-commission départementale
+            - Commission communale
+            - Commission intercommunale
+            - Commission d'arrondissement
+            - CoDERST
+        libelle:
+          type: string
+    Contact:
+      type: object
+      title: Objet Contact
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        nom:
+          type: string
+        prenom:
+          type: string
+        fonction:
+          type: string
+        telephone_fixe:
+          type: string
+        telephone_portable:
+          type: string
+        telephone_fax:
+          type: string
+        adresse:
+          type: string
+        site_web_url:
+          type: string
+        civilite:
+          type: string
+        societe:
+          type: string
+        email:
+          type: string
+        observations:
+          type: string
+    DescriptifTechniqueDECIBase:
+      type: object
+      title: Objet Descriptif Technique DECI Base
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - PIBI
+            - PENA
+          readOnly: true
+        anomalies:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/AnomaliePEI'
+        est_reglementaire:
+          type: boolean
+          readOnly: true
+        domanialite:
+          type: string
+          enum:
+            - privee
+            - publique
+            - privee_conventionnee
+          readOnly: true
+        est_conforme_rddeci:
+          type: boolean
+          readOnly: true
+        performance_theorique:
+          type: integer
+          description: |-
+            - Performance nulle = 0
+            - Performance restreinte = 1
+            - Performance bonne = 2
+            - Performance inconnue = -1
+          minimum: -1
+          maximum: 2
+          readOnly: true
+        performance_reelle:
+          type: integer
+          description: |-
+            - Performance nulle = 0
+            - Performance restreinte = 1
+            - Performance bonne = 2
+            - Performance inconnue = -1
+          minimum: -1
+          maximum: 2
+          readOnly: true
+        observations_generales:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+        statut:
+          type: string
+          enum:
+            - reprise_de_donnees
+            - declaration_en_cours
+            - reconnaissance_operationnelle_initiale
+            - actif
+            - projet
+            - reforme
+          readOnly: true
+        est_disponible:
+          type: boolean
+          readOnly: true
+    DescriptifTechniqueDECI:
+      type: object
+      title: Descriptif Technique DECI
+      oneOf:
+        - $ref: '#/components/schemas/DescriptifTechniquePIBI'
+        - $ref: '#/components/schemas/DescriptifTechniquePENA'
+    DescriptifTechniqueERPBase:
+      type: object
+      title: Objet Descriptif Technique ERP Base
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+        statut_erp:
+          type: string
+          enum:
+            - reprise_de_donnees
+            - ouvert
+            - projet
+            - ferme
+        genre:
+          type: string
+          enum:
+            - etablissement
+            - site
+            - cellule
+        avis_exploitation:
+          $ref: '#/components/schemas/Avis'
+        categorie:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+        type_activite:
+          $ref: '#/components/schemas/ActiviteErp'
+        types_activites_secondaires:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActiviteErp'
+        periodicite:
+          type: integer
+        libelle:
+          type: string
+        presence_locaux_sommeil:
+          type: boolean
+        observations_generales:
+          type: string
+    DescriptifTechniqueERP:
+      type: object
+      title: Descriptif Technique ERP
+      oneOf:
+        - $ref: '#/components/schemas/DescriptifTechniqueERPBase'
+    DescriptifTechniquePENA:
+      title: Objet Descriptif Technique DECI PENA
+      allOf:
+        - $ref: '#/components/schemas/DescriptifTechniqueDECIBase'
+        - type: object
+          properties:
+            nature:
+              type: string
+              enum:
+                - POINT_ASPIRATION
+                - CITERNE_AERIENNE
+                - CITERNE_ENTERREE
+                - CITERNE_SEMI_ENTERREE
+                - CITERNE_SOUPLE
+                - RESERVE_AERIENNE
+                - POTEAU_RELAIS
+                - PUISARD_ASPIRATION
+                - PRISE_DEPORTEE
+                - POTEAU_ASPIRATION_1x100
+                - POTEAU_ASPIRATION_2x100
+                - BOUCHE_ASPIRATION_1x100
+              readOnly: true
+            volume:
+              type: number
+              readOnly: true
+    DescriptifTechniquePIBI:
+      title: Objet Descriptif Technique DECI PIBI
+      allOf:
+        - $ref: '#/components/schemas/DescriptifTechniqueDECIBase'
+        - type: object
+          properties:
+            surpression:
+              type: number
+              description: Surpression mesurée en bar
+              readOnly: true
+            nature:
+              type: string
+              enum:
+                - PI1x65
+                - PI1x65+PI2x45
+                - PI1x100
+                - PI2x100
+                - BI1x65
+                - BI1x80
+                - BI1x100
+                - BI2x100
+              readOnly: true
+            debit_1bar:
+              type: number
+              readOnly: true
+            pression:
+              type: number
+              readOnly: true
+            pression_statique:
+              type: number
+              readOnly: true
+            debit_gueule_bee:
+              type: number
+              readOnly: true
+    Dossier:
+      type: object
+      title: Objet Dossier
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - deci:declaration_pei
+            - erp:autorisation_de_travaux
+            - erp:visite_periodique
+        description:
+          type: string
+        date_de_creation:
+          type: string
+          format: date-time
+          readOnly: true
+        createur:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+        application_utilisee_nom:
+          type: string
+          readOnly: true
+        statut:
+          type: string
+          enum:
+            - OUVERT
+            - CLOS
+          readOnly: true
+        objet:
+          type: string
+          readOnly: true
+        pei:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/PEI'
+        erp:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ERP'
+    ERP:
+      type: object
+      title: ERP
+      description: >-
+        Les établissements recevant du public (ERP) sont des bâtiments, des
+        locaux ou des enceintes dans lesquels sont admises des personnes
+        extérieures.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date_de_realisation:
+          type: string
+          format: date-time
+          readOnly: true
+        date_de_derniere_mise_a_jour:
+          type: string
+          format: date-time
+          readOnly: true
+        references_exterieures:
+          type: array
+          readOnly: true
+          items:
+            type: object
+            properties:
+              titre:
+                type: string
+                readOnly: true
+              valeur:
+                type: string
+                readOnly: true
+        implantation:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/AdressePostale'
+        descriptif_technique:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/DescriptifTechniqueERP'
+        coordonnees:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Contact'
+    Email:
+      type: object
+      title: Objet Email
+      properties:
+        email:
+          type: string
+          format: email
+          readOnly: true
+        is_primary:
+          type: boolean
+          readOnly: true
+        is_publicly_visible:
+          type: boolean
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+    Error:
+      type: object
+      title: Objet Error
+      description: |
+        Un objet commun Error (RFC 7807).
+      properties:
+        type:
+          type: string
+          format: uri
+          description: Une référence Uri qui identifie le type de problème
+        title:
+          type: string
+          description: Un résumé du type d'erreur rencontré
+        status:
+          type: integer
+          format: int32
+          description: Le code de réponse HTTP généré par l'API Metarisc
+          minimum: 400
+          maximum: 600
+          exclusiveMaximum: true
+        detail:
+          type: string
+          description: La description complète de l'erreur rencontrée
+    Evenement:
+      type: object
+      title: Objet Evenement
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+        type:
+          type: string
+          enum:
+            - DEFAUT
+            - RECONNAISSANCE_OPERATIONNELLE_ANNUELLE
+            - VISITE_PERIODIQUE
+            - COMMISSION_SECURITE
+        description:
+          type: string
+        date_debut:
+          type: string
+          format: date-time
+        date_fin:
+          type: string
+          format: date-time
+      x-examples:
+        Example 1:
+          id: 6f05da30-0fe3-4418-8cfb-d28867bc3b65
+          utilisateurs:
+            - User 1
+            - user 2
+          title: Visite de tous les etablissements publiques
+          type: VISITE_PERIODIQUE
+          description: hkqjsdhkqjshdkjhqskjdhkqjshdkjqshdr
+          dossiers:
+            - Dossiers1
+            - dossier 2
+          date_debut: '2023-04-11T23:00:24+00:00'
+          date_fin: '2023-04-13T14:07:26+00:00'
+    FeedMessageBase:
+      type: object
+      title: Objet Feed Message Base
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        titre:
+          type: string
+        date_de_creation:
+          type: string
+          format: date-time
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - texte
+            - liste_pei
+    FeedMessageTexte:
+      title: Objet FeedMessage Texte
+      allOf:
+        - $ref: '#/components/schemas/FeedMessageBase'
+        - type: object
+          properties:
+            texte:
+              type: string
+    FeedMessage:
+      title: Objet Feed Message
+      oneOf:
+        - $ref: '#/components/schemas/FeedMessageTexte'
+    Notification:
+      type: object
+      title: Notification
+      description: >-
+        Une notification est un objet créé pour avertir ou informer un
+        utilisateur pour un évévemenent spécifique.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+        message:
+          type: string
+        contexte:
+          type: object
+        date_creation:
+          type: string
+          format: date-time
+          readOnly: true
+        date_de_lecture:
+          type: string
+          format: date-time
+          readOnly: true
+        utilisateur_id:
+          type: string
+          writeOnly: true
+        utilisateur:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+      x-examples:
+        Example 1:
+          id: 945f9037-23f3-42eb-ab6a-3e47095b2f84
+          title: Bonjour Monsieur Mbappé
+          message: Ca vous dirait de jouer pour LENS
+          contexte:
+            joueur_id: khqfdsiuysf
+          date_creation: '2023-03-09T14:45:53+00:00'
+          date_de_lecture: null
+          utilisateur_concerne_id: '123'
+    Organisation:
+      type: object
+      title: Objet Organisation
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        nom:
+          type: string
+          readOnly: true
+        logo_url:
+          type: string
+          format: uri
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - sis
+          readOnly: true
+    OrganisationGeoservice:
+      type: object
+      title: Objet Organisation Geoservice
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        organisation:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Organisation'
+        nom:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - WFS
+            - WMS
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+    OrganisationMembre:
+      type: object
+      title: Objet Organisation Membre
+      properties:
+        organisation:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Organisation'
+        utilisateur_id:
+          type: string
+          writeOnly: true
+        utilisateur:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+        date_integration:
+          type: string
+          format: date-time
+          readOnly: true
+        role:
+          type: string
+          enum:
+            - membre
+            - invite
+            - invitation_en_cours
+          readOnly: true
+    PEI:
+      type: object
+      title: Objet Point d'Eau Incendie
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date_de_realisation:
+          type: string
+          format: date-time
+          readOnly: true
+        date_de_derniere_mise_a_jour:
+          type: string
+          format: date-time
+          readOnly: true
+        references_exterieures:
+          type: array
+          readOnly: true
+          items:
+            type: object
+            properties:
+              titre:
+                type: string
+              valeur:
+                type: string
+        descriptif_technique:
+          allOf:
+            - $ref: '#/components/schemas/DescriptifTechniqueDECI'
+        implantation:
+          allOf:
+            - $ref: '#/components/schemas/AdressePostale'
+        genre:
+          type: string
+          enum:
+            - PIBI
+            - PENA
+          readOnly: true
+        numero:
+          type: string
+        numero_compteur:
+          type: string
+        numero_serie_appareil:
+          type: string
+    PaginationMetadata:
+      type: object
+      title: Pagination Metadata
+      properties:
+        total:
+          type: integer
+          minimum: 0
+          readOnly: true
+        count:
+          type: integer
+          minimum: 0
+          readOnly: true
+        per_page:
+          type: integer
+          minimum: 1
+          readOnly: true
+        current_page:
+          type: integer
+          minimum: 1
+          readOnly: true
+        total_pages:
+          type: integer
+          minimum: 1
+          readOnly: true
+    PassageCommission:
+      type: object
+      title: Objet Passage en Commission
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date_debut:
+          type: string
+          format: date-time
+        date_fin:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+            - salle
+            - visite_de_securite
+            - groupe_de_visite
+        libelle:
+          type: string
+    PassageCommissionDossier:
+      type: object
+      title: Objet Passage en Commission Dossier
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        dossier:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Dossier'
+        dossier_id:
+          writeOnly: true
+          type: string
+          format: uuid
+        avis:
+          allOf:
+            - $ref: '#/components/schemas/Avis'
+        statut:
+          type: string
+          readOnly: true
+          enum:
+            - En attente de traitement
+            - Présence d'un avis du rapporteur
+            - Validé
+            - Présence d'un avis de commission
+    PieceJointe:
+      type: object
+      title: Objet Piece Jointe
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        nom:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - photo
+            - plan
+            - annexe
+            - divers
+          readOnly: true
+    Prescription:
+      type: object
+      title: Objet Prescription
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        contenu:
+          type: string
+        type:
+          type: string
+          enum:
+            - liee_a_l_exploitation
+            - liee_a_l_amelioration
+            - rappel_reglementaire
+        supports_reglementaires:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+        supports_reglementaires_id:
+          type: array
+          writeOnly: true
+          items:
+            type: string
+            format: uuid
+    PrescriptionSupportReglementaire:
+      type: object
+      title: Objet Prescription Support Réglementaire
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        nature:
+          type: string
+          enum:
+            - arrete
+            - article
+            - local
+        legifrance_cid:
+          type: string
+          description: >-
+            Le CID est l’identifiant commun à l’ensemble des versions d’un objet
+            Legifrance (article, section, texte).
+
+            Si le CID est renseigné, alors ce support réglementaire est sourcé
+            depuis Legifrance.
+        contenu:
+          type: string
+        titre:
+          type: string
+        etat:
+          type: string
+          enum:
+            - en_vigueur
+        reference:
+          type: string
+    Tag:
+      type: object
+      title: Objet Tag
+      properties:
+        message:
+          type: string
+          readOnly: true
+    TourneeDeci:
+      title: Objet Tournée Deci
+      anyOf:
+        - $ref: '#/components/schemas/TourneeDeciSimple'
+        - $ref: '#/components/schemas/TourneeDeciModele'
+    TourneeDeciBase:
+      type: object
+      title: Objet Tournee Deci Base
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        libelle:
+          type: string
+        description:
+          type: string
+        date_de_creation:
+          type: string
+          format: date-time
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - tournee_deci
+            - tournee_deci_modele
+    TourneeDeciModele:
+      title: Objet Tournee Deci Modele
+      allOf:
+        - $ref: '#/components/schemas/TourneeDeciBase'
+        - type: object
+          properties:
+            mois_debut:
+              type: string
+            mois_fin:
+              type: string
+    TourneeDeciPei:
+      type: object
+      title: Objet Tournée Deci PEI
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date_du_controle:
+          type: string
+          format: date-time
+        liste_anomalies:
+          type: array
+          items:
+            type: object
+            properties:
+              anomalie:
+                readOnly: true
+                allOf:
+                  - $ref: '#/components/schemas/AnomalieDECI'
+              code:
+                type: integer
+                writeOnly: true
+              a_lever:
+                type: boolean
+        essais_engin_utilise:
+          type: string
+          enum:
+            - aucun
+            - fpt
+            - mpr
+            - ccf
+        pei_id:
+          type: string
+          format: uuid
+          writeOnly: true
+        pei:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/PEI'
+        est_controle:
+          type: boolean
+          readOnly: true
+        ordre:
+          type: integer
+    TourneeDeciSimple:
+      title: Objet Tournée Deci Simple
+      allOf:
+        - $ref: '#/components/schemas/TourneeDeciBase'
+        - type: object
+          properties:
+            pourcentage:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 1
+              readOnly: true
+            est_terminee:
+              type: boolean
+              readOnly: true
+            date_de_debut:
+              type: string
+              format: date-time
+            date_de_fin:
+              type: string
+              format: date-time
+            modele:
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/TourneeDeciModele'
+            modele_id:
+              type: string
+              format: uuid
+              writeOnly: true
+    Utilisateur:
+      type: object
+      title: Objet Utilisateur
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        timezone:
+          type: string
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+        fonction:
+          type: string
+          readOnly: true
+        avatar_url:
+          type: string
+          format: uri
+          readOnly: true
+    WorkflowAnalyseDeRisque:
+      title: Workflow-AnalyseDeRisque
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            analyse_de_risque:
+              type: string
+            avis_rapporteur:
+              $ref: '#/components/schemas/Avis'
+            descriptif_effectifs:
+              type: string
+            facteur_dangerosite:
+              type: integer
+            derogations:
+              type: string
+            prescriptions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Prescription'
+            mesures_compensatoires:
+              type: string
+            mesures_complementaires:
+              type: string
+    WorkflowArriveeSecretariat:
+      title: Workflow-ArriveeSecretariat
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            date_arrivee_secretariat:
+              type: string
+              format: date-time
+              readOnly: true
+            passage_commission:
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/PassageCommission'
+    WorkflowBase:
+      type: object
+      title: Objet Workflow Base
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        titre:
+          type: string
+          readOnly: true
+        date_de_creation:
+          type: string
+          format: date-time
+          readOnly: true
+        date_de_debut:
+          type: string
+          format: date-time
+          readOnly: true
+        date_de_fin:
+          type: string
+          format: date-time
+          readOnly: true
+        workflow_automatise:
+          type: boolean
+          readOnly: true
+        etat:
+          type: string
+          enum:
+            - VALIDE
+            - EN_COURS
+            - ATTENTE
+          readOnly: true
+        observations:
+          type: string
+        type:
+          type: string
+          readOnly: true
+    WorkflowConsultationSis:
+      title: Workflow-ConsultationSis
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            commission:
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/Commission'
+    WorkflowDossiersLies:
+      title: 'Objet Workflow : Dossiers Lies'
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            dossier_lie:
+              type: array
+              readOnly: true
+              items:
+                $ref: '#/components/schemas/Dossier'
+    WorkflowPassageCommissionSecurite:
+      title: Workflow-PassageCommissionSecurite
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            commission_date:
+              $ref: '#/components/schemas/PassageCommission'
+            avis_de_commission:
+              $ref: '#/components/schemas/Avis'
+    WorkflowRelectureSecretariat:
+      title: Workflow-RelectureSecretariat
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            est_relu:
+              type: boolean
+              readOnly: true
+    WorkflowRemiseEnServicePEI:
+      title: 'Objet Workflow : Remise En Service PEI'
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            pei_lie:
+              type: string
+              readOnly: true
+            anomalies_levees:
+              type: array
+              readOnly: true
+              items:
+                type: string
+    WorkflowStep:
+      type: object
+      title: Workflow-Step
+      properties:
+        name:
+          type: string
+          readOnly: true
+        workflow:
+          type: object
+          properties:
+            titre:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              readOnly: true
+        needs:
+          type: array
+          readOnly: true
+          items:
+            type: string
+    WorkflowType:
+      type: object
+      title: Workflow-Type
+      properties:
+        dossier_type:
+          type: string
+          readOnly: true
+        steps:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/WorkflowStep'
+    WorkflowValidation:
+      title: Workflow-Validation
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            est_valide:
+              type: boolean
+    WorkflowVisite:
+      title: Workflow-Visite
+      allOf:
+        - $ref: '#/components/schemas/WorkflowBase'
+        - type: object
+          properties:
+            passage_commission:
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/PassageCommission'
+    Workflow:
+      title: Workflow
+      oneOf:
+        - $ref: '#/components/schemas/WorkflowDossiersLies'
+        - $ref: '#/components/schemas/WorkflowRemiseEnServicePEI'
+        - $ref: '#/components/schemas/WorkflowPassageCommissionSecurite'
+        - $ref: '#/components/schemas/WorkflowAnalyseDeRisque'
+        - $ref: '#/components/schemas/WorkflowArriveeSecretariat'
+        - $ref: '#/components/schemas/WorkflowConsultationSis'
+        - $ref: '#/components/schemas/WorkflowValidation'
+        - $ref: '#/components/schemas/WorkflowVisite'
+        - $ref: '#/components/schemas/WorkflowRelectureSecretariat'
+  parameters:
+    PaginationPage:
+      name: page
+      in: query
+      description: Numéro de page
+      schema:
+        type: integer
+        minimum: 1
+    PaginationPerPage:
+      name: per_page
+      in: query
+      description: >-
+        Limite le nombre d'objets retournés. La limite est comprise entre 1 et
+        100, la valeur par défaut étant de 10.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    IdMetariscFr:
+      type: oauth2
+      flows:
+        authorizationCode:
+          refreshUrl: ''
+          authorizationUrl: >-
+            https://id.metarisc.fr/auth/realms/production/protocol/openid-connect/auth
+          scopes:
+            openid: >-
+              Si une application se connecte à l’aide d’OpenID Connect, elle
+              doit solliciter le scope openid. Le scope openid s’affiche sur la
+              page de consentement en tant qu’autorisation de connexion. En
+              utilisant cette autorisation, une application peut recevoir un
+              identificateur unique pour l’utilisateur sous la forme d'une
+              propriété sub. L’autorisation permet également à l’application
+              d’accéder au point de terminaison UserInfo. Le scope openid peut
+              être utilisée sur le point de terminaison des jetons de la
+              plateforme d’identités id.metarisc.fr pour acquérir des jetons
+              d’ID. L’application peut utiliser ces derniers pour
+              l’authentification.
+            email: >-
+              Le scope email peut être utilisée avec le scope openid et toute
+              autre scope. Il permet à l’application d’accéder à l’adresse de
+              messagerie principale de l’utilisateur sous la forme de la
+              propriété email. Le scope email est inclus dans un jeton
+              uniquement si une adresse e-mail est associée au compte
+              d’utilisateur, ce qui n’est pas toujours le cas. Si votre
+              application utilise le scope email, l’application doit être en
+              mesure de traiter un cas dans lequel aucune propriété email
+              n’existe dans le jeton.
+            profile: >-
+              Le scope profile peut être utilisé avec le scope openid et toute
+              autre scope. Il permet à l’application d’accéder à une grande
+              quantité d’informations sur l’utilisateur, notamment le prénom de
+              l’utilisateur, son nom de famille, son nom d’utilisateur préféré
+              et l’ID d’objet.
+            offline_access: >-
+              Le scope offline_access permet à votre application d’accéder aux
+              ressources pour le compte de l’utilisateur pendant une période
+              prolongée. Dans la page de consentement, ce scope apparaît comme
+              l’autorisation Conserver l’accès aux données auxquelles vous lui
+              avez donné l’accès.
+          tokenUrl: >-
+            https://id.metarisc.fr/auth/realms/production/protocol/openid-connect/token
