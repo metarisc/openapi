@@ -1,6 +1,6 @@
 # Metarisc OpenAPI Specification
 
-Ce repository contient les [spécifications OpenAPI][openapi] pour l'API Metarisc :
+Ce repository contient les [spécifications OpenAPI](openapi.yaml) pour l'API Metarisc :
 
 - `openapi.yaml:` OpenAPI 3.0 specs de l'API publique Metarisc
 
