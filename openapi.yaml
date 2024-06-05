@@ -50,6 +50,14 @@ info:
     HTTP échoueront.
 
 
+    ## Organisation connectée
+
+
+    Pour réaliser des appels en tant que membre d'une organisation Metarisc, les
+    requêtes peuvent utiliser l'entête spéciale Metarisc-Org-Id. Assurez vous
+    que cette entête contienne un identifiant d'une organisation valide.
+
+
     ## Gestion des erreurs
 
 
@@ -222,6 +230,13 @@ paths:
       summary: '@moi'
       description: Récupérer les détails de l'utilisateur connecté.
       operationId: GetMoi
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -343,6 +358,12 @@ paths:
           description: Filtre sur le texte de l'anomalie
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -467,6 +488,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -591,6 +619,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -704,6 +738,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -820,6 +860,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -943,6 +989,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -1069,6 +1122,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -1198,6 +1257,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -1329,6 +1394,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -1458,6 +1529,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -1593,6 +1670,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -1732,6 +1815,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -1856,6 +1945,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -1971,6 +2066,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -2103,6 +2204,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -2216,6 +2323,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -2334,6 +2447,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -2455,6 +2574,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -2587,6 +2712,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -2700,6 +2831,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -2818,6 +2955,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -2939,6 +3082,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -3073,6 +3222,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -3203,6 +3358,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -3329,6 +3490,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -3459,6 +3626,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -3583,6 +3756,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -3701,6 +3880,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -3829,6 +4014,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -3963,6 +4154,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -4103,6 +4300,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -4239,6 +4442,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -4369,6 +4578,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -4492,6 +4707,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -4625,6 +4846,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -4736,6 +4963,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -4880,6 +5113,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -5007,6 +5247,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -5137,6 +5383,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -5263,6 +5515,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -5393,6 +5651,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -5519,6 +5783,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -5649,6 +5919,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -5773,6 +6049,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -5894,6 +6176,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -6035,6 +6323,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -6158,6 +6452,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -6282,6 +6583,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -6395,6 +6702,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -6524,6 +6837,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -6653,6 +6972,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: Success
@@ -6776,6 +7101,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -6898,6 +7230,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -7021,6 +7359,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -7145,6 +7490,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -7258,6 +7609,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -7374,6 +7731,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -7506,6 +7869,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -7640,6 +8009,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -7771,6 +8146,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -7892,6 +8273,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -8022,6 +8409,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -8147,6 +8540,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -8306,6 +8705,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -8429,6 +8834,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -8555,6 +8967,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -8685,6 +9103,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -8811,6 +9235,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -8941,6 +9371,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -9067,6 +9503,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -9197,6 +9639,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -9321,6 +9769,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -9442,6 +9896,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -9563,6 +10023,13 @@ paths:
         Permet de s'assurer que le service Metarisc est en ligne. Ping ... Pong
         !
       operationId: GetPing
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -9684,6 +10151,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -9807,6 +10280,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -9931,6 +10411,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -10044,6 +10530,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -10160,6 +10652,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -10283,6 +10781,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -10407,6 +10912,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -10520,6 +11031,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -10648,6 +11165,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -10771,6 +11294,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -10895,6 +11425,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -11012,6 +11548,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -11137,6 +11679,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -11260,6 +11808,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -11389,6 +11943,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       requestBody:
         content:
@@ -11520,6 +12080,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '204':
           description: No Content
@@ -11639,6 +12205,12 @@ paths:
           required: true
           schema:
             type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
             maxLength: 255
       responses:
         '200':
@@ -11764,6 +12336,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       requestBody:
         content:
           application/json:
@@ -11886,6 +12464,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -12014,6 +12598,13 @@ paths:
             - openid
             - email
             - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -12135,6 +12726,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -12266,6 +12863,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
@@ -12387,6 +12990,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
       responses:
         '200':
           description: OK
