@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  version: '1.0'
+  title: Metarisc API WFS
+  description: |-
+    Les données géographiques de Metarisc sont diffusées via un Web Feature Service (WFS), exposant une interface permettant de traiter des requêtes géographiques.
+
+    Metarisc utilise WFS version 1.1.0.
+paths:
+  /GetCapabilities:
+    get:
+      tags:
+        - WFS API
+      summary: Caractéristiques du service WFS
+      description: Le point de terminaison GetCapabilities permet aux clients de récupérer l'ensemble des caractéristiques du service WFS. La réponse est au format XML.
+      operationId: get-capabilities
+      responses:
+        '200':
+          description: OK
+  /DescribeFeatureType:
+    get:
+      tags:
+        - WFS API
+      summary: Informations de champ concernant les features WFS
+      description: 'Le point de terminaison DescribeFeatureType décrit les informations de champ concernant une ou plusieurs entités du service WFS. Cela inclut les noms de champs, les types de champs, les valeurs minimales et maximales autorisées dans les champs et toute autre contrainte définie dans un champ des classes d’entités ou tables.'
+      operationId: describ-feature-type
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /GetFeature:
+    get:
+      tags:
+        - WFS API
+      summary: Informations sur des features
+      description: Le point de terminaison GetFeature renvoie des informations concernant des types d’entités spécifiques disponibles par l’intermédiaire du service WFS.
+      operationId: get-feature
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  crs:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      properties:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                  features:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/feature'
+              examples:
+                Example Request GetFeature:
+                  value:
+                    type: FeatureCollection
+                    crs:
+                      type: name
+                      properties:
+                        name: 'urn:ogc:def:crs:EPSG::4326'
+                    features:
+                      - type: Feature
+                        properties:
+                          id: '1'
+                          codepostal: '62300'
+                          temperature: '11'
+                          nomville: lens
+                        geometry:
+                          type: Point
+                          bbox:
+                            - 2.83183
+                            - 50.42893
+                            - 2.83183
+                            - 50.42893
+                          coordinates:
+                            - 2.83183
+                            - 50.42893
+                      - type: Feature
+                        properties:
+                          id: '2'
+                          codepostal: '62880'
+                          temperature: '12'
+                          nomville: vendin
+                        geometry:
+                          type: Point
+                          bbox:
+                            - 2.865986
+                            - 50.475517
+                            - 2.865986
+                            - 50.475517
+                          coordinates:
+                            - 2.865986
+                            - 50.475517
+                      - type: Feature
+                        properties:
+                          id: '3'
+                          codepostal: '62680'
+                          temperature: '14'
+                          nomville: mericourt
+                        geometry:
+                          type: Point
+                          bbox:
+                            - 2.866865
+                            - 50.401526
+                            - 2.866865
+                            - 50.401526
+                          coordinates:
+                            - 2.866865
+                            - 50.401526
+                      - type: Feature
+                        properties:
+                          id: '4'
+                          codepostal: '62000'
+                          temperature: '13'
+                          nomville: arras
+                        geometry:
+                          type: Point
+                          bbox:
+                            - 2.777535
+                            - 50.291002
+                            - 2.777535
+                            - 50.291002
+                          coordinates:
+                            - 2.777535
+                            - 50.291002
+                      - type: Feature
+                        properties:
+                          id: '5'
+                          codepostal: '20000'
+                          temperature: '24'
+                          nomville: ajaccio
+                        geometry:
+                          type: Point
+                          bbox:
+                            - -74.005941
+                            - 40.712784
+                            - -74.005941
+                            - 40.712784
+                          coordinates:
+                            - -74.005941
+                            - 40.712784
+tags:
+  - name: WFS API
+components:
+  schemas:
+    feature:
+      type: object
+      title: GeoJSON Feature
+      properties:
+        type:
+          type: string
+        properties:
+          type: object
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+            bbox:
+              type: array
+              items:
+                type: number
+            coordinates:
+              type: array
+              items:
+                type: number
+      x-examples:
+        Example 1:
+          type: Feature
+          properties:
+            id: '1'
+            codepostal: '62300'
+            temperature: '11'
+            nomville: lens
+          geometry:
+            type: Point
+            bbox:
+              - 2.83183
+              - 50.42893
+              - 2.83183
+              - 50.42893
+            coordinates:
+              - 2.83183
+              - 50.42893
+      x-tags:
+        - WFS API
+x-extension-metarisc-codegen-visibility: ignore

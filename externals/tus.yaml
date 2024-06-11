@@ -1,0 +1,424 @@
+openapi: 3.1.0
+info:
+  version: '1.0'
+  title: Metarisc API Resumable Uploads
+  description: 'Microservice qui permet de télécharger et de téléverser des fichiers dans Metarisc. Le protocole utilisé est [TUS Resumable Uploads 1.0](https://tus.io/protocols/resumable-upload.html).'
+paths:
+  /files:
+    post:
+      tags:
+        - Resumable File Uploads API
+      summary: Création d'une nouvelle ressource de téléchargement
+      description: 'Une requête POST vide est utilisée pour créer une nouvelle ressource de téléchargement. L''en-tête Upload-Length indique la taille de l''ensemble du téléchargement en octets. Si l''extension Création avec téléchargement est disponible, le client peut inclure des parties du téléchargement dans la demande de création initiale'
+      operationId: create-new-upload-resource
+      parameters:
+        - name: Content-Length
+          in: header
+          description: Doit être 0 pour l'extension de création. Peut être un nombre positif pour l'extension Creation With Upload.
+          schema:
+            type: integer
+        - name: Upload-Length
+          in: header
+          description: 'L''en-tête de demande et de réponse Upload-Length indiquant la taille de l''ensemble du téléchargement en octets. La valeur DOIT être un entier non négatif. Dans l''extension de concaténation, le client NE DOIT PAS inclure l''en-tête Upload-Length dans la création finale du téléchargement.'
+          schema:
+            $ref: '#/components/schemas/Upload-Length'
+        - name: Tus-Resumable
+          in: header
+          description: Version du protocole
+          schema:
+            $ref: '#/components/schemas/Tus-Resumable'
+        - name: Upload-Metadata
+          in: header
+          description: 'Ajouté par l''extension Creation. L''en-tête de demande et de réponse Upload-Metadata DOIT consister en une ou plusieurs paires clé-valeur séparées par des virgules. La clé et la valeur DOIVENT être séparées par un espace. La clé NE DOIT PAS contenir d''espaces ni de virgules et NE DOIT PAS être vide. La clé DEVRAIT être encodée en ASCII et la valeur DOIT être encodée en Base64. Toutes les clés DOIVENT être uniques. La valeur PEUT être vide. Dans ces cas, l''espace, qui séparerait normalement la clé et la valeur, PEUT être omis. Étant donné que les métadonnées peuvent contenir des valeurs binaires arbitraires, les serveurs DEVRAIENT soigneusement valider les valeurs des métadonnées ou les nettoyer avant de les utiliser comme valeurs d''en-tête pour éviter la contrebande d''en-tête.'
+          schema:
+            type: string
+        - name: Upload-Concat
+          in: header
+          description: 'Ajouté par l''extension Concaténation. L''en-tête de demande et de réponse Upload-Concat DOIT être défini dans les demandes de création de téléchargement partiel et final. Il indique si le téléchargement est un téléchargement partiel ou final. Si le téléchargement est partiel, la valeur d''en-tête DOIT être partielle. Dans le cas d''un téléchargement final, sa valeur DOIT être finale suivie d''un point-virgule et d''une liste séparée par des espaces d''URL de téléchargement partiel qui seront concaténées. Les URL de téléchargements partiels PEUVENT être absolues ou relatives et NE DOIVENT PAS contenir d''espaces comme défini dans la RFC 3986.'
+          schema:
+            type: string
+        - name: Upload-Defer-Length
+          in: header
+          description: 'L''en-tête de demande et de réponse Upload-Defer-Length indique que la taille du téléchargement n''est pas connue actuellement et sera transférée ultérieurement. Sa valeur DOIT être 1. Si la longueur d''un téléchargement n''est pas différée, cet en-tête DOIT être omis.'
+          schema:
+            $ref: '#/components/schemas/Upload-Defer-Length'
+        - name: Upload-Offset
+          in: header
+          description: L'en-tête de demande et de réponse Upload-Offset indique un décalage d'octet dans une ressource. La valeur DOIT être un entier non négatif.
+          schema:
+            $ref: '#/components/schemas/Upload-Offset'
+        - name: Upload-Checksum
+          in: header
+          description: L'en-tête de demande Upload-Checksum contient des informations sur la somme de contrôle de la charge utile du corps actuel. L'en-tête DOIT être composé du nom de l'algorithme de somme de contrôle utilisé et de la somme de contrôle encodée en Base64 séparés par un espace.
+          schema:
+            $ref: '#/components/schemas/Upload-Checksum'
+      requestBody:
+        description: Contenu restant du fichier. Requis si Content-Length > 0.
+        required: false
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+      responses:
+        '201':
+          description: Le contenu a été téléchargé
+        '400':
+          description: Ajouté par l'extension Creation With Upload en combinaison avec l'extension de somme de contrôle. L'algorithme de somme de contrôle n'est pas pris en charge par le serveur
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '401':
+          description: Unauthorized
+        '412':
+          description: Échec de la condition préalable
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+            Tus-Version:
+              schema:
+                $ref: '#/components/schemas/Tus-Version'
+              description: 'L''en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.'
+        '413':
+          description: 'Si la longueur du téléchargement dépasse le maximum, qui PEUT être spécifié en utilisant l''en-tête Tus-Max-Size, le serveur DOIT répondre avec le statut 413 Request Entity Too Large.'
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '415':
+          description: Ajouté par l'extension Creation With Upload. Content-Type n'était pas application/offset+octet-stream
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '460':
+          description: Ajouté par l'extension Creation With Upload en combinaison avec l'extension de somme de contrôle. Non-concordance des sommes de contrôle
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+    options:
+      tags:
+        - Resumable File Uploads API
+      summary: Informations sur la configuration actuelle du serveur
+      description: Une demande OPTIONS PEUT être utilisée pour recueillir des informations sur la configuration actuelle du serveur. Une réponse réussie indiquée par le status code 204 Pas de contenu ou 200 OK DOIT contenir l'en-tête Tus-Version. Il PEUT inclure les en-têtes Tus-Extension et Tus-Max-Size.
+      operationId: get-server-info
+      responses:
+        '200':
+          description: Succès
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+            Tus-Checksum-Algorithm:
+              schema:
+                $ref: '#/components/schemas/Tus-Checksum-Algorithm'
+              description: Ajouté par l'extension de somme de contrôle. L'en-tête de réponse Tus-Checksum-Algorithm doit être une liste séparée par des virgules des algorithmes de somme de contrôle pris en charge par le serveur.
+            Tus-Version:
+              schema:
+                $ref: '#/components/schemas/Tus-Version'
+              description: 'L''en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.'
+            Tus-Max-Size:
+              schema:
+                $ref: '#/components/schemas/Tus-Max-Size'
+              description: L'en-tête de réponse Tus-Max-Size doit être un entier non négatif indiquant la taille maximale autorisée d'un téléchargement entier en octets. Le serveur DEVRAIT définir cet en-tête s'il existe une limite stricte connue.
+            Tus-Extension:
+              schema:
+                $ref: '#/components/schemas/Tus-Extension'
+              description: 'L''en-tête de réponse Tus-Extension doit être une liste séparée par des virgules des extensions prises en charge par le serveur. Si aucune extension n''est prise en charge, l''en-tête Tus-Extension doit être omis.'
+        '204':
+          description: Succès
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+            Tus-Checksum-Algorithm:
+              schema:
+                $ref: '#/components/schemas/Tus-Checksum-Algorithm'
+              description: Ajouté par l'extension de somme de contrôle. L'en-tête de réponse Tus-Checksum-Algorithm doit être une liste séparée par des virgules des algorithmes de somme de contrôle pris en charge par le serveur.
+            Tus-Version:
+              schema:
+                $ref: '#/components/schemas/Tus-Version'
+              description: 'L''en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.'
+            Tus-Max-Size:
+              schema:
+                $ref: '#/components/schemas/Tus-Max-Size'
+              description: L'en-tête de réponse Tus-Max-Size doit être un entier non négatif indiquant la taille maximale autorisée d'un téléchargement entier en octets. Le serveur DEVRAIT définir cet en-tête s'il existe une limite stricte connue.
+            Tus-Extension:
+              schema:
+                $ref: '#/components/schemas/Tus-Extension'
+              description: 'L''en-tête de réponse Tus-Extension doit être une liste séparée par des virgules des extensions prises en charge par le serveur. Si aucune extension n''est prise en charge, l''en-tête Tus-Extension doit être omis.'
+  '/files/{id}':
+    delete:
+      tags:
+        - Resumable File Uploads API
+      summary: Annulation d'un téléchargement
+      description: 'Lors de la réception d''une demande DELETE pour un téléchargement existant, l''API tus-resumable-uploads libére les ressources associées et répond avec le status code 204 No Content confirmant que le téléchargement a été terminé. Pour toutes les demandes futures à cette URL, l''API tus-resumable-uploads répond avec le status code 404 Not Found ou 410 Gone.'
+      operationId: delete-file
+      parameters:
+        - name: Tus-Resumable
+          in: header
+          description: Version du protocole
+          required: true
+          schema:
+            $ref: '#/components/schemas/Tus-Resumable'
+        - name: id
+          in: path
+          description: identifiant du fichier
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Le téléchargement a été interrompu
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '412':
+          description: Échec de la condition préalable
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: 'Version du protocole '
+            Tus-Version:
+              schema:
+                $ref: '#/components/schemas/Tus-Version'
+              description: 'L''en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.'
+      x-internal: false
+    head:
+      tags:
+        - Resumable File Uploads API
+      summary: Déterminer le décalage auquel le téléchargement doit être poursuivi
+      description: Utilisé pour déterminer le décalage auquel le téléchargement doit être poursuivi.
+      operationId: get-upload-offset
+      parameters:
+        - name: Tus-Resumable
+          in: header
+          description: Version du protocole
+          required: true
+          schema:
+            $ref: '#/components/schemas/Tus-Resumable'
+        - name: id
+          in: path
+          description: identifiant du fichier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Retourne le décalage
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+            Cache-Control:
+              schema:
+                type: string
+                enum:
+                  - no-store
+              description: 'Le serveur doit empêcher le client et/ou les proxys de mettre en caching la réponse en ajoutant l''en-tête Cache-Control: no-store à la réponse.'
+            Upload-Offset:
+              schema:
+                $ref: '#/components/schemas/Upload-Offset'
+              description: L'en-tête de demande et de réponse Upload-Offset indique un décalage d'octet dans une ressource. La valeur DOIT être un entier non négatif.
+            Upload-Length:
+              schema:
+                $ref: '#/components/schemas/Upload-Length'
+              description: 'L''en-tête de demande et de réponse Upload-Length indiquant la taille de l''ensemble du téléchargement en octets. La valeur DOIT être un entier non négatif. Dans l''extension de concaténation, le client NE DOIT PAS inclure l''en-tête Upload-Length dans la création finale du téléchargement.'
+        '403':
+          description: 'Si la ressource n''est pas trouvée, le serveur DEVRAIT retourner le status code 404 Not Found, 410 Gone ou 403 Forbidden sans l''en-tête Upload-Offset.'
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '404':
+          description: 'Si la ressource n''est pas trouvée, le serveur DEVRAIT retourner le status code 404 Not Found, 410 Gone ou 403 Forbidden sans l''en-tête Upload-Offset.'
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '410':
+          description: 'Si la ressource n''est pas trouvée, le serveur DEVRAIT retourner le status 404 Not Found, 410 Gone ou 403 Forbidden sans l''en-tête Upload-Offset.'
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '412':
+          description: Échec de la condition préalable
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+            Tus-Version:
+              schema:
+                $ref: '#/components/schemas/Tus-Version'
+              description: 'L''en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.'
+    patch:
+      tags:
+        - Resumable File Uploads API
+      summary: Reprendre le téléchargement
+      description: 'L''API tus-resumable-uploads accepte les requêtes PATCH contre toute URL de téléchargement et applique les octets contenus dans le message au décalage donné spécifié par l''en-tête Upload-Offset. Toutes les requêtes PATCH DOIVENT utiliser Content-Type : application/offset+octet-stream, sinon l''API resumable-uploads renvoi un status code 415 Unsupported Media Type.'
+      operationId: patch-file
+      parameters:
+        - name: Tus-Resumable
+          in: header
+          description: Version du protocole
+          required: true
+          schema:
+            $ref: '#/components/schemas/Tus-Resumable'
+        - name: Content-Length
+          in: header
+          description: Longueur du corps de la requête
+          required: true
+          schema:
+            type: integer
+        - name: Upload-Offset
+          in: header
+          description: L'en-tête de demande et de réponse Upload-Offset indique un décalage d'octet dans une ressource. La valeur DOIT être un entier non négatif.
+          required: true
+          schema:
+            $ref: '#/components/schemas/Upload-Offset'
+        - name: Upload-Checksum
+          in: header
+          description: L'en-tête de demande Upload-Checksum contient des informations sur la somme de contrôle de la charge utile du corps actuel. L'en-tête DOIT être composé du nom de l'algorithme de somme de contrôle utilisé et de la somme de contrôle encodée en Base64 séparés par un espace.
+          schema:
+            $ref: '#/components/schemas/Upload-Checksum'
+        - name: id
+          in: path
+          description: identifiant du fichier
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Contenu restant du fichier. Requis si Content-Length > 0.
+        required: false
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Ajouté par l'extension de somme de contrôle. L'algorithme de somme de contrôle n'est pas pris en charge par le serveur
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '401':
+          description: Unauthorized
+        '403':
+          description: 'Dans l''extension de concaténation, le serveur DOIT répondre avec le statut 403 Forbidden aux requêtes PATCH contre une URL de téléchargement final et NE DOIT PAS modifier le téléchargement final ou partiel.'
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '404':
+          description: Requête PATCH sur une ressource inexistante
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '409':
+          description: Requête PATCH avec Upload-Offset différent de l'offset de la ressource sur le serveur. La valeur de l'en-tête Upload-Offset DOIT être égale au décalage actuel de la ressource.
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '410':
+          description: Requête PATCH sur une ressource inexistante
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+        '412':
+          description: Échec de la condition préalable
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: Version du protocole
+            Tus-Version:
+              schema:
+                $ref: '#/components/schemas/Tus-Version'
+              description: 'L''en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.'
+        '415':
+          description: Content-Type n'était pas application/offset+octet-stream
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: 'Version du protocole '
+        '460':
+          description: Ajouté par l'extension de somme de contrôle. Non-concordance des sommes de contrôle
+          headers:
+            Tus-Resumable:
+              schema:
+                $ref: '#/components/schemas/Tus-Resumable'
+              description: 'Version du protocole '
+tags:
+  - name: Resumable File Uploads API
+components:
+  schemas:
+    Upload-Length:
+      type: integer
+      title: En-tête HTTP Tus-Upload-Length
+      description: L'en-tête de la demande et de la réponse Upload-Length indique la taille de l'ensemble du téléchargement en octets. La valeur doit être un entier non négatif.
+    Tus-Resumable:
+      type: string
+      enum:
+        - 1.0.0
+      title: En-tête HTTP Tus-Resumable
+      description: Version du protocole
+    Upload-Defer-Length:
+      type: integer
+      enum:
+        - 1
+      description: 'Ajouté par l''extension Creation Defer Length. L''en-tête de demande et de réponse Upload-Defer-Length indique que la taille du téléchargement n''est pas connue actuellement et sera dépassée. Sa valeur DOIT être 1. Si la longueur d''un téléchargement n''est pas différée, cet en-tête DOIT être omis.'
+    Upload-Offset:
+      type: integer
+      title: En-tête HTTP Tus-Upload-Offset
+      description: L'en-tête de demande et de réponse Upload-Offset indique un décalage d'octet dans une ressource. La valeur DOIT être un entier non négatif.
+    Upload-Checksum:
+      type: string
+      title: En-tête HTTP Tus-Upload-Checksum
+      description: L'en-tête de la requête Upload-Checksum contient des informations sur la somme de contrôle de la charge utile du corps actuel. L'en-tête doit être composé du nom de l'algorithme de somme de contrôle utilisé et de la somme de contrôle encodée en Base64 séparés par un espace.
+    Tus-Version:
+      type: string
+      title: En-tête HTTP Tus-Version
+      description: |
+        L'en-tête de réponse Tus-Version doit être une liste séparée par des virgules des versions de protocole prises en charge par le serveur. La liste doit être triée par préférence du serveur, la première étant la plus préférée.
+    Tus-Checksum-Algorithm:
+      type: string
+      title: En-tête HTTP Tus-Checksum-Algorithm
+      description: Ajouté par l'extension de somme de contrôle. L'en-tête de réponse Tus-Checksum-Algorithm DOIT être une liste séparée par des virgules des algorithmes de somme de contrôle pris en charge par le serveur.
+    Tus-Max-Size:
+      type: integer
+      title: En-tête HTTP Tus-Max-Size
+      description: L'en-tête de réponse Tus-Max-Size doit être un entier non négatif indiquant la taille maximale autorisée d'un téléchargement entier en octets. Le serveur devrait définir cet en-tête s'il existe une limite stricte connue.
+    Tus-Extension:
+      type: string
+      title: En-tête HTTP Tus-Extension
+      description: 'L''en-tête de réponse Tus-Extension doit être une liste séparée par des virgules des extensions prises en charge par le serveur. Si aucune extension n''est prise en charge, l''en-tête Tus-Extension doit être omis.'
+x-extension-metarisc-codegen-visibility: ignore
