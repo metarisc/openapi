@@ -1,0 +1,30 @@
+name: "Trigger SDK codegen"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: tibdex/github-app-token@v2
+        id: gh-api-token
+        with:
+          app_id: ${{ secrets.GH_APP_METARISC_OPENAPI_APP_ID }}
+          private_key: ${{ secrets.GH_APP_METARISC_OPENAPI_PRIVATE_KEY }}
+
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ steps.gh-api-token.outputs.token }}
+          script: |
+            await github.rest.repos.createWorkflowDispatch({
+              owner: 'metarisc',
+              repo: 'sdk-codegen',
+              workflow_id: 'codegen.yml',
+              ref: 'main'
+            })
