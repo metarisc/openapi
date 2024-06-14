@@ -54,8 +54,8 @@ info:
 
 
     Pour réaliser des appels en tant que membre d'une organisation Metarisc, les
-    requêtes peuvent utiliser l'entête spéciale Metarisc-Org-Id. Assurez vous
-    que cette entête contienne un identifiant d'une organisation valide.
+    requêtes peuvent utiliser l'entête spéciale ```Metarisc-Org-Id```. Assurez
+    vous que cette entête contienne un identifiant d'une organisation valide.
 
 
     ## Gestion des erreurs
@@ -185,13 +185,13 @@ info:
     {
         "data": [...],
         "meta": {
-        "pagination": {
-            "total": int,
-            "count": int,
-            "per_page": int,
-            "current_page": int,
-            "total_pages": int
-        }
+            "pagination": {
+                "total": int,
+                "count": int,
+                "per_page": int,
+                "current_page": int,
+                "total_pages": int
+            }
         }
     }
 
