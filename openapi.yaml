@@ -13197,10 +13197,12 @@ components:
           maxLength: 255
         latitude:
           type: number
+          format: double
           readOnly: true
           maxLength: 255
         longitude:
           type: number
+          format: double
           readOnly: true
           maxLength: 255
         localisation_operationnelle:
