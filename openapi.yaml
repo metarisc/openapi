@@ -374,6 +374,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -875,6 +876,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -1137,6 +1139,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -1544,6 +1547,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -2081,6 +2085,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -2589,6 +2594,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -3097,6 +3103,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -3237,6 +3244,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -3505,6 +3513,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -4029,6 +4038,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -4169,6 +4179,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -4315,6 +4326,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -4978,6 +4990,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -5262,6 +5275,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -5530,6 +5544,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -5798,6 +5813,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -6191,6 +6207,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -6338,6 +6355,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -6852,6 +6870,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -6987,6 +7006,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -7245,6 +7265,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -7746,6 +7767,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -7885,6 +7907,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -8024,6 +8047,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -8288,6 +8312,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -8720,6 +8745,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -8982,6 +9008,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -9250,6 +9277,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -9518,6 +9546,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -9911,6 +9940,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -10166,6 +10196,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -10667,6 +10698,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -11180,6 +11212,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -11823,6 +11856,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -12479,6 +12513,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -12741,6 +12776,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -13005,6 +13041,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    description: Tableau d'objets contenu dans la page.
                     type: array
                     maxItems: 200
                     items:
@@ -13130,11 +13167,19 @@ components:
   schemas:
     ActiviteErp:
       type: object
-      title: ActiviteErp
+      title: Objet Activité ERP
+      description: >-
+        Un ERP est associé à un type d'activité selon la nature de leur
+        exploitation. Il est codifié par une ou plusieurs lettres, en fonction
+        de la nature et de l'activité de l'exploitation.
       properties:
         type:
+          description: >-
+            Le type est désignée par une ou un ensemble de lettres définies par
+            l’article GN 1 du règlement de sécurité  incendie dans les ERP. Voir
+            :
+            https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487
           type: string
-          readOnly: true
           enum:
             - J
             - L
@@ -13150,79 +13195,101 @@ components:
             - W
             - X
             - 'Y'
-            - PE
-            - PO
-            - PU
-            - PX
             - PA
             - CTS
             - SG
-            - OA
-            - REF
             - PS
             - GA
+            - OA
             - EF
-            - GEEM
-            - EP
-            - R. 143-15
-            - EIRP
+            - REF
         activite:
+          description: >-
+            Désignation spécifique de l'exploitation. (exemple : Pour un type R
+            - "Crèche")
           type: string
           maxLength: 255
-          readOnly: true
     AdressePostale:
       type: object
       title: Objet Adresse Postale
-      description: Représente une adresse postale permettant de localiser un POI.
+      description: >-
+        Représente une adresse postale qui est la localisation complète du
+        destinataire d'un courrier.
       properties:
         code_postal:
+          description: >-
+            Le code postal en France est une suite de cinq chiffres dont les
+            deux premiers correspondent au département.
           type: string
-          readOnly: true
-          maxLength: 255
+          maxLength: 5
+          pattern: ^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$
         commune:
+          description: Nom de la commune.
           type: string
-          readOnly: true
           maxLength: 255
         voie:
+          description: >-
+            Libellé de la voie et de son type (exemple : "rue du point du
+            jour").
           type: string
-          readOnly: true
           maxLength: 255
         code_insee:
+          description: Code unique attribué à chaque commune de France.
           type: string
-          readOnly: true
-          maxLength: 255
+          pattern: ^([02][1-9]|2[AB]|[1345678][0-9]|9[012345]|97[12346])$
+          maxLength: 5
         arrondissement:
-          type: string
-          readOnly: true
-          maxLength: 255
+          description: >-
+            Le "code arrondissement" contient un chiffre (à partir de 1). Chaque
+            arrondissement français peut ainsi être identifié par un code unique
+            à 3 (pour la métropole) ou 4 (pour l'outre-mer) chiffres, dont
+            respectivement les deux ou trois premiers identifient le
+            département.
+          type: number
+          format: int32
         latitude:
+          description: >-
+            La latitude est une coordonnée géographique représentée par une
+            valeur angulaire, expression de la position d'un point sur Terre, au
+            nord ou au sud de l'équateur qui est le plan de référence. La
+            latitude est une mesure angulaire ; elle varie entre la valeur 0° à
+            l'équateur et 90° aux pôles.
           type: number
           format: double
-          readOnly: true
           maxLength: 255
         longitude:
+          description: >-
+            La longitude d'un point sur Terre est une coordonnée géographique
+            représentée par une valeur angulaire, expression du positionnement
+            est-ouest du point. Une longitude se mesure par rapport à une
+            référence arbitraire qui, sur Terre, est généralement le méridien de
+            Greenwich.
           type: number
           format: double
-          readOnly: true
           maxLength: 255
         localisation_operationnelle:
+          description: Complément d'adresse à destination des services de secours.
           type: string
           maxLength: 255
-          readOnly: true
         complement:
+          description: Complément d'adresse.
           type: string
           maxLength: 255
-          readOnly: true
     AnomalieDECI:
       type: object
-      title: Objet Anomalie
+      title: Objet Anomalie DECI
+      description: >-
+        Anomalie DECI constatée visuellement. Les anomalies DECI impactent la
+        disponibilité, la conformité ou l'utilisation d'un PEI.
       properties:
         code:
+          description: Référence codifiée de l'anomalie.
           type: integer
           format: int32
           minimum: 0
           maximum: 99999
         texte:
+          description: Description de l'anomalie.
           type: string
           maxLength: 255
         indice_de_gravite:
@@ -13234,14 +13301,21 @@ components:
             - 0
             - 1
             - 2
-          description: |-
+          description: >-
+            L'indice de gravité permet de classifier l'impact d'une anomalie sur
+            la vie d'un PEI.
+
             Nomenclature de l'indice de gravité :
+
             - 0 : Réserve ;
+
             - 1 : Anomalie ;
+
             - 2 : Anomalie bloquante.
     AnomaliePEI:
       type: object
       title: Objet Anomalie PEI
+      description: Pose d'une anomalie DECI sur un PEI.
       properties:
         anomalie:
           readOnly: true
@@ -13267,24 +13341,30 @@ components:
           maxLength: 255
     Avis:
       type: object
-      title: Avis
+      title: Objet Avis
+      description: Objet représentant un avis générique.
       properties:
-        avis_exploitation:
+        type:
+          description: Type de l'avis donné.
           type: string
           enum:
-            - favorable_exploitation
-            - defavorable_exploitation
-          readOnly: true
+            - favorable
+            - defavorable
     Commission:
       type: object
       title: Objet Commission
+      description: Une commission est un organisme compétent pour donner des avis.
       properties:
         id:
           type: string
+          description: Identifiant unique de l'objet.
           format: uuid
           readOnly: true
           maxLength: 255
         type:
+          description: >-
+            Type de la commission (peut être une commission de sécurité, un
+            conseil départemental ...).
           type: string
           enum:
             - Sous-commission départementale
@@ -13293,63 +13373,91 @@ components:
             - Commission d'arrondissement
             - CoDERST
         libelle:
+          description: Nom de la commission.
           type: string
           maxLength: 255
     Contact:
       type: object
       title: Objet Contact
+      description: >-
+        Représente une "carte de visite" aggrégeant les coordonnées d'un
+        contact.
       properties:
         id:
           type: string
+          description: Identifiant unique de l'objet.
           format: uuid
           readOnly: true
           maxLength: 255
         nom:
+          description: Nom de famille du contact.
           type: string
           maxLength: 255
         prenom:
+          description: Prénom du contact.
           type: string
           maxLength: 255
         fonction:
+          description: La fonction professionnelle d'un contact.
           type: string
           maxLength: 255
         telephone_fixe:
+          description: Le numéro de téléphone fixe du contact.
           type: string
           maxLength: 255
         telephone_portable:
+          description: Le numéro de téléphone portable du contact.
           type: string
           maxLength: 255
         telephone_fax:
+          description: Le numéro de fax du contact.
           type: string
           maxLength: 255
         adresse:
+          description: Adresse complète du contact.
           type: string
           maxLength: 255
         site_web_url:
+          description: Le site internet du contact.
           type: string
           maxLength: 255
         civilite:
+          description: Le titre de civilité utilisé.
           type: string
           maxLength: 255
+          enum:
+            - M
+            - Mme
+            - Mx
         societe:
+          description: Nom de la société / entreprise liée à ce contact.
           type: string
           maxLength: 255
         email:
+          description: Adresse email du contact.
           type: string
           maxLength: 255
         observations:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
     DescriptifTechniqueDECIBase:
       type: object
       title: Objet Descriptif Technique DECI Base
+      description: Descriptif technique de base pour l'ensemble des PEI.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         type:
+          description: >-
+            Permet de définir à quelle famille de points d’eau ce descriptif
+            technique se rattache.
           type: string
           enum:
             - PIBI
@@ -13362,9 +13470,13 @@ components:
           items:
             $ref: '#/components/schemas/AnomaliePEI'
         est_reglementaire:
+          description: Statut réglementaire calculé à travers le RD-DECI du PEI.
           type: boolean
           readOnly: true
         domanialite:
+          description: >-
+            Le régime domanial, notamment en ce qui concerne le domaine public,
+            s'appliquant s'appliquant au PEI.
           type: string
           enum:
             - privee
@@ -13372,15 +13484,26 @@ components:
             - privee_conventionnee
           readOnly: true
         est_conforme_rddeci:
+          description: >-
+            Résultat de l'application des règles RD-DECI en vigueur pour
+            déterminer la conformité d'un PEI.
           type: boolean
           readOnly: true
         performance_theorique:
           type: integer
           format: int32
-          description: |-
+          description: >-
+            Calcul de la performance opérationnelle théorique du PEI (c'est à
+            dire sans prendre en compte sa disponibilité).
+
+            Nomenclature de la performance :
+
             - Performance nulle = 0
+
             - Performance restreinte = 1
+
             - Performance bonne = 2
+
             - Performance inconnue = -1
           minimum: -1
           maximum: 2
@@ -13388,19 +13511,31 @@ components:
         performance_reelle:
           type: integer
           format: int32
-          description: |-
+          description: >-
+            Calcul de la performance opérationnelle du PEI en fonction des
+            règles RD-DECI en vigueur.
+
+            Nomenclature de la performance :
+
             - Performance nulle = 0
+
             - Performance restreinte = 1
+
             - Performance bonne = 2
+
             - Performance inconnue = -1
           minimum: -1
           maximum: 2
           readOnly: true
         observations_generales:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs.
           type: string
           readOnly: true
           maxLength: 255
         date:
+          description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
           readOnly: true
@@ -13416,24 +13551,29 @@ components:
             - reforme
           readOnly: true
         est_disponible:
+          description: Disponibilité opérationnelle du PEI.
           type: boolean
           readOnly: true
     DescriptifTechniqueDECI:
       type: object
-      title: Descriptif Technique DECI
+      title: Objet Descriptif Technique DECI
+      description: Descriptif technique associé à un PEI.
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniquePIBI'
         - $ref: '#/components/schemas/DescriptifTechniquePENA'
     DescriptifTechniqueERPBase:
       type: object
       title: Objet Descriptif Technique ERP Base
+      description: Descriptif technique de base pour l'ensemble des ERP.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         date:
+          description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
           readOnly: true
@@ -13454,6 +13594,10 @@ components:
         avis_exploitation:
           $ref: '#/components/schemas/Avis'
         categorie:
+          description: >-
+            Les établissements sont classés en catégories d'après l'effectif du
+            public et du personnel. Voir :
+            https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
           type: integer
           minimum: 1
           maximum: 5
@@ -13467,36 +13611,56 @@ components:
         type_activite:
           $ref: '#/components/schemas/ActiviteErp'
         types_activites_secondaires:
+          description: >-
+            Définition des types d'activité secondaires d'un établissement selon
+            la nature de son exploitation. Voir:
+            https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818975
           type: array
           maxItems: 255
           items:
             $ref: '#/components/schemas/ActiviteErp'
         periodicite:
+          description: >-
+            Les établissements des 1re, 2e, 3e et 4e catégories doivent être
+            visités périodiquement par les commissions de sécurité. La fréquence
+            est fixée selon le type et de la catégorie. La périodicité est en
+            mois.
           type: integer
           format: int32
           minimum: 12
           maximum: 60
           multipleOf: 12
         libelle:
+          description: >-
+            Le nom commercial vise l'entreprise individuelle, le fonds de
+            commerce ou l'activité exercée, c'est le nom sous lequel
+            l'établissement est connu du grand public.
           type: string
           maxLength: 255
         presence_locaux_sommeil:
+          description: Présence de locaux à sommeil dans l'établissement.
           type: boolean
         observations_generales:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
     DescriptifTechniqueERP:
       type: object
-      title: Descriptif Technique ERP
+      title: Objet Descriptif Technique ERP
+      description: Descriptif technique associé à un ERP.
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniqueERPBase'
     DescriptifTechniquePENA:
       title: Objet Descriptif Technique DECI PENA
+      description: Descriptif technique d'un PENA - Point d'Eau Naturel ou Artificiel.
       allOf:
         - $ref: '#/components/schemas/DescriptifTechniqueDECIBase'
         - type: object
           properties:
             nature:
+              description: Nature du PENA.
               type: string
               enum:
                 - POINT_ASPIRATION
@@ -13511,13 +13675,19 @@ components:
                 - POTEAU_ASPIRATION_1x100
                 - POTEAU_ASPIRATION_2x100
                 - BOUCHE_ASPIRATION_1x100
-              readOnly: true
             volume:
+              description: >-
+                Dans le cas d'une citerne, information sur son volume d'eau en
+                m3.
               type: number
               format: float
+            est_citerne:
+              description: Permet de savoir si le PENA est une citerne.
+              type: boolean
               readOnly: true
     DescriptifTechniquePIBI:
       title: Objet Descriptif Technique DECI PIBI
+      description: Descriptif technique d'un PIBI - Poteau incendie ou Bouche incendie.
       allOf:
         - $ref: '#/components/schemas/DescriptifTechniqueDECIBase'
         - type: object
@@ -13525,9 +13695,11 @@ components:
             surpression:
               type: number
               format: float
-              description: Surpression mesurée en bar
-              readOnly: true
+              description: >-
+                Surpression du réseau d'eau sur lequel est relié le PIBI mesurée
+                en bar.
             nature:
+              description: Nature du PIBI.
               type: string
               enum:
                 - PI1x65
@@ -13538,64 +13710,79 @@ components:
                 - BI1x80
                 - BI1x100
                 - BI2x100
-              readOnly: true
             debit_1bar:
+              description: Débit en m3/h à 1 bar de pression dynamique.
               type: number
               format: float
               readOnly: true
             pression:
+              description: >-
+                Pression (en bar) mesurée avec le PIBI ouvert et vanne de
+                régulation sur valeurs d’essai.
               type: number
               format: float
               readOnly: true
             pression_statique:
+              description: >-
+                Pression (en bar) mesurée avec le PIBI ouvert mais vanne de
+                régulation fermée.
               type: number
               format: float
               readOnly: true
             debit_gueule_bee:
+              description: Débit maximal en m3/h.
               type: number
               format: float
               readOnly: true
     Dossier:
       type: object
       title: Objet Dossier
+      description: >-
+        Les dossiers sont un ensemble de documents administratifs et techniques.
+        L'instruction du dossier suit une logique pré-définie selon le type.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         type:
+          description: Type du dossier.
           type: string
           enum:
             - deci:declaration_pei
             - erp:autorisation_de_travaux
             - erp:visite_periodique
-        description:
+        objet:
+          description: Objet du dossier.
           type: string
           maxLength: 255
         date_de_creation:
+          description: Date de création du dossier.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         createur:
+          description: Utilisateur ayant créé le dossier.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
         application_utilisee_nom:
+          description: Nom de l'application / intégration ayant généré le dossier.
           type: string
           readOnly: true
           maxLength: 255
         statut:
+          description: >-
+            Indicateur permettant de savoir si le dossier est en cours de
+            traitement.
           type: string
           enum:
             - OUVERT
             - CLOS
           readOnly: true
-        objet:
-          type: string
-          readOnly: true
-          maxLength: 255
         pei:
           readOnly: true
           allOf:
@@ -13606,28 +13793,35 @@ components:
             - $ref: '#/components/schemas/ERP'
     ERP:
       type: object
-      title: ERP
+      title: Objet ERP
       description: >-
         Les établissements recevant du public (ERP) sont des bâtiments, des
         locaux ou des enceintes dans lesquels sont admises des personnes
         extérieures.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         date_de_realisation:
+          description: Date à laquelle l'ERP a intégré Metarisc.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         date_de_derniere_mise_a_jour:
+          description: Date à laquelle l'ERP a été mis à jour dans Metarisc.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         references_exterieures:
+          description: >-
+            Ensemble de paires clé-valeur que vous pouvez attacher à un objet.
+            Cela peut être utile pour stocker des informations supplémentaires
+            sur l'objet dans un format structuré.
           type: array
           readOnly: true
           maxItems: 255
@@ -13643,40 +13837,46 @@ components:
                 readOnly: true
                 maxLength: 255
         implantation:
+          description: Adresse postale de l'ERP.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/AdressePostale'
         descriptif_technique:
+          description: Descriptif technique actuel de l'ERP.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/DescriptifTechniqueERP'
         coordonnees:
+          description: Coordonées de l'ERP.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/Contact'
     Email:
       type: object
       title: Objet Email
+      description: Email associé à un utilisateur Metarisc.
       properties:
         email:
+          description: Adresse email de l'utilisateur.
           type: string
           format: email
-          readOnly: true
           maxLength: 255
         is_primary:
+          description: >-
+            Une adresse email "primary" est utilisée pour les notifications, la
+            gestion du compte et les communications.
           type: boolean
-          readOnly: true
         is_publicly_visible:
+          description: Détermine si l'adresse email peut être publiée publiquement.
           type: boolean
-          readOnly: true
         is_verified:
+          description: Détermine si l'adresse email est vérifiée.
           type: boolean
           readOnly: true
     Error:
       type: object
       title: Objet Error
-      description: |
-        Un objet commun Error (RFC 7807).
+      description: Un objet commun Error (RFC 7807).
       properties:
         type:
           type: string
@@ -13701,16 +13901,20 @@ components:
     Evenement:
       type: object
       title: Objet Evenement
+      description: Un événement calendaire.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         title:
+          description: Titre de l'événement.
           type: string
           maxLength: 255
         type:
+          description: Type de l'événement.
           type: string
           enum:
             - DEFAUT
@@ -13718,63 +13922,60 @@ components:
             - VISITE_PERIODIQUE
             - COMMISSION_SECURITE
         description:
+          description: Description de l'événement.
           type: string
           maxLength: 255
         date_debut:
+          description: Date de début de l'événement.
           type: string
           format: date-time
           maxLength: 255
         date_fin:
+          description: Date de fin de l'événement.
           type: string
           format: date-time
           maxLength: 255
-      x-examples:
-        Example 1:
-          id: 6f05da30-0fe3-4418-8cfb-d28867bc3b65
-          utilisateurs:
-            - User 1
-            - user 2
-          title: Visite de tous les etablissements publiques
-          type: VISITE_PERIODIQUE
-          description: hkqjsdhkqjshdkjhqskjdhkqjshdkjqshdr
-          dossiers:
-            - Dossiers1
-            - dossier 2
-          date_debut: '2023-04-11T23:00:24+00:00'
-          date_fin: '2023-04-13T14:07:26+00:00'
     FeedMessageBase:
       type: object
       title: Objet Feed Message Base
+      description: Message de base d'un flux d'activité.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         titre:
+          description: Titre du message.
           type: string
           maxLength: 255
         date_de_creation:
+          description: Date de création du message.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         type:
+          description: Type du message.
           type: string
           enum:
             - texte
             - liste_pei
     FeedMessageTexte:
       title: Objet FeedMessage Texte
+      description: Message texte d'un flux d'activité.
       allOf:
         - $ref: '#/components/schemas/FeedMessageBase'
         - type: object
           properties:
             texte:
+              description: Contenu du message.
               type: string
               maxLength: 255
     FeedMessage:
       title: Objet Feed Message
+      description: Message associé à un flux d'activité.
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
     Notification:
@@ -13785,17 +13986,24 @@ components:
         utilisateur pour un évévemenent spécifique.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         title:
+          description: Titre de la notification.
           type: string
           maxLength: 255
         message:
+          description: Contenu de la notification.
           type: string
           maxLength: 255
         contexte:
+          description: >-
+            Ensemble de paires clé-valeur que vous pouvez attacher à un objet.
+            Cela peut être utile pour stocker des informations supplémentaires
+            sur l'objet dans un format structuré.
           type: object
         date_creation:
           type: string
@@ -13815,35 +14023,35 @@ components:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
-      x-examples:
-        Example 1:
-          id: 945f9037-23f3-42eb-ab6a-3e47095b2f84
-          title: Bonjour Monsieur Mbappé
-          message: Ca vous dirait de jouer pour LENS
-          contexte:
-            joueur_id: khqfdsiuysf
-          date_creation: '2023-03-09T14:45:53+00:00'
-          date_de_lecture: null
-          utilisateur_concerne_id: '123'
     Organisation:
       type: object
       title: Objet Organisation
+      description: >-
+        Une organisation désigne un ensemble dans lequel les données vont être
+        stockées. Chaque utilisateur Metarisc possède ses propres organisations.
+        L'organisation joue un rôle central ou l'ensemble des utilisateurs
+        Metarisc peuvent collaborer, avec des fonctionnalités de sécurité et
+        d'administration propres.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         nom:
+          description: Nom de l'organisation.
           type: string
           readOnly: true
           maxLength: 255
         logo_url:
+          description: Lien URL vers le logo représentant l'organisation.
           type: string
           format: uri
           readOnly: true
           maxLength: 255
         type:
+          description: Type de l'organisation.
           type: string
           enum:
             - sis
@@ -13851,54 +14059,67 @@ components:
     OrganisationGeoservice:
       type: object
       title: Objet Organisation Geoservice
+      description: >-
+        Un géoservice est un service web pour représenter des informations
+        géographiques lié à une organisation. Les géoservices sont basés sur les
+        standards OGC (https://www.ogc.org).
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         organisation:
+          description: L'organisation liée à ce geoservice.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/Organisation'
         nom:
+          description: Nom du géoservice.
           type: string
-          readOnly: true
           maxLength: 255
         type:
+          description: Type de la norme utilisée par le géoservice.
           type: string
           enum:
             - WFS
             - WMS
-          readOnly: true
         url:
+          description: L'URL du serveur hébergeant les informations géographiques.
           type: string
           format: uri
-          readOnly: true
           maxLength: 255
     OrganisationMembre:
       type: object
       title: Objet Organisation Membre
+      description: Représente un membre d'une organisation.
       properties:
         organisation:
+          description: Organisation liée au membre.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/Organisation'
+        utilisateur:
+          description: Informations de l'utilisateur lié.
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
         utilisateur_id:
+          description: Identifiant de l'utilisateur lié.
           type: string
           writeOnly: true
           maxLength: 255
-        utilisateur:
-          readOnly: true
-          maxLength: 255
-          allOf:
-            - $ref: '#/components/schemas/Utilisateur'
         date_integration:
+          description: >-
+            Date à laquelle l'utilisateur à rejoint l'organisation en tant que
+            membre.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         role:
+          description: Rôle du membre au sein de l'organisation.
           type: string
           maxLength: 255
           enum:
@@ -13909,23 +14130,31 @@ components:
     PEI:
       type: object
       title: Objet Point d'Eau Incendie
+      description: Dispositif de lutte contre l'incendie.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         date_de_realisation:
+          description: Date à laquelle le PEI a intégré Metarisc.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         date_de_derniere_mise_a_jour:
+          description: Date de la dernière mise à jour du PEI.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         references_exterieures:
+          description: >-
+            Ensemble de paires clé-valeur que vous pouvez attacher à un objet.
+            Cela peut être utile pour stocker des informations supplémentaires
+            sur l'objet dans un format structuré.
           type: array
           readOnly: true
           maxItems: 255
@@ -13939,9 +14168,11 @@ components:
                 type: string
                 maxLength: 255
         descriptif_technique:
+          description: Descriptif technique actuel du PEI.
           allOf:
             - $ref: '#/components/schemas/DescriptifTechniqueDECI'
         implantation:
+          description: Implantation du PEI sous la forme d'une adresse postale.
           allOf:
             - $ref: '#/components/schemas/AdressePostale'
         genre:
@@ -13951,43 +14182,52 @@ components:
             - PENA
           readOnly: true
         numero:
+          description: Identifiant métier unique. Obéit à une convention de nommage.
           type: string
           maxLength: 255
         numero_compteur:
+          description: Le numéro de série du compteur (PIBI).
           type: string
           maxLength: 255
         numero_serie_appareil:
+          description: Numéro de série du PEI (si disponible).
           type: string
           maxLength: 255
     PaginationMetadata:
       type: object
       title: Pagination Metadata
+      description: Ensemble d'informations liées à une réponse paginée.
       properties:
         total:
+          description: Nombre total d'objets.
           type: integer
           format: int32
           minimum: 0
           maximum: 99999
           readOnly: true
         count:
+          description: Nombre d'objets contenu dans la page courante.
           type: integer
           format: int32
           minimum: 0
           maximum: 99999
           readOnly: true
         per_page:
+          description: Nombre d'objets retournés par une page
           type: integer
           format: int32
           minimum: 0
           maximum: 200
           readOnly: true
         current_page:
+          description: Numéro de la page courante.
           type: integer
           format: int32
           minimum: 0
           maximum: 99999
           readOnly: true
         total_pages:
+          description: Nombres de pages disponibles.
           type: integer
           format: int32
           minimum: 0
@@ -13996,27 +14236,35 @@ components:
     PassageCommission:
       type: object
       title: Objet Passage en Commission
+      description: Représente une date de passage en commission.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         date_debut:
+          description: Date de début du passage en commission programmée.
           type: string
           format: date-time
           maxLength: 255
         date_fin:
+          description: Date de fin du passage en commission programmée.
           type: string
           format: date-time
           maxLength: 255
         type:
+          description: Type du passage en commission.
           type: string
           enum:
             - salle
             - visite_de_securite
             - groupe_de_visite
         libelle:
+          description: >-
+            Libellé de la date de passage en commission. Souvent utile pour
+            affichage aux utilisateurs.
           type: string
           maxLength: 255
     PassageCommissionDossier:
@@ -14024,23 +14272,34 @@ components:
       title: Objet Passage en Commission Dossier
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         dossier:
+          description: >-
+            Dossier incrit à l'ordre du jour d'une date de passage en
+            commission.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/Dossier'
         dossier_id:
+          description: >-
+            Identifiant du dossier incrit à l'ordre du jour d'une date de
+            passage en commission.
           writeOnly: true
           type: string
           format: uuid
           maxLength: 255
         avis:
+          description: Avis rendu de la commission sur le dossier.
           allOf:
             - $ref: '#/components/schemas/Avis'
         statut:
+          description: >-
+            État du dossier au regard de l'ordre du jour du passage en
+            commission.
           type: string
           readOnly: true
           enum:
@@ -14051,46 +14310,60 @@ components:
     PieceJointe:
       type: object
       title: Objet Piece Jointe
+      description: Document représentant un fichier informatique stocké sur internet.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         url:
+          description: Point de stockage du fichier.
           type: string
           format: uri
-          readOnly: true
           maxLength: 255
         nom:
+          description: Nom du fichier joint.
           type: string
-          readOnly: true
           maxLength: 255
         description:
+          description: Description du fichier joint.
           type: string
-          readOnly: true
           maxLength: 255
         type:
+          description: Type de la pièce jointe.
           type: string
           enum:
             - photo
             - plan
             - annexe
             - divers
-          readOnly: true
     Prescription:
       type: object
       title: Objet Prescription
+      description: >-
+        La prescription réglementaire est une mesure de prévention et de
+        sauvegarde propre à assurer la sécurité des personnes. Elle est décrite
+        à travers un texte libre motivé par un ou des supports réglementaires.
+        Le règlement de sécurité comprend des prescriptions générales communes à
+        tous les établissements et d'autres particulières à chaque type
+        d'établissement. Il précise les cas dans lesquels les obligations qu'il
+        définit s'imposent à la fois aux constructeurs, propriétaires,
+        installateurs et exploitants ou à certains de ceux-ci seulement.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         contenu:
+          description: Contenu de la prescription.
           type: string
           maxLength: 255
         type:
+          description: Classement de la prescription.
           type: string
           maxLength: 255
           enum:
@@ -14098,12 +14371,14 @@ components:
             - liee_a_l_amelioration
             - rappel_reglementaire
         supports_reglementaires:
+          description: Les supports réglementaires de la prescription.
           type: array
           maxItems: 255
           readOnly: true
           items:
             $ref: '#/components/schemas/PrescriptionSupportReglementaire'
         supports_reglementaires_id:
+          description: Les identifiants des supports réglementaires de la prescription.
           type: array
           maxItems: 255
           writeOnly: true
@@ -14113,14 +14388,19 @@ components:
             maxLength: 255
     PrescriptionSupportReglementaire:
       type: object
-      title: Objet Prescription Support Réglementaire
+      title: Objet Support Réglementaire
+      description: >-
+        Texte réglementaire destiné à assurer la sécurité contre les risques
+        d'incendie  et de panique dans les établissements recevant du public.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         nature:
+          description: Nature du support réglementaire.
           type: string
           enum:
             - arrete
@@ -14136,68 +14416,91 @@ components:
             Si le CID est renseigné, alors ce support réglementaire est sourcé
             depuis Legifrance.
         contenu:
+          description: Contenu du support régelementaire.
           type: string
           maxLength: 255
         titre:
+          description: Titre du contenu réglementaire.
           type: string
           maxLength: 255
         etat:
+          description: Etats juridiques d’un support réglementaire.
           type: string
           enum:
             - en_vigueur
         reference:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs ou la recherche.
           type: string
           maxLength: 255
     Tag:
       type: object
       title: Objet Tag
+      description: Les tags sont des mots-clés permettant de classifier un objet.
       properties:
         message:
+          description: Libellé du tag.
           type: string
           readOnly: true
           maxLength: 255
     TourneeDeci:
       title: Objet Tournée Deci
+      description: >-
+        Une tournée de reconnaissance opérationnelle portant sur la visibilité,
+        l’accessibilité,  la signalisation et la manoeuvrabilité (ouverture et
+        fermeture) des PEI.
       anyOf:
         - $ref: '#/components/schemas/TourneeDeciSimple'
         - $ref: '#/components/schemas/TourneeDeciModele'
     TourneeDeciBase:
       type: object
       title: Objet Tournee Deci Base
+      description: Tournée DECI de base.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         libelle:
+          description: Nom d'identification de la tournée.
           type: string
           maxLength: 255
         description:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
         date_de_creation:
+          description: Date de création de la tournée.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         type:
+          description: Type de la tournée.
           type: string
           enum:
             - tournee_deci
             - tournee_deci_modele
     TourneeDeciModele:
       title: Objet Tournee Deci Modele
+      description: Modèle de tournée DECI permettant une programmation cyclique.
       allOf:
         - $ref: '#/components/schemas/TourneeDeciBase'
         - type: object
           properties:
             mois_debut:
+              description: Numéro du mois de début de la tournéee programmée
               type: integer
               format: int32
               minimum: 1
               maximum: 12
             mois_fin:
+              description: Numéro de mois de fin de la tournéee programmée
               type: integer
               format: int32
               minimum: 1
@@ -14205,35 +14508,43 @@ components:
     TourneeDeciPei:
       type: object
       title: Objet Tournée Deci PEI
+      description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         date_du_controle:
+          description: Date à laquelle le contrôle a été effectué.
           type: string
           format: date-time
           maxLength: 255
         liste_anomalies:
+          description: Liste des anomalies posées ou à lever suite à ce contrôle.
           type: array
           maxItems: 255
           items:
             type: object
             properties:
               anomalie:
+                description: Informations sur l'anomalie liée.
                 readOnly: true
                 allOf:
                   - $ref: '#/components/schemas/AnomalieDECI'
               code:
+                description: Code de l'anomalie.
                 type: integer
                 format: int32
                 minimum: 1
                 maximum: 255
                 writeOnly: true
               a_lever:
+                description: Si l'anomalie est à lever.
                 type: boolean
         essais_engin_utilise:
+          description: Engin utilisé pour les essais hydrauliques.
           type: string
           enum:
             - aucun
@@ -14241,50 +14552,65 @@ components:
             - mpr
             - ccf
         pei_id:
+          description: Identifiant du PEI à lier au contrôle.
           type: string
           format: uuid
           writeOnly: true
           maxLength: 255
         pei:
+          description: PEI lié au contrôle.
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/PEI'
         est_controle:
+          description: État du contrôle.
           type: boolean
           readOnly: true
         ordre:
+          description: L'ordre du contrôle dans le livret de tournée.
           type: integer
           format: int32
           minimum: 1
           maximum: 255
     TourneeDeciSimple:
       title: Objet Tournée Deci Simple
+      description: Tournéee DECI déclenchée
       allOf:
         - $ref: '#/components/schemas/TourneeDeciBase'
         - type: object
           properties:
             pourcentage:
+              description: Pourcentage de complétion de la tournée (en %)
               type: number
               format: float
               minimum: 0
               maximum: 1
               readOnly: true
             est_terminee:
+              description: État de la complétion de la tournée
               type: boolean
               readOnly: true
             date_de_debut:
+              description: Date de début de la tournée
               type: string
               format: date-time
               maxLength: 255
             date_de_fin:
+              description: Date de fin de la tournée
               type: string
               format: date-time
               maxLength: 255
             modele:
+              description: >-
+                Si la Tournée DECI a été créé depuis un modèle, son modèle est
+                rattaché
               readOnly: true
               allOf:
                 - $ref: '#/components/schemas/TourneeDeciModele'
             modele_id:
+              description: >-
+                Identifiant de la tournée DECI modèle à utiliser pour la
+                création
               type: string
               format: uuid
               writeOnly: true
@@ -14294,43 +14620,55 @@ components:
       title: Objet Utilisateur
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
-          format: uuid
           readOnly: true
           maxLength: 255
         first_name:
+          description: Prénom de l'utilisateur.
           type: string
           readOnly: true
           maxLength: 255
         last_name:
+          description: Nom de l'utilisateur.
           type: string
           readOnly: true
           maxLength: 255
         created_at:
+          description: Date à laquelle l'utilisateur a été créé.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         updated_at:
+          description: Date à laquelle l'utilisateur a été mis à jour.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         timezone:
+          description: >-
+            Identifiant 'tz database' du Fuseau horaire de l'utilisateur. Voir :
+            https://www.iana.org/time-zones Liste des fuseaux horaires :
+            https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
           type: string
           readOnly: true
           maxLength: 255
         is_active:
+          description: État d'activation du compte utilisateur.
           type: boolean
           readOnly: true
         is_verified:
+          description: État de vérification du compte utilisateur.
           type: boolean
           readOnly: true
         fonction:
+          description: Fonction de l'utilisateur.
           type: string
           readOnly: true
           maxLength: 255
         avatar_url:
+          description: Lien URL vers l'avatar de l'utilisateur.
           type: string
           format: uri
           readOnly: true
@@ -14386,35 +14724,52 @@ components:
     WorkflowBase:
       type: object
       title: Objet Workflow Base
+      description: Objet Workflow de base.
       properties:
         id:
+          description: Identifiant unique de l'objet.
           type: string
           format: uuid
           readOnly: true
           maxLength: 255
         titre:
+          description: Titre du workflow.
           type: string
           readOnly: true
           maxLength: 255
         date_de_creation:
+          description: Date de création du workflow.
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         date_de_debut:
+          description: >-
+            Date du déclenchement du workflow (date à laquelle il est passé
+            actif).
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         date_de_fin:
+          description: >-
+            Date de fin de traitement du workflow (date à laquelle il est passé
+            en terminé).
           type: string
           format: date-time
           readOnly: true
           maxLength: 255
         workflow_automatise:
+          description: Si le workflow a été géré par un processus automatisé.
           type: boolean
           readOnly: true
         etat:
+          description: >-
+            État du workflow. Le workflow peut être dans 3 états : - En attente
+            : Le workflow est en attente de la complétion d'autres workflows ; -
+            En cours :Le workflow devient actif pour traitement ; - Validé : Le
+            workflow est vérouillé et débloque d'autres workflows ou complète le
+            dossier ;
           type: string
           enum:
             - VALIDE
@@ -14422,9 +14777,13 @@ components:
             - ATTENTE
           readOnly: true
         observations:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
         type:
+          description: Type du workflow.
           type: string
           readOnly: true
           maxLength: 255
@@ -14548,6 +14907,9 @@ components:
                 - $ref: '#/components/schemas/PassageCommission'
     Workflow:
       title: Workflow
+      description: >-
+        Étape du traitement d'un dossier. Une étape est liée à un groupe de
+        travail ainsi qu'a un nombre de champs à valider.
       oneOf:
         - $ref: '#/components/schemas/WorkflowDossiersLies'
         - $ref: '#/components/schemas/WorkflowRemiseEnServicePEI'
@@ -14562,7 +14924,7 @@ components:
     PaginationPage:
       name: page
       in: query
-      description: Numéro de page
+      description: Le numéro de la page de resultats demandé.
       schema:
         type: integer
         format: int32
@@ -14573,8 +14935,8 @@ components:
       name: per_page
       in: query
       description: >-
-        Limite le nombre d'objets retournés. La limite est comprise entre 1 et
-        100, la valeur par défaut étant de 10.
+        Limite le nombre d'objets retournés par une page. La limite est comprise
+        entre 1 et 100, la valeur par défaut étant de 10.
       schema:
         type: integer
         format: int32
