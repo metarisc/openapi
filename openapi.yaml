@@ -337,8 +337,8 @@ paths:
     get:
       tags:
         - Anomalies API
-      summary: Liste des anomalies
-      description: Liste des anomalies.
+      summary: Liste des anomalies types de la bibiliothèque DECI
+      description: Retourne une liste des anomalies types dans la bibliothèque DECI.
       operationId: PaginateAnomalies
       security:
         - IdMetariscFr:
@@ -348,6 +348,20 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: sort
+          in: query
+          description: >-
+            Propriété sur laquelle trier les résultats. L'ordre de tri par
+            défaut est croissant (asc) sauf si la propriété est préfixée par un
+            trait d'union (-), auquel cas l'ordre de tri sera décroissant
+            (desc).
+          schema:
+            type: string
+            pattern: ^-?.*$
+            maxLength: 255
+            enum:
+              - code
+            default: code
         - name: texte
           in: query
           description: Filtre sur le texte de l'anomalie
@@ -12374,7 +12388,6 @@ components:
             l'équateur et 90° aux pôles.
           type: number
           format: double
-          maxLength: 255
         longitude:
           description: >-
             La longitude d'un point sur Terre est une coordonnée géographique
@@ -12384,7 +12397,6 @@ components:
             Greenwich.
           type: number
           format: double
-          maxLength: 255
         localisation_operationnelle:
           description: Complément d'adresse à destination des services de secours.
           type: string
