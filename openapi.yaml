@@ -227,8 +227,12 @@ paths:
     get:
       tags:
         - Moi API
-      summary: '@moi'
-      description: Récupérer les détails de l'utilisateur connecté.
+      summary: Utilisateur connecté
+      description: >-
+        L'utilisateur connecté retourné par ce point de terminaison utilise le
+        token d'accès généré par le service OpenID Connect afin de le lier à une
+        identité connue de Metarisc. Si l'utilisateur est inconnu une erreur est
+        retournée.
       operationId: GetMoi
       security:
         - IdMetariscFr:
@@ -413,6 +417,12 @@ paths:
         - name: texte
           in: query
           description: Filtre sur le texte de l'anomalie
+          schema:
+            type: string
+            maxLength: 255
+        - name: code
+          in: query
+          description: Filtre sur le code de l'anomalie
           schema:
             type: string
             maxLength: 255
@@ -12329,6 +12339,187 @@ paths:
       x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: organisations
       x-extension-metarisc-codegen-operation: paginate-organisation-geoservices
+    post:
+      tags:
+        - Organisations API
+      summary: Ajouter un géo-service à une organisation
+      description: Ajout d'un un géo-service à une organisation.
+      operationId: PostGeoservicesOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          description: Org Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Organisation Geoservice
+              description: >-
+                Un géoservice est un service web pour représenter des
+                informations géographiques lié à une organisation. Les
+                géoservices sont basés sur les standards OGC
+                (https://www.ogc.org).
+              properties:
+                nom:
+                  description: Nom du géoservice.
+                  type: string
+                  maxLength: 255
+                type:
+                  description: Type de la norme utilisée par le géoservice.
+                  type: string
+                  enum:
+                    - WFS
+                    - WMS
+                url:
+                  description: L'URL du serveur hébergeant les informations géographiques.
+                  type: string
+                  format: uri
+                  maxLength: 255
+              required:
+                - nom
+                - type
+                - url
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Objet Organisation Geoservice
+                description: >-
+                  Un géoservice est un service web pour représenter des
+                  informations géographiques lié à une organisation. Les
+                  géoservices sont basés sur les standards OGC
+                  (https://www.ogc.org).
+                properties:
+                  id:
+                    description: Identifiant unique de l'objet.
+                    type: string
+                    format: uuid
+                    maxLength: 255
+                  organisation:
+                    description: L'organisation liée à ce geoservice.
+                    allOf:
+                      - $ref: '#/components/schemas/Organisation'
+                  nom:
+                    description: Nom du géoservice.
+                    type: string
+                    maxLength: 255
+                  type:
+                    description: Type de la norme utilisée par le géoservice.
+                    type: string
+                    enum:
+                      - WFS
+                      - WMS
+                  url:
+                    description: >-
+                      L'URL du serveur hébergeant les informations
+                      géographiques.
+                    type: string
+                    format: uri
+                    maxLength: 255
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: post-organisation-geoservices
   /organisations/{org_id}:
     get:
       tags:
@@ -12807,41 +12998,70 @@ paths:
             application/json:
               schema:
                 type: object
+                title: Objet Règles DECI
                 properties:
                   pibi_conformite_matrice_seuil_pesee_1bar_par_nature:
+                    description: >-
+                      Matrice représentant l'association entre une nature d'un
+                      PIBI et son seuil de pesée 1bar au delà duquel le PEI
+                      passe conforme.
                     type: object
+                    additionalProperties:
+                      type: number
+                      format: float
+                      minimum: 0
+                      maximum: 99999
                   pibi_performance_natures_performance_restreinte:
+                    description: >-
+                      Liste des natures de PIBI qui auront quoiqu'il arrive une
+                      performance déclarée "restreinte".
                     type: array
                     maxItems: 255
                     items:
                       type: string
                       maxLength: 255
                   pibi_performance_natures_a_reformer:
+                    description: >-
+                      Les PIBI qui sont à réformer impérativement seront
+                      automatiquement non conforme.
                     type: array
                     maxItems: 255
                     items:
                       type: string
                       maxLength: 255
                   pibi_performance_seuil_pesee_1bar:
+                    description: >-
+                      Seuil au dessous duquel la performance du PIBI passe en
+                      "nulle".
                     type: number
                     format: float
                     minimum: 0
                     maximum: 99999
                   pibi_conformite_seuil_surpression:
+                    description: >-
+                      Seuil de la pression d'un réseau au dessus duquel le PIBI
+                      sera déclaré non conforme.
                     type: number
                     format: float
                     minimum: 0
                     maximum: 99999
                   pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
+                    description: >-
+                      Valeur par défaut prise en compte pour le seuil de pesée
+                      1bar au delà duquel le PEI passe conforme.
                     type: number
                     format: float
                     minimum: 0
                     maximum: 99999
                   pena_conformite_seuil_volume_citerne:
+                    description: >-
+                      Volume minimum d'une citerne pour le calcul de sa
+                      conformité.
                     type: number
                     format: float
                     minimum: 0
                     maximum: 99999
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
@@ -12922,6 +13142,256 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: organisations
       x-extension-metarisc-codegen-operation: get-organisation-regles-deci
+    post:
+      tags:
+        - Organisations API
+      summary: Mise à jour des règles DECI
+      description: >-
+        Mise à jour de l'ensemble des règles utilisées pour le calcul de la
+        conformité et de la performance DECI.
+      operationId: PostReglesDeciOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          description: Org Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Règles DECI
+              properties:
+                pibi_conformite_matrice_seuil_pesee_1bar_par_nature:
+                  description: >-
+                    Matrice représentant l'association entre une nature d'un
+                    PIBI et son seuil de pesée 1bar au delà duquel le PEI passe
+                    conforme.
+                  type: object
+                  additionalProperties:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 99999
+                pibi_performance_natures_performance_restreinte:
+                  description: >-
+                    Liste des natures de PIBI qui auront quoiqu'il arrive une
+                    performance déclarée "restreinte".
+                  type: array
+                  maxItems: 255
+                  items:
+                    type: string
+                    maxLength: 255
+                pibi_performance_natures_a_reformer:
+                  description: >-
+                    Les PIBI qui sont à réformer impérativement seront
+                    automatiquement non conforme.
+                  type: array
+                  maxItems: 255
+                  items:
+                    type: string
+                    maxLength: 255
+                pibi_performance_seuil_pesee_1bar:
+                  description: >-
+                    Seuil au dessous duquel la performance du PIBI passe en
+                    "nulle".
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 99999
+                pibi_conformite_seuil_surpression:
+                  description: >-
+                    Seuil de la pression d'un réseau au dessus duquel le PIBI
+                    sera déclaré non conforme.
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 99999
+                pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
+                  description: >-
+                    Valeur par défaut prise en compte pour le seuil de pesée
+                    1bar au delà duquel le PEI passe conforme.
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 99999
+                pena_conformite_seuil_volume_citerne:
+                  description: >-
+                    Volume minimum d'une citerne pour le calcul de sa
+                    conformité.
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 99999
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Objet Règles DECI
+                properties:
+                  pibi_conformite_matrice_seuil_pesee_1bar_par_nature:
+                    description: >-
+                      Matrice représentant l'association entre une nature d'un
+                      PIBI et son seuil de pesée 1bar au delà duquel le PEI
+                      passe conforme.
+                    type: object
+                    additionalProperties:
+                      type: number
+                      format: float
+                      minimum: 0
+                      maximum: 99999
+                  pibi_performance_natures_performance_restreinte:
+                    description: >-
+                      Liste des natures de PIBI qui auront quoiqu'il arrive une
+                      performance déclarée "restreinte".
+                    type: array
+                    maxItems: 255
+                    items:
+                      type: string
+                      maxLength: 255
+                  pibi_performance_natures_a_reformer:
+                    description: >-
+                      Les PIBI qui sont à réformer impérativement seront
+                      automatiquement non conforme.
+                    type: array
+                    maxItems: 255
+                    items:
+                      type: string
+                      maxLength: 255
+                  pibi_performance_seuil_pesee_1bar:
+                    description: >-
+                      Seuil au dessous duquel la performance du PIBI passe en
+                      "nulle".
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 99999
+                  pibi_conformite_seuil_surpression:
+                    description: >-
+                      Seuil de la pression d'un réseau au dessus duquel le PIBI
+                      sera déclaré non conforme.
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 99999
+                  pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
+                    description: >-
+                      Valeur par défaut prise en compte pour le seuil de pesée
+                      1bar au delà duquel le PEI passe conforme.
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 99999
+                  pena_conformite_seuil_volume_citerne:
+                    description: >-
+                      Volume minimum d'une citerne pour le calcul de sa
+                      conformité.
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 99999
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: post-organisation-regles-deci
   /pei:
     get:
       tags:
@@ -20902,6 +21372,66 @@ components:
             - context: create
               required: true
             - context: update
+    ReglesDeci:
+      type: object
+      title: Objet Règles DECI
+      properties:
+        pibi_conformite_matrice_seuil_pesee_1bar_par_nature:
+          description: >-
+            Matrice représentant l'association entre une nature d'un PIBI et son
+            seuil de pesée 1bar au delà duquel le PEI passe conforme.
+          type: object
+          additionalProperties:
+            type: number
+            format: float
+            minimum: 0
+            maximum: 99999
+        pibi_performance_natures_performance_restreinte:
+          description: >-
+            Liste des natures de PIBI qui auront quoiqu'il arrive une
+            performance déclarée "restreinte".
+          type: array
+          maxItems: 255
+          items:
+            type: string
+            maxLength: 255
+        pibi_performance_natures_a_reformer:
+          description: >-
+            Les PIBI qui sont à réformer impérativement seront automatiquement
+            non conforme.
+          type: array
+          maxItems: 255
+          items:
+            type: string
+            maxLength: 255
+        pibi_performance_seuil_pesee_1bar:
+          description: Seuil au dessous duquel la performance du PIBI passe en "nulle".
+          type: number
+          format: float
+          minimum: 0
+          maximum: 99999
+        pibi_conformite_seuil_surpression:
+          description: >-
+            Seuil de la pression d'un réseau au dessus duquel le PIBI sera
+            déclaré non conforme.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 99999
+        pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
+          description: >-
+            Valeur par défaut prise en compte pour le seuil de pesée 1bar au
+            delà duquel le PEI passe conforme.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 99999
+        pena_conformite_seuil_volume_citerne:
+          description: Volume minimum d'une citerne pour le calcul de sa conformité.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 99999
     Tag:
       type: object
       title: Objet Tag
