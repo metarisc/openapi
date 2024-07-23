@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/23-07-2024.2
+  version: 1.0/main/23-07-2024.3
   title: Metarisc API
   description: >-
 
@@ -3062,6 +3062,506 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: contacts
       x-extension-metarisc-codegen-operation: update-contact
+  /controles_pei/{pei_id}:
+    delete:
+      tags:
+        - Controles Pei API
+      summary: Suppression du contrôle PEI
+      description: Suppression du contrôle PEI de la tournée DECI.
+      operationId: DeletePeiControlesPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          description: Pei Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '204':
+          description: No Content
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: controles_pei
+      x-extension-metarisc-codegen-operation: delete-controle
+    get:
+      tags:
+        - Controles Pei API
+      summary: Détail du PEI contrôlé
+      description: Récupération des détails liés au contrôle d'un PEI d'une tournée.
+      operationId: GetPeiControlesPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          description: Pei Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Objet Tournée Deci PEI
+                description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
+                properties:
+                  id:
+                    description: Identifiant unique de l'objet.
+                    type: string
+                    format: uuid
+                    maxLength: 255
+                  date_du_controle:
+                    description: Date à laquelle le contrôle a été effectué.
+                    type: string
+                    format: date-time
+                    maxLength: 255
+                  liste_anomalies:
+                    description: Liste des anomalies posées ou à lever suite à ce contrôle.
+                    type: array
+                    maxItems: 255
+                    items:
+                      type: object
+                      properties:
+                        anomalie:
+                          description: Informations sur l'anomalie liée.
+                          allOf:
+                            - $ref: '#/components/schemas/AnomalieDECI'
+                        code:
+                          description: Code de l'anomalie.
+                          type: integer
+                          format: int32
+                          minimum: 1
+                          maximum: 255
+                        a_lever:
+                          description: Si l'anomalie est à lever.
+                          type: boolean
+                  essais_engin_utilise:
+                    description: Engin utilisé pour les essais hydrauliques.
+                    type: string
+                    enum:
+                      - aucun
+                      - fpt
+                      - mpr
+                      - ccf
+                  pei:
+                    description: PEI lié au contrôle.
+                    allOf:
+                      - $ref: '#/components/schemas/PEI'
+                  est_controle:
+                    description: État du contrôle.
+                    type: boolean
+                  ordre:
+                    description: L'ordre du contrôle dans le livret de tournée.
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    maximum: 255
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: controles_pei
+      x-extension-metarisc-codegen-operation: get-controle
+    post:
+      tags:
+        - Controles Pei API
+      summary: Mise à jour du PEI contrôlé
+      description: Mise à jour du PEI contrôlé.
+      operationId: PostPeiControlesPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          description: Pei Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Tournée Deci PEI
+              description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
+              properties:
+                date_du_controle:
+                  description: Date à laquelle le contrôle a été effectué.
+                  type: string
+                  format: date-time
+                  maxLength: 255
+                liste_anomalies:
+                  description: Liste des anomalies posées ou à lever suite à ce contrôle.
+                  type: array
+                  maxItems: 255
+                  items:
+                    type: object
+                    properties:
+                      anomalie:
+                        description: Informations sur l'anomalie liée.
+                        allOf:
+                          - $ref: '#/components/schemas/AnomalieDECI'
+                      code:
+                        description: Code de l'anomalie.
+                        type: integer
+                        format: int32
+                        minimum: 1
+                        maximum: 255
+                      a_lever:
+                        description: Si l'anomalie est à lever.
+                        type: boolean
+                essais_engin_utilise:
+                  description: Engin utilisé pour les essais hydrauliques.
+                  type: string
+                  enum:
+                    - aucun
+                    - fpt
+                    - mpr
+                    - ccf
+                ordre:
+                  description: L'ordre du contrôle dans le livret de tournée.
+                  type: integer
+                  format: int32
+                  minimum: 1
+                  maximum: 255
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Objet Tournée Deci PEI
+                description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
+                properties:
+                  id:
+                    description: Identifiant unique de l'objet.
+                    type: string
+                    format: uuid
+                    maxLength: 255
+                  date_du_controle:
+                    description: Date à laquelle le contrôle a été effectué.
+                    type: string
+                    format: date-time
+                    maxLength: 255
+                  liste_anomalies:
+                    description: Liste des anomalies posées ou à lever suite à ce contrôle.
+                    type: array
+                    maxItems: 255
+                    items:
+                      type: object
+                      properties:
+                        anomalie:
+                          description: Informations sur l'anomalie liée.
+                          allOf:
+                            - $ref: '#/components/schemas/AnomalieDECI'
+                        code:
+                          description: Code de l'anomalie.
+                          type: integer
+                          format: int32
+                          minimum: 1
+                          maximum: 255
+                        a_lever:
+                          description: Si l'anomalie est à lever.
+                          type: boolean
+                  essais_engin_utilise:
+                    description: Engin utilisé pour les essais hydrauliques.
+                    type: string
+                    enum:
+                      - aucun
+                      - fpt
+                      - mpr
+                      - ccf
+                  pei:
+                    description: PEI lié au contrôle.
+                    allOf:
+                      - $ref: '#/components/schemas/PEI'
+                  est_controle:
+                    description: État du contrôle.
+                    type: boolean
+                  ordre:
+                    description: L'ordre du contrôle dans le livret de tournée.
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    maximum: 255
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: controles_pei
+      x-extension-metarisc-codegen-operation: update-controle
   /documents:
     get:
       tags:
@@ -18602,472 +19102,6 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: tournees_deci
       x-extension-metarisc-codegen-operation: post-tournee-deci-pei
-  /tournees_deci/{tournee_deci_id}/pei/{pei_id}:
-    delete:
-      tags:
-        - Tournées DECI API
-      summary: Suppression du contrôle PEI
-      description: Suppression du contrôle PEI de la tournée DECI.
-      operationId: DeletePeiPeiTourneeDeciTourneesDeci
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: tournee_deci_id
-          in: path
-          required: true
-          description: Tournee Deci Id
-          schema:
-            type: string
-            maxLength: 255
-        - name: pei_id
-          in: path
-          required: true
-          description: Pei Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: >-
-            Identifiant de l'organisation Metarisc sur laquelle réaliser
-            l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      responses:
-        '204':
-          description: No Content
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: tournees_deci
-      x-extension-metarisc-codegen-operation: delete-tournee-deci-pei
-    get:
-      tags:
-        - Tournées DECI API
-      summary: Détail du PEI contrôlé
-      description: Récupération des détails liés au contrôle d'un PEI d'une tournée.
-      operationId: GetPeiPeiTourneeDeciTourneesDeci
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: tournee_deci_id
-          in: path
-          required: true
-          description: Tournee Deci Id
-          schema:
-            type: string
-            maxLength: 255
-        - name: pei_id
-          in: path
-          required: true
-          description: Pei Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: >-
-            Identifiant de l'organisation Metarisc sur laquelle réaliser
-            l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                title: Objet Tournée Deci PEI
-                description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
-                properties:
-                  id:
-                    description: Identifiant unique de l'objet.
-                    type: string
-                    format: uuid
-                    maxLength: 255
-                  date_du_controle:
-                    description: Date à laquelle le contrôle a été effectué.
-                    type: string
-                    format: date-time
-                    maxLength: 255
-                  liste_anomalies:
-                    description: Liste des anomalies posées ou à lever suite à ce contrôle.
-                    type: array
-                    maxItems: 255
-                    items:
-                      type: object
-                      properties:
-                        anomalie:
-                          description: Informations sur l'anomalie liée.
-                          allOf:
-                            - $ref: '#/components/schemas/AnomalieDECI'
-                        code:
-                          description: Code de l'anomalie.
-                          type: integer
-                          format: int32
-                          minimum: 1
-                          maximum: 255
-                        a_lever:
-                          description: Si l'anomalie est à lever.
-                          type: boolean
-                  essais_engin_utilise:
-                    description: Engin utilisé pour les essais hydrauliques.
-                    type: string
-                    enum:
-                      - aucun
-                      - fpt
-                      - mpr
-                      - ccf
-                  pei:
-                    description: PEI lié au contrôle.
-                    allOf:
-                      - $ref: '#/components/schemas/PEI'
-                  est_controle:
-                    description: État du contrôle.
-                    type: boolean
-                  ordre:
-                    description: L'ordre du contrôle dans le livret de tournée.
-                    type: integer
-                    format: int32
-                    minimum: 1
-                    maximum: 255
-                x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: tournees_deci
-      x-extension-metarisc-codegen-operation: get-tournee-deci-pei
-    post:
-      tags:
-        - Tournées DECI API
-      summary: Mise à jour du PEI contrôlé
-      description: Mise à jour du PEI contrôlé dans une tournée DECI.
-      operationId: PostPeiPeiTourneeDeciTourneesDeci
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: tournee_deci_id
-          in: path
-          required: true
-          description: Tournee Deci Id
-          schema:
-            type: string
-            maxLength: 255
-        - name: pei_id
-          in: path
-          required: true
-          description: Pei Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: >-
-            Identifiant de l'organisation Metarisc sur laquelle réaliser
-            l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              title: Objet Tournée Deci PEI
-              description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
-              properties:
-                date_du_controle:
-                  description: Date à laquelle le contrôle a été effectué.
-                  type: string
-                  format: date-time
-                  maxLength: 255
-                liste_anomalies:
-                  description: Liste des anomalies posées ou à lever suite à ce contrôle.
-                  type: array
-                  maxItems: 255
-                  items:
-                    type: object
-                    properties:
-                      anomalie:
-                        description: Informations sur l'anomalie liée.
-                        allOf:
-                          - $ref: '#/components/schemas/AnomalieDECI'
-                      code:
-                        description: Code de l'anomalie.
-                        type: integer
-                        format: int32
-                        minimum: 1
-                        maximum: 255
-                      a_lever:
-                        description: Si l'anomalie est à lever.
-                        type: boolean
-                essais_engin_utilise:
-                  description: Engin utilisé pour les essais hydrauliques.
-                  type: string
-                  enum:
-                    - aucun
-                    - fpt
-                    - mpr
-                    - ccf
-                ordre:
-                  description: L'ordre du contrôle dans le livret de tournée.
-                  type: integer
-                  format: int32
-                  minimum: 1
-                  maximum: 255
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TourneeDeciPei'
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: tournees_deci
-      x-extension-metarisc-codegen-operation: update-tournee-deci-pei
   /utilisateurs/@moi/emails:
     get:
       tags:
@@ -19811,6 +19845,7 @@ tags:
   - name: Anomalies API
   - name: Commissions API
   - name: Contacts API
+  - name: Controles Pei API
   - name: Documents API
   - name: Dossiers API
   - name: ERP API
