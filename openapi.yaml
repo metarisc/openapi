@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-07-2024.1
+  version: 1.0/main/24-07-2024.2
   title: Metarisc API
   description: >-
 
@@ -645,7 +645,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AnomalieDECI'
+                type: object
+                title: Objet Anomalie DECI
+                description: >-
+                  Anomalie DECI constatée visuellement. Les anomalies DECI
+                  impactent la disponibilité, la conformité ou l'utilisation
+                  d'un PEI.
+                properties:
+                  code:
+                    description: Référence codifiée de l'anomalie.
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 99999
+                  texte:
+                    description: Description de l'anomalie.
+                    type: string
+                    maxLength: 255
+                  indice_de_gravite:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 2
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                    description: >-
+                      L'indice de gravité permet de classifier l'impact d'une
+                      anomalie sur la vie d'un PEI.
+
+                      Nomenclature de l'indice de gravité :
+
+                      - 0 : Réserve ;
+
+                      - 1 : Anomalie ;
+
+                      - 2 : Anomalie bloquante.
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomalieDECI'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
@@ -1194,7 +1231,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Commission'
+                type: object
+                title: Objet Commission
+                description: >-
+                  Une commission est un organisme compétent pour donner des
+                  avis.
+                properties:
+                  type:
+                    description: >-
+                      Type de la commission (peut être une commission de
+                      sécurité, un conseil départemental ...).
+                    type: string
+                    enum:
+                      - Sous-commission départementale
+                      - Commission communale
+                      - Commission intercommunale
+                      - Commission d'arrondissement
+                      - CoDERST
+                  libelle:
+                    description: Nom de la commission.
+                    type: string
+                    maxLength: 255
+                required:
+                  - type
+                  - libelle
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
@@ -10867,7 +10928,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Organisation'
+                type: object
+                title: Objet Organisation
+                description: >-
+                  Une organisation désigne un ensemble dans lequel les données
+                  vont être stockées. Chaque utilisateur Metarisc possède ses
+                  propres organisations. L'organisation joue un rôle central ou
+                  l'ensemble des utilisateurs Metarisc peuvent collaborer, avec
+                  des fonctionnalités de sécurité et d'administration propres.
+                properties:
+                  id:
+                    description: Identifiant unique de l'objet.
+                    type: string
+                    format: uuid
+                    maxLength: 255
+                  nom:
+                    description: Nom de l'organisation.
+                    type: string
+                    maxLength: 255
+                  logo_url:
+                    description: Lien URL vers le logo représentant l'organisation.
+                    type: string
+                    format: uri
+                    maxLength: 255
+                  type:
+                    description: Type de l'organisation.
+                    type: string
+                    enum:
+                      - sis
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
@@ -17095,7 +17184,55 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Utilisateur'
+                type: object
+                title: Objet Utilisateur
+                properties:
+                  id:
+                    description: Identifiant unique de l'objet.
+                    type: string
+                    maxLength: 255
+                  first_name:
+                    description: Prénom de l'utilisateur.
+                    type: string
+                    maxLength: 255
+                  last_name:
+                    description: Nom de l'utilisateur.
+                    type: string
+                    maxLength: 255
+                  created_at:
+                    description: Date à laquelle l'utilisateur a été créé.
+                    type: string
+                    format: date-time
+                    maxLength: 255
+                  updated_at:
+                    description: Date à laquelle l'utilisateur a été mis à jour.
+                    type: string
+                    format: date-time
+                    maxLength: 255
+                  timezone:
+                    description: >-
+                      Identifiant 'tz database' du Fuseau horaire de
+                      l'utilisateur. Voir : https://www.iana.org/time-zones
+                      Liste des fuseaux horaires :
+                      https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+                    type: string
+                    maxLength: 255
+                  is_active:
+                    description: État d'activation du compte utilisateur.
+                    type: boolean
+                  is_verified:
+                    description: État de vérification du compte utilisateur.
+                    type: boolean
+                  fonction:
+                    description: Fonction de l'utilisateur.
+                    type: string
+                    maxLength: 255
+                  avatar_url:
+                    description: Lien URL vers l'avatar de l'utilisateur.
+                    type: string
+                    format: uri
+                    maxLength: 255
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
