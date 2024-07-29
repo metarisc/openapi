@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-07-2024.1
+  version: 1.0/main/29-07-2024.2
   title: Metarisc API
   description: >-
 
@@ -2332,16 +2332,6 @@ paths:
                   items:
                     type: object
                     properties:
-                      anomalie:
-                        description: Informations sur l'anomalie liée.
-                        allOf:
-                          - type: object
-                            title: Objet Anomalie DECI
-                            description: >-
-                              Anomalie DECI constatée visuellement. Les
-                              anomalies DECI impactent la disponibilité, la
-                              conformité ou l'utilisation d'un PEI.
-                            properties: {}
                       code:
                         description: Code de l'anomalie.
                         type: integer
@@ -12472,50 +12462,6 @@ paths:
                   items:
                     type: object
                     properties:
-                      anomalie:
-                        description: Informations sur l'anomalie liée.
-                        allOf:
-                          - type: object
-                            title: Objet Anomalie DECI
-                            description: >-
-                              Anomalie DECI constatée visuellement. Les
-                              anomalies DECI impactent la disponibilité, la
-                              conformité ou l'utilisation d'un PEI.
-                            properties:
-                              code:
-                                description: Référence codifiée de l'anomalie.
-                                type: integer
-                                format: int32
-                                minimum: 0
-                                maximum: 99999
-                              texte:
-                                description: Description de l'anomalie.
-                                type: string
-                                maxLength: 255
-                              indice_de_gravite:
-                                type: integer
-                                format: int32
-                                minimum: 0
-                                maximum: 2
-                                enum:
-                                  - 0
-                                  - 1
-                                  - 2
-                                description: >-
-                                  L'indice de gravité permet de classifier
-                                  l'impact d'une anomalie sur la vie d'un PEI.
-
-                                  Nomenclature de l'indice de gravité :
-
-                                  - 0 : Réserve ;
-
-                                  - 1 : Anomalie ;
-
-                                  - 2 : Anomalie bloquante.
-                            required:
-                              - code
-                              - texte
-                              - indice_de_gravite
                       code:
                         description: Code de l'anomalie.
                         type: integer
@@ -15650,12 +15596,6 @@ components:
                 description: Informations sur l'anomalie liée.
                 allOf:
                   - $ref: '#/components/schemas/AnomalieDECI'
-              code:
-                description: Code de l'anomalie.
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 255
               a_lever:
                 description: Si l'anomalie est à lever.
                 type: boolean
