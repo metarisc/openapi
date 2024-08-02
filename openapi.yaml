@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-07-2024.2
+  version: 1.0/main/02-08-2024.1
   title: Metarisc API
   description: >-
 
@@ -3672,66 +3672,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                title: Objet Contact
-                description: >-
-                  Représente une "carte de visite" aggrégeant les coordonnées
-                  d'un contact.
-                properties:
-                  nom:
-                    description: Nom de famille du contact.
-                    type: string
-                    maxLength: 255
-                  prenom:
-                    description: Prénom du contact.
-                    type: string
-                    maxLength: 255
-                  fonction:
-                    description: La fonction professionnelle d'un contact.
-                    type: string
-                    maxLength: 255
-                  telephone_fixe:
-                    description: Le numéro de téléphone fixe du contact.
-                    type: string
-                    maxLength: 255
-                  telephone_portable:
-                    description: Le numéro de téléphone portable du contact.
-                    type: string
-                    maxLength: 255
-                  telephone_fax:
-                    description: Le numéro de fax du contact.
-                    type: string
-                    maxLength: 255
-                  adresse:
-                    description: Adresse complète du contact.
-                    type: string
-                    maxLength: 255
-                  site_web_url:
-                    description: Le site internet du contact.
-                    type: string
-                    maxLength: 255
-                  civilite:
-                    description: Le titre de civilité utilisé.
-                    type: string
-                    enum:
-                      - M
-                      - Mme
-                      - Mx
-                  societe:
-                    description: Nom de la société / entreprise liée à ce contact.
-                    type: string
-                    maxLength: 255
-                  email:
-                    description: Adresse email du contact.
-                    type: string
-                    maxLength: 255
-                  observations:
-                    description: >-
-                      Une chaîne de caractères arbitraire rattachée à l'objet.
-                      Souvent utile pour affichage aux utilisateurs.
-                    type: string
-                    maxLength: 255
-                x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
+                $ref: '#/components/schemas/Contact'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
