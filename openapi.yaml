@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/02-08-2024.1
+  version: 1.0/main/02-08-2024.2
   title: Metarisc API
   description: >-
 
@@ -361,7 +361,7 @@ paths:
             (desc).
           schema:
             type: string
-            pattern: ^-?.*$
+            pattern: ^-?\w*$
             maxLength: 255
             enum:
               - code
@@ -4742,11 +4742,17 @@ paths:
                   maxItems: 255
                   items:
                     type: object
+                    title: Objet Référence Extérieure
+                    description: >-
+                      Une référence extérieure permet de lier une identification
+                      extérieure (ou historique) à un objet.
                     properties:
                       titre:
+                        description: Titre de la référence extérieure.
                         type: string
                         maxLength: 255
                       valeur:
+                        description: La valeur de la référence extérieure.
                         type: string
                         maxLength: 255
                 implantation:
@@ -8972,11 +8978,17 @@ paths:
                   maxItems: 255
                   items:
                     type: object
+                    title: Objet Référence Extérieure
+                    description: >-
+                      Une référence extérieure permet de lier une identification
+                      extérieure (ou historique) à un objet.
                     properties:
                       titre:
+                        description: Titre de la référence extérieure.
                         type: string
                         maxLength: 255
                       valeur:
+                        description: La valeur de la référence extérieure.
                         type: string
                         maxLength: 255
                 implantation:
@@ -14875,14 +14887,7 @@ components:
           type: array
           maxItems: 255
           items:
-            type: object
-            properties:
-              titre:
-                type: string
-                maxLength: 255
-              valeur:
-                type: string
-                maxLength: 255
+            $ref: '#/components/schemas/ReferenceExterieure'
         implantation:
           description: Adresse postale de l'ERP.
           allOf:
@@ -15168,14 +15173,7 @@ components:
           type: array
           maxItems: 255
           items:
-            type: object
-            properties:
-              titre:
-                type: string
-                maxLength: 255
-              valeur:
-                type: string
-                maxLength: 255
+            $ref: '#/components/schemas/ReferenceExterieure'
         descriptif_technique:
           description: Descriptif technique actuel du PEI.
           allOf:
@@ -15378,6 +15376,22 @@ components:
           type: string
           maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
+    ReferenceExterieure:
+      type: object
+      title: Objet Référence Extérieure
+      description: >-
+        Une référence extérieure permet de lier une identification extérieure
+        (ou historique) à un objet.
+      properties:
+        titre:
+          description: Titre de la référence extérieure.
+          type: string
+          maxLength: 255
+        valeur:
+          description: La valeur de la référence extérieure.
+          type: string
+          maxLength: 255
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
     ReglesDeci:
       type: object
       title: Objet Règles DECI
