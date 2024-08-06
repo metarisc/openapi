@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/02-08-2024.3
+  version: 1.0/main/06-08-2024.1
   title: Metarisc API
   description: >-
 
@@ -13581,7 +13581,7 @@ paths:
                             type: string
                             format: uuid
                             maxLength: 255
-                - title: Workflow-PassageCommissionSecurite
+                - title: 'Objet Workflow : Passage en commission de sécurité'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -13656,7 +13656,7 @@ paths:
                         avis_de_commission:
                           $ref: >-
                             #/paths/~1workflows~1%7Bworkflow_id%7D/post/requestBody/content/application~1json/schema/oneOf/3/allOf/1/properties/avis_rapporteur
-                - title: Workflow-AnalyseDeRisque
+                - title: 'Objet Workflow : Analyse de Risque'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -13744,7 +13744,7 @@ paths:
                         mesures_complementaires:
                           type: string
                           maxLength: 255
-                - title: Workflow-ArriveeSecretariat
+                - title: 'Objet Workflow : Arrivée secrétariat'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -13797,7 +13797,7 @@ paths:
                                     utilisateurs.
                                   type: string
                                   maxLength: 255
-                - title: Workflow-ConsultationSis
+                - title: 'Objet Workflow : Consultation SIS'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -13836,7 +13836,7 @@ paths:
                                   description: Nom de la commission.
                                   type: string
                                   maxLength: 255
-                - title: Workflow-Validation
+                - title: 'Objet Workflow : Validation'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -13853,7 +13853,7 @@ paths:
                       properties:
                         est_valide:
                           type: boolean
-                - title: Workflow-Visite
+                - title: 'Objet Workflow : Visite'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -13902,7 +13902,7 @@ paths:
                                     utilisateurs.
                                   type: string
                                   maxLength: 255
-                - title: Workflow-RelectureSecretariat
+                - title: 'Objet Workflow : Relecture secrétariat'
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -15600,7 +15600,7 @@ components:
           maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
     WorkflowAnalyseDeRisque:
-      title: Workflow-AnalyseDeRisque
+      title: 'Objet Workflow : Analyse de Risque'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -15634,7 +15634,7 @@ components:
               maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowAnalyseDeRisque'
     WorkflowArriveeSecretariat:
-      title: Workflow-ArriveeSecretariat
+      title: 'Objet Workflow : Arrivée secrétariat'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -15707,7 +15707,7 @@ components:
           maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowBase'
     WorkflowConsultationSis:
-      title: Workflow-ConsultationSis
+      title: 'Objet Workflow : Consultation SIS'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -15729,7 +15729,7 @@ components:
                 $ref: '#/components/schemas/Dossier'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowDossiersLies'
     WorkflowPassageCommissionSecurite:
-      title: Workflow-PassageCommissionSecurite
+      title: 'Objet Workflow : Passage en commission de sécurité'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -15740,7 +15740,7 @@ components:
               $ref: '#/components/schemas/Avis'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowPassageCommissionSecurite'
     WorkflowRelectureSecretariat:
-      title: Workflow-RelectureSecretariat
+      title: 'Objet Workflow : Relecture secrétariat'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -15803,7 +15803,7 @@ components:
             $ref: '#/components/schemas/WorkflowStep'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
     WorkflowValidation:
-      title: Workflow-Validation
+      title: 'Objet Workflow : Validation'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -15812,7 +15812,7 @@ components:
               type: boolean
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowValidation'
     WorkflowVisite:
-      title: Workflow-Visite
+      title: 'Objet Workflow : Visite'
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
