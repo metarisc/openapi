@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-08-2024.1
+  version: 1.0/main/08-08-2024.1
   title: Metarisc API
   description: >-
 
@@ -4798,6 +4798,12 @@ paths:
                             identifient le département.
                           type: number
                           format: int32
+                        arrondissement_municipal:
+                          description: >-
+                            L'arrondissement municipal est une subdivision
+                            territoriale des communes.
+                          type: string
+                          maxLength: 255
                         latitude:
                           description: >-
                             La latitude est une coordonnée géographique
@@ -9034,6 +9040,12 @@ paths:
                             identifient le département.
                           type: number
                           format: int32
+                        arrondissement_municipal:
+                          description: >-
+                            L'arrondissement municipal est une subdivision
+                            territoriale des communes.
+                          type: string
+                          maxLength: 255
                         latitude:
                           description: >-
                             La latitude est une coordonnée géographique
@@ -14286,6 +14298,12 @@ components:
             département.
           type: number
           format: int32
+        arrondissement_municipal:
+          description: >-
+            L'arrondissement municipal est une subdivision territoriale des
+            communes.
+          type: string
+          maxLength: 255
         latitude:
           description: >-
             La latitude est une coordonnée géographique représentée par une
