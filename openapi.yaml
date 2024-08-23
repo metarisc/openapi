@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-08-2024.1
+  version: 1.0/main/23-08-2024.1
   title: Metarisc API
   description: >-
 
@@ -1036,6 +1036,11 @@ paths:
                   description: Nom de la commission.
                   type: string
                   maxLength: 255
+                presidence_id:
+                  description: Identifiant de l'organisation présidant la commission.
+                  type: string
+                  format: uuid
+                  maxLength: 255
               required:
                 - type
                 - libelle
@@ -1526,6 +1531,1002 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: commissions
       x-extension-metarisc-codegen-operation: get-commission
+  /commissions/{commission_id}/membres:
+    get:
+      tags:
+        - Commissions API
+      summary: Liste des membres de la commission.
+      description: Récupération de la liste des membres de la commission.
+      operationId: PaginateMembresCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          description: Commission Id
+          schema:
+            type: string
+            maxLength: 255
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/CommissionMembre'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: paginate-commission-membres
+    post:
+      tags:
+        - Commissions API
+      summary: Ajout d'un membre dans la commission.
+      description: Ajout d'un membre dans la commission.
+      operationId: PostMembresCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          description: Commission Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Commission Membre
+              description: >-
+                Représentation d'un membre amené à siéger au sein d'une
+                commission.
+              properties:
+                titre:
+                  description: Le titre du membre au sein de la commission.
+                  type: string
+                  enum:
+                    - POLICE
+                    - GENDARMERIE
+                    - MAIRE
+                    - SIS
+                    - DDT/DDTM
+                    - REGION
+                presence_obligatoire:
+                  description: >-
+                    Le membre doit siéger obligatoirement lors des passages en
+                    commission.
+                  type: boolean
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionMembre'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: post-membres-commission
+  /commissions/{commission_id}/preferences:
+    get:
+      tags:
+        - Commissions API
+      summary: Préférences de la commission
+      description: Récupération des préférences de la commission.
+      operationId: GetPreferencesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          description: Commission Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionPreferences'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: get-commission-preferences
+    post:
+      tags:
+        - Commissions API
+      summary: Mise à jour des préférences de la commission
+      description: Mise à jour des préférences de la commission.
+      operationId: PostPreferencesCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          description: Commission Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionPreferences'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: get-commission-preferences
+  /commissions_membres:
+    get:
+      tags:
+        - Commissions Membres API
+      summary: Liste des membres des commissions.
+      description: Récupération de la liste membres des commissions.
+      operationId: PaginateCommissionsMembres
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/CommissionMembre'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: commissions_membres
+      x-extension-metarisc-codegen-operation: paginate-membres
+      x-extension-metarisc-codegen-visibility: public
+  /commissions_membres/{membre_id}:
+    delete:
+      tags:
+        - Commissions Membres API
+      summary: Suppression d'un membre de commission.
+      description: Suppression d'un membre de commission existant.
+      operationId: DeleteMembreCommissionsMembres
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: membre_id
+          in: path
+          required: true
+          description: Membre Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '204':
+          description: No Content
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions_membres
+      x-extension-metarisc-codegen-operation: delete-membre
+    get:
+      tags:
+        - Commissions Membres API
+      summary: Détails d'un membre de commission
+      description: Récupération d'une fiche d'un membre d'une commission.
+      operationId: GetMembreCommissionsMembres
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: membre_id
+          in: path
+          required: true
+          description: Membre Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionMembre'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions_membres
+      x-extension-metarisc-codegen-operation: get-membre
+    post:
+      tags:
+        - Commissions Membres API
+      summary: Mise à jour d'un membre de commission
+      description: Mise à jour d'un membre de commission existant.
+      operationId: PostMembreCommissionsMembres
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: membre_id
+          in: path
+          required: true
+          description: Membre Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Commission Membre
+              description: >-
+                Représentation d'un membre amené à siéger au sein d'une
+                commission.
+              properties:
+                titre:
+                  description: Le titre du membre au sein de la commission.
+                  type: string
+                  enum:
+                    - POLICE
+                    - GENDARMERIE
+                    - MAIRE
+                    - SIS
+                    - DDT/DDTM
+                    - REGION
+                presence_obligatoire:
+                  description: >-
+                    Le membre doit siéger obligatoirement lors des passages en
+                    commission.
+                  type: boolean
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionMembre'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions_membres
+      x-extension-metarisc-codegen-operation: update-membre
   /contacts:
     get:
       tags:
@@ -12180,124 +13181,6 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: tournees_deci
       x-extension-metarisc-codegen-operation: update-tournee-deci
-  /tournees_deci/{tournee_deci_id}/livret_de_tournee:
-    get:
-      tags:
-        - Tournées DECI API
-      summary: Récupération d'un livret de tournée
-      description: Génération d'un livret de tournée pour une tournée DECI.
-      operationId: GetLivretDeTourneeTourneeDeciTourneesDeci
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: tournee_deci_id
-          in: path
-          required: true
-          description: Tournee Deci Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: >-
-            Identifiant de l'organisation Metarisc sur laquelle réaliser
-            l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      responses:
-        '200':
-          description: OK
-          content:
-            application/pdf:
-              schema:
-                type: string
-                format: binary
-                maxLength: 99999
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
-            RateLimit-Reset:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
-            RateLimit-Remaining:
-              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
-            Access-Control-Allow-Origin:
-              $ref: >-
-                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: tournees_deci
-      x-extension-metarisc-codegen-operation: get-tournee-deci-livret-de-tournee
   /tournees_deci/{tournee_deci_id}/pei:
     get:
       tags:
@@ -13957,6 +14840,13 @@ paths:
                                   description: Nom de la commission.
                                   type: string
                                   maxLength: 255
+                                presidence_id:
+                                  description: >-
+                                    Identifiant de l'organisation présidant la
+                                    commission.
+                                  type: string
+                                  format: uuid
+                                  maxLength: 255
                 - title: 'Objet Workflow : Validation'
                   allOf:
                     - type: object
@@ -14244,6 +15134,7 @@ tags:
   - name: Moi API
   - name: Anomalies API
   - name: Commissions API
+  - name: Commissions Membres API
   - name: Contacts API
   - name: Controles Pei API
   - name: Dates Passage Commission API
@@ -14539,7 +15430,51 @@ components:
           description: Nom de la commission.
           type: string
           maxLength: 255
+        presidence:
+          description: Organisation présidant la commission.
+          allOf:
+            - $ref: '#/components/schemas/Organisation'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
+    CommissionMembre:
+      type: object
+      title: Objet Commission Membre
+      description: Représentation d'un membre amené à siéger au sein d'une commission.
+      properties:
+        id:
+          type: string
+          description: Identifiant unique de l'objet.
+          format: uuid
+          maxLength: 255
+        titre:
+          description: Le titre du membre au sein de la commission.
+          type: string
+          enum:
+            - POLICE
+            - GENDARMERIE
+            - MAIRE
+            - SIS
+            - DDT/DDTM
+            - REGION
+        presence_obligatoire:
+          description: >-
+            Le membre doit siéger obligatoirement lors des passages en
+            commission.
+          type: boolean
+        commission:
+          allOf:
+            - $ref: '#/components/schemas/Commission'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
+    CommissionPreferences:
+      type: object
+      title: Objet Commission Préférences
+      description: Ensemble des préférences et paramètres pour la gestion d'une commission.
+      properties:
+        rapport_modele_cr:
+          description: 'Modèle pour les rapports générés : Compte rendu de commission'
+          type: string
+          format: uri
+          maxLength: 255
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
     Contact:
       type: object
       title: Objet Contact
