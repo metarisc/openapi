@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/23-08-2024.1
+  version: 1.0/main/28-08-2024.1
   title: Metarisc API
   description: >-
 
@@ -2033,7 +2033,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: commissions
-      x-extension-metarisc-codegen-operation: get-commission-preferences
+      x-extension-metarisc-codegen-operation: post-commission-preferences
   /commissions_membres:
     get:
       tags:
@@ -11423,12 +11423,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    maxLength: 255
-                    default: pong
+                $ref: '#/components/schemas/Ping'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
@@ -16295,6 +16290,16 @@ components:
             - annexe
             - divers
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+    Ping:
+      type: object
+      title: Objet Ping
+      description: Objet technique
+      properties:
+        message:
+          type: string
+          maxLength: 255
+          default: pong
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/Ping'
     Prescription:
       type: object
       title: Objet Prescription
