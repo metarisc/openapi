@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-08-2024.1
+  version: 1.0/main/05-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -9620,6 +9620,124 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: organisations
       x-extension-metarisc-codegen-operation: add-organisation-membres
+  /organisations/{org_id}/preferences:
+    get:
+      tags:
+        - Organisations API
+      summary: Préférences de l'organisation
+      description: >-
+        Ensemble des paramétrages et des configurations liés aux règles métiers
+        de l'organisation.
+      operationId: GetPreferencesOrgOrganisations
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: org_id
+          in: path
+          required: true
+          description: Org Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationPreferences'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: organisations
+      x-extension-metarisc-codegen-operation: get-organisation-preferences
   /organisations/{org_id}/regles-deci:
     get:
       tags:
@@ -16144,6 +16262,25 @@ components:
             - invite
             - invitation_en_cours
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationMembre'
+    OrganisationPreferences:
+      type: object
+      title: Objet Organisation Préférences
+      description: Gestion des préférences pour une organisation.
+      properties:
+        platau_id_acteur:
+          description: >-
+            Identifiant représentant l'organisation dans Plat'AU. Voir :
+            https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
+          type: string
+          maxLength: 255
+        s3_global_endpoint:
+          description: >-
+            Endpoint du bucket S3 lié au stockage des fichiers d'une
+            organisation.
+          type: string
+          format: uri
+          maxLength: 255
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
     PEI:
       type: object
       title: Objet Point d'Eau Incendie
