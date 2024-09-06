@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-09-2024.1
+  version: 1.0/main/06-09-2024.2
   title: Metarisc API
   description: >-
 
@@ -10729,6 +10729,137 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: pei
       x-extension-metarisc-codegen-operation: post-pei
+  /pei/{pei_id}/anomalies:
+    get:
+      tags:
+        - PEI API
+      summary: Liste des anomalies liées au PEI
+      description: Récupération de la liste des anomalies DECI détectées sur le PEI.
+      operationId: PaginateAnomaliesPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          description: Pei Id
+          schema:
+            type: string
+            maxLength: 255
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/AnomaliePEI'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: paginate-pei-anomalies
   /pei/{pei_id}/contacts:
     get:
       tags:
