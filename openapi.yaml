@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-09-2024.2
+  version: 1.0/main/06-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -3735,6 +3735,13 @@ paths:
                   type: string
                   format: uuid
                   maxLength: 255
+                date_de_passage:
+                  description: >-
+                    Date à laquelle le passage du dossier est prévue à l'ordre
+                    du jour.
+                  type: string
+                  format: date-time
+                  maxLength: 255
               required:
                 - dossier_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
@@ -4944,8 +4951,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
               required:
                 - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -6426,8 +6439,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
               required:
                 - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -8562,6 +8581,122 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: notifications
       x-extension-metarisc-codegen-operation: get-notification
+  /notifications/{notification_id}/marquer_comme_lue:
+    post:
+      tags:
+        - Notifications API
+      summary: Marquer la notification domme lue.
+      description: Permet de marquer la notification donnée comme lue par l'utilisateur.
+      operationId: PostMarquerCommeLueNotificationNotifications
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: notification_id
+          in: path
+          required: true
+          description: Notification Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: notifications
+      x-extension-metarisc-codegen-operation: notification-marquer-comme-lue
   /ordres_du_jour/{dossier_id}:
     post:
       tags:
@@ -8613,6 +8748,13 @@ paths:
                           enum:
                             - favorable
                             - defavorable
+                date_de_passage:
+                  description: >-
+                    Date à laquelle le passage du dossier est prévue à l'ordre
+                    du jour.
+                  type: string
+                  format: date-time
+                  maxLength: 255
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '200':
@@ -10225,6 +10367,184 @@ paths:
                         description: La valeur de la référence extérieure.
                         type: string
                         maxLength: 255
+                descriptif_technique:
+                  description: Descriptif technique actuel du PEI.
+                  allOf:
+                    - type: object
+                      title: Objet Descriptif Technique DECI
+                      description: Descriptif technique associé à un PEI.
+                      oneOf:
+                        - title: Objet Descriptif Technique DECI PIBI
+                          description: >-
+                            Descriptif technique d'un PIBI - Poteau incendie ou
+                            Bouche incendie.
+                          allOf:
+                            - type: object
+                              title: Objet Descriptif Technique DECI Base
+                              description: >-
+                                Descriptif technique de base pour l'ensemble des
+                                PEI.
+                              properties:
+                                type:
+                                  description: >-
+                                    Permet de définir à quelle famille de points
+                                    d’eau ce descriptif technique se rattache.
+                                  type: string
+                                  enum:
+                                    - PIBI
+                                    - PENA
+                                domanialite:
+                                  description: >-
+                                    Le régime domanial, notamment en ce qui
+                                    concerne le domaine public, s'appliquant au
+                                    PEI.
+                                  type: string
+                                  enum:
+                                    - privee
+                                    - publique
+                                    - privee_conventionnee
+                                observations_generales:
+                                  description: >-
+                                    Une chaîne de caractères arbitraire
+                                    rattachée à l'objet. Souvent utile pour
+                                    affichage aux utilisateurs.
+                                  type: string
+                                  maxLength: 255
+                                statut:
+                                  description: >-
+                                    Statut du PEI lors de l'établissement de son
+                                    descriptif technique.
+                                  type: string
+                                  enum:
+                                    - reprise_de_donnees
+                                    - declaration_en_cours
+                                    - reconnaissance_operationnelle_initiale
+                                    - actif
+                                    - projet
+                                    - reforme
+                              required:
+                                - type
+                                - statut
+                            - type: object
+                              properties:
+                                surpression:
+                                  type: number
+                                  format: float
+                                  description: >-
+                                    Surpression du réseau d'eau sur lequel est
+                                    relié le PIBI mesurée en bar.
+                                nature:
+                                  description: Nature du PIBI.
+                                  type: string
+                                  enum:
+                                    - PI1x65
+                                    - PI1x65+PI2x45
+                                    - PI1x100
+                                    - PI2x100
+                                    - BI1x65
+                                    - BI1x80
+                                    - BI1x100
+                                    - BI2x100
+                                debit_1bar:
+                                  description: Débit en m3/h à 1 bar de pression dynamique.
+                                  type: number
+                                  format: float
+                                pression:
+                                  description: >-
+                                    Pression (en bar) mesurée avec le PIBI
+                                    ouvert et vanne de régulation sur valeurs
+                                    d’essai.
+                                  type: number
+                                  format: float
+                                pression_statique:
+                                  description: >-
+                                    Pression (en bar) mesurée avec le PIBI
+                                    ouvert mais vanne de régulation fermée.
+                                  type: number
+                                  format: float
+                                debit_gueule_bee:
+                                  description: Débit maximal en m3/h.
+                                  type: number
+                                  format: float
+                              required:
+                                - nature
+                        - title: Objet Descriptif Technique DECI PENA
+                          description: >-
+                            Descriptif technique d'un PENA - Point d'Eau Naturel
+                            ou Artificiel.
+                          allOf:
+                            - type: object
+                              title: Objet Descriptif Technique DECI Base
+                              description: >-
+                                Descriptif technique de base pour l'ensemble des
+                                PEI.
+                              properties:
+                                type:
+                                  description: >-
+                                    Permet de définir à quelle famille de points
+                                    d’eau ce descriptif technique se rattache.
+                                  type: string
+                                  enum:
+                                    - PIBI
+                                    - PENA
+                                domanialite:
+                                  description: >-
+                                    Le régime domanial, notamment en ce qui
+                                    concerne le domaine public, s'appliquant au
+                                    PEI.
+                                  type: string
+                                  enum:
+                                    - privee
+                                    - publique
+                                    - privee_conventionnee
+                                observations_generales:
+                                  description: >-
+                                    Une chaîne de caractères arbitraire
+                                    rattachée à l'objet. Souvent utile pour
+                                    affichage aux utilisateurs.
+                                  type: string
+                                  maxLength: 255
+                                statut:
+                                  description: >-
+                                    Statut du PEI lors de l'établissement de son
+                                    descriptif technique.
+                                  type: string
+                                  enum:
+                                    - reprise_de_donnees
+                                    - declaration_en_cours
+                                    - reconnaissance_operationnelle_initiale
+                                    - actif
+                                    - projet
+                                    - reforme
+                              required:
+                                - type
+                                - statut
+                            - type: object
+                              properties:
+                                nature:
+                                  description: Nature du PENA.
+                                  type: string
+                                  enum:
+                                    - POINT_ASPIRATION
+                                    - CITERNE_AERIENNE
+                                    - CITERNE_ENTERREE
+                                    - CITERNE_SEMI_ENTERREE
+                                    - CITERNE_SOUPLE
+                                    - RESERVE_AERIENNE
+                                    - POTEAU_RELAIS
+                                    - PUISARD_ASPIRATION
+                                    - PRISE_DEPORTEE
+                                    - POTEAU_ASPIRATION_1x100
+                                    - POTEAU_ASPIRATION_2x100
+                                    - BOUCHE_ASPIRATION_1x100
+                                volume:
+                                  description: >-
+                                    Dans le cas d'une citerne, information sur
+                                    son volume d'eau en m3.
+                                  type: number
+                                  format: float
+                              required:
+                                - nature
                 implantation:
                   description: Implantation du PEI sous la forme d'une adresse postale.
                   allOf:
@@ -10319,6 +10639,7 @@ paths:
                   type: string
                   maxLength: 255
               required:
+                - descriptif_technique
                 - implantation
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
       responses:
@@ -10908,8 +11229,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
               required:
                 - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -14398,8 +14725,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
               required:
                 - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -16285,6 +16618,9 @@ components:
             https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
           type: string
           maxLength: 255
+        platau_active:
+          description: Activation de la passerelle Plat'AU pour l'organisation.
+          type: boolean
         s3_global_endpoint:
           description: >-
             Endpoint du bucket S3 lié au stockage des fichiers d'une
@@ -16396,6 +16732,11 @@ components:
           description: Avis rendu de la commission sur le dossier.
           allOf:
             - $ref: '#/components/schemas/Avis'
+        date_de_passage:
+          description: Date à laquelle le passage du dossier est prévue à l'ordre du jour.
+          type: string
+          format: date-time
+          maxLength: 255
         statut:
           description: >-
             État du dossier au regard de l'ordre du jour du passage en
@@ -16438,6 +16779,11 @@ components:
             - plan
             - annexe
             - divers
+        est_sensible:
+          description: >-
+            Information permettant de savoir si le contenu du document doit être
+            considéré comme sensible par Metarisc.
+          type: boolean
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
     Ping:
       type: object
