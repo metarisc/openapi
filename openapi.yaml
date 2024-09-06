@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-09-2024.2
+  version: 1.0/main/06-09-2024.3
   title: Metarisc API
   description: >-
 
@@ -8585,7 +8585,7 @@ paths:
     post:
       tags:
         - Notifications API
-      summary: Marquer la notification domme lue.
+      summary: Marquer la notification comme lue.
       description: Permet de marquer la notification donnée comme lue par l'utilisateur.
       operationId: PostMarquerCommeLueNotificationNotifications
       security:
