@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-09-2024.3
+  version: 1.0/main/09-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -365,6 +365,7 @@ paths:
             maxLength: 255
             enum:
               - code
+              - '-code'
             default: code
         - name: texte
           in: query
