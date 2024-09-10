@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-09-2024.1
+  version: 1.0/main/10-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -5800,8 +5800,7 @@ paths:
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
                           type: string
-                          pattern: >-
-                            ^([02][1-9]|2[AB]|[1345678][0-9]|9[012345]|97[12346])$
+                          pattern: ^([013-9]\d|2[AB1-9])\d{3}$
                           maxLength: 5
                         arrondissement:
                           description: >-
@@ -10576,8 +10575,7 @@ paths:
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
                           type: string
-                          pattern: >-
-                            ^([02][1-9]|2[AB]|[1345678][0-9]|9[012345]|97[12346])$
+                          pattern: ^([013-9]\d|2[AB1-9])\d{3}$
                           maxLength: 5
                         arrondissement:
                           description: >-
@@ -15866,7 +15864,7 @@ components:
         code_insee:
           description: Code unique attribué à chaque commune de France.
           type: string
-          pattern: ^([02][1-9]|2[AB]|[1345678][0-9]|9[012345]|97[12346])$
+          pattern: ^([013-9]\d|2[AB1-9])\d{3}$
           maxLength: 5
         arrondissement:
           description: >-
