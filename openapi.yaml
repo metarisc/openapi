@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/10-09-2024.1
+  version: 1.0/main/10-09-2024.2
   title: Metarisc API
   description: >-
 
@@ -1716,6 +1716,9 @@ paths:
                     Le membre doit siéger obligatoirement lors des passages en
                     commission.
                   type: boolean
+              required:
+                - titre
+                - presence_obligatoire
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
       responses:
         '201':
