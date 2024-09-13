@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/12-09-2024.1
+  version: 1.0/main/13-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -10344,6 +10344,61 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: sort
+          in: query
+          description: >-
+            Propriété sur laquelle trier les résultats. L'ordre de tri par
+            défaut est croissant (asc) sauf si la propriété est préfixée par un
+            trait d'union (-), auquel cas l'ordre de tri sera décroissant
+            (desc).
+          schema:
+            type: string
+            pattern: ^-?\w*$
+            maxLength: 255
+            enum:
+              - numero
+              - '-numero'
+            default: numero
+        - name: numero
+          in: query
+          description: Filtre sur le numéro du PEI
+          schema:
+            type: string
+            maxLength: 255
+        - name: type
+          in: query
+          description: Filtre sur le type du PEI
+          schema:
+            type: string
+            enum:
+              - PIBI
+              - PENA
+        - name: statut
+          in: query
+          description: Filtre sur le statut du PEI
+          schema:
+            type: string
+            enum:
+              - reprise_de_donnees
+              - declaration_en_cours
+              - reconnaissance_operationnelle_initiale
+              - actif
+              - projet
+              - reforme
+        - name: est_disponible
+          in: query
+          description: Filtre sur la disponibilité du PEI
+          schema:
+            type: boolean
+        - name: domanialite
+          in: query
+          description: Filtre sur la domanialité du PEI
+          schema:
+            type: string
+            enum:
+              - privee
+              - publique
+              - privee_conventionnee
         - name: geojson
           in: query
           description: Filtre sur la position des PEI
