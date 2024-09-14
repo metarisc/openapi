@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/13-09-2024.2
+  version: 1.0/main/14-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -377,8 +377,10 @@ paths:
           in: query
           description: Filtre sur le code de l'anomalie
           schema:
-            type: string
-            maxLength: 255
+            type: integer
+            format: int32
+            maximum: 99999
+            minimum: 0
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -1138,7 +1140,10 @@ paths:
       tags:
         - Commissions API
       summary: Liste des dates de passage prévues de la commission
-      description: Récupération de la liste des dates de passage de la commission.
+      description: >-
+        Récupération de la liste des dates de passage de la commission. Cela
+        peut représenter une visite périodique sur site de la commission, ou un
+        passage en salle.
       operationId: PaginateDatesCommissionCommissions
       security:
         - IdMetariscFr:
@@ -5206,11 +5211,35 @@ paths:
                 Les dossiers sont un ensemble de documents administratifs et
                 techniques. L'instruction du dossier suit une logique
                 pré-définie selon le type.
-              properties:
-                objet:
-                  description: Objet du dossier.
-                  type: string
-                  maxLength: 255
+              oneOf:
+                - type: object
+                  title: Objet Dossier ERP
+                  description: Dossier d'un ERP.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 255
+                    - type: object
+                      properties: {}
+                - type: object
+                  title: Objet Dossier DECI
+                  description: Dossier d'un DECI.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 255
+                    - type: object
+                      properties: {}
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '200':
@@ -5751,28 +5780,6 @@ paths:
                 des locaux ou des enceintes dans lesquels sont admises des
                 personnes extérieures.
               properties:
-                references_exterieures:
-                  description: >-
-                    Ensemble de paires clé-valeur que vous pouvez attacher à un
-                    objet. Cela peut être utile pour stocker des informations
-                    supplémentaires sur l'objet dans un format structuré.
-                  type: array
-                  maxItems: 255
-                  items:
-                    type: object
-                    title: Objet Référence Extérieure
-                    description: >-
-                      Une référence extérieure permet de lier une identification
-                      extérieure (ou historique) à un objet.
-                    properties:
-                      titre:
-                        description: Titre de la référence extérieure.
-                        type: string
-                        maxLength: 255
-                      valeur:
-                        description: La valeur de la référence extérieure.
-                        type: string
-                        maxLength: 255
                 implantation:
                   description: Adresse postale de l'ERP.
                   allOf:
@@ -6707,20 +6714,50 @@ paths:
                 Les dossiers sont un ensemble de documents administratifs et
                 techniques. L'instruction du dossier suit une logique
                 pré-définie selon le type.
-              properties:
-                type:
-                  description: Type du dossier.
-                  type: string
-                  enum:
-                    - deci:declaration_pei
-                    - erp:autorisation_de_travaux
-                    - erp:visite_periodique
-                objet:
-                  description: Objet du dossier.
-                  type: string
-                  maxLength: 255
-              required:
-                - type
+              oneOf:
+                - type: object
+                  title: Objet Dossier ERP
+                  description: Dossier d'un ERP.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 255
+                    - type: object
+                      properties:
+                        type:
+                          description: Type du dossier.
+                          type: string
+                          enum:
+                            - erp:autorisation_de_travaux
+                            - erp:visite_periodique
+                      required:
+                        - type
+                - type: object
+                  title: Objet Dossier DECI
+                  description: Dossier d'un DECI.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 255
+                    - type: object
+                      properties:
+                        type:
+                          description: Type du dossier.
+                          type: string
+                          enum:
+                            - deci:declaration_pei
+                      required:
+                        - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '201':
@@ -7056,6 +7093,261 @@ paths:
       x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: erp
       x-extension-metarisc-codegen-operation: paginate-erp-historique
+  /erp/{erp_id}/references_exterieures:
+    get:
+      tags:
+        - ERP API
+      summary: Récupération de toutes les références extérieures.
+      description: Récupération de toutes les références extérieures de l'objet.
+      operationId: GetReferencesExterieuresErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          description: Erp Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 255
+                items:
+                  $ref: '#/components/schemas/ReferenceExterieure'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: get-references-exterieures-erp
+    patch:
+      tags:
+        - ERP API
+      summary: Créer ou mettre à jour des références extérieures
+      description: >-
+        Créez ou mettez à jour des références extérieures. L'utilisation d'une
+        valeur null pour une référence extérieure supprimera ou « annulera » la
+        valeur de la propriété de la référence extérieure.
+      operationId: PatchReferencesExterieuresErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          description: Erp Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Référence Extérieure
+              description: >-
+                Ensemble de paires clé-valeur que vous pouvez attacher à un
+                objet. Une référence extérieure permet de lier une
+                identification extérieure (ou historique) à un objet. Cela peut
+                être utile pour stocker des informations supplémentaires sur
+                l'objet dans un format structuré.
+              properties:
+                titre:
+                  description: Titre de la référence extérieure.
+                  type: string
+                  maxLength: 255
+                valeur:
+                  description: La valeur de la référence extérieure.
+                  type: string
+                  maxLength: 255
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+      responses:
+        '204':
+          description: No Content
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: patch-references-exterieures-erp
   /evenements:
     get:
       tags:
@@ -10543,28 +10835,6 @@ paths:
               title: Objet Point d'Eau Incendie
               description: Dispositif de lutte contre l'incendie.
               properties:
-                references_exterieures:
-                  description: >-
-                    Ensemble de paires clé-valeur que vous pouvez attacher à un
-                    objet. Cela peut être utile pour stocker des informations
-                    supplémentaires sur l'objet dans un format structuré.
-                  type: array
-                  maxItems: 255
-                  items:
-                    type: object
-                    title: Objet Référence Extérieure
-                    description: >-
-                      Une référence extérieure permet de lier une identification
-                      extérieure (ou historique) à un objet.
-                    properties:
-                      titre:
-                        description: Titre de la référence extérieure.
-                        type: string
-                        maxLength: 255
-                      valeur:
-                        description: La valeur de la référence extérieure.
-                        type: string
-                        maxLength: 255
                 descriptif_technique:
                   description: Descriptif technique actuel du PEI.
                   allOf:
@@ -11822,20 +12092,50 @@ paths:
                 Les dossiers sont un ensemble de documents administratifs et
                 techniques. L'instruction du dossier suit une logique
                 pré-définie selon le type.
-              properties:
-                type:
-                  description: Type du dossier.
-                  type: string
-                  enum:
-                    - deci:declaration_pei
-                    - erp:autorisation_de_travaux
-                    - erp:visite_periodique
-                objet:
-                  description: Objet du dossier.
-                  type: string
-                  maxLength: 255
-              required:
-                - type
+              oneOf:
+                - type: object
+                  title: Objet Dossier ERP
+                  description: Dossier d'un ERP.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 255
+                    - type: object
+                      properties:
+                        type:
+                          description: Type du dossier.
+                          type: string
+                          enum:
+                            - erp:autorisation_de_travaux
+                            - erp:visite_periodique
+                      required:
+                        - type
+                - type: object
+                  title: Objet Dossier DECI
+                  description: Dossier d'un DECI.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 255
+                    - type: object
+                      properties:
+                        type:
+                          description: Type du dossier.
+                          type: string
+                          enum:
+                            - deci:declaration_pei
+                      required:
+                        - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '201':
@@ -12171,6 +12471,261 @@ paths:
       x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: pei
       x-extension-metarisc-codegen-operation: paginate-pei-historique
+  /pei/{pei_id}/references_exterieures:
+    get:
+      tags:
+        - PEI API
+      summary: Récupération de toutes les références extérieures.
+      description: Récupération de toutes les références extérieures de l'objet.
+      operationId: GetReferencesExterieuresPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          description: Pei Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 255
+                items:
+                  $ref: '#/components/schemas/ReferenceExterieure'
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: get-references-exterieures-pei
+    patch:
+      tags:
+        - PEI API
+      summary: Créer ou mettre à jour des références extérieures
+      description: >-
+        Créez ou mettez à jour des références extérieures. L'utilisation d'une
+        valeur null pour une référence extérieure supprimera ou « annulera » la
+        valeur de la propriété de la référence extérieure.
+      operationId: PatchReferencesExterieuresPeiPei
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: pei_id
+          in: path
+          required: true
+          description: Pei Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Référence Extérieure
+              description: >-
+                Ensemble de paires clé-valeur que vous pouvez attacher à un
+                objet. Une référence extérieure permet de lier une
+                identification extérieure (ou historique) à un objet. Cela peut
+                être utile pour stocker des informations supplémentaires sur
+                l'objet dans un format structuré.
+              properties:
+                titre:
+                  description: Titre de la référence extérieure.
+                  type: string
+                  maxLength: 255
+                valeur:
+                  description: La valeur de la référence extérieure.
+                  type: string
+                  maxLength: 255
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+      responses:
+        '204':
+          description: No Content
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              $ref: '#/paths/~1erp/get/responses/429/headers/Retry-After'
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
+            RateLimit-Reset:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Reset'
+            RateLimit-Remaining:
+              $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Remaining'
+            Access-Control-Allow-Origin:
+              $ref: >-
+                #/paths/~1erp/get/responses/400/headers/Access-Control-Allow-Origin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: pei
+      x-extension-metarisc-codegen-operation: patch-references-exterieures-pei
   /ping:
     get:
       tags:
@@ -15440,11 +15995,35 @@ paths:
                               administratifs et techniques. L'instruction du
                               dossier suit une logique pré-définie selon le
                               type.
-                            properties:
-                              objet:
-                                description: Objet du dossier.
-                                type: string
-                                maxLength: 255
+                            oneOf:
+                              - type: object
+                                title: Objet Dossier ERP
+                                description: Dossier d'un ERP.
+                                allOf:
+                                  - type: object
+                                    title: Objet Dossier Base
+                                    description: Dossier de base.
+                                    properties:
+                                      objet:
+                                        description: Objet du dossier.
+                                        type: string
+                                        maxLength: 255
+                                  - type: object
+                                    properties: {}
+                              - type: object
+                                title: Objet Dossier DECI
+                                description: Dossier d'un DECI.
+                                allOf:
+                                  - type: object
+                                    title: Objet Dossier Base
+                                    description: Dossier de base.
+                                    properties:
+                                      objet:
+                                        description: Objet du dossier.
+                                        type: string
+                                        maxLength: 255
+                                  - type: object
+                                    properties: {}
                 - title: 'Objet Workflow : Remise En Service PEI'
                   allOf:
                     - type: object
@@ -16707,25 +17286,16 @@ components:
               type: number
               format: float
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
-    Dossier:
+    DossierBase:
       type: object
-      title: Objet Dossier
-      description: >-
-        Les dossiers sont un ensemble de documents administratifs et techniques.
-        L'instruction du dossier suit une logique pré-définie selon le type.
+      title: Objet Dossier Base
+      description: Dossier de base.
       properties:
         id:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
           maxLength: 255
-        type:
-          description: Type du dossier.
-          type: string
-          enum:
-            - deci:declaration_pei
-            - erp:autorisation_de_travaux
-            - erp:visite_periodique
         objet:
           description: Objet du dossier.
           type: string
@@ -16751,12 +17321,51 @@ components:
           enum:
             - OUVERT
             - CLOS
-        pei:
-          allOf:
-            - $ref: '#/components/schemas/PEI'
-        erp:
-          allOf:
-            - $ref: '#/components/schemas/ERP'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
+    DossierDeci:
+      type: object
+      title: Objet Dossier DECI
+      description: Dossier d'un DECI.
+      allOf:
+        - $ref: '#/components/schemas/DossierBase'
+        - type: object
+          properties:
+            type:
+              description: Type du dossier.
+              type: string
+              enum:
+                - deci:declaration_pei
+            pei:
+              allOf:
+                - $ref: '#/components/schemas/PEI'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierDeci'
+    DossierErp:
+      type: object
+      title: Objet Dossier ERP
+      description: Dossier d'un ERP.
+      allOf:
+        - $ref: '#/components/schemas/DossierBase'
+        - type: object
+          properties:
+            type:
+              description: Type du dossier.
+              type: string
+              enum:
+                - erp:autorisation_de_travaux
+                - erp:visite_periodique
+            erp:
+              allOf:
+                - $ref: '#/components/schemas/ERP'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
+    Dossier:
+      type: object
+      title: Objet Dossier
+      description: >-
+        Les dossiers sont un ensemble de documents administratifs et techniques.
+        L'instruction du dossier suit une logique pré-définie selon le type.
+      oneOf:
+        - $ref: '#/components/schemas/DossierErp'
+        - $ref: '#/components/schemas/DossierDeci'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
     ERP:
       type: object
@@ -16781,15 +17390,6 @@ components:
           type: string
           format: date-time
           maxLength: 255
-        references_exterieures:
-          description: >-
-            Ensemble de paires clé-valeur que vous pouvez attacher à un objet.
-            Cela peut être utile pour stocker des informations supplémentaires
-            sur l'objet dans un format structuré.
-          type: array
-          maxItems: 255
-          items:
-            $ref: '#/components/schemas/ReferenceExterieure'
         implantation:
           description: Adresse postale de l'ERP.
           allOf:
@@ -17089,15 +17689,6 @@ components:
           type: string
           format: date-time
           maxLength: 255
-        references_exterieures:
-          description: >-
-            Ensemble de paires clé-valeur que vous pouvez attacher à un objet.
-            Cela peut être utile pour stocker des informations supplémentaires
-            sur l'objet dans un format structuré.
-          type: array
-          maxItems: 255
-          items:
-            $ref: '#/components/schemas/ReferenceExterieure'
         descriptif_technique:
           description: Descriptif technique actuel du PEI.
           allOf:
@@ -17324,8 +17915,10 @@ components:
       type: object
       title: Objet Référence Extérieure
       description: >-
-        Une référence extérieure permet de lier une identification extérieure
-        (ou historique) à un objet.
+        Ensemble de paires clé-valeur que vous pouvez attacher à un objet. Une
+        référence extérieure permet de lier une identification extérieure (ou
+        historique) à un objet. Cela peut être utile pour stocker des
+        informations supplémentaires sur l'objet dans un format structuré.
       properties:
         titre:
           description: Titre de la référence extérieure.
