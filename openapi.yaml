@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/14-09-2024.1
+  version: 1.0/main/14-09-2024.2
   title: Metarisc API
   description: >-
 
@@ -3070,7 +3070,7 @@ paths:
   /controles_pei/{pei_id}:
     delete:
       tags:
-        - Controles Pei API
+        - Controles PEI API
       summary: Suppression du contrôle PEI
       description: Suppression du contrôle PEI de la tournée DECI.
       operationId: DeletePeiControlesPei
@@ -3181,7 +3181,7 @@ paths:
       x-extension-metarisc-codegen-operation: delete-controle
     get:
       tags:
-        - Controles Pei API
+        - Controles PEI API
       summary: Détail du PEI contrôlé
       description: Récupération des détails liés au contrôle d'un PEI d'une tournée.
       operationId: GetPeiControlesPei
@@ -3296,7 +3296,7 @@ paths:
       x-extension-metarisc-codegen-operation: get-controle
     post:
       tags:
-        - Controles Pei API
+        - Controles PEI API
       summary: Mise à jour du PEI contrôlé
       description: Mise à jour du PEI contrôlé.
       operationId: PostPeiControlesPei
@@ -3335,6 +3335,40 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 255
+                hydraulique:
+                  description: >-
+                    Informations sur les essais hydrauliques procédés le jour du
+                    contrôle.
+                  type: object
+                  properties:
+                    volume:
+                      description: Volume relevé lors des essais / contrôle hydrauliques.
+                      type: number
+                      format: float
+                    debit_1bar:
+                      description: >-
+                        Débit à 1 bar de pression relevé lors des essais /
+                        contrôle hydrauliques.
+                      type: number
+                      format: float
+                    pression:
+                      description: >-
+                        Pression relevée lors des essais / contrôle
+                        hydrauliques.
+                      type: number
+                      format: float
+                    pression_statique:
+                      description: >-
+                        Pression statique relevée lors des essais / contrôle
+                        hydrauliques.
+                      type: number
+                      format: float
+                    debit_gueule_bee:
+                      description: >-
+                        Débit gueule bée relevé lors des essais / contrôle
+                        hydrauliques.
+                      type: number
+                      format: float
                 liste_anomalies:
                   description: Liste des anomalies posées ou à lever suite à ce contrôle.
                   type: array
@@ -3346,8 +3380,8 @@ paths:
                         description: Code de l'anomalie.
                         type: integer
                         format: int32
-                        minimum: 1
-                        maximum: 255
+                        maximum: 99999
+                        minimum: 0
                       a_lever:
                         description: Si l'anomalie est à lever.
                         type: boolean
@@ -14783,11 +14817,12 @@ paths:
               title: Objet Tournée Deci PEI
               description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
               properties:
-                date_du_controle:
-                  description: Date à laquelle le contrôle a été effectué.
-                  type: string
-                  format: date-time
-                  maxLength: 255
+                hydraulique:
+                  description: >-
+                    Informations sur les essais hydrauliques procédés le jour du
+                    contrôle.
+                  type: object
+                  properties: {}
                 liste_anomalies:
                   description: Liste des anomalies posées ou à lever suite à ce contrôle.
                   type: array
@@ -14799,30 +14834,16 @@ paths:
                         description: Code de l'anomalie.
                         type: integer
                         format: int32
-                        minimum: 1
-                        maximum: 255
+                        maximum: 99999
+                        minimum: 0
                       a_lever:
                         description: Si l'anomalie est à lever.
                         type: boolean
-                essais_engin_utilise:
-                  description: Engin utilisé pour les essais hydrauliques.
-                  type: string
-                  enum:
-                    - aucun
-                    - fpt
-                    - mpr
-                    - ccf
                 pei_id:
                   description: Identifiant du PEI à lier au contrôle.
                   type: string
                   format: uuid
                   maxLength: 255
-                ordre:
-                  description: L'ordre du contrôle dans le livret de tournée.
-                  type: integer
-                  format: int32
-                  minimum: 1
-                  maximum: 255
               required:
                 - pei_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
@@ -16601,7 +16622,7 @@ tags:
   - name: Commissions API
   - name: Commissions Membres API
   - name: Contacts API
-  - name: Controles Pei API
+  - name: Controles PEI API
   - name: Dates Passage Commission API
   - name: Documents API
   - name: Dossiers API
@@ -18077,6 +18098,36 @@ components:
           type: string
           format: date-time
           maxLength: 255
+        hydraulique:
+          description: >-
+            Informations sur les essais hydrauliques procédés le jour du
+            contrôle.
+          type: object
+          properties:
+            volume:
+              description: Volume relevé lors des essais / contrôle hydrauliques.
+              type: number
+              format: float
+            debit_1bar:
+              description: >-
+                Débit à 1 bar de pression relevé lors des essais / contrôle
+                hydrauliques.
+              type: number
+              format: float
+            pression:
+              description: Pression relevée lors des essais / contrôle hydrauliques.
+              type: number
+              format: float
+            pression_statique:
+              description: >-
+                Pression statique relevée lors des essais / contrôle
+                hydrauliques.
+              type: number
+              format: float
+            debit_gueule_bee:
+              description: Débit gueule bée relevé lors des essais / contrôle hydrauliques.
+              type: number
+              format: float
         liste_anomalies:
           description: Liste des anomalies posées ou à lever suite à ce contrôle.
           type: array
