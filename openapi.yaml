@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-09-2024.2
+  version: 1.0/main/16-09-2024.3
   title: Metarisc API
   description: >-
 
@@ -7281,24 +7281,27 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              title: Objet Référence Extérieure
-              description: >-
-                Ensemble de paires clé-valeur que vous pouvez attacher à un
-                objet. Une référence extérieure permet de lier une
-                identification extérieure (ou historique) à un objet. Cela peut
-                être utile pour stocker des informations supplémentaires sur
-                l'objet dans un format structuré.
-              properties:
-                titre:
-                  description: Titre de la référence extérieure.
-                  type: string
-                  maxLength: 255
-                valeur:
-                  description: La valeur de la référence extérieure.
-                  type: string
-                  maxLength: 255
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+              type: array
+              maxItems: 255
+              items:
+                type: object
+                title: Objet Référence Extérieure
+                description: >-
+                  Ensemble de paires clé-valeur que vous pouvez attacher à un
+                  objet. Une référence extérieure permet de lier une
+                  identification extérieure (ou historique) à un objet. Cela
+                  peut être utile pour stocker des informations supplémentaires
+                  sur l'objet dans un format structuré.
+                properties:
+                  titre:
+                    description: Titre de la référence extérieure.
+                    type: string
+                    maxLength: 255
+                  valeur:
+                    description: La valeur de la référence extérieure.
+                    type: string
+                    maxLength: 255
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '204':
           description: No Content
@@ -12659,24 +12662,27 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              title: Objet Référence Extérieure
-              description: >-
-                Ensemble de paires clé-valeur que vous pouvez attacher à un
-                objet. Une référence extérieure permet de lier une
-                identification extérieure (ou historique) à un objet. Cela peut
-                être utile pour stocker des informations supplémentaires sur
-                l'objet dans un format structuré.
-              properties:
-                titre:
-                  description: Titre de la référence extérieure.
-                  type: string
-                  maxLength: 255
-                valeur:
-                  description: La valeur de la référence extérieure.
-                  type: string
-                  maxLength: 255
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+              type: array
+              maxItems: 255
+              items:
+                type: object
+                title: Objet Référence Extérieure
+                description: >-
+                  Ensemble de paires clé-valeur que vous pouvez attacher à un
+                  objet. Une référence extérieure permet de lier une
+                  identification extérieure (ou historique) à un objet. Cela
+                  peut être utile pour stocker des informations supplémentaires
+                  sur l'objet dans un format structuré.
+                properties:
+                  titre:
+                    description: Titre de la référence extérieure.
+                    type: string
+                    maxLength: 255
+                  valeur:
+                    description: La valeur de la référence extérieure.
+                    type: string
+                    maxLength: 255
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '204':
           description: No Content
