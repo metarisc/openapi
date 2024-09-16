@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/14-09-2024.2
+  version: 1.0/main/16-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -14817,28 +14817,6 @@ paths:
               title: Objet Tournée Deci PEI
               description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
               properties:
-                hydraulique:
-                  description: >-
-                    Informations sur les essais hydrauliques procédés le jour du
-                    contrôle.
-                  type: object
-                  properties: {}
-                liste_anomalies:
-                  description: Liste des anomalies posées ou à lever suite à ce contrôle.
-                  type: array
-                  maxItems: 255
-                  items:
-                    type: object
-                    properties:
-                      code:
-                        description: Code de l'anomalie.
-                        type: integer
-                        format: int32
-                        maximum: 99999
-                        minimum: 0
-                      a_lever:
-                        description: Si l'anomalie est à lever.
-                        type: boolean
                 pei_id:
                   description: Identifiant du PEI à lier au contrôle.
                   type: string
