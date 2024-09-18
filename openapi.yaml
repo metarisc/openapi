@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-09-2024.3
+  version: 1.0/main/18-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -5240,41 +5240,14 @@ paths:
           application/json:
             schema:
               type: object
-              title: Objet Dossier
-              description: >-
-                Les dossiers sont un ensemble de documents administratifs et
-                techniques. L'instruction du dossier suit une logique
-                pré-définie selon le type.
-              oneOf:
-                - type: object
-                  title: Objet Dossier ERP
-                  description: Dossier d'un ERP.
-                  allOf:
-                    - type: object
-                      title: Objet Dossier Base
-                      description: Dossier de base.
-                      properties:
-                        objet:
-                          description: Objet du dossier.
-                          type: string
-                          maxLength: 255
-                    - type: object
-                      properties: {}
-                - type: object
-                  title: Objet Dossier DECI
-                  description: Dossier d'un DECI.
-                  allOf:
-                    - type: object
-                      title: Objet Dossier Base
-                      description: Dossier de base.
-                      properties:
-                        objet:
-                          description: Objet du dossier.
-                          type: string
-                          maxLength: 255
-                    - type: object
-                      properties: {}
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+              title: Objet Dossier Base
+              description: Dossier de base.
+              properties:
+                objet:
+                  description: Objet du dossier.
+                  type: string
+                  maxLength: 255
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       responses:
         '200':
           description: OK
