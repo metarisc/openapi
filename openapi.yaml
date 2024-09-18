@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-09-2024.1
+  version: 1.0/main/18-09-2024.2
   title: Metarisc API
   description: >-
 
@@ -7273,6 +7273,7 @@ paths:
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
+                    nullable: true
                     maxLength: 255
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
@@ -12654,6 +12655,7 @@ paths:
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
+                    nullable: true
                     maxLength: 255
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
@@ -17906,6 +17908,7 @@ components:
         valeur:
           description: La valeur de la référence extérieure.
           type: string
+          nullable: true
           maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
     ReglesDeci:
