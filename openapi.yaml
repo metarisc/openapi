@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-09-2024.2
+  version: 1.0/main/18-09-2024.3
   title: Metarisc API
   description: >-
 
@@ -7135,10 +7135,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                maxItems: 255
-                items:
-                  $ref: '#/components/schemas/ReferenceExterieure'
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/ReferenceExterieure'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
@@ -12517,10 +12521,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                maxItems: 255
-                items:
-                  $ref: '#/components/schemas/ReferenceExterieure'
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/ReferenceExterieure'
           headers:
             RateLimit-Limit:
               $ref: '#/paths/~1erp/get/responses/200/headers/RateLimit-Limit'
