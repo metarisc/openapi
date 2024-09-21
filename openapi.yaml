@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/21-09-2024.1
+  version: 1.0/main/21-09-2024.2
   title: Metarisc API
   description: >-
 
@@ -7228,6 +7228,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: erp
       x-extension-metarisc-codegen-operation: get-references-exterieures-erp
     patch:
@@ -12614,6 +12615,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: pei
       x-extension-metarisc-codegen-operation: get-references-exterieures-pei
     patch:
