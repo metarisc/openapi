@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-09-2024.3
+  version: 1.0/main/21-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -3339,36 +3339,43 @@ paths:
                   description: >-
                     Informations sur les essais hydrauliques procédés le jour du
                     contrôle.
-                  type: object
-                  properties:
-                    volume:
-                      description: Volume relevé lors des essais / contrôle hydrauliques.
-                      type: number
-                      format: float
-                    debit_1bar:
+                  allOf:
+                    - type: object
+                      title: Objet Données Hydrauliques
                       description: >-
-                        Débit à 1 bar de pression relevé lors des essais /
-                        contrôle hydrauliques.
-                      type: number
-                      format: float
-                    pression:
-                      description: >-
-                        Pression relevée lors des essais / contrôle
-                        hydrauliques.
-                      type: number
-                      format: float
-                    pression_statique:
-                      description: >-
-                        Pression statique relevée lors des essais / contrôle
-                        hydrauliques.
-                      type: number
-                      format: float
-                    debit_gueule_bee:
-                      description: >-
-                        Débit gueule bée relevé lors des essais / contrôle
-                        hydrauliques.
-                      type: number
-                      format: float
+                        Objet de contrôle des données hydrauliques d'un PEI dans
+                        le cadre d'une Tournée DECI.
+                      properties:
+                        volume:
+                          description: >-
+                            Volume relevé lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                        debit_1bar:
+                          description: >-
+                            Débit à 1 bar de pression relevé lors des essais /
+                            contrôle hydrauliques.
+                          type: number
+                          format: float
+                        pression:
+                          description: >-
+                            Pression relevée lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                        pression_statique:
+                          description: >-
+                            Pression statique relevée lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                        debit_gueule_bee:
+                          description: >-
+                            Débit gueule bée relevé lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
                 liste_anomalies:
                   description: Liste des anomalies posées ou à lever suite à ce contrôle.
                   type: array
@@ -14038,7 +14045,7 @@ paths:
                 Une tournée de reconnaissance opérationnelle portant sur la
                 visibilité, l’accessibilité,  la signalisation et la
                 manoeuvrabilité (ouverture et fermeture) des PEI.
-              anyOf:
+              oneOf:
                 - title: Objet Tournée Deci Simple
                   description: Tournéee DECI déclenchée
                   allOf:
@@ -14487,7 +14494,7 @@ paths:
                 Une tournée de reconnaissance opérationnelle portant sur la
                 visibilité, l’accessibilité,  la signalisation et la
                 manoeuvrabilité (ouverture et fermeture) des PEI.
-              anyOf:
+              oneOf:
                 - title: Objet Tournée Deci Simple
                   description: Tournéee DECI déclenchée
                   allOf:
@@ -17275,6 +17282,36 @@ components:
               type: number
               format: float
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
+    DonneesHydrauliques:
+      type: object
+      title: Objet Données Hydrauliques
+      description: >-
+        Objet de contrôle des données hydrauliques d'un PEI dans le cadre d'une
+        Tournée DECI.
+      properties:
+        volume:
+          description: Volume relevé lors des essais / contrôle hydrauliques.
+          type: number
+          format: float
+        debit_1bar:
+          description: >-
+            Débit à 1 bar de pression relevé lors des essais / contrôle
+            hydrauliques.
+          type: number
+          format: float
+        pression:
+          description: Pression relevée lors des essais / contrôle hydrauliques.
+          type: number
+          format: float
+        pression_statique:
+          description: Pression statique relevée lors des essais / contrôle hydrauliques.
+          type: number
+          format: float
+        debit_gueule_bee:
+          description: Débit gueule bée relevé lors des essais / contrôle hydrauliques.
+          type: number
+          format: float
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DonneesHydrauliques'
     DossierBase:
       type: object
       title: Objet Dossier Base
@@ -17996,7 +18033,7 @@ components:
         Une tournée de reconnaissance opérationnelle portant sur la visibilité,
         l’accessibilité,  la signalisation et la manoeuvrabilité (ouverture et
         fermeture) des PEI.
-      anyOf:
+      oneOf:
         - $ref: '#/components/schemas/TourneeDeciSimple'
         - $ref: '#/components/schemas/TourneeDeciModele'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
@@ -18071,32 +18108,8 @@ components:
           description: >-
             Informations sur les essais hydrauliques procédés le jour du
             contrôle.
-          type: object
-          properties:
-            volume:
-              description: Volume relevé lors des essais / contrôle hydrauliques.
-              type: number
-              format: float
-            debit_1bar:
-              description: >-
-                Débit à 1 bar de pression relevé lors des essais / contrôle
-                hydrauliques.
-              type: number
-              format: float
-            pression:
-              description: Pression relevée lors des essais / contrôle hydrauliques.
-              type: number
-              format: float
-            pression_statique:
-              description: >-
-                Pression statique relevée lors des essais / contrôle
-                hydrauliques.
-              type: number
-              format: float
-            debit_gueule_bee:
-              description: Débit gueule bée relevé lors des essais / contrôle hydrauliques.
-              type: number
-              format: float
+          allOf:
+            - $ref: '#/components/schemas/DonneesHydrauliques'
         liste_anomalies:
           description: Liste des anomalies posées ou à lever suite à ce contrôle.
           type: array
