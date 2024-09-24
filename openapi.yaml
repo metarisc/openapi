@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/23-09-2024.3
+  version: 1.0/main/24-09-2024.1
   title: Metarisc API
   description: >-
 
@@ -16582,88 +16582,8 @@ paths:
                 Étape du traitement d'un dossier. Une étape est liée à un groupe
                 de travail ainsi qu'a un nombre de champs à valider.
               oneOf:
-                - title: 'Objet Workflow : Dossiers Lies'
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 255
-                    - type: object
-                      properties:
-                        dossier_lie:
-                          type: array
-                          maxItems: 255
-                          items:
-                            type: object
-                            title: Objet Dossier
-                            description: >-
-                              Les dossiers sont un ensemble de documents
-                              administratifs et techniques. L'instruction du
-                              dossier suit une logique pré-définie selon le
-                              type.
-                            oneOf:
-                              - type: object
-                                title: Objet Dossier ERP
-                                description: Dossier d'un ERP.
-                                allOf:
-                                  - type: object
-                                    title: Objet Dossier Base
-                                    description: Dossier de base.
-                                    properties:
-                                      objet:
-                                        description: Objet du dossier.
-                                        type: string
-                                        maxLength: 255
-                                  - type: object
-                                    properties: {}
-                              - type: object
-                                title: Objet Dossier DECI
-                                description: Dossier d'un DECI.
-                                allOf:
-                                  - type: object
-                                    title: Objet Dossier Base
-                                    description: Dossier de base.
-                                    properties:
-                                      objet:
-                                        description: Objet du dossier.
-                                        type: string
-                                        maxLength: 255
-                                  - type: object
-                                    properties: {}
-                - title: 'Objet Workflow : Remise En Service PEI'
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 255
-                    - type: object
-                      properties:
-                        pei_lie:
-                          type: string
-                          format: uuid
-                          maxLength: 255
-                        anomalies_levees:
-                          type: array
-                          maxItems: 255
-                          items:
-                            type: string
-                            format: uuid
-                            maxLength: 255
                 - title: 'Objet Workflow : Passage en commission de sécurité'
+                  description: Workflow de gestion des passages en commission de sécurité.
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -16678,6 +16598,10 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type du workflow.
+                          enum:
+                            - passage_commission
                         commission_date:
                           type: object
                           title: Objet Passage en Commission
@@ -16737,7 +16661,9 @@ paths:
                                 - context: update
                         avis_de_commission:
                           $ref: >-
-                            #/paths/~1workflows~1%7Bworkflow_id%7D/post/requestBody/content/application~1json/schema/oneOf/3/allOf/1/properties/avis_rapporteur
+                            #/paths/~1workflows~1%7Bworkflow_id%7D/post/requestBody/content/application~1json/schema/oneOf/1/allOf/1/properties/avis_rapporteur
+                      required:
+                        - type
                 - title: 'Objet Workflow : Analyse de Risque'
                   description: Workflow de gestion des analyses de risque.
                   allOf:
@@ -16754,6 +16680,10 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type du workflow.
+                          enum:
+                            - analyse_de_risque
                         analyse_risque:
                           description: Analyse des risques de l'établissement.
                           allOf:
@@ -17311,8 +17241,6 @@ paths:
                                   description: Présence d'un parafoudre
                                   type: boolean
                                   nullable: true
-                          type: string
-                          maxLength: 255
                         avis_rapporteur:
                           type: object
                           title: Objet Avis
@@ -17383,7 +17311,10 @@ paths:
                         mesures_complementaires:
                           type: string
                           maxLength: 255
+                      required:
+                        - type
                 - title: 'Objet Workflow : Arrivée secrétariat'
+                  description: Workflow de gestion des arrivées au secrétariat.
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -17398,6 +17329,10 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type du workflow.
+                          enum:
+                            - arrivee_secretariat
                         date_arrivee_secretariat:
                           type: string
                           format: date-time
@@ -17436,7 +17371,10 @@ paths:
                                     utilisateurs.
                                   type: string
                                   maxLength: 255
+                      required:
+                        - type
                 - title: 'Objet Workflow : Consultation SIS'
+                  description: Workflow de gestion des consultations SIS.
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -17451,6 +17389,10 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type du workflow.
+                          enum:
+                            - consultation_sis
                         commission:
                           allOf:
                             - type: object
@@ -17482,7 +17424,10 @@ paths:
                                   type: string
                                   format: uuid
                                   maxLength: 255
+                      required:
+                        - type
                 - title: 'Objet Workflow : Validation'
+                  description: Workflow de gestion des validations.
                   allOf:
                     - type: object
                       title: Objet Workflow Base
@@ -17497,8 +17442,16 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type du workflow.
+                          enum:
+                            - validation
                         est_valide:
+                          description: Indique si le workflow est validé.
                           type: boolean
+                      required:
+                        - type
+                        - est_valide
                 - title: 'Objet Workflow : Visite'
                   allOf:
                     - type: object
@@ -17514,57 +17467,17 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
-                        passage_commission:
-                          allOf:
-                            - type: object
-                              title: Objet Passage en Commission
-                              description: Représente une date de passage en commission.
-                              properties:
-                                date_debut:
-                                  description: >-
-                                    Date de début du passage en commission
-                                    programmée.
-                                  type: string
-                                  format: date-time
-                                  maxLength: 255
-                                date_fin:
-                                  description: >-
-                                    Date de fin du passage en commission
-                                    programmée.
-                                  type: string
-                                  format: date-time
-                                  maxLength: 255
-                                type:
-                                  description: Type du passage en commission.
-                                  type: string
-                                  enum:
-                                    - salle
-                                    - visite_de_securite
-                                    - groupe_de_visite
-                                libelle:
-                                  description: >-
-                                    Libellé de la date de passage en commission.
-                                    Souvent utile pour affichage aux
-                                    utilisateurs.
-                                  type: string
-                                  maxLength: 255
-                - title: 'Objet Workflow : Relecture secrétariat'
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
+                        type:
+                          description: Type du workflow.
+                          enum:
+                            - visite
+                        passage_commission_id:
                           type: string
+                          format: uuid
                           maxLength: 255
-                    - type: object
-                      properties:
-                        est_relu:
-                          type: boolean
+                      required:
+                        - type
+                        - passage_commission_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
       responses:
         '200':
@@ -19724,12 +19637,14 @@ components:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
           properties:
+            type:
+              description: Type du workflow.
+              enum:
+                - analyse_de_risque
             analyse_risque:
               description: Analyse des risques de l'établissement.
               allOf:
                 - $ref: '#/components/schemas/Clicdvcrem'
-              type: string
-              maxLength: 255
             avis_rapporteur:
               $ref: '#/components/schemas/Avis'
             descriptif_effectifs:
@@ -19754,13 +19669,20 @@ components:
             mesures_complementaires:
               type: string
               maxLength: 255
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowAnalyseDeRisque'
     WorkflowArriveeSecretariat:
       title: 'Objet Workflow : Arrivée secrétariat'
+      description: Workflow de gestion des arrivées au secrétariat.
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
           properties:
+            type:
+              description: Type du workflow.
+              enum:
+                - arrivee_secretariat
             date_arrivee_secretariat:
               type: string
               format: date-time
@@ -19768,6 +19690,8 @@ components:
             passage_commission:
               allOf:
                 - $ref: '#/components/schemas/PassageCommission'
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowArriveeSecretariat'
     WorkflowBase:
       type: object
@@ -19823,23 +19747,27 @@ components:
             utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
-        type:
-          description: Type du workflow.
-          type: string
-          maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowBase'
     WorkflowConsultationSis:
       title: 'Objet Workflow : Consultation SIS'
+      description: Workflow de gestion des consultations SIS.
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
           properties:
+            type:
+              description: Type du workflow.
+              enum:
+                - consultation_sis
             commission:
               allOf:
                 - $ref: '#/components/schemas/Commission'
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowConsultationSis'
     WorkflowDossiersLies:
       title: 'Objet Workflow : Dossiers Lies'
+      description: Workflow de gestion des dossiers liés.
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -19852,17 +19780,25 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowDossiersLies'
     WorkflowPassageCommissionSecurite:
       title: 'Objet Workflow : Passage en commission de sécurité'
+      description: Workflow de gestion des passages en commission de sécurité.
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
           properties:
+            type:
+              description: Type du workflow.
+              enum:
+                - passage_commission
             commission_date:
               $ref: '#/components/schemas/PassageCommission'
             avis_de_commission:
               $ref: '#/components/schemas/Avis'
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowPassageCommissionSecurite'
     WorkflowRelectureSecretariat:
       title: 'Objet Workflow : Relecture secrétariat'
+      description: Workflow de gestion des relectures secrétariat.
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
@@ -19926,12 +19862,20 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
     WorkflowValidation:
       title: 'Objet Workflow : Validation'
+      description: Workflow de gestion des validations.
       allOf:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
           properties:
+            type:
+              description: Type du workflow.
+              enum:
+                - validation
             est_valide:
+              description: Indique si le workflow est validé.
               type: boolean
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowValidation'
     WorkflowVisite:
       title: 'Objet Workflow : Visite'
@@ -19939,9 +19883,15 @@ components:
         - $ref: '#/components/schemas/WorkflowBase'
         - type: object
           properties:
+            type:
+              description: Type du workflow.
+              enum:
+                - visite
             passage_commission:
               allOf:
                 - $ref: '#/components/schemas/PassageCommission'
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowVisite'
     Workflow:
       title: Workflow
@@ -19949,15 +19899,12 @@ components:
         Étape du traitement d'un dossier. Une étape est liée à un groupe de
         travail ainsi qu'a un nombre de champs à valider.
       oneOf:
-        - $ref: '#/components/schemas/WorkflowDossiersLies'
-        - $ref: '#/components/schemas/WorkflowRemiseEnServicePEI'
         - $ref: '#/components/schemas/WorkflowPassageCommissionSecurite'
         - $ref: '#/components/schemas/WorkflowAnalyseDeRisque'
         - $ref: '#/components/schemas/WorkflowArriveeSecretariat'
         - $ref: '#/components/schemas/WorkflowConsultationSis'
         - $ref: '#/components/schemas/WorkflowValidation'
         - $ref: '#/components/schemas/WorkflowVisite'
-        - $ref: '#/components/schemas/WorkflowRelectureSecretariat'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
   parameters:
     PaginationPage:
