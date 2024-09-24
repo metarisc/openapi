@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-09-2024.1
+  version: 1.0/main/24-09-2024.2
   title: Metarisc API
   description: >-
 
@@ -6125,6 +6125,7 @@ paths:
                                         celle qui est envisagée. Voir :
                                         https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979
                                       type: boolean
+                                      nullable: true
                                     plancher_bas_du_dernier_niveau:
                                       description: >-
                                         Le plancher bas du dernier niveau est le
@@ -6165,6 +6166,7 @@ paths:
                                         - Risque Courant
                                         - Risque Moyen
                                         - Risque Important
+                                      nullable: true
                                     sprinklage:
                                       description: >-
                                         Le sprinklage est un système
@@ -16890,6 +16892,7 @@ paths:
                                     qui est envisagée. Voir :
                                     https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979
                                   type: boolean
+                                  nullable: true
                                 plancher_bas_du_dernier_niveau:
                                   description: >-
                                     Le plancher bas du dernier niveau est le
@@ -16930,6 +16933,7 @@ paths:
                                     - Risque Courant
                                     - Risque Moyen
                                     - Risque Important
+                                  nullable: true
                                 sprinklage:
                                   description: >-
                                     Le sprinklage est un système d'extinction
@@ -18049,6 +18053,7 @@ components:
             :
             https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979
           type: boolean
+          nullable: true
         plancher_bas_du_dernier_niveau:
           description: >-
             Le plancher bas du dernier niveau est le plancher le plus bas de la
@@ -18085,6 +18090,7 @@ components:
             - Risque Courant
             - Risque Moyen
             - Risque Important
+          nullable: true
         sprinklage:
           description: Le sprinklage est un système d'extinction automatique à eau.
           type: boolean
