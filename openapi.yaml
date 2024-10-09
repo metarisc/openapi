@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-09-2024.1
+  version: 1.0/main/09-10-2024.1
   title: Metarisc API
   description: >-
 
@@ -16735,6 +16735,7 @@ paths:
                       properties:
                         type:
                           description: Type du workflow.
+                          type: string
                           enum:
                             - passage_commission
                         commission_date:
@@ -16817,6 +16818,7 @@ paths:
                       properties:
                         type:
                           description: Type du workflow.
+                          type: string
                           enum:
                             - analyse_de_risque
                         analyse_risque:
@@ -17468,6 +17470,7 @@ paths:
                       properties:
                         type:
                           description: Type du workflow.
+                          type: string
                           enum:
                             - arrivee_secretariat
                         date_arrivee_secretariat:
@@ -17528,6 +17531,7 @@ paths:
                       properties:
                         type:
                           description: Type du workflow.
+                          type: string
                           enum:
                             - consultation_sis
                         commission:
@@ -17581,6 +17585,7 @@ paths:
                       properties:
                         type:
                           description: Type du workflow.
+                          type: string
                           enum:
                             - validation
                         est_valide:
@@ -17606,6 +17611,7 @@ paths:
                       properties:
                         type:
                           description: Type du workflow.
+                          type: string
                           enum:
                             - visite
                         passage_commission_id:
@@ -19778,6 +19784,7 @@ components:
           properties:
             type:
               description: Type du workflow.
+              type: string
               enum:
                 - analyse_de_risque
             analyse_risque:
@@ -19820,6 +19827,7 @@ components:
           properties:
             type:
               description: Type du workflow.
+              type: string
               enum:
                 - arrivee_secretariat
             date_arrivee_secretariat:
@@ -19896,6 +19904,7 @@ components:
           properties:
             type:
               description: Type du workflow.
+              type: string
               enum:
                 - consultation_sis
             commission:
@@ -19926,6 +19935,7 @@ components:
           properties:
             type:
               description: Type du workflow.
+              type: string
               enum:
                 - passage_commission
             commission_date:
@@ -20008,6 +20018,7 @@ components:
           properties:
             type:
               description: Type du workflow.
+              type: string
               enum:
                 - validation
             est_valide:
@@ -20024,6 +20035,7 @@ components:
           properties:
             type:
               description: Type du workflow.
+              type: string
               enum:
                 - visite
             passage_commission:
