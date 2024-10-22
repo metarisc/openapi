@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-10-2024.1
+  version: 1.0/main/22-10-2024.1
   title: Metarisc API
   description: >-
 
@@ -14816,17 +14816,15 @@ paths:
                             utilisateurs.
                           type: string
                           maxLength: 255
+                      required:
+                        - libelle
+                    - type: object
+                      properties:
                         type:
-                          description: Type de la tournée.
+                          description: Type de la tournée DECI.
                           type: string
                           enum:
                             - tournee_deci
-                            - tournee_deci_modele
-                      required:
-                        - libelle
-                        - type
-                    - type: object
-                      properties:
                         date_de_debut:
                           description: Date de début de la tournée.
                           type: string
@@ -14838,6 +14836,7 @@ paths:
                           format: date-time
                           maxLength: 255
                       required:
+                        - type
                         - date_de_debut
                         - date_de_fin
                 - title: Objet Tournee Deci Modele
@@ -14860,17 +14859,15 @@ paths:
                             utilisateurs.
                           type: string
                           maxLength: 255
-                        type:
-                          description: Type de la tournée.
-                          type: string
-                          enum:
-                            - tournee_deci
-                            - tournee_deci_modele
                       required:
                         - libelle
-                        - type
                     - type: object
                       properties:
+                        type:
+                          description: Type de la tournée DECI.
+                          type: string
+                          enum:
+                            - tournee_deci_modele
                         mois_debut:
                           description: Numéro du mois de début de la tournée programmée
                           type: integer
@@ -14884,6 +14881,7 @@ paths:
                           minimum: 1
                           maximum: 12
                       required:
+                        - type
                         - mois_debut
                         - mois_fin
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
@@ -15267,6 +15265,11 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type de la tournée DECI.
+                          type: string
+                          enum:
+                            - tournee_deci
                         date_de_debut:
                           description: Date de début de la tournée.
                           type: string
@@ -15277,6 +15280,8 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 255
+                      required:
+                        - type
                 - title: Objet Tournee Deci Modele
                   description: >-
                     Modèle de tournée DECI permettant une programmation
@@ -15299,6 +15304,11 @@ paths:
                           maxLength: 255
                     - type: object
                       properties:
+                        type:
+                          description: Type de la tournée DECI.
+                          type: string
+                          enum:
+                            - tournee_deci_modele
                         mois_debut:
                           description: Numéro du mois de début de la tournée programmée
                           type: integer
@@ -15311,6 +15321,8 @@ paths:
                           format: int32
                           minimum: 1
                           maximum: 12
+                      required:
+                        - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -19609,12 +19621,6 @@ components:
           type: string
           format: date-time
           maxLength: 255
-        type:
-          description: Type de la tournée.
-          type: string
-          enum:
-            - tournee_deci
-            - tournee_deci_modele
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciBase'
     TourneeDeciModele:
       title: Objet Tournee Deci Modele
@@ -19623,6 +19629,11 @@ components:
         - $ref: '#/components/schemas/TourneeDeciBase'
         - type: object
           properties:
+            type:
+              description: Type de la tournée DECI.
+              type: string
+              enum:
+                - tournee_deci_modele
             mois_debut:
               description: Numéro du mois de début de la tournée programmée
               type: integer
@@ -19635,6 +19646,8 @@ components:
               format: int32
               minimum: 1
               maximum: 12
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciModele'
     TourneeDeciPei:
       type: object
@@ -19700,6 +19713,11 @@ components:
         - $ref: '#/components/schemas/TourneeDeciBase'
         - type: object
           properties:
+            type:
+              description: Type de la tournée DECI.
+              type: string
+              enum:
+                - tournee_deci
             pourcentage:
               description: Pourcentage de complétion de la tournée (en %).
               type: number
@@ -19725,6 +19743,8 @@ components:
                 rattaché.
               allOf:
                 - $ref: '#/components/schemas/TourneeDeciModele'
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciSimple'
     Utilisateur:
       type: object
