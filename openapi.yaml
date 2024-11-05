@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-11-2024.1
+  version: 1.0/main/05-11-2024.2
   title: Metarisc API
   description: >-
 
@@ -11450,6 +11450,7 @@ paths:
               - actif
               - projet
               - reforme
+              - declaration_abandonnee
         - name: est_disponible
           in: query
           description: Filtre sur la disponibilité du PEI
@@ -11663,6 +11664,7 @@ paths:
                                     - actif
                                     - projet
                                     - reforme
+                                    - declaration_abandonnee
                               required:
                                 - type
                                 - statut
@@ -11757,6 +11759,7 @@ paths:
                                     - actif
                                     - projet
                                     - reforme
+                                    - declaration_abandonnee
                               required:
                                 - type
                                 - statut
@@ -19247,6 +19250,7 @@ components:
             - actif
             - projet
             - reforme
+            - declaration_abandonnee
         est_disponible:
           description: Disponibilité opérationnelle du PEI.
           type: boolean
