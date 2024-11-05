@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-11-2024.2
+  version: 1.0/main/05-11-2024.3
   title: Metarisc API
   description: >-
 
@@ -11470,7 +11470,7 @@ paths:
           description: Filtre sur la position des PEI
           schema:
             type: string
-            maxLength: 2048
+            maxLength: 8192
         - in: header
           name: Metarisc-Org-Id
           description: >-
