@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-11-2024.1
+  version: 1.0/main/05-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -16353,6 +16353,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: last_name
+          in: query
+          description: Filtre sur le nom de l'utilisateur.
+          schema:
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: >-
