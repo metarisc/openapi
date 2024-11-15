@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/13-11-2024.1
+  version: 1.0/main/15-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -7297,8 +7297,8 @@ paths:
                   maxLength: 255
                 date_de_passage:
                   description: >-
-                    Date à laquelle le passage du dossier est prévue à l'ordre
-                    du jour.
+                    Date et heure à laquelle le passage du dossier est prévu à
+                    l'ordre du jour.
                   type: string
                   format: date-time
                   maxLength: 255
@@ -18497,10 +18497,23 @@ paths:
                             - defavorable
                 date_de_passage:
                   description: >-
-                    Date à laquelle le passage du dossier est prévue à l'ordre
-                    du jour.
+                    Date et heure à laquelle le passage du dossier est prévu à
+                    l'ordre du jour.
                   type: string
                   format: date-time
+                  maxLength: 255
+                avis_differe:
+                  description: >-
+                    La commission de sécurité peut décider de reporter son avis
+                    à une date ultérieure. Dans ce cas, la date de passage est
+                    reportée et un avis différé est émis.
+                  type: boolean
+                observations:
+                  description: >-
+                    La commission de sécurité émet soit un avis favorable soit
+                    un avis défavorable. Afin de motiver les décisions prises,
+                    la commission peut émettre des observations.
+                  type: string
                   maxLength: 255
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
@@ -35746,20 +35759,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/Avis'
         date_de_passage:
-          description: Date à laquelle le passage du dossier est prévue à l'ordre du jour.
+          description: >-
+            Date et heure à laquelle le passage du dossier est prévu à l'ordre
+            du jour.
           type: string
           format: date-time
           maxLength: 255
-        statut:
+        avis_differe:
           description: >-
-            État du dossier au regard de l'ordre du jour du passage en
-            commission.
+            La commission de sécurité peut décider de reporter son avis à une
+            date ultérieure. Dans ce cas, la date de passage est reportée et un
+            avis différé est émis.
+          type: boolean
+        observations:
+          description: >-
+            La commission de sécurité émet soit un avis favorable soit un avis
+            défavorable. Afin de motiver les décisions prises, la commission
+            peut émettre des observations.
           type: string
-          enum:
-            - En attente de traitement
-            - Présence d'un avis du rapporteur
-            - Validé
-            - Présence d'un avis de commission
+          maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
     PieceJointe:
       type: object
