@@ -3622,7 +3622,10 @@ paths:
       tags:
         - Commissions API
       summary: Mise à jour des préférences de la commission
-      description: Mise à jour des préférences de la commission.
+      description: >-
+        Mise à jour des préférences de la commission en définissant les valeurs
+        des paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
       operationId: PostPreferencesCommissionCommissions
       security:
         - IdMetariscFr:
@@ -4609,7 +4612,10 @@ paths:
       tags:
         - Commissions Membres API
       summary: Mise à jour d'un membre de commission
-      description: Mise à jour d'un membre de commission existant.
+      description: >-
+        Mise à jour d'un membre de commission existant en définissant les
+        valeurs des paramètres transmis. Tous les paramètres non fournis
+        resteront inchangés.
       operationId: PostMembreCommissionsMembres
       security:
         - IdMetariscFr:
@@ -5622,7 +5628,10 @@ paths:
       tags:
         - Contacts API
       summary: Mise à jour d'un contact
-      description: Mise à jour d'une fiche contact existante.
+      description: >-
+        Mise à jour d'une fiche contact existante en définissant les valeurs des
+        paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
       operationId: PostContactContacts
       security:
         - IdMetariscFr:
@@ -5660,34 +5669,42 @@ paths:
                   description: Nom de famille du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
                   type: string
@@ -5695,20 +5712,24 @@ paths:
                     - M
                     - Mme
                     - Mx
+                  nullable: true
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
                   maxLength: 255
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '200':
@@ -6418,7 +6439,9 @@ paths:
       tags:
         - Controles PEI API
       summary: Mise à jour du PEI contrôlé
-      description: Mise à jour du PEI contrôlé.
+      description: >-
+        Mise à jour du PEI contrôlé en définissant les valeurs des paramètres
+        transmis. Tous les paramètres non fournis resteront inchangés.
       operationId: PostPeiControlesPei
       security:
         - IdMetariscFr:
@@ -6472,30 +6495,35 @@ paths:
                             hydrauliques.
                           type: number
                           format: float
+                          nullable: true
                         debit_1bar:
                           description: >-
                             Débit à 1 bar de pression relevé lors des essais /
                             contrôle hydrauliques.
                           type: number
                           format: float
+                          nullable: true
                         pression:
                           description: >-
                             Pression relevée lors des essais / contrôle
                             hydrauliques.
                           type: number
                           format: float
+                          nullable: true
                         pression_statique:
                           description: >-
                             Pression statique relevée lors des essais / contrôle
                             hydrauliques.
                           type: number
                           format: float
+                          nullable: true
                         debit_gueule_bee:
                           description: >-
                             Débit gueule bée relevé lors des essais / contrôle
                             hydrauliques.
                           type: number
                           format: float
+                          nullable: true
                 liste_anomalies:
                   description: Liste des anomalies posées ou à lever suite à ce contrôle.
                   type: array
@@ -7304,6 +7332,7 @@ paths:
                   maxLength: 255
               required:
                 - dossier_id
+                - date_de_passage
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '201':
@@ -8268,7 +8297,10 @@ paths:
       tags:
         - Documents API
       summary: Mise à jour d'un document
-      description: Mise à jour d'un document existant.
+      description: >-
+        Mise à jour d'un document existant en définissant les valeurs des
+        paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
       operationId: PostDocumentDocuments
       security:
         - IdMetariscFr:
@@ -8310,6 +8342,7 @@ paths:
                   description: Description du fichier joint.
                   type: string
                   maxLength: 255
+                  nullable: true
                 type:
                   description: Type de la pièce jointe.
                   type: string
@@ -9094,34 +9127,42 @@ paths:
                   description: Nom de famille du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
                   type: string
@@ -9129,20 +9170,24 @@ paths:
                     - M
                     - Mme
                     - Mx
+                  nullable: true
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
                   maxLength: 255
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '201':
@@ -9673,6 +9718,7 @@ paths:
                   description: Description du fichier joint.
                   type: string
                   maxLength: 255
+                  nullable: true
                 type:
                   description: Type de la pièce jointe.
                   type: string
@@ -10158,7 +10204,10 @@ paths:
       tags:
         - Dossiers API
       summary: Mettre à jour un dossier
-      description: Modification d'un dossier existant
+      description: >-
+        Modification d'un dossier existant en définissant les valeurs des
+        paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
       operationId: PostDossierDossiers
       security:
         - IdMetariscFr:
@@ -11240,21 +11289,25 @@ paths:
                           type: string
                           maxLength: 5
                           pattern: ^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$
+                          nullable: true
                         commune:
                           description: Nom de la commune.
                           type: string
                           maxLength: 255
+                          nullable: true
                         voie:
                           description: >-
                             Libellé de la voie et de son type (exemple : "rue du
                             point du jour").
                           type: string
                           maxLength: 255
+                          nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
                           type: string
                           pattern: ^([013-9]\d|2[AB1-9])\d{3}$
                           maxLength: 5
+                          nullable: true
                         arrondissement:
                           description: >-
                             Le "code arrondissement" contient un chiffre (à
@@ -11265,12 +11318,14 @@ paths:
                             identifient le département.
                           type: number
                           format: int32
+                          nullable: true
                         arrondissement_municipal:
                           description: >-
                             L'arrondissement municipal est une subdivision
                             territoriale des communes.
                           type: string
                           maxLength: 255
+                          nullable: true
                         latitude:
                           description: >-
                             La latitude est une coordonnée géographique
@@ -11281,6 +11336,7 @@ paths:
                             la valeur 0° à l'équateur et 90° aux pôles.
                           type: number
                           format: double
+                          nullable: true
                         longitude:
                           description: >-
                             La longitude d'un point sur Terre est une coordonnée
@@ -11291,16 +11347,19 @@ paths:
                             méridien de Greenwich.
                           type: number
                           format: double
+                          nullable: true
                         localisation_operationnelle:
                           description: >-
                             Complément d'adresse à destination des services de
                             secours.
                           type: string
                           maxLength: 255
+                          nullable: true
                         complement:
                           description: Complément d'adresse.
                           type: string
                           maxLength: 255
+                          nullable: true
                 descriptif_technique:
                   description: Descriptif technique actuel de l'ERP.
                   allOf:
@@ -11339,6 +11398,7 @@ paths:
                                 utilisateurs.
                               type: string
                               maxLength: 255
+                              nullable: true
                             analyse_risque:
                               description: Analyse des risques de l'établissement.
                               allOf:
@@ -11914,6 +11974,8 @@ paths:
                                       description: Présence d'un parafoudre
                                       type: boolean
                                       nullable: true
+                                  required:
+                                    - activite_principale
                           required:
                             - statut
                             - libelle
@@ -12442,34 +12504,42 @@ paths:
                   description: Nom de famille du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
                   type: string
@@ -12477,20 +12547,24 @@ paths:
                     - M
                     - Mme
                     - Mx
+                  nullable: true
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
                   maxLength: 255
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '201':
@@ -13021,6 +13095,7 @@ paths:
                   description: Description du fichier joint.
                   type: string
                   maxLength: 255
+                  nullable: true
                 type:
                   description: Type de la pièce jointe.
                   type: string
@@ -13567,6 +13642,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -13589,6 +13666,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -14635,8 +14714,19 @@ paths:
                     maxLength: 255
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/ReferenceExterieure'
           headers:
             RateLimit-Limit:
               description: >-
@@ -14845,6 +14935,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: erp
       x-extension-metarisc-codegen-operation: patch-references-exterieures-erp
   /erp/{erp_id}/textes_applicables:
@@ -15436,6 +15527,7 @@ paths:
               required:
                 - title
                 - type
+                - description
                 - date_debut
                 - date_fin
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
@@ -16720,7 +16812,7 @@ paths:
                         - texte
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
       responses:
-        '200':
+        '201':
           description: OK
           content:
             application/json:
@@ -18451,7 +18543,8 @@ paths:
       summary: Mise à jour d'un dossier lié à une date de passage en commission
       description: >-
         Mise à jour des détails d'un dossier lié à une date de passage en
-        commission
+        commission en définissant les valeurs des paramètres transmis. Tous les
+        paramètres non fournis resteront inchangés.
       operationId: PostDossierOrdresDuJour
       security:
         - IdMetariscFr:
@@ -20814,7 +20907,10 @@ paths:
       tags:
         - Organisations API
       summary: Mise à jour des préférences de l'organisation
-      description: Mise à jour des préférences de l'organisation.
+      description: >-
+        Mise à jour des préférences de l'organisation en définissant les valeurs
+        des paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
       operationId: PostPreferencesOrgOrganisations
       security:
         - IdMetariscFr:
@@ -20852,9 +20948,11 @@ paths:
                     https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
                   type: string
                   maxLength: 255
+                  nullable: true
                 platau_active:
                   description: Activation de la passerelle Plat'AU pour l'organisation.
                   type: boolean
+                  nullable: true
                 s3_global_endpoint:
                   description: >-
                     Endpoint du bucket S3 lié au stockage des fichiers d'une
@@ -20862,6 +20960,7 @@ paths:
                   type: string
                   format: uri
                   maxLength: 255
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       responses:
         '200':
@@ -21334,7 +21433,9 @@ paths:
       summary: Mise à jour des règles DECI
       description: >-
         Mise à jour de l'ensemble des règles utilisées pour le calcul de la
-        conformité et de la performance DECI.
+        conformité et de la performance DECI en définissant les valeurs des
+        paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
       operationId: PostReglesDeciOrgOrganisations
       security:
         - IdMetariscFr:
@@ -21717,6 +21818,7 @@ paths:
               - privee
               - publique
               - privee_conventionnee
+            nullable: true
         - name: geojson
           in: query
           description: Filtre sur la position des PEI
@@ -22027,6 +22129,7 @@ paths:
                                     - privee
                                     - publique
                                     - privee_conventionnee
+                                  nullable: true
                                 observations_generales:
                                   description: >-
                                     Une chaîne de caractères arbitraire
@@ -22034,6 +22137,7 @@ paths:
                                     affichage aux utilisateurs.
                                   type: string
                                   maxLength: 255
+                                  nullable: true
                                 statut:
                                   description: >-
                                     Statut du PEI lors de l'établissement de son
@@ -22058,6 +22162,7 @@ paths:
                                   description: >-
                                     Surpression du réseau d'eau sur lequel est
                                     relié le PIBI mesurée en bar.
+                                  nullable: true
                                 nature:
                                   description: Nature du PIBI.
                                   type: string
@@ -22074,6 +22179,7 @@ paths:
                                   description: Débit en m3/h à 1 bar de pression dynamique.
                                   type: number
                                   format: float
+                                  nullable: true
                                 pression:
                                   description: >-
                                     Pression (en bar) mesurée avec le PIBI
@@ -22081,16 +22187,19 @@ paths:
                                     d’essai.
                                   type: number
                                   format: float
+                                  nullable: true
                                 pression_statique:
                                   description: >-
                                     Pression (en bar) mesurée avec le PIBI
                                     ouvert mais vanne de régulation fermée.
                                   type: number
                                   format: float
+                                  nullable: true
                                 debit_gueule_bee:
                                   description: Débit maximal en m3/h.
                                   type: number
                                   format: float
+                                  nullable: true
                               required:
                                 - nature
                         - title: Objet Descriptif Technique DECI PENA
@@ -22122,6 +22231,7 @@ paths:
                                     - privee
                                     - publique
                                     - privee_conventionnee
+                                  nullable: true
                                 observations_generales:
                                   description: >-
                                     Une chaîne de caractères arbitraire
@@ -22129,6 +22239,7 @@ paths:
                                     affichage aux utilisateurs.
                                   type: string
                                   maxLength: 255
+                                  nullable: true
                                 statut:
                                   description: >-
                                     Statut du PEI lors de l'établissement de son
@@ -22169,6 +22280,7 @@ paths:
                                     son volume d'eau en m3.
                                   type: number
                                   format: float
+                                  nullable: true
                               required:
                                 - nature
                 implantation:
@@ -22188,21 +22300,25 @@ paths:
                           type: string
                           maxLength: 5
                           pattern: ^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$
+                          nullable: true
                         commune:
                           description: Nom de la commune.
                           type: string
                           maxLength: 255
+                          nullable: true
                         voie:
                           description: >-
                             Libellé de la voie et de son type (exemple : "rue du
                             point du jour").
                           type: string
                           maxLength: 255
+                          nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
                           type: string
                           pattern: ^([013-9]\d|2[AB1-9])\d{3}$
                           maxLength: 5
+                          nullable: true
                         arrondissement:
                           description: >-
                             Le "code arrondissement" contient un chiffre (à
@@ -22213,12 +22329,14 @@ paths:
                             identifient le département.
                           type: number
                           format: int32
+                          nullable: true
                         arrondissement_municipal:
                           description: >-
                             L'arrondissement municipal est une subdivision
                             territoriale des communes.
                           type: string
                           maxLength: 255
+                          nullable: true
                         latitude:
                           description: >-
                             La latitude est une coordonnée géographique
@@ -22229,6 +22347,7 @@ paths:
                             la valeur 0° à l'équateur et 90° aux pôles.
                           type: number
                           format: double
+                          nullable: true
                         longitude:
                           description: >-
                             La longitude d'un point sur Terre est une coordonnée
@@ -22239,36 +22358,35 @@ paths:
                             méridien de Greenwich.
                           type: number
                           format: double
+                          nullable: true
                         localisation_operationnelle:
                           description: >-
                             Complément d'adresse à destination des services de
                             secours.
                           type: string
                           maxLength: 255
+                          nullable: true
                         complement:
                           description: Complément d'adresse.
                           type: string
                           maxLength: 255
-                numero:
-                  description: >-
-                    Identifiant métier unique. Obéit à une convention de
-                    nommage.
-                  type: string
-                  maxLength: 255
+                          nullable: true
                 numero_compteur:
                   description: Le numéro de série du compteur (PIBI).
                   type: string
                   maxLength: 255
+                  nullable: true
                 numero_serie_appareil:
                   description: Numéro de série du PEI (si disponible).
                   type: string
                   maxLength: 255
+                  nullable: true
               required:
                 - descriptif_technique
                 - implantation
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
       responses:
-        '200':
+        '201':
           description: Success
           content:
             application/json:
@@ -23318,34 +23436,42 @@ paths:
                   description: Nom de famille du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
                   type: string
@@ -23353,20 +23479,24 @@ paths:
                     - M
                     - Mme
                     - Mx
+                  nullable: true
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
                   maxLength: 255
+                  nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
                   maxLength: 255
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '201':
@@ -23897,6 +24027,7 @@ paths:
                   description: Description du fichier joint.
                   type: string
                   maxLength: 255
+                  nullable: true
                 type:
                   description: Type de la pièce jointe.
                   type: string
@@ -24443,6 +24574,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -24465,6 +24598,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -25511,8 +25646,19 @@ paths:
                     maxLength: 255
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/ReferenceExterieure'
           headers:
             RateLimit-Limit:
               description: >-
@@ -25721,6 +25867,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: pei
       x-extension-metarisc-codegen-operation: patch-references-exterieures-pei
   /ping:
@@ -27285,7 +27432,7 @@ paths:
                     Si le CID est renseigné, alors ce support réglementaire est
                     sourcé depuis Legifrance.
                 contenu:
-                  description: Contenu du support régelementaire.
+                  description: Contenu du support réglementaire.
                   type: string
                   maxLength: 255
                 titre:
@@ -27300,8 +27447,7 @@ paths:
                 reference:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
-                    Souvent utile pour affichage aux utilisateurs ou la
-                    recherche.
+                    Utile pour rechercher le support réglementaire.
                   type: string
                   maxLength: 255
               required:
@@ -28331,6 +28477,7 @@ paths:
                             utilisateurs.
                           type: string
                           maxLength: 255
+                          nullable: true
                       required:
                         - libelle
                     - type: object
@@ -28374,6 +28521,7 @@ paths:
                             utilisateurs.
                           type: string
                           maxLength: 255
+                          nullable: true
                       required:
                         - libelle
                     - type: object
@@ -29178,6 +29326,7 @@ paths:
                   description: Description du fichier joint.
                   type: string
                   maxLength: 255
+                  nullable: true
                 type:
                   description: Type de la pièce jointe.
                   type: string
@@ -29662,7 +29811,9 @@ paths:
       tags:
         - Tournées DECI API
       summary: Mise à jour de la tournée DECI
-      description: Mise à jour de la tournée DECI.
+      description: >-
+        Mise à jour de la tournée DECI en définissant les valeurs des paramètres
+        transmis. Tous les paramètres non fournis resteront inchangés.
       operationId: PostTourneeDeciTourneesDeci
       security:
         - IdMetariscFr:
@@ -29714,6 +29865,7 @@ paths:
                             utilisateurs.
                           type: string
                           maxLength: 255
+                          nullable: true
                     - type: object
                       properties:
                         type:
@@ -29753,6 +29905,7 @@ paths:
                             utilisateurs.
                           type: string
                           maxLength: 255
+                          nullable: true
                     - type: object
                       properties:
                         type:
@@ -32353,6 +32506,7 @@ paths:
                   description: Description du fichier joint.
                   type: string
                   maxLength: 255
+                  nullable: true
                 type:
                   description: Type de la pièce jointe.
                   type: string
@@ -34387,21 +34541,25 @@ components:
           type: string
           maxLength: 5
           pattern: ^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$
+          nullable: true
         commune:
           description: Nom de la commune.
           type: string
           maxLength: 255
+          nullable: true
         voie:
           description: >-
             Libellé de la voie et de son type (exemple : "rue du point du
             jour").
           type: string
           maxLength: 255
+          nullable: true
         code_insee:
           description: Code unique attribué à chaque commune de France.
           type: string
           pattern: ^([013-9]\d|2[AB1-9])\d{3}$
           maxLength: 5
+          nullable: true
         arrondissement:
           description: >-
             Le "code arrondissement" contient un chiffre (à partir de 1). Chaque
@@ -34411,12 +34569,14 @@ components:
             département.
           type: number
           format: int32
+          nullable: true
         arrondissement_municipal:
           description: >-
             L'arrondissement municipal est une subdivision territoriale des
             communes.
           type: string
           maxLength: 255
+          nullable: true
         latitude:
           description: >-
             La latitude est une coordonnée géographique représentée par une
@@ -34426,6 +34586,7 @@ components:
             l'équateur et 90° aux pôles.
           type: number
           format: double
+          nullable: true
         longitude:
           description: >-
             La longitude d'un point sur Terre est une coordonnée géographique
@@ -34435,14 +34596,17 @@ components:
             Greenwich.
           type: number
           format: double
+          nullable: true
         localisation_operationnelle:
           description: Complément d'adresse à destination des services de secours.
           type: string
           maxLength: 255
+          nullable: true
         complement:
           description: Complément d'adresse.
           type: string
           maxLength: 255
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AdressePostale'
     AnomalieDECI:
       type: object
@@ -34498,6 +34662,7 @@ components:
           type: string
           format: date-time
           maxLength: 255
+          nullable: true
         est_programmee:
           type: boolean
         date_pose:
@@ -34914,6 +35079,7 @@ components:
           type: string
           format: uri
           maxLength: 255
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
     Contact:
       type: object
@@ -34931,34 +35097,42 @@ components:
           description: Nom de famille du contact.
           type: string
           maxLength: 255
+          nullable: true
         prenom:
           description: Prénom du contact.
           type: string
           maxLength: 255
+          nullable: true
         fonction:
           description: La fonction professionnelle d'un contact.
           type: string
           maxLength: 255
+          nullable: true
         telephone_fixe:
           description: Le numéro de téléphone fixe du contact.
           type: string
           maxLength: 255
+          nullable: true
         telephone_portable:
           description: Le numéro de téléphone portable du contact.
           type: string
           maxLength: 255
+          nullable: true
         telephone_fax:
           description: Le numéro de fax du contact.
           type: string
           maxLength: 255
+          nullable: true
         adresse:
           description: Adresse complète du contact.
           type: string
           maxLength: 255
+          nullable: true
         site_web_url:
           description: Le site internet du contact.
           type: string
           maxLength: 255
+          nullable: true
         civilite:
           description: Le titre de civilité utilisé.
           type: string
@@ -34966,20 +35140,24 @@ components:
             - M
             - Mme
             - Mx
+          nullable: true
         societe:
           description: Nom de la société / entreprise liée à ce contact.
           type: string
           maxLength: 255
+          nullable: true
         email:
           description: Adresse email du contact.
           type: string
           maxLength: 255
+          nullable: true
         observations:
           description: >-
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
             utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
     Degagement:
       type: object
@@ -35029,6 +35207,7 @@ components:
         est_reglementaire:
           description: Statut réglementaire calculé à travers le RD-DECI.
           type: boolean
+          nullable: true
         domanialite:
           description: >-
             Le régime domanial, notamment en ce qui concerne le domaine public,
@@ -35038,11 +35217,13 @@ components:
             - privee
             - publique
             - privee_conventionnee
+          nullable: true
         est_conforme_rddeci:
           description: >-
             Résultat de l'application des règles RD-DECI en vigueur pour
             déterminer la conformité d'un PEI.
           type: boolean
+          nullable: true
         performance_theorique:
           type: integer
           format: int32
@@ -35085,6 +35266,7 @@ components:
             utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
+          nullable: true
         date:
           description: Date à laquelle le descriptif technique a été établi.
           type: string
@@ -35104,6 +35286,7 @@ components:
         est_disponible:
           description: Disponibilité opérationnelle du PEI.
           type: boolean
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECIBase'
     DescriptifTechniqueDECI:
       type: object
@@ -35160,6 +35343,7 @@ components:
             utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
+          nullable: true
         analyse_risque:
           description: Analyse des risques de l'établissement.
           allOf:
@@ -35201,6 +35385,7 @@ components:
                 m3.
               type: number
               format: float
+              nullable: true
             est_citerne:
               description: Permet de savoir si le PENA est une citerne.
               type: boolean
@@ -35218,6 +35403,7 @@ components:
               description: >-
                 Surpression du réseau d'eau sur lequel est relié le PIBI mesurée
                 en bar.
+              nullable: true
             nature:
               description: Nature du PIBI.
               type: string
@@ -35234,22 +35420,26 @@ components:
               description: Débit en m3/h à 1 bar de pression dynamique.
               type: number
               format: float
+              nullable: true
             pression:
               description: >-
                 Pression (en bar) mesurée avec le PIBI ouvert et vanne de
                 régulation sur valeurs d’essai.
               type: number
               format: float
+              nullable: true
             pression_statique:
               description: >-
                 Pression (en bar) mesurée avec le PIBI ouvert mais vanne de
                 régulation fermée.
               type: number
               format: float
+              nullable: true
             debit_gueule_bee:
               description: Débit maximal en m3/h.
               type: number
               format: float
+              nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
     DonneesHydrauliques:
       type: object
@@ -35262,24 +35452,29 @@ components:
           description: Volume relevé lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
         debit_1bar:
           description: >-
             Débit à 1 bar de pression relevé lors des essais / contrôle
             hydrauliques.
           type: number
           format: float
+          nullable: true
         pression:
           description: Pression relevée lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
         pression_statique:
           description: Pression statique relevée lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
         debit_gueule_bee:
           description: Débit gueule bée relevé lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DonneesHydrauliques'
     DossierBase:
       type: object
@@ -35304,10 +35499,12 @@ components:
           description: Utilisateur ayant créé le dossier.
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
+          nullable: true
         application_utilisee_nom:
           description: Nom de l'application / intégration ayant généré le dossier.
           type: string
           maxLength: 255
+          nullable: true
         statut:
           description: >-
             Indicateur permettant de savoir si le dossier est en cours de
@@ -35385,6 +35582,7 @@ components:
           type: string
           format: date-time
           maxLength: 255
+          nullable: true
         implantation:
           description: Adresse postale de l'ERP.
           allOf:
@@ -35397,6 +35595,7 @@ components:
           description: Avis d'exploitation de l'ERP.
           allOf:
             - $ref: '#/components/schemas/Avis'
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
     Email:
       type: object
@@ -35446,6 +35645,7 @@ components:
           description: Description de l'événement.
           type: string
           maxLength: 255
+          nullable: true
         date_debut:
           description: Date de début de l'événement.
           type: string
@@ -35545,6 +35745,7 @@ components:
           type: string
           format: date-time
           maxLength: 255
+          nullable: true
         utilisateur:
           description: Utilisateur cible de la notification.
           allOf:
@@ -35574,6 +35775,7 @@ components:
           type: string
           format: uri
           maxLength: 255
+          nullable: true
         type:
           description: Type de l'organisation.
           type: string
@@ -35653,9 +35855,11 @@ components:
             https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
           type: string
           maxLength: 255
+          nullable: true
         platau_active:
           description: Activation de la passerelle Plat'AU pour l'organisation.
           type: boolean
+          nullable: true
         s3_global_endpoint:
           description: >-
             Endpoint du bucket S3 lié au stockage des fichiers d'une
@@ -35663,6 +35867,7 @@ components:
           type: string
           format: uri
           maxLength: 255
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
     PEI:
       type: object
@@ -35684,6 +35889,7 @@ components:
           type: string
           format: date-time
           maxLength: 255
+          nullable: true
         descriptif_technique:
           description: Descriptif technique actuel du PEI.
           allOf:
@@ -35693,17 +35899,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdressePostale'
         numero:
-          description: Identifiant métier unique. Obéit à une convention de nommage.
+          description: Identifiant MRISC unique généré par l'application.
           type: string
           maxLength: 255
         numero_compteur:
           description: Le numéro de série du compteur (PIBI).
           type: string
           maxLength: 255
+          nullable: true
         numero_serie_appareil:
           description: Numéro de série du PEI (si disponible).
           type: string
           maxLength: 255
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
     PassageCommission:
       type: object
@@ -35758,6 +35966,7 @@ components:
           description: Avis rendu de la commission sur le dossier.
           allOf:
             - $ref: '#/components/schemas/Avis'
+          nullable: true
         date_de_passage:
           description: >-
             Date et heure à laquelle le passage du dossier est prévu à l'ordre
@@ -35802,6 +36011,7 @@ components:
           description: Description du fichier joint.
           type: string
           maxLength: 255
+          nullable: true
         type:
           description: Type de la pièce jointe.
           type: string
@@ -35891,8 +36101,9 @@ components:
 
             Si le CID est renseigné, alors ce support réglementaire est sourcé
             depuis Legifrance.
+          nullable: true
         contenu:
-          description: Contenu du support régelementaire.
+          description: Contenu du support réglementaire.
           type: string
           maxLength: 255
         titre:
@@ -35906,8 +36117,8 @@ components:
             - en_vigueur
         reference:
           description: >-
-            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
-            utile pour affichage aux utilisateurs ou la recherche.
+            Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour
+            rechercher le support réglementaire.
           type: string
           maxLength: 255
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
@@ -36031,6 +36242,7 @@ components:
             utile pour affichage aux utilisateurs.
           type: string
           maxLength: 255
+          nullable: true
         date_de_creation:
           description: Date de création de la tournée.
           type: string
@@ -36079,12 +36291,14 @@ components:
           type: string
           format: date-time
           maxLength: 255
+          nullable: true
         hydraulique:
           description: >-
             Informations sur les essais hydrauliques procédés le jour du
             contrôle.
           allOf:
             - $ref: '#/components/schemas/DonneesHydrauliques'
+          nullable: true
         liste_anomalies:
           description: Liste des anomalies posées ou à lever suite à ce contrôle.
           type: array
@@ -36107,6 +36321,7 @@ components:
             - fpt
             - mpr
             - ccf
+          nullable: true
         pei:
           description: PEI lié au contrôle.
           allOf:
@@ -36139,9 +36354,11 @@ components:
               format: float
               minimum: 0
               maximum: 1
+              nullable: true
             est_terminee:
               description: État de la complétion de la tournée.
               type: boolean
+              nullable: true
             date_de_debut:
               description: Date de début de la tournée.
               type: string
@@ -36158,6 +36375,7 @@ components:
                 rattaché.
               allOf:
                 - $ref: '#/components/schemas/TourneeDeciModele'
+              nullable: true
           required:
             - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciSimple'
@@ -36173,10 +36391,12 @@ components:
           description: Prénom de l'utilisateur.
           type: string
           maxLength: 255
+          nullable: true
         last_name:
           description: Nom de l'utilisateur.
           type: string
           maxLength: 255
+          nullable: true
         created_at:
           description: Date à laquelle l'utilisateur a été créé.
           type: string
@@ -36187,6 +36407,7 @@ components:
           type: string
           format: date-time
           maxLength: 255
+          nullable: true
         timezone:
           description: >-
             Identifiant 'tz database' du Fuseau horaire de l'utilisateur. Voir :
@@ -36204,11 +36425,13 @@ components:
           description: Fonction de l'utilisateur.
           type: string
           maxLength: 255
+          nullable: true
         avatar_url:
           description: Lien URL vers l'avatar de l'utilisateur.
           type: string
           format: uri
           maxLength: 255
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
     WorkflowAnalyseDeRisque:
       title: 'Objet Workflow : Analyse de Risque'
