@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-11-2024.2
+  version: 1.0/main/15-11-2024.3
   title: Metarisc API
   description: >-
 
@@ -11001,8 +11001,10 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Liste des ERP
-      description: Récupération de la liste des ERP.
+      summary: Recherche des ERP
+      description: >-
+        Récupération de la liste des Établissements Recevant du Public (ERP)
+        selon des critères de recherche.
       operationId: PaginateErp
       security:
         - IdMetariscFr:
@@ -11012,6 +11014,86 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: sort
+          in: query
+          description: >-
+            Propriété sur laquelle trier les résultats. L'ordre de tri par
+            défaut est croissant (asc) sauf si la propriété est préfixée par un
+            trait d'union (-), auquel cas l'ordre de tri sera décroissant
+            (desc).
+          schema:
+            type: string
+            pattern: ^-?\w*$
+            maxLength: 255
+            enum:
+              - libelle
+              - '-libelle'
+            default: libelle
+        - name: libelle
+          in: query
+          description: Filtre sur le libellé de l'ERP
+          schema:
+            type: string
+            maxLength: 255
+        - name: geojson
+          in: query
+          description: Filtre sur la position des ERP.
+          schema:
+            type: string
+            maxLength: 8192
+        - name: references_exterieures
+          in: query
+          description: >-
+            Filtre sur les références extérieures de l'ERP. La syntaxe
+            d'utilisation de ce filtre est : "titre:valeur" (exemple
+            prevarisc_id:"5678").
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+              maxLength: 255
+        - name: presence_locaux_sommeil
+          in: query
+          description: Filtre sur la présence de locaux à sommeil dans l'ERP.
+          schema:
+            type: boolean
+            nullable: false
+        - name: type_activite
+          in: query
+          description: Filtre sur le type d'activité.
+          schema:
+            type: string
+            enum:
+              - J
+              - L
+              - M
+              - 'N'
+              - O
+              - P
+              - R
+              - S
+              - T
+              - U
+              - V
+              - W
+              - X
+              - 'Y'
+              - PA
+              - CTS
+              - SG
+              - PS
+              - GA
+              - OA
+              - EF
+              - REF
+        - name: avis_exploitation
+          in: query
+          description: Filtre sur l'avis d'exploitation.
+          schema:
+            type: string
+            enum:
+              - favorable
+              - defavorable
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -21760,7 +21842,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Liste des Points d'Eau Incendie
+      summary: Recherche des Points d'Eau Incendie
       description: >-
         Récupération de la liste des Points d'Eau Incendie (PEI) selon des
         critères de recherche.
@@ -21836,6 +21918,17 @@ paths:
           schema:
             type: string
             maxLength: 8192
+        - name: references_exterieures
+          in: query
+          description: >-
+            Filtre sur les références extérieures du PEI. La syntaxe
+            d'utilisation de ce filtre est : "titre:valeur" (exemple
+            numero_62:"62041001").
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+              maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: >-
