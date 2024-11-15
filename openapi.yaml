@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-11-2024.1
+  version: 1.0/main/15-11-2024.2
   title: Metarisc API
   description: >-
 
@@ -1820,7 +1820,18 @@ paths:
                   type: string
                   maxLength: 255
                 presidence_id:
-                  description: Identifiant de l'organisation présidant la commission.
+                  description: >-
+                    Identifiant de l'organisation présidant la commission. Par
+                    défaut l'organisation tenant la présidence est celle de
+                    l'utilisateur connecté.
+                  type: string
+                  format: uuid
+                  maxLength: 255
+                secretariat_id:
+                  description: >-
+                    Identifiant de l'organisation tenant le secrétariat de la
+                    commission. Par défaut l'organisation tenant le secrétariat
+                    est celle de l'utilisateur connecté.
                   type: string
                   format: uuid
                   maxLength: 255
@@ -33876,7 +33887,18 @@ paths:
                                 presidence_id:
                                   description: >-
                                     Identifiant de l'organisation présidant la
-                                    commission.
+                                    commission. Par défaut l'organisation tenant
+                                    la présidence est celle de l'utilisateur
+                                    connecté.
+                                  type: string
+                                  format: uuid
+                                  maxLength: 255
+                                secretariat_id:
+                                  description: >-
+                                    Identifiant de l'organisation tenant le
+                                    secrétariat de la commission. Par défaut
+                                    l'organisation tenant le secrétariat est
+                                    celle de l'utilisateur connecté.
                                   type: string
                                   format: uuid
                                   maxLength: 255
@@ -35037,6 +35059,10 @@ components:
           maxLength: 255
         presidence:
           description: Organisation présidant la commission.
+          allOf:
+            - $ref: '#/components/schemas/Organisation'
+        secretariat:
+          description: Organisation tenant le secrétariat de la commission.
           allOf:
             - $ref: '#/components/schemas/Organisation'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
