@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-11-2024.1
+  version: 1.0/main/18-11-2024.2
   title: Metarisc API
   description: >-
 
@@ -11645,7 +11645,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 255
+                                      maximum: 99999
                                       nullable: true
                                     effectif_personnel:
                                       description: >-
@@ -11655,7 +11655,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 255
+                                      maximum: 99999
                                       nullable: true
                                     presence_locaux_sommeil:
                                       description: >-
@@ -11678,7 +11678,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 255
+                                      maximum: 99999
                                       nullable: true
                                     surface_accessible_au_public:
                                       description: >-
@@ -11688,7 +11688,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 255
+                                      maximum: 99999
                                       nullable: true
                                     r143_20:
                                       description: >-
@@ -12057,7 +12057,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 255
+                                      maximum: 99999
                                       nullable: true
                                     ligne_telephonique_reliee_au_cta:
                                       description: La ligne téléphonique est reliée au CTA
@@ -33386,7 +33386,7 @@ paths:
                                   type: integer
                                   format: int32
                                   minimum: 0
-                                  maximum: 255
+                                  maximum: 99999
                                   nullable: true
                                 effectif_personnel:
                                   description: >-
@@ -33395,7 +33395,7 @@ paths:
                                   type: integer
                                   format: int32
                                   minimum: 0
-                                  maximum: 255
+                                  maximum: 99999
                                   nullable: true
                                 presence_locaux_sommeil:
                                   description: >-
@@ -33418,7 +33418,7 @@ paths:
                                   type: integer
                                   format: int32
                                   minimum: 0
-                                  maximum: 255
+                                  maximum: 99999
                                   nullable: true
                                 surface_accessible_au_public:
                                   description: >-
@@ -33428,7 +33428,7 @@ paths:
                                   type: integer
                                   format: int32
                                   minimum: 0
-                                  maximum: 255
+                                  maximum: 99999
                                   nullable: true
                                 r143_20:
                                   description: >-
@@ -33789,7 +33789,7 @@ paths:
                                   type: integer
                                   format: int32
                                   minimum: 0
-                                  maximum: 255
+                                  maximum: 99999
                                   nullable: true
                                 ligne_telephonique_reliee_au_cta:
                                   description: La ligne téléphonique est reliée au CTA
@@ -34842,7 +34842,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 255
+          maximum: 99999
           nullable: true
         effectif_personnel:
           description: >-
@@ -34851,7 +34851,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 255
+          maximum: 99999
           nullable: true
         presence_locaux_sommeil:
           description: >-
@@ -34870,7 +34870,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 255
+          maximum: 99999
           nullable: true
         surface_accessible_au_public:
           description: >-
@@ -34879,7 +34879,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 255
+          maximum: 99999
           nullable: true
         r143_20:
           description: >-
@@ -35114,7 +35114,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 255
+          maximum: 99999
           nullable: true
         ligne_telephonique_reliee_au_cta:
           description: La ligne téléphonique est reliée au CTA
