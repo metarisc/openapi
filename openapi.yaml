@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-11-2024.3
+  version: 1.0/main/18-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -502,7 +502,7 @@ paths:
           description: Filtre sur le texte de l'anomalie
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - name: code
           in: query
           description: Filtre sur le code de l'anomalie
@@ -791,7 +791,7 @@ paths:
                 texte:
                   description: Description de l'anomalie.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 indice_de_gravite:
                   type: integer
                   format: int32
@@ -1818,7 +1818,7 @@ paths:
                 libelle:
                   description: Nom de la commission.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 presidence_id:
                   description: >-
                     Identifiant de l'organisation présidant la commission. Par
@@ -1826,7 +1826,7 @@ paths:
                     l'utilisateur connecté.
                   type: string
                   format: uuid
-                  maxLength: 255
+                  maxLength: 4096
                 secretariat_id:
                   description: >-
                     Identifiant de l'organisation tenant le secrétariat de la
@@ -1834,7 +1834,7 @@ paths:
                     est celle de l'utilisateur connecté.
                   type: string
                   format: uuid
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - type
                 - libelle
@@ -2360,12 +2360,12 @@ paths:
                   description: Date de début du passage en commission programmée.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
                 date_fin:
                   description: Date de fin du passage en commission programmée.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
                 type:
                   description: Type du passage en commission.
                   type: string
@@ -2378,7 +2378,7 @@ paths:
                     Libellé de la date de passage en commission. Souvent utile
                     pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - date_debut
                 - date_fin
@@ -5679,42 +5679,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -5727,19 +5727,19 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
@@ -6488,7 +6488,7 @@ paths:
                   description: Date à laquelle le contrôle a été effectué.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
                 hydraulique:
                   description: >-
                     Informations sur les essais hydrauliques procédés le jour du
@@ -7333,14 +7333,14 @@ paths:
                     de passage en commission.
                   type: string
                   format: uuid
-                  maxLength: 255
+                  maxLength: 4096
                 date_de_passage:
                   description: >-
-                    Date et heure à laquelle le passage du dossier est prévu à
-                    l'ordre du jour.
+                    Heure à laquelle le passage du dossier est prévue à l'ordre
+                    du jour.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - dossier_id
                 - date_de_passage
@@ -8348,11 +8348,11 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -9137,42 +9137,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -9185,19 +9185,19 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
@@ -9720,15 +9720,15 @@ paths:
                   description: Point de stockage du fichier.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -10253,7 +10253,7 @@ paths:
                 objet:
                   description: Objet du dossier.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       responses:
         '200':
@@ -11034,7 +11034,7 @@ paths:
           description: Filtre sur le libellé de l'ERP
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - name: geojson
           in: query
           description: Filtre sur la position des ERP.
@@ -11051,7 +11051,7 @@ paths:
             type: object
             additionalProperties:
               type: string
-              maxLength: 255
+              maxLength: 4096
         - name: presence_locaux_sommeil
           in: query
           description: Filtre sur la présence de locaux à sommeil dans l'ERP.
@@ -11386,14 +11386,14 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         voie:
                           description: >-
                             Libellé de la voie et de son type (exemple : "rue du
                             point du jour").
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -11417,7 +11417,7 @@ paths:
                             L'arrondissement municipal est une subdivision
                             territoriale des communes.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         latitude:
                           description: >-
@@ -11446,12 +11446,12 @@ paths:
                             Complément d'adresse à destination des services de
                             secours.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                 descriptif_technique:
                   description: Descriptif technique actuel de l'ERP.
@@ -11483,14 +11483,14 @@ paths:
                                 exercée, c'est le nom sous lequel
                                 l'établissement est connu du grand public.
                               type: string
-                              maxLength: 255
+                              maxLength: 4096
                             observations_generales:
                               description: >-
                                 Une chaîne de caractères arbitraire rattachée à
                                 l'objet. Souvent utile pour affichage aux
                                 utilisateurs.
                               type: string
-                              maxLength: 255
+                              maxLength: 4096
                               nullable: true
                             analyse_risque:
                               description: Analyse des risques de l'établissement.
@@ -11557,7 +11557,7 @@ paths:
                                                 l'exploitation. (exemple : Pour un type
                                                 R - "Crèche")
                                               type: string
-                                              maxLength: 255
+                                              maxLength: 4096
                                           required:
                                             - type
                                             - activite
@@ -11615,7 +11615,7 @@ paths:
                                               l'exploitation. (exemple : Pour un type
                                               R - "Crèche")
                                             type: string
-                                            maxLength: 255
+                                            maxLength: 4096
                                         required:
                                           - type
                                           - activite
@@ -12596,42 +12596,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -12644,19 +12644,19 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
@@ -13179,15 +13179,15 @@ paths:
                   description: Point de stockage du fichier.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -13734,7 +13734,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - objet
                     - type: object
@@ -13758,7 +13758,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - objet
                     - type: object
@@ -14799,12 +14799,12 @@ paths:
                   titre:
                     description: Titre de la référence extérieure.
                     type: string
-                    maxLength: 255
+                    maxLength: 4096
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
                     nullable: true
-                    maxLength: 255
+                    maxLength: 4096
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '200':
@@ -15316,13 +15316,13 @@ paths:
             l'événement se déroule. Exemple 2004-12-02T23:00/2005-01-01T12:30.
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - name: type
           in: query
           description: Le type d'événement.
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -15594,7 +15594,7 @@ paths:
                 title:
                   description: Titre de l'événement.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 type:
                   description: Type de l'événement.
                   type: string
@@ -15606,17 +15606,17 @@ paths:
                 description:
                   description: Description de l'événement.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 date_debut:
                   description: Date de début de l'événement.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
                 date_fin:
                   description: Date de fin de l'événement.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - title
                 - type
@@ -16885,7 +16885,7 @@ paths:
                         titre:
                           description: Titre du message.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         type:
                           description: Type du message.
                           type: string
@@ -16900,7 +16900,7 @@ paths:
                         texte:
                           description: Contenu du message.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - texte
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
@@ -17650,11 +17650,11 @@ paths:
                 title:
                   description: Titre de la notification.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 message:
                   description: Contenu de la notification.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 type:
                   description: Type de la notification.
                   type: string
@@ -17668,11 +17668,11 @@ paths:
                   type: object
                   additionalProperties:
                     type: string
-                    maxLength: 255
+                    maxLength: 4096
                 utilisateur_id:
                   description: Identifiant de l'utilisateur cible de la notification.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - title
                 - message
@@ -18683,11 +18683,11 @@ paths:
                             - defavorable
                 date_de_passage:
                   description: >-
-                    Date et heure à laquelle le passage du dossier est prévu à
-                    l'ordre du jour.
+                    Heure à laquelle le passage du dossier est prévue à l'ordre
+                    du jour.
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
                 avis_differe:
                   description: >-
                     La commission de sécurité peut décider de reporter son avis
@@ -18700,7 +18700,7 @@ paths:
                     un avis défavorable. Afin de motiver les décisions prises,
                     la commission peut émettre des observations.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '200':
@@ -19738,7 +19738,7 @@ paths:
                 nom:
                   description: Nom du géoservice.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 type:
                   description: Type de la norme utilisée par le géoservice.
                   type: string
@@ -19749,7 +19749,7 @@ paths:
                   description: L'URL du serveur hébergeant les informations géographiques.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - nom
                 - type
@@ -20518,11 +20518,11 @@ paths:
                 utilisateur_id:
                   description: Identifiant de l'utilisateur lié.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 role:
                   description: Rôle du membre au sein de l'organisation.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   enum:
                     - membre
                     - invite
@@ -21040,7 +21040,7 @@ paths:
                     Identifiant représentant l'organisation dans Plat'AU. Voir :
                     https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 platau_active:
                   description: Activation de la passerelle Plat'AU pour l'organisation.
@@ -21052,7 +21052,7 @@ paths:
                     organisation.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       responses:
@@ -21578,7 +21578,7 @@ paths:
                   maxItems: 255
                   items:
                     type: string
-                    maxLength: 255
+                    maxLength: 4096
                 pibi_performance_natures_a_reformer:
                   description: >-
                     Les PIBI qui sont à réformer impérativement seront
@@ -21587,7 +21587,7 @@ paths:
                   maxItems: 255
                   items:
                     type: string
-                    maxLength: 255
+                    maxLength: 4096
                 pibi_performance_seuil_pesee_1bar:
                   description: >-
                     Seuil au dessous duquel la performance du PIBI passe en
@@ -21875,7 +21875,7 @@ paths:
           description: Filtre sur le numéro du PEI
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - name: type
           in: query
           description: Filtre sur le type du PEI
@@ -21928,7 +21928,7 @@ paths:
             type: object
             additionalProperties:
               type: string
-              maxLength: 255
+              maxLength: 4096
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -22240,7 +22240,7 @@ paths:
                                     rattachée à l'objet. Souvent utile pour
                                     affichage aux utilisateurs.
                                   type: string
-                                  maxLength: 255
+                                  maxLength: 4096
                                   nullable: true
                                 statut:
                                   description: >-
@@ -22342,7 +22342,7 @@ paths:
                                     rattachée à l'objet. Souvent utile pour
                                     affichage aux utilisateurs.
                                   type: string
-                                  maxLength: 255
+                                  maxLength: 4096
                                   nullable: true
                                 statut:
                                   description: >-
@@ -22408,14 +22408,14 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         voie:
                           description: >-
                             Libellé de la voie et de son type (exemple : "rue du
                             point du jour").
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -22439,7 +22439,7 @@ paths:
                             L'arrondissement municipal est une subdivision
                             territoriale des communes.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         latitude:
                           description: >-
@@ -22468,22 +22468,22 @@ paths:
                             Complément d'adresse à destination des services de
                             secours.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                 numero_compteur:
                   description: Le numéro de série du compteur (PIBI).
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 numero_serie_appareil:
                   description: Numéro de série du PEI (si disponible).
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
               required:
                 - descriptif_technique
@@ -23012,11 +23012,11 @@ paths:
                 date_debut:
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
                 date_fin:
                   type: string
                   format: date-time
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - code_anomalie
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
@@ -23539,42 +23539,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -23587,19 +23587,19 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 observations:
                   description: >-
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
@@ -24122,15 +24122,15 @@ paths:
                   description: Point de stockage du fichier.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -24677,7 +24677,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - objet
                     - type: object
@@ -24701,7 +24701,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - objet
                     - type: object
@@ -25742,12 +25742,12 @@ paths:
                   titre:
                     description: Titre de la référence extérieure.
                     type: string
-                    maxLength: 255
+                    maxLength: 4096
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
                     nullable: true
-                    maxLength: 255
+                    maxLength: 4096
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '200':
@@ -26506,11 +26506,11 @@ paths:
                 contenu:
                   description: Contenu de la prescription.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 type:
                   description: Classement de la prescription.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   enum:
                     - liee_a_l_exploitation
                     - liee_a_l_amelioration
@@ -26524,7 +26524,7 @@ paths:
                   items:
                     type: string
                     format: uuid
-                    maxLength: 255
+                    maxLength: 4096
               required:
                 - contenu
                 - type
@@ -27528,7 +27528,7 @@ paths:
                     - local
                 legifrance_cid:
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   description: >-
                     Le CID est l’identifiant commun à l’ensemble des versions
                     d’un objet Legifrance (article, section, texte).
@@ -27538,11 +27538,11 @@ paths:
                 contenu:
                   description: Contenu du support réglementaire.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 titre:
                   description: Titre du contenu réglementaire.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 etat:
                   description: Etat juridique d’un support réglementaire.
                   type: string
@@ -27553,7 +27553,7 @@ paths:
                     Une chaîne de caractères arbitraire rattachée à l'objet.
                     Utile pour rechercher le support réglementaire.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - nature
                 - contenu
@@ -28285,14 +28285,14 @@ paths:
           description: Filtre sur le libellé
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - name: periode
           in: query
           description: Filtre sur les dates
           schema:
             type: string
             pattern: ^\d{4}-\d{2}-\d{2}\/\d{4}-\d{2}-\d{2}$
-            maxLength: 255
+            maxLength: 4096
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -28573,14 +28573,14 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         description:
                           description: >-
                             Une chaîne de caractères arbitraire rattachée à
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                       required:
                         - libelle
@@ -28595,12 +28595,12 @@ paths:
                           description: Date de début de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 255
+                          maxLength: 4096
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - type
                         - date_de_debut
@@ -28617,14 +28617,14 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         description:
                           description: >-
                             Une chaîne de caractères arbitraire rattachée à
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                       required:
                         - libelle
@@ -29421,15 +29421,15 @@ paths:
                   description: Point de stockage du fichier.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -29961,14 +29961,14 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         description:
                           description: >-
                             Une chaîne de caractères arbitraire rattachée à
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                     - type: object
                       properties:
@@ -29981,12 +29981,12 @@ paths:
                           description: Date de début de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 255
+                          maxLength: 4096
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - type
                 - title: Objet Tournee Deci Modele
@@ -30001,14 +30001,14 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         description:
                           description: >-
                             Une chaîne de caractères arbitraire rattachée à
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                           nullable: true
                     - type: object
                       properties:
@@ -30550,7 +30550,7 @@ paths:
                   description: Identifiant du PEI à lier au contrôle.
                   type: string
                   format: uuid
-                  maxLength: 255
+                  maxLength: 4096
               required:
                 - pei_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
@@ -31290,7 +31290,7 @@ paths:
           description: Filtre sur le nom de l'utilisateur.
           schema:
             type: string
-            maxLength: 255
+            maxLength: 4096
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -32601,15 +32601,15 @@ paths:
                   description: Point de stockage du fichier.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 4096
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 4096
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -33141,7 +33141,7 @@ paths:
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                     - type: object
                       properties:
                         type:
@@ -33158,7 +33158,7 @@ paths:
                               description: Identifiant unique de l'objet.
                               type: string
                               format: uuid
-                              maxLength: 255
+                              maxLength: 4096
                               x-extension-metarisc-property-mutability:
                                 - context: query
                             date_debut:
@@ -33167,7 +33167,7 @@ paths:
                                 programmée.
                               type: string
                               format: date-time
-                              maxLength: 255
+                              maxLength: 4096
                               x-extension-metarisc-property-mutability:
                                 - context: query
                                 - context: create
@@ -33177,7 +33177,7 @@ paths:
                               description: Date de fin du passage en commission programmée.
                               type: string
                               format: date-time
-                              maxLength: 255
+                              maxLength: 4096
                               x-extension-metarisc-property-mutability:
                                 - context: query
                                 - context: create
@@ -33200,7 +33200,7 @@ paths:
                                 Libellé de la date de passage en commission.
                                 Souvent utile pour affichage aux utilisateurs.
                               type: string
-                              maxLength: 255
+                              maxLength: 4096
                               x-extension-metarisc-property-mutability:
                                 - context: query
                                 - context: create
@@ -33232,7 +33232,7 @@ paths:
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                     - type: object
                       properties:
                         type:
@@ -33304,7 +33304,7 @@ paths:
                                             l'exploitation. (exemple : Pour un type
                                             R - "Crèche")
                                           type: string
-                                          maxLength: 255
+                                          maxLength: 4096
                                 activites_secondaire:
                                   description: >-
                                     Les activités secondaires sont les activités
@@ -33359,7 +33359,7 @@ paths:
                                           l'exploitation. (exemple : Pour un type
                                           R - "Crèche")
                                         type: string
-                                        maxLength: 255
+                                        maxLength: 4096
                                   nullable: true
                                 categorie:
                                   description: >-
@@ -33812,7 +33812,7 @@ paths:
                                 - defavorable
                         descriptif_effectifs:
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         facteur_dangerosite:
                           type: integer
                           format: int32
@@ -33820,7 +33820,7 @@ paths:
                           maximum: 3
                         derogations:
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         prescriptions:
                           type: array
                           maxItems: 255
@@ -33844,11 +33844,11 @@ paths:
                               contenu:
                                 description: Contenu de la prescription.
                                 type: string
-                                maxLength: 255
+                                maxLength: 4096
                               type:
                                 description: Classement de la prescription.
                                 type: string
-                                maxLength: 255
+                                maxLength: 4096
                                 enum:
                                   - liee_a_l_exploitation
                                   - liee_a_l_amelioration
@@ -33862,13 +33862,13 @@ paths:
                                 items:
                                   type: string
                                   format: uuid
-                                  maxLength: 255
+                                  maxLength: 4096
                         mesures_compensatoires:
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                         mesures_complementaires:
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - type
                 - title: 'Objet Workflow : Arrivée secrétariat'
@@ -33884,7 +33884,7 @@ paths:
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                     - type: object
                       properties:
                         type:
@@ -33895,7 +33895,7 @@ paths:
                         date_arrivee_secretariat:
                           type: string
                           format: date-time
-                          maxLength: 255
+                          maxLength: 4096
                         passage_commission:
                           allOf:
                             - type: object
@@ -33908,14 +33908,14 @@ paths:
                                     programmée.
                                   type: string
                                   format: date-time
-                                  maxLength: 255
+                                  maxLength: 4096
                                 date_fin:
                                   description: >-
                                     Date de fin du passage en commission
                                     programmée.
                                   type: string
                                   format: date-time
-                                  maxLength: 255
+                                  maxLength: 4096
                                 type:
                                   description: Type du passage en commission.
                                   type: string
@@ -33929,7 +33929,7 @@ paths:
                                     Souvent utile pour affichage aux
                                     utilisateurs.
                                   type: string
-                                  maxLength: 255
+                                  maxLength: 4096
                       required:
                         - type
                 - title: 'Objet Workflow : Consultation SIS'
@@ -33945,7 +33945,7 @@ paths:
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                     - type: object
                       properties:
                         type:
@@ -33976,7 +33976,7 @@ paths:
                                 libelle:
                                   description: Nom de la commission.
                                   type: string
-                                  maxLength: 255
+                                  maxLength: 4096
                                 presidence_id:
                                   description: >-
                                     Identifiant de l'organisation présidant la
@@ -33985,7 +33985,7 @@ paths:
                                     connecté.
                                   type: string
                                   format: uuid
-                                  maxLength: 255
+                                  maxLength: 4096
                                 secretariat_id:
                                   description: >-
                                     Identifiant de l'organisation tenant le
@@ -33994,7 +33994,7 @@ paths:
                                     celle de l'utilisateur connecté.
                                   type: string
                                   format: uuid
-                                  maxLength: 255
+                                  maxLength: 4096
                       required:
                         - type
                 - title: 'Objet Workflow : Validation'
@@ -34010,7 +34010,7 @@ paths:
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                     - type: object
                       properties:
                         type:
@@ -34036,7 +34036,7 @@ paths:
                             l'objet. Souvent utile pour affichage aux
                             utilisateurs.
                           type: string
-                          maxLength: 255
+                          maxLength: 4096
                     - type: object
                       properties:
                         type:
@@ -34047,7 +34047,7 @@ paths:
                         passage_commission_id:
                           type: string
                           format: uuid
-                          maxLength: 255
+                          maxLength: 4096
                       required:
                         - type
                         - passage_commission_id
@@ -34546,11 +34546,11 @@ components:
           type: string
           format: uri
           description: Une référence Uri qui identifie le type de problème
-          maxLength: 255
+          maxLength: 4096
         title:
           type: string
           description: Un résumé du type d'erreur rencontré
-          maxLength: 255
+          maxLength: 4096
         status:
           type: integer
           format: int32
@@ -34560,7 +34560,7 @@ components:
           exclusiveMaximum: true
         detail:
           type: string
-          maxLength: 255
+          maxLength: 4096
           description: La description complète de l'erreur rencontrée
     PaginationMetadata:
       type: object
@@ -34640,7 +34640,7 @@ components:
             Désignation spécifique de l'exploitation. (exemple : Pour un type R
             - "Crèche")
           type: string
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ActiviteErp'
     AdressePostale:
       type: object
@@ -34660,14 +34660,14 @@ components:
         commune:
           description: Nom de la commune.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         voie:
           description: >-
             Libellé de la voie et de son type (exemple : "rue du point du
             jour").
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         code_insee:
           description: Code unique attribué à chaque commune de France.
@@ -34690,7 +34690,7 @@ components:
             L'arrondissement municipal est une subdivision territoriale des
             communes.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         latitude:
           description: >-
@@ -34715,12 +34715,12 @@ components:
         localisation_operationnelle:
           description: Complément d'adresse à destination des services de secours.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         complement:
           description: Complément d'adresse.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AdressePostale'
     AnomalieDECI:
@@ -34739,7 +34739,7 @@ components:
         texte:
           description: Description de l'anomalie.
           type: string
-          maxLength: 255
+          maxLength: 4096
         indice_de_gravite:
           type: integer
           format: int32
@@ -34772,18 +34772,18 @@ components:
         date_debut:
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_fin:
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         est_programmee:
           type: boolean
         date_pose:
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
     Avis:
       type: object
@@ -35134,7 +35134,7 @@ components:
           type: string
           description: Identifiant unique de l'objet.
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         type:
           description: >-
             Type de la commission (peut être une commission de sécurité, un
@@ -35149,7 +35149,7 @@ components:
         libelle:
           description: Nom de la commission.
           type: string
-          maxLength: 255
+          maxLength: 4096
         presidence:
           description: Organisation présidant la commission.
           allOf:
@@ -35168,7 +35168,7 @@ components:
           type: string
           description: Identifiant unique de l'objet.
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         titre:
           description: Le titre du membre au sein de la commission.
           type: string
@@ -35197,7 +35197,7 @@ components:
           description: 'Modèle pour les rapports générés : Compte rendu de commission'
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
     Contact:
@@ -35211,46 +35211,46 @@ components:
           type: string
           description: Identifiant unique de l'objet.
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         nom:
           description: Nom de famille du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         prenom:
           description: Prénom du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         fonction:
           description: La fonction professionnelle d'un contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         telephone_fixe:
           description: Le numéro de téléphone fixe du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         telephone_portable:
           description: Le numéro de téléphone portable du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         telephone_fax:
           description: Le numéro de fax du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         adresse:
           description: Adresse complète du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         site_web_url:
           description: Le site internet du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         civilite:
           description: Le titre de civilité utilisé.
@@ -35263,19 +35263,19 @@ components:
         societe:
           description: Nom de la société / entreprise liée à ce contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         email:
           description: Adresse email du contact.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         observations:
           description: >-
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
             utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
     Degagement:
@@ -35314,7 +35314,7 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         type:
           description: >-
             Permet de définir à quelle famille de points d’eau ce descriptif
@@ -35384,13 +35384,13 @@ components:
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
             utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         date:
           description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         statut:
           description: Statut du PEI lors de l'établissement de son descriptif technique.
           type: string
@@ -35424,12 +35424,12 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         date:
           description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         statut:
           description: Statut de l'ERP lors de l'établissement de son descriptif technique.
           type: string
@@ -35455,13 +35455,13 @@ components:
             commerce ou l'activité exercée, c'est le nom sous lequel
             l'établissement est connu du grand public.
           type: string
-          maxLength: 255
+          maxLength: 4096
         observations_generales:
           description: >-
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
             utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         analyse_risque:
           description: Analyse des risques de l'établissement.
@@ -35604,16 +35604,16 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         objet:
           description: Objet du dossier.
           type: string
-          maxLength: 255
+          maxLength: 4096
         date_de_creation:
           description: Date de création du dossier.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         createur:
           description: Utilisateur ayant créé le dossier.
           allOf:
@@ -35622,7 +35622,7 @@ components:
         application_utilisee_nom:
           description: Nom de l'application / intégration ayant généré le dossier.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         statut:
           description: >-
@@ -35690,17 +35690,17 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         date_de_realisation:
           description: Date à laquelle l'ERP a intégré Metarisc.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_de_derniere_mise_a_jour:
           description: Date à laquelle l'ERP a été mis à jour dans Metarisc.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         implantation:
           description: Adresse postale de l'ERP.
@@ -35725,7 +35725,7 @@ components:
           description: Adresse email de l'utilisateur.
           type: string
           format: email
-          maxLength: 255
+          maxLength: 4096
         is_primary:
           description: >-
             Une adresse email "primary" est utilisée pour les notifications, la
@@ -35747,11 +35747,11 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         title:
           description: Titre de l'événement.
           type: string
-          maxLength: 255
+          maxLength: 4096
         type:
           description: Type de l'événement.
           type: string
@@ -35763,18 +35763,18 @@ components:
         description:
           description: Description de l'événement.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         date_debut:
           description: Date de début de l'événement.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_fin:
           description: Date de fin de l'événement.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
     FeedMessageBase:
       type: object
@@ -35785,16 +35785,16 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         titre:
           description: Titre du message.
           type: string
-          maxLength: 255
+          maxLength: 4096
         date_de_creation:
           description: Date de création du message.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         type:
           description: Type du message.
           type: string
@@ -35812,7 +35812,7 @@ components:
             texte:
               description: Contenu du message.
               type: string
-              maxLength: 255
+              maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
     FeedMessage:
       title: Objet Feed Message
@@ -35831,15 +35831,15 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         title:
           description: Titre de la notification.
           type: string
-          maxLength: 255
+          maxLength: 4096
         message:
           description: Contenu de la notification.
           type: string
-          maxLength: 255
+          maxLength: 4096
         type:
           description: Type de la notification.
           type: string
@@ -35853,17 +35853,17 @@ components:
           type: object
           additionalProperties:
             type: string
-            maxLength: 255
+            maxLength: 4096
         date_creation:
           description: Date de déclenchement de la notification.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_de_lecture:
           description: Date à laquelle l'utilisateur a lu la notification.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         utilisateur:
           description: Utilisateur cible de la notification.
@@ -35884,16 +35884,16 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         nom:
           description: Nom de l'organisation.
           type: string
-          maxLength: 255
+          maxLength: 4096
         logo_url:
           description: Lien URL vers le logo représentant l'organisation.
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         type:
           description: Type de l'organisation.
@@ -35913,7 +35913,7 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         organisation:
           description: L'organisation liée à ce geoservice.
           allOf:
@@ -35921,7 +35921,7 @@ components:
         nom:
           description: Nom du géoservice.
           type: string
-          maxLength: 255
+          maxLength: 4096
         type:
           description: Type de la norme utilisée par le géoservice.
           type: string
@@ -35932,7 +35932,7 @@ components:
           description: L'URL du serveur hébergeant les informations géographiques.
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
     OrganisationMembre:
       type: object
@@ -35953,11 +35953,11 @@ components:
             membre.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         role:
           description: Rôle du membre au sein de l'organisation.
           type: string
-          maxLength: 255
+          maxLength: 4096
           enum:
             - membre
             - invite
@@ -35973,7 +35973,7 @@ components:
             Identifiant représentant l'organisation dans Plat'AU. Voir :
             https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         platau_active:
           description: Activation de la passerelle Plat'AU pour l'organisation.
@@ -35985,7 +35985,7 @@ components:
             organisation.
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
     PEI:
@@ -35997,17 +35997,17 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         date_de_realisation:
           description: Date à laquelle le PEI a intégré Metarisc.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_de_derniere_mise_a_jour:
           description: Date de la dernière mise à jour du PEI.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         descriptif_technique:
           description: Descriptif technique actuel du PEI.
@@ -36020,16 +36020,16 @@ components:
         numero:
           description: Identifiant MRISC unique généré par l'application.
           type: string
-          maxLength: 255
+          maxLength: 4096
         numero_compteur:
           description: Le numéro de série du compteur (PIBI).
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         numero_serie_appareil:
           description: Numéro de série du PEI (si disponible).
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
     PassageCommission:
@@ -36041,17 +36041,17 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         date_debut:
           description: Date de début du passage en commission programmée.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_fin:
           description: Date de fin du passage en commission programmée.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         type:
           description: Type du passage en commission.
           type: string
@@ -36064,7 +36064,7 @@ components:
             Libellé de la date de passage en commission. Souvent utile pour
             affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
     PassageCommissionDossier:
       type: object
@@ -36074,7 +36074,7 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         dossier:
           description: >-
             Dossier incrit à l'ordre du jour d'une date de passage en
@@ -36087,12 +36087,10 @@ components:
             - $ref: '#/components/schemas/Avis'
           nullable: true
         date_de_passage:
-          description: >-
-            Date et heure à laquelle le passage du dossier est prévu à l'ordre
-            du jour.
+          description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         avis_differe:
           description: >-
             La commission de sécurité peut décider de reporter son avis à une
@@ -36105,7 +36103,7 @@ components:
             défavorable. Afin de motiver les décisions prises, la commission
             peut émettre des observations.
           type: string
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
     PieceJointe:
       type: object
@@ -36116,20 +36114,20 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         url:
           description: Point de stockage du fichier.
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 4096
         nom:
           description: Nom du fichier joint.
           type: string
-          maxLength: 255
+          maxLength: 4096
         description:
           description: Description du fichier joint.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         type:
           description: Type de la pièce jointe.
@@ -36152,7 +36150,7 @@ components:
       properties:
         message:
           type: string
-          maxLength: 255
+          maxLength: 4096
           default: pong
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Ping'
     Prescription:
@@ -36172,15 +36170,15 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         contenu:
           description: Contenu de la prescription.
           type: string
-          maxLength: 255
+          maxLength: 4096
         type:
           description: Classement de la prescription.
           type: string
-          maxLength: 255
+          maxLength: 4096
           enum:
             - liee_a_l_exploitation
             - liee_a_l_amelioration
@@ -36203,7 +36201,7 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         nature:
           description: Nature du support réglementaire.
           type: string
@@ -36213,7 +36211,7 @@ components:
             - local
         legifrance_cid:
           type: string
-          maxLength: 255
+          maxLength: 4096
           description: >-
             Le CID est l’identifiant commun à l’ensemble des versions d’un objet
             Legifrance (article, section, texte).
@@ -36224,11 +36222,11 @@ components:
         contenu:
           description: Contenu du support réglementaire.
           type: string
-          maxLength: 255
+          maxLength: 4096
         titre:
           description: Titre du contenu réglementaire.
           type: string
-          maxLength: 255
+          maxLength: 4096
         etat:
           description: Etat juridique d’un support réglementaire.
           type: string
@@ -36239,7 +36237,7 @@ components:
             Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour
             rechercher le support réglementaire.
           type: string
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
     ReferenceExterieure:
       type: object
@@ -36253,12 +36251,12 @@ components:
         titre:
           description: Titre de la référence extérieure.
           type: string
-          maxLength: 255
+          maxLength: 4096
         valeur:
           description: La valeur de la référence extérieure.
           type: string
           nullable: true
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
     ReglesDeci:
       type: object
@@ -36282,7 +36280,7 @@ components:
           maxItems: 255
           items:
             type: string
-            maxLength: 255
+            maxLength: 4096
         pibi_performance_natures_a_reformer:
           description: >-
             Les PIBI qui sont à réformer impérativement seront automatiquement
@@ -36291,7 +36289,7 @@ components:
           maxItems: 255
           items:
             type: string
-            maxLength: 255
+            maxLength: 4096
         pibi_performance_seuil_pesee_1bar:
           description: Seuil au dessous duquel la performance du PIBI passe en "nulle".
           type: number
@@ -36329,7 +36327,7 @@ components:
         message:
           description: Libellé du tag.
           type: string
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
     TourneeDeci:
       title: Objet Tournée Deci
@@ -36350,23 +36348,23 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         libelle:
           description: Nom d'identification de la tournée.
           type: string
-          maxLength: 255
+          maxLength: 4096
         description:
           description: >-
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
             utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         date_de_creation:
           description: Date de création de la tournée.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciBase'
     TourneeDeciModele:
       title: Objet Tournee Deci Modele
@@ -36404,12 +36402,12 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         date_du_controle:
           description: Date à laquelle le contrôle a été effectué.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         hydraulique:
           description: >-
@@ -36482,12 +36480,12 @@ components:
               description: Date de début de la tournée.
               type: string
               format: date-time
-              maxLength: 255
+              maxLength: 4096
             date_de_fin:
               description: Date de fin de la tournée.
               type: string
               format: date-time
-              maxLength: 255
+              maxLength: 4096
             modele:
               description: >-
                 Si la Tournée DECI a été créé depuis un modèle, son modèle est
@@ -36505,27 +36503,27 @@ components:
         id:
           description: Identifiant unique de l'objet.
           type: string
-          maxLength: 255
+          maxLength: 4096
         first_name:
           description: Prénom de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         last_name:
           description: Nom de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         created_at:
           description: Date à laquelle l'utilisateur a été créé.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         updated_at:
           description: Date à laquelle l'utilisateur a été mis à jour.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         timezone:
           description: >-
@@ -36533,7 +36531,7 @@ components:
             https://www.iana.org/time-zones Liste des fuseaux horaires :
             https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
           type: string
-          maxLength: 255
+          maxLength: 4096
         is_active:
           description: État d'activation du compte utilisateur.
           type: boolean
@@ -36543,13 +36541,13 @@ components:
         fonction:
           description: Fonction de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 4096
           nullable: true
         avatar_url:
           description: Lien URL vers l'avatar de l'utilisateur.
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
     WorkflowAnalyseDeRisque:
@@ -36572,7 +36570,7 @@ components:
               $ref: '#/components/schemas/Avis'
             descriptif_effectifs:
               type: string
-              maxLength: 255
+              maxLength: 4096
             facteur_dangerosite:
               type: integer
               format: int32
@@ -36580,7 +36578,7 @@ components:
               maximum: 3
             derogations:
               type: string
-              maxLength: 255
+              maxLength: 4096
             prescriptions:
               type: array
               maxItems: 255
@@ -36588,10 +36586,10 @@ components:
                 $ref: '#/components/schemas/Prescription'
             mesures_compensatoires:
               type: string
-              maxLength: 255
+              maxLength: 4096
             mesures_complementaires:
               type: string
-              maxLength: 255
+              maxLength: 4096
           required:
             - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowAnalyseDeRisque'
@@ -36610,7 +36608,7 @@ components:
             date_arrivee_secretariat:
               type: string
               format: date-time
-              maxLength: 255
+              maxLength: 4096
             passage_commission:
               allOf:
                 - $ref: '#/components/schemas/PassageCommission'
@@ -36626,30 +36624,30 @@ components:
           description: Identifiant unique de l'objet.
           type: string
           format: uuid
-          maxLength: 255
+          maxLength: 4096
         titre:
           description: Titre du workflow.
           type: string
-          maxLength: 255
+          maxLength: 4096
         date_de_creation:
           description: Date de création du workflow.
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_de_debut:
           description: >-
             Date du déclenchement du workflow (date à laquelle il est passé
             actif).
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         date_de_fin:
           description: >-
             Date de fin de traitement du workflow (date à laquelle il est passé
             en terminé).
           type: string
           format: date-time
-          maxLength: 255
+          maxLength: 4096
         workflow_automatise:
           description: Si le workflow a été géré par un processus automatisé.
           type: boolean
@@ -36670,7 +36668,7 @@ components:
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
             utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowBase'
     WorkflowConsultationSis:
       title: 'Objet Workflow : Consultation SIS'
@@ -36741,14 +36739,14 @@ components:
             pei_lie:
               type: string
               format: uuid
-              maxLength: 255
+              maxLength: 4096
             anomalies_levees:
               type: array
               maxItems: 255
               items:
                 type: string
                 format: uuid
-                maxLength: 255
+                maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowRemiseEnServicePEI'
     WorkflowStep:
       type: object
@@ -36756,22 +36754,22 @@ components:
       properties:
         name:
           type: string
-          maxLength: 255
+          maxLength: 4096
         workflow:
           type: object
           properties:
             titre:
               type: string
-              maxLength: 255
+              maxLength: 4096
             type:
               type: string
-              maxLength: 255
+              maxLength: 4096
         needs:
           type: array
           maxItems: 10
           items:
             type: string
-            maxLength: 255
+            maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowStep'
     WorkflowType:
       type: object
@@ -36779,7 +36777,7 @@ components:
       properties:
         dossier_type:
           type: string
-          maxLength: 255
+          maxLength: 4096
         steps:
           type: array
           maxItems: 999999
