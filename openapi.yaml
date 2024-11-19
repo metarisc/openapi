@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-11-2024.2
+  version: 1.0/main/19-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -3157,6 +3157,7 @@ paths:
                     - SIS
                     - DDT/DDTM
                     - REGION
+                    - DISP
                 presence_obligatoire:
                   description: >-
                     Le membre doit siéger obligatoirement lors des passages en
@@ -4670,6 +4671,7 @@ paths:
                     - SIS
                     - DDT/DDTM
                     - REGION
+                    - DISP
                 presence_obligatoire:
                   description: >-
                     Le membre doit siéger obligatoirement lors des passages en
@@ -8835,6 +8837,535 @@ paths:
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: paginate-dossiers
       x-extension-metarisc-codegen-visibility: public
+  /dossiers/{dossier_id}/affectations:
+    get:
+      tags:
+        - Dossiers API
+      summary: Affectations du dossier
+      description: Liste des affectations du dossier.
+      operationId: GetAffectationsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/DossierAffectation'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-affectations-dossier
+    post:
+      tags:
+        - Dossiers API
+      summary: Ajout d'une affectation dans le dossier
+      description: >-
+        Ajoute une affectation à un dossier. Vous pouvez affecter plusieurs
+        personnes au dossier, y compris vous-même. Cela permet de débloquer des
+        droits spécifiques sur le traitement du dossier.
+      operationId: PostAffectationsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Dossier Affectation
+              description: >-
+                Liaison entre un dossier et un utilisateur. Vous pouvez affecter
+                plusieurs personnes au dossier, y compris vous-même. Cela permet
+                de débloquer des droits spécifiques sur le traitement du
+                dossier.
+              properties:
+                role:
+                  description: Role sur le traitement du dossier.
+                  type: string
+                  enum:
+                    - admin
+                    - preventionniste
+                    - secretariat_prev
+                utilisateur_id:
+                  description: Identifiant de l'utilisateur à affecter au dossier.
+                  type: string
+                  maxLength: 4096
+              required:
+                - role
+                - utilisateur_id
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DossierAffectation'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-affectations-dossier
   /dossiers/{dossier_id}/contacts:
     get:
       tags:
@@ -9964,6 +10495,528 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: post-documents-dossier
+  /dossiers/{dossier_id}/fil_rouge:
+    get:
+      tags:
+        - Dossiers API
+      summary: Fil rouge du dossier
+      description: Consulter l'espace d'échange pour le suivi du dossier.
+      operationId: PaginateFilRougeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 200
+                    items:
+                      $ref: '#/components/schemas/FilRougeMessage'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: paginate-dossier-fil-rouge
+    post:
+      tags:
+        - Dossiers API
+      summary: Ajout d'un message dans le fil rouge
+      description: >-
+        Ajoute un message dans le fil rouge d'un dossier pour l'utilisateur
+        connecté.
+      operationId: PostFilRougeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Objet Fil Rouge Message
+              description: Message associé à un fil rouge d'un dossier.
+              properties:
+                message:
+                  description: Contenu du message.
+                  type: string
+                  maxLength: 10000
+              required:
+                - message
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilRougeMessage'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-fil-rouge-dossier
   /dossiers/{dossier_id}:
     get:
       tags:
@@ -10473,6 +11526,1612 @@ paths:
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: patch-dossier
       x-extension-metarisc-codegen-visibility: public
+  /dossiers/{dossier_id}/rapport_etude:
+    get:
+      tags:
+        - Dossiers API
+      summary: Détails du rapport d'étude
+      description: Récupération des détails du rapport d'étude.
+      operationId: GetRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RapportEtude'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-rapport-etude-dossier
+    post:
+      tags:
+        - Dossiers API
+      summary: Mise à jour du rapport d'étude
+      description: >-
+        Mise à jour du rapport d'étude en définissant les valeurs des paramètres
+        transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PostRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: 'Objet : Analyse de Risque'
+              description: Gestion de l'analyse de risque.
+              properties:
+                analyse_risque:
+                  description: Analyse des risques.
+                  allOf:
+                    - type: object
+                      title: Objet CLICDVCREM
+                      description: >-
+                        Objet représentant les caractéristiques liées à
+                        l'activité, l'implantation, la construction, les
+                        dégagements, la ventilation et désenfumage,
+                        l'électricité, éclairage, chauffage et climatisation,
+                        les risques particuliers, les moyens de secours d'un
+                        ERP.
+                      properties:
+                        activite_principale:
+                          description: >-
+                            L'activité principale est l'activité exercée dans
+                            l'établissement.
+                          allOf:
+                            - type: object
+                              title: Objet Activité ERP
+                              description: >-
+                                Un ERP est associé à un type d'activité selon la
+                                nature de leur exploitation. Il est codifié par
+                                une ou plusieurs lettres, en fonction de la
+                                nature et de l'activité de l'exploitation.
+                              properties:
+                                type:
+                                  description: >-
+                                    Le type est désignée par une ou un ensemble
+                                    de lettres définies par l’article GN 1 du
+                                    règlement de sécurité  incendie dans les
+                                    ERP. Voir :
+                                    https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487
+                                  type: string
+                                  enum:
+                                    - J
+                                    - L
+                                    - M
+                                    - 'N'
+                                    - O
+                                    - P
+                                    - R
+                                    - S
+                                    - T
+                                    - U
+                                    - V
+                                    - W
+                                    - X
+                                    - 'Y'
+                                    - PA
+                                    - CTS
+                                    - SG
+                                    - PS
+                                    - GA
+                                    - OA
+                                    - EF
+                                    - REF
+                                activite:
+                                  description: >-
+                                    Désignation spécifique de l'exploitation.
+                                    (exemple : Pour un type R - "Crèche")
+                                  type: string
+                                  maxLength: 4096
+                          nullable: true
+                        activites_secondaire:
+                          description: >-
+                            Les activités secondaires sont les activités
+                            exercées dans l'établissement en plus de l'activité
+                            principale.
+                          type: array
+                          maxItems: 5
+                          items:
+                            type: object
+                            title: Objet Activité ERP
+                            description: >-
+                              Un ERP est associé à un type d'activité selon la
+                              nature de leur exploitation. Il est codifié par
+                              une ou plusieurs lettres, en fonction de la nature
+                              et de l'activité de l'exploitation.
+                            properties:
+                              type:
+                                description: >-
+                                  Le type est désignée par une ou un ensemble de
+                                  lettres définies par l’article GN 1 du
+                                  règlement de sécurité  incendie dans les ERP.
+                                  Voir :
+                                  https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487
+                                type: string
+                                enum:
+                                  - J
+                                  - L
+                                  - M
+                                  - 'N'
+                                  - O
+                                  - P
+                                  - R
+                                  - S
+                                  - T
+                                  - U
+                                  - V
+                                  - W
+                                  - X
+                                  - 'Y'
+                                  - PA
+                                  - CTS
+                                  - SG
+                                  - PS
+                                  - GA
+                                  - OA
+                                  - EF
+                                  - REF
+                              activite:
+                                description: >-
+                                  Désignation spécifique de l'exploitation.
+                                  (exemple : Pour un type R - "Crèche")
+                                type: string
+                                maxLength: 4096
+                          nullable: true
+                        categorie:
+                          description: >-
+                            La catégorie d'un ERP est déterminée par le type
+                            d'activité principale exercée dans l'établissement.
+                            Voir :
+                            https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+                          type: integer
+                          minimum: 1
+                          maximum: 5
+                          format: int32
+                          enum:
+                            - 1
+                            - 2
+                            - 3
+                            - 4
+                            - 5
+                          nullable: true
+                        effectif_public:
+                          description: >-
+                            L'effectif du public est le nombre de personnes
+                            pouvant être accueillies dans l'établissement.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 99999
+                          nullable: true
+                        effectif_personnel:
+                          description: >-
+                            L'effectif du personnel est le nombre de personnes
+                            travaillant dans l'établissement.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 99999
+                          nullable: true
+                        presence_locaux_sommeil:
+                          description: >-
+                            Les ERP avec locaux à sommeil sont des
+                            établissements qui comportent des locaux réservés au
+                            sommeil du public la nuit.
+                          type: boolean
+                          nullable: true
+                        sous_sol_accessible_au_public:
+                          description: >-
+                            Les sous-sols accessibles au public sont des locaux
+                            situés en sous-sol et accessibles au public.
+                          type: boolean
+                          nullable: true
+                        surface_totale:
+                          description: La surface totale est la surface totale des locaux.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 99999
+                          nullable: true
+                        surface_accessible_au_public:
+                          description: >-
+                            La surface accessible au public est la surface
+                            totale des locaux accessibles au public.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 99999
+                          nullable: true
+                        r143_20:
+                          description: >-
+                            Les établissements recevant du public qui ne
+                            correspondent à aucun des types définis par le
+                            règlement de sécurité sont néanmoins assujettis aux
+                            prescriptions du présent chapitre via l'activation
+                            du R143-20. Les mesures de sécurité à y appliquer
+                            sont précisées, après avis de la commission de
+                            sécurité compétente, en tenant compte de celles qui
+                            sont imposées aux types d'établissements dont la
+                            nature d'exploitation se rapproche le plus de celle
+                            qui est envisagée. Voir :
+                            https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979
+                          type: boolean
+                          nullable: true
+                        plancher_bas_du_dernier_niveau:
+                          description: >-
+                            Le plancher bas du dernier niveau est le plancher le
+                            plus bas de la construction.
+                          type: string
+                          enum:
+                            - '>8m'
+                            - <8m
+                          nullable: true
+                        plancher_bas_du_dernier_niveau_accessible_au_public:
+                          description: >-
+                            Le plancher bas du dernier niveau accessible au
+                            public est le plancher le plus bas accessible au
+                            public.
+                          type: string
+                          enum:
+                            - '>8m'
+                            - <8m
+                          nullable: true
+                        type_cloisonnement:
+                          description: >-
+                            Les cloisons sont des éléments de construction
+                            verticaux pour limiter la propagation du feu et des
+                            fumées à travers la construction.
+                          type: string
+                          enum:
+                            - Traditionnels
+                            - Secteurs
+                            - Compartiments
+                          nullable: true
+                        locaux:
+                          description: >-
+                            Les locaux sont des espaces délimités par des
+                            cloisons.
+                          type: string
+                          enum:
+                            - Risque Courant
+                            - Risque Moyen
+                            - Risque Important
+                          nullable: true
+                        sprinklage:
+                          description: >-
+                            Le sprinklage est un système d'extinction
+                            automatique à eau.
+                          type: boolean
+                          nullable: true
+                        degagement_normaux:
+                          description: >-
+                            Dégagements comptants dans le nombre minimal de
+                            dégagements imposés par la réglementation.
+                          type: array
+                          maxItems: 5
+                          items:
+                            type: object
+                            title: Objet Dégagement
+                            description: >-
+                              Un dégagement est toute partie de la construction
+                              permettant le cheminement d'évacuation des
+                              occupants : porte, sortie, issue, circulation
+                              horizontale, zone de circulation, escalier,
+                              couloir, rampe ... Il est important de prendre en
+                              considération que leur nombre diffère de celui du
+                              nombre d'unités de passage. En effet, le nombre
+                              d'occupants qui empruntent le cheminement, à son
+                              point de départ ou après la jonction de plusieurs
+                              dégagements, dépend le plus souvent de la largeur
+                              initiale de ce cheminement. Celle-ci se calcule en
+                              fonction d'une largeur type appelée « unité de
+                              passage » (UP) de 0,60 m.
+                            properties:
+                              nombre_degagements:
+                                description: Nombre de dégagements.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 255
+                              nombre_unite_passage:
+                                description: Nombre d'unités de passage.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 255
+                          nullable: true
+                        degagements_accessoires:
+                          description: >-
+                            Dégagements imposés lorsque exceptionnellement les
+                            dégagements normaux ne sont pas judicieusement
+                            répartis dans le local, l'étage, le secteur, le
+                            compartiment ou l'établissement.
+                          type: array
+                          maxItems: 5
+                          items:
+                            type: object
+                            title: Objet Dégagement
+                            description: >-
+                              Un dégagement est toute partie de la construction
+                              permettant le cheminement d'évacuation des
+                              occupants : porte, sortie, issue, circulation
+                              horizontale, zone de circulation, escalier,
+                              couloir, rampe ... Il est important de prendre en
+                              considération que leur nombre diffère de celui du
+                              nombre d'unités de passage. En effet, le nombre
+                              d'occupants qui empruntent le cheminement, à son
+                              point de départ ou après la jonction de plusieurs
+                              dégagements, dépend le plus souvent de la largeur
+                              initiale de ce cheminement. Celle-ci se calcule en
+                              fonction d'une largeur type appelée « unité de
+                              passage » (UP) de 0,60 m.
+                            properties:
+                              nombre_degagements:
+                                description: Nombre de dégagements.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 255
+                              nombre_unite_passage:
+                                description: Nombre d'unités de passage.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 255
+                          nullable: true
+                        degagement_supplementaires:
+                          description: >-
+                            Dégagements en surnombres des autres dégagements (ou
+                            qui n'est pas utilisé en permanence par le public).
+                          type: array
+                          maxItems: 5
+                          items:
+                            type: object
+                            title: Objet Dégagement
+                            description: >-
+                              Un dégagement est toute partie de la construction
+                              permettant le cheminement d'évacuation des
+                              occupants : porte, sortie, issue, circulation
+                              horizontale, zone de circulation, escalier,
+                              couloir, rampe ... Il est important de prendre en
+                              considération que leur nombre diffère de celui du
+                              nombre d'unités de passage. En effet, le nombre
+                              d'occupants qui empruntent le cheminement, à son
+                              point de départ ou après la jonction de plusieurs
+                              dégagements, dépend le plus souvent de la largeur
+                              initiale de ce cheminement. Celle-ci se calcule en
+                              fonction d'une largeur type appelée « unité de
+                              passage » (UP) de 0,60 m.
+                            properties:
+                              nombre_degagements:
+                                description: Nombre de dégagements.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 255
+                              nombre_unite_passage:
+                                description: Nombre d'unités de passage.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 255
+                          nullable: true
+                        presence_eas_ou_equivalents:
+                          description: >-
+                            Les espaces d'attente sécurisés prévus à l'article
+                            GN 8 peuvent être aménagés dans tous les espaces
+                            accessibles au public ou au personnel, à l'exception
+                            des locaux à risques particuliers. Ils peuvent ne
+                            pas être exclusivement destinés à cette fonction,
+                            sous réserve de ne pas contenir d'éléments pouvant
+                            remettre en cause l'objectif de sécurité attendu.
+                          type: boolean
+                          nullable: true
+                        presence_desenfumage_mécanique:
+                          description: >-
+                            Le désenfumage mécanique est un système de
+                            ventilation qui permet d'évacuer les fumées et les
+                            gaz toxiques en cas d'incendie.
+                          type: boolean
+                          nullable: true
+                        presence_desenfumage_naturel:
+                          description: >-
+                            Le désenfumage naturel est un système de ventilation
+                            qui permet d'évacuer les fumées et les gaz toxiques
+                            en cas d'incendie.
+                          type: boolean
+                          nullable: true
+                        puissance_chaufferie:
+                          description: Puissance de la chaufferie
+                          type: string
+                          enum:
+                            - '>70kW'
+                            - <70kW
+                            - Non
+                          nullable: true
+                        presence_gaz_chaufferie:
+                          description: Présence de gaz en chaufferie
+                          type: boolean
+                          nullable: true
+                        puissance_cuisine:
+                          description: Puissance de la cuisine
+                          type: string
+                          enum:
+                            - '>20kW'
+                            - <20kW
+                            - Non
+                          nullable: true
+                        presence_gaz_cuisine:
+                          description: Présence de gaz en cuisine
+                          type: boolean
+                          nullable: true
+                        presence_ria:
+                          description: >-
+                            Les RIA sont des robinets d'incendie armés. Ils sont
+                            des équipements de lutte contre l'incendie.
+                          type: boolean
+                          nullable: true
+                        deversoirs_ponctuels:
+                          description: >-
+                            Les déversoirs servent à pouvoir inonder
+                            instantanément les locaux où ils sont installés.
+                          type: boolean
+                          nullable: true
+                        elements_de_constructions_irrigues:
+                          description: >-
+                            Des rideaux d'eau composés de canalisations munies
+                            de diffuseurs adaptés peuvent être imposés pour
+                            améliorer la résistance au feu de certains éléments
+                            de construction (cloisons, rideaux, portes, etc.).
+                            Ils constituent des éléments de construction
+                            irrigués.
+                          type: boolean
+                          nullable: true
+                        presence_deci:
+                          description: Dispositif DECI présent et suffisant
+                          type: boolean
+                          nullable: true
+                        presence_colonnes_seches:
+                          description: Colonnes sèches
+                          type: boolean
+                          nullable: true
+                        presence_colonnes_en_charge:
+                          description: Colonnes en charge (ou colonnes humides)
+                          type: boolean
+                          nullable: true
+                        installation_extinction:
+                          description: >-
+                            Installation d'extinction automatique à eau : -
+                            Automatique - Manuelle - Autres
+                          type: string
+                          enum:
+                            - Automatique
+                            - Manuelle
+                            - Autres
+                          nullable: true
+                        service_de_securite_incendie:
+                          description: >-
+                            Types de service de sécurité incendie : - Personnel
+                            désigné et formé ; - SSIAP ; - Sapeurs- pompiers ; -
+                            Combinaison des différentes possibilités ;
+                          type: string
+                          enum:
+                            - Personnel désigné et formé
+                            - SSIAP
+                            - Sapeurs- pompiers
+                            - Combinaison des différentes possibilités
+                            - Non
+                          nullable: true
+                        type_ssi:
+                          description: >-
+                            Il existe 5 types de SSI : SSI E : comprend
+                            éventuellement un dispositif de commande manuel DCM
+                            (de désenfumage naturel) ; SSI D : comprend au
+                            minimum un dispositif de commandes manuelles
+                            regroupés DCMR (de désenfumage naturel) ; SSI C :
+                            des dispositifs de commandes avec signalisation DCS
+                            (si le système comporte des DAS dont la position
+                            d’attente et/ou de sécurité doit être surveillée :
+                            cas du désenfumage mécanique) ; SSI B : un
+                            centralisateur de mise en sécurité incendie (CMSI) ;
+                            SSI A : un système de détection incendie (SDI)et un
+                            centralisateur de mise en sécurité incendie (CMSI).
+                          type: string
+                          enum:
+                            - A
+                            - B
+                            - C
+                            - D
+                            - E
+                            - Non
+                          nullable: true
+                        type_alarme:
+                          description: >-
+                            Il existe 5 types d’alarme incendie: Les alarmes
+                            incendie Type 4 (Système le plus simple) ; Les
+                            alarmes incendie Type 3 ; Les alarmes incendie Type
+                            2B ; Les alarmes incendie Type 2A ; Les alarmes
+                            incendie Type 1 (Système le plus complexe).
+                          type: string
+                          enum:
+                            - '1'
+                            - 2A
+                            - 2B
+                            - '3'
+                            - '4'
+                          nullable: true
+                        temporisation_alarme_en_minutes:
+                          description: Temporisation de l'alarme en minutes
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 255
+                          nullable: true
+                        desenfumage_commande_par_le_ssi:
+                          description: Désenfumage commandé par le SSI
+                          type: boolean
+                          nullable: true
+                        nombre_de_zones_alarmes:
+                          description: Nombre de zones d'alarmes
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 99999
+                          nullable: true
+                        ligne_telephonique_reliee_au_cta:
+                          description: La ligne téléphonique est reliée au CTA
+                          type: boolean
+                          nullable: true
+                        parafoudre:
+                          description: Présence d'un parafoudre
+                          type: boolean
+                          nullable: true
+                observations:
+                  description: Observations sur l'analyse de risque.
+                  type: string
+                  maxLength: 4096
+                  nullable: true
+                prise_de_note_interne:
+                  description: Prise de note interne.
+                  type: string
+                  maxLength: 4096
+                  nullable: true
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RapportEtude'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-rapport-etude-dossier
+  /dossiers/{dossier_id}/rapport_etude/prescriptions:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des prescriptions sur le rapport d'étude
+      description: Récupération de la liste des prescriptions sur le rapport d'étude.
+      operationId: GetPrescriptionsRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets
+                    type: array
+                    maxItems: 50
+                    items:
+                      $ref: '#/components/schemas/PrescriptionAnalyseDeRisque'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-prescriptions-rapport-etude-dossier
+    post:
+      tags:
+        - Dossiers API
+      summary: Ajout d'une prescription sur le rapport d'étude
+      description: Ajout d'une prescription sur le rapport d'étude.
+      operationId: PostPrescriptionsRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Prescription Analyse de Risque
+              description: >-
+                Liaison entre une prescription et une analyse de risque sur un
+                dossier. Elle est motivée par un facteur de dangerosité et des
+                mesures compensatoires et complémentaires.
+              allOf:
+                - type: object
+                  title: Objet Prescription
+                  description: >-
+                    La prescription réglementaire est une mesure de prévention
+                    et de sauvegarde propre à assurer la sécurité des personnes.
+                    Elle est décrite à travers un texte libre motivé par un ou
+                    des supports réglementaires. Le règlement de sécurité
+                    comprend des prescriptions générales communes à tous les
+                    établissements et d'autres particulières à chaque type
+                    d'établissement. Il précise les cas dans lesquels les
+                    obligations qu'il définit s'imposent à la fois aux
+                    constructeurs, propriétaires, installateurs et exploitants
+                    ou à certains de ceux-ci seulement.
+                  properties:
+                    contenu:
+                      description: Contenu de la prescription.
+                      type: string
+                      maxLength: 4096
+                    type:
+                      description: Classement de la prescription.
+                      type: string
+                      maxLength: 4096
+                      enum:
+                        - liee_a_l_exploitation
+                        - liee_a_l_amelioration
+                        - rappel_reglementaire
+                    supports_reglementaires_id:
+                      description: >-
+                        Les identifiants des supports réglementaires de la
+                        prescription.
+                      type: array
+                      maxItems: 255
+                      items:
+                        type: string
+                        format: uuid
+                        maxLength: 4096
+                  required:
+                    - contenu
+                    - type
+                - type: object
+                  properties:
+                    numero:
+                      description: Numéro d'ordre de la prescription
+                      type: integer
+                      format: int32
+                      minimum: 1
+                      maximum: 999
+                    facteur_dangerosite:
+                      description: Facteur de dangerosité de la prescription
+                      type: integer
+                      format: int32
+                      minimum: 0
+                      maximum: 3
+                  required:
+                    - numero
+                    - facteur_dangerosite
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrescriptionAnalyseDeRisque'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-prescriptions-rapport-etude-dossier
   /dossiers/{dossier_id}/tags:
     get:
       tags:
@@ -11561,6 +14220,7 @@ paths:
                                           required:
                                             - type
                                             - activite
+                                      nullable: true
                                     activites_secondaire:
                                       description: >-
                                         Les activités secondaires sont les
@@ -12072,6 +14732,11 @@ paths:
                           required:
                             - statut
                             - libelle
+                date_pc_initial:
+                  description: Avis d'exploitation de l'ERP.
+                  type: string
+                  format: date-time
+                  maxLength: 4096
               required:
                 - implantation
                 - descriptif_technique
@@ -32298,553 +34963,6 @@ paths:
       x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: utilisateurs
       x-extension-metarisc-codegen-operation: paginate-utilisateur-organisations
-  /workflows/{workflow_id}/documents:
-    get:
-      tags:
-        - Workflows API
-      summary: Liste des documents
-      description: Récupération de la liste des documents.
-      operationId: PaginateDocumentsWorkflowWorkflows
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: workflow_id
-          in: path
-          required: true
-          description: Workflow Id
-          schema:
-            type: string
-            maxLength: 255
-        - $ref: '#/components/parameters/PaginationPage'
-        - $ref: '#/components/parameters/PaginationPerPage'
-        - in: header
-          name: Metarisc-Org-Id
-          description: >-
-            Identifiant de l'organisation Metarisc sur laquelle réaliser
-            l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    description: Tableau d'objets contenu dans la page.
-                    type: array
-                    maxItems: 200
-                    items:
-                      $ref: '#/components/schemas/PieceJointe'
-                  meta:
-                    type: object
-                    properties:
-                      pagination:
-                        $ref: '#/components/schemas/PaginationMetadata'
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: >-
-                Indique combien de temps le client doit attendre avant de faire
-                une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 255
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-ispagination: true
-      x-extension-metarisc-codegen-name: workflows
-      x-extension-metarisc-codegen-operation: paginate-workflow-documents
-    post:
-      tags:
-        - Workflows API
-      summary: Ajout d'un document
-      description: Ajout d'un document.
-      operationId: PostDocumentsWorkflowWorkflows
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: workflow_id
-          in: path
-          required: true
-          description: Workflow Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: >-
-            Identifiant de l'organisation Metarisc sur laquelle réaliser
-            l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              title: Objet Piece Jointe
-              description: >-
-                Document représentant un fichier informatique stocké sur
-                internet.
-              properties:
-                url:
-                  description: Point de stockage du fichier.
-                  type: string
-                  format: uri
-                  maxLength: 4096
-                nom:
-                  description: Nom du fichier joint.
-                  type: string
-                  maxLength: 4096
-                description:
-                  description: Description du fichier joint.
-                  type: string
-                  maxLength: 4096
-                  nullable: true
-                type:
-                  description: Type de la pièce jointe.
-                  type: string
-                  enum:
-                    - photo
-                    - plan
-                    - annexe
-                    - divers
-                est_sensible:
-                  description: >-
-                    Information permettant de savoir si le contenu du document
-                    doit être considéré comme sensible par Metarisc.
-                  type: boolean
-              required:
-                - url
-                - est_sensible
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
-      responses:
-        '201':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PieceJointe'
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: >-
-                Indique combien de temps le client doit attendre avant de faire
-                une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 255
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: >-
-                Header pour afficher la limite autorisée jusqu'à ce que le quota
-                soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: >-
-                Header pour afficher le temps restant (en secondes) jusqu'à ce
-                que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: >-
-                Header pour afficher le nombre de requêtes disponibles jusqu'à
-                ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: >-
-                Indique si la réponse peut être partagée avec la requête
-                provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: workflows
-      x-extension-metarisc-codegen-operation: post-documents-workflow
   /workflows/{workflow_id}:
     get:
       tags:
@@ -33127,930 +35245,28 @@ paths:
               description: >-
                 Étape du traitement d'un dossier. Une étape est liée à un groupe
                 de travail ainsi qu'a un nombre de champs à valider.
-              oneOf:
-                - title: 'Objet Workflow : Passage en commission de sécurité'
-                  description: Workflow de gestion des passages en commission de sécurité.
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 4096
-                    - type: object
-                      properties:
-                        type:
-                          description: Type du workflow.
-                          type: string
-                          enum:
-                            - passage_commission
-                        commission_date:
-                          type: object
-                          title: Objet Passage en Commission
-                          description: Représente une date de passage en commission.
-                          properties:
-                            id:
-                              description: Identifiant unique de l'objet.
-                              type: string
-                              format: uuid
-                              maxLength: 4096
-                              x-extension-metarisc-property-mutability:
-                                - context: query
-                            date_debut:
-                              description: >-
-                                Date de début du passage en commission
-                                programmée.
-                              type: string
-                              format: date-time
-                              maxLength: 4096
-                              x-extension-metarisc-property-mutability:
-                                - context: query
-                                - context: create
-                                  required: true
-                                - context: update
-                            date_fin:
-                              description: Date de fin du passage en commission programmée.
-                              type: string
-                              format: date-time
-                              maxLength: 4096
-                              x-extension-metarisc-property-mutability:
-                                - context: query
-                                - context: create
-                                  required: true
-                                - context: update
-                            type:
-                              description: Type du passage en commission.
-                              type: string
-                              enum:
-                                - salle
-                                - visite_de_securite
-                                - groupe_de_visite
-                              x-extension-metarisc-property-mutability:
-                                - context: query
-                                - context: create
-                                  required: true
-                                - context: update
-                            libelle:
-                              description: >-
-                                Libellé de la date de passage en commission.
-                                Souvent utile pour affichage aux utilisateurs.
-                              type: string
-                              maxLength: 4096
-                              x-extension-metarisc-property-mutability:
-                                - context: query
-                                - context: create
-                                  required: true
-                                - context: update
-                        avis_de_commission:
-                          type: object
-                          title: Objet Avis
-                          description: Objet représentant un avis générique.
-                          properties:
-                            type:
-                              description: Type de l'avis donné.
-                              type: string
-                              enum:
-                                - favorable
-                                - defavorable
-                      required:
-                        - type
-                - title: 'Objet Workflow : Analyse de Risque'
-                  description: Workflow de gestion des analyses de risque.
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 4096
-                    - type: object
-                      properties:
-                        type:
-                          description: Type du workflow.
-                          type: string
-                          enum:
-                            - analyse_de_risque
-                        analyse_risque:
-                          description: Analyse des risques de l'établissement.
-                          allOf:
-                            - type: object
-                              title: Objet CLICDVCREM
-                              description: >-
-                                Objet représentant les caractéristiques liées à
-                                l'activité, l'implantation, la construction, les
-                                dégagements, la ventilation et désenfumage,
-                                l'électricité, éclairage, chauffage et
-                                climatisation, les risques particuliers, les
-                                moyens de secours d'un ERP.
-                              properties:
-                                activite_principale:
-                                  description: >-
-                                    L'activité principale est l'activité exercée
-                                    dans l'établissement.
-                                  allOf:
-                                    - type: object
-                                      title: Objet Activité ERP
-                                      description: >-
-                                        Un ERP est associé à un type d'activité
-                                        selon la nature de leur exploitation. Il
-                                        est codifié par une ou plusieurs
-                                        lettres, en fonction de la nature et de
-                                        l'activité de l'exploitation.
-                                      properties:
-                                        type:
-                                          description: >-
-                                            Le type est désignée par une ou un
-                                            ensemble de lettres définies par
-                                            l’article GN 1 du règlement de sécurité 
-                                            incendie dans les ERP. Voir :
-                                            https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487
-                                          type: string
-                                          enum:
-                                            - J
-                                            - L
-                                            - M
-                                            - 'N'
-                                            - O
-                                            - P
-                                            - R
-                                            - S
-                                            - T
-                                            - U
-                                            - V
-                                            - W
-                                            - X
-                                            - 'Y'
-                                            - PA
-                                            - CTS
-                                            - SG
-                                            - PS
-                                            - GA
-                                            - OA
-                                            - EF
-                                            - REF
-                                        activite:
-                                          description: >-
-                                            Désignation spécifique de
-                                            l'exploitation. (exemple : Pour un type
-                                            R - "Crèche")
-                                          type: string
-                                          maxLength: 4096
-                                activites_secondaire:
-                                  description: >-
-                                    Les activités secondaires sont les activités
-                                    exercées dans l'établissement en plus de
-                                    l'activité principale.
-                                  type: array
-                                  maxItems: 5
-                                  items:
-                                    type: object
-                                    title: Objet Activité ERP
-                                    description: >-
-                                      Un ERP est associé à un type d'activité
-                                      selon la nature de leur exploitation. Il
-                                      est codifié par une ou plusieurs lettres,
-                                      en fonction de la nature et de l'activité
-                                      de l'exploitation.
-                                    properties:
-                                      type:
-                                        description: >-
-                                          Le type est désignée par une ou un
-                                          ensemble de lettres définies par
-                                          l’article GN 1 du règlement de sécurité 
-                                          incendie dans les ERP. Voir :
-                                          https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487
-                                        type: string
-                                        enum:
-                                          - J
-                                          - L
-                                          - M
-                                          - 'N'
-                                          - O
-                                          - P
-                                          - R
-                                          - S
-                                          - T
-                                          - U
-                                          - V
-                                          - W
-                                          - X
-                                          - 'Y'
-                                          - PA
-                                          - CTS
-                                          - SG
-                                          - PS
-                                          - GA
-                                          - OA
-                                          - EF
-                                          - REF
-                                      activite:
-                                        description: >-
-                                          Désignation spécifique de
-                                          l'exploitation. (exemple : Pour un type
-                                          R - "Crèche")
-                                        type: string
-                                        maxLength: 4096
-                                  nullable: true
-                                categorie:
-                                  description: >-
-                                    La catégorie d'un ERP est déterminée par le
-                                    type d'activité principale exercée dans
-                                    l'établissement. Voir :
-                                    https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
-                                  type: integer
-                                  minimum: 1
-                                  maximum: 5
-                                  format: int32
-                                  enum:
-                                    - 1
-                                    - 2
-                                    - 3
-                                    - 4
-                                    - 5
-                                  nullable: true
-                                effectif_public:
-                                  description: >-
-                                    L'effectif du public est le nombre de
-                                    personnes pouvant être accueillies dans
-                                    l'établissement.
-                                  type: integer
-                                  format: int32
-                                  minimum: 0
-                                  maximum: 99999
-                                  nullable: true
-                                effectif_personnel:
-                                  description: >-
-                                    L'effectif du personnel est le nombre de
-                                    personnes travaillant dans l'établissement.
-                                  type: integer
-                                  format: int32
-                                  minimum: 0
-                                  maximum: 99999
-                                  nullable: true
-                                presence_locaux_sommeil:
-                                  description: >-
-                                    Les ERP avec locaux à sommeil sont des
-                                    établissements qui comportent des locaux
-                                    réservés au sommeil du public la nuit.
-                                  type: boolean
-                                  nullable: true
-                                sous_sol_accessible_au_public:
-                                  description: >-
-                                    Les sous-sols accessibles au public sont des
-                                    locaux situés en sous-sol et accessibles au
-                                    public.
-                                  type: boolean
-                                  nullable: true
-                                surface_totale:
-                                  description: >-
-                                    La surface totale est la surface totale des
-                                    locaux.
-                                  type: integer
-                                  format: int32
-                                  minimum: 0
-                                  maximum: 99999
-                                  nullable: true
-                                surface_accessible_au_public:
-                                  description: >-
-                                    La surface accessible au public est la
-                                    surface totale des locaux accessibles au
-                                    public.
-                                  type: integer
-                                  format: int32
-                                  minimum: 0
-                                  maximum: 99999
-                                  nullable: true
-                                r143_20:
-                                  description: >-
-                                    Les établissements recevant du public qui ne
-                                    correspondent à aucun des types définis par
-                                    le règlement de sécurité sont néanmoins
-                                    assujettis aux prescriptions du présent
-                                    chapitre via l'activation du R143-20. Les
-                                    mesures de sécurité à y appliquer sont
-                                    précisées, après avis de la commission de
-                                    sécurité compétente, en tenant compte de
-                                    celles qui sont imposées aux types
-                                    d'établissements dont la nature
-                                    d'exploitation se rapproche le plus de celle
-                                    qui est envisagée. Voir :
-                                    https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979
-                                  type: boolean
-                                  nullable: true
-                                plancher_bas_du_dernier_niveau:
-                                  description: >-
-                                    Le plancher bas du dernier niveau est le
-                                    plancher le plus bas de la construction.
-                                  type: string
-                                  enum:
-                                    - '>8m'
-                                    - <8m
-                                  nullable: true
-                                plancher_bas_du_dernier_niveau_accessible_au_public:
-                                  description: >-
-                                    Le plancher bas du dernier niveau accessible
-                                    au public est le plancher le plus bas
-                                    accessible au public.
-                                  type: string
-                                  enum:
-                                    - '>8m'
-                                    - <8m
-                                  nullable: true
-                                type_cloisonnement:
-                                  description: >-
-                                    Les cloisons sont des éléments de
-                                    construction verticaux pour limiter la
-                                    propagation du feu et des fumées à travers
-                                    la construction.
-                                  type: string
-                                  enum:
-                                    - Traditionnels
-                                    - Secteurs
-                                    - Compartiments
-                                  nullable: true
-                                locaux:
-                                  description: >-
-                                    Les locaux sont des espaces délimités par
-                                    des cloisons.
-                                  type: string
-                                  enum:
-                                    - Risque Courant
-                                    - Risque Moyen
-                                    - Risque Important
-                                  nullable: true
-                                sprinklage:
-                                  description: >-
-                                    Le sprinklage est un système d'extinction
-                                    automatique à eau.
-                                  type: boolean
-                                  nullable: true
-                                degagement_normaux:
-                                  description: >-
-                                    Dégagements comptants dans le nombre minimal
-                                    de dégagements imposés par la
-                                    réglementation.
-                                  type: array
-                                  maxItems: 5
-                                  items:
-                                    type: object
-                                    title: Objet Dégagement
-                                    description: >-
-                                      Un dégagement est toute partie de la
-                                      construction permettant le cheminement
-                                      d'évacuation des occupants : porte,
-                                      sortie, issue, circulation horizontale,
-                                      zone de circulation, escalier, couloir,
-                                      rampe ... Il est important de prendre en
-                                      considération que leur nombre diffère de
-                                      celui du nombre d'unités de passage. En
-                                      effet, le nombre d'occupants qui
-                                      empruntent le cheminement, à son point de
-                                      départ ou après la jonction de plusieurs
-                                      dégagements, dépend le plus souvent de la
-                                      largeur initiale de ce cheminement.
-                                      Celle-ci se calcule en fonction d'une
-                                      largeur type appelée « unité de passage »
-                                      (UP) de 0,60 m.
-                                    properties:
-                                      nombre_degagements:
-                                        description: Nombre de dégagements.
-                                        type: integer
-                                        format: int32
-                                        minimum: 0
-                                        maximum: 255
-                                      nombre_unite_passage:
-                                        description: Nombre d'unités de passage.
-                                        type: integer
-                                        format: int32
-                                        minimum: 0
-                                        maximum: 255
-                                  nullable: true
-                                degagements_accessoires:
-                                  description: >-
-                                    Dégagements imposés lorsque
-                                    exceptionnellement les dégagements normaux
-                                    ne sont pas judicieusement répartis dans le
-                                    local, l'étage, le secteur, le compartiment
-                                    ou l'établissement.
-                                  type: array
-                                  maxItems: 5
-                                  items:
-                                    type: object
-                                    title: Objet Dégagement
-                                    description: >-
-                                      Un dégagement est toute partie de la
-                                      construction permettant le cheminement
-                                      d'évacuation des occupants : porte,
-                                      sortie, issue, circulation horizontale,
-                                      zone de circulation, escalier, couloir,
-                                      rampe ... Il est important de prendre en
-                                      considération que leur nombre diffère de
-                                      celui du nombre d'unités de passage. En
-                                      effet, le nombre d'occupants qui
-                                      empruntent le cheminement, à son point de
-                                      départ ou après la jonction de plusieurs
-                                      dégagements, dépend le plus souvent de la
-                                      largeur initiale de ce cheminement.
-                                      Celle-ci se calcule en fonction d'une
-                                      largeur type appelée « unité de passage »
-                                      (UP) de 0,60 m.
-                                    properties:
-                                      nombre_degagements:
-                                        description: Nombre de dégagements.
-                                        type: integer
-                                        format: int32
-                                        minimum: 0
-                                        maximum: 255
-                                      nombre_unite_passage:
-                                        description: Nombre d'unités de passage.
-                                        type: integer
-                                        format: int32
-                                        minimum: 0
-                                        maximum: 255
-                                  nullable: true
-                                degagement_supplementaires:
-                                  description: >-
-                                    Dégagements en surnombres des autres
-                                    dégagements (ou qui n'est pas utilisé en
-                                    permanence par le public).
-                                  type: array
-                                  maxItems: 5
-                                  items:
-                                    type: object
-                                    title: Objet Dégagement
-                                    description: >-
-                                      Un dégagement est toute partie de la
-                                      construction permettant le cheminement
-                                      d'évacuation des occupants : porte,
-                                      sortie, issue, circulation horizontale,
-                                      zone de circulation, escalier, couloir,
-                                      rampe ... Il est important de prendre en
-                                      considération que leur nombre diffère de
-                                      celui du nombre d'unités de passage. En
-                                      effet, le nombre d'occupants qui
-                                      empruntent le cheminement, à son point de
-                                      départ ou après la jonction de plusieurs
-                                      dégagements, dépend le plus souvent de la
-                                      largeur initiale de ce cheminement.
-                                      Celle-ci se calcule en fonction d'une
-                                      largeur type appelée « unité de passage »
-                                      (UP) de 0,60 m.
-                                    properties:
-                                      nombre_degagements:
-                                        description: Nombre de dégagements.
-                                        type: integer
-                                        format: int32
-                                        minimum: 0
-                                        maximum: 255
-                                      nombre_unite_passage:
-                                        description: Nombre d'unités de passage.
-                                        type: integer
-                                        format: int32
-                                        minimum: 0
-                                        maximum: 255
-                                  nullable: true
-                                presence_eas_ou_equivalents:
-                                  description: >-
-                                    Les espaces d'attente sécurisés prévus à
-                                    l'article GN 8 peuvent être aménagés dans
-                                    tous les espaces accessibles au public ou au
-                                    personnel, à l'exception des locaux à
-                                    risques particuliers. Ils peuvent ne pas
-                                    être exclusivement destinés à cette
-                                    fonction, sous réserve de ne pas contenir
-                                    d'éléments pouvant remettre en cause
-                                    l'objectif de sécurité attendu.
-                                  type: boolean
-                                  nullable: true
-                                presence_desenfumage_mécanique:
-                                  description: >-
-                                    Le désenfumage mécanique est un système de
-                                    ventilation qui permet d'évacuer les fumées
-                                    et les gaz toxiques en cas d'incendie.
-                                  type: boolean
-                                  nullable: true
-                                presence_desenfumage_naturel:
-                                  description: >-
-                                    Le désenfumage naturel est un système de
-                                    ventilation qui permet d'évacuer les fumées
-                                    et les gaz toxiques en cas d'incendie.
-                                  type: boolean
-                                  nullable: true
-                                puissance_chaufferie:
-                                  description: Puissance de la chaufferie
-                                  type: string
-                                  enum:
-                                    - '>70kW'
-                                    - <70kW
-                                    - Non
-                                  nullable: true
-                                presence_gaz_chaufferie:
-                                  description: Présence de gaz en chaufferie
-                                  type: boolean
-                                  nullable: true
-                                puissance_cuisine:
-                                  description: Puissance de la cuisine
-                                  type: string
-                                  enum:
-                                    - '>20kW'
-                                    - <20kW
-                                    - Non
-                                  nullable: true
-                                presence_gaz_cuisine:
-                                  description: Présence de gaz en cuisine
-                                  type: boolean
-                                  nullable: true
-                                presence_ria:
-                                  description: >-
-                                    Les RIA sont des robinets d'incendie armés.
-                                    Ils sont des équipements de lutte contre
-                                    l'incendie.
-                                  type: boolean
-                                  nullable: true
-                                deversoirs_ponctuels:
-                                  description: >-
-                                    Les déversoirs servent à pouvoir inonder
-                                    instantanément les locaux où ils sont
-                                    installés.
-                                  type: boolean
-                                  nullable: true
-                                elements_de_constructions_irrigues:
-                                  description: >-
-                                    Des rideaux d'eau composés de canalisations
-                                    munies de diffuseurs adaptés peuvent être
-                                    imposés pour améliorer la résistance au feu
-                                    de certains éléments de construction
-                                    (cloisons, rideaux, portes, etc.). Ils
-                                    constituent des éléments de construction
-                                    irrigués.
-                                  type: boolean
-                                  nullable: true
-                                presence_deci:
-                                  description: Dispositif DECI présent et suffisant
-                                  type: boolean
-                                  nullable: true
-                                presence_colonnes_seches:
-                                  description: Colonnes sèches
-                                  type: boolean
-                                  nullable: true
-                                presence_colonnes_en_charge:
-                                  description: Colonnes en charge (ou colonnes humides)
-                                  type: boolean
-                                  nullable: true
-                                installation_extinction:
-                                  description: >-
-                                    Installation d'extinction automatique à eau
-                                    : - Automatique - Manuelle - Autres
-                                  type: string
-                                  enum:
-                                    - Automatique
-                                    - Manuelle
-                                    - Autres
-                                  nullable: true
-                                service_de_securite_incendie:
-                                  description: >-
-                                    Types de service de sécurité incendie : -
-                                    Personnel désigné et formé ; - SSIAP ; -
-                                    Sapeurs- pompiers ; - Combinaison des
-                                    différentes possibilités ;
-                                  type: string
-                                  enum:
-                                    - Personnel désigné et formé
-                                    - SSIAP
-                                    - Sapeurs- pompiers
-                                    - Combinaison des différentes possibilités
-                                    - Non
-                                  nullable: true
-                                type_ssi:
-                                  description: >-
-                                    Il existe 5 types de SSI : SSI E : comprend
-                                    éventuellement un dispositif de commande
-                                    manuel DCM (de désenfumage naturel) ; SSI D
-                                    : comprend au minimum un dispositif de
-                                    commandes manuelles regroupés DCMR (de
-                                    désenfumage naturel) ; SSI C : des
-                                    dispositifs de commandes avec signalisation
-                                    DCS (si le système comporte des DAS dont la
-                                    position d’attente et/ou de sécurité doit
-                                    être surveillée : cas du désenfumage
-                                    mécanique) ; SSI B : un centralisateur de
-                                    mise en sécurité incendie (CMSI) ; SSI A :
-                                    un système de détection incendie (SDI)et un
-                                    centralisateur de mise en sécurité incendie
-                                    (CMSI).
-                                  type: string
-                                  enum:
-                                    - A
-                                    - B
-                                    - C
-                                    - D
-                                    - E
-                                    - Non
-                                  nullable: true
-                                type_alarme:
-                                  description: >-
-                                    Il existe 5 types d’alarme incendie: Les
-                                    alarmes incendie Type 4 (Système le plus
-                                    simple) ; Les alarmes incendie Type 3 ; Les
-                                    alarmes incendie Type 2B ; Les alarmes
-                                    incendie Type 2A ; Les alarmes incendie Type
-                                    1 (Système le plus complexe).
-                                  type: string
-                                  enum:
-                                    - '1'
-                                    - 2A
-                                    - 2B
-                                    - '3'
-                                    - '4'
-                                  nullable: true
-                                temporisation_alarme_en_minutes:
-                                  description: Temporisation de l'alarme en minutes
-                                  type: integer
-                                  format: int32
-                                  minimum: 0
-                                  maximum: 255
-                                  nullable: true
-                                desenfumage_commande_par_le_ssi:
-                                  description: Désenfumage commandé par le SSI
-                                  type: boolean
-                                  nullable: true
-                                nombre_de_zones_alarmes:
-                                  description: Nombre de zones d'alarmes
-                                  type: integer
-                                  format: int32
-                                  minimum: 0
-                                  maximum: 99999
-                                  nullable: true
-                                ligne_telephonique_reliee_au_cta:
-                                  description: La ligne téléphonique est reliée au CTA
-                                  type: boolean
-                                  nullable: true
-                                parafoudre:
-                                  description: Présence d'un parafoudre
-                                  type: boolean
-                                  nullable: true
-                        avis_rapporteur:
-                          type: object
-                          title: Objet Avis
-                          description: Objet représentant un avis générique.
-                          properties:
-                            type:
-                              description: Type de l'avis donné.
-                              type: string
-                              enum:
-                                - favorable
-                                - defavorable
-                        descriptif_effectifs:
-                          type: string
-                          maxLength: 4096
-                        facteur_dangerosite:
-                          type: integer
-                          format: int32
-                          minimum: 0
-                          maximum: 3
-                        derogations:
-                          type: string
-                          maxLength: 4096
-                        prescriptions:
-                          type: array
-                          maxItems: 255
-                          items:
-                            type: object
-                            title: Objet Prescription
-                            description: >-
-                              La prescription réglementaire est une mesure de
-                              prévention et de sauvegarde propre à assurer la
-                              sécurité des personnes. Elle est décrite à travers
-                              un texte libre motivé par un ou des supports
-                              réglementaires. Le règlement de sécurité comprend
-                              des prescriptions générales communes à tous les
-                              établissements et d'autres particulières à chaque
-                              type d'établissement. Il précise les cas dans
-                              lesquels les obligations qu'il définit s'imposent
-                              à la fois aux constructeurs, propriétaires,
-                              installateurs et exploitants ou à certains de
-                              ceux-ci seulement.
-                            properties:
-                              contenu:
-                                description: Contenu de la prescription.
-                                type: string
-                                maxLength: 4096
-                              type:
-                                description: Classement de la prescription.
-                                type: string
-                                maxLength: 4096
-                                enum:
-                                  - liee_a_l_exploitation
-                                  - liee_a_l_amelioration
-                                  - rappel_reglementaire
-                              supports_reglementaires_id:
-                                description: >-
-                                  Les identifiants des supports réglementaires
-                                  de la prescription.
-                                type: array
-                                maxItems: 255
-                                items:
-                                  type: string
-                                  format: uuid
-                                  maxLength: 4096
-                        mesures_compensatoires:
-                          type: string
-                          maxLength: 4096
-                        mesures_complementaires:
-                          type: string
-                          maxLength: 4096
-                      required:
-                        - type
-                - title: 'Objet Workflow : Arrivée secrétariat'
-                  description: Workflow de gestion des arrivées au secrétariat.
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 4096
-                    - type: object
-                      properties:
-                        type:
-                          description: Type du workflow.
-                          type: string
-                          enum:
-                            - arrivee_secretariat
-                        date_arrivee_secretariat:
-                          type: string
-                          format: date-time
-                          maxLength: 4096
-                        passage_commission:
-                          allOf:
-                            - type: object
-                              title: Objet Passage en Commission
-                              description: Représente une date de passage en commission.
-                              properties:
-                                date_debut:
-                                  description: >-
-                                    Date de début du passage en commission
-                                    programmée.
-                                  type: string
-                                  format: date-time
-                                  maxLength: 4096
-                                date_fin:
-                                  description: >-
-                                    Date de fin du passage en commission
-                                    programmée.
-                                  type: string
-                                  format: date-time
-                                  maxLength: 4096
-                                type:
-                                  description: Type du passage en commission.
-                                  type: string
-                                  enum:
-                                    - salle
-                                    - visite_de_securite
-                                    - groupe_de_visite
-                                libelle:
-                                  description: >-
-                                    Libellé de la date de passage en commission.
-                                    Souvent utile pour affichage aux
-                                    utilisateurs.
-                                  type: string
-                                  maxLength: 4096
-                      required:
-                        - type
-                - title: 'Objet Workflow : Consultation SIS'
-                  description: Workflow de gestion des consultations SIS.
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 4096
-                    - type: object
-                      properties:
-                        type:
-                          description: Type du workflow.
-                          type: string
-                          enum:
-                            - consultation_sis
-                        commission:
-                          allOf:
-                            - type: object
-                              title: Objet Commission
-                              description: >-
-                                Une commission est un organisme compétent pour
-                                donner des avis.
-                              properties:
-                                type:
-                                  description: >-
-                                    Type de la commission (peut être une
-                                    commission de sécurité, un conseil
-                                    départemental ...).
-                                  type: string
-                                  enum:
-                                    - Sous-commission départementale
-                                    - Commission communale
-                                    - Commission intercommunale
-                                    - Commission d'arrondissement
-                                    - CoDERST
-                                libelle:
-                                  description: Nom de la commission.
-                                  type: string
-                                  maxLength: 4096
-                                presidence_id:
-                                  description: >-
-                                    Identifiant de l'organisation présidant la
-                                    commission. Par défaut l'organisation tenant
-                                    la présidence est celle de l'utilisateur
-                                    connecté.
-                                  type: string
-                                  format: uuid
-                                  maxLength: 4096
-                                secretariat_id:
-                                  description: >-
-                                    Identifiant de l'organisation tenant le
-                                    secrétariat de la commission. Par défaut
-                                    l'organisation tenant le secrétariat est
-                                    celle de l'utilisateur connecté.
-                                  type: string
-                                  format: uuid
-                                  maxLength: 4096
-                      required:
-                        - type
-                - title: 'Objet Workflow : Validation'
-                  description: Workflow de gestion des validations.
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 4096
-                    - type: object
-                      properties:
-                        type:
-                          description: Type du workflow.
-                          type: string
-                          enum:
-                            - validation
-                        est_valide:
-                          description: Indique si le workflow est validé.
-                          type: boolean
-                      required:
-                        - type
-                        - est_valide
-                - title: 'Objet Workflow : Visite'
-                  allOf:
-                    - type: object
-                      title: Objet Workflow Base
-                      description: Objet Workflow de base.
-                      properties:
-                        observations:
-                          description: >-
-                            Une chaîne de caractères arbitraire rattachée à
-                            l'objet. Souvent utile pour affichage aux
-                            utilisateurs.
-                          type: string
-                          maxLength: 4096
-                    - type: object
-                      properties:
-                        type:
-                          description: Type du workflow.
-                          type: string
-                          enum:
-                            - visite
-                        passage_commission_id:
-                          type: string
-                          format: uuid
-                          maxLength: 4096
-                      required:
-                        - type
-                        - passage_commission_id
+              properties:
+                observations:
+                  description: >-
+                    Une chaîne de caractères arbitraire rattachée à l'objet.
+                    Souvent utile pour affichage aux utilisateurs.
+                  type: string
+                  maxLength: 4096
+                  nullable: true
+                type:
+                  description: Type du workflow.
+                  type: string
+                  enum:
+                    - analyse_de_risque
+                    - validation
+                    - arrivee_sis
+                    - arrivee_sis_prev
+                    - arrivee_secretariat_commission
+                    - consultation_sis
+                    - passage_commission
+                    - relecture
+              required:
+                - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
       responses:
         '200':
@@ -34810,6 +36026,7 @@ components:
           description: L'activité principale est l'activité exercée dans l'établissement.
           allOf:
             - $ref: '#/components/schemas/ActiviteErp'
+          nullable: true
         activites_secondaire:
           description: >-
             Les activités secondaires sont les activités exercées dans
@@ -35179,6 +36396,7 @@ components:
             - SIS
             - DDT/DDTM
             - REGION
+            - DISP
         presence_obligatoire:
           description: >-
             Le membre doit siéger obligatoirement lors des passages en
@@ -35632,6 +36850,15 @@ components:
           enum:
             - OUVERT
             - CLOS
+        modules:
+          description: Modules du dossier.
+          type: array
+          items:
+            type: string
+            enum:
+              - erp:analyse_de_risque
+              - deci:controle_technique_pei
+          maxItems: 25
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
     DossierDeci:
       type: object
@@ -35678,6 +36905,29 @@ components:
         - $ref: '#/components/schemas/DossierErp'
         - $ref: '#/components/schemas/DossierDeci'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+    DossierAffectation:
+      type: object
+      title: Objet Dossier Affectation
+      description: >-
+        Liaison entre un dossier et un utilisateur. Vous pouvez affecter
+        plusieurs personnes au dossier, y compris vous-même. Cela permet de
+        débloquer des droits spécifiques sur le traitement du dossier.
+      properties:
+        role:
+          description: Role sur le traitement du dossier.
+          type: string
+          enum:
+            - admin
+            - preventionniste
+            - secretariat_prev
+        utilisateur:
+          description: Utilisateur affecté au dossier.
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+      required:
+        - role
+        - utilisateur
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
     ERP:
       type: object
       title: Objet ERP
@@ -35714,6 +36964,12 @@ components:
           description: Avis d'exploitation de l'ERP.
           allOf:
             - $ref: '#/components/schemas/Avis'
+          nullable: true
+        date_pc_initial:
+          description: Avis d'exploitation de l'ERP.
+          type: string
+          format: date-time
+          maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
     Email:
@@ -35820,6 +37076,29 @@ components:
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
+    FilRougeMessage:
+      title: Objet Fil Rouge Message
+      description: Message associé à un fil rouge d'un dossier.
+      properties:
+        id:
+          description: Identifiant unique de l'objet.
+          type: string
+          format: uuid
+          maxLength: 255
+        message:
+          description: Contenu du message.
+          type: string
+          maxLength: 10000
+        date_de_creation:
+          description: Date de création du message.
+          type: string
+          format: date-time
+          maxLength: 255
+        auteur:
+          description: Auteur du message.
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
     Notification:
       type: object
       title: Notification
@@ -36097,6 +37376,7 @@ components:
             date ultérieure. Dans ce cas, la date de passage est reportée et un
             avis différé est émis.
           type: boolean
+          nullable: true
         observations:
           description: >-
             La commission de sécurité émet soit un avis favorable soit un avis
@@ -36104,6 +37384,7 @@ components:
             peut émettre des observations.
           type: string
           maxLength: 4096
+          nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
     PieceJointe:
       type: object
@@ -36190,6 +37471,30 @@ components:
           items:
             $ref: '#/components/schemas/PrescriptionSupportReglementaire'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
+    PrescriptionAnalyseDeRisque:
+      type: object
+      title: Objet Prescription Analyse de Risque
+      description: >-
+        Liaison entre une prescription et une analyse de risque sur un dossier.
+        Elle est motivée par un facteur de dangerosité et des mesures
+        compensatoires et complémentaires.
+      allOf:
+        - $ref: '#/components/schemas/Prescription'
+        - type: object
+          properties:
+            numero:
+              description: Numéro d'ordre de la prescription
+              type: integer
+              format: int32
+              minimum: 1
+              maximum: 999
+            facteur_dangerosite:
+              description: Facteur de dangerosité de la prescription
+              type: integer
+              format: int32
+              minimum: 0
+              maximum: 3
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
     PrescriptionSupportReglementaire:
       type: object
       title: Objet Support Réglementaire
@@ -36239,6 +37544,25 @@ components:
           type: string
           maxLength: 4096
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
+    RapportEtude:
+      title: 'Objet : Analyse de Risque'
+      description: Gestion de l'analyse de risque.
+      properties:
+        analyse_risque:
+          description: Analyse des risques.
+          allOf:
+            - $ref: '#/components/schemas/Clicdvcrem'
+        observations:
+          description: Observations sur l'analyse de risque.
+          type: string
+          maxLength: 4096
+          nullable: true
+        prise_de_note_interne:
+          description: Prise de note interne.
+          type: string
+          maxLength: 4096
+          nullable: true
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
     ReferenceExterieure:
       type: object
       title: Objet Référence Extérieure
@@ -36550,204 +37874,6 @@ components:
           maxLength: 4096
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
-    WorkflowAnalyseDeRisque:
-      title: 'Objet Workflow : Analyse de Risque'
-      description: Workflow de gestion des analyses de risque.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            type:
-              description: Type du workflow.
-              type: string
-              enum:
-                - analyse_de_risque
-            analyse_risque:
-              description: Analyse des risques de l'établissement.
-              allOf:
-                - $ref: '#/components/schemas/Clicdvcrem'
-            avis_rapporteur:
-              $ref: '#/components/schemas/Avis'
-            descriptif_effectifs:
-              type: string
-              maxLength: 4096
-            facteur_dangerosite:
-              type: integer
-              format: int32
-              minimum: 0
-              maximum: 3
-            derogations:
-              type: string
-              maxLength: 4096
-            prescriptions:
-              type: array
-              maxItems: 255
-              items:
-                $ref: '#/components/schemas/Prescription'
-            mesures_compensatoires:
-              type: string
-              maxLength: 4096
-            mesures_complementaires:
-              type: string
-              maxLength: 4096
-          required:
-            - type
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowAnalyseDeRisque'
-    WorkflowArriveeSecretariat:
-      title: 'Objet Workflow : Arrivée secrétariat'
-      description: Workflow de gestion des arrivées au secrétariat.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            type:
-              description: Type du workflow.
-              type: string
-              enum:
-                - arrivee_secretariat
-            date_arrivee_secretariat:
-              type: string
-              format: date-time
-              maxLength: 4096
-            passage_commission:
-              allOf:
-                - $ref: '#/components/schemas/PassageCommission'
-          required:
-            - type
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowArriveeSecretariat'
-    WorkflowBase:
-      type: object
-      title: Objet Workflow Base
-      description: Objet Workflow de base.
-      properties:
-        id:
-          description: Identifiant unique de l'objet.
-          type: string
-          format: uuid
-          maxLength: 4096
-        titre:
-          description: Titre du workflow.
-          type: string
-          maxLength: 4096
-        date_de_creation:
-          description: Date de création du workflow.
-          type: string
-          format: date-time
-          maxLength: 4096
-        date_de_debut:
-          description: >-
-            Date du déclenchement du workflow (date à laquelle il est passé
-            actif).
-          type: string
-          format: date-time
-          maxLength: 4096
-        date_de_fin:
-          description: >-
-            Date de fin de traitement du workflow (date à laquelle il est passé
-            en terminé).
-          type: string
-          format: date-time
-          maxLength: 4096
-        workflow_automatise:
-          description: Si le workflow a été géré par un processus automatisé.
-          type: boolean
-        etat:
-          description: >-
-            État du workflow. Le workflow peut être dans 3 états : - En attente
-            : Le workflow est en attente de la complétion d'autres workflows ; -
-            En cours :Le workflow devient actif pour traitement ; - Validé : Le
-            workflow est vérouillé et débloque d'autres workflows ou complète le
-            dossier ;
-          type: string
-          enum:
-            - VALIDE
-            - EN_COURS
-            - ATTENTE
-        observations:
-          description: >-
-            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
-            utile pour affichage aux utilisateurs.
-          type: string
-          maxLength: 4096
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowBase'
-    WorkflowConsultationSis:
-      title: 'Objet Workflow : Consultation SIS'
-      description: Workflow de gestion des consultations SIS.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            type:
-              description: Type du workflow.
-              type: string
-              enum:
-                - consultation_sis
-            commission:
-              allOf:
-                - $ref: '#/components/schemas/Commission'
-          required:
-            - type
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowConsultationSis'
-    WorkflowDossiersLies:
-      title: 'Objet Workflow : Dossiers Lies'
-      description: Workflow de gestion des dossiers liés.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            dossier_lie:
-              type: array
-              maxItems: 255
-              items:
-                $ref: '#/components/schemas/Dossier'
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowDossiersLies'
-    WorkflowPassageCommissionSecurite:
-      title: 'Objet Workflow : Passage en commission de sécurité'
-      description: Workflow de gestion des passages en commission de sécurité.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            type:
-              description: Type du workflow.
-              type: string
-              enum:
-                - passage_commission
-            commission_date:
-              $ref: '#/components/schemas/PassageCommission'
-            avis_de_commission:
-              $ref: '#/components/schemas/Avis'
-          required:
-            - type
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowPassageCommissionSecurite'
-    WorkflowRelectureSecretariat:
-      title: 'Objet Workflow : Relecture secrétariat'
-      description: Workflow de gestion des relectures secrétariat.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            est_relu:
-              type: boolean
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowRelectureSecretariat'
-    WorkflowRemiseEnServicePEI:
-      title: 'Objet Workflow : Remise En Service PEI'
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            pei_lie:
-              type: string
-              format: uuid
-              maxLength: 4096
-            anomalies_levees:
-              type: array
-              maxItems: 255
-              items:
-                type: string
-                format: uuid
-                maxLength: 4096
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowRemiseEnServicePEI'
     WorkflowStep:
       type: object
       title: Workflow-Step
@@ -36784,53 +37910,78 @@ components:
           items:
             $ref: '#/components/schemas/WorkflowStep'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
-    WorkflowValidation:
-      title: 'Objet Workflow : Validation'
-      description: Workflow de gestion des validations.
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            type:
-              description: Type du workflow.
-              type: string
-              enum:
-                - validation
-            est_valide:
-              description: Indique si le workflow est validé.
-              type: boolean
-          required:
-            - type
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowValidation'
-    WorkflowVisite:
-      title: 'Objet Workflow : Visite'
-      allOf:
-        - $ref: '#/components/schemas/WorkflowBase'
-        - type: object
-          properties:
-            type:
-              description: Type du workflow.
-              type: string
-              enum:
-                - visite
-            passage_commission:
-              allOf:
-                - $ref: '#/components/schemas/PassageCommission'
-          required:
-            - type
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowVisite'
     Workflow:
       title: Workflow
       description: >-
         Étape du traitement d'un dossier. Une étape est liée à un groupe de
         travail ainsi qu'a un nombre de champs à valider.
-      oneOf:
-        - $ref: '#/components/schemas/WorkflowPassageCommissionSecurite'
-        - $ref: '#/components/schemas/WorkflowAnalyseDeRisque'
-        - $ref: '#/components/schemas/WorkflowArriveeSecretariat'
-        - $ref: '#/components/schemas/WorkflowConsultationSis'
-        - $ref: '#/components/schemas/WorkflowValidation'
-        - $ref: '#/components/schemas/WorkflowVisite'
+      properties:
+        id:
+          description: Identifiant unique de l'objet.
+          type: string
+          format: uuid
+          maxLength: 255
+        titre:
+          description: Titre du workflow.
+          type: string
+          maxLength: 4096
+        date_de_creation:
+          description: Date de création du workflow.
+          type: string
+          format: date-time
+          maxLength: 255
+        date_de_debut:
+          description: >-
+            Date du déclenchement du workflow (date à laquelle il est passé
+            actif).
+          type: string
+          format: date-time
+          maxLength: 255
+          nullable: true
+        date_de_fin:
+          description: >-
+            Date de fin de traitement du workflow (date à laquelle il est passé
+            en terminé).
+          type: string
+          format: date-time
+          maxLength: 255
+          nullable: true
+        workflow_automatise:
+          description: Si le workflow a été géré par un processus automatisé.
+          type: boolean
+        etat:
+          description: >-
+            État du workflow. Le workflow peut être dans 3 états : - En attente
+            : Le workflow est en attente de la complétion d'autres workflows ; -
+            En cours :Le workflow devient actif pour traitement ; - Validé : Le
+            workflow est vérouillé et débloque d'autres workflows ou complète le
+            dossier ;
+          type: string
+          enum:
+            - VALIDE
+            - EN_COURS
+            - ATTENTE
+        observations:
+          description: >-
+            Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
+            utile pour affichage aux utilisateurs.
+          type: string
+          maxLength: 4096
+          nullable: true
+        type:
+          description: Type du workflow.
+          type: string
+          enum:
+            - analyse_de_risque
+            - validation
+            - arrivee_sis
+            - arrivee_sis_prev
+            - arrivee_secretariat_commission
+            - consultation_sis
+            - passage_commission
+            - relecture
+      required:
+        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
   parameters:
     PaginationPage:
