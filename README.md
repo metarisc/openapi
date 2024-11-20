@@ -19,3 +19,11 @@ Le nom de l'opération.
 ### `x-extension-metarisc-codegen-scope`
 
 La portée de l'opération (core, ping, moi ...).
+
+### `x-extension-metarisc-codegen-ispagination`
+
+Définit un endpoint paginé.
+
+### `x-extension-metarisc-codegen-islist`
+
+Définit un endpoint retournant une liste.
