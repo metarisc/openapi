@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-11-2024.3
+  version: 1.0/feature/filtres_erp_pei/20-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -13714,7 +13714,7 @@ paths:
             type: object
             additionalProperties:
               type: string
-              maxLength: 4096
+              maxLength: 255
         - name: presence_locaux_sommeil
           in: query
           description: Filtre sur la présence de locaux à sommeil dans l'ERP.
@@ -24622,7 +24622,7 @@ paths:
             type: object
             additionalProperties:
               type: string
-              maxLength: 4096
+              maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: >-
