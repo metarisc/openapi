@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/21-11-2024.1
+  version: 1.0/main/21-11-2024.2
   title: Metarisc API
   description: >-
 
@@ -13711,10 +13711,8 @@ paths:
             d'utilisation de ce filtre est : "titre:valeur" (exemple
             prevarisc_id:"5678").
           schema:
-            type: object
-            additionalProperties:
-              type: string
-              maxLength: 255
+            type: string
+            maxLength: 255
         - name: presence_locaux_sommeil
           in: query
           description: Filtre sur la présence de locaux à sommeil dans l'ERP.
@@ -24619,10 +24617,8 @@ paths:
             d'utilisation de ce filtre est : "titre:valeur" (exemple
             numero_62:"62041001").
           schema:
-            type: object
-            additionalProperties:
-              type: string
-              maxLength: 255
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: >-
