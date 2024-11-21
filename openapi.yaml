@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-11-2024.1
+  version: 1.0/main/21-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -35299,6 +35299,9 @@ paths:
                     - consultation_sis
                     - passage_commission
                     - relecture
+                    - visite
+                    - arrivee_secretariat
+                    - workflow
               required:
                 - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
@@ -37961,6 +37964,9 @@ components:
                 - consultation_sis
                 - passage_commission
                 - relecture
+                - visite
+                - arrivee_secretariat
+                - workflow
         needs:
           description: Les prérequis nécessaires à l'accomplissement de l'étape.
           type: array
@@ -38055,6 +38061,9 @@ components:
             - consultation_sis
             - passage_commission
             - relecture
+            - visite
+            - arrivee_secretariat
+            - workflow
       required:
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
