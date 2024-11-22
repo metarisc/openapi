@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/22-11-2024.1
+  version: 1.0/main/22-11-2024.2
   title: Metarisc API
   description: >-
 
@@ -37460,6 +37460,11 @@ components:
         plusieurs personnes au dossier, y compris vous-même. Cela permet de
         débloquer des droits spécifiques sur le traitement du dossier.
       properties:
+        id:
+          description: Identifiant unique de l'objet.
+          type: string
+          format: uuid
+          maxLength: 36
         role:
           description: Role sur le traitement du dossier.
           type: string
