@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/22-11-2024.2
+  version: 1.0/main/25-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -12344,6 +12344,28 @@ paths:
                   type: string
                   maxLength: 4096
                   nullable: true
+                proposition_avis:
+                  description: Proposition d'avis du préventionniste.
+                  type: string
+                  enum:
+                    - favorable
+                    - defavorable
+                  nullable: true
+                proposition_avis_observations:
+                  description: Observations sur l'avis du préventionniste.
+                  type: string
+                  maxLength: 4096
+                facteur_dangerosite:
+                  description: >-
+                    Facteur de dangerosité de la prescription. Il est déterminé
+                    par l'analyse de risque, et est classifié comme suit : - 0 :
+                    DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 :
+                    DANGEROSITÉ ELEVÉE
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 3
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       responses:
         '200':
@@ -21854,17 +21876,10 @@ paths:
               properties:
                 avis:
                   description: Avis rendu de la commission sur le dossier.
-                  allOf:
-                    - type: object
-                      title: Objet Avis
-                      description: Objet représentant un avis générique.
-                      properties:
-                        type:
-                          description: Type de l'avis donné.
-                          type: string
-                          enum:
-                            - favorable
-                            - defavorable
+                  type: string
+                  enum:
+                    - favorable
+                    - defavorable
                 date_de_passage:
                   description: >-
                     Heure à laquelle le passage du dossier est prévue à l'ordre
@@ -36549,18 +36564,6 @@ components:
           format: date-time
           maxLength: 25
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
-    Avis:
-      type: object
-      title: Objet Avis
-      description: Objet représentant un avis générique.
-      properties:
-        type:
-          description: Type de l'avis donné.
-          type: string
-          enum:
-            - favorable
-            - defavorable
-      x-extension-metarisc-codegen-schema-src: '#/components/schemas/Avis'
     Clicdvcrem:
       type: object
       title: Objet CLICDVCREM
@@ -37514,8 +37517,10 @@ components:
             - $ref: '#/components/schemas/DescriptifTechniqueERP'
         avis_exploitation:
           description: Avis d'exploitation de l'ERP.
-          allOf:
-            - $ref: '#/components/schemas/Avis'
+          type: string
+          enum:
+            - favorable
+            - defavorable
           nullable: true
         date_pc_initial:
           description: >-
@@ -37916,8 +37921,10 @@ components:
             - $ref: '#/components/schemas/Dossier'
         avis:
           description: Avis rendu de la commission sur le dossier.
-          allOf:
-            - $ref: '#/components/schemas/Avis'
+          type: string
+          enum:
+            - favorable
+            - defavorable
           nullable: true
         date_de_passage:
           description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
@@ -38118,6 +38125,27 @@ components:
           description: Prise de note interne.
           type: string
           maxLength: 4096
+          nullable: true
+        proposition_avis:
+          description: Proposition d'avis du préventionniste.
+          type: string
+          enum:
+            - favorable
+            - defavorable
+          nullable: true
+        proposition_avis_observations:
+          description: Observations sur l'avis du préventionniste.
+          type: string
+          maxLength: 4096
+        facteur_dangerosite:
+          description: >-
+            Facteur de dangerosité de la prescription. Il est déterminé par
+            l'analyse de risque, et est classifié comme suit : - 0 : DANGEROSITÉ
+            BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ ELEVÉE
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 3
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
     ReferenceExterieure:
