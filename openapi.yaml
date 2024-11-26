@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-11-2024.1
+  version: 1.0/main/26-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -24239,7 +24239,7 @@ paths:
                     Identifiant représentant l'organisation dans Plat'AU. Voir :
                     https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
                   type: string
-                  maxLength: 4096
+                  maxLength: 255
                   nullable: true
                 platau_active:
                   description: Activation de la passerelle Plat'AU pour l'organisation.
@@ -24251,7 +24251,12 @@ paths:
                     organisation.
                   type: string
                   format: uri
-                  maxLength: 4096
+                  maxLength: 255
+                  nullable: true
+                rapport_modele_rapport_etude:
+                  description: Modèle de rapport d'étude par défaut pour l'organisation.
+                  type: string
+                  maxLength: 255
                   nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       responses:
@@ -37811,7 +37816,7 @@ components:
             Identifiant représentant l'organisation dans Plat'AU. Voir :
             https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236
           type: string
-          maxLength: 4096
+          maxLength: 255
           nullable: true
         platau_active:
           description: Activation de la passerelle Plat'AU pour l'organisation.
@@ -37823,7 +37828,12 @@ components:
             organisation.
           type: string
           format: uri
-          maxLength: 4096
+          maxLength: 255
+          nullable: true
+        rapport_modele_rapport_etude:
+          description: Modèle de rapport d'étude par défaut pour l'organisation.
+          type: string
+          maxLength: 255
           nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
     PEI:
