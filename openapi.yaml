@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-11-2024.1
+  version: 1.0/feature/dossiers-infos/26-11-2024.1
   title: Metarisc API
   description: >-
 
@@ -16951,6 +16951,37 @@ paths:
                           enum:
                             - erp:autorisation_de_travaux
                             - erp:visite_periodique
+                        numero_urbanisme:
+                          description: Numéro d'urbanisme.
+                          type: string
+                          maxLength: 255
+                        numero_urbanisme_date:
+                          description: Date du numéro d'urbanisme.
+                          type: string
+                          format: date-time
+                          maxLength: 25
+                        demandeur:
+                          description: Demandeur ayant déposé le dossier.
+                          type: string
+                          maxLength: 255
+                        service_instructeur:
+                          description: >-
+                            Service instructeur du dossier. C'est un service
+                            administratif chargé de l'examen d'un dossier.
+                          type: string
+                          maxLength: 255
+                        descriptif_travaux:
+                          description: Descriptif des travaux.
+                          type: string
+                          maxLength: 4096
+                        date_limite_traitement:
+                          description: Date limite de traitement du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 25
+                        dossier_complet:
+                          description: Dossier complet.
+                          type: boolean
                       required:
                         - type
                 - type: object
@@ -27912,6 +27943,37 @@ paths:
                           enum:
                             - erp:autorisation_de_travaux
                             - erp:visite_periodique
+                        numero_urbanisme:
+                          description: Numéro d'urbanisme.
+                          type: string
+                          maxLength: 255
+                        numero_urbanisme_date:
+                          description: Date du numéro d'urbanisme.
+                          type: string
+                          format: date-time
+                          maxLength: 25
+                        demandeur:
+                          description: Demandeur ayant déposé le dossier.
+                          type: string
+                          maxLength: 255
+                        service_instructeur:
+                          description: >-
+                            Service instructeur du dossier. C'est un service
+                            administratif chargé de l'examen d'un dossier.
+                          type: string
+                          maxLength: 255
+                        descriptif_travaux:
+                          description: Descriptif des travaux.
+                          type: string
+                          maxLength: 4096
+                        date_limite_traitement:
+                          description: Date limite de traitement du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 25
+                        dossier_complet:
+                          description: Dossier complet.
+                          type: boolean
                       required:
                         - type
                 - type: object
@@ -37449,6 +37511,44 @@ components:
             erp:
               allOf:
                 - $ref: '#/components/schemas/ERP'
+            numero_urbanisme:
+              description: Numéro d'urbanisme.
+              type: string
+              maxLength: 255
+              nullable: true
+            numero_urbanisme_date:
+              description: Date du numéro d'urbanisme.
+              type: string
+              format: date-time
+              maxLength: 25
+              nullable: true
+            demandeur:
+              description: Demandeur ayant déposé le dossier.
+              type: string
+              maxLength: 255
+              nullable: true
+            service_instructeur:
+              description: >-
+                Service instructeur du dossier. C'est un service administratif
+                chargé de l'examen d'un dossier.
+              type: string
+              maxLength: 255
+              nullable: true
+            descriptif_travaux:
+              description: Descriptif des travaux.
+              type: string
+              maxLength: 4096
+              nullable: true
+            date_limite_traitement:
+              description: Date limite de traitement du dossier.
+              type: string
+              format: date-time
+              maxLength: 25
+              nullable: true
+            dossier_complet:
+              description: Dossier complet.
+              type: boolean
+              nullable: true
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
     Dossier:
       type: object
