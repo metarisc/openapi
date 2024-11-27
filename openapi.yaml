@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-11-2024.3
+  version: 1.0/main/27-11-2024.4
   title: Metarisc API
   description: >-
 
@@ -11371,7 +11371,14 @@ paths:
                           type: string
                           maxLength: 4096
                     - type: object
-                      properties: {}
+                      properties:
+                        type:
+                          description: Type du dossier.
+                          type: string
+                          enum:
+                            - deci:declaration_pei
+                      required:
+                        - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '200':
@@ -37353,9 +37360,10 @@ components:
             mois.
           type: integer
           format: int32
-          minimum: 12
+          minimum: 0
           maximum: 60
           multipleOf: 12
+          nullable: true
         libelle:
           description: >-
             Le nom commercial vise l'entreprise individuelle, le fonds de
@@ -37565,6 +37573,8 @@ components:
             pei:
               allOf:
                 - $ref: '#/components/schemas/PEI'
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierDeci'
     DossierErp:
       type: object
@@ -37621,6 +37631,8 @@ components:
               description: Dossier complet.
               type: boolean
               nullable: true
+          required:
+            - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
     Dossier:
       type: object
