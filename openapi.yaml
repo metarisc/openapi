@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-11-2024.1
+  version: 1.0/main/27-11-2024.2
   title: Metarisc API
   description: >-
 
@@ -11319,6 +11319,12 @@ paths:
                           maxLength: 4096
                     - type: object
                       properties:
+                        type:
+                          description: Type du dossier.
+                          type: string
+                          enum:
+                            - erp:autorisation_de_travaux
+                            - erp:visite_periodique
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -11350,6 +11356,8 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
+                      required:
+                        - type
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
