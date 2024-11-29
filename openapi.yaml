@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-11-2024.2
+  version: 1.0/main/29-11-2024.3
   title: Metarisc API
   description: >-
 
@@ -510,7 +510,7 @@ paths:
           schema:
             type: integer
             format: int32
-            maximum: 99999
+            maximum: 999999
             minimum: 0
         - in: header
           name: Metarisc-Org-Id
@@ -532,7 +532,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/AnomalieDECI'
                   meta:
@@ -540,6 +540,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -788,7 +793,7 @@ paths:
                   type: integer
                   format: int32
                   minimum: 0
-                  maximum: 99999
+                  maximum: 999999
                 texte:
                   description: Description de l'anomalie.
                   type: string
@@ -1557,7 +1562,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Commission'
                   meta:
@@ -1565,6 +1570,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -2102,7 +2112,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PassageCommission'
                   meta:
@@ -2110,6 +2120,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -2891,7 +2906,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/CommissionMembre'
                   meta:
@@ -2899,6 +2914,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -3913,7 +3933,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/CommissionMembre'
                   meta:
@@ -3921,6 +3941,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -4676,6 +4701,9 @@ paths:
                     Le membre doit siéger obligatoirement lors des passages en
                     commission.
                   type: boolean
+              required:
+                - titre
+                - presence_obligatoire
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
       responses:
         '200':
@@ -4929,7 +4957,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
@@ -4937,6 +4965,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -6507,35 +6540,30 @@ paths:
                             hydrauliques.
                           type: number
                           format: float
-                          nullable: true
                         debit_1bar:
                           description: >-
                             Débit à 1 bar de pression relevé lors des essais /
                             contrôle hydrauliques.
                           type: number
                           format: float
-                          nullable: true
                         pression:
                           description: >-
                             Pression relevée lors des essais / contrôle
                             hydrauliques.
                           type: number
                           format: float
-                          nullable: true
                         pression_statique:
                           description: >-
                             Pression statique relevée lors des essais / contrôle
                             hydrauliques.
                           type: number
                           format: float
-                          nullable: true
                         debit_gueule_bee:
                           description: >-
                             Débit gueule bée relevé lors des essais / contrôle
                             hydrauliques.
                           type: number
                           format: float
-                          nullable: true
                 liste_anomalies:
                   description: Liste des anomalies posées ou à lever suite à ce contrôle.
                   type: array
@@ -6547,7 +6575,7 @@ paths:
                         description: Code de l'anomalie.
                         type: integer
                         format: int32
-                        maximum: 99999
+                        maximum: 999999
                         minimum: 0
                       a_lever:
                         description: Si l'anomalie est à lever.
@@ -7074,7 +7102,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PassageCommissionDossier'
                   meta:
@@ -7082,6 +7110,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -7598,7 +7631,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
@@ -7606,6 +7639,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -8616,7 +8654,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Dossier'
                   meta:
@@ -8624,6 +8662,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -8876,9 +8919,11 @@ paths:
                   data:
                     description: Liste d'objets.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/DossierAffectation'
+                required:
+                  - data
           headers:
             RateLimit-Limit:
               description: >-
@@ -9407,7 +9452,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
@@ -9415,6 +9460,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -9989,7 +10039,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
@@ -9997,6 +10047,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -10246,11 +10301,6 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
-                url:
-                  description: Point de stockage du fichier.
-                  type: string
-                  format: uri
-                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -10268,14 +10318,6 @@ paths:
                     - plan
                     - annexe
                     - divers
-                est_sensible:
-                  description: >-
-                    Information permettant de savoir si le contenu du document
-                    doit être considéré comme sensible par Metarisc.
-                  type: boolean
-              required:
-                - url
-                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -10802,7 +10844,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/FilRougeMessage'
                   meta:
@@ -10810,6 +10852,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -11582,7 +11629,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                     - type: object
                       properties:
                         type:
@@ -11635,7 +11682,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                     - type: object
                       properties:
                         type:
@@ -12209,7 +12256,10 @@ paths:
                                     Désignation spécifique de l'exploitation.
                                     (exemple : Pour un type R - "Crèche")
                                   type: string
-                                  maxLength: 4096
+                                  maxLength: 255
+                              required:
+                                - type
+                                - activite
                           nullable: true
                         activites_secondaire:
                           description: >-
@@ -12263,8 +12313,10 @@ paths:
                                   Désignation spécifique de l'exploitation.
                                   (exemple : Pour un type R - "Crèche")
                                 type: string
-                                maxLength: 4096
-                          nullable: true
+                                maxLength: 255
+                            required:
+                              - type
+                              - activite
                         categorie:
                           description: >-
                             La catégorie d'un ERP est déterminée par le type
@@ -12289,7 +12341,7 @@ paths:
                           type: integer
                           format: int32
                           minimum: 0
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         effectif_personnel:
                           description: >-
@@ -12298,7 +12350,7 @@ paths:
                           type: integer
                           format: int32
                           minimum: 0
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         presence_locaux_sommeil:
                           description: >-
@@ -12318,7 +12370,7 @@ paths:
                           type: integer
                           format: int32
                           minimum: 0
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         surface_accessible_au_public:
                           description: >-
@@ -12327,7 +12379,7 @@ paths:
                           type: integer
                           format: int32
                           minimum: 0
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         r143_20:
                           description: >-
@@ -12419,14 +12471,13 @@ paths:
                                 type: integer
                                 format: int32
                                 minimum: 0
-                                maximum: 99999
+                                maximum: 999999
                               nombre_unite_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
                                 minimum: 0
-                                maximum: 99999
-                          nullable: true
+                                maximum: 999999
                         degagements_accessoires:
                           description: >-
                             Dégagements imposés lorsque exceptionnellement les
@@ -12458,14 +12509,13 @@ paths:
                                 type: integer
                                 format: int32
                                 minimum: 0
-                                maximum: 99999
+                                maximum: 999999
                               nombre_unite_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
                                 minimum: 0
-                                maximum: 99999
-                          nullable: true
+                                maximum: 999999
                         degagement_supplementaires:
                           description: >-
                             Dégagements en surnombres des autres dégagements (ou
@@ -12495,14 +12545,13 @@ paths:
                                 type: integer
                                 format: int32
                                 minimum: 0
-                                maximum: 99999
+                                maximum: 999999
                               nombre_unite_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
                                 minimum: 0
-                                maximum: 99999
-                          nullable: true
+                                maximum: 999999
                         presence_eas_ou_equivalents:
                           description: >-
                             Les espaces d'attente sécurisés prévus à l'article
@@ -12663,7 +12712,7 @@ paths:
                           type: integer
                           format: int32
                           minimum: 0
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         ligne_telephonique_reliee_au_cta:
                           description: La ligne téléphonique est reliée au CTA
@@ -12968,6 +13017,8 @@ paths:
                     maxItems: 50
                     items:
                       $ref: '#/components/schemas/PrescriptionAnalyseDeRisque'
+                required:
+                  - data
           headers:
             RateLimit-Limit:
               description: >-
@@ -13263,7 +13314,7 @@ paths:
                       type: integer
                       format: int32
                       minimum: 1
-                      maximum: 99999
+                      maximum: 999999
                     facteur_dangerosite:
                       description: >-
                         Facteur de dangerosité de la prescription. Il est
@@ -13537,7 +13588,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Tag'
                   meta:
@@ -13545,6 +13596,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -13799,7 +13855,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Workflow'
                   meta:
@@ -13807,6 +13863,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -14311,6 +14372,13 @@ paths:
                     - admin
                     - preventionniste
                     - secretariat_prev
+                utilisateur_id:
+                  description: Identifiant de l'utilisateur à affecter au dossier.
+                  type: string
+                  maxLength: 255
+              required:
+                - role
+                - utilisateur_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
       responses:
         '200':
@@ -14566,7 +14634,7 @@ paths:
           description: Filtre sur le libellé de l'ERP
           schema:
             type: string
-            maxLength: 4096
+            maxLength: 255
         - name: geojson
           in: query
           description: Filtre sur la position des ERP.
@@ -14575,10 +14643,7 @@ paths:
             maxLength: 8192
         - name: references_exterieures
           in: query
-          description: >-
-            Filtre sur les références extérieures de l'ERP. La syntaxe
-            d'utilisation de ce filtre est : "titre:valeur" (exemple
-            prevarisc_id:"5678").
+          description: Filtre sur les références extérieures de l'ERP.
           schema:
             type: array
             maxItems: 10
@@ -14647,7 +14712,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/ERP'
                   meta:
@@ -14655,6 +14720,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -14919,14 +14989,14 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                         voie:
                           description: >-
                             Libellé de la voie et de son type (exemple : "rue du
                             point du jour").
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -14945,14 +15015,14 @@ paths:
                           type: integer
                           format: int32
                           minimum: 1
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         arrondissement_municipal:
                           description: >-
                             L'arrondissement municipal est une subdivision
                             territoriale des communes.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                         latitude:
                           description: >-
@@ -14990,7 +15060,7 @@ paths:
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                 descriptif_technique:
                   description: Descriptif technique actuel de l'ERP.
@@ -15022,7 +15092,7 @@ paths:
                                 exercée, c'est le nom sous lequel
                                 l'établissement est connu du grand public.
                               type: string
-                              maxLength: 4096
+                              maxLength: 255
                             observations_generales:
                               description: >-
                                 Une chaîne de caractères arbitraire rattachée à
@@ -15096,7 +15166,7 @@ paths:
                                                 l'exploitation. (exemple : Pour un type
                                                 R - "Crèche")
                                               type: string
-                                              maxLength: 4096
+                                              maxLength: 255
                                           required:
                                             - type
                                             - activite
@@ -15155,11 +15225,10 @@ paths:
                                               l'exploitation. (exemple : Pour un type
                                               R - "Crèche")
                                             type: string
-                                            maxLength: 4096
+                                            maxLength: 255
                                         required:
                                           - type
                                           - activite
-                                      nullable: true
                                     categorie:
                                       description: >-
                                         La catégorie d'un ERP est déterminée par
@@ -15185,7 +15254,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 99999
+                                      maximum: 999999
                                       nullable: true
                                     effectif_personnel:
                                       description: >-
@@ -15195,7 +15264,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 99999
+                                      maximum: 999999
                                       nullable: true
                                     presence_locaux_sommeil:
                                       description: >-
@@ -15218,7 +15287,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 99999
+                                      maximum: 999999
                                       nullable: true
                                     surface_accessible_au_public:
                                       description: >-
@@ -15228,7 +15297,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 99999
+                                      maximum: 999999
                                       nullable: true
                                     r143_20:
                                       description: >-
@@ -15328,14 +15397,13 @@ paths:
                                             type: integer
                                             format: int32
                                             minimum: 0
-                                            maximum: 99999
+                                            maximum: 999999
                                           nombre_unite_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
                                             minimum: 0
-                                            maximum: 99999
-                                      nullable: true
+                                            maximum: 999999
                                     degagements_accessoires:
                                       description: >-
                                         Dégagements imposés lorsque
@@ -15372,14 +15440,13 @@ paths:
                                             type: integer
                                             format: int32
                                             minimum: 0
-                                            maximum: 99999
+                                            maximum: 999999
                                           nombre_unite_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
                                             minimum: 0
-                                            maximum: 99999
-                                      nullable: true
+                                            maximum: 999999
                                     degagement_supplementaires:
                                       description: >-
                                         Dégagements en surnombres des autres
@@ -15413,14 +15480,13 @@ paths:
                                             type: integer
                                             format: int32
                                             minimum: 0
-                                            maximum: 99999
+                                            maximum: 999999
                                           nombre_unite_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
                                             minimum: 0
-                                            maximum: 99999
-                                      nullable: true
+                                            maximum: 999999
                                     presence_eas_ou_equivalents:
                                       description: >-
                                         Les espaces d'attente sécurisés prévus à
@@ -15597,7 +15663,7 @@ paths:
                                       type: integer
                                       format: int32
                                       minimum: 0
-                                      maximum: 99999
+                                      maximum: 999999
                                       nullable: true
                                     ligne_telephonique_reliee_au_cta:
                                       description: La ligne téléphonique est reliée au CTA
@@ -15607,8 +15673,6 @@ paths:
                                       description: Présence d'un parafoudre
                                       type: boolean
                                       nullable: true
-                                  required:
-                                    - activite_principale
                           required:
                             - statut
                             - libelle
@@ -15884,7 +15948,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
@@ -15892,6 +15956,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -16466,7 +16535,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
@@ -16474,6 +16543,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -16723,11 +16797,6 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
-                url:
-                  description: Point de stockage du fichier.
-                  type: string
-                  format: uri
-                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -16745,14 +16814,6 @@ paths:
                     - plan
                     - annexe
                     - divers
-                est_sensible:
-                  description: >-
-                    Information permettant de savoir si le contenu du document
-                    doit être considéré comme sensible par Metarisc.
-                  type: boolean
-              required:
-                - url
-                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -17013,7 +17074,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Dossier'
                   meta:
@@ -17021,6 +17082,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -17282,9 +17348,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 4096
-                      required:
-                        - objet
+                          maxLength: 255
                     - type: object
                       properties:
                         type:
@@ -17337,9 +17401,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 4096
-                      required:
-                        - objet
+                          maxLength: 255
                     - type: object
                       properties:
                         type:
@@ -17855,7 +17917,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/DescriptifTechniqueERP'
                   meta:
@@ -17863,6 +17925,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -18114,9 +18181,11 @@ paths:
                   data:
                     description: Liste d'objets.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/ReferenceExterieure'
+                required:
+                  - data
           headers:
             RateLimit-Limit:
               description: >-
@@ -18379,11 +18448,15 @@ paths:
                     description: Titre de la référence extérieure.
                     type: string
                     maxLength: 255
+                    nullable: true
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
+                    maxLength: 255
                     nullable: true
-                    maxLength: 4096
+                required:
+                  - titre
+                  - valeur
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '200':
@@ -18396,9 +18469,11 @@ paths:
                   data:
                     description: Liste d'objets.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/ReferenceExterieure'
+                required:
+                  - data
           headers:
             RateLimit-Limit:
               description: >-
@@ -18654,7 +18729,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PrescriptionSupportReglementaire'
                   meta:
@@ -18662,6 +18737,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -18890,18 +18970,21 @@ paths:
         - $ref: '#/components/parameters/PaginationPerPage'
         - name: period
           in: query
-          description: >-
-            La période (ISO 8601) séparée par un slash (/) pendant laquelle
-            l'événement se déroule. Exemple 2004-12-02T23:00/2005-01-01T12:30.
+          description: La période pendant laquelle l'événement se déroule.
           schema:
             type: string
-            maxLength: 4096
+            format: string
+            maxLength: 25
         - name: type
           in: query
           description: Le type d'événement.
           schema:
             type: string
-            maxLength: 4096
+            enum:
+              - DEFAUT
+              - RECONNAISSANCE_OPERATIONNELLE_ANNUELLE
+              - VISITE_PERIODIQUE
+              - COMMISSION_SECURITE
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -18922,7 +19005,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Evenement'
                   meta:
@@ -18930,6 +19013,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -19692,7 +19780,7 @@ paths:
             maxLength: 255
       responses:
         '200':
-          description: ''
+          description: OK
           content:
             application/json:
               schema:
@@ -19951,7 +20039,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Utilisateur'
                   meta:
@@ -19959,6 +20047,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -20207,7 +20300,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/FeedMessage'
                   meta:
@@ -20215,6 +20308,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -20976,7 +21074,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Notification'
                   meta:
@@ -20984,6 +21082,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -22247,12 +22350,13 @@ paths:
               type: object
               title: Objet Passage en Commission Dossier
               properties:
-                avis:
-                  description: Avis rendu de la commission sur le dossier.
+                dossier_id:
+                  description: >-
+                    Identifiant du dossier incrit à l'ordre du jour d'une date
+                    de passage en commission.
                   type: string
-                  enum:
-                    - favorable
-                    - defavorable
+                  format: uuid
+                  maxLength: 36
                 date_de_passage:
                   description: >-
                     Heure à laquelle le passage du dossier est prévue à l'ordre
@@ -22260,19 +22364,9 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                avis_differe:
-                  description: >-
-                    La commission de sécurité peut décider de reporter son avis
-                    à une date ultérieure. Dans ce cas, la date de passage est
-                    reportée et un avis différé est émis.
-                  type: boolean
-                observations:
-                  description: >-
-                    La commission de sécurité émet soit un avis favorable soit
-                    un avis défavorable. Afin de motiver les décisions prises,
-                    la commission peut émettre des observations.
-                  type: string
-                  maxLength: 4096
+              required:
+                - dossier_id
+                - date_de_passage
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '200':
@@ -22526,7 +22620,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Organisation'
                   meta:
@@ -22534,6 +22628,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -22787,7 +22886,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/WorkflowType'
                   meta:
@@ -22795,6 +22894,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -23048,7 +23152,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/OrganisationGeoservice'
                   meta:
@@ -23056,6 +23160,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -23832,7 +23941,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/OrganisationMembre'
                   meta:
@@ -23840,6 +23949,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -24090,11 +24204,11 @@ paths:
                 utilisateur_id:
                   description: Identifiant de l'utilisateur lié.
                   type: string
-                  maxLength: 4096
+                  maxLength: 255
                 role:
                   description: Rôle du membre au sein de l'organisation.
                   type: string
-                  maxLength: 4096
+                  maxLength: 255
                   enum:
                     - membre
                     - invite
@@ -25146,7 +25260,7 @@ paths:
                     type: number
                     format: float
                     minimum: 0
-                    maximum: 99999
+                    maximum: 999999
                 pibi_performance_natures_performance_restreinte:
                   description: >-
                     Liste des natures de PIBI qui auront quoiqu'il arrive une
@@ -25188,7 +25302,7 @@ paths:
                   type: number
                   format: float
                   minimum: 0
-                  maximum: 99999
+                  maximum: 999999
                 pibi_conformite_seuil_surpression:
                   description: >-
                     Seuil de la pression d'un réseau au dessus duquel le PIBI
@@ -25196,7 +25310,7 @@ paths:
                   type: number
                   format: float
                   minimum: 0
-                  maximum: 99999
+                  maximum: 999999
                 pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
                   description: >-
                     Valeur par défaut prise en compte pour le seuil de pesée
@@ -25204,7 +25318,7 @@ paths:
                   type: number
                   format: float
                   minimum: 0
-                  maximum: 99999
+                  maximum: 999999
                 pena_conformite_seuil_volume_citerne:
                   description: >-
                     Volume minimum d'une citerne pour le calcul de sa
@@ -25212,7 +25326,7 @@ paths:
                   type: number
                   format: float
                   minimum: 0
-                  maximum: 99999
+                  maximum: 999999
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
       responses:
         '200':
@@ -25504,7 +25618,6 @@ paths:
               - privee
               - publique
               - privee_conventionnee
-            nullable: true
         - name: geojson
           in: query
           description: Filtre sur la position des PEI
@@ -25513,10 +25626,7 @@ paths:
             maxLength: 8192
         - name: references_exterieures
           in: query
-          description: >-
-            Filtre sur les références extérieures du PEI. La syntaxe
-            d'utilisation de ce filtre est : "titre:valeur" (exemple
-            numero_62:"62041001").
+          description: Filtre sur les références extérieures du PEI.
           schema:
             type: array
             maxItems: 10
@@ -25543,7 +25653,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PEI'
                   meta:
@@ -25551,6 +25661,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -26002,14 +26117,14 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                         voie:
                           description: >-
                             Libellé de la voie et de son type (exemple : "rue du
                             point du jour").
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -26028,14 +26143,14 @@ paths:
                           type: integer
                           format: int32
                           minimum: 1
-                          maximum: 99999
+                          maximum: 999999
                           nullable: true
                         arrondissement_municipal:
                           description: >-
                             L'arrondissement municipal est une subdivision
                             territoriale des communes.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                         latitude:
                           description: >-
@@ -26073,7 +26188,7 @@ paths:
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 4096
+                          maxLength: 255
                           nullable: true
                 numero_compteur:
                   description: Le numéro de série du compteur (PIBI).
@@ -26348,7 +26463,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/AnomaliePEI'
                   meta:
@@ -26356,6 +26471,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -26607,7 +26727,7 @@ paths:
                   description: Référence codifiée de l'anomalie.
                   type: integer
                   format: int32
-                  maximum: 99999
+                  maximum: 999999
                   minimum: 0
                 date_debut:
                   type: string
@@ -26879,7 +26999,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
@@ -26887,6 +27007,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -27461,7 +27586,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
@@ -27469,6 +27594,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -27718,11 +27848,6 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
-                url:
-                  description: Point de stockage du fichier.
-                  type: string
-                  format: uri
-                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -27740,14 +27865,6 @@ paths:
                     - plan
                     - annexe
                     - divers
-                est_sensible:
-                  description: >-
-                    Information permettant de savoir si le contenu du document
-                    doit être considéré comme sensible par Metarisc.
-                  type: boolean
-              required:
-                - url
-                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -28008,7 +28125,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Dossier'
                   meta:
@@ -28016,6 +28133,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -28277,9 +28399,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 4096
-                      required:
-                        - objet
+                          maxLength: 255
                     - type: object
                       properties:
                         type:
@@ -28332,9 +28452,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 4096
-                      required:
-                        - objet
+                          maxLength: 255
                     - type: object
                       properties:
                         type:
@@ -28850,7 +28968,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/DescriptifTechniqueDECI'
                   meta:
@@ -28858,6 +28976,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -29109,9 +29232,11 @@ paths:
                   data:
                     description: Liste d'objets.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/ReferenceExterieure'
+                required:
+                  - data
           headers:
             RateLimit-Limit:
               description: >-
@@ -29374,11 +29499,15 @@ paths:
                     description: Titre de la référence extérieure.
                     type: string
                     maxLength: 255
+                    nullable: true
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
+                    maxLength: 255
                     nullable: true
-                    maxLength: 4096
+                required:
+                  - titre
+                  - valeur
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '200':
@@ -29391,9 +29520,11 @@ paths:
                   data:
                     description: Liste d'objets.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/ReferenceExterieure'
+                required:
+                  - data
           headers:
             RateLimit-Limit:
               description: >-
@@ -29877,7 +30008,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Prescription'
                   meta:
@@ -29885,6 +30016,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -30898,7 +31034,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PrescriptionSupportReglementaire'
                   meta:
@@ -30906,6 +31042,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -31943,7 +32084,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/TourneeDeci'
                   meta:
@@ -31951,6 +32092,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -32212,8 +32358,6 @@ paths:
                           type: string
                           maxLength: 4096
                           nullable: true
-                      required:
-                        - libelle
                     - type: object
                       properties:
                         type:
@@ -32233,8 +32377,6 @@ paths:
                           maxLength: 25
                       required:
                         - type
-                        - date_de_debut
-                        - date_de_fin
                 - title: Objet Tournee Deci Modele
                   description: >-
                     Modèle de tournée DECI permettant une programmation
@@ -32256,8 +32398,6 @@ paths:
                           type: string
                           maxLength: 4096
                           nullable: true
-                      required:
-                        - libelle
                     - type: object
                       properties:
                         type:
@@ -32279,8 +32419,6 @@ paths:
                           maximum: 12
                       required:
                         - type
-                        - mois_debut
-                        - mois_fin
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -32790,7 +32928,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
@@ -32798,6 +32936,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -33047,11 +33190,6 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
-                url:
-                  description: Point de stockage du fichier.
-                  type: string
-                  format: uri
-                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -33069,14 +33207,6 @@ paths:
                     - plan
                     - annexe
                     - divers
-                est_sensible:
-                  description: >-
-                    Information permettant de savoir si le contenu du document
-                    doit être considéré comme sensible par Metarisc.
-                  type: boolean
-              required:
-                - url
-                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -33921,7 +34051,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/TourneeDeciPei'
                   meta:
@@ -33929,6 +34059,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -34176,13 +34311,82 @@ paths:
               title: Objet Tournée Deci PEI
               description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
               properties:
-                pei_id:
-                  description: Identifiant du PEI à lier au contrôle.
+                date_du_controle:
+                  description: Date à laquelle le contrôle a été effectué.
                   type: string
-                  format: uuid
-                  maxLength: 36
-              required:
-                - pei_id
+                  format: date-time
+                  maxLength: 25
+                hydraulique:
+                  description: >-
+                    Informations sur les essais hydrauliques procédés le jour du
+                    contrôle.
+                  allOf:
+                    - type: object
+                      title: Objet Données Hydrauliques
+                      description: >-
+                        Objet de contrôle des données hydrauliques d'un PEI dans
+                        le cadre d'une Tournée DECI.
+                      properties:
+                        volume:
+                          description: >-
+                            Volume relevé lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                        debit_1bar:
+                          description: >-
+                            Débit à 1 bar de pression relevé lors des essais /
+                            contrôle hydrauliques.
+                          type: number
+                          format: float
+                        pression:
+                          description: >-
+                            Pression relevée lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                        pression_statique:
+                          description: >-
+                            Pression statique relevée lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                        debit_gueule_bee:
+                          description: >-
+                            Débit gueule bée relevé lors des essais / contrôle
+                            hydrauliques.
+                          type: number
+                          format: float
+                liste_anomalies:
+                  description: Liste des anomalies posées ou à lever suite à ce contrôle.
+                  type: array
+                  maxItems: 255
+                  items:
+                    type: object
+                    properties:
+                      code:
+                        description: Code de l'anomalie.
+                        type: integer
+                        format: int32
+                        maximum: 999999
+                        minimum: 0
+                      a_lever:
+                        description: Si l'anomalie est à lever.
+                        type: boolean
+                essais_engin_utilise:
+                  description: Engin utilisé pour les essais hydrauliques.
+                  type: string
+                  enum:
+                    - aucun
+                    - fpt
+                    - mpr
+                    - ccf
+                ordre:
+                  description: L'ordre du contrôle dans le livret de tournée.
+                  type: integer
+                  format: int32
+                  minimum: 1
+                  maximum: 255
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
       responses:
         '200':
@@ -34438,7 +34642,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Email'
                   meta:
@@ -34446,6 +34650,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -34941,7 +35150,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Utilisateur'
                   meta:
@@ -34949,6 +35158,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -35202,7 +35416,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Email'
                   meta:
@@ -35210,6 +35424,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -35709,7 +35928,7 @@ paths:
                   data:
                     description: Tableau d'objets contenu dans la page.
                     type: array
-                    maxItems: 200
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/OrganisationMembre'
                   meta:
@@ -35717,6 +35936,11 @@ paths:
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: >-
@@ -36731,11 +36955,11 @@ components:
           type: string
           format: uri
           description: Une référence Uri qui identifie le type de problème
-          maxLength: 4096
+          maxLength: 255
         title:
           type: string
           description: Un résumé du type d'erreur rencontré
-          maxLength: 4096
+          maxLength: 255
         status:
           type: integer
           format: int32
@@ -36757,31 +36981,31 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         count:
           description: Nombre d'objets contenu dans la page courante.
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         per_page:
-          description: Nombre d'objets retournés par une page
+          description: Nombre d'objets pouvant être retournés par une page
           type: integer
           format: int32
-          minimum: 0
-          maximum: 200
+          minimum: 1
+          maximum: 100
         current_page:
           description: Numéro de la page courante.
           type: integer
           format: int32
-          minimum: 0
-          maximum: 99999
+          minimum: 1
+          maximum: 999999
         total_pages:
           description: Nombres de pages disponibles.
           type: integer
           format: int32
-          minimum: 0
-          maximum: 99999
+          minimum: 1
+          maximum: 999999
     ActiviteErp:
       type: object
       title: Objet Activité ERP
@@ -36825,7 +37049,10 @@ components:
             Désignation spécifique de l'exploitation. (exemple : Pour un type R
             - "Crèche")
           type: string
-          maxLength: 4096
+          maxLength: 255
+      required:
+        - type
+        - activite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ActiviteErp'
     AdressePostale:
       type: object
@@ -36845,14 +37072,14 @@ components:
         commune:
           description: Nom de la commune.
           type: string
-          maxLength: 4096
+          maxLength: 255
           nullable: true
         voie:
           description: >-
             Libellé de la voie et de son type (exemple : "rue du point du
             jour").
           type: string
-          maxLength: 4096
+          maxLength: 255
           nullable: true
         code_insee:
           description: Code unique attribué à chaque commune de France.
@@ -36870,14 +37097,14 @@ components:
           type: integer
           format: int32
           minimum: 1
-          maximum: 99999
+          maximum: 999999
           nullable: true
         arrondissement_municipal:
           description: >-
             L'arrondissement municipal est une subdivision territoriale des
             communes.
           type: string
-          maxLength: 4096
+          maxLength: 255
           nullable: true
         latitude:
           description: >-
@@ -36911,8 +37138,19 @@ components:
         complement:
           description: Complément d'adresse.
           type: string
-          maxLength: 4096
+          maxLength: 255
           nullable: true
+      required:
+        - code_postal
+        - commune
+        - voie
+        - code_insee
+        - arrondissement
+        - arrondissement_municipal
+        - latitude
+        - longitude
+        - localisation_operationnelle
+        - complement
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AdressePostale'
     AnomalieDECI:
       type: object
@@ -36926,7 +37164,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         texte:
           description: Description de l'anomalie.
           type: string
@@ -36951,6 +37189,10 @@ components:
             - 1 : Anomalie ;
 
             - 2 : Anomalie bloquante.
+      required:
+        - code
+        - texte
+        - indice_de_gravite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomalieDECI'
     AnomaliePEI:
       type: object
@@ -36975,6 +37217,12 @@ components:
           type: string
           format: date-time
           maxLength: 25
+      required:
+        - anomalie
+        - date_debut
+        - date_fin
+        - est_programmee
+        - date_pose
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
     Clicdvcrem:
       type: object
@@ -36998,7 +37246,6 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/ActiviteErp'
-          nullable: true
         categorie:
           description: >-
             La catégorie d'un ERP est déterminée par le type d'activité
@@ -37022,7 +37269,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
           nullable: true
         effectif_personnel:
           description: >-
@@ -37031,7 +37278,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
           nullable: true
         presence_locaux_sommeil:
           description: >-
@@ -37050,7 +37297,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
           nullable: true
         surface_accessible_au_public:
           description: >-
@@ -37059,7 +37306,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
           nullable: true
         r143_20:
           description: >-
@@ -37123,7 +37370,6 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/Degagement'
-          nullable: true
         degagements_accessoires:
           description: >-
             Dégagements imposés lorsque exceptionnellement les dégagements
@@ -37133,7 +37379,6 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/Degagement'
-          nullable: true
         degagement_supplementaires:
           description: >-
             Dégagements en surnombres des autres dégagements (ou qui n'est pas
@@ -37142,7 +37387,6 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/Degagement'
-          nullable: true
         presence_eas_ou_equivalents:
           description: >-
             Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être
@@ -37294,7 +37538,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
           nullable: true
         ligne_telephonique_reliee_au_cta:
           description: La ligne téléphonique est reliée au CTA
@@ -37304,6 +37548,47 @@ components:
           description: Présence d'un parafoudre
           type: boolean
           nullable: true
+      required:
+        - activite_principale
+        - activites_secondaire
+        - categorie
+        - effectif_public
+        - effectif_personnel
+        - presence_locaux_sommeil
+        - sous_sol_accessible_au_public
+        - surface_totale
+        - surface_accessible_au_public
+        - r143_20
+        - plancher_bas_du_dernier_niveau
+        - plancher_bas_du_dernier_niveau_accessible_au_public
+        - type_cloisonnement
+        - locaux
+        - sprinklage
+        - degagement_normaux
+        - degagements_accessoires
+        - degagement_supplementaires
+        - presence_eas_ou_equivalents
+        - presence_desenfumage_mécanique
+        - presence_desenfumage_naturel
+        - puissance_chaufferie
+        - presence_gaz_chaufferie
+        - puissance_cuisine
+        - presence_gaz_cuisine
+        - presence_ria
+        - deversoirs_ponctuels
+        - elements_de_constructions_irrigues
+        - presence_deci
+        - presence_colonnes_seches
+        - presence_colonnes_en_charge
+        - installation_extinction
+        - service_de_securite_incendie
+        - type_ssi
+        - type_alarme
+        - temporisation_alarme_en_minutes
+        - desenfumage_commande_par_le_ssi
+        - nombre_de_zones_alarmes
+        - ligne_telephonique_reliee_au_cta
+        - parafoudre
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Clicdvcrem'
     Commission:
       type: object
@@ -37338,6 +37623,12 @@ components:
           description: Organisation tenant le secrétariat de la commission.
           allOf:
             - $ref: '#/components/schemas/Organisation'
+      required:
+        - id
+        - type
+        - libelle
+        - presidence
+        - secretariat
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
     CommissionMembre:
       type: object
@@ -37367,6 +37658,11 @@ components:
         commission:
           allOf:
             - $ref: '#/components/schemas/Commission'
+      required:
+        - id
+        - titre
+        - presence_obligatoire
+        - commission
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
     CommissionPreferences:
       type: object
@@ -37379,6 +37675,8 @@ components:
           format: uri
           maxLength: 512
           nullable: true
+      required:
+        - rapport_modele_cr
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
     Contact:
       type: object
@@ -37457,6 +37755,20 @@ components:
           type: string
           maxLength: 4096
           nullable: true
+      required:
+        - id
+        - nom
+        - prenom
+        - fonction
+        - telephone_fixe
+        - telephone_portable
+        - telephone_fax
+        - adresse
+        - site_web_url
+        - civilite
+        - societe
+        - email
+        - observations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
     Degagement:
       type: object
@@ -37477,13 +37789,16 @@ components:
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         nombre_unite_passage:
           description: Nombre d'unités de passage.
           type: integer
           format: int32
           minimum: 0
-          maximum: 99999
+          maximum: 999999
+      required:
+        - nombre_degagements
+        - nombre_unite_passage
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Degagement'
     DescriptifTechniqueDECIBase:
       type: object
@@ -37586,6 +37901,18 @@ components:
           description: Disponibilité opérationnelle du PEI.
           type: boolean
           nullable: true
+      required:
+        - id
+        - type
+        - est_reglementaire
+        - domanialite
+        - est_conforme_rddeci
+        - performance_theorique
+        - performance_reelle
+        - observations_generales
+        - date
+        - statut
+        - est_disponible
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECIBase'
     DescriptifTechniqueDECI:
       type: object
@@ -37636,7 +37963,7 @@ components:
             commerce ou l'activité exercée, c'est le nom sous lequel
             l'établissement est connu du grand public.
           type: string
-          maxLength: 4096
+          maxLength: 255
         observations_generales:
           description: >-
             Une chaîne de caractères arbitraire rattachée à l'objet. Souvent
@@ -37648,6 +37975,14 @@ components:
           description: Analyse des risques de l'établissement.
           allOf:
             - $ref: '#/components/schemas/Clicdvcrem'
+      required:
+        - id
+        - date
+        - statut
+        - periodicite
+        - libelle
+        - observations_generales
+        - analyse_risque
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERPBase'
     DescriptifTechniqueERP:
       type: object
@@ -37689,6 +38024,10 @@ components:
             est_citerne:
               description: Permet de savoir si le PENA est une citerne.
               type: boolean
+          required:
+            - nature
+            - volume
+            - est_citerne
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePENA'
     DescriptifTechniquePIBI:
       title: Objet Descriptif Technique DECI PIBI
@@ -37740,6 +38079,13 @@ components:
               type: number
               format: float
               nullable: true
+          required:
+            - surpression
+            - nature
+            - debit_1bar
+            - pression
+            - pression_statique
+            - debit_gueule_bee
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
     DonneesHydrauliques:
       type: object
@@ -37752,29 +38098,30 @@ components:
           description: Volume relevé lors des essais / contrôle hydrauliques.
           type: number
           format: float
-          nullable: true
         debit_1bar:
           description: >-
             Débit à 1 bar de pression relevé lors des essais / contrôle
             hydrauliques.
           type: number
           format: float
-          nullable: true
         pression:
           description: Pression relevée lors des essais / contrôle hydrauliques.
           type: number
           format: float
-          nullable: true
         pression_statique:
           description: Pression statique relevée lors des essais / contrôle hydrauliques.
           type: number
           format: float
-          nullable: true
         debit_gueule_bee:
           description: Débit gueule bée relevé lors des essais / contrôle hydrauliques.
           type: number
           format: float
-          nullable: true
+      required:
+        - volume
+        - debit_1bar
+        - pression
+        - pression_statique
+        - debit_gueule_bee
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DonneesHydrauliques'
     DossierBase:
       type: object
@@ -37789,7 +38136,7 @@ components:
         objet:
           description: Objet du dossier.
           type: string
-          maxLength: 4096
+          maxLength: 255
         date_de_creation:
           description: Date de création du dossier.
           type: string
@@ -37822,6 +38169,14 @@ components:
               - erp:analyse_de_risque
               - deci:controle_technique_pei
           maxItems: 25
+      required:
+        - id
+        - objet
+        - date_de_creation
+        - createur
+        - application_utilisee_nom
+        - statut
+        - modules
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
     DossierDeci:
       type: object
@@ -37841,6 +38196,7 @@ components:
                 - $ref: '#/components/schemas/PEI'
           required:
             - type
+            - pei
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierDeci'
     DossierErp:
       type: object
@@ -37899,6 +38255,14 @@ components:
               nullable: true
           required:
             - type
+            - erp
+            - numero_urbanisme
+            - numero_urbanisme_date
+            - demandeur
+            - service_instructeur
+            - descriptif_travaux
+            - date_limite_traitement
+            - dossier_complet
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
     Dossier:
       type: object
@@ -37935,6 +38299,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
       required:
+        - id
         - role
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
@@ -37985,6 +38350,14 @@ components:
           format: date-time
           maxLength: 25
           nullable: true
+      required:
+        - id
+        - date_de_realisation
+        - date_de_derniere_mise_a_jour
+        - implantation
+        - descriptif_technique
+        - avis_exploitation
+        - date_pc_initial
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
     Email:
       type: object
@@ -38007,6 +38380,11 @@ components:
         is_verified:
           description: Détermine si l'adresse email est vérifiée.
           type: boolean
+      required:
+        - email
+        - is_primary
+        - is_publicly_visible
+        - is_verified
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Email'
     Evenement:
       type: object
@@ -38045,6 +38423,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
+      required:
+        - id
+        - title
+        - type
+        - description
+        - date_debut
+        - date_fin
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
     FeedMessageBase:
       type: object
@@ -38071,6 +38456,11 @@ components:
           enum:
             - texte
             - liste_pei
+      required:
+        - id
+        - titre
+        - date_de_creation
+        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageBase'
     FeedMessageTexte:
       title: Objet FeedMessage Texte
@@ -38083,6 +38473,8 @@ components:
               description: Contenu du message.
               type: string
               maxLength: 4096
+          required:
+            - texte
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
     FeedMessage:
       title: Objet Feed Message
@@ -38112,6 +38504,11 @@ components:
           description: Auteur du message.
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
+      required:
+        - id
+        - message
+        - date_de_creation
+        - auteur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
     Notification:
       type: object
@@ -38162,6 +38559,15 @@ components:
           description: Utilisateur cible de la notification.
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
+      required:
+        - id
+        - title
+        - message
+        - type
+        - contexte
+        - date_creation
+        - date_de_lecture
+        - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Notification'
     Organisation:
       type: object
@@ -38193,6 +38599,11 @@ components:
           type: string
           enum:
             - sis
+      required:
+        - id
+        - nom
+        - logo_url
+        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
     OrganisationGeoservice:
       type: object
@@ -38226,6 +38637,12 @@ components:
           type: string
           format: uri
           maxLength: 512
+      required:
+        - id
+        - organisation
+        - nom
+        - type
+        - url
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
     OrganisationMembre:
       type: object
@@ -38246,15 +38663,19 @@ components:
             membre.
           type: string
           format: date-time
-          maxLength: 4096
+          maxLength: 25
         role:
           description: Rôle du membre au sein de l'organisation.
           type: string
-          maxLength: 4096
+          maxLength: 255
           enum:
             - membre
             - invite
             - invitation_en_cours
+      required:
+        - organisation
+        - utilisateur
+        - role
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationMembre'
     OrganisationPreferences:
       type: object
@@ -38285,6 +38706,11 @@ components:
           type: string
           maxLength: 255
           nullable: true
+      required:
+        - platau_id_acteur
+        - platau_active
+        - s3_global_endpoint
+        - rapport_modele_rapport_etude
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
     PEI:
       type: object
@@ -38329,6 +38755,15 @@ components:
           type: string
           maxLength: 255
           nullable: true
+      required:
+        - id
+        - date_de_realisation
+        - date_de_derniere_mise_a_jour
+        - descriptif_technique
+        - implantation
+        - numero
+        - numero_compteur
+        - numero_serie_appareil
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
     PassageCommission:
       type: object
@@ -38363,6 +38798,12 @@ components:
             affichage aux utilisateurs.
           type: string
           maxLength: 255
+      required:
+        - id
+        - date_debut
+        - date_fin
+        - type
+        - libelle
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
     PassageCommissionDossier:
       type: object
@@ -38406,6 +38847,13 @@ components:
           type: string
           maxLength: 4096
           nullable: true
+      required:
+        - id
+        - dossier
+        - avis
+        - date_de_passage
+        - avis_differe
+        - observations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
     PieceJointe:
       type: object
@@ -38444,6 +38892,13 @@ components:
             Information permettant de savoir si le contenu du document doit être
             considéré comme sensible par Metarisc.
           type: boolean
+      required:
+        - id
+        - url
+        - nom
+        - description
+        - type
+        - est_sensible
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
     Ping:
       type: object
@@ -38490,6 +38945,11 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+      required:
+        - id
+        - contenu
+        - type
+        - supports_reglementaires
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
     PrescriptionAnalyseDeRisque:
       type: object
@@ -38507,7 +38967,7 @@ components:
               type: integer
               format: int32
               minimum: 1
-              maximum: 99999
+              maximum: 999999
             facteur_dangerosite:
               description: >-
                 Facteur de dangerosité de la prescription. Il est déterminé par
@@ -38518,6 +38978,9 @@ components:
               format: int32
               minimum: 0
               maximum: 3
+          required:
+            - numero
+            - facteur_dangerosite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
     PrescriptionSupportReglementaire:
       type: object
@@ -38567,6 +39030,12 @@ components:
             rechercher le support réglementaire.
           type: string
           maxLength: 255
+      required:
+        - id
+        - nature
+        - legifrance_cid
+        - etat
+        - reference
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
     RapportEtude:
       title: 'Objet : Analyse de Risque'
@@ -38607,6 +39076,13 @@ components:
           minimum: 0
           maximum: 3
           nullable: true
+      required:
+        - analyse_risque
+        - observations
+        - prise_de_note_interne
+        - proposition_avis
+        - proposition_avis_observations
+        - facteur_dangerosite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
     ReferenceExterieure:
       type: object
@@ -38624,8 +39100,10 @@ components:
         valeur:
           description: La valeur de la référence extérieure.
           type: string
-          nullable: true
-          maxLength: 4096
+          maxLength: 255
+      required:
+        - titre
+        - valeur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
     ReglesDeci:
       type: object
@@ -38640,7 +39118,7 @@ components:
             type: number
             format: float
             minimum: 0
-            maximum: 99999
+            maximum: 999999
         pibi_performance_natures_performance_restreinte:
           description: >-
             Liste des natures de PIBI qui auront quoiqu'il arrive une
@@ -38680,7 +39158,7 @@ components:
           type: number
           format: float
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         pibi_conformite_seuil_surpression:
           description: >-
             Seuil de la pression d'un réseau au dessus duquel le PIBI sera
@@ -38688,7 +39166,7 @@ components:
           type: number
           format: float
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         pibi_conformite_matrice_seuil_pesee_1bar_par_defaut:
           description: >-
             Valeur par défaut prise en compte pour le seuil de pesée 1bar au
@@ -38696,13 +39174,21 @@ components:
           type: number
           format: float
           minimum: 0
-          maximum: 99999
+          maximum: 999999
         pena_conformite_seuil_volume_citerne:
           description: Volume minimum d'une citerne pour le calcul de sa conformité.
           type: number
           format: float
           minimum: 0
-          maximum: 99999
+          maximum: 999999
+      required:
+        - pibi_conformite_matrice_seuil_pesee_1bar_par_nature
+        - pibi_performance_natures_performance_restreinte
+        - pibi_performance_natures_a_reformer
+        - pibi_performance_seuil_pesee_1bar
+        - pibi_conformite_seuil_surpression
+        - pibi_conformite_matrice_seuil_pesee_1bar_par_defaut
+        - pena_conformite_seuil_volume_citerne
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
     Tag:
       type: object
@@ -38713,6 +39199,8 @@ components:
           description: Libellé du tag.
           type: string
           maxLength: 255
+      required:
+        - message
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
     TourneeDeci:
       title: Objet Tournée Deci
@@ -38750,6 +39238,11 @@ components:
           type: string
           format: date-time
           maxLength: 25
+      required:
+        - id
+        - libelle
+        - description
+        - date_de_creation
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciBase'
     TourneeDeciModele:
       title: Objet Tournee Deci Modele
@@ -38777,6 +39270,8 @@ components:
               maximum: 12
           required:
             - type
+            - mois_debut
+            - mois_fin
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciModele'
     TourneeDeciPei:
       type: object
@@ -38815,6 +39310,9 @@ components:
               a_lever:
                 description: Si l'anomalie est à lever.
                 type: boolean
+            required:
+              - anomalie
+              - a_lever
         essais_engin_utilise:
           description: Engin utilisé pour les essais hydrauliques.
           type: string
@@ -38837,6 +39335,15 @@ components:
           format: int32
           minimum: 1
           maximum: 255
+      required:
+        - id
+        - date_du_controle
+        - hydraulique
+        - liste_anomalies
+        - essais_engin_utilise
+        - pei
+        - est_controle
+        - ordre
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
     TourneeDeciSimple:
       title: Objet Tournée Deci Simple
@@ -38880,6 +39387,11 @@ components:
               nullable: true
           required:
             - type
+            - pourcentage
+            - est_terminee
+            - date_de_debut
+            - date_de_fin
+            - modele
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciSimple'
     Utilisateur:
       type: object
@@ -38934,6 +39446,17 @@ components:
           format: uri
           maxLength: 512
           nullable: true
+      required:
+        - id
+        - first_name
+        - last_name
+        - created_at
+        - updated_at
+        - timezone
+        - is_active
+        - is_verified
+        - fonction
+        - avatar_url
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
     WorkflowStep:
       type: object
@@ -38971,6 +39494,10 @@ components:
           items:
             type: string
             maxLength: 255
+      required:
+        - name
+        - workflow
+        - needs
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowStep'
     WorkflowType:
       type: object
@@ -38980,13 +39507,16 @@ components:
         dossier_type:
           description: Type du dossier.
           type: string
-          maxLength: 4096
+          maxLength: 255
         steps:
           description: Étapes des workflows associés au dossier.
           type: array
           maxItems: 50
           items:
             $ref: '#/components/schemas/WorkflowStep'
+      required:
+        - dossier_type
+        - steps
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
     Workflow:
       title: Workflow
@@ -39062,13 +39592,21 @@ components:
             - arrivee_secretariat
             - workflow
       required:
+        - id
+        - titre
+        - date_de_creation
+        - date_de_debut
+        - date_de_fin
+        - workflow_automatise
+        - etat
+        - observations
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
   parameters:
     PaginationPage:
       name: page
       in: query
-      description: Le numéro de la page de resultats demandé.
+      description: Le numéro de la page de résultats demandé.
       schema:
         type: integer
         format: int32
