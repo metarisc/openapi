@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-11-2024.5
+  version: 1.0/main/03-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -4701,9 +4701,6 @@ paths:
                     Le membre doit siéger obligatoirement lors des passages en
                     commission.
                   type: boolean
-              required:
-                - titre
-                - presence_obligatoire
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
       responses:
         '200':
@@ -10301,6 +10298,11 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
+                url:
+                  description: Point de stockage du fichier.
+                  type: string
+                  format: uri
+                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -10318,6 +10320,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
+              required:
+                - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -12257,9 +12267,6 @@ paths:
                                     (exemple : Pour un type R - "Crèche")
                                   type: string
                                   maxLength: 255
-                              required:
-                                - type
-                                - activite
                           nullable: true
                         activites_secondaire:
                           description: >-
@@ -12314,9 +12321,7 @@ paths:
                                   (exemple : Pour un type R - "Crèche")
                                 type: string
                                 maxLength: 255
-                            required:
-                              - type
-                              - activite
+                          nullable: true
                         categorie:
                           description: >-
                             La catégorie d'un ERP est déterminée par le type
@@ -12478,6 +12483,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                          nullable: true
                         degagements_accessoires:
                           description: >-
                             Dégagements imposés lorsque exceptionnellement les
@@ -12516,6 +12522,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                          nullable: true
                         degagement_supplementaires:
                           description: >-
                             Dégagements en surnombres des autres dégagements (ou
@@ -12552,6 +12559,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                          nullable: true
                         presence_eas_ou_equivalents:
                           description: >-
                             Les espaces d'attente sécurisés prévus à l'article
@@ -12679,7 +12687,6 @@ paths:
                             - C
                             - D
                             - E
-                            - Non
                           nullable: true
                         type_alarme:
                           description: >-
@@ -14372,13 +14379,6 @@ paths:
                     - admin
                     - preventionniste
                     - secretariat_prev
-                utilisateur_id:
-                  description: Identifiant de l'utilisateur à affecter au dossier.
-                  type: string
-                  maxLength: 255
-              required:
-                - role
-                - utilisateur_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
       responses:
         '200':
@@ -15229,6 +15229,7 @@ paths:
                                         required:
                                           - type
                                           - activite
+                                      nullable: true
                                     categorie:
                                       description: >-
                                         La catégorie d'un ERP est déterminée par
@@ -15404,6 +15405,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                      nullable: true
                                     degagements_accessoires:
                                       description: >-
                                         Dégagements imposés lorsque
@@ -15447,6 +15449,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                      nullable: true
                                     degagement_supplementaires:
                                       description: >-
                                         Dégagements en surnombres des autres
@@ -15487,6 +15490,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                      nullable: true
                                     presence_eas_ou_equivalents:
                                       description: >-
                                         Les espaces d'attente sécurisés prévus à
@@ -15628,7 +15632,6 @@ paths:
                                         - C
                                         - D
                                         - E
-                                        - Non
                                       nullable: true
                                     type_alarme:
                                       description: >-
@@ -16797,6 +16800,11 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
+                url:
+                  description: Point de stockage du fichier.
+                  type: string
+                  format: uri
+                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -16814,6 +16822,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
+              required:
+                - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -17349,6 +17365,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -17402,6 +17420,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -22350,13 +22370,12 @@ paths:
               type: object
               title: Objet Passage en Commission Dossier
               properties:
-                dossier_id:
-                  description: >-
-                    Identifiant du dossier incrit à l'ordre du jour d'une date
-                    de passage en commission.
+                avis:
+                  description: Avis rendu de la commission sur le dossier.
                   type: string
-                  format: uuid
-                  maxLength: 36
+                  enum:
+                    - favorable
+                    - defavorable
                 date_de_passage:
                   description: >-
                     Heure à laquelle le passage du dossier est prévue à l'ordre
@@ -22364,9 +22383,19 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-              required:
-                - dossier_id
-                - date_de_passage
+                avis_differe:
+                  description: >-
+                    La commission de sécurité peut décider de reporter son avis
+                    à une date ultérieure. Dans ce cas, la date de passage est
+                    reportée et un avis différé est émis.
+                  type: boolean
+                observations:
+                  description: >-
+                    La commission de sécurité émet soit un avis favorable soit
+                    un avis défavorable. Afin de motiver les décisions prises,
+                    la commission peut émettre des observations.
+                  type: string
+                  maxLength: 4096
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '200':
@@ -27848,6 +27877,11 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
+                url:
+                  description: Point de stockage du fichier.
+                  type: string
+                  format: uri
+                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -27865,6 +27899,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
+              required:
+                - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -28400,6 +28442,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -28453,6 +28497,8 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      required:
+                        - objet
                     - type: object
                       properties:
                         type:
@@ -32358,6 +32404,8 @@ paths:
                           type: string
                           maxLength: 4096
                           nullable: true
+                      required:
+                        - libelle
                     - type: object
                       properties:
                         type:
@@ -32377,6 +32425,8 @@ paths:
                           maxLength: 25
                       required:
                         - type
+                        - date_de_debut
+                        - date_de_fin
                 - title: Objet Tournee Deci Modele
                   description: >-
                     Modèle de tournée DECI permettant une programmation
@@ -32398,6 +32448,8 @@ paths:
                           type: string
                           maxLength: 4096
                           nullable: true
+                      required:
+                        - libelle
                     - type: object
                       properties:
                         type:
@@ -32419,6 +32471,8 @@ paths:
                           maximum: 12
                       required:
                         - type
+                        - mois_debut
+                        - mois_fin
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -33190,6 +33244,11 @@ paths:
                 Document représentant un fichier informatique stocké sur
                 internet.
               properties:
+                url:
+                  description: Point de stockage du fichier.
+                  type: string
+                  format: uri
+                  maxLength: 512
                 nom:
                   description: Nom du fichier joint.
                   type: string
@@ -33207,6 +33266,14 @@ paths:
                     - plan
                     - annexe
                     - divers
+                est_sensible:
+                  description: >-
+                    Information permettant de savoir si le contenu du document
+                    doit être considéré comme sensible par Metarisc.
+                  type: boolean
+              required:
+                - url
+                - est_sensible
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -34311,82 +34378,13 @@ paths:
               title: Objet Tournée Deci PEI
               description: Objet de contrôle d'un PEI dans le cadre d'une Tournée DECI
               properties:
-                date_du_controle:
-                  description: Date à laquelle le contrôle a été effectué.
+                pei_id:
+                  description: Identifiant du PEI à lier au contrôle.
                   type: string
-                  format: date-time
-                  maxLength: 25
-                hydraulique:
-                  description: >-
-                    Informations sur les essais hydrauliques procédés le jour du
-                    contrôle.
-                  allOf:
-                    - type: object
-                      title: Objet Données Hydrauliques
-                      description: >-
-                        Objet de contrôle des données hydrauliques d'un PEI dans
-                        le cadre d'une Tournée DECI.
-                      properties:
-                        volume:
-                          description: >-
-                            Volume relevé lors des essais / contrôle
-                            hydrauliques.
-                          type: number
-                          format: float
-                        debit_1bar:
-                          description: >-
-                            Débit à 1 bar de pression relevé lors des essais /
-                            contrôle hydrauliques.
-                          type: number
-                          format: float
-                        pression:
-                          description: >-
-                            Pression relevée lors des essais / contrôle
-                            hydrauliques.
-                          type: number
-                          format: float
-                        pression_statique:
-                          description: >-
-                            Pression statique relevée lors des essais / contrôle
-                            hydrauliques.
-                          type: number
-                          format: float
-                        debit_gueule_bee:
-                          description: >-
-                            Débit gueule bée relevé lors des essais / contrôle
-                            hydrauliques.
-                          type: number
-                          format: float
-                liste_anomalies:
-                  description: Liste des anomalies posées ou à lever suite à ce contrôle.
-                  type: array
-                  maxItems: 255
-                  items:
-                    type: object
-                    properties:
-                      code:
-                        description: Code de l'anomalie.
-                        type: integer
-                        format: int32
-                        maximum: 999999
-                        minimum: 0
-                      a_lever:
-                        description: Si l'anomalie est à lever.
-                        type: boolean
-                essais_engin_utilise:
-                  description: Engin utilisé pour les essais hydrauliques.
-                  type: string
-                  enum:
-                    - aucun
-                    - fpt
-                    - mpr
-                    - ccf
-                ordre:
-                  description: L'ordre du contrôle dans le livret de tournée.
-                  type: integer
-                  format: int32
-                  minimum: 1
-                  maximum: 255
+                  format: uuid
+                  maxLength: 36
+              required:
+                - pei_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
       responses:
         '200':
@@ -37246,6 +37244,7 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/ActiviteErp'
+          nullable: true
         categorie:
           description: >-
             La catégorie d'un ERP est déterminée par le type d'activité
@@ -37370,6 +37369,7 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/Degagement'
+          nullable: true
         degagements_accessoires:
           description: >-
             Dégagements imposés lorsque exceptionnellement les dégagements
@@ -37379,6 +37379,7 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/Degagement'
+          nullable: true
         degagement_supplementaires:
           description: >-
             Dégagements en surnombres des autres dégagements (ou qui n'est pas
@@ -37387,6 +37388,7 @@ components:
           maxItems: 5
           items:
             $ref: '#/components/schemas/Degagement'
+          nullable: true
         presence_eas_ou_equivalents:
           description: >-
             Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être
@@ -37506,7 +37508,6 @@ components:
             - C
             - D
             - E
-            - Non
           nullable: true
         type_alarme:
           description: >-
@@ -38043,6 +38044,10 @@ components:
                 Surpression du réseau d'eau sur lequel est relié le PIBI mesurée
                 en bar.
               nullable: true
+            est_surpresse:
+              description: Indique si le PIBI est sur un réseau surpressé.
+              type: boolean
+              nullable: true
             nature:
               description: Nature du PIBI.
               type: string
@@ -38081,6 +38086,7 @@ components:
               nullable: true
           required:
             - surpression
+            - est_surpresse
             - nature
             - debit_1bar
             - pression
@@ -38098,24 +38104,29 @@ components:
           description: Volume relevé lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
         debit_1bar:
           description: >-
             Débit à 1 bar de pression relevé lors des essais / contrôle
             hydrauliques.
           type: number
           format: float
+          nullable: true
         pression:
           description: Pression relevée lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
         pression_statique:
           description: Pression statique relevée lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
         debit_gueule_bee:
           description: Débit gueule bée relevé lors des essais / contrôle hydrauliques.
           type: number
           format: float
+          nullable: true
       required:
         - volume
         - debit_1bar
@@ -38355,7 +38366,6 @@ components:
         - date_de_realisation
         - date_de_derniere_mise_a_jour
         - implantation
-        - descriptif_technique
         - avis_exploitation
         - date_pc_initial
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
@@ -38759,7 +38769,6 @@ components:
         - id
         - date_de_realisation
         - date_de_derniere_mise_a_jour
-        - descriptif_technique
         - implantation
         - numero
         - numero_compteur
