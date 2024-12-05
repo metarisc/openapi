@@ -15687,6 +15687,15 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                date_ouverture:
+                  description: Date d'ouverture de l'ERP.
+                  type: string
+                  format: date-time
+                  maxLength: 25
+                notes_internes:
+                  description: Notes internes sur l'ERP.
+                  type: string
+                  maxLength: 4096
               required:
                 - implantation
                 - descriptif_technique
@@ -38367,6 +38376,23 @@ components:
           format: date-time
           maxLength: 25
           nullable: true
+        date_ouverture:
+          description: Date d'ouverture de l'ERP.
+          type: string
+          format: date-time
+          maxLength: 25
+          nullable: true
+        date_derniere_visite:
+          description: Date de la dernière visite de l'ERP.
+          type: string
+          format: date-time
+          maxLength: 25
+          nullable: true
+        notes_internes:
+          description: Notes internes sur l'ERP.
+          type: string
+          maxLength: 4096
+          nullable: true
       required:
         - id
         - date_de_realisation
@@ -38374,6 +38400,9 @@ components:
         - implantation
         - avis_exploitation
         - date_pc_initial
+        - date_ouverture
+        - date_derniere_visite
+        - notes_internes
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
     Email:
       type: object
