@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-12-2024.1
+  version: 1.0/main/05-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -187,11 +187,11 @@ info:
         "data": [...],
         "meta": {
             "pagination": {
-                "total": int,
-                "count": int,
-                "per_page": int,
-                "current_page": int,
-                "total_pages": int
+                "total": Nombre total d'objets. (int),
+                "count": Nombre d'objets contenu dans la page courante (int),
+                "per_page": Nombre d'objets pouvant être retournés par une page (int),
+                "current_page": Numéro de la page courante (int),
+                "total_pages": Nombres de pages disponibles (int)
             }
         }
     }
@@ -37004,6 +37004,12 @@ components:
           format: int32
           minimum: 1
           maximum: 999999
+      required:
+        - total
+        - count
+        - per_page
+        - current_page
+        - total_pages
     ActiviteErp:
       type: object
       title: Objet Activité ERP
