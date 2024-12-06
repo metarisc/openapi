@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-12-2024.1
+  version: 1.0/main/06-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -19002,8 +19002,7 @@ paths:
           description: La période pendant laquelle l'événement se déroule.
           schema:
             type: string
-            format: string
-            maxLength: 25
+            maxLength: 33
         - name: type
           in: query
           description: Le type d'événement.
