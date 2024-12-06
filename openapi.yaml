@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-12-2024.1
+  version: 1.0/feature/additional-props-erp-pei-dossier/06-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -38195,6 +38195,12 @@ components:
               - erp:analyse_de_risque
               - deci:controle_technique_pei
           maxItems: 25
+        tags:
+          description: Tags du dossier.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          maxItems: 25
       required:
         - id
         - objet
@@ -38203,6 +38209,7 @@ components:
         - application_utilisee_nom
         - statut
         - modules
+        - tags
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
     DossierDeci:
       type: object
@@ -38393,6 +38400,12 @@ components:
           type: string
           maxLength: 4096
           nullable: true
+        references_exterieures:
+          description: Références externes de l'ERP.
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferenceExterieure'
+          maxItems: 25
       required:
         - id
         - date_de_realisation
@@ -38403,6 +38416,7 @@ components:
         - date_ouverture
         - date_derniere_visite
         - notes_internes
+        - references_exterieures
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
     Email:
       type: object
@@ -38800,6 +38814,12 @@ components:
           type: string
           maxLength: 255
           nullable: true
+        references_exterieures:
+          description: Références externes du PEI.
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferenceExterieure'
+          maxItems: 25
       required:
         - id
         - date_de_realisation
@@ -38808,6 +38828,7 @@ components:
         - numero
         - numero_compteur
         - numero_serie_appareil
+        - references_exterieures
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
     PassageCommission:
       type: object
