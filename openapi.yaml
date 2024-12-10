@@ -12894,6 +12894,56 @@ paths:
                   minimum: 0
                   maximum: 3
                   nullable: true
+                documents_techniques:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Document Technique
+                    description: >-
+                      Un dossier permettant de vérifier la conformité d'un
+                      établissement recevant le public avec les règles de
+                      sécurité, prévu par le b de l'article R. 122-11, comprend
+                      des documents techniques. Voir
+                      https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818985.
+                    properties:
+                      libelle:
+                        description: Libellé du document technique.
+                        type: string
+                        maxLength: 255
+                      reference:
+                        description: Référence du document technique.
+                        type: string
+                        maxLength: 255
+                      type:
+                        description: Type du document technique.
+                        type: string
+                        enum:
+                          - notice_descriptive
+                          - plan
+                          - certificat_de_verification
+                          - RVRAT
+                          - RVRE
+                          - RVRMD
+                          - divers
+                      date_de_reception:
+                        description: Date de réception du document technique.
+                        type: string
+                        format: date-time
+                        maxLength: 25
+                        minLength: 25
+                      date_de_consultation:
+                        description: Date de consultation du document technique.
+                        type: string
+                        format: date-time
+                        maxLength: 25
+                        minLength: 25
+                      est_manquant:
+                        description: Indique si le document technique est manquant.
+                        type: boolean
+                    required:
+                      - libelle
+                      - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       responses:
         '200':
@@ -38419,6 +38469,61 @@ components:
             - pression_statique
             - debit_gueule_bee
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
+    DocumentTechnique:
+      type: object
+      title: Objet Document Technique
+      description: >-
+        Un dossier permettant de vérifier la conformité d'un établissement
+        recevant le public avec les règles de sécurité, prévu par le b de
+        l'article R. 122-11, comprend des documents techniques. Voir
+        https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818985.
+      properties:
+        libelle:
+          description: Libellé du document technique.
+          type: string
+          maxLength: 255
+        reference:
+          description: Référence du document technique.
+          type: string
+          maxLength: 255
+          nullable: true
+        type:
+          description: Type du document technique.
+          type: string
+          enum:
+            - notice_descriptive
+            - plan
+            - certificat_de_verification
+            - RVRAT
+            - RVRE
+            - RVRMD
+            - divers
+        date_de_reception:
+          description: Date de réception du document technique.
+          type: string
+          format: date-time
+          maxLength: 25
+          minLength: 25
+          nullable: true
+        date_de_consultation:
+          description: Date de consultation du document technique.
+          type: string
+          format: date-time
+          maxLength: 25
+          minLength: 25
+          nullable: true
+        est_manquant:
+          description: Indique si le document technique est manquant.
+          type: boolean
+          nullable: true
+      required:
+        - libelle
+        - reference
+        - type
+        - date_de_reception
+        - date_de_consultation
+        - est_manquant
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DocumentTechnique'
     DonneesHydrauliques:
       type: object
       title: Objet Données Hydrauliques
@@ -39533,6 +39638,11 @@ components:
           minimum: 0
           maximum: 3
           nullable: true
+        documents_techniques:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/DocumentTechnique'
       required:
         - analyse_risque
         - observations
@@ -39540,6 +39650,7 @@ components:
         - proposition_avis
         - proposition_avis_observations
         - facteur_dangerosite
+        - documents_techniques
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
     ReferenceExterieure:
       type: object
