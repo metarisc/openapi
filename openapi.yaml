@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-12-2024.2
+  version: 1.0/main/10-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -1838,6 +1838,7 @@ paths:
                   type: string
                   format: uuid
                   maxLength: 36
+                  minLength: 36
                 secretariat_id:
                   description: >-
                     Identifiant de l'organisation tenant le secrétariat de la
@@ -1846,6 +1847,7 @@ paths:
                   type: string
                   format: uuid
                   maxLength: 36
+                  minLength: 36
               required:
                 - type
                 - libelle
@@ -2377,11 +2379,13 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 date_fin:
                   description: Date de fin du passage en commission programmée.
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 type:
                   description: Type du passage en commission.
                   type: string
@@ -6520,6 +6524,7 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 hydraulique:
                   description: >-
                     Informations sur les essais hydrauliques procédés le jour du
@@ -7365,6 +7370,7 @@ paths:
                   type: string
                   format: uuid
                   maxLength: 36
+                  minLength: 36
                 date_de_passage:
                   description: >-
                     Heure à laquelle le passage du dossier est prévue à l'ordre
@@ -7372,6 +7378,7 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
               required:
                 - dossier_id
                 - date_de_passage
@@ -11657,6 +11664,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -11676,6 +11684,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -13435,6 +13444,7 @@ paths:
                         type: string
                         format: uuid
                         maxLength: 36
+                        minLength: 36
                   required:
                     - contenu
                     - type
@@ -14769,11 +14779,14 @@ paths:
           in: query
           description: Filtre sur les références extérieures de l'ERP.
           schema:
-            type: array
-            maxItems: 10
-            items:
-              type: string
-              maxLength: 255
+            oneOf:
+              - type: string
+                maxLength: 255
+              - type: array
+                items:
+                  type: string
+                  maxLength: 255
+                maxItems: 10
         - name: presence_locaux_sommeil
           in: query
           description: Filtre sur la présence de locaux à sommeil dans l'ERP.
@@ -15941,11 +15954,13 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 date_ouverture:
                   description: Date d'ouverture de l'ERP.
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
@@ -17647,6 +17662,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -17666,6 +17682,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -19256,7 +19273,9 @@ paths:
           description: La période pendant laquelle l'événement se déroule.
           schema:
             type: string
-            maxLength: 33
+            maxLength: 51
+            minLength: 21
+            pattern: ^(.*)\/(.*)$
         - name: type
           in: query
           description: Le type d'événement.
@@ -19561,11 +19580,13 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 date_fin:
                   description: Date de fin de l'événement.
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
               required:
                 - title
                 - type
@@ -22645,6 +22666,7 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 avis_differe:
                   description: >-
                     La commission de sécurité peut décider de reporter son avis
@@ -25919,11 +25941,14 @@ paths:
           in: query
           description: Filtre sur les références extérieures du PEI.
           schema:
-            type: array
-            maxItems: 10
-            items:
-              type: string
-              maxLength: 255
+            oneOf:
+              - type: string
+                maxLength: 255
+              - type: array
+                items:
+                  type: string
+                  maxLength: 255
+                maxItems: 10
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -27024,10 +27049,12 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
                 date_fin:
                   type: string
                   format: date-time
                   maxLength: 25
+                  minLength: 25
               required:
                 - code_anomalie
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
@@ -28723,6 +28750,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -28742,6 +28770,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -30599,6 +30628,7 @@ paths:
                     type: string
                     format: uuid
                     maxLength: 36
+                    minLength: 36
               required:
                 - contenu
                 - type
@@ -32370,8 +32400,9 @@ paths:
           description: Filtre sur les dates
           schema:
             type: string
-            pattern: ^\d{4}-\d{2}-\d{2}\/\d{4}-\d{2}-\d{2}$
-            maxLength: 4096
+            maxLength: 51
+            minLength: 21
+            pattern: ^(.*)\/(.*)$
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -32680,11 +32711,13 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                       required:
                         - type
                         - date_de_debut
@@ -34071,11 +34104,13 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
                           maxLength: 25
+                          minLength: 25
                       required:
                         - type
                 - title: Objet Tournee Deci Modele
@@ -34645,6 +34680,7 @@ paths:
                   type: string
                   format: uuid
                   maxLength: 36
+                  minLength: 36
               required:
                 - pei_id
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
@@ -37472,10 +37508,12 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_fin:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         est_programmee:
           type: boolean
@@ -37483,6 +37521,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
       required:
         - anomalie
         - date_debut
@@ -37881,6 +37920,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         type:
           description: >-
             Type de la commission (peut être une commission de sécurité, un
@@ -37921,6 +37961,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         titre:
           description: Le titre du membre au sein de la commission.
           type: string
@@ -37971,6 +38012,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         nom:
           description: Nom de famille du contact.
           type: string
@@ -38091,6 +38133,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         type:
           description: >-
             Permet de définir à quelle famille de points d’eau ce descriptif
@@ -38167,6 +38210,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         statut:
           description: Statut du PEI lors de l'établissement de son descriptif technique.
           type: string
@@ -38213,11 +38257,13 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         date:
           description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         statut:
           description: Statut de l'ERP lors de l'établissement de son descriptif technique.
           type: string
@@ -38424,6 +38470,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         objet:
           description: Objet du dossier.
           type: string
@@ -38433,6 +38480,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         createur:
           description: Utilisateur ayant créé le dossier.
           allOf:
@@ -38516,6 +38564,7 @@ components:
               type: string
               format: date-time
               maxLength: 25
+              minLength: 25
               nullable: true
             demandeur:
               description: Demandeur ayant déposé le dossier.
@@ -38539,6 +38588,7 @@ components:
               type: string
               format: date-time
               maxLength: 25
+              minLength: 25
               nullable: true
             dossier_complet:
               description: Dossier complet.
@@ -38578,6 +38628,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         role:
           description: Role sur le traitement du dossier.
           type: string
@@ -38607,16 +38658,19 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         date_de_realisation:
           description: Date à laquelle l'ERP a intégré Metarisc.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_de_derniere_mise_a_jour:
           description: Date à laquelle l'ERP a été mis à jour dans Metarisc.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         implantation:
           description: Adresse postale de l'ERP.
@@ -38640,18 +38694,21 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         date_ouverture:
           description: Date d'ouverture de l'ERP.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         date_derniere_visite:
           description: Date de la dernière visite de l'ERP.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         notes_internes:
           description: Notes internes sur l'ERP.
@@ -38773,6 +38830,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         title:
           description: Titre de l'événement.
           type: string
@@ -38795,11 +38853,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_fin:
           description: Date de fin de l'événement.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
       required:
         - id
         - title
@@ -38818,6 +38878,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         titre:
           description: Titre du message.
           type: string
@@ -38827,6 +38888,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         type:
           description: Type du message.
           type: string
@@ -38868,6 +38930,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         message:
           description: Contenu du message.
           type: string
@@ -38877,6 +38940,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         auteur:
           description: Auteur du message.
           allOf:
@@ -38899,6 +38963,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         title:
           description: Titre de la notification.
           type: string
@@ -38926,11 +38991,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_de_lecture:
           description: Date à laquelle l'utilisateur a lu la notification.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         utilisateur:
           description: Utilisateur cible de la notification.
@@ -38961,6 +39028,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         nom:
           description: Nom de l'organisation.
           type: string
@@ -38995,6 +39063,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         organisation:
           description: L'organisation liée à ce geoservice.
           allOf:
@@ -39041,6 +39110,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         role:
           description: Rôle du membre au sein de l'organisation.
           type: string
@@ -39099,16 +39169,19 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         date_de_realisation:
           description: Date à laquelle le PEI a intégré Metarisc.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_de_derniere_mise_a_jour:
           description: Date de la dernière mise à jour du PEI.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         descriptif_technique:
           description: Descriptif technique actuel du PEI.
@@ -39151,16 +39224,19 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         date_debut:
           description: Date de début du passage en commission programmée.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_fin:
           description: Date de fin du passage en commission programmée.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         type:
           description: Type du passage en commission.
           type: string
@@ -39190,6 +39266,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         dossier:
           description: >-
             Dossier incrit à l'ordre du jour d'une date de passage en
@@ -39208,6 +39285,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         avis_differe:
           description: >-
             La commission de sécurité peut décider de reporter son avis à une
@@ -39241,6 +39319,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         url:
           description: Point de stockage du fichier.
           type: string
@@ -39304,6 +39383,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         contenu:
           description: Contenu de la prescription.
           type: string
@@ -39370,6 +39450,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         nature:
           description: Nature du support réglementaire.
           type: string
@@ -39598,6 +39679,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         libelle:
           description: Nom d'identification de la tournée.
           type: string
@@ -39614,6 +39696,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
       required:
         - id
         - libelle
@@ -39659,11 +39742,13 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         date_du_controle:
           description: Date à laquelle le contrôle a été effectué.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         hydraulique:
           description: >-
@@ -39749,11 +39834,13 @@ components:
               type: string
               format: date-time
               maxLength: 25
+              minLength: 25
             date_de_fin:
               description: Date de fin de la tournée.
               type: string
               format: date-time
               maxLength: 25
+              minLength: 25
             modele:
               description: >-
                 Si la Tournée DECI a été créé depuis un modèle, son modèle est
@@ -39792,11 +39879,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         updated_at:
           description: Date à laquelle l'utilisateur a été mis à jour.
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         timezone:
           description: >-
@@ -39905,6 +39994,7 @@ components:
           type: string
           format: uuid
           maxLength: 36
+          minLength: 36
         titre:
           description: Titre du workflow.
           type: string
@@ -39914,6 +40004,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
         date_de_debut:
           description: >-
             Date du déclenchement du workflow (date à laquelle il est passé
@@ -39921,6 +40012,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         date_de_fin:
           description: >-
@@ -39929,6 +40021,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
+          minLength: 25
           nullable: true
         workflow_automatise:
           description: Si le workflow a été géré par un processus automatisé.
