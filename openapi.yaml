@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/10-12-2024.1
+  version: 1.0/main/11-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -2393,6 +2393,10 @@ paths:
                     - salle
                     - visite_de_securite
                     - groupe_de_visite
+                    - visite_reception_travaux
+                    - visite_periodique
+                    - visite_inopinee
+                    - visite_controle
                 libelle:
                   description: >-
                     Libellé de la date de passage en commission. Souvent utile
@@ -13506,19 +13510,8 @@ paths:
                       format: int32
                       minimum: 1
                       maximum: 999999
-                    facteur_dangerosite:
-                      description: >-
-                        Facteur de dangerosité de la prescription. Il est
-                        déterminé par l'analyse de risque, et est classifié
-                        comme suit : - 0 : DANGEROSITÉ BASSE - 1 : DANGEROSITÉ
-                        MOYENNE - 2 : DANGEROSITÉ ELEVÉE
-                      type: integer
-                      format: int32
-                      minimum: 0
-                      maximum: 3
                   required:
                     - numero
-                    - facteur_dangerosite
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
       responses:
         '201':
@@ -39349,6 +39342,10 @@ components:
             - salle
             - visite_de_securite
             - groupe_de_visite
+            - visite_reception_travaux
+            - visite_periodique
+            - visite_inopinee
+            - visite_controle
         libelle:
           description: >-
             Libellé de la date de passage en commission. Souvent utile pour
@@ -39529,19 +39526,8 @@ components:
               format: int32
               minimum: 1
               maximum: 999999
-            facteur_dangerosite:
-              description: >-
-                Facteur de dangerosité de la prescription. Il est déterminé par
-                l'analyse de risque, et est classifié comme suit : - 0 :
-                DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ
-                ELEVÉE
-              type: integer
-              format: int32
-              minimum: 0
-              maximum: 3
           required:
             - numero
-            - facteur_dangerosite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
     PrescriptionSupportReglementaire:
       type: object
