@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/11-12-2024.2
+  version: 1.0/main/12-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -2379,13 +2379,13 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 date_fin:
                   description: Date de fin du passage en commission programmée.
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 type:
                   description: Type du passage en commission.
                   type: string
@@ -6528,7 +6528,7 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 hydraulique:
                   description: >-
                     Informations sur les essais hydrauliques procédés le jour du
@@ -7382,7 +7382,7 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
               required:
                 - dossier_id
                 - date_de_passage
@@ -12151,7 +12151,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -12171,7 +12171,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -13418,13 +13418,13 @@ paths:
                         type: string
                         format: date-time
                         maxLength: 25
-                        minLength: 25
+                        minLength: 20
                       date_de_consultation:
                         description: Date de consultation du document technique.
                         type: string
                         format: date-time
                         maxLength: 25
-                        minLength: 25
+                        minLength: 20
                       est_manquant:
                         description: Indique si le document technique est manquant.
                         type: boolean
@@ -14213,6 +14213,286 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: post-prescriptions-rapport-etude-dossier
+  /dossiers/{dossier_id}/rapport_etude/prescriptions/reorganiser:
+    post:
+      tags:
+        - Dossiers API
+      summary: Réorganiser les prescriptions du rapport d'étude
+      description: >-
+        Réorganiser les numéros d'ordre des prescriptions du rapport d'étude.
+        Cela permet de mettre à jour simplement les numéros d'ordre des
+        prescriptions du rapport d'étude.
+      operationId: PostReorganiserPrescriptionsRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              maxItems: 50
+              items:
+                type: object
+                properties:
+                  id:
+                    description: L'identifiant de la prescription
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
+                  numero:
+                    description: Le nouveau numéro d'ordre de la prescription
+                    type: integer
+                    format: int32
+                    maximum: 999999
+                    minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Liste d'objets.
+                    type: array
+                    maxItems: 50
+                    items:
+                      $ref: '#/components/schemas/PrescriptionAnalyseDeRisque'
+                required:
+                  - data
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-reorganiser-prescriptions-rapport-etude-dossier
   /dossiers/{dossier_id}/tags:
     get:
       tags:
@@ -15748,6 +16028,19 @@ paths:
                                 - ouvert
                                 - projet
                                 - ferme
+                            periodicite:
+                              description: >-
+                                Les établissements des 1re, 2e, 3e et 4e
+                                catégories doivent être visités périodiquement
+                                par les commissions de sécurité. La fréquence
+                                est fixée selon le type et de la catégorie. La
+                                périodicité est en mois.
+                              type: integer
+                              format: int32
+                              minimum: 0
+                              maximum: 60
+                              multipleOf: 12
+                              nullable: true
                             libelle:
                               description: >-
                                 Le nom commercial vise l'entreprise
@@ -16480,13 +16773,13 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 date_ouverture:
                   description: Date d'ouverture de l'ERP.
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
@@ -18188,7 +18481,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -18208,7 +18501,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -20106,13 +20399,13 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 date_fin:
                   description: Date de fin de l'événement.
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
               required:
                 - title
                 - type
@@ -23192,7 +23485,7 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 avis_differe:
                   description: >-
                     La commission de sécurité peut décider de reporter son avis
@@ -27575,12 +27868,12 @@ paths:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
                 date_fin:
                   type: string
                   format: date-time
                   maxLength: 25
-                  minLength: 25
+                  minLength: 20
               required:
                 - code_anomalie
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
@@ -29276,7 +29569,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -29296,7 +29589,7 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -31863,6 +32156,295 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: prescriptions
       x-extension-metarisc-codegen-operation: get-prescription
+    patch:
+      tags:
+        - Prescriptions API
+      summary: Mettre à jour une prescription
+      description: >-
+        Modification d'une prescription existante en définissant les valeurs des
+        paramètres transmis. Tous les paramètres non fournis resteront
+        inchangés.
+      operationId: PatchPrescriptionPrescriptions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: prescription_id
+          in: path
+          required: true
+          description: Prescription Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Prescription
+              description: >-
+                La prescription réglementaire est une mesure de prévention et de
+                sauvegarde propre à assurer la sécurité des personnes. Elle est
+                décrite à travers un texte libre motivé par un ou des supports
+                réglementaires. Le règlement de sécurité comprend des
+                prescriptions générales communes à tous les établissements et
+                d'autres particulières à chaque type d'établissement. Il précise
+                les cas dans lesquels les obligations qu'il définit s'imposent à
+                la fois aux constructeurs, propriétaires, installateurs et
+                exploitants ou à certains de ceux-ci seulement.
+              properties:
+                contenu:
+                  description: Contenu de la prescription.
+                  type: string
+                  maxLength: 4096
+                type:
+                  description: Classement de la prescription.
+                  type: string
+                  enum:
+                    - liee_a_l_exploitation
+                    - liee_a_l_amelioration
+                    - rappel_reglementaire
+                supports_reglementaires_id:
+                  description: >-
+                    Les identifiants des supports réglementaires de la
+                    prescription.
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prescription'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: prescriptions
+      x-extension-metarisc-codegen-operation: patch-prescription
+      x-extension-metarisc-codegen-visibility: public
   /supports_reglementaires:
     get:
       tags:
@@ -33237,13 +33819,13 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                       required:
                         - type
                         - date_de_debut
@@ -34630,13 +35212,13 @@ paths:
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
                           maxLength: 25
-                          minLength: 25
+                          minLength: 20
                       required:
                         - type
                 - title: Objet Tournee Deci Modele
@@ -38034,12 +38616,12 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_fin:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         est_programmee:
           type: boolean
@@ -38047,7 +38629,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
       required:
         - anomalie
         - date_debut
@@ -38736,7 +39318,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         statut:
           description: Statut du PEI lors de l'établissement de son descriptif technique.
           type: string
@@ -38789,7 +39371,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         statut:
           description: Statut de l'ERP lors de l'établissement de son descriptif technique.
           type: string
@@ -38979,14 +39561,14 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         date_de_consultation:
           description: Date de consultation du document technique.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         est_manquant:
           description: Indique si le document technique est manquant.
@@ -39061,7 +39643,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         createur:
           description: Utilisateur ayant créé le dossier.
           allOf:
@@ -39152,7 +39734,7 @@ components:
               type: string
               format: date-time
               maxLength: 25
-              minLength: 25
+              minLength: 20
               nullable: true
             demandeur:
               description: Demandeur ayant déposé le dossier.
@@ -39176,7 +39758,7 @@ components:
               type: string
               format: date-time
               maxLength: 25
-              minLength: 25
+              minLength: 20
               nullable: true
             dossier_complet:
               description: Dossier complet.
@@ -39252,13 +39834,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_de_derniere_mise_a_jour:
           description: Date à laquelle l'ERP a été mis à jour dans Metarisc.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         implantation:
           description: Adresse postale de l'ERP.
@@ -39282,21 +39864,21 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         date_ouverture:
           description: Date d'ouverture de l'ERP.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         date_derniere_visite:
           description: Date de la dernière visite de l'ERP.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         notes_internes:
           description: Notes internes sur l'ERP.
@@ -39441,13 +40023,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_fin:
           description: Date de fin de l'événement.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
       required:
         - id
         - title
@@ -39476,7 +40058,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         type:
           description: Type du message.
           type: string
@@ -39528,7 +40110,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         auteur:
           description: Auteur du message.
           allOf:
@@ -39579,13 +40161,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_de_lecture:
           description: Date à laquelle l'utilisateur a lu la notification.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         utilisateur:
           description: Utilisateur cible de la notification.
@@ -39698,7 +40280,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         role:
           description: Rôle du membre au sein de l'organisation.
           type: string
@@ -39763,13 +40345,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_de_derniere_mise_a_jour:
           description: Date de la dernière mise à jour du PEI.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         descriptif_technique:
           description: Descriptif technique actuel du PEI.
@@ -39818,13 +40400,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_fin:
           description: Date de fin du passage en commission programmée.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         type:
           description: Type du passage en commission.
           type: string
@@ -39877,7 +40459,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         avis_differe:
           description: >-
             La commission de sécurité peut décider de reporter son avis à une
@@ -40283,7 +40865,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
       required:
         - id
         - libelle
@@ -40335,7 +40917,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         hydraulique:
           description: >-
@@ -40421,13 +41003,13 @@ components:
               type: string
               format: date-time
               maxLength: 25
-              minLength: 25
+              minLength: 20
             date_de_fin:
               description: Date de fin de la tournée.
               type: string
               format: date-time
               maxLength: 25
-              minLength: 25
+              minLength: 20
             modele:
               description: >-
                 Si la Tournée DECI a été créé depuis un modèle, son modèle est
@@ -40466,13 +41048,13 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         updated_at:
           description: Date à laquelle l'utilisateur a été mis à jour.
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         timezone:
           description: >-
@@ -40591,7 +41173,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
         date_de_debut:
           description: >-
             Date du déclenchement du workflow (date à laquelle il est passé
@@ -40599,7 +41181,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         date_de_fin:
           description: >-
@@ -40608,7 +41190,7 @@ components:
           type: string
           format: date-time
           maxLength: 25
-          minLength: 25
+          minLength: 20
           nullable: true
         workflow_automatise:
           description: Si le workflow a été géré par un processus automatisé.
