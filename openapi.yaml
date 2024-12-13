@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/12-12-2024.1
+  version: 1.0/main/13-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -12728,7 +12728,7 @@ paths:
                               properties:
                                 type:
                                   description: >-
-                                    Le type est désignée par une ou un ensemble
+                                    Le type est désigné par une ou un ensemble
                                     de lettres définies par l’article GN 1 du
                                     règlement de sécurité  incendie dans les
                                     ERP. Voir :
@@ -12782,7 +12782,7 @@ paths:
                             properties:
                               type:
                                 description: >-
-                                  Le type est désignée par une ou un ensemble de
+                                  Le type est désigné par une ou un ensemble de
                                   lettres définies par l’article GN 1 du
                                   règlement de sécurité  incendie dans les ERP.
                                   Voir :
@@ -12879,7 +12879,7 @@ paths:
                                     properties:
                                       type:
                                         description: >-
-                                          Le type est désignée par une ou un
+                                          Le type est désigné par une ou un
                                           ensemble de lettres définies par
                                           l’article GN 1 du règlement de sécurité 
                                           incendie dans les ERP. Voir :
@@ -13284,7 +13284,6 @@ paths:
                             - SSIAP
                             - Sapeurs- pompiers
                             - Combinaison des différentes possibilités
-                            - Non
                           nullable: true
                         type_ssi:
                           description: >-
@@ -16087,7 +16086,7 @@ paths:
                                           properties:
                                             type:
                                               description: >-
-                                                Le type est désignée par une ou un
+                                                Le type est désigné par une ou un
                                                 ensemble de lettres définies par
                                                 l’article GN 1 du règlement de sécurité 
                                                 incendie dans les ERP. Voir :
@@ -16146,7 +16145,7 @@ paths:
                                         properties:
                                           type:
                                             description: >-
-                                              Le type est désignée par une ou un
+                                              Le type est désigné par une ou un
                                               ensemble de lettres définies par
                                               l’article GN 1 du règlement de sécurité 
                                               incendie dans les ERP. Voir :
@@ -16249,7 +16248,7 @@ paths:
                                                 properties:
                                                   type:
                                                     description: >-
-                                                      Le type est désignée par une ou un
+                                                      Le type est désigné par une ou un
                                                       ensemble de lettres définies par
                                                       l’article GN 1 du règlement de sécurité 
                                                       incendie dans les ERP. Voir :
@@ -16691,7 +16690,6 @@ paths:
                                         - SSIAP
                                         - Sapeurs- pompiers
                                         - Combinaison des différentes possibilités
-                                        - Non
                                       nullable: true
                                     type_ssi:
                                       description: >-
@@ -38426,7 +38424,7 @@ components:
       properties:
         type:
           description: >-
-            Le type est désignée par une ou un ensemble de lettres définies par
+            Le type est désigné par une ou un ensemble de lettres définies par
             l’article GN 1 du règlement de sécurité  incendie dans les ERP. Voir
             :
             https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487
@@ -38914,7 +38912,6 @@ components:
             - SSIAP
             - Sapeurs- pompiers
             - Combinaison des différentes possibilités
-            - Non
           nullable: true
         type_ssi:
           description: >-
