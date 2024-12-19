@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/13-12-2024.2
+  version: 1.0/main/19-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -7604,6 +7604,285 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dates_passage_commission
       x-extension-metarisc-codegen-operation: post-commission-date-dossier
+  /dates_passage_commission/{date_id}/reprogrammer:
+    post:
+      tags:
+        - Dates Passage Commission API
+      summary: Reprogrammer une date de passage en commission
+      description: >-
+        Reprogrammation d'une date de passage en commission. Cette opération
+        permet de reprogrammer une date de passage en commission. La date de
+        début et la date de fin du passage en commission programmée sont
+        modifiées. Si des dossier sont déjà associés à cette date de passage en
+        commission, alors ces dossiers devront être reprogrammés car l'ordre du
+        jour sera réinitialisé.
+      operationId: PostReprogrammerDateDatesPassageCommission
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: date_id
+          in: path
+          required: true
+          description: Date Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: >-
+            Identifiant de l'organisation Metarisc sur laquelle réaliser
+            l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nouvelle_date_debut:
+                  description: Nouvelle date de début du passage en commission programmée.
+                  type: string
+                  format: date-time
+                  maxLength: 25
+                  minLength: 20
+                nouvelle_date_fin:
+                  description: Nouvelle date de fin du passage en commission programmée.
+                  type: string
+                  format: date-time
+                  maxLength: 25
+                  minLength: 20
+                raison:
+                  description: >-
+                    Raison de la reprogrammation de la date de passage en
+                    commission.
+                  type: string
+                  maxLength: 255
+              required:
+                - nouvelle_date_debut
+                - nouvelle_date_fin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommission'
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: >-
+                Indique combien de temps le client doit attendre avant de faire
+                une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: >-
+                Header pour afficher la limite autorisée jusqu'à ce que le quota
+                soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: >-
+                Header pour afficher le temps restant (en secondes) jusqu'à ce
+                que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: >-
+                Header pour afficher le nombre de requêtes disponibles jusqu'à
+                ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: >-
+                Indique si la réponse peut être partagée avec la requête
+                provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dates_passage_commission
+      x-extension-metarisc-codegen-operation: post-reprogrammer-date
   /documents:
     get:
       tags:
@@ -40442,12 +40721,20 @@ components:
             affichage aux utilisateurs.
           type: string
           maxLength: 255
+        raison_reprogrammation:
+          description: >-
+            Si la date de passage en commission a été reprogrammé, alors cette
+            propriété contient la raison de la reprogrammation.
+          type: string
+          maxLength: 255
+          nullable: true
       required:
         - id
         - date_debut
         - date_fin
         - type
         - libelle
+        - raison_reprogrammation
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
     PassageCommissionDossier:
       type: object
