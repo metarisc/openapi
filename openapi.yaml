@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-12-2024.1
+  version: 1.0/main/30-12-2024.1
   title: Metarisc API
   description: >-
 
@@ -13947,8 +13947,6 @@ paths:
           schema:
             type: string
             maxLength: 255
-        - $ref: '#/components/parameters/PaginationPage'
-        - $ref: '#/components/parameters/PaginationPerPage'
         - in: header
           name: Metarisc-Org-Id
           description: >-
@@ -14527,23 +14525,35 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              maxItems: 50
-              items:
-                type: object
-                properties:
-                  id:
-                    description: L'identifiant de la prescription
-                    type: string
-                    format: uuid
-                    maxLength: 36
-                    minLength: 36
-                  numero:
-                    description: Le nouveau numéro d'ordre de la prescription
-                    type: integer
-                    format: int32
-                    maximum: 999999
-                    minimum: 1
+              type: object
+              properties:
+                prescriptions:
+                  description: >-
+                    Liste des prescriptions du rapport d'étude à réorganiser.
+                    Les prescriptions doivent être ordonnées par leur nouveau
+                    numéro d'ordre.
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        description: L'identifiant de la prescription
+                        type: string
+                        format: uuid
+                        maxLength: 36
+                        minLength: 36
+                      numero:
+                        description: Le nouveau numéro d'ordre de la prescription
+                        type: integer
+                        format: int32
+                        maximum: 999999
+                        minimum: 1
+                    required:
+                      - id
+                      - numero
+              required:
+                - prescriptions
       responses:
         '200':
           description: OK
