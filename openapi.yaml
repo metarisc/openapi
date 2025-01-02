@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/30-12-2024.1
+  version: 1.0/main/02-01-2025.1
   title: Metarisc API
   description: >-
 
@@ -528,6 +528,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -537,6 +538,7 @@ paths:
                       $ref: '#/components/schemas/AnomalieDECI'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -822,6 +824,7 @@ paths:
                 - code
                 - texte
                 - indice_de_gravite
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomalieDECI'
       responses:
         '201':
@@ -1558,6 +1561,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -1567,6 +1571,7 @@ paths:
                       $ref: '#/components/schemas/Commission'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -1851,6 +1856,7 @@ paths:
               required:
                 - type
                 - libelle
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
       responses:
         '201':
@@ -2110,6 +2116,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -2119,6 +2126,7 @@ paths:
                       $ref: '#/components/schemas/PassageCommission'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -2408,6 +2416,7 @@ paths:
                 - date_fin
                 - type
                 - libelle
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
       responses:
         '201':
@@ -2910,6 +2919,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -2919,6 +2929,7 @@ paths:
                       $ref: '#/components/schemas/CommissionMembre'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -3194,6 +3205,7 @@ paths:
               required:
                 - titre
                 - presence_obligatoire
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
       responses:
         '201':
@@ -3689,6 +3701,26 @@ paths:
             type: string
             format: uuid
             maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Commission Préférences
+              description: >-
+                Ensemble des préférences et paramètres pour la gestion d'une
+                commission.
+              properties:
+                rapport_modele_cr:
+                  description: >-
+                    Modèle pour les rapports générés : Compte rendu de
+                    commission
+                  type: string
+                  format: uri
+                  maxLength: 512
+                  nullable: true
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
       responses:
         '200':
           description: OK
@@ -3937,6 +3969,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -3946,6 +3979,7 @@ paths:
                       $ref: '#/components/schemas/CommissionMembre'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -4709,6 +4743,7 @@ paths:
                     Le membre doit siéger obligatoirement lors des passages en
                     commission.
                   type: boolean
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
       responses:
         '200':
@@ -4958,6 +4993,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -4967,6 +5003,7 @@ paths:
                       $ref: '#/components/schemas/Contact'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -5780,6 +5817,7 @@ paths:
                   type: string
                   maxLength: 4096
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '200':
@@ -6570,6 +6608,7 @@ paths:
                             hydrauliques.
                           type: number
                           format: float
+                      additionalProperties: false
                 liste_anomalies:
                   description: Liste des anomalies posées ou à lever suite à ce contrôle.
                   type: array
@@ -6600,6 +6639,7 @@ paths:
                   format: int32
                   minimum: 1
                   maximum: 255
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
       responses:
         '200':
@@ -7104,6 +7144,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -7113,6 +7154,7 @@ paths:
                       $ref: '#/components/schemas/PassageCommissionDossier'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -7386,6 +7428,7 @@ paths:
               required:
                 - dossier_id
                 - date_de_passage
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '201':
@@ -7644,6 +7687,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 nouvelle_date_debut:
                   description: Nouvelle date de début du passage en commission programmée.
@@ -7914,6 +7958,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -7923,6 +7968,7 @@ paths:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -8688,6 +8734,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '200':
@@ -8937,6 +8984,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -8946,6 +8994,7 @@ paths:
                       $ref: '#/components/schemas/Dossier'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -9202,6 +9251,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -9479,6 +9529,7 @@ paths:
               required:
                 - role
                 - utilisateur_id
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
       responses:
         '201':
@@ -10218,6 +10269,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -10227,6 +10279,7 @@ paths:
                       $ref: '#/components/schemas/Contact'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -10549,6 +10602,7 @@ paths:
                   type: string
                   maxLength: 4096
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '201':
@@ -10805,6 +10859,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -10814,6 +10869,7 @@ paths:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -11101,6 +11157,7 @@ paths:
               required:
                 - url
                 - est_sensible
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -11360,6 +11417,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 type:
                   description: Options de l'export
@@ -11623,6 +11681,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -11632,6 +11691,7 @@ paths:
                       $ref: '#/components/schemas/FilRougeMessage'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -11894,6 +11954,7 @@ paths:
                   maxLength: 4096
               required:
                 - message
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
       responses:
         '201':
@@ -12413,6 +12474,7 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -12456,6 +12518,7 @@ paths:
                           type: boolean
                       required:
                         - type
+                  additionalProperties: false
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
@@ -12468,6 +12531,7 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -12477,6 +12541,8 @@ paths:
                             - deci:declaration_pei
                       required:
                         - type
+                  additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '200':
@@ -13042,6 +13108,7 @@ paths:
                                     (exemple : Pour un type R - "Crèche")
                                   type: string
                                   maxLength: 255
+                              additionalProperties: false
                           nullable: true
                         activites_secondaire:
                           description: >-
@@ -13096,6 +13163,7 @@ paths:
                                   (exemple : Pour un type R - "Crèche")
                                 type: string
                                 maxLength: 255
+                            additionalProperties: false
                           nullable: true
                         categorie:
                           description: >-
@@ -13194,6 +13262,7 @@ paths:
                                           R - "Crèche")
                                         type: string
                                         maxLength: 255
+                                    additionalProperties: false
                                 nullable: true
                               surface_totale:
                                 description: >-
@@ -13237,6 +13306,7 @@ paths:
                             required:
                               - niveau
                               - local
+                            additionalProperties: false
                           nullable: true
                         effectif_public:
                           description: >-
@@ -13382,6 +13452,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                            additionalProperties: false
                           nullable: true
                         degagements_accessoires:
                           description: >-
@@ -13421,6 +13492,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                            additionalProperties: false
                           nullable: true
                         degagement_supplementaires:
                           description: >-
@@ -13458,6 +13530,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                            additionalProperties: false
                           nullable: true
                         presence_eas_ou_equivalents:
                           description: >-
@@ -13627,6 +13700,7 @@ paths:
                           description: Présence d'un parafoudre
                           type: boolean
                           nullable: true
+                      additionalProperties: false
                 observations:
                   description: Observations sur l'analyse de risque.
                   type: string
@@ -13709,6 +13783,8 @@ paths:
                     required:
                       - libelle
                       - type
+                    additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       responses:
         '200':
@@ -13963,6 +14039,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -14261,6 +14338,7 @@ paths:
                   required:
                     - contenu
                     - type
+                  additionalProperties: false
                 - type: object
                   properties:
                     numero:
@@ -14271,6 +14349,7 @@ paths:
                       maximum: 999999
                   required:
                     - numero
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
       responses:
         '201':
@@ -14526,6 +14605,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 prescriptions:
                   description: >-
@@ -14561,6 +14641,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -14819,6 +14900,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -14828,6 +14910,7 @@ paths:
                       $ref: '#/components/schemas/Tag'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -15086,6 +15169,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -15095,6 +15179,7 @@ paths:
                       $ref: '#/components/schemas/Workflow'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -15607,6 +15692,7 @@ paths:
                     - admin
                     - preventionniste
                     - secretariat_prev
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
       responses:
         '200':
@@ -15939,6 +16025,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -15948,6 +16035,7 @@ paths:
                       $ref: '#/components/schemas/ERP'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -16293,6 +16381,7 @@ paths:
                           type: string
                           maxLength: 255
                           nullable: true
+                      additionalProperties: false
                 descriptif_technique:
                   description: Descriptif technique actuel de l'ERP.
                   allOf:
@@ -16414,6 +16503,7 @@ paths:
                                           required:
                                             - type
                                             - activite
+                                          additionalProperties: false
                                       nullable: true
                                     activites_secondaire:
                                       description: >-
@@ -16473,6 +16563,7 @@ paths:
                                         required:
                                           - type
                                           - activite
+                                        additionalProperties: false
                                       nullable: true
                                     categorie:
                                       description: >-
@@ -16576,6 +16667,7 @@ paths:
                                                 required:
                                                   - type
                                                   - activite
+                                                additionalProperties: false
                                             nullable: true
                                           surface_totale:
                                             description: >-
@@ -16620,6 +16712,7 @@ paths:
                                         required:
                                           - niveau
                                           - local
+                                        additionalProperties: false
                                       nullable: true
                                     effectif_public:
                                       description: >-
@@ -16779,6 +16872,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                        additionalProperties: false
                                       nullable: true
                                     degagements_accessoires:
                                       description: >-
@@ -16823,6 +16917,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                        additionalProperties: false
                                       nullable: true
                                     degagement_supplementaires:
                                       description: >-
@@ -16864,6 +16959,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                        additionalProperties: false
                                       nullable: true
                                     presence_eas_ou_equivalents:
                                       description: >-
@@ -17049,9 +17145,12 @@ paths:
                                       description: Présence d'un parafoudre
                                       type: boolean
                                       nullable: true
+                                  additionalProperties: false
                           required:
                             - statut
                             - libelle
+                          additionalProperties: false
+                      additionalProperties: false
                 date_pc_initial:
                   description: >-
                     Date de l'établissement du permis de construire initial.
@@ -17074,6 +17173,7 @@ paths:
               required:
                 - implantation
                 - descriptif_technique
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       responses:
         '201':
@@ -17331,6 +17431,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -17340,6 +17441,7 @@ paths:
                       $ref: '#/components/schemas/Contact'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -17662,6 +17764,7 @@ paths:
                   type: string
                   maxLength: 4096
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '201':
@@ -17918,6 +18021,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -17927,6 +18031,7 @@ paths:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -18214,6 +18319,7 @@ paths:
               required:
                 - url
                 - est_sensible
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -18470,6 +18576,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -18479,6 +18586,7 @@ paths:
                       $ref: '#/components/schemas/Dossier'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -18751,6 +18859,7 @@ paths:
                           maxLength: 255
                       required:
                         - objet
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -18794,6 +18903,7 @@ paths:
                           type: boolean
                       required:
                         - type
+                  additionalProperties: false
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
@@ -18808,6 +18918,7 @@ paths:
                           maxLength: 255
                       required:
                         - objet
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -18817,6 +18928,8 @@ paths:
                             - deci:declaration_pei
                       required:
                         - type
+                  additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '201':
@@ -19319,6 +19432,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -19328,6 +19442,7 @@ paths:
                       $ref: '#/components/schemas/DescriptifTechniqueERP'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -19583,6 +19698,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -19863,6 +19979,7 @@ paths:
                 required:
                   - titre
                   - valeur
+                additionalProperties: false
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '200':
@@ -19871,6 +19988,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -20131,6 +20249,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -20140,6 +20259,7 @@ paths:
                       $ref: '#/components/schemas/PrescriptionSupportReglementaire'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -20408,6 +20528,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -20417,6 +20538,7 @@ paths:
                       $ref: '#/components/schemas/Evenement'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -20699,6 +20821,7 @@ paths:
                 - description
                 - date_debut
                 - date_fin
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
       responses:
         '201':
@@ -21444,6 +21567,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -21453,6 +21577,7 @@ paths:
                       $ref: '#/components/schemas/Utilisateur'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -21705,6 +21830,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -21714,6 +21840,7 @@ paths:
                       $ref: '#/components/schemas/FeedMessage'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -21981,6 +22108,7 @@ paths:
                       required:
                         - titre
                         - type
+                      additionalProperties: false
                     - type: object
                       properties:
                         texte:
@@ -21989,6 +22117,8 @@ paths:
                           maxLength: 4096
                       required:
                         - texte
+                  additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
       responses:
         '201':
@@ -22479,6 +22609,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -22488,6 +22619,7 @@ paths:
                       $ref: '#/components/schemas/Notification'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -22769,6 +22901,7 @@ paths:
                 - message
                 - type
                 - utilisateur_id
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Notification'
       responses:
         '201':
@@ -23786,6 +23919,7 @@ paths:
                     la commission peut émettre des observations.
                   type: string
                   maxLength: 4096
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       responses:
         '200':
@@ -24035,6 +24169,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -24044,6 +24179,7 @@ paths:
                       $ref: '#/components/schemas/Organisation'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -24301,6 +24437,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -24310,6 +24447,7 @@ paths:
                       $ref: '#/components/schemas/WorkflowType'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -24567,6 +24705,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -24576,6 +24715,7 @@ paths:
                       $ref: '#/components/schemas/OrganisationGeoservice'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -24854,6 +24994,7 @@ paths:
                 - nom
                 - type
                 - url
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
       responses:
         '201':
@@ -25356,6 +25497,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -25365,6 +25507,7 @@ paths:
                       $ref: '#/components/schemas/OrganisationMembre'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -25635,6 +25778,7 @@ paths:
               required:
                 - utilisateur_id
                 - role
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationMembre'
       responses:
         '200':
@@ -26164,6 +26308,7 @@ paths:
                   type: string
                   maxLength: 255
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       responses:
         '200':
@@ -26746,6 +26891,7 @@ paths:
                   format: float
                   minimum: 0
                   maximum: 999999
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
       responses:
         '200':
@@ -27071,6 +27217,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -27080,6 +27227,7 @@ paths:
                       $ref: '#/components/schemas/PEI'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -27389,6 +27537,7 @@ paths:
                               required:
                                 - type
                                 - statut
+                              additionalProperties: false
                             - type: object
                               properties:
                                 surpression:
@@ -27437,6 +27586,7 @@ paths:
                                   nullable: true
                               required:
                                 - nature
+                          additionalProperties: false
                         - title: Objet Descriptif Technique DECI PENA
                           description: >-
                             Descriptif technique d'un PENA - Point d'Eau Naturel
@@ -27491,6 +27641,7 @@ paths:
                               required:
                                 - type
                                 - statut
+                              additionalProperties: false
                             - type: object
                               properties:
                                 nature:
@@ -27518,6 +27669,8 @@ paths:
                                   nullable: true
                               required:
                                 - nature
+                          additionalProperties: false
+                      additionalProperties: false
                 implantation:
                   description: Implantation du PEI sous la forme d'une adresse postale.
                   allOf:
@@ -27612,6 +27765,7 @@ paths:
                           type: string
                           maxLength: 255
                           nullable: true
+                      additionalProperties: false
                 numero_compteur:
                   description: Le numéro de série du compteur (PIBI).
                   type: string
@@ -27625,6 +27779,7 @@ paths:
               required:
                 - descriptif_technique
                 - implantation
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
       responses:
         '201':
@@ -27881,6 +28036,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -27890,6 +28046,7 @@ paths:
                       $ref: '#/components/schemas/AnomaliePEI'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -28163,6 +28320,7 @@ paths:
                   minLength: 20
               required:
                 - code_anomalie
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
       responses:
         '201':
@@ -28419,6 +28577,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -28428,6 +28587,7 @@ paths:
                       $ref: '#/components/schemas/Contact'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -28750,6 +28910,7 @@ paths:
                   type: string
                   maxLength: 4096
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
       responses:
         '201':
@@ -29006,6 +29167,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -29015,6 +29177,7 @@ paths:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -29302,6 +29465,7 @@ paths:
               required:
                 - url
                 - est_sensible
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -29558,6 +29722,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -29567,6 +29732,7 @@ paths:
                       $ref: '#/components/schemas/Dossier'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -29839,6 +30005,7 @@ paths:
                           maxLength: 255
                       required:
                         - objet
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -29882,6 +30049,7 @@ paths:
                           type: boolean
                       required:
                         - type
+                  additionalProperties: false
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
@@ -29896,6 +30064,7 @@ paths:
                           maxLength: 255
                       required:
                         - objet
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -29905,6 +30074,8 @@ paths:
                             - deci:declaration_pei
                       required:
                         - type
+                  additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '201':
@@ -30407,6 +30578,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -30416,6 +30588,7 @@ paths:
                       $ref: '#/components/schemas/DescriptifTechniqueDECI'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -30671,6 +30844,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -30951,6 +31125,7 @@ paths:
                 required:
                   - titre
                   - valeur
+                additionalProperties: false
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
       responses:
         '200':
@@ -30959,6 +31134,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Liste d'objets.
@@ -31447,6 +31623,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -31456,6 +31633,7 @@ paths:
                       $ref: '#/components/schemas/Prescription'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -31738,6 +31916,7 @@ paths:
               required:
                 - contenu
                 - type
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
       responses:
         '200':
@@ -32513,6 +32692,7 @@ paths:
                     format: uuid
                     maxLength: 36
                     minLength: 36
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
       responses:
         '200':
@@ -32763,6 +32943,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -32772,6 +32953,7 @@ paths:
                       $ref: '#/components/schemas/PrescriptionSupportReglementaire'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -33064,6 +33246,7 @@ paths:
                 - titre
                 - etat
                 - reference
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
       responses:
         '200':
@@ -33814,6 +33997,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -33823,6 +34007,7 @@ paths:
                       $ref: '#/components/schemas/TourneeDeci'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -34094,6 +34279,7 @@ paths:
                           nullable: true
                       required:
                         - libelle
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -34117,6 +34303,7 @@ paths:
                         - type
                         - date_de_debut
                         - date_de_fin
+                  additionalProperties: false
                 - title: Objet Tournee Deci Modele
                   description: >-
                     Modèle de tournée DECI permettant une programmation
@@ -34140,6 +34327,7 @@ paths:
                           nullable: true
                       required:
                         - libelle
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -34163,6 +34351,8 @@ paths:
                         - type
                         - mois_debut
                         - mois_fin
+                  additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -34668,6 +34858,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -34677,6 +34868,7 @@ paths:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -34964,6 +35156,7 @@ paths:
               required:
                 - url
                 - est_sensible
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
       responses:
         '201':
@@ -35487,6 +35680,7 @@ paths:
                           type: string
                           maxLength: 4096
                           nullable: true
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -35508,6 +35702,7 @@ paths:
                           minLength: 20
                       required:
                         - type
+                  additionalProperties: false
                 - title: Objet Tournee Deci Modele
                   description: >-
                     Modèle de tournée DECI permettant une programmation
@@ -35529,6 +35724,7 @@ paths:
                           type: string
                           maxLength: 4096
                           nullable: true
+                      additionalProperties: false
                     - type: object
                       properties:
                         type:
@@ -35550,6 +35746,8 @@ paths:
                           maximum: 12
                       required:
                         - type
+                  additionalProperties: false
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -35806,6 +36004,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -35815,6 +36014,7 @@ paths:
                       $ref: '#/components/schemas/TourneeDeciPei'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -36078,6 +36278,7 @@ paths:
                   minLength: 36
               required:
                 - pei_id
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
       responses:
         '200':
@@ -36329,6 +36530,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -36338,6 +36540,7 @@ paths:
                       $ref: '#/components/schemas/Email'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -36837,6 +37040,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -36846,6 +37050,7 @@ paths:
                       $ref: '#/components/schemas/Utilisateur'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -37103,6 +37308,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -37112,6 +37318,7 @@ paths:
                       $ref: '#/components/schemas/Email'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -37615,6 +37822,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: Tableau d'objets contenu dans la page.
@@ -37624,6 +37832,7 @@ paths:
                       $ref: '#/components/schemas/OrganisationMembre'
                   meta:
                     type: object
+                    additionalProperties: false
                     properties:
                       pagination:
                         $ref: '#/components/schemas/PaginationMetadata'
@@ -38150,6 +38359,7 @@ paths:
                     - workflow
               required:
                 - type
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
       responses:
         '200':
@@ -38639,6 +38849,7 @@ components:
   schemas:
     Error:
       type: object
+      additionalProperties: false
       title: Objet Error
       description: Un objet commun Error (RFC 7807).
       properties:
@@ -38664,6 +38875,7 @@ components:
           description: La description complète de l'erreur rencontrée
     PaginationMetadata:
       type: object
+      additionalProperties: false
       title: Pagination Metadata
       description: Ensemble d'informations liées à une réponse paginée.
       properties:
@@ -38750,6 +38962,7 @@ components:
       required:
         - type
         - activite
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ActiviteErp'
     AdressePostale:
       type: object
@@ -38848,6 +39061,7 @@ components:
         - longitude
         - localisation_operationnelle
         - complement
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AdressePostale'
     AnomalieDECI:
       type: object
@@ -38890,6 +39104,7 @@ components:
         - code
         - texte
         - indice_de_gravite
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomalieDECI'
     AnomaliePEI:
       type: object
@@ -38923,6 +39138,7 @@ components:
         - date_fin
         - est_programmee
         - date_pose
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
     Clicdvcrem:
       type: object
@@ -39303,6 +39519,7 @@ components:
         - nombre_de_zones_alarmes
         - ligne_telephonique_reliee_au_cta
         - parafoudre
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Clicdvcrem'
     Commission:
       type: object
@@ -39344,6 +39561,7 @@ components:
         - libelle
         - presidence
         - secretariat
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
     CommissionMembre:
       type: object
@@ -39379,6 +39597,7 @@ components:
         - titre
         - presence_obligatoire
         - commission
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
     CommissionPreferences:
       type: object
@@ -39393,6 +39612,7 @@ components:
           nullable: true
       required:
         - rapport_modele_cr
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
     Contact:
       type: object
@@ -39486,6 +39706,7 @@ components:
         - societe
         - email
         - observations
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
     Degagement:
       type: object
@@ -39516,6 +39737,7 @@ components:
       required:
         - nombre_degagements
         - nombre_unite_passage
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Degagement'
     DescriptifTechniqueDECIBase:
       type: object
@@ -39632,6 +39854,7 @@ components:
         - date
         - statut
         - est_disponible
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECIBase'
     DescriptifTechniqueDECI:
       type: object
@@ -39640,6 +39863,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniquePIBI'
         - $ref: '#/components/schemas/DescriptifTechniquePENA'
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECI'
     DescriptifTechniqueERPBase:
       type: object
@@ -39704,6 +39928,7 @@ components:
         - libelle
         - observations_generales
         - analyse_risque
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERPBase'
     DescriptifTechniqueERP:
       type: object
@@ -39711,6 +39936,7 @@ components:
       description: Descriptif technique associé à un ERP.
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniqueERPBase'
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERP'
     DescriptifTechniquePENA:
       title: Objet Descriptif Technique DECI PENA
@@ -39749,6 +39975,7 @@ components:
             - nature
             - volume
             - est_citerne
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePENA'
     DescriptifTechniquePIBI:
       title: Objet Descriptif Technique DECI PIBI
@@ -39812,6 +40039,7 @@ components:
             - pression
             - pression_statique
             - debit_gueule_bee
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
     DocumentTechnique:
       type: object
@@ -39867,6 +40095,7 @@ components:
         - date_de_reception
         - date_de_consultation
         - est_manquant
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DocumentTechnique'
     DonneesHydrauliques:
       type: object
@@ -39908,6 +40137,7 @@ components:
         - pression
         - pression_statique
         - debit_gueule_bee
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DonneesHydrauliques'
     DossierBase:
       type: object
@@ -39979,6 +40209,7 @@ components:
         - modules
         - tags
         - est_archive
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
     DossierDeci:
       type: object
@@ -39999,6 +40230,7 @@ components:
           required:
             - type
             - pei
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierDeci'
     DossierErp:
       type: object
@@ -40067,6 +40299,7 @@ components:
             - descriptif_travaux
             - date_limite_traitement
             - dossier_complet
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
     Dossier:
       type: object
@@ -40077,6 +40310,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DossierErp'
         - $ref: '#/components/schemas/DossierDeci'
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
     DossierAffectation:
       type: object
@@ -40107,6 +40341,7 @@ components:
         - id
         - role
         - utilisateur
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
     ERP:
       type: object
@@ -40195,6 +40430,7 @@ components:
         - date_derniere_visite
         - notes_internes
         - references_exterieures
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
     EffectifsNiveau:
       type: object
@@ -40262,6 +40498,7 @@ components:
         - surface_accessible_au_public
         - effectif_public
         - effectif_personnel
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/EffectifsNiveau'
     Email:
       type: object
@@ -40289,6 +40526,7 @@ components:
         - is_primary
         - is_publicly_visible
         - is_verified
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Email'
     Evenement:
       type: object
@@ -40337,6 +40575,7 @@ components:
         - description
         - date_debut
         - date_fin
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
     FeedMessageBase:
       type: object
@@ -40370,6 +40609,7 @@ components:
         - titre
         - date_de_creation
         - type
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageBase'
     FeedMessageTexte:
       title: Objet FeedMessage Texte
@@ -40384,12 +40624,14 @@ components:
               maxLength: 4096
           required:
             - texte
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
     FeedMessage:
       title: Objet Feed Message
       description: Message associé à un flux d'activité.
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
     FilRougeMessage:
       title: Objet Fil Rouge Message
@@ -40420,6 +40662,7 @@ components:
         - message
         - date_de_creation
         - auteur
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
     Notification:
       type: object
@@ -40482,6 +40725,7 @@ components:
         - date_creation
         - date_de_lecture
         - utilisateur
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Notification'
     Organisation:
       type: object
@@ -40519,6 +40763,7 @@ components:
         - nom
         - logo_url
         - type
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
     OrganisationGeoservice:
       type: object
@@ -40559,6 +40804,7 @@ components:
         - nom
         - type
         - url
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
     OrganisationMembre:
       type: object
@@ -40593,6 +40839,7 @@ components:
         - organisation
         - utilisateur
         - role
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationMembre'
     OrganisationPreferences:
       type: object
@@ -40628,6 +40875,7 @@ components:
         - platau_active
         - s3_global_endpoint
         - rapport_modele_rapport_etude
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
     PEI:
       type: object
@@ -40690,6 +40938,7 @@ components:
         - numero_compteur
         - numero_serie_appareil
         - references_exterieures
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
     PassageCommission:
       type: object
@@ -40745,6 +40994,7 @@ components:
         - type
         - libelle
         - raison_reprogrammation
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
     PassageCommissionDossier:
       type: object
@@ -40797,6 +41047,7 @@ components:
         - date_de_passage
         - avis_differe
         - observations
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
     PieceJointe:
       type: object
@@ -40843,6 +41094,7 @@ components:
         - description
         - type
         - est_sensible
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
     Ping:
       type: object
@@ -40853,6 +41105,7 @@ components:
           type: string
           maxLength: 4096
           default: pong
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Ping'
     Prescription:
       type: object
@@ -40895,6 +41148,7 @@ components:
         - contenu
         - type
         - supports_reglementaires
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
     PrescriptionAnalyseDeRisque:
       type: object
@@ -40915,6 +41169,7 @@ components:
               maximum: 999999
           required:
             - numero
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
     PrescriptionSupportReglementaire:
       type: object
@@ -40971,6 +41226,7 @@ components:
         - legifrance_cid
         - etat
         - reference
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
     RapportEtude:
       title: 'Objet : Analyse de Risque'
@@ -41024,6 +41280,7 @@ components:
         - proposition_avis_observations
         - facteur_dangerosite
         - documents_techniques
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
     ReferenceExterieure:
       type: object
@@ -41045,6 +41302,7 @@ components:
       required:
         - titre
         - valeur
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
     ReglesDeci:
       type: object
@@ -41130,6 +41388,7 @@ components:
         - pibi_conformite_seuil_surpression
         - pibi_conformite_matrice_seuil_pesee_1bar_par_defaut
         - pena_conformite_seuil_volume_citerne
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
     Tag:
       type: object
@@ -41142,6 +41401,7 @@ components:
           maxLength: 255
       required:
         - message
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
     TourneeDeci:
       title: Objet Tournée Deci
@@ -41152,6 +41412,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/TourneeDeciSimple'
         - $ref: '#/components/schemas/TourneeDeciModele'
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
     TourneeDeciBase:
       type: object
@@ -41186,6 +41447,7 @@ components:
         - libelle
         - description
         - date_de_creation
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciBase'
     TourneeDeciModele:
       title: Objet Tournee Deci Modele
@@ -41215,6 +41477,7 @@ components:
             - type
             - mois_debut
             - mois_fin
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciModele'
     TourneeDeciPei:
       type: object
@@ -41289,6 +41552,7 @@ components:
         - pei
         - est_controle
         - ordre
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
     TourneeDeciSimple:
       title: Objet Tournée Deci Simple
@@ -41339,6 +41603,7 @@ components:
             - date_de_debut
             - date_de_fin
             - modele
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciSimple'
     Utilisateur:
       type: object
@@ -41406,6 +41671,7 @@ components:
         - is_verified
         - fonction
         - avatar_url
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
     WorkflowStep:
       type: object
@@ -41447,6 +41713,7 @@ components:
         - name
         - workflow
         - needs
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowStep'
     WorkflowType:
       type: object
@@ -41466,6 +41733,7 @@ components:
       required:
         - dossier_type
         - steps
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
     Workflow:
       title: Workflow
@@ -41554,6 +41822,7 @@ components:
         - etat
         - observations
         - type
+      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
   parameters:
     PaginationPage:
