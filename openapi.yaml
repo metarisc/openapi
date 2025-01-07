@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/02-01-2025.2
+  version: 1.0/main/07-01-2025.1
   title: Metarisc API
   description: |-
 
@@ -5442,6 +5442,7 @@ paths:
                       a_lever:
                         description: Si l'anomalie est à lever.
                         type: boolean
+                    additionalProperties: false
                 essais_engin_utilise:
                   description: Engin utilisé pour les essais hydrauliques.
                   type: string
@@ -9888,7 +9889,6 @@ paths:
                   maxLength: 4096
               required:
                 - message
-              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
       responses:
         '201':
@@ -10360,7 +10360,10 @@ paths:
                           type: boolean
                       required:
                         - type
-                  additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties:
+                    type: object
+                  maxProperties: 9
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
@@ -10383,8 +10386,13 @@ paths:
                             - deci:declaration_pei
                       required:
                         - type
-                  additionalProperties: false
-              additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties:
+                    type: object
+                  maxProperties: 2
+              additionalProperties:
+                type: object
+              maxProperties: 11
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '200':
@@ -11333,7 +11341,6 @@ paths:
                       - libelle
                       - type
                     additionalProperties: false
-              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       responses:
         '200':
@@ -11799,7 +11806,10 @@ paths:
                       maximum: 999999
                   required:
                     - numero
-              additionalProperties: false
+                  additionalProperties: false
+              additionalProperties:
+                type: object
+              maxProperties: 4
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
       responses:
         '201':
@@ -13994,7 +14004,9 @@ paths:
                             - statut
                             - libelle
                           additionalProperties: false
-                      additionalProperties: false
+                      additionalProperties:
+                        type: object
+                      maxProperties: 5
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
@@ -15479,7 +15491,10 @@ paths:
                           type: boolean
                       required:
                         - type
-                  additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties:
+                    type: object
+                  maxProperties: 9
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
@@ -15504,8 +15519,13 @@ paths:
                             - deci:declaration_pei
                       required:
                         - type
-                  additionalProperties: false
-              additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties:
+                    type: object
+                  maxProperties: 2
+              additionalProperties:
+                type: object
+              maxProperties: 11
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '201':
@@ -18175,8 +18195,7 @@ paths:
                           maxLength: 4096
                       required:
                         - texte
-                  additionalProperties: false
-              additionalProperties: false
+                      additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
       responses:
         '201':
@@ -18813,6 +18832,7 @@ paths:
                   additionalProperties:
                     type: string
                     maxLength: 255
+                  maxProperties: 10
                 utilisateur_id:
                   description: Identifiant de l'utilisateur cible de la notification.
                   type: string
@@ -22081,6 +22101,7 @@ paths:
                     format: float
                     minimum: 0
                     maximum: 999999
+                  maxProperties: 50
                 pibi_performance_natures_performance_restreinte:
                   description: Liste des natures de PIBI qui auront quoiqu'il arrive une performance déclarée "restreinte".
                   type: array
@@ -22719,7 +22740,7 @@ paths:
                                   nullable: true
                               required:
                                 - nature
-                          additionalProperties: false
+                              additionalProperties: false
                         - title: Objet Descriptif Technique DECI PENA
                           description: Descriptif technique d'un PENA - Point d'Eau Naturel ou Artificiel.
                           allOf:
@@ -22786,8 +22807,10 @@ paths:
                                   nullable: true
                               required:
                                 - nature
-                          additionalProperties: false
-                      additionalProperties: false
+                              additionalProperties: false
+                      additionalProperties:
+                        type: object
+                      maxProperties: 16
                 implantation:
                   description: Implantation du PEI sous la forme d'une adresse postale.
                   allOf:
@@ -24788,7 +24811,10 @@ paths:
                           type: boolean
                       required:
                         - type
-                  additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties:
+                    type: object
+                  maxProperties: 9
                 - type: object
                   title: Objet Dossier DECI
                   description: Dossier d'un DECI.
@@ -24813,8 +24839,13 @@ paths:
                             - deci:declaration_pei
                       required:
                         - type
-                  additionalProperties: false
-              additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties:
+                    type: object
+                  maxProperties: 2
+              additionalProperties:
+                type: object
+              maxProperties: 11
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
       responses:
         '201':
@@ -28321,7 +28352,7 @@ paths:
                         - type
                         - date_de_debut
                         - date_de_fin
-                  additionalProperties: false
+                      additionalProperties: false
                 - title: Objet Tournee Deci Modele
                   description: Modèle de tournée DECI permettant une programmation cyclique.
                   allOf:
@@ -28364,8 +28395,7 @@ paths:
                         - type
                         - mois_debut
                         - mois_fin
-                  additionalProperties: false
-              additionalProperties: false
+                      additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -29490,7 +29520,7 @@ paths:
                           minLength: 20
                       required:
                         - type
-                  additionalProperties: false
+                      additionalProperties: false
                 - title: Objet Tournee Deci Modele
                   description: Modèle de tournée DECI permettant une programmation cyclique.
                   allOf:
@@ -29529,8 +29559,7 @@ paths:
                           maximum: 12
                       required:
                         - type
-                  additionalProperties: false
-              additionalProperties: false
+                      additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
       responses:
         '200':
@@ -31712,7 +31741,6 @@ paths:
                     - workflow
               required:
                 - type
-              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
       responses:
         '200':
@@ -32976,7 +33004,9 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniquePIBI'
         - $ref: '#/components/schemas/DescriptifTechniquePENA'
-      additionalProperties: false
+      additionalProperties:
+        type: object
+      maxProperties: 32
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECI'
     DescriptifTechniqueERPBase:
       type: object
@@ -33040,7 +33070,9 @@ components:
       description: Descriptif technique associé à un ERP.
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniqueERPBase'
-      additionalProperties: false
+      additionalProperties:
+        type: object
+      maxProperties: 7
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERP'
     DescriptifTechniquePENA:
       title: Objet Descriptif Technique DECI PENA
@@ -33077,7 +33109,7 @@ components:
             - nature
             - volume
             - est_citerne
-      additionalProperties: false
+          additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePENA'
     DescriptifTechniquePIBI:
       title: Objet Descriptif Technique DECI PIBI
@@ -33135,7 +33167,7 @@ components:
             - pression
             - pression_statique
             - debit_gueule_bee
-      additionalProperties: false
+          additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
     DocumentTechnique:
       type: object
@@ -33313,7 +33345,10 @@ components:
           required:
             - type
             - pei
-      additionalProperties: false
+          additionalProperties: false
+      additionalProperties:
+        type: object
+      maxProperties: 11
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierDeci'
     DossierErp:
       type: object
@@ -33380,7 +33415,10 @@ components:
             - descriptif_travaux
             - date_limite_traitement
             - dossier_complet
-      additionalProperties: false
+          additionalProperties: false
+      additionalProperties:
+        type: object
+      maxProperties: 18
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
     Dossier:
       type: object
@@ -33389,7 +33427,9 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DossierErp'
         - $ref: '#/components/schemas/DossierDeci'
-      additionalProperties: false
+      additionalProperties:
+        type: object
+      maxProperties: 29
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
     DossierAffectation:
       type: object
@@ -33683,14 +33723,13 @@ components:
               maxLength: 4096
           required:
             - texte
-      additionalProperties: false
+          additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
     FeedMessage:
       title: Objet Feed Message
       description: Message associé à un flux d'activité.
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
-      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
     FilRougeMessage:
       title: Objet Fil Rouge Message
@@ -33721,7 +33760,6 @@ components:
         - message
         - date_de_creation
         - auteur
-      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
     Notification:
       type: object
@@ -33753,6 +33791,7 @@ components:
           additionalProperties:
             type: string
             maxLength: 255
+          maxProperties: 10
         date_creation:
           description: Date de déclenchement de la notification.
           type: string
@@ -34184,7 +34223,10 @@ components:
               maximum: 999999
           required:
             - numero
-      additionalProperties: false
+          additionalProperties: false
+      additionalProperties:
+        type: object
+      maxProperties: 6
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
     PrescriptionSupportReglementaire:
       type: object
@@ -34285,7 +34327,6 @@ components:
         - proposition_avis_observations
         - facteur_dangerosite
         - documents_techniques
-      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
     ReferenceExterieure:
       type: object
@@ -34317,6 +34358,7 @@ components:
             format: float
             minimum: 0
             maximum: 999999
+          maxProperties: 50
         pibi_performance_natures_performance_restreinte:
           description: Liste des natures de PIBI qui auront quoiqu'il arrive une performance déclarée "restreinte".
           type: array
@@ -34400,7 +34442,6 @@ components:
       oneOf:
         - $ref: '#/components/schemas/TourneeDeciSimple'
         - $ref: '#/components/schemas/TourneeDeciModele'
-      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
     TourneeDeciBase:
       type: object
@@ -34463,7 +34504,7 @@ components:
             - type
             - mois_debut
             - mois_fin
-      additionalProperties: false
+          additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciModele'
     TourneeDeciPei:
       type: object
@@ -34505,6 +34546,7 @@ components:
             required:
               - anomalie
               - a_lever
+            additionalProperties: false
         essais_engin_utilise:
           description: Engin utilisé pour les essais hydrauliques.
           type: string
@@ -34585,7 +34627,7 @@ components:
             - date_de_debut
             - date_de_fin
             - modele
-      additionalProperties: false
+          additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciSimple'
     Utilisateur:
       type: object
@@ -34681,6 +34723,7 @@ components:
                 - visite
                 - arrivee_secretariat
                 - workflow
+          additionalProperties: false
         needs:
           description: Les prérequis nécessaires à l'accomplissement de l'étape.
           type: array
@@ -34788,7 +34831,6 @@ components:
         - etat
         - observations
         - type
-      additionalProperties: false
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
   parameters:
     PaginationPage:
