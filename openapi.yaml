@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-01-2025.1
+  version: 1.0/main/09-01-2025.2
   title: Metarisc API
   description: |-
 
@@ -1929,13 +1929,13 @@ paths:
                   description: Date de début du passage en commission programmée.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 date_fin:
                   description: Date de fin du passage en commission programmée.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 type:
                   description: Type du passage en commission.
@@ -5409,7 +5409,7 @@ paths:
                   description: Date à laquelle le contrôle a été effectué.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 hydraulique:
                   description: Informations sur les essais hydrauliques procédés le jour du contrôle.
@@ -6118,7 +6118,7 @@ paths:
                   description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
               required:
                 - dossier_id
@@ -6340,13 +6340,13 @@ paths:
                   description: Nouvelle date de début du passage en commission programmée.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 nouvelle_date_fin:
                   description: Nouvelle date de fin du passage en commission programmée.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 raison:
                   description: Raison de la reprogrammation de la date de passage en commission.
@@ -10383,7 +10383,7 @@ paths:
                           description: Date du numéro d'urbanisme.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
@@ -10401,7 +10401,7 @@ paths:
                           description: Date limite de traitement du dossier.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         dossier_complet:
                           description: Dossier complet.
@@ -11356,13 +11356,13 @@ paths:
                         description: Date de réception du document technique.
                         type: string
                         format: date-time
-                        maxLength: 25
+                        maxLength: 50
                         minLength: 20
                       date_de_consultation:
                         description: Date de consultation du document technique.
                         type: string
                         format: date-time
-                        maxLength: 25
+                        maxLength: 50
                         minLength: 20
                       est_manquant:
                         description: Indique si le document technique est manquant.
@@ -14016,13 +14016,13 @@ paths:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 date_ouverture:
                   description: Date d'ouverture de l'ERP.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 notes_internes:
                   description: Notes internes sur l'ERP.
@@ -15464,7 +15464,7 @@ paths:
                           description: Date du numéro d'urbanisme.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
@@ -15482,7 +15482,7 @@ paths:
                           description: Date limite de traitement du dossier.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         dossier_complet:
                           description: Dossier complet.
@@ -16817,7 +16817,7 @@ paths:
           description: La période pendant laquelle l'événement se déroule.
           schema:
             type: string
-            maxLength: 51
+            maxLength: 100
             minLength: 21
             pattern: ^(.*)\/(.*)$
         - name: type
@@ -17079,13 +17079,13 @@ paths:
                   description: Date de début de l'événement.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 date_fin:
                   description: Date de fin de l'événement.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
               required:
                 - title
@@ -19644,7 +19644,7 @@ paths:
                   description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 avis_differe:
                   description: La commission de sécurité peut décider de reporter son avis à une date ultérieure. Dans ce cas, la date de passage est reportée et un avis différé est émis.
@@ -23296,12 +23296,12 @@ paths:
                 date_debut:
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
                 date_fin:
                   type: string
                   format: date-time
-                  maxLength: 25
+                  maxLength: 50
                   minLength: 20
               required:
                 - code_anomalie
@@ -24737,7 +24737,7 @@ paths:
                           description: Date du numéro d'urbanisme.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
@@ -24755,7 +24755,7 @@ paths:
                           description: Date limite de traitement du dossier.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         dossier_complet:
                           description: Dossier complet.
@@ -28028,7 +28028,7 @@ paths:
           description: Filtre sur les dates
           schema:
             type: string
-            maxLength: 51
+            maxLength: 100
             minLength: 21
             pattern: ^(.*)\/(.*)$
         - name: pei
@@ -28296,13 +28296,13 @@ paths:
                           description: Date de début de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                       required:
                         - type
@@ -29460,13 +29460,13 @@ paths:
                           description: Date de début de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                         date_de_fin:
                           description: Date de fin de la tournée.
                           type: string
                           format: date-time
-                          maxLength: 25
+                          maxLength: 50
                           minLength: 20
                       required:
                         - type
@@ -32310,12 +32310,12 @@ components:
         date_debut:
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_fin:
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         est_programmee:
@@ -32323,7 +32323,7 @@ components:
         date_pose:
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
       required:
         - anomalie
@@ -32892,7 +32892,7 @@ components:
           description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         statut:
           description: Statut du PEI lors de l'établissement de son descriptif technique.
@@ -32945,7 +32945,7 @@ components:
           description: Date à laquelle le descriptif technique a été établi.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         statut:
           description: Statut de l'ERP lors de l'établissement de son descriptif technique.
@@ -33114,14 +33114,14 @@ components:
           description: Date de réception du document technique.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         date_de_consultation:
           description: Date de consultation du document technique.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         est_manquant:
@@ -33192,7 +33192,7 @@ components:
           description: Date de création du dossier.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         createur:
           description: Utilisateur ayant créé le dossier.
@@ -33285,7 +33285,7 @@ components:
               description: Date du numéro d'urbanisme.
               type: string
               format: date-time
-              maxLength: 25
+              maxLength: 50
               minLength: 20
               nullable: true
             demandeur:
@@ -33307,7 +33307,7 @@ components:
               description: Date limite de traitement du dossier.
               type: string
               format: date-time
-              maxLength: 25
+              maxLength: 50
               minLength: 20
               nullable: true
             dossier_complet:
@@ -33375,13 +33375,13 @@ components:
           description: Date à laquelle l'ERP a intégré Metarisc.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_de_derniere_mise_a_jour:
           description: Date à laquelle l'ERP a été mis à jour dans Metarisc.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         implantation:
@@ -33403,21 +33403,21 @@ components:
           description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         date_ouverture:
           description: Date d'ouverture de l'ERP.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         date_derniere_visite:
           description: Date de la dernière visite de l'ERP.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         notes_internes:
@@ -33557,13 +33557,13 @@ components:
           description: Date de début de l'événement.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_fin:
           description: Date de fin de l'événement.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
       required:
         - id
@@ -33592,7 +33592,7 @@ components:
           description: Date de création du message.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         type:
           description: Type du message.
@@ -33644,7 +33644,7 @@ components:
           description: Date de création du message.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         auteur:
           description: Auteur du message.
@@ -33691,13 +33691,13 @@ components:
           description: Date de déclenchement de la notification.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_de_lecture:
           description: Date à laquelle l'utilisateur a lu la notification.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         utilisateur:
@@ -33800,7 +33800,7 @@ components:
           description: Date à laquelle l'utilisateur à rejoint l'organisation en tant que membre.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         role:
           description: Rôle du membre au sein de l'organisation.
@@ -33861,13 +33861,13 @@ components:
           description: Date à laquelle le PEI a intégré Metarisc.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_de_derniere_mise_a_jour:
           description: Date de la dernière mise à jour du PEI.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         descriptif_technique:
@@ -33923,13 +33923,13 @@ components:
           description: Date de début du passage en commission programmée.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_fin:
           description: Date de fin du passage en commission programmée.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         type:
           description: Type du passage en commission.
@@ -33984,7 +33984,7 @@ components:
           description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         avis_differe:
           description: La commission de sécurité peut décider de reporter son avis à une date ultérieure. Dans ce cas, la date de passage est reportée et un avis différé est émis.
@@ -34343,7 +34343,7 @@ components:
           description: Date de création de la tournée.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
       required:
         - id
@@ -34395,7 +34395,7 @@ components:
           description: Date à laquelle le contrôle a été effectué.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         hydraulique:
@@ -34479,13 +34479,13 @@ components:
               description: Date de début de la tournée.
               type: string
               format: date-time
-              maxLength: 25
+              maxLength: 50
               minLength: 20
             date_de_fin:
               description: Date de fin de la tournée.
               type: string
               format: date-time
-              maxLength: 25
+              maxLength: 50
               minLength: 20
             modele:
               description: Si la Tournée DECI a été créé depuis un modèle, son modèle est rattaché.
@@ -34522,13 +34522,13 @@ components:
           description: Date à laquelle l'utilisateur a été créé.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         updated_at:
           description: Date à laquelle l'utilisateur a été mis à jour.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         timezone:
@@ -34642,20 +34642,20 @@ components:
           description: Date de création du workflow.
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
         date_de_debut:
           description: Date du déclenchement du workflow (date à laquelle il est passé actif).
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         date_de_fin:
           description: Date de fin de traitement du workflow (date à laquelle il est passé en terminé).
           type: string
           format: date-time
-          maxLength: 25
+          maxLength: 50
           minLength: 20
           nullable: true
         workflow_automatise:
