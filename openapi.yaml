@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-01-2025.2
+  version: 1.0/main/09-01-2025.1
   title: Metarisc API
   description: |-
 
@@ -1214,6 +1214,23 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: libelle
+          in: query
+          description: Filtre sur le libellé de la commission
+          schema:
+            type: string
+            maxLength: 255
+        - name: type
+          in: query
+          description: Filtre sur le type de la commission
+          schema:
+            type: string
+            enum:
+              - Sous-commission départementale
+              - Commission communale
+              - Commission intercommunale
+              - Commission d'arrondissement
+              - CoDERST
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -2345,6 +2362,14 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: commission
+          in: query
+          description: Filtre sur la commission liée
+          schema:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -7373,6 +7398,57 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: objet
+          in: query
+          description: Filtre sur l'objet du dossier
+          schema:
+            type: string
+            maxLength: 255
+        - name: erp
+          in: query
+          description: Filtre sur l'ERP lié au dossier
+          schema:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
+        - name: pei
+          in: query
+          description: Filtre sur le PEI lié au dossier
+          schema:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
+        - name: type
+          in: query
+          description: Filtre sur le type du dossier
+          schema:
+            type: string
+            maxLength: 256
+        - name: workflow_actif
+          in: query
+          description: Filtre sur le workflow qui est actuellement actif sur le dossier
+          schema:
+            type: string
+            enum:
+              - analyse_de_risque
+              - validation
+              - arrivee_sis
+              - arrivee_sis_prev
+              - arrivee_secretariat_commission
+              - consultation_sis
+              - passage_commission
+              - relecture
+              - visite
+              - arrivee_secretariat
+              - workflow
+        - name: affecte
+          in: query
+          description: Filtre sur les affectations du dossier
+          schema:
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -20877,6 +20953,12 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: last_name
+          in: query
+          description: Filtre sur le nom de l'utilisateur
+          schema:
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -25972,6 +26054,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: contenu
+          in: query
+          description: Filtre sur le contenu de la prescription
+          schema:
+            type: string
+            maxLength: 4096
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -27055,6 +27143,18 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: contenu
+          in: query
+          description: Filtre sur le contenu du support réglementaire
+          schema:
+            type: string
+            maxLength: 4096
+        - name: reference
+          in: query
+          description: Filtre sur la référence du support réglementaire
+          schema:
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -27931,6 +28031,14 @@ paths:
             maxLength: 51
             minLength: 21
             pattern: ^(.*)\/(.*)$
+        - name: pei
+          in: query
+          description: Filtre sur un PEI lié à la tournée
+          schema:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
