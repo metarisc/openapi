@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-01-2025.2
+  version: 1.0/main/15-01-2025.1
   title: Metarisc API
   description: |-
 
@@ -27404,7 +27404,7 @@ paths:
                 titre:
                   description: Titre du contenu réglementaire.
                   type: string
-                  maxLength: 255
+                  maxLength: 512
                 etat:
                   description: Etat juridique d’un support réglementaire.
                   type: string
@@ -34140,7 +34140,7 @@ components:
         titre:
           description: Titre du contenu réglementaire.
           type: string
-          maxLength: 255
+          maxLength: 512
         etat:
           description: Etat juridique d’un support réglementaire.
           type: string
