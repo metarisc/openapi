@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-01-2025.1
+  version: 1.0/feature/clic-next/16-01-2025.1
   title: Metarisc API
   description: |-
 
@@ -10945,6 +10945,15 @@ paths:
                             - 4
                             - 5
                           nullable: true
+                        groupement_etablissement:
+                          description: Le groupement d'établissement est un ensemble d'établissements qui sont regroupés pour former un seul établissement.
+                          type: string
+                          enum:
+                            - Non concerné
+                            - Groupement d'établissement isolé (GN3)
+                            - Groupement d'établissement non isolé (GN2)
+                            - Bâtiment unique
+                          nullable: true
                         tableau_des_effectifs:
                           description: Le tableau des effectifs recense le nombre de personnes présentes dans un établissement à un instant donné. Il est organisé par niveaux, et tient en compte du type d'activité, ainsi que de modes de calculs.
                           type: array
@@ -11052,9 +11061,16 @@ paths:
                           description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
                           type: boolean
                           nullable: true
-                        sous_sol_accessible_au_public:
-                          description: Les sous-sols accessibles au public sont des locaux situés en sous-sol et accessibles au public.
+                        presence_locaux_sommeil_au_dessus_r1:
+                          description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
                           type: boolean
+                          nullable: true
+                        niveau_total:
+                          description: Le nombre total de niveaux est le nombre total de niveaux de l'établissement.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
                           nullable: true
                         surface_totale:
                           description: La surface totale est la surface totale des locaux.
@@ -11074,44 +11090,250 @@ paths:
                           description: 'Les établissements recevant du public qui ne correspondent à aucun des types définis par le règlement de sécurité sont néanmoins assujettis aux prescriptions du présent chapitre via l''activation du R143-20. Les mesures de sécurité à y appliquer sont précisées, après avis de la commission de sécurité compétente, en tenant compte de celles qui sont imposées aux types d''établissements dont la nature d''exploitation se rapproche le plus de celle qui est envisagée. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979'
                           type: boolean
                           nullable: true
+                        batiment_etages_en_superstructure:
+                          description: Le nombre d'étages en superstructure est le nombre d'étages situés au-dessus du sol.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        batiment_etages_en_infrastructure:
+                          description: Le nombre d'étages en infrastructure est le nombre d'étages situés en dessous du sol.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        etablissement_de_plain_pied:
+                          description: Un établissement de plain-pied est un établissement qui ne comporte pas d'étage.
+                          type: boolean
+                          nullable: true
                         plancher_bas_du_dernier_niveau:
                           description: Le plancher bas du dernier niveau est le plancher le plus bas de la construction.
                           type: string
                           enum:
-                            - '>8m'
                             - <8m
+                            - '=>8m'
                           nullable: true
                         plancher_bas_du_dernier_niveau_accessible_au_public:
                           description: Le plancher bas du dernier niveau accessible au public est le plancher le plus bas accessible au public.
                           type: string
                           enum:
-                            - '>8m'
                             - <8m
+                            - '=>8m'
+                          nullable: true
+                        voie_engin:
+                          description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
+                          type: boolean
+                          nullable: true
+                        voie_echelle:
+                          description: La voie des échelles est la voie facilitant l'accès des échelles.
+                          type: boolean
+                          nullable: true
+                        nombre_facades_accessibles:
+                          description: Le nombre de façades accessibles aux engins de pompiers.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        informations_acces_facades:
+                          description: Les informations d'accès aux façades.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        espace_libre:
+                          description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
+                          type: boolean
+                          nullable: true
+                        desserte_informations_complementaires:
+                          description: Les informations complémentaires sur la desserte.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        presence_erp_ou_tiers_contigus:
+                          description: La présence d'ERP ou de tiers contigus.
+                          type: boolean
+                          nullable: true
+                        isolement_contigus_realise_degre_cf:
+                          description: Le degré CF (Coupe Feu) de l'isolement entre les tiers.
+                          type: string
+                          enum:
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                            - Non concerné
+                          nullable: true
+                        isolement_contigus_realise_degre_cf_autre_precision:
+                          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        isolement_contigus_informations_complementaires:
+                          description: Les informations complémentaires sur l'isolement entre les tiers.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        air_libre:
+                          description: Distance d'air libre entre les tiers en vis à vis.
+                          type: string
+                          enum:
+                            - '- de 4m'
+                            - 4m ou plus
+                            - 5m ou plus
+                            - '- de 8m'
+                            - 8m ou plus
+                            - Non concerné
+                          nullable: true
+                        vis_a_vis:
+                          description: La distance entre les deux tiers en vis à vis.
+                          type: string
+                          enum:
+                            - '- de 5m'
+                            - 5m ou plus
+                            - 8m ou plus
+                            - '- de 8m'
+                            - Non concerné
+                          nullable: true
+                        isolement_vis_a_vis_informations_complementaires:
+                          description: Les informations complémentaires sur l'isolement vis à vis.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        presence_erp_ou_tiers_superpose:
+                          description: La présence d'ERP ou de tiers superposés.
+                          type: boolean
+                          nullable: true
+                        isolement_superpose_realise_degre_cf:
+                          description: Le degré CF de l'isolement entre les tiers superposés.
+                          type: string
+                          enum:
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                            - Non concerné
+                          nullable: true
+                        isolement_superpose_realise_degre_cf_autre_precision:
+                          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        isolement_superpose_informations_complementaires:
+                          description: Les informations complémentaires sur l'isolement entre les tiers superposés.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        structure_sf:
+                          description: La stabilité au feu de la structure.
+                          type: string
+                          enum:
+                            - 1/2h
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                          nullable: true
+                        plancher_sf:
+                          description: La stabilité au feu du plancher.
+                          type: string
+                          enum:
+                            - 1/2h
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                          nullable: true
+                        stabilite_au_feu_informations_complementaires:
+                          description: Les informations complémentaires sur la stabilité au feu.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        isolement_autre_description:
+                          description: Description d'un autre type d'isolement.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        construction_structures_description:
+                          description: Description des structures de construction.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        construction_couverture_description:
+                          description: Description de la couverture de construction.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        construction_facades_description:
+                          description: Description des façades de construction.
+                          type: string
+                          maxLength: 4096
                           nullable: true
                         type_cloisonnement:
                           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+                          type: array
+                          maxItems: 3
+                          items:
+                            enum:
+                              - Traditionnels
+                              - Secteurs
+                              - Compartiments
+                          nullable: true
+                        construction_distribution_interieure_informations_complementaires:
+                          description: Les informations complémentaires sur la distribution intérieure de la construction.
                           type: string
-                          enum:
-                            - Traditionnels
-                            - Secteurs
-                            - Compartiments
+                          maxLength: 4096
                           nullable: true
                         locaux:
                           description: Les locaux sont des espaces délimités par des cloisons.
-                          type: string
-                          enum:
-                            - Risque Courant
-                            - Risque Moyen
-                            - Risque Important
+                          type: array
+                          maxItems: 5
+                          items:
+                            type: object
+                            title: Objet Local
+                            description: Objet représentant un local dans un bâtiment.
+                            properties:
+                              nom_du_local:
+                                description: Le nom du local
+                                type: string
+                                maxLength: 256
+                                nullable: true
+                              etage_du_local:
+                                description: L'étage du local
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                                nullable: true
+                              type_de_risque:
+                                description: Le type de risque du local
+                                type: string
+                                enum:
+                                  - Risque Courant
+                                  - Risque Moyen
+                                  - Risque Important
+                                nullable: true
+                              local_informations_complementaires:
+                                description: Les informations complémentaires du local
+                                type: string
+                                maxLength: 4096
+                                nullable: true
                           nullable: true
-                        sprinklage:
-                          description: Le sprinklage est un système d'extinction automatique à eau.
-                          type: boolean
+                        construction_conduits_et_gaines_description:
+                          description: Description des conduits et des gaines.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        construction_amenagements_interieurs_description:
+                          description: Description des aménagements intérieurs.
+                          type: string
+                          maxLength: 4096
                           nullable: true
                         degagement_normaux:
                           description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
                           type: array
-                          maxItems: 5
+                          maxItems: 10
                           items:
                             type: object
                             title: Objet Dégagement
@@ -11133,7 +11355,7 @@ paths:
                         degagements_accessoires:
                           description: Dégagements imposés lorsque exceptionnellement les dégagements normaux ne sont pas judicieusement répartis dans le local, l'étage, le secteur, le compartiment ou l'établissement.
                           type: array
-                          maxItems: 5
+                          maxItems: 10
                           items:
                             type: object
                             title: Objet Dégagement
@@ -11151,11 +11373,16 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
+                          nullable: true
+                        degagement_exigibles_informations_complementaires:
+                          description: Les informations complémentaires sur les dégagements exigibles.
+                          type: string
+                          maxLength: 4096
                           nullable: true
                         degagement_supplementaires:
                           description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
                           type: array
-                          maxItems: 5
+                          maxItems: 10
                           items:
                             type: object
                             title: Objet Dégagement
@@ -11174,9 +11401,38 @@ paths:
                                 minimum: 0
                                 maximum: 999999
                           nullable: true
+                        degagement_escaliers_description:
+                          description: Description du dégagement des escaliers.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
+                          description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
                         presence_eas_ou_equivalents:
                           description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
                           type: boolean
+                          nullable: true
+                        degagement_espaces_attente_securises_informations_complementaires:
+                          description: Les informations complémentaires sur les espaces d'attente sécurisés.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        degagement_tribunes_et_gradins_non_demontables_description:
+                          description: Description des dégagements des tribunes et gradins non démontables.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        enfouissement:
+                          description: Information sur la présence d'un enfouissement.
+                          type: boolean
+                          nullable: true
+                        degagement_enfouissement_informations_complementaires:
+                          description: Les informations complémentaires au sujet de l'enfouissement.
+                          type: string
+                          maxLength: 4096
                           nullable: true
                         presence_desenfumage_mécanique:
                           description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
@@ -11186,28 +11442,93 @@ paths:
                           description: Le désenfumage naturel est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
                           type: boolean
                           nullable: true
+                        ventilation_desenfumage_informations_complementaires:
+                          description: Les informations complémentaires sur la ventilation et le désenfumage.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        groupe_electrogene:
+                          description: Information sur la presence d'un groupe électrogène.
+                          type: boolean
+                          nullable: true
+                        batteries_accumulateurs_et_materiels_associes:
+                          description: Information sur la présence de batteries, accumulateurs et matériels associés.
+                          type: boolean
+                          nullable: true
+                        photovoltaique:
+                          description: Information sur la présence de panneaux photovoltaïques.
+                          type: boolean
+                          nullable: true
+                        parafoudre:
+                          description: Information sur la présence de parafoudres.
+                          type: boolean
+                          nullable: true
+                        electricite_eclairage_informations_complementaires:
+                          description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
                         puissance_chaufferie:
                           description: Puissance de la chaufferie
                           type: string
                           enum:
+                            - <=70kW
                             - '>70kW'
-                            - <70kW
                             - Non
                           nullable: true
                         presence_gaz_chaufferie:
                           description: Présence de gaz en chaufferie
                           type: boolean
                           nullable: true
+                        type_de_chauffage:
+                          description: Information sur le type de chauffage present dans le batiment.
+                          type: array
+                          maxItems: 7
+                          items:
+                            enum:
+                              - Sous-station
+                              - Chaufferie
+                              - Climatisation
+                              - Aerothermique
+                              - Rooftop
+                              - Chauffage urbain
+                              - Autre
+                          nullable: true
+                        chauffage_ventilation_informations_complementaires:
+                          description: Les informations complémentaires au sujet du chauffage et de la ventilation.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
                         puissance_cuisine:
                           description: Puissance de la cuisine
                           type: string
                           enum:
+                            - <=20kW
                             - '>20kW'
-                            - <20kW
                             - Non
+                          nullable: true
+                        type_de_cuisine:
+                          description: Information sur le type de cuisine present dans le batiment.
+                          type: string
+                          enum:
+                            - Ouverte
+                            - Fermée
                           nullable: true
                         presence_gaz_cuisine:
                           description: Présence de gaz en cuisine
+                          type: boolean
+                          nullable: true
+                        systeme_extraction:
+                          description: Présence d'un système d'extraction dans la cuisine.
+                          type: boolean
+                          nullable: true
+                        risques_spéciaux_informations_complementaires:
+                          description: Les informations complémentaires sur les risques spéciaux.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        presence_extincteur:
+                          description: Présence d'extincteurs.
                           type: boolean
                           nullable: true
                         presence_ria:
@@ -11235,21 +11556,56 @@ paths:
                           type: boolean
                           nullable: true
                         installation_extinction:
-                          description: 'Installation d''extinction automatique à eau : - Automatique - Manuelle - Autres'
+                          description: Installation d'extinction automatique à eau.
                           type: string
                           enum:
                             - Automatique
                             - Manuelle
-                            - Autres
+                            - Autre
+                          nullable: true
+                        moyens_de_secours_informations_complementaires:
+                          description: Les informations complémentaires sur les moyens de secours.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        deci_description:
+                          description: Description du dispositif DECI.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        affichage_des_plans_intervention:
+                          description: Présence d'affichage des plans d'intervention.
+                          type: boolean
+                          nullable: true
+                        tour_incendie:
+                          description: Présence d'une tour d'incendie.
+                          type: boolean
+                          nullable: true
+                        tremie_attaque:
+                          description: Présence de tremie d'attaque.
+                          type: boolean
                           nullable: true
                         service_de_securite_incendie:
-                          description: 'Types de service de sécurité incendie : - Personnel désigné et formé ; - SSIAP ; - Sapeurs- pompiers ; - Combinaison des différentes possibilités ;'
+                          description: Types de service de sécurité incendie.
                           type: string
                           enum:
                             - Personnel désigné et formé
                             - SSIAP
-                            - Sapeurs- pompiers
+                            - Sapeurs-pompiers
                             - Combinaison des différentes possibilités
+                          nullable: true
+                        presence_pc_securite:
+                          description: Présence d'un PC sécurité.
+                          type: boolean
+                          nullable: true
+                        service_de_securite_incendie_informations_complementaires:
+                          description: Les informations complémentaires sur le service de sécurité incendie.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        systeme_de_securite_incendie:
+                          description: Présence d'un système de sécurité incendie.
+                          type: boolean
                           nullable: true
                         type_ssi:
                           description: 'Il existe 5 types de SSI : SSI E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel) ; SSI D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel) ; SSI C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique) ; SSI B : un centralisateur de mise en sécurité incendie (CMSI) ; SSI A : un système de détection incendie (SDI)et un centralisateur de mise en sécurité incendie (CMSI).'
@@ -11282,20 +11638,30 @@ paths:
                           description: Désenfumage commandé par le SSI
                           type: boolean
                           nullable: true
-                        nombre_de_zones_alarmes:
-                          description: Nombre de zones d'alarmes
-                          type: integer
-                          format: int32
-                          minimum: 0
-                          maximum: 999999
-                          nullable: true
                         ligne_telephonique_reliee_au_cta:
                           description: La ligne téléphonique est reliée au CTA
                           type: boolean
                           nullable: true
-                        parafoudre:
-                          description: Présence d'un parafoudre
+                        autre_systeme_alerte:
+                          description: Autre système d'alerte.
+                          type: string
+                          enum:
+                            - Telephone urbain fixe ou box secourue
+                            - GSM
+                          nullable: true
+                        systeme_securite_incendie_informations_complementaires:
+                          description: Les informations complémentaires sur le système de sécurité incendie.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        defibrillateur:
+                          description: Présence d'un défibrillateur.
                           type: boolean
+                          nullable: true
+                        specificites_informations_complementaires:
+                          description: Les informations complémentaires sur les spécificités.
+                          type: string
+                          maxLength: 4096
                           nullable: true
                 observations:
                   description: Observations sur l'analyse de risque.
@@ -13654,6 +14020,15 @@ paths:
                                         - 4
                                         - 5
                                       nullable: true
+                                    groupement_etablissement:
+                                      description: Le groupement d'établissement est un ensemble d'établissements qui sont regroupés pour former un seul établissement.
+                                      type: string
+                                      enum:
+                                        - Non concerné
+                                        - Groupement d'établissement isolé (GN3)
+                                        - Groupement d'établissement non isolé (GN2)
+                                        - Bâtiment unique
+                                      nullable: true
                                     tableau_des_effectifs:
                                       description: Le tableau des effectifs recense le nombre de personnes présentes dans un établissement à un instant donné. Il est organisé par niveaux, et tient en compte du type d'activité, ainsi que de modes de calculs.
                                       type: array
@@ -13764,9 +14139,16 @@ paths:
                                       description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
                                       type: boolean
                                       nullable: true
-                                    sous_sol_accessible_au_public:
-                                      description: Les sous-sols accessibles au public sont des locaux situés en sous-sol et accessibles au public.
+                                    presence_locaux_sommeil_au_dessus_r1:
+                                      description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
                                       type: boolean
+                                      nullable: true
+                                    niveau_total:
+                                      description: Le nombre total de niveaux est le nombre total de niveaux de l'établissement.
+                                      type: integer
+                                      format: int32
+                                      minimum: 0
+                                      maximum: 999999
                                       nullable: true
                                     surface_totale:
                                       description: La surface totale est la surface totale des locaux.
@@ -13786,44 +14168,250 @@ paths:
                                       description: 'Les établissements recevant du public qui ne correspondent à aucun des types définis par le règlement de sécurité sont néanmoins assujettis aux prescriptions du présent chapitre via l''activation du R143-20. Les mesures de sécurité à y appliquer sont précisées, après avis de la commission de sécurité compétente, en tenant compte de celles qui sont imposées aux types d''établissements dont la nature d''exploitation se rapproche le plus de celle qui est envisagée. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979'
                                       type: boolean
                                       nullable: true
+                                    batiment_etages_en_superstructure:
+                                      description: Le nombre d'étages en superstructure est le nombre d'étages situés au-dessus du sol.
+                                      type: integer
+                                      format: int32
+                                      minimum: 0
+                                      maximum: 999999
+                                      nullable: true
+                                    batiment_etages_en_infrastructure:
+                                      description: Le nombre d'étages en infrastructure est le nombre d'étages situés en dessous du sol.
+                                      type: integer
+                                      format: int32
+                                      minimum: 0
+                                      maximum: 999999
+                                      nullable: true
+                                    etablissement_de_plain_pied:
+                                      description: Un établissement de plain-pied est un établissement qui ne comporte pas d'étage.
+                                      type: boolean
+                                      nullable: true
                                     plancher_bas_du_dernier_niveau:
                                       description: Le plancher bas du dernier niveau est le plancher le plus bas de la construction.
                                       type: string
                                       enum:
-                                        - '>8m'
                                         - <8m
+                                        - '=>8m'
                                       nullable: true
                                     plancher_bas_du_dernier_niveau_accessible_au_public:
                                       description: Le plancher bas du dernier niveau accessible au public est le plancher le plus bas accessible au public.
                                       type: string
                                       enum:
-                                        - '>8m'
                                         - <8m
+                                        - '=>8m'
+                                      nullable: true
+                                    voie_engin:
+                                      description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
+                                      type: boolean
+                                      nullable: true
+                                    voie_echelle:
+                                      description: La voie des échelles est la voie facilitant l'accès des échelles.
+                                      type: boolean
+                                      nullable: true
+                                    nombre_facades_accessibles:
+                                      description: Le nombre de façades accessibles aux engins de pompiers.
+                                      type: integer
+                                      format: int32
+                                      minimum: 0
+                                      maximum: 999999
+                                      nullable: true
+                                    informations_acces_facades:
+                                      description: Les informations d'accès aux façades.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    espace_libre:
+                                      description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
+                                      type: boolean
+                                      nullable: true
+                                    desserte_informations_complementaires:
+                                      description: Les informations complémentaires sur la desserte.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    presence_erp_ou_tiers_contigus:
+                                      description: La présence d'ERP ou de tiers contigus.
+                                      type: boolean
+                                      nullable: true
+                                    isolement_contigus_realise_degre_cf:
+                                      description: Le degré CF (Coupe Feu) de l'isolement entre les tiers.
+                                      type: string
+                                      enum:
+                                        - 1h
+                                        - 2h
+                                        - 3h
+                                        - Autre
+                                        - Non concerné
+                                      nullable: true
+                                    isolement_contigus_realise_degre_cf_autre_precision:
+                                      description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    isolement_contigus_informations_complementaires:
+                                      description: Les informations complémentaires sur l'isolement entre les tiers.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    air_libre:
+                                      description: Distance d'air libre entre les tiers en vis à vis.
+                                      type: string
+                                      enum:
+                                        - '- de 4m'
+                                        - 4m ou plus
+                                        - 5m ou plus
+                                        - '- de 8m'
+                                        - 8m ou plus
+                                        - Non concerné
+                                      nullable: true
+                                    vis_a_vis:
+                                      description: La distance entre les deux tiers en vis à vis.
+                                      type: string
+                                      enum:
+                                        - '- de 5m'
+                                        - 5m ou plus
+                                        - 8m ou plus
+                                        - '- de 8m'
+                                        - Non concerné
+                                      nullable: true
+                                    isolement_vis_a_vis_informations_complementaires:
+                                      description: Les informations complémentaires sur l'isolement vis à vis.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    presence_erp_ou_tiers_superpose:
+                                      description: La présence d'ERP ou de tiers superposés.
+                                      type: boolean
+                                      nullable: true
+                                    isolement_superpose_realise_degre_cf:
+                                      description: Le degré CF de l'isolement entre les tiers superposés.
+                                      type: string
+                                      enum:
+                                        - 1h
+                                        - 2h
+                                        - 3h
+                                        - Autre
+                                        - Non concerné
+                                      nullable: true
+                                    isolement_superpose_realise_degre_cf_autre_precision:
+                                      description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    isolement_superpose_informations_complementaires:
+                                      description: Les informations complémentaires sur l'isolement entre les tiers superposés.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    structure_sf:
+                                      description: La stabilité au feu de la structure.
+                                      type: string
+                                      enum:
+                                        - 1/2h
+                                        - 1h
+                                        - 2h
+                                        - 3h
+                                        - Autre
+                                      nullable: true
+                                    plancher_sf:
+                                      description: La stabilité au feu du plancher.
+                                      type: string
+                                      enum:
+                                        - 1/2h
+                                        - 1h
+                                        - 2h
+                                        - 3h
+                                        - Autre
+                                      nullable: true
+                                    stabilite_au_feu_informations_complementaires:
+                                      description: Les informations complémentaires sur la stabilité au feu.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    isolement_autre_description:
+                                      description: Description d'un autre type d'isolement.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    construction_structures_description:
+                                      description: Description des structures de construction.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    construction_couverture_description:
+                                      description: Description de la couverture de construction.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    construction_facades_description:
+                                      description: Description des façades de construction.
+                                      type: string
+                                      maxLength: 4096
                                       nullable: true
                                     type_cloisonnement:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+                                      type: array
+                                      maxItems: 3
+                                      items:
+                                        enum:
+                                          - Traditionnels
+                                          - Secteurs
+                                          - Compartiments
+                                      nullable: true
+                                    construction_distribution_interieure_informations_complementaires:
+                                      description: Les informations complémentaires sur la distribution intérieure de la construction.
                                       type: string
-                                      enum:
-                                        - Traditionnels
-                                        - Secteurs
-                                        - Compartiments
+                                      maxLength: 4096
                                       nullable: true
                                     locaux:
                                       description: Les locaux sont des espaces délimités par des cloisons.
-                                      type: string
-                                      enum:
-                                        - Risque Courant
-                                        - Risque Moyen
-                                        - Risque Important
+                                      type: array
+                                      maxItems: 5
+                                      items:
+                                        type: object
+                                        title: Objet Local
+                                        description: Objet représentant un local dans un bâtiment.
+                                        properties:
+                                          nom_du_local:
+                                            description: Le nom du local
+                                            type: string
+                                            maxLength: 256
+                                            nullable: true
+                                          etage_du_local:
+                                            description: L'étage du local
+                                            type: integer
+                                            format: int32
+                                            minimum: 0
+                                            maximum: 999999
+                                            nullable: true
+                                          type_de_risque:
+                                            description: Le type de risque du local
+                                            type: string
+                                            enum:
+                                              - Risque Courant
+                                              - Risque Moyen
+                                              - Risque Important
+                                            nullable: true
+                                          local_informations_complementaires:
+                                            description: Les informations complémentaires du local
+                                            type: string
+                                            maxLength: 4096
+                                            nullable: true
                                       nullable: true
-                                    sprinklage:
-                                      description: Le sprinklage est un système d'extinction automatique à eau.
-                                      type: boolean
+                                    construction_conduits_et_gaines_description:
+                                      description: Description des conduits et des gaines.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    construction_amenagements_interieurs_description:
+                                      description: Description des aménagements intérieurs.
+                                      type: string
+                                      maxLength: 4096
                                       nullable: true
                                     degagement_normaux:
                                       description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
                                       type: array
-                                      maxItems: 5
+                                      maxItems: 10
                                       items:
                                         type: object
                                         title: Objet Dégagement
@@ -13845,7 +14433,7 @@ paths:
                                     degagements_accessoires:
                                       description: Dégagements imposés lorsque exceptionnellement les dégagements normaux ne sont pas judicieusement répartis dans le local, l'étage, le secteur, le compartiment ou l'établissement.
                                       type: array
-                                      maxItems: 5
+                                      maxItems: 10
                                       items:
                                         type: object
                                         title: Objet Dégagement
@@ -13863,11 +14451,16 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
+                                      nullable: true
+                                    degagement_exigibles_informations_complementaires:
+                                      description: Les informations complémentaires sur les dégagements exigibles.
+                                      type: string
+                                      maxLength: 4096
                                       nullable: true
                                     degagement_supplementaires:
                                       description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
                                       type: array
-                                      maxItems: 5
+                                      maxItems: 10
                                       items:
                                         type: object
                                         title: Objet Dégagement
@@ -13886,9 +14479,38 @@ paths:
                                             minimum: 0
                                             maximum: 999999
                                       nullable: true
+                                    degagement_escaliers_description:
+                                      description: Description du dégagement des escaliers.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
+                                      description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
                                     presence_eas_ou_equivalents:
                                       description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
                                       type: boolean
+                                      nullable: true
+                                    degagement_espaces_attente_securises_informations_complementaires:
+                                      description: Les informations complémentaires sur les espaces d'attente sécurisés.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    degagement_tribunes_et_gradins_non_demontables_description:
+                                      description: Description des dégagements des tribunes et gradins non démontables.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    enfouissement:
+                                      description: Information sur la présence d'un enfouissement.
+                                      type: boolean
+                                      nullable: true
+                                    degagement_enfouissement_informations_complementaires:
+                                      description: Les informations complémentaires au sujet de l'enfouissement.
+                                      type: string
+                                      maxLength: 4096
                                       nullable: true
                                     presence_desenfumage_mécanique:
                                       description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
@@ -13898,28 +14520,93 @@ paths:
                                       description: Le désenfumage naturel est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
                                       type: boolean
                                       nullable: true
+                                    ventilation_desenfumage_informations_complementaires:
+                                      description: Les informations complémentaires sur la ventilation et le désenfumage.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    groupe_electrogene:
+                                      description: Information sur la presence d'un groupe électrogène.
+                                      type: boolean
+                                      nullable: true
+                                    batteries_accumulateurs_et_materiels_associes:
+                                      description: Information sur la présence de batteries, accumulateurs et matériels associés.
+                                      type: boolean
+                                      nullable: true
+                                    photovoltaique:
+                                      description: Information sur la présence de panneaux photovoltaïques.
+                                      type: boolean
+                                      nullable: true
+                                    parafoudre:
+                                      description: Information sur la présence de parafoudres.
+                                      type: boolean
+                                      nullable: true
+                                    electricite_eclairage_informations_complementaires:
+                                      description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
                                     puissance_chaufferie:
                                       description: Puissance de la chaufferie
                                       type: string
                                       enum:
+                                        - <=70kW
                                         - '>70kW'
-                                        - <70kW
                                         - Non
                                       nullable: true
                                     presence_gaz_chaufferie:
                                       description: Présence de gaz en chaufferie
                                       type: boolean
                                       nullable: true
+                                    type_de_chauffage:
+                                      description: Information sur le type de chauffage present dans le batiment.
+                                      type: array
+                                      maxItems: 7
+                                      items:
+                                        enum:
+                                          - Sous-station
+                                          - Chaufferie
+                                          - Climatisation
+                                          - Aerothermique
+                                          - Rooftop
+                                          - Chauffage urbain
+                                          - Autre
+                                      nullable: true
+                                    chauffage_ventilation_informations_complementaires:
+                                      description: Les informations complémentaires au sujet du chauffage et de la ventilation.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
                                     puissance_cuisine:
                                       description: Puissance de la cuisine
                                       type: string
                                       enum:
+                                        - <=20kW
                                         - '>20kW'
-                                        - <20kW
                                         - Non
+                                      nullable: true
+                                    type_de_cuisine:
+                                      description: Information sur le type de cuisine present dans le batiment.
+                                      type: string
+                                      enum:
+                                        - Ouverte
+                                        - Fermée
                                       nullable: true
                                     presence_gaz_cuisine:
                                       description: Présence de gaz en cuisine
+                                      type: boolean
+                                      nullable: true
+                                    systeme_extraction:
+                                      description: Présence d'un système d'extraction dans la cuisine.
+                                      type: boolean
+                                      nullable: true
+                                    risques_spéciaux_informations_complementaires:
+                                      description: Les informations complémentaires sur les risques spéciaux.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    presence_extincteur:
+                                      description: Présence d'extincteurs.
                                       type: boolean
                                       nullable: true
                                     presence_ria:
@@ -13947,21 +14634,56 @@ paths:
                                       type: boolean
                                       nullable: true
                                     installation_extinction:
-                                      description: 'Installation d''extinction automatique à eau : - Automatique - Manuelle - Autres'
+                                      description: Installation d'extinction automatique à eau.
                                       type: string
                                       enum:
                                         - Automatique
                                         - Manuelle
-                                        - Autres
+                                        - Autre
+                                      nullable: true
+                                    moyens_de_secours_informations_complementaires:
+                                      description: Les informations complémentaires sur les moyens de secours.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    deci_description:
+                                      description: Description du dispositif DECI.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    affichage_des_plans_intervention:
+                                      description: Présence d'affichage des plans d'intervention.
+                                      type: boolean
+                                      nullable: true
+                                    tour_incendie:
+                                      description: Présence d'une tour d'incendie.
+                                      type: boolean
+                                      nullable: true
+                                    tremie_attaque:
+                                      description: Présence de tremie d'attaque.
+                                      type: boolean
                                       nullable: true
                                     service_de_securite_incendie:
-                                      description: 'Types de service de sécurité incendie : - Personnel désigné et formé ; - SSIAP ; - Sapeurs- pompiers ; - Combinaison des différentes possibilités ;'
+                                      description: Types de service de sécurité incendie.
                                       type: string
                                       enum:
                                         - Personnel désigné et formé
                                         - SSIAP
-                                        - Sapeurs- pompiers
+                                        - Sapeurs-pompiers
                                         - Combinaison des différentes possibilités
+                                      nullable: true
+                                    presence_pc_securite:
+                                      description: Présence d'un PC sécurité.
+                                      type: boolean
+                                      nullable: true
+                                    service_de_securite_incendie_informations_complementaires:
+                                      description: Les informations complémentaires sur le service de sécurité incendie.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    systeme_de_securite_incendie:
+                                      description: Présence d'un système de sécurité incendie.
+                                      type: boolean
                                       nullable: true
                                     type_ssi:
                                       description: 'Il existe 5 types de SSI : SSI E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel) ; SSI D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel) ; SSI C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique) ; SSI B : un centralisateur de mise en sécurité incendie (CMSI) ; SSI A : un système de détection incendie (SDI)et un centralisateur de mise en sécurité incendie (CMSI).'
@@ -13994,20 +14716,30 @@ paths:
                                       description: Désenfumage commandé par le SSI
                                       type: boolean
                                       nullable: true
-                                    nombre_de_zones_alarmes:
-                                      description: Nombre de zones d'alarmes
-                                      type: integer
-                                      format: int32
-                                      minimum: 0
-                                      maximum: 999999
-                                      nullable: true
                                     ligne_telephonique_reliee_au_cta:
                                       description: La ligne téléphonique est reliée au CTA
                                       type: boolean
                                       nullable: true
-                                    parafoudre:
-                                      description: Présence d'un parafoudre
+                                    autre_systeme_alerte:
+                                      description: Autre système d'alerte.
+                                      type: string
+                                      enum:
+                                        - Telephone urbain fixe ou box secourue
+                                        - GSM
+                                      nullable: true
+                                    systeme_securite_incendie_informations_complementaires:
+                                      description: Les informations complémentaires sur le système de sécurité incendie.
+                                      type: string
+                                      maxLength: 4096
+                                      nullable: true
+                                    defibrillateur:
+                                      description: Présence d'un défibrillateur.
                                       type: boolean
+                                      nullable: true
+                                    specificites_informations_complementaires:
+                                      description: Les informations complémentaires sur les spécificités.
+                                      type: string
+                                      maxLength: 4096
                                       nullable: true
                           required:
                             - statut
@@ -32362,6 +33094,15 @@ components:
             - 4
             - 5
           nullable: true
+        groupement_etablissement:
+          description: Le groupement d'établissement est un ensemble d'établissements qui sont regroupés pour former un seul établissement.
+          type: string
+          enum:
+            - Non concerné
+            - Groupement d'établissement isolé (GN3)
+            - Groupement d'établissement non isolé (GN2)
+            - Bâtiment unique
+          nullable: true
         tableau_des_effectifs:
           description: Le tableau des effectifs recense le nombre de personnes présentes dans un établissement à un instant donné. Il est organisé par niveaux, et tient en compte du type d'activité, ainsi que de modes de calculs.
           type: array
@@ -32376,8 +33117,22 @@ components:
           minimum: 0
           maximum: 999999
           nullable: true
+        effectif_public_total:
+          description: L'effectif du public total est le nombre de personnes pouvant être accueillies au total dans l'établissement.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
         effectif_personnel:
           description: L'effectif du personnel est le nombre de personnes travaillant dans l'établissement.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
+        effectif_personnel_total:
+          description: L'effectif du personnel total est le nombre de personnes travaillant au total dans l'établissement.
           type: integer
           format: int32
           minimum: 0
@@ -32387,9 +33142,16 @@ components:
           description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
           type: boolean
           nullable: true
-        sous_sol_accessible_au_public:
-          description: Les sous-sols accessibles au public sont des locaux situés en sous-sol et accessibles au public.
+        presence_locaux_sommeil_au_dessus_r1:
+          description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
           type: boolean
+          nullable: true
+        niveau_total:
+          description: Le nombre total de niveaux est le nombre total de niveaux de l'établissement.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
           nullable: true
         surface_totale:
           description: La surface totale est la surface totale des locaux.
@@ -32409,64 +33171,276 @@ components:
           description: 'Les établissements recevant du public qui ne correspondent à aucun des types définis par le règlement de sécurité sont néanmoins assujettis aux prescriptions du présent chapitre via l''activation du R143-20. Les mesures de sécurité à y appliquer sont précisées, après avis de la commission de sécurité compétente, en tenant compte de celles qui sont imposées aux types d''établissements dont la nature d''exploitation se rapproche le plus de celle qui est envisagée. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979'
           type: boolean
           nullable: true
+        batiment_etages_en_superstructure:
+          description: Le nombre d'étages en superstructure est le nombre d'étages situés au-dessus du sol.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
+        batiment_etages_en_infrastructure:
+          description: Le nombre d'étages en infrastructure est le nombre d'étages situés en dessous du sol.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
+        etablissement_de_plain_pied:
+          description: Un établissement de plain-pied est un établissement qui ne comporte pas d'étage.
+          type: boolean
+          nullable: true
         plancher_bas_du_dernier_niveau:
           description: Le plancher bas du dernier niveau est le plancher le plus bas de la construction.
           type: string
           enum:
-            - '>8m'
             - <8m
+            - '=>8m'
           nullable: true
         plancher_bas_du_dernier_niveau_accessible_au_public:
           description: Le plancher bas du dernier niveau accessible au public est le plancher le plus bas accessible au public.
           type: string
           enum:
-            - '>8m'
             - <8m
+            - '=>8m'
+          nullable: true
+        voie_engin:
+          description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
+          type: boolean
+          nullable: true
+        voie_echelle:
+          description: La voie des échelles est la voie facilitant l'accès des échelles.
+          type: boolean
+          nullable: true
+        nombre_facades_accessibles:
+          description: Le nombre de façades accessibles aux engins de pompiers.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
+        informations_acces_facades:
+          description: Les informations d'accès aux façades.
+          type: string
+          maxLength: 4096
+          nullable: true
+        espace_libre:
+          description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
+          type: boolean
+          nullable: true
+        desserte_informations_complementaires:
+          description: Les informations complémentaires sur la desserte.
+          type: string
+          maxLength: 4096
+          nullable: true
+        presence_erp_ou_tiers_contigus:
+          description: La présence d'ERP ou de tiers contigus.
+          type: boolean
+          nullable: true
+        isolement_contigus_realise_degre_cf:
+          description: Le degré CF (Coupe Feu) de l'isolement entre les tiers.
+          type: string
+          enum:
+            - 1h
+            - 2h
+            - 3h
+            - Autre
+            - Non concerné
+          nullable: true
+        isolement_contigus_realise_degre_cf_autre_precision:
+          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+          type: string
+          maxLength: 4096
+          nullable: true
+        isolement_contigus_informations_complementaires:
+          description: Les informations complémentaires sur l'isolement entre les tiers.
+          type: string
+          maxLength: 4096
+          nullable: true
+        air_libre:
+          description: Distance d'air libre entre les tiers en vis à vis.
+          type: string
+          enum:
+            - '- de 4m'
+            - 4m ou plus
+            - 5m ou plus
+            - '- de 8m'
+            - 8m ou plus
+            - Non concerné
+          nullable: true
+        vis_a_vis:
+          description: La distance entre les deux tiers en vis à vis.
+          type: string
+          enum:
+            - '- de 5m'
+            - 5m ou plus
+            - 8m ou plus
+            - '- de 8m'
+            - Non concerné
+          nullable: true
+        isolement_vis_a_vis_informations_complementaires:
+          description: Les informations complémentaires sur l'isolement vis à vis.
+          type: string
+          maxLength: 4096
+          nullable: true
+        presence_erp_ou_tiers_superpose:
+          description: La présence d'ERP ou de tiers superposés.
+          type: boolean
+          nullable: true
+        isolement_superpose_realise_degre_cf:
+          description: Le degré CF de l'isolement entre les tiers superposés.
+          type: string
+          enum:
+            - 1h
+            - 2h
+            - 3h
+            - Autre
+            - Non concerné
+          nullable: true
+        isolement_superpose_realise_degre_cf_autre_precision:
+          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+          type: string
+          maxLength: 4096
+          nullable: true
+        isolement_superpose_informations_complementaires:
+          description: Les informations complémentaires sur l'isolement entre les tiers superposés.
+          type: string
+          maxLength: 4096
+          nullable: true
+        structure_sf:
+          description: La stabilité au feu de la structure.
+          type: string
+          enum:
+            - 1/2h
+            - 1h
+            - 2h
+            - 3h
+            - Autre
+          nullable: true
+        plancher_sf:
+          description: La stabilité au feu du plancher.
+          type: string
+          enum:
+            - 1/2h
+            - 1h
+            - 2h
+            - 3h
+            - Autre
+          nullable: true
+        stabilite_au_feu_informations_complementaires:
+          description: Les informations complémentaires sur la stabilité au feu.
+          type: string
+          maxLength: 4096
+          nullable: true
+        isolement_autre_description:
+          description: Description d'un autre type d'isolement.
+          type: string
+          maxLength: 4096
+          nullable: true
+        construction_structures_description:
+          description: Description des structures de construction.
+          type: string
+          maxLength: 4096
+          nullable: true
+        construction_couverture_description:
+          description: Description de la couverture de construction.
+          type: string
+          maxLength: 4096
+          nullable: true
+        construction_facades_description:
+          description: Description des façades de construction.
+          type: string
+          maxLength: 4096
           nullable: true
         type_cloisonnement:
           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+          type: array
+          maxItems: 3
+          items:
+            enum:
+              - Traditionnels
+              - Secteurs
+              - Compartiments
+          nullable: true
+        construction_distribution_interieure_informations_complementaires:
+          description: Les informations complémentaires sur la distribution intérieure de la construction.
           type: string
-          enum:
-            - Traditionnels
-            - Secteurs
-            - Compartiments
+          maxLength: 4096
           nullable: true
         locaux:
           description: Les locaux sont des espaces délimités par des cloisons.
-          type: string
-          enum:
-            - Risque Courant
-            - Risque Moyen
-            - Risque Important
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/Local'
           nullable: true
-        sprinklage:
-          description: Le sprinklage est un système d'extinction automatique à eau.
-          type: boolean
+        construction_conduits_et_gaines_description:
+          description: Description des conduits et des gaines.
+          type: string
+          maxLength: 4096
+          nullable: true
+        construction_amenagements_interieurs_description:
+          description: Description des aménagements intérieurs.
+          type: string
+          maxLength: 4096
           nullable: true
         degagement_normaux:
           description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
           type: array
-          maxItems: 5
+          maxItems: 10
           items:
             $ref: '#/components/schemas/Degagement'
           nullable: true
         degagements_accessoires:
           description: Dégagements imposés lorsque exceptionnellement les dégagements normaux ne sont pas judicieusement répartis dans le local, l'étage, le secteur, le compartiment ou l'établissement.
           type: array
-          maxItems: 5
+          maxItems: 10
           items:
             $ref: '#/components/schemas/Degagement'
+          nullable: true
+        degagement_exigibles_informations_complementaires:
+          description: Les informations complémentaires sur les dégagements exigibles.
+          type: string
+          maxLength: 4096
           nullable: true
         degagement_supplementaires:
           description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
           type: array
-          maxItems: 5
+          maxItems: 10
           items:
             $ref: '#/components/schemas/Degagement'
+          nullable: true
+        degagement_escaliers_description:
+          description: Description du dégagement des escaliers.
+          type: string
+          maxLength: 4096
+          nullable: true
+        degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
+          description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
+          type: string
+          maxLength: 4096
           nullable: true
         presence_eas_ou_equivalents:
           description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
           type: boolean
+          nullable: true
+        degagement_espaces_attente_securises_informations_complementaires:
+          description: Les informations complémentaires sur les espaces d'attente sécurisés.
+          type: string
+          maxLength: 4096
+          nullable: true
+        degagement_tribunes_et_gradins_non_demontables_description:
+          description: Description des dégagements des tribunes et gradins non démontables.
+          type: string
+          maxLength: 4096
+          nullable: true
+        enfouissement:
+          description: Information sur la présence d'un enfouissement.
+          type: boolean
+          nullable: true
+        degagement_enfouissement_informations_complementaires:
+          description: Les informations complémentaires au sujet de l'enfouissement.
+          type: string
+          maxLength: 4096
           nullable: true
         presence_desenfumage_mécanique:
           description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
@@ -32476,28 +33450,93 @@ components:
           description: Le désenfumage naturel est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
           type: boolean
           nullable: true
+        ventilation_desenfumage_informations_complementaires:
+          description: Les informations complémentaires sur la ventilation et le désenfumage.
+          type: string
+          maxLength: 4096
+          nullable: true
+        groupe_electrogene:
+          description: Information sur la presence d'un groupe électrogène.
+          type: boolean
+          nullable: true
+        batteries_accumulateurs_et_materiels_associes:
+          description: Information sur la présence de batteries, accumulateurs et matériels associés.
+          type: boolean
+          nullable: true
+        photovoltaique:
+          description: Information sur la présence de panneaux photovoltaïques.
+          type: boolean
+          nullable: true
+        parafoudre:
+          description: Information sur la présence de parafoudres.
+          type: boolean
+          nullable: true
+        electricite_eclairage_informations_complementaires:
+          description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
+          type: string
+          maxLength: 4096
+          nullable: true
         puissance_chaufferie:
           description: Puissance de la chaufferie
           type: string
           enum:
+            - <=70kW
             - '>70kW'
-            - <70kW
             - Non
           nullable: true
         presence_gaz_chaufferie:
           description: Présence de gaz en chaufferie
           type: boolean
           nullable: true
+        type_de_chauffage:
+          description: Information sur le type de chauffage present dans le batiment.
+          type: array
+          maxItems: 7
+          items:
+            enum:
+              - Sous-station
+              - Chaufferie
+              - Climatisation
+              - Aerothermique
+              - Rooftop
+              - Chauffage urbain
+              - Autre
+          nullable: true
+        chauffage_ventilation_informations_complementaires:
+          description: Les informations complémentaires au sujet du chauffage et de la ventilation.
+          type: string
+          maxLength: 4096
+          nullable: true
         puissance_cuisine:
           description: Puissance de la cuisine
           type: string
           enum:
+            - <=20kW
             - '>20kW'
-            - <20kW
             - Non
+          nullable: true
+        type_de_cuisine:
+          description: Information sur le type de cuisine present dans le batiment.
+          type: string
+          enum:
+            - Ouverte
+            - Fermée
           nullable: true
         presence_gaz_cuisine:
           description: Présence de gaz en cuisine
+          type: boolean
+          nullable: true
+        systeme_extraction:
+          description: Présence d'un système d'extraction dans la cuisine.
+          type: boolean
+          nullable: true
+        risques_spéciaux_informations_complementaires:
+          description: Les informations complémentaires sur les risques spéciaux.
+          type: string
+          maxLength: 4096
+          nullable: true
+        presence_extincteur:
+          description: Présence d'extincteurs.
           type: boolean
           nullable: true
         presence_ria:
@@ -32525,21 +33564,56 @@ components:
           type: boolean
           nullable: true
         installation_extinction:
-          description: 'Installation d''extinction automatique à eau : - Automatique - Manuelle - Autres'
+          description: Installation d'extinction automatique à eau.
           type: string
           enum:
             - Automatique
             - Manuelle
-            - Autres
+            - Autre
+          nullable: true
+        moyens_de_secours_informations_complementaires:
+          description: Les informations complémentaires sur les moyens de secours.
+          type: string
+          maxLength: 4096
+          nullable: true
+        deci_description:
+          description: Description du dispositif DECI.
+          type: string
+          maxLength: 4096
+          nullable: true
+        affichage_des_plans_intervention:
+          description: Présence d'affichage des plans d'intervention.
+          type: boolean
+          nullable: true
+        tour_incendie:
+          description: Présence d'une tour d'incendie.
+          type: boolean
+          nullable: true
+        tremie_attaque:
+          description: Présence de tremie d'attaque.
+          type: boolean
           nullable: true
         service_de_securite_incendie:
-          description: 'Types de service de sécurité incendie : - Personnel désigné et formé ; - SSIAP ; - Sapeurs- pompiers ; - Combinaison des différentes possibilités ;'
+          description: Types de service de sécurité incendie.
           type: string
           enum:
             - Personnel désigné et formé
             - SSIAP
-            - Sapeurs- pompiers
+            - Sapeurs-pompiers
             - Combinaison des différentes possibilités
+          nullable: true
+        presence_pc_securite:
+          description: Présence d'un PC sécurité.
+          type: boolean
+          nullable: true
+        service_de_securite_incendie_informations_complementaires:
+          description: Les informations complémentaires sur le service de sécurité incendie.
+          type: string
+          maxLength: 4096
+          nullable: true
+        systeme_de_securite_incendie:
+          description: Présence d'un système de sécurité incendie.
+          type: boolean
           nullable: true
         type_ssi:
           description: 'Il existe 5 types de SSI : SSI E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel) ; SSI D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel) ; SSI C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique) ; SSI B : un centralisateur de mise en sécurité incendie (CMSI) ; SSI A : un système de détection incendie (SDI)et un centralisateur de mise en sécurité incendie (CMSI).'
@@ -32572,48 +33646,110 @@ components:
           description: Désenfumage commandé par le SSI
           type: boolean
           nullable: true
-        nombre_de_zones_alarmes:
-          description: Nombre de zones d'alarmes
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 999999
-          nullable: true
         ligne_telephonique_reliee_au_cta:
           description: La ligne téléphonique est reliée au CTA
           type: boolean
           nullable: true
-        parafoudre:
-          description: Présence d'un parafoudre
+        autre_systeme_alerte:
+          description: Autre système d'alerte.
+          type: string
+          enum:
+            - Telephone urbain fixe ou box secourue
+            - GSM
+          nullable: true
+        systeme_securite_incendie_informations_complementaires:
+          description: Les informations complémentaires sur le système de sécurité incendie.
+          type: string
+          maxLength: 4096
+          nullable: true
+        defibrillateur:
+          description: Présence d'un défibrillateur.
           type: boolean
+          nullable: true
+        specificites_informations_complementaires:
+          description: Les informations complémentaires sur les spécificités.
+          type: string
+          maxLength: 4096
           nullable: true
       required:
         - activite_principale
         - activites_secondaire
         - categorie
+        - groupement_etablissement
         - tableau_des_effectifs
         - effectif_public
+        - effectif_public_total
         - effectif_personnel
+        - effectif_personnel_total
         - presence_locaux_sommeil
-        - sous_sol_accessible_au_public
+        - presence_locaux_sommeil_au_dessus_r1
+        - niveau_total
         - surface_totale
         - surface_accessible_au_public
         - r143_20
+        - batiment_etages_en_superstructure
+        - batiment_etages_en_infrastructure
+        - etablissement_de_plain_pied
         - plancher_bas_du_dernier_niveau
         - plancher_bas_du_dernier_niveau_accessible_au_public
+        - voie_engin
+        - voie_echelle
+        - nombre_facades_accessibles
+        - informations_acces_facades
+        - espace_libre
+        - desserte_informations_complementaires
+        - presence_erp_ou_tiers_contigus
+        - isolement_contigus_realise_degre_cf
+        - isolement_contigus_realise_degre_cf_autre_precision
+        - isolement_contigus_informations_complementaires
+        - air_libre
+        - vis_a_vis
+        - isolement_vis_a_vis_informations_complementaires
+        - presence_erp_ou_tiers_superpose
+        - isolement_superpose_realise_degre_cf
+        - isolement_superpose_realise_degre_cf_autre_precision
+        - isolement_superpose_informations_complementaires
+        - structure_sf
+        - plancher_sf
+        - stabilite_au_feu_informations_complementaires
+        - isolement_autre_description
+        - construction_structures_description
+        - construction_couverture_description
+        - construction_facades_description
         - type_cloisonnement
+        - construction_distribution_interieure_informations_complementaires
         - locaux
-        - sprinklage
+        - construction_conduits_et_gaines_description
+        - construction_amenagements_interieurs_description
         - degagement_normaux
         - degagements_accessoires
+        - degagement_exigibles_informations_complementaires
         - degagement_supplementaires
+        - degagement_escaliers_description
+        - degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description
         - presence_eas_ou_equivalents
+        - degagement_espaces_attente_securises_informations_complementaires
+        - degagement_tribunes_et_gradins_non_demontables_description
+        - enfouissement
+        - degagement_enfouissement_informations_complementaires
         - presence_desenfumage_mécanique
         - presence_desenfumage_naturel
+        - ventilation_desenfumage_informations_complementaires
+        - groupe_electrogene
+        - batteries_accumulateurs_et_materiels_associes
+        - photovoltaique
+        - parafoudre
+        - electricite_eclairage_informations_complementaires
         - puissance_chaufferie
         - presence_gaz_chaufferie
+        - type_de_chauffage
+        - chauffage_ventilation_informations_complementaires
         - puissance_cuisine
+        - type_de_cuisine
         - presence_gaz_cuisine
+        - systeme_extraction
+        - risques_spéciaux_informations_complementaires
+        - presence_extincteur
         - presence_ria
         - deversoirs_ponctuels
         - elements_de_constructions_irrigues
@@ -32621,14 +33757,24 @@ components:
         - presence_colonnes_seches
         - presence_colonnes_en_charge
         - installation_extinction
+        - moyens_de_secours_informations_complementaires
+        - deci_description
+        - affichage_des_plans_intervention
+        - tour_incendie
+        - tremie_attaque
         - service_de_securite_incendie
+        - presence_pc_securite
+        - service_de_securite_incendie_informations_complementaires
+        - systeme_de_securite_incendie
         - type_ssi
         - type_alarme
         - temporisation_alarme_en_minutes
         - desenfumage_commande_par_le_ssi
-        - nombre_de_zones_alarmes
         - ligne_telephonique_reliee_au_cta
-        - parafoudre
+        - autre_systeme_alerte
+        - systeme_securite_incendie_informations_complementaires
+        - defibrillateur
+        - specificites_informations_complementaires
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Clicdvcrem'
     Commission:
       type: object
@@ -33656,6 +34802,42 @@ components:
         - date_de_creation
         - auteur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
+    Local:
+      type: object
+      title: Objet Local
+      description: Objet représentant un local dans un bâtiment.
+      properties:
+        nom_du_local:
+          description: Le nom du local
+          type: string
+          maxLength: 256
+          nullable: true
+        etage_du_local:
+          description: L'étage du local
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
+        type_de_risque:
+          description: Le type de risque du local
+          type: string
+          enum:
+            - Risque Courant
+            - Risque Moyen
+            - Risque Important
+          nullable: true
+        local_informations_complementaires:
+          description: Les informations complémentaires du local
+          type: string
+          maxLength: 4096
+          nullable: true
+      required:
+        - nom_du_local
+        - etage_du_local
+        - type_de_risque
+        - local_informations_complementaires
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/Local'
     Notification:
       type: object
       title: Notification
