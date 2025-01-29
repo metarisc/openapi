@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-01-2025.1
+  version: 1.0/main/29-01-2025.1
   title: Metarisc API
   description: |-
 
@@ -10376,11 +10376,12 @@ paths:
                           type: string
                           maxLength: 255
                         enveloppe_id:
-                          description: Rattachement du dossier à une enveloppe existante.
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                          nullable: true
                     - type: object
                       properties:
                         type:
@@ -10435,11 +10436,12 @@ paths:
                           type: string
                           maxLength: 255
                         enveloppe_id:
-                          description: Rattachement du dossier à une enveloppe existante.
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                          nullable: true
                     - type: object
                       properties:
                         type:
@@ -17268,7 +17270,7 @@ paths:
                           type: string
                           maxLength: 255
                         enveloppe_id:
-                          description: Rattachement du dossier à une enveloppe existante.
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
                           format: uuid
                           maxLength: 36
@@ -17329,7 +17331,7 @@ paths:
                           type: string
                           maxLength: 255
                         enveloppe_id:
-                          description: Rattachement du dossier à une enveloppe existante.
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
                           format: uuid
                           maxLength: 36
@@ -26553,7 +26555,7 @@ paths:
                           type: string
                           maxLength: 255
                         enveloppe_id:
-                          description: Rattachement du dossier à une enveloppe existante.
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
                           format: uuid
                           maxLength: 36
@@ -26614,7 +26616,7 @@ paths:
                           type: string
                           maxLength: 255
                         enveloppe_id:
-                          description: Rattachement du dossier à une enveloppe existante.
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
                           format: uuid
                           maxLength: 36
