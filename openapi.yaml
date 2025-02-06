@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-02-2025.2
+  version: 1.0/main/06-02-2025.1
   title: Metarisc API
   description: |-
 
