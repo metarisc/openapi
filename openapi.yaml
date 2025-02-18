@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-02-2025.1
+  version: 1.0/main/18-02-2025.1
   title: Metarisc API
   description: |-
 
@@ -619,6 +619,7 @@ paths:
                 - indice_de_gravite
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomalieDECI'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -1490,6 +1491,7 @@ paths:
                 - libelle
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -1959,6 +1961,7 @@ paths:
                 - libelle
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -2624,6 +2627,7 @@ paths:
                 - presence_obligatoire
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -3047,6 +3051,7 @@ paths:
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -3894,6 +3899,7 @@ paths:
                   type: boolean
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -4791,6 +4797,7 @@ paths:
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -5470,6 +5477,7 @@ paths:
                   maximum: 255
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -6125,6 +6133,7 @@ paths:
                 - date_de_passage
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -7206,6 +7215,7 @@ paths:
                     - divers
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -7924,6 +7934,7 @@ paths:
                 - utilisateur_id
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -8823,6 +8834,7 @@ paths:
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -9288,6 +9300,7 @@ paths:
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -9737,6 +9750,7 @@ paths:
                       - libelle
                     additionalProperties: false
                     x-extension-metarisc-codegen-schema-src: '#/components/schemas/Essai'
+                    x-extension-metarisc-codegen-context: update
               required:
                 - essais
       responses:
@@ -10408,6 +10422,7 @@ paths:
               required:
                 - message
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -10933,6 +10948,7 @@ paths:
               additionalProperties: {}
               maxProperties: 13
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -12452,6 +12468,7 @@ paths:
                       - libelle
                       - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -12917,6 +12934,7 @@ paths:
               additionalProperties: {}
               maxProperties: 4
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -14032,6 +14050,7 @@ paths:
                     - secretariat_prev
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -14478,6 +14497,7 @@ paths:
                 - titre
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Enveloppe'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -15100,6 +15120,7 @@ paths:
                   maxLength: 256
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Enveloppe'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -16836,6 +16857,7 @@ paths:
                 - descriptif_technique
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -17337,6 +17359,7 @@ paths:
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -17802,6 +17825,7 @@ paths:
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -18348,6 +18372,7 @@ paths:
               additionalProperties: {}
               maxProperties: 13
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -19219,6 +19244,7 @@ paths:
                   - valeur
                 additionalProperties: false
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+                x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -19928,6 +19954,7 @@ paths:
                 - date_fin
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: created
@@ -21004,6 +21031,7 @@ paths:
                       required:
                         - texte
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -21649,6 +21677,7 @@ paths:
                 - utilisateur_id
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Notification'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: created
@@ -22488,6 +22517,7 @@ paths:
                   maxLength: 4096
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -23383,6 +23413,7 @@ paths:
                 - url
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -24045,6 +24076,7 @@ paths:
                 - role
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationMembre'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -24482,6 +24514,7 @@ paths:
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -24961,6 +24994,7 @@ paths:
                   maximum: 999999
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -25685,6 +25719,7 @@ paths:
                 - implantation
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: Success
@@ -26140,6 +26175,7 @@ paths:
                 - code_anomalie
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -26640,6 +26676,7 @@ paths:
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -27105,6 +27142,7 @@ paths:
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -27651,6 +27689,7 @@ paths:
               additionalProperties: {}
               maxProperties: 13
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -28522,6 +28561,7 @@ paths:
                   - valeur
                 additionalProperties: false
                 x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+                x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -29177,6 +29217,7 @@ paths:
                 - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -29813,6 +29854,7 @@ paths:
                     minLength: 36
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -30285,6 +30327,7 @@ paths:
                 - reference
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -31213,6 +31256,7 @@ paths:
                         - mois_debut
                         - mois_fin
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -31882,6 +31926,7 @@ paths:
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+              x-extension-metarisc-codegen-context: create
       responses:
         '201':
           description: OK
@@ -32371,6 +32416,7 @@ paths:
                       required:
                         - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -32816,6 +32862,7 @@ paths:
                 - pei_id
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+              x-extension-metarisc-codegen-context: create
       responses:
         '200':
           description: OK
@@ -34542,6 +34589,7 @@ paths:
               required:
                 - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
+              x-extension-metarisc-codegen-context: update
       responses:
         '200':
           description: OK
@@ -35089,6 +35137,7 @@ components:
         - localisation_operationnelle
         - complement
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AdressePostale'
+      x-extension-metarisc-codegen-context: query
     AnomalieDECI:
       type: object
       title: Objet Anomalie DECI
@@ -35124,6 +35173,7 @@ components:
         - texte
         - indice_de_gravite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomalieDECI'
+      x-extension-metarisc-codegen-context: query
     AnomaliePEI:
       type: object
       title: Objet Anomalie PEI
@@ -35157,6 +35207,7 @@ components:
         - est_programmee
         - date_pose
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AnomaliePEI'
+      x-extension-metarisc-codegen-context: query
     Clicdvcrem:
       type: object
       title: Objet CLICDVCREM
@@ -36078,6 +36129,7 @@ components:
         - defibrillateur
         - specificites_informations_complementaires
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Clicdvcrem'
+      x-extension-metarisc-codegen-context: query
     Commission:
       type: object
       title: Objet Commission
@@ -36117,6 +36169,7 @@ components:
         - presidence
         - secretariat
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
+      x-extension-metarisc-codegen-context: query
     CommissionMembre:
       type: object
       title: Objet Commission Membre
@@ -36150,6 +36203,7 @@ components:
         - presence_obligatoire
         - commission
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionMembre'
+      x-extension-metarisc-codegen-context: query
     CommissionPreferences:
       type: object
       title: Objet Commission Préférences
@@ -36164,6 +36218,7 @@ components:
       required:
         - rapport_modele_cr
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
+      x-extension-metarisc-codegen-context: query
     Contact:
       type: object
       title: Objet Contact
@@ -36253,6 +36308,7 @@ components:
         - email
         - observations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
+      x-extension-metarisc-codegen-context: query
     Degagement:
       type: object
       title: Objet Dégagement
@@ -36274,6 +36330,7 @@ components:
         - nombre_degagements
         - nombre_unite_passage
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Degagement'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniqueDECIBase:
       type: object
       title: Objet Descriptif Technique DECI Base
@@ -36370,6 +36427,7 @@ components:
         - statut
         - est_disponible
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECIBase'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniqueDECI:
       type: object
       title: Objet Descriptif Technique DECI
@@ -36378,6 +36436,7 @@ components:
         - $ref: '#/components/schemas/DescriptifTechniquePIBI'
         - $ref: '#/components/schemas/DescriptifTechniquePENA'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueDECI'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniqueERPBase:
       type: object
       title: Objet Descriptif Technique ERP Base
@@ -36433,6 +36492,7 @@ components:
         - observations_generales
         - analyse_risque
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERPBase'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniqueERP:
       type: object
       title: Objet Descriptif Technique ERP
@@ -36440,6 +36500,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DescriptifTechniqueERPBase'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERP'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniquePENA:
       title: Objet Descriptif Technique DECI PENA
       description: Descriptif technique d'un PENA - Point d'Eau Naturel ou Artificiel.
@@ -36476,6 +36537,7 @@ components:
             - volume
             - est_citerne
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePENA'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniquePIBI:
       title: Objet Descriptif Technique DECI PIBI
       description: Descriptif technique d'un PIBI - Poteau incendie ou Bouche incendie.
@@ -36533,6 +36595,7 @@ components:
             - pression_statique
             - debit_gueule_bee
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePIBI'
+      x-extension-metarisc-codegen-context: query
     DocumentTechnique:
       type: object
       title: Objet Document Technique
@@ -36584,6 +36647,7 @@ components:
         - date_de_consultation
         - est_manquant
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DocumentTechnique'
+      x-extension-metarisc-codegen-context: query
     DonneesHydrauliques:
       type: object
       title: Objet Données Hydrauliques
@@ -36621,6 +36685,7 @@ components:
         - pression_statique
         - debit_gueule_bee
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DonneesHydrauliques'
+      x-extension-metarisc-codegen-context: query
     DossierBase:
       type: object
       title: Objet Dossier Base
@@ -36693,6 +36758,7 @@ components:
         - est_archive
         - enveloppe
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
+      x-extension-metarisc-codegen-context: query
     DossierDeci:
       type: object
       title: Objet Dossier DECI
@@ -36713,6 +36779,7 @@ components:
             - type
             - pei
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierDeci'
+      x-extension-metarisc-codegen-context: query
     DossierErp:
       type: object
       title: Objet Dossier ERP
@@ -36797,6 +36864,7 @@ components:
             - date_limite_traitement
             - dossier_complet
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
+      x-extension-metarisc-codegen-context: query
     Dossier:
       type: object
       title: Objet Dossier
@@ -36805,6 +36873,7 @@ components:
         - $ref: '#/components/schemas/DossierErp'
         - $ref: '#/components/schemas/DossierDeci'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+      x-extension-metarisc-codegen-context: query
     DossierAffectation:
       type: object
       title: Objet Dossier Affectation
@@ -36832,6 +36901,7 @@ components:
         - role
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
+      x-extension-metarisc-codegen-context: query
     ERP:
       type: object
       title: Objet ERP
@@ -36915,6 +36985,7 @@ components:
         - notes_internes
         - references_exterieures
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
+      x-extension-metarisc-codegen-context: query
     EffectifsNiveau:
       type: object
       title: Objet Effectifs du Niveau
@@ -37076,6 +37147,7 @@ components:
         - effectif_public
         - effectif_personnel
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/EffectifsNiveau'
+      x-extension-metarisc-codegen-context: query
     Email:
       type: object
       title: Objet Email
@@ -37101,6 +37173,7 @@ components:
         - is_publicly_visible
         - is_verified
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Email'
+      x-extension-metarisc-codegen-context: query
     Enveloppe:
       type: object
       title: Objet Enveloppe
@@ -37127,6 +37200,7 @@ components:
         - titre
         - nb_dossiers
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Enveloppe'
+      x-extension-metarisc-codegen-context: query
     Essai:
       type: object
       title: Objet Essai
@@ -37150,6 +37224,7 @@ components:
         - libelle
         - concluant
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Essai'
+      x-extension-metarisc-codegen-context: query
     Evenement:
       type: object
       title: Objet Evenement
@@ -37198,6 +37273,7 @@ components:
         - date_debut
         - date_fin
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
+      x-extension-metarisc-codegen-context: query
     FeedMessageBase:
       type: object
       title: Objet Feed Message Base
@@ -37231,6 +37307,7 @@ components:
         - date_de_creation
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageBase'
+      x-extension-metarisc-codegen-context: query
     FeedMessageTexte:
       title: Objet FeedMessage Texte
       description: Message texte d'un flux d'activité.
@@ -37245,12 +37322,14 @@ components:
           required:
             - texte
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
+      x-extension-metarisc-codegen-context: query
     FeedMessage:
       title: Objet Feed Message
       description: Message associé à un flux d'activité.
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
+      x-extension-metarisc-codegen-context: query
     FilRougeMessage:
       title: Objet Fil Rouge Message
       description: Message associé à un fil rouge d'un dossier.
@@ -37281,6 +37360,7 @@ components:
         - date_de_creation
         - auteur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
+      x-extension-metarisc-codegen-context: query
     Local:
       type: object
       title: Objet Local
@@ -37317,6 +37397,7 @@ components:
         - type_de_risque
         - local_informations_complementaires
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Local'
+      x-extension-metarisc-codegen-context: query
     Notification:
       type: object
       title: Notification
@@ -37375,6 +37456,7 @@ components:
         - date_de_lecture
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Notification'
+      x-extension-metarisc-codegen-context: query
     Organisation:
       type: object
       title: Objet Organisation
@@ -37407,6 +37489,7 @@ components:
         - logo_url
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
+      x-extension-metarisc-codegen-context: query
     OrganisationGeoservice:
       type: object
       title: Objet Organisation Geoservice
@@ -37444,6 +37527,7 @@ components:
         - type
         - url
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationGeoservice'
+      x-extension-metarisc-codegen-context: query
     OrganisationMembre:
       type: object
       title: Objet Organisation Membre
@@ -37476,6 +37560,7 @@ components:
         - utilisateur
         - role
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationMembre'
+      x-extension-metarisc-codegen-context: query
     OrganisationPreferences:
       type: object
       title: Objet Organisation Préférences
@@ -37507,6 +37592,7 @@ components:
         - s3_global_endpoint
         - rapport_modele_rapport_etude
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
+      x-extension-metarisc-codegen-context: query
     PEI:
       type: object
       title: Objet Point d'Eau Incendie
@@ -37569,6 +37655,7 @@ components:
         - numero_serie_appareil
         - references_exterieures
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
+      x-extension-metarisc-codegen-context: query
     PassageCommission:
       type: object
       title: Objet Passage en Commission
@@ -37620,6 +37707,7 @@ components:
         - libelle
         - raison_reprogrammation
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
+      x-extension-metarisc-codegen-context: query
     PassageCommissionDossier:
       type: object
       title: Objet Passage en Commission Dossier
@@ -37664,6 +37752,7 @@ components:
         - avis_differe
         - observations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
+      x-extension-metarisc-codegen-context: query
     PieceJointe:
       type: object
       title: Objet Piece Jointe
@@ -37708,6 +37797,7 @@ components:
         - type
         - est_sensible
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
+      x-extension-metarisc-codegen-context: query
     Ping:
       type: object
       title: Objet Ping
@@ -37718,6 +37808,7 @@ components:
           maxLength: 4096
           default: pong
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Ping'
+      x-extension-metarisc-codegen-context: query
     Prescription:
       type: object
       title: Objet Prescription
@@ -37752,6 +37843,7 @@ components:
         - type
         - supports_reglementaires
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
+      x-extension-metarisc-codegen-context: query
     PrescriptionAnalyseDeRisque:
       type: object
       title: Objet Prescription Analyse de Risque
@@ -37769,6 +37861,7 @@ components:
           required:
             - numero
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
+      x-extension-metarisc-codegen-context: query
     PrescriptionSupportReglementaire:
       type: object
       title: Objet Support Réglementaire
@@ -37818,6 +37911,7 @@ components:
         - etat
         - reference
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
+      x-extension-metarisc-codegen-context: query
     RapportEtude:
       title: 'Objet : Analyse de Risque'
       description: Gestion de l'analyse de risque.
@@ -37868,6 +37962,7 @@ components:
         - facteur_dangerosite
         - documents_techniques
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
+      x-extension-metarisc-codegen-context: query
     ReferenceExterieure:
       type: object
       title: Objet Référence Extérieure
@@ -37885,6 +37980,7 @@ components:
         - titre
         - valeur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReferenceExterieure'
+      x-extension-metarisc-codegen-context: query
     ReglesDeci:
       type: object
       title: Objet Règles DECI
@@ -37961,6 +38057,7 @@ components:
         - pibi_conformite_matrice_seuil_pesee_1bar_par_defaut
         - pena_conformite_seuil_volume_citerne
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
+      x-extension-metarisc-codegen-context: query
     Tag:
       type: object
       title: Objet Tag
@@ -37973,6 +38070,7 @@ components:
       required:
         - message
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
+      x-extension-metarisc-codegen-context: query
     TourneeDeci:
       title: Objet Tournée Deci
       description: Une tournée de reconnaissance opérationnelle portant sur la visibilité, l’accessibilité,  la signalisation et la manoeuvrabilité (ouverture et fermeture) des PEI.
@@ -37980,6 +38078,7 @@ components:
         - $ref: '#/components/schemas/TourneeDeciSimple'
         - $ref: '#/components/schemas/TourneeDeciModele'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
+      x-extension-metarisc-codegen-context: query
     TourneeDeciBase:
       type: object
       title: Objet Tournee Deci Base
@@ -38012,6 +38111,7 @@ components:
         - description
         - date_de_creation
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciBase'
+      x-extension-metarisc-codegen-context: query
     TourneeDeciModele:
       title: Objet Tournee Deci Modele
       description: Modèle de tournée DECI permettant une programmation cyclique.
@@ -38041,6 +38141,7 @@ components:
             - mois_debut
             - mois_fin
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciModele'
+      x-extension-metarisc-codegen-context: query
     TourneeDeciPei:
       type: object
       title: Objet Tournée Deci PEI
@@ -38113,6 +38214,7 @@ components:
         - est_controle
         - ordre
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+      x-extension-metarisc-codegen-context: query
     TourneeDeciSimple:
       title: Objet Tournée Deci Simple
       description: Tournéee DECI déclenchée
@@ -38161,6 +38263,7 @@ components:
             - date_de_fin
             - modele
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciSimple'
+      x-extension-metarisc-codegen-context: query
     Utilisateur:
       type: object
       title: Objet Utilisateur
@@ -38225,6 +38328,7 @@ components:
         - fonction
         - avatar_url
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
+      x-extension-metarisc-codegen-context: query
     WorkflowStep:
       type: object
       title: Objet Workflow Step
@@ -38266,6 +38370,7 @@ components:
         - workflow
         - needs
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowStep'
+      x-extension-metarisc-codegen-context: query
     WorkflowType:
       type: object
       title: Objet Workflow Type
@@ -38285,6 +38390,7 @@ components:
         - dossier_type
         - steps
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
+      x-extension-metarisc-codegen-context: query
     Workflow:
       title: Workflow
       description: Étape du traitement d'un dossier. Une étape est liée à un groupe de travail ainsi qu'a un nombre de champs à valider.
@@ -38360,6 +38466,7 @@ components:
         - observations
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
+      x-extension-metarisc-codegen-context: query
   parameters:
     PaginationPage:
       name: page
