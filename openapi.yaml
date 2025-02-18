@@ -18754,6 +18754,301 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: erp
       x-extension-metarisc-codegen-operation: get-erp
+    post:
+      tags:
+        - ERP API
+      summary: Mise à jour d'un ERP
+      description: Mise à jour des détails d'un ERP en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PostErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          description: Erp Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet ERP
+              description: Les établissements recevant du public (ERP) sont des bâtiments, des locaux ou des enceintes dans lesquels sont admises des personnes extérieures.
+              properties:
+                implantation:
+                  description: Adresse postale de l'ERP.
+                  allOf:
+                    - type: object
+                      title: Objet Adresse Postale
+                      description: Représente une adresse postale qui est la localisation complète du destinataire d'un courrier.
+                      properties:
+                        code_postal:
+                          description: Le code postal en France est une suite de cinq chiffres dont les deux premiers correspondent au département.
+                          type: string
+                          maxLength: 5
+                          pattern: ^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$
+                          nullable: true
+                        commune:
+                          description: Nom de la commune.
+                          type: string
+                          maxLength: 255
+                          nullable: true
+                        voie:
+                          description: 'Libellé de la voie et de son type (exemple : "rue du point du jour").'
+                          type: string
+                          maxLength: 255
+                          nullable: true
+                        code_insee:
+                          description: Code unique attribué à chaque commune de France.
+                          type: string
+                          pattern: ^([013-9]\d|2[AB1-9])\d{3}$
+                          maxLength: 5
+                          nullable: true
+                        arrondissement:
+                          description: Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l'outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département.
+                          type: integer
+                          format: int32
+                          minimum: 1
+                          maximum: 999999
+                          nullable: true
+                        arrondissement_municipal:
+                          description: L'arrondissement municipal est une subdivision territoriale des communes.
+                          type: string
+                          maxLength: 255
+                          nullable: true
+                        latitude:
+                          description: La latitude est une coordonnée géographique représentée par une valeur angulaire, expression de la position d'un point sur Terre, au nord ou au sud de l'équateur qui est le plan de référence. La latitude est une mesure angulaire ; elle varie entre la valeur 0° à l'équateur et 90° aux pôles.
+                          type: number
+                          format: double
+                          maximum: 90
+                          minimum: -90
+                          nullable: true
+                        longitude:
+                          description: La longitude d'un point sur Terre est une coordonnée géographique représentée par une valeur angulaire, expression du positionnement est-ouest du point. Une longitude se mesure par rapport à une référence arbitraire qui, sur Terre, est généralement le méridien de Greenwich.
+                          type: number
+                          format: double
+                          maximum: 180
+                          minimum: -180
+                          nullable: true
+                        localisation_operationnelle:
+                          description: Complément d'adresse à destination des services de secours.
+                          type: string
+                          maxLength: 4096
+                          nullable: true
+                        complement:
+                          description: Complément d'adresse.
+                          type: string
+                          maxLength: 255
+                          nullable: true
+                date_pc_initial:
+                  description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
+                  type: string
+                  format: date-time
+                  maxLength: 50
+                  minLength: 20
+                date_ouverture:
+                  description: Date d'ouverture de l'ERP.
+                  type: string
+                  format: date-time
+                  maxLength: 50
+                  minLength: 20
+                notes_internes:
+                  description: Notes internes sur l'ERP.
+                  type: string
+                  maxLength: 4096
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERP'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: post-erp
   /erp/{erp_id}/historique:
     get:
       tags:
