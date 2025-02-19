@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-02-2025.1
+  version: 1.0/main/19-02-2025.2
   title: Metarisc API
   description: |-
 
@@ -37041,6 +37041,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/Enveloppe'
           nullable: true
+        workflows_actifs:
+          description: Workflows actifs du dossier. Un workflow actif est un workflow qui est en cours de traitement.
+          type: array
+          items:
+            type: string
+            enum:
+              - analyse_de_risque
+              - validation
+              - arrivee_sis
+              - arrivee_sis_prev
+              - arrivee_secretariat_commission
+              - consultation_sis
+              - passage_commission
+              - relecture
+              - visite
+              - arrivee_secretariat
+              - workflow
+          maxItems: 25
       required:
         - id
         - objet
@@ -37052,6 +37070,7 @@ components:
         - tags
         - est_archive
         - enveloppe
+        - workflows_actifs
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       x-extension-metarisc-codegen-context: query
     DossierDeci:
@@ -37994,6 +38013,12 @@ components:
           type: string
           maxLength: 255
           nullable: true
+        nb_dossiers:
+          description: Nombre de dossiers à l'ordre du jour.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 150
       required:
         - id
         - date_debut
@@ -38001,6 +38026,7 @@ components:
         - type
         - libelle
         - raison_reprogrammation
+        - nb_dossiers
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
       x-extension-metarisc-codegen-context: query
     PassageCommissionDossier:
