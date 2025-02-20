@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-02-2025.1
+  version: 1.0/feature/datetime/20-02-2025.1
   title: Metarisc API
   description: |-
 
@@ -10901,9 +10901,9 @@ paths:
                         numero_urbanisme_date:
                           description: Date du numéro d'urbanisme.
                           type: string
-                          format: date-time
-                          maxLength: 50
-                          minLength: 20
+                          format: date
+                          maxLength: 10
+                          minLength: 10
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -10919,9 +10919,9 @@ paths:
                         date_limite_traitement:
                           description: Date limite de traitement du dossier.
                           type: string
-                          format: date-time
-                          maxLength: 50
-                          minLength: 20
+                          format: date
+                          maxLength: 10
+                          minLength: 10
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -12472,15 +12472,15 @@ paths:
                       date_de_reception:
                         description: Date de réception du document technique.
                         type: string
-                        format: date-time
-                        maxLength: 50
-                        minLength: 20
+                        format: date
+                        maxLength: 10
+                        minLength: 10
                       date_de_consultation:
                         description: Date de consultation du document technique.
                         type: string
-                        format: date-time
-                        maxLength: 50
-                        minLength: 20
+                        format: date
+                        maxLength: 10
+                        minLength: 10
                       est_manquant:
                         description: Indique si le document technique est manquant.
                         type: boolean
@@ -16859,15 +16859,15 @@ paths:
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
-                  format: date-time
-                  maxLength: 50
-                  minLength: 20
+                  format: date
+                  maxLength: 10
+                  minLength: 10
                 date_ouverture:
                   description: Date d'ouverture de l'ERP.
                   type: string
-                  format: date-time
-                  maxLength: 50
-                  minLength: 20
+                  format: date
+                  maxLength: 10
+                  minLength: 10
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
@@ -18334,9 +18334,9 @@ paths:
                         numero_urbanisme_date:
                           description: Date du numéro d'urbanisme.
                           type: string
-                          format: date-time
-                          maxLength: 50
-                          minLength: 20
+                          format: date
+                          maxLength: 10
+                          minLength: 10
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -18352,9 +18352,9 @@ paths:
                         date_limite_traitement:
                           description: Date limite de traitement du dossier.
                           type: string
-                          format: date-time
-                          maxLength: 50
-                          minLength: 20
+                          format: date
+                          maxLength: 10
+                          minLength: 10
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -18876,15 +18876,15 @@ paths:
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
-                  format: date-time
-                  maxLength: 50
-                  minLength: 20
+                  format: date
+                  maxLength: 10
+                  minLength: 10
                 date_ouverture:
                   description: Date d'ouverture de l'ERP.
                   type: string
-                  format: date-time
-                  maxLength: 50
-                  minLength: 20
+                  format: date
+                  maxLength: 10
+                  minLength: 10
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
@@ -27946,9 +27946,9 @@ paths:
                         numero_urbanisme_date:
                           description: Date du numéro d'urbanisme.
                           type: string
-                          format: date-time
-                          maxLength: 50
-                          minLength: 20
+                          format: date
+                          maxLength: 10
+                          minLength: 10
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
@@ -27964,9 +27964,9 @@ paths:
                         date_limite_traitement:
                           description: Date limite de traitement du dossier.
                           type: string
-                          format: date-time
-                          maxLength: 50
-                          minLength: 20
+                          format: date
+                          maxLength: 10
+                          minLength: 10
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
@@ -36939,16 +36939,16 @@ components:
         date_de_reception:
           description: Date de réception du document technique.
           type: string
-          format: date-time
-          maxLength: 50
-          minLength: 20
+          format: date
+          maxLength: 10
+          minLength: 10
           nullable: true
         date_de_consultation:
           description: Date de consultation du document technique.
           type: string
-          format: date-time
-          maxLength: 50
-          minLength: 20
+          format: date
+          maxLength: 10
+          minLength: 10
           nullable: true
         est_manquant:
           description: Indique si le document technique est manquant.
@@ -37179,9 +37179,9 @@ components:
             numero_urbanisme_date:
               description: Date du numéro d'urbanisme.
               type: string
-              format: date-time
-              maxLength: 50
-              minLength: 20
+              format: date
+              maxLength: 10
+              minLength: 10
               nullable: true
             demandeur:
               description: Demandeur ayant déposé le dossier.
@@ -37201,9 +37201,9 @@ components:
             date_limite_traitement:
               description: Date limite de traitement du dossier.
               type: string
-              format: date-time
-              maxLength: 50
-              minLength: 20
+              format: date
+              maxLength: 10
+              minLength: 10
               nullable: true
             dossier_complet:
               description: Dossier complet.
@@ -37300,23 +37300,23 @@ components:
         date_pc_initial:
           description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
           type: string
-          format: date-time
-          maxLength: 50
-          minLength: 20
+          format: date
+          maxLength: 10
+          minLength: 10
           nullable: true
         date_ouverture:
           description: Date d'ouverture de l'ERP.
           type: string
-          format: date-time
-          maxLength: 50
-          minLength: 20
+          format: date
+          maxLength: 10
+          minLength: 10
           nullable: true
         date_derniere_visite:
           description: Date de la dernière visite de l'ERP.
           type: string
-          format: date-time
-          maxLength: 50
-          minLength: 20
+          format: date
+          maxLength: 10
+          minLength: 10
           nullable: true
         notes_internes:
           description: Notes internes sur l'ERP.
