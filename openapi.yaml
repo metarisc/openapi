@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-02-2025.2
+  version: 1.0/feature/modules/20-02-2025.1
   title: Metarisc API
   description: |-
 
@@ -10851,6 +10851,16 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                        modules:
+                          description: Modules du dossier.
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - erp:analyse_de_risque
+                              - erp:essais_visite
+                              - deci:controle_technique_pei
+                          maxItems: 25
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -10929,6 +10939,16 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 255
+                        modules:
+                          description: Modules du dossier.
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - erp:analyse_de_risque
+                              - erp:essais_visite
+                              - deci:controle_technique_pei
+                          maxItems: 25
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -10946,7 +10966,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 13
+              maxProperties: 15
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -37025,6 +37045,7 @@ components:
             type: string
             enum:
               - erp:analyse_de_risque
+              - erp:essais_visite
               - deci:controle_technique_pei
           maxItems: 25
         tags:
