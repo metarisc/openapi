@@ -37080,6 +37080,24 @@ components:
               - arrivee_secretariat
               - workflow
           maxItems: 25
+        nb_messages_fil_rouge:
+          description: Nombre de messages dans le fil rouge du dossier.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+        nb_contacts:
+          description: Nombre de contacts associés au dossier.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+        nb_pieces_jointes:
+          description: Nombre de pièces jointes associées au dossier.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
       required:
         - id
         - objet
@@ -37092,6 +37110,9 @@ components:
         - est_archive
         - enveloppe
         - workflows_actifs
+        - nb_messages_fil_rouge
+        - nb_contacts
+        - nb_pieces_jointes
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       x-extension-metarisc-codegen-context: query
     DossierDeci:
