@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-02-2025.1
+  version: 1.0/main/21-02-2025.1
   title: Metarisc API
   description: |-
 
@@ -7453,6 +7453,7 @@ paths:
               - visite
               - arrivee_secretariat
               - workflow
+              - reception_de_travaux_en_attente
         - name: affecte
           in: query
           description: Filtre sur les affectations du dossier
@@ -34852,7 +34853,7 @@ paths:
       tags:
         - Workflows API
       summary: Mise à jour d'un workflow
-      description: Mise à jour d'un workflow.
+      description: Mise à jour d'un workflow. La mise à jour d'un workflow peut concerner son champ observations. Il est possible de modifier son état ce qui peut déclencher des actions. La modification de l'état peut être antidatée en précisant une date de fin (par défaut la date du jour).
       operationId: PostWorkflowWorkflows
       security:
         - IdMetariscFr:
@@ -34878,31 +34879,30 @@ paths:
         content:
           application/json:
             schema:
-              title: Workflow
-              description: Étape du traitement d'un dossier. Une étape est liée à un groupe de travail ainsi qu'a un nombre de champs à valider.
+              type: object
+              title: Objet Workflow
+              description: Workflow du traitement d'un dossier. Il représente une étape dans la vie du dossier.
               properties:
+                date_de_fin:
+                  description: Date de fin de traitement du workflow (date à laquelle il est passé en terminé).
+                  type: string
+                  format: date-time
+                  maxLength: 50
+                  minLength: 20
+                etat:
+                  description: 'État du workflow. Le workflow peut être dans 5 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours : Le workflow devient actif pour traitement ; - Validé : Le workflow est traité, vérouillé et peut débloquer d''autres workflows liés ; - Pause : Le workflow est en pause et ne peut être traité ; - Non concerné : Le workflow n''est pas concerné par le dossier en cours de traitement.'
+                  type: string
+                  enum:
+                    - VALIDE
+                    - EN_COURS
+                    - ATTENTE
+                    - PAUSE
+                    - NON_CONCERNE
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
                   maxLength: 4096
-                  nullable: true
-                type:
-                  description: Type du workflow.
-                  type: string
-                  enum:
-                    - analyse_de_risque
-                    - validation
-                    - arrivee_sis
-                    - arrivee_sis_prev
-                    - arrivee_secretariat_commission
-                    - consultation_sis
-                    - passage_commission
-                    - relecture
-                    - visite
-                    - arrivee_secretariat
-                    - workflow
-              required:
-                - type
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -35082,206 +35082,6 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: workflows
       x-extension-metarisc-codegen-operation: update-workflows-details
-  /workflows/{workflow_id}/terminer:
-    post:
-      tags:
-        - Workflows API
-      summary: Terminer un workflow
-      description: Terminer un workflow. Cela met à jour l'ensemble de son traitement.
-      operationId: PostTerminerWorkflowWorkflows
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: workflow_id
-          in: path
-          required: true
-          description: Workflow Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      responses:
-        '204':
-          description: No Content
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 255
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: workflows
-      x-extension-metarisc-codegen-operation: post-terminer-workflow
 tags:
   - name: Moi API
   - name: Anomalies API
@@ -37079,6 +36879,7 @@ components:
               - visite
               - arrivee_secretariat
               - workflow
+              - reception_de_travaux_en_attente
           maxItems: 25
         nb_messages_fil_rouge:
           description: Nombre de messages dans le fil rouge du dossier.
@@ -38706,7 +38507,7 @@ components:
           properties:
             titre:
               type: string
-              maxLength: 255
+              maxLength: 256
             type:
               type: string
               enum:
@@ -38721,6 +38522,7 @@ components:
                 - visite
                 - arrivee_secretariat
                 - workflow
+                - reception_de_travaux_en_attente
         needs:
           description: Les prérequis nécessaires à l'accomplissement de l'étape.
           type: array
@@ -38755,8 +38557,9 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowType'
       x-extension-metarisc-codegen-context: query
     Workflow:
-      title: Workflow
-      description: Étape du traitement d'un dossier. Une étape est liée à un groupe de travail ainsi qu'a un nombre de champs à valider.
+      type: object
+      title: Objet Workflow
+      description: Workflow du traitement d'un dossier. Il représente une étape dans la vie du dossier.
       properties:
         id:
           description: Identifiant unique de l'objet.
@@ -38767,7 +38570,7 @@ components:
         titre:
           description: Titre du workflow.
           type: string
-          maxLength: 255
+          maxLength: 256
         date_de_creation:
           description: Date de création du workflow.
           type: string
@@ -38792,12 +38595,14 @@ components:
           description: Si le workflow a été géré par un processus automatisé.
           type: boolean
         etat:
-          description: 'État du workflow. Le workflow peut être dans 3 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours :Le workflow devient actif pour traitement ; - Validé : Le workflow est vérouillé et débloque d''autres workflows ou complète le dossier ;'
+          description: 'État du workflow. Le workflow peut être dans 5 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours : Le workflow devient actif pour traitement ; - Validé : Le workflow est traité, vérouillé et peut débloquer d''autres workflows liés ; - Pause : Le workflow est en pause et ne peut être traité ; - Non concerné : Le workflow n''est pas concerné par le dossier en cours de traitement.'
           type: string
           enum:
             - VALIDE
             - EN_COURS
             - ATTENTE
+            - PAUSE
+            - NON_CONCERNE
         observations:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
@@ -38818,6 +38623,7 @@ components:
             - visite
             - arrivee_secretariat
             - workflow
+            - reception_de_travaux_en_attente
       required:
         - id
         - titre
