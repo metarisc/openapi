@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/22-02-2025.1
+  version: 1.0/feature/erp-a-visiter/24-02-2025.1
   title: Metarisc API
   description: |-
 
@@ -15494,6 +15494,15 @@ paths:
             enum:
               - favorable
               - defavorable
+        - name: a_visiter_en
+          in: query
+          description: Filtre sur l'année pour laquelle les ERP doivent être visités.
+          schema:
+            type: string
+            format: year
+            maxLength: 4
+            minLength: 4
+            pattern: ^\d{4}$
         - name: site_geographique
           in: query
           description: Filtre sur un site géographique.
@@ -38228,6 +38237,14 @@ components:
           items:
             $ref: '#/components/schemas/ReferenceExterieure'
           maxItems: 25
+        a_visiter_en:
+          description: Année pour laquelle l'ERP doit être visité. Si le champ est null, l'ERP n'a pas de visite périodique prochaine prévue.
+          type: string
+          format: year
+          maxLength: 4
+          minLength: 4
+          pattern: ^\d{4}$
+          nullable: true
         sites_geographiques:
           description: Sites géographiques contenant l'ERP.
           type: array
@@ -38245,6 +38262,7 @@ components:
         - date_derniere_visite
         - notes_internes
         - references_exterieures
+        - a_visiter_en
         - sites_geographiques
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       x-extension-metarisc-codegen-context: query
