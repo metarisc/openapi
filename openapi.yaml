@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-02-2025.1
+  version: 1.0/main/25-02-2025.1
   title: Metarisc API
   description: |-
 
@@ -39360,14 +39360,9 @@ components:
           description: Libellé du site géographique.
           type: string
           maxLength: 256
-        geojson:
-          description: Représentation géographique du site sous forme de GeoJSON.
-          type: string
-          maxLength: 4096
       required:
         - id
         - libelle
-        - geojson
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/SiteGeographique'
       x-extension-metarisc-codegen-context: query
     Tag:
