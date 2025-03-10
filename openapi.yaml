@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-02-2025.1
+  version: 1.0/main/10-03-2025.1
   title: Metarisc API
   description: |-
 
@@ -350,7 +350,7 @@ paths:
           description: Filtre sur le texte de l'anomalie
           schema:
             type: string
-            maxLength: 4096
+            maxLength: 8192
         - name: code
           in: query
           description: Filtre sur le code de l'anomalie
@@ -597,7 +597,7 @@ paths:
                 texte:
                   description: Description de l'anomalie.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 indice_de_gravite:
                   type: integer
                   format: int32
@@ -4793,7 +4793,7 @@ paths:
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
@@ -7203,7 +7203,7 @@ paths:
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -8831,7 +8831,7 @@ paths:
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
@@ -9283,7 +9283,7 @@ paths:
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -10419,7 +10419,7 @@ paths:
                 message:
                   description: Contenu du message.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
               required:
                 - message
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
@@ -10916,7 +10916,7 @@ paths:
                         descriptif_travaux:
                           description: Descriptif des travaux.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                         date_limite_traitement:
                           description: Date limite de traitement du dossier.
                           type: string
@@ -11892,7 +11892,7 @@ paths:
                         informations_acces_facades:
                           description: Les informations d'accès aux façades.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         espace_libre:
                           description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
@@ -11901,7 +11901,7 @@ paths:
                         desserte_informations_complementaires:
                           description: Les informations complémentaires sur la desserte.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         presence_erp_ou_tiers_contigus:
                           description: La présence d'ERP ou de tiers contigus.
@@ -11920,12 +11920,12 @@ paths:
                         isolement_contigus_realise_degre_cf_autre_precision:
                           description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         isolement_contigus_informations_complementaires:
                           description: Les informations complémentaires sur l'isolement entre les tiers.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         air_libre:
                           description: Distance d'air libre entre les tiers en vis à vis.
@@ -11951,7 +11951,7 @@ paths:
                         isolement_vis_a_vis_informations_complementaires:
                           description: Les informations complémentaires sur l'isolement vis à vis.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         presence_erp_ou_tiers_superpose:
                           description: La présence d'ERP ou de tiers superposés.
@@ -11970,12 +11970,12 @@ paths:
                         isolement_superpose_realise_degre_cf_autre_precision:
                           description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         isolement_superpose_informations_complementaires:
                           description: Les informations complémentaires sur l'isolement entre les tiers superposés.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         structure_sf:
                           description: La stabilité au feu de la structure.
@@ -12000,27 +12000,27 @@ paths:
                         stabilite_au_feu_informations_complementaires:
                           description: Les informations complémentaires sur la stabilité au feu.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         isolement_autre_description:
                           description: Description d'un autre type d'isolement.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         construction_structures_description:
                           description: Description des structures de construction.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         construction_couverture_description:
                           description: Description de la couverture de construction.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         construction_facades_description:
                           description: Description des façades de construction.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         type_cloisonnement:
                           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
@@ -12035,7 +12035,7 @@ paths:
                         construction_distribution_interieure_informations_complementaires:
                           description: Les informations complémentaires sur la distribution intérieure de la construction.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         locaux:
                           description: Les locaux sont des espaces délimités par des cloisons.
@@ -12069,18 +12069,18 @@ paths:
                               local_informations_complementaires:
                                 description: Les informations complémentaires du local
                                 type: string
-                                maxLength: 4096
+                                maxLength: 8192
                                 nullable: true
                           nullable: true
                         construction_conduits_et_gaines_description:
                           description: Description des conduits et des gaines.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         construction_amenagements_interieurs_description:
                           description: Description des aménagements intérieurs.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         degagement_normaux:
                           description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
@@ -12129,7 +12129,7 @@ paths:
                         degagement_exigibles_informations_complementaires:
                           description: Les informations complémentaires sur les dégagements exigibles.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         degagement_supplementaires:
                           description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
@@ -12156,12 +12156,12 @@ paths:
                         degagement_escaliers_description:
                           description: Description du dégagement des escaliers.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
                           description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         presence_eas_ou_equivalents:
                           description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
@@ -12170,12 +12170,12 @@ paths:
                         degagement_espaces_attente_securises_informations_complementaires:
                           description: Les informations complémentaires sur les espaces d'attente sécurisés.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         degagement_tribunes_et_gradins_non_demontables_description:
                           description: Description des dégagements des tribunes et gradins non démontables.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         enfouissement:
                           description: Information sur la présence d'un enfouissement.
@@ -12184,7 +12184,7 @@ paths:
                         degagement_enfouissement_informations_complementaires:
                           description: Les informations complémentaires au sujet de l'enfouissement.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         presence_desenfumage_mécanique:
                           description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
@@ -12197,7 +12197,7 @@ paths:
                         ventilation_desenfumage_informations_complementaires:
                           description: Les informations complémentaires sur la ventilation et le désenfumage.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         groupe_electrogene:
                           description: Information sur la presence d'un groupe électrogène.
@@ -12218,7 +12218,7 @@ paths:
                         electricite_eclairage_informations_complementaires:
                           description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         puissance_chaufferie:
                           description: Puissance de la chaufferie
@@ -12249,7 +12249,7 @@ paths:
                         chauffage_ventilation_informations_complementaires:
                           description: Les informations complémentaires au sujet du chauffage et de la ventilation.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         puissance_cuisine:
                           description: Puissance de la cuisine
@@ -12277,7 +12277,7 @@ paths:
                         risques_spéciaux_informations_complementaires:
                           description: Les informations complémentaires sur les risques spéciaux.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         presence_extincteur:
                           description: Présence d'extincteurs.
@@ -12318,12 +12318,12 @@ paths:
                         moyens_de_secours_informations_complementaires:
                           description: Les informations complémentaires sur les moyens de secours.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         deci_description:
                           description: Description du dispositif DECI.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         affichage_des_plans_intervention:
                           description: Présence d'affichage des plans d'intervention.
@@ -12353,7 +12353,7 @@ paths:
                         service_de_securite_incendie_informations_complementaires:
                           description: Les informations complémentaires sur le service de sécurité incendie.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         systeme_de_securite_incendie:
                           description: Présence d'un système de sécurité incendie.
@@ -12404,7 +12404,7 @@ paths:
                         systeme_securite_incendie_informations_complementaires:
                           description: Les informations complémentaires sur le système de sécurité incendie.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                         defibrillateur:
                           description: Présence d'un défibrillateur.
@@ -12413,17 +12413,17 @@ paths:
                         specificites_informations_complementaires:
                           description: Les informations complémentaires sur les spécificités.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                 observations:
                   description: Observations sur l'analyse de risque.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 prise_de_note_interne:
                   description: Prise de note interne.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 proposition_avis:
                   description: Proposition d'avis du préventionniste.
@@ -12435,7 +12435,7 @@ paths:
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 facteur_dangerosite:
                   description: 'Facteur de dangerosité de la prescription. Il est déterminé par l''analyse de risque, et est classifié comme suit : - 0 : DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ ELEVÉE'
                   type: integer
@@ -12922,7 +12922,7 @@ paths:
                     contenu:
                       description: Contenu de la prescription.
                       type: string
-                      maxLength: 4096
+                      maxLength: 8192
                     type:
                       description: Classement de la prescription.
                       type: string
@@ -15798,7 +15798,7 @@ paths:
                         localisation_operationnelle:
                           description: Complément d'adresse à destination des services de secours.
                           type: string
-                          maxLength: 4096
+                          maxLength: 256
                           nullable: true
                         complement:
                           description: Complément d'adresse.
@@ -15839,7 +15839,7 @@ paths:
                             observations_generales:
                               description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                               type: string
-                              maxLength: 4096
+                              maxLength: 8192
                               nullable: true
                             analyse_risque:
                               description: Analyse des risques de l'établissement.
@@ -16348,7 +16348,7 @@ paths:
                                     informations_acces_facades:
                                       description: Les informations d'accès aux façades.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     espace_libre:
                                       description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
@@ -16357,7 +16357,7 @@ paths:
                                     desserte_informations_complementaires:
                                       description: Les informations complémentaires sur la desserte.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     presence_erp_ou_tiers_contigus:
                                       description: La présence d'ERP ou de tiers contigus.
@@ -16376,12 +16376,12 @@ paths:
                                     isolement_contigus_realise_degre_cf_autre_precision:
                                       description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     isolement_contigus_informations_complementaires:
                                       description: Les informations complémentaires sur l'isolement entre les tiers.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     air_libre:
                                       description: Distance d'air libre entre les tiers en vis à vis.
@@ -16407,7 +16407,7 @@ paths:
                                     isolement_vis_a_vis_informations_complementaires:
                                       description: Les informations complémentaires sur l'isolement vis à vis.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     presence_erp_ou_tiers_superpose:
                                       description: La présence d'ERP ou de tiers superposés.
@@ -16426,12 +16426,12 @@ paths:
                                     isolement_superpose_realise_degre_cf_autre_precision:
                                       description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     isolement_superpose_informations_complementaires:
                                       description: Les informations complémentaires sur l'isolement entre les tiers superposés.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     structure_sf:
                                       description: La stabilité au feu de la structure.
@@ -16456,27 +16456,27 @@ paths:
                                     stabilite_au_feu_informations_complementaires:
                                       description: Les informations complémentaires sur la stabilité au feu.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     isolement_autre_description:
                                       description: Description d'un autre type d'isolement.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     construction_structures_description:
                                       description: Description des structures de construction.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     construction_couverture_description:
                                       description: Description de la couverture de construction.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     construction_facades_description:
                                       description: Description des façades de construction.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     type_cloisonnement:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
@@ -16491,7 +16491,7 @@ paths:
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     locaux:
                                       description: Les locaux sont des espaces délimités par des cloisons.
@@ -16525,18 +16525,18 @@ paths:
                                           local_informations_complementaires:
                                             description: Les informations complémentaires du local
                                             type: string
-                                            maxLength: 4096
+                                            maxLength: 8192
                                             nullable: true
                                       nullable: true
                                     construction_conduits_et_gaines_description:
                                       description: Description des conduits et des gaines.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     construction_amenagements_interieurs_description:
                                       description: Description des aménagements intérieurs.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     degagement_normaux:
                                       description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
@@ -16585,7 +16585,7 @@ paths:
                                     degagement_exigibles_informations_complementaires:
                                       description: Les informations complémentaires sur les dégagements exigibles.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     degagement_supplementaires:
                                       description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
@@ -16612,12 +16612,12 @@ paths:
                                     degagement_escaliers_description:
                                       description: Description du dégagement des escaliers.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
                                       description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     presence_eas_ou_equivalents:
                                       description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
@@ -16626,12 +16626,12 @@ paths:
                                     degagement_espaces_attente_securises_informations_complementaires:
                                       description: Les informations complémentaires sur les espaces d'attente sécurisés.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     degagement_tribunes_et_gradins_non_demontables_description:
                                       description: Description des dégagements des tribunes et gradins non démontables.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     enfouissement:
                                       description: Information sur la présence d'un enfouissement.
@@ -16640,7 +16640,7 @@ paths:
                                     degagement_enfouissement_informations_complementaires:
                                       description: Les informations complémentaires au sujet de l'enfouissement.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     presence_desenfumage_mécanique:
                                       description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
@@ -16653,7 +16653,7 @@ paths:
                                     ventilation_desenfumage_informations_complementaires:
                                       description: Les informations complémentaires sur la ventilation et le désenfumage.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     groupe_electrogene:
                                       description: Information sur la presence d'un groupe électrogène.
@@ -16674,7 +16674,7 @@ paths:
                                     electricite_eclairage_informations_complementaires:
                                       description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     puissance_chaufferie:
                                       description: Puissance de la chaufferie
@@ -16705,7 +16705,7 @@ paths:
                                     chauffage_ventilation_informations_complementaires:
                                       description: Les informations complémentaires au sujet du chauffage et de la ventilation.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     puissance_cuisine:
                                       description: Puissance de la cuisine
@@ -16733,7 +16733,7 @@ paths:
                                     risques_spéciaux_informations_complementaires:
                                       description: Les informations complémentaires sur les risques spéciaux.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     presence_extincteur:
                                       description: Présence d'extincteurs.
@@ -16774,12 +16774,12 @@ paths:
                                     moyens_de_secours_informations_complementaires:
                                       description: Les informations complémentaires sur les moyens de secours.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     deci_description:
                                       description: Description du dispositif DECI.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     affichage_des_plans_intervention:
                                       description: Présence d'affichage des plans d'intervention.
@@ -16809,7 +16809,7 @@ paths:
                                     service_de_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le service de sécurité incendie.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     systeme_de_securite_incendie:
                                       description: Présence d'un système de sécurité incendie.
@@ -16860,7 +16860,7 @@ paths:
                                     systeme_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le système de sécurité incendie.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                                     defibrillateur:
                                       description: Présence d'un défibrillateur.
@@ -16869,7 +16869,7 @@ paths:
                                     specificites_informations_complementaires:
                                       description: Les informations complémentaires sur les spécificités.
                                       type: string
-                                      maxLength: 4096
+                                      maxLength: 8192
                                       nullable: true
                           required:
                             - statut
@@ -16889,7 +16889,7 @@ paths:
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 sites_geographiques_id:
                   description: Les identifiants des sites géographiques auxquelles associer cet ERP. Envoyez un ou pluseurs identifiants de sites géographiques pour remplacer les sites géographiques associés à cet ERP. Un tableau vide ([]) dissocie l'ERP de tous les sites géographiques.
                   type: array
@@ -17402,7 +17402,7 @@ paths:
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
@@ -17854,7 +17854,7 @@ paths:
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -18375,7 +18375,7 @@ paths:
                         descriptif_travaux:
                           description: Descriptif des travaux.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                         date_limite_traitement:
                           description: Date limite de traitement du dossier.
                           type: string
@@ -18893,7 +18893,7 @@ paths:
                         localisation_operationnelle:
                           description: Complément d'adresse à destination des services de secours.
                           type: string
-                          maxLength: 4096
+                          maxLength: 256
                           nullable: true
                         complement:
                           description: Complément d'adresse.
@@ -18915,7 +18915,7 @@ paths:
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 sites_geographiques_id:
                   description: Les identifiants des sites géographiques auxquelles associer cet ERP. Envoyez un ou pluseurs identifiants de sites géographiques pour remplacer les sites géographiques associés à cet ERP. Un tableau vide ([]) dissocie l'ERP de tous les sites géographiques.
                   type: array
@@ -20284,7 +20284,7 @@ paths:
                 description:
                   description: Description de l'événement.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 date_debut:
                   description: Date de début de l'événement.
                   type: string
@@ -21378,7 +21378,7 @@ paths:
                         texte:
                           description: Contenu du message.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                       required:
                         - texte
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
@@ -22004,7 +22004,7 @@ paths:
                 message:
                   description: Contenu de la notification.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 type:
                   description: Type de la notification.
                   type: string
@@ -22865,7 +22865,7 @@ paths:
                 observations:
                   description: La commission de sécurité émet soit un avis favorable soit un avis défavorable. Afin de motiver les décisions prises, la commission peut émettre des observations.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -25868,7 +25868,7 @@ paths:
                                 observations_generales:
                                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                                   type: string
-                                  maxLength: 4096
+                                  maxLength: 8192
                                   nullable: true
                                 statut:
                                   description: Statut du PEI lors de l'établissement de son descriptif technique.
@@ -25949,7 +25949,7 @@ paths:
                                 observations_generales:
                                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                                   type: string
-                                  maxLength: 4096
+                                  maxLength: 8192
                                   nullable: true
                                 statut:
                                   description: Statut du PEI lors de l'établissement de son descriptif technique.
@@ -26048,7 +26048,7 @@ paths:
                         localisation_operationnelle:
                           description: Complément d'adresse à destination des services de secours.
                           type: string
-                          maxLength: 4096
+                          maxLength: 256
                           nullable: true
                         complement:
                           description: Complément d'adresse.
@@ -27023,7 +27023,7 @@ paths:
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Contact'
@@ -27475,7 +27475,7 @@ paths:
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -27996,7 +27996,7 @@ paths:
                         descriptif_travaux:
                           description: Descriptif des travaux.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                         date_limite_traitement:
                           description: Date limite de traitement du dossier.
                           type: string
@@ -29313,7 +29313,7 @@ paths:
           description: Filtre sur le contenu de la prescription
           schema:
             type: string
-            maxLength: 4096
+            maxLength: 8192
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -29546,7 +29546,7 @@ paths:
                 contenu:
                   description: Contenu de la prescription.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 type:
                   description: Classement de la prescription.
                   type: string
@@ -30186,7 +30186,7 @@ paths:
                 contenu:
                   description: Contenu de la prescription.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 type:
                   description: Classement de la prescription.
                   type: string
@@ -31475,7 +31475,7 @@ paths:
           description: Filtre sur le contenu du support réglementaire
           schema:
             type: string
-            maxLength: 4096
+            maxLength: 8192
         - name: reference
           in: query
           description: Filtre sur la référence du support réglementaire
@@ -31727,7 +31727,7 @@ paths:
                 contenu:
                   description: Contenu du support réglementaire.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                 titre:
                   description: Titre du contenu réglementaire.
                   type: string
@@ -32609,7 +32609,7 @@ paths:
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                       required:
                         - libelle
@@ -32650,7 +32650,7 @@ paths:
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                       required:
                         - libelle
@@ -33330,7 +33330,7 @@ paths:
                 description:
                   description: Description du fichier joint.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
                   nullable: true
                 type:
                   description: Type de la pièce jointe.
@@ -33777,7 +33777,7 @@ paths:
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                     - type: object
                       properties:
@@ -33814,7 +33814,7 @@ paths:
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
-                          maxLength: 4096
+                          maxLength: 8192
                           nullable: true
                     - type: object
                       properties:
@@ -36007,7 +36007,7 @@ paths:
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 4096
+                  maxLength: 8192
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Workflow'
               x-extension-metarisc-codegen-context: update
@@ -36241,7 +36241,7 @@ components:
           exclusiveMaximum: true
         detail:
           type: string
-          maxLength: 4096
+          maxLength: 8192
           description: La description complète de l'erreur rencontrée
     PaginationMetadata:
       type: object
@@ -36340,7 +36340,7 @@ components:
         localisation_operationnelle:
           description: Complément d'adresse à destination des services de secours.
           type: string
-          maxLength: 4096
+          maxLength: 256
           nullable: true
         complement:
           description: Complément d'adresse.
@@ -36374,7 +36374,7 @@ components:
         texte:
           description: Description de l'anomalie.
           type: string
-          maxLength: 4096
+          maxLength: 8192
         indice_de_gravite:
           type: integer
           format: int32
@@ -36796,7 +36796,7 @@ components:
         informations_acces_facades:
           description: Les informations d'accès aux façades.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         espace_libre:
           description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
@@ -36805,7 +36805,7 @@ components:
         desserte_informations_complementaires:
           description: Les informations complémentaires sur la desserte.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         presence_erp_ou_tiers_contigus:
           description: La présence d'ERP ou de tiers contigus.
@@ -36824,12 +36824,12 @@ components:
         isolement_contigus_realise_degre_cf_autre_precision:
           description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         isolement_contigus_informations_complementaires:
           description: Les informations complémentaires sur l'isolement entre les tiers.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         air_libre:
           description: Distance d'air libre entre les tiers en vis à vis.
@@ -36855,7 +36855,7 @@ components:
         isolement_vis_a_vis_informations_complementaires:
           description: Les informations complémentaires sur l'isolement vis à vis.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         presence_erp_ou_tiers_superpose:
           description: La présence d'ERP ou de tiers superposés.
@@ -36874,12 +36874,12 @@ components:
         isolement_superpose_realise_degre_cf_autre_precision:
           description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         isolement_superpose_informations_complementaires:
           description: Les informations complémentaires sur l'isolement entre les tiers superposés.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         structure_sf:
           description: La stabilité au feu de la structure.
@@ -36904,27 +36904,27 @@ components:
         stabilite_au_feu_informations_complementaires:
           description: Les informations complémentaires sur la stabilité au feu.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         isolement_autre_description:
           description: Description d'un autre type d'isolement.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         construction_structures_description:
           description: Description des structures de construction.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         construction_couverture_description:
           description: Description de la couverture de construction.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         construction_facades_description:
           description: Description des façades de construction.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         type_cloisonnement:
           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
@@ -36939,7 +36939,7 @@ components:
         construction_distribution_interieure_informations_complementaires:
           description: Les informations complémentaires sur la distribution intérieure de la construction.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         locaux:
           description: Les locaux sont des espaces délimités par des cloisons.
@@ -36951,12 +36951,12 @@ components:
         construction_conduits_et_gaines_description:
           description: Description des conduits et des gaines.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         construction_amenagements_interieurs_description:
           description: Description des aménagements intérieurs.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         degagement_normaux:
           description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
@@ -36975,7 +36975,7 @@ components:
         degagement_exigibles_informations_complementaires:
           description: Les informations complémentaires sur les dégagements exigibles.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         degagement_supplementaires:
           description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
@@ -36987,12 +36987,12 @@ components:
         degagement_escaliers_description:
           description: Description du dégagement des escaliers.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
           description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         presence_eas_ou_equivalents:
           description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
@@ -37001,12 +37001,12 @@ components:
         degagement_espaces_attente_securises_informations_complementaires:
           description: Les informations complémentaires sur les espaces d'attente sécurisés.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         degagement_tribunes_et_gradins_non_demontables_description:
           description: Description des dégagements des tribunes et gradins non démontables.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         enfouissement:
           description: Information sur la présence d'un enfouissement.
@@ -37015,7 +37015,7 @@ components:
         degagement_enfouissement_informations_complementaires:
           description: Les informations complémentaires au sujet de l'enfouissement.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         presence_desenfumage_mécanique:
           description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
@@ -37028,7 +37028,7 @@ components:
         ventilation_desenfumage_informations_complementaires:
           description: Les informations complémentaires sur la ventilation et le désenfumage.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         groupe_electrogene:
           description: Information sur la presence d'un groupe électrogène.
@@ -37049,7 +37049,7 @@ components:
         electricite_eclairage_informations_complementaires:
           description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         puissance_chaufferie:
           description: Puissance de la chaufferie
@@ -37080,7 +37080,7 @@ components:
         chauffage_ventilation_informations_complementaires:
           description: Les informations complémentaires au sujet du chauffage et de la ventilation.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         puissance_cuisine:
           description: Puissance de la cuisine
@@ -37108,7 +37108,7 @@ components:
         risques_spéciaux_informations_complementaires:
           description: Les informations complémentaires sur les risques spéciaux.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         presence_extincteur:
           description: Présence d'extincteurs.
@@ -37149,12 +37149,12 @@ components:
         moyens_de_secours_informations_complementaires:
           description: Les informations complémentaires sur les moyens de secours.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         deci_description:
           description: Description du dispositif DECI.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         affichage_des_plans_intervention:
           description: Présence d'affichage des plans d'intervention.
@@ -37184,7 +37184,7 @@ components:
         service_de_securite_incendie_informations_complementaires:
           description: Les informations complémentaires sur le service de sécurité incendie.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         systeme_de_securite_incendie:
           description: Présence d'un système de sécurité incendie.
@@ -37235,7 +37235,7 @@ components:
         systeme_securite_incendie_informations_complementaires:
           description: Les informations complémentaires sur le système de sécurité incendie.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         defibrillateur:
           description: Présence d'un défibrillateur.
@@ -37244,7 +37244,7 @@ components:
         specificites_informations_complementaires:
           description: Les informations complémentaires sur les spécificités.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
       required:
         - activite_principale
@@ -37513,7 +37513,7 @@ components:
         observations:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
       required:
         - id
@@ -37613,7 +37613,7 @@ components:
         observations_generales:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         date:
           description: Date à laquelle le descriptif technique a été établi.
@@ -37699,7 +37699,7 @@ components:
         observations_generales:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         analyse_risque:
           description: Analyse des risques de l'établissement.
@@ -38104,7 +38104,7 @@ components:
             descriptif_travaux:
               description: Descriptif des travaux.
               type: string
-              maxLength: 4096
+              maxLength: 8192
               nullable: true
             date_limite_traitement:
               description: Date limite de traitement du dossier.
@@ -38229,7 +38229,7 @@ components:
         notes_internes:
           description: Notes internes sur l'ERP.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         references_exterieures:
           description: Références externes de l'ERP.
@@ -38531,7 +38531,7 @@ components:
         description:
           description: Description de l'événement.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         date_debut:
           description: Date de début de l'événement.
@@ -38598,7 +38598,7 @@ components:
             texte:
               description: Contenu du message.
               type: string
-              maxLength: 4096
+              maxLength: 8192
           required:
             - texte
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
@@ -38623,7 +38623,7 @@ components:
         message:
           description: Contenu du message.
           type: string
-          maxLength: 4096
+          maxLength: 8192
         date_de_creation:
           description: Date de création du message.
           type: string
@@ -38669,7 +38669,7 @@ components:
         local_informations_complementaires:
           description: Les informations complémentaires du local
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
       required:
         - nom_du_local
@@ -38696,7 +38696,7 @@ components:
         message:
           description: Contenu de la notification.
           type: string
-          maxLength: 4096
+          maxLength: 8192
         type:
           description: Type de la notification.
           type: string
@@ -39029,7 +39029,7 @@ components:
         observations:
           description: La commission de sécurité émet soit un avis favorable soit un avis défavorable. Afin de motiver les décisions prises, la commission peut émettre des observations.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
       required:
         - id
@@ -39063,7 +39063,7 @@ components:
         description:
           description: Description du fichier joint.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         type:
           description: Type de la pièce jointe.
@@ -39092,7 +39092,7 @@ components:
       properties:
         message:
           type: string
-          maxLength: 4096
+          maxLength: 256
           default: pong
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Ping'
       x-extension-metarisc-codegen-context: query
@@ -39110,7 +39110,7 @@ components:
         contenu:
           description: Contenu de la prescription.
           type: string
-          maxLength: 4096
+          maxLength: 8192
         type:
           description: Classement de la prescription.
           type: string
@@ -39177,7 +39177,7 @@ components:
         contenu:
           description: Contenu du support réglementaire.
           type: string
-          maxLength: 4096
+          maxLength: 8192
         titre:
           description: Titre du contenu réglementaire.
           type: string
@@ -39210,12 +39210,12 @@ components:
         observations:
           description: Observations sur l'analyse de risque.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         prise_de_note_interne:
           description: Prise de note interne.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         proposition_avis:
           description: Proposition d'avis du préventionniste.
@@ -39227,7 +39227,7 @@ components:
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
           type: string
-          maxLength: 4096
+          maxLength: 8192
         facteur_dangerosite:
           description: 'Facteur de dangerosité de la prescription. Il est déterminé par l''analyse de risque, et est classifié comme suit : - 0 : DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ ELEVÉE'
           type: integer
@@ -39404,7 +39404,7 @@ components:
         description:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         date_de_creation:
           description: Date de création de la tournée.
@@ -39749,7 +39749,7 @@ components:
         observations:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 4096
+          maxLength: 8192
           nullable: true
         type:
           description: Type du workflow.
