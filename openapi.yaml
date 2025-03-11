@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/11-03-2025.1
+  version: 1.0/main/11-03-2025.2
   title: Metarisc API
   description: |-
 
@@ -38163,6 +38163,18 @@ components:
         est_archive:
           description: Indicateur permettant de savoir si le dossier est archivé. Un dossier archivé ne peut plus être modifié. Cela peut être utile pour des raisons de traçabilité.
           type: boolean
+        passage_en_commission:
+          description: Information permettant de savoir si le dossier est actuellement programmé à l'ordre du jour d'une commission.
+          allOf:
+            - $ref: '#/components/schemas/PassageCommission'
+          nullable: true
+        avis:
+          description: Avis rendu de la commission sur le dossier.
+          type: string
+          enum:
+            - favorable
+            - defavorable
+          nullable: true
         enveloppe:
           description: Enveloppe du dossier.
           allOf:
@@ -38205,6 +38217,12 @@ components:
           format: int32
           minimum: 0
           maximum: 999999
+        affectations:
+          description: Représente le groupe de travail du dossier.
+          type: array
+          items:
+            $ref: '#/components/schemas/DossierAffectation'
+          maxItems: 25
       required:
         - id
         - objet
@@ -38215,11 +38233,14 @@ components:
         - modules
         - tags
         - est_archive
+        - passage_en_commission
+        - avis
         - enveloppe
         - workflows_actifs
         - nb_messages_fil_rouge
         - nb_contacts
         - nb_pieces_jointes
+        - affectations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       x-extension-metarisc-codegen-context: query
     DossierDeci:
