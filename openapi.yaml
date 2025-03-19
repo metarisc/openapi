@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/11-03-2025.2
+  version: 1.0/main/19-03-2025.1
   title: Metarisc API
   description: |-
 
@@ -23052,6 +23052,9 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                ge4_3:
+                  description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
+                  type: boolean
                 date_de_passage:
                   description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
                   type: string
@@ -39236,6 +39239,10 @@ components:
             - favorable
             - defavorable
           nullable: true
+        ge4_3:
+          description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
+          type: boolean
+          nullable: true
         date_de_passage:
           description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
           type: string
@@ -39255,6 +39262,7 @@ components:
         - id
         - dossier
         - avis
+        - ge4_3
         - date_de_passage
         - avis_differe
         - observations
