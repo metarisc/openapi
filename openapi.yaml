@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-03-2025.1
+  version: 1.0/main/21-03-2025.1
   title: Metarisc API
   description: |-
 
@@ -9298,6 +9298,8 @@ paths:
                   type: boolean
               required:
                 - url
+                - nom
+                - type
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
@@ -9941,224 +9943,6 @@ paths:
       x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: put-essais-dossier
-  /dossiers/{dossier_id}/export:
-    post:
-      tags:
-        - Dossiers API
-      summary: Export du dossier
-      description: L'export du dossier est une opération qui permet de récupérer un fichier PDF contenant l'ensemble des éléments du dossier. Le PDF généré est un document de synthèse qui reprend les informations du dossier, en se basant sur le modèle de rapport de l'organisation. L'export du dossier est une opération qui peut être longue, en fonction de la taille du dossier et du nombre d'éléments à exporter. Le fichier PDF généré est disponible en téléchargement depuis les pièces jointes du dossier.
-      operationId: PostExportDossierDossiers
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: dossier_id
-          in: path
-          required: true
-          description: Dossier Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: false
-              properties:
-                type:
-                  description: Options de l'export
-                  type: string
-                  enum:
-                    - rapport_etude
-              required:
-                - type
-      responses:
-        '201':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PieceJointe'
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 255
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: dossiers
-      x-extension-metarisc-codegen-operation: post-export-dossier
   /dossiers/{dossier_id}/fil_rouge:
     get:
       tags:
@@ -12667,6 +12451,212 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: post-rapport-etude-dossier
+  /dossiers/{dossier_id}/rapport_etude/pdf:
+    get:
+      tags:
+        - Dossiers API
+      summary: Téléchargement PDF du rapport d'étude
+      description: L'export du rapport d'étude est une opération qui permet de récupérer un fichier PDF contenant l'ensemble des éléments du dossier d'étude. Le SIS réalise pour chaque étude ou visite un rapport détaillé par ERP. Ce document est présenté en commission par le sapeur pompier préventionniste en sa qualité de rapporteur et de technicien du risque. Le PDF généré est un document de synthèse qui reprend les informations du dossier, en se basant sur le modèle de rapport de l'organisation. L'export du dossier est une opération qui peut être longue, en fonction de la taille du dossier et du nombre d'éléments à exporter.
+      operationId: GetPdfRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/pdf:
+              schema:
+                format: base64
+                type: string
+                maxLength: 100000000
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 255
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-pdf-rapport-etude-dossier
   /dossiers/{dossier_id}/rapport_etude/prescriptions:
     get:
       tags:
@@ -17882,6 +17872,8 @@ paths:
                   type: boolean
               required:
                 - url
+                - nom
+                - type
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
@@ -23178,6 +23170,8 @@ paths:
                   type: boolean
               required:
                 - url
+                - nom
+                - type
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
@@ -29932,6 +29926,8 @@ paths:
                   type: boolean
               required:
                 - url
+                - nom
+                - type
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
@@ -35787,6 +35783,8 @@ paths:
                   type: boolean
               required:
                 - url
+                - nom
+                - type
                 - est_sensible
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
