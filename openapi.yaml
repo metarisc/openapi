@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-03-2025.1
+  version: 1.0/feature/search-prescr-sr/25-03-2025.1
   title: Metarisc API
   description: |-
 
@@ -32370,6 +32370,12 @@ paths:
           schema:
             type: string
             maxLength: 8192
+        - name: support_reglementaire_reference
+          in: query
+          description: Filtre sur les références des supports réglementaires de la prescription
+          schema:
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
