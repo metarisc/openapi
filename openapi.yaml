@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-03-2025.1
+  version: 1.0/feature/cellule/25-03-2025.1
   title: Metarisc API
   description: |-
 
@@ -17108,6 +17108,28 @@ paths:
                   items:
                     type: string
                     maxLength: 255
+                etablissement_rattache:
+                  description: Etablissement rattaché à l'ERP. Le rattachement permet de définir l'ERP courant comme une cellule commerciale ou un batiment non-isolé faisant partie d'un ERP plus grand.
+                  allOf:
+                    - type: object
+                      title: Objet ERP Lié
+                      description: Les bâtiments d'une même exploitation et les exploitations groupées dans un même bâtiment ou dans des bâtiments voisins, qui ne répondent pas aux conditions d'isolement du règlement de sécurité, sont considérés comme un seul établissement recevant du public. Néanmoins les dispositions de sécurité incendie doivent être prises pour chaque bâtiment ou exploitation, ainsi l'ensemble des bâtiments ou exploitations groupés doit avoir sa propre fiche ERP. La liaison permet donc de définir les ERP liés entre eux. https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020303850
+                      properties:
+                        erp_lie_id:
+                          description: Identifiant de l'ERP lié.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                        type:
+                          description: Type de la relation entre les ERP.
+                          type: string
+                          enum:
+                            - CELLULE
+                            - BATIMENT_NON_ISOLE
+                      required:
+                        - erp_lie_id
+                        - type
               required:
                 - implantation
                 - descriptif_technique
@@ -19150,6 +19172,28 @@ paths:
                   items:
                     type: string
                     maxLength: 255
+                etablissement_rattache:
+                  description: Etablissement rattaché à l'ERP. Le rattachement permet de définir l'ERP courant comme une cellule commerciale ou un batiment non-isolé faisant partie d'un ERP plus grand.
+                  allOf:
+                    - type: object
+                      title: Objet ERP Lié
+                      description: Les bâtiments d'une même exploitation et les exploitations groupées dans un même bâtiment ou dans des bâtiments voisins, qui ne répondent pas aux conditions d'isolement du règlement de sécurité, sont considérés comme un seul établissement recevant du public. Néanmoins les dispositions de sécurité incendie doivent être prises pour chaque bâtiment ou exploitation, ainsi l'ensemble des bâtiments ou exploitations groupés doit avoir sa propre fiche ERP. La liaison permet donc de définir les ERP liés entre eux. https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020303850
+                      properties:
+                        erp_lie_id:
+                          description: Identifiant de l'ERP lié.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                        type:
+                          description: Type de la relation entre les ERP.
+                          type: string
+                          enum:
+                            - CELLULE
+                            - BATIMENT_NON_ISOLE
+                      required:
+                        - erp_lie_id
+                        - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -41247,6 +41291,28 @@ components:
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
       x-extension-metarisc-codegen-context: query
+    ERPLie:
+      type: object
+      title: Objet ERP Lié
+      description: Les bâtiments d'une même exploitation et les exploitations groupées dans un même bâtiment ou dans des bâtiments voisins, qui ne répondent pas aux conditions d'isolement du règlement de sécurité, sont considérés comme un seul établissement recevant du public. Néanmoins les dispositions de sécurité incendie doivent être prises pour chaque bâtiment ou exploitation, ainsi l'ensemble des bâtiments ou exploitations groupés doit avoir sa propre fiche ERP. La liaison permet donc de définir les ERP liés entre eux. https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020303850
+      properties:
+        erp_lie_id:
+          description: Identifiant de l'ERP lié.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        type:
+          description: Type de la relation entre les ERP.
+          type: string
+          enum:
+            - CELLULE
+            - BATIMENT_NON_ISOLE
+      required:
+        - erp_lie_id
+        - type
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERPLie'
+      x-extension-metarisc-codegen-context: query
     ERP:
       type: object
       title: Objet ERP
@@ -41343,6 +41409,10 @@ components:
           maxItems: 2
           items:
             $ref: '#/components/schemas/Utilisateur'
+        etablissement_rattache:
+          description: Etablissement rattaché à l'ERP. Le rattachement permet de définir l'ERP courant comme une cellule commerciale ou un batiment non-isolé faisant partie d'un ERP plus grand.
+          allOf:
+            - $ref: '#/components/schemas/ERPLie'
       required:
         - id
         - date_de_realisation
