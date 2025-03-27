@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-03-2025.1
+  version: 1.0/main/27-03-2025.1
   title: Metarisc API
   description: |-
 
@@ -25714,6 +25714,12 @@ paths:
                   description: La commission de sécurité émet soit un avis favorable soit un avis défavorable. Afin de motiver les décisions prises, la commission peut émettre des observations.
                   type: string
                   maxLength: 8192
+                duree_minutes:
+                  description: Durée en minutes du créneau de passage en commission.
+                  type: integer
+                  format: int32
+                  minimum: 5
+                  maximum: 1440
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -32370,6 +32376,12 @@ paths:
           schema:
             type: string
             maxLength: 8192
+        - name: support_reglementaire_reference
+          in: query
+          description: Filtre sur les références des supports réglementaires de la prescription
+          schema:
+            type: string
+            maxLength: 255
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -42140,6 +42152,10 @@ components:
           format: int32
           minimum: 0
           maximum: 150
+        commission:
+          description: Commission en charge du passage en commission.
+          allOf:
+            - $ref: '#/components/schemas/Commission'
       required:
         - id
         - date_debut
@@ -42148,6 +42164,7 @@ components:
         - libelle
         - raison_reprogrammation
         - nb_dossiers
+        - commission
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
       x-extension-metarisc-codegen-context: query
     PassageCommissionDossier:
@@ -42190,6 +42207,12 @@ components:
           type: string
           maxLength: 8192
           nullable: true
+        duree_minutes:
+          description: Durée en minutes du créneau de passage en commission.
+          type: integer
+          format: int32
+          minimum: 5
+          maximum: 1440
       required:
         - id
         - dossier
@@ -42198,6 +42221,7 @@ components:
         - date_de_passage
         - avis_differe
         - observations
+        - duree_minutes
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
       x-extension-metarisc-codegen-context: query
     PieceJointe:
