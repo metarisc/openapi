@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-03-2025.1
+  version: 1.0/main/04-04-2025.1
   title: Metarisc API
   description: |-
 
@@ -250,7 +250,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -339,8 +339,8 @@ paths:
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
             type: string
+            maxLength: 256
             pattern: ^-?\w*$
-            maxLength: 255
             enum:
               - code
               - '-code'
@@ -492,7 +492,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -729,7 +729,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -929,7 +929,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -1132,7 +1132,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -1220,7 +1220,7 @@ paths:
           description: Filtre sur le libellé de la commission
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - name: type
           in: query
           description: Filtre sur le type de la commission
@@ -1365,7 +1365,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -1473,7 +1473,7 @@ paths:
                 libelle:
                   description: Nom de la commission.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 presidence_id:
                   description: Identifiant de l'organisation présidant la commission. Par défaut l'organisation tenant la présidence est celle de l'utilisateur connecté.
                   type: string
@@ -1601,7 +1601,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -1824,7 +1824,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -1953,7 +1953,7 @@ paths:
                 libelle:
                   description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
               required:
                 - date_debut
                 - date_fin
@@ -2071,7 +2071,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -2275,7 +2275,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -2506,7 +2506,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -2737,7 +2737,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -2941,7 +2941,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -3045,6 +3045,12 @@ paths:
               properties:
                 rapport_modele_cr:
                   description: 'Modèle pour les rapports générés : Compte rendu de commission'
+                  type: string
+                  format: uri
+                  maxLength: 512
+                  nullable: true
+                rapport_modele_pv:
+                  description: 'Modèle pour les rapports générés : Procès verbal de commission'
                   type: string
                   format: uri
                   maxLength: 512
@@ -3161,7 +3167,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -3377,7 +3383,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -3579,7 +3585,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -3782,7 +3788,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -4009,7 +4015,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -4225,7 +4231,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -4427,7 +4433,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -4630,7 +4636,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -4735,42 +4741,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -4783,12 +4789,12 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
@@ -4907,7 +4913,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -5107,7 +5113,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -5310,7 +5316,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -5587,7 +5593,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -5793,7 +5799,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -5997,7 +6003,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -6220,7 +6226,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -6449,7 +6455,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -6566,7 +6572,7 @@ paths:
                 raison:
                   description: Raison de la reprogrammation de la date de passage en commission.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
               required:
                 - nouvelle_date_debut
                 - nouvelle_date_fin
@@ -6679,7 +6685,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -6895,7 +6901,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -7097,7 +7103,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -7300,7 +7306,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -7405,7 +7411,7 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 description:
                   description: Description du fichier joint.
                   type: string
@@ -7531,7 +7537,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -7619,7 +7625,7 @@ paths:
           description: Filtre sur l'objet du dossier
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - name: erp
           in: query
           description: Filtre sur l'ERP lié au dossier
@@ -7665,7 +7671,7 @@ paths:
           description: Filtre sur les affectations du dossier
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - name: enveloppe
           in: query
           description: Filtre sur une enveloppe.
@@ -7807,7 +7813,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -8022,7 +8028,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -8135,7 +8141,7 @@ paths:
                 utilisateur_id:
                   description: Identifiant de l'utilisateur à affecter au dossier.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
               required:
                 - role
                 - utilisateur_id
@@ -8251,7 +8257,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -8451,7 +8457,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -8650,7 +8656,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -8873,7 +8879,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -8979,42 +8985,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -9027,12 +9033,12 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
@@ -9151,7 +9157,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -9374,7 +9380,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -9485,7 +9491,7 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 description:
                   description: Description du fichier joint.
                   type: string
@@ -9619,7 +9625,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -9832,7 +9838,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -10080,7 +10086,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -10304,7 +10310,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -10523,7 +10529,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -10727,7 +10733,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -10841,7 +10847,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         modules:
                           description: Modules du dossier.
                           type: array
@@ -10888,7 +10894,7 @@ paths:
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         numero_urbanisme_date:
                           description: Date du numéro d'urbanisme.
                           type: string
@@ -10898,11 +10904,11 @@ paths:
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         service_instructeur:
                           description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         descriptif_travaux:
                           description: Descriptif des travaux.
                           type: string
@@ -10929,7 +10935,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         modules:
                           description: Modules du dossier.
                           type: array
@@ -11069,7 +11075,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -11274,7 +11280,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -11494,7 +11500,7 @@ paths:
                         activites_secondaire:
                           description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
                           type: array
-                          maxItems: 5
+                          maxItems: 10
                           items:
                             type: string
                             enum:
@@ -11643,7 +11649,7 @@ paths:
                               local:
                                 description: La description du local dans lequel les personnes sont présentes.
                                 type: string
-                                maxLength: 255
+                                maxLength: 256
                               activite_principale:
                                 description: L'activité exercée dans le local.
                                 type: string
@@ -12444,11 +12450,11 @@ paths:
                       libelle:
                         description: Libellé du document technique.
                         type: string
-                        maxLength: 255
+                        maxLength: 256
                       reference:
                         description: Référence du document technique.
                         type: string
-                        maxLength: 255
+                        maxLength: 256
                       type:
                         description: Type du document technique.
                         type: string
@@ -12589,7 +12595,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -12795,7 +12801,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -13008,7 +13014,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -13261,7 +13267,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -13505,7 +13511,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -13729,7 +13735,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -13954,7 +13960,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -14156,7 +14162,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -14377,7 +14383,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -14465,8 +14471,8 @@ paths:
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
             type: string
+            maxLength: 256
             pattern: ^-?\w*$
-            maxLength: 255
             enum:
               - titre
               - '-titre'
@@ -14610,7 +14616,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -14824,7 +14830,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -15025,7 +15031,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -15228,7 +15234,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -15447,7 +15453,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -15536,8 +15542,8 @@ paths:
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
             type: string
+            maxLength: 256
             pattern: ^-?\w*$
-            maxLength: 255
             enum:
               - libelle
               - '-libelle'
@@ -15547,7 +15553,7 @@ paths:
           description: Filtre sur le libellé de l'ERP
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - name: geojson
           in: query
           description: Filtre sur la position des ERP.
@@ -15560,11 +15566,11 @@ paths:
           schema:
             oneOf:
               - type: string
-                maxLength: 255
+                maxLength: 256
               - type: array
                 items:
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 maxItems: 10
         - name: presence_locaux_sommeil
           in: query
@@ -15840,7 +15846,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -15952,12 +15958,12 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         voie:
                           description: 'Libellé de la voie et de son type (exemple : "rue du point du jour").'
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -15966,16 +15972,14 @@ paths:
                           maxLength: 5
                           nullable: true
                         arrondissement:
-                          description: Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l'outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département.
-                          type: integer
-                          format: int32
-                          minimum: 1
-                          maximum: 999999
+                          description: 'Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l''outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département. Ce code est une chaine de caractère car il peut être alphanumérique (exemple : 2A1 pour AJACCIO).'
+                          type: string
+                          maxLength: 256
                           nullable: true
                         arrondissement_municipal:
                           description: L'arrondissement municipal est une subdivision territoriale des communes.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         latitude:
                           description: La latitude est une coordonnée géographique représentée par une valeur angulaire, expression de la position d'un point sur Terre, au nord ou au sud de l'équateur qui est le plan de référence. La latitude est une mesure angulaire ; elle varie entre la valeur 0° à l'équateur et 90° aux pôles.
@@ -15999,7 +16003,7 @@ paths:
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                 descriptif_technique:
                   description: Descriptif technique actuel de l'ERP.
@@ -16021,7 +16025,7 @@ paths:
                                 - projet
                                 - ferme
                             periodicite:
-                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
+                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
                               type: integer
                               format: int32
                               minimum: 0
@@ -16031,7 +16035,7 @@ paths:
                             libelle:
                               description: Le nom commercial vise l'entreprise individuelle, le fonds de commerce ou l'activité exercée, c'est le nom sous lequel l'établissement est connu du grand public.
                               type: string
-                              maxLength: 255
+                              maxLength: 256
                             observations_generales:
                               description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                               type: string
@@ -16156,7 +16160,7 @@ paths:
                                     activites_secondaire:
                                       description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
                                       type: array
-                                      maxItems: 5
+                                      maxItems: 10
                                       items:
                                         type: string
                                         enum:
@@ -16305,7 +16309,7 @@ paths:
                                           local:
                                             description: La description du local dans lequel les personnes sont présentes.
                                             type: string
-                                            maxLength: 255
+                                            maxLength: 256
                                           activite_principale:
                                             description: L'activité exercée dans le local.
                                             type: string
@@ -17107,7 +17111,7 @@ paths:
                   maxItems: 3
                   items:
                     type: string
-                    maxLength: 255
+                    maxLength: 256
               required:
                 - implantation
                 - descriptif_technique
@@ -17223,7 +17227,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -17447,7 +17451,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -17553,42 +17557,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -17601,12 +17605,12 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
@@ -17725,7 +17729,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -17948,7 +17952,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -18059,7 +18063,7 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 description:
                   description: Description du fichier joint.
                   type: string
@@ -18193,7 +18197,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -18416,7 +18420,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -18530,7 +18534,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -18568,7 +18572,7 @@ paths:
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         numero_urbanisme_date:
                           description: Date du numéro d'urbanisme.
                           type: string
@@ -18578,11 +18582,11 @@ paths:
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         service_instructeur:
                           description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         descriptif_travaux:
                           description: Descriptif des travaux.
                           type: string
@@ -18609,7 +18613,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -18740,7 +18744,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -18944,7 +18948,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -19062,12 +19066,12 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         voie:
                           description: 'Libellé de la voie et de son type (exemple : "rue du point du jour").'
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -19076,16 +19080,14 @@ paths:
                           maxLength: 5
                           nullable: true
                         arrondissement:
-                          description: Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l'outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département.
-                          type: integer
-                          format: int32
-                          minimum: 1
-                          maximum: 999999
+                          description: 'Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l''outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département. Ce code est une chaine de caractère car il peut être alphanumérique (exemple : 2A1 pour AJACCIO).'
+                          type: string
+                          maxLength: 256
                           nullable: true
                         arrondissement_municipal:
                           description: L'arrondissement municipal est une subdivision territoriale des communes.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         latitude:
                           description: La latitude est une coordonnée géographique représentée par une valeur angulaire, expression de la position d'un point sur Terre, au nord ou au sud de l'équateur qui est le plan de référence. La latitude est une mesure angulaire ; elle varie entre la valeur 0° à l'équateur et 90° aux pôles.
@@ -19109,7 +19111,7 @@ paths:
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
@@ -19149,7 +19151,7 @@ paths:
                   maxItems: 3
                   items:
                     type: string
-                    maxLength: 255
+                    maxLength: 256
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -19262,7 +19264,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -19485,7 +19487,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -19579,8 +19581,8 @@ paths:
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
             type: string
+            maxLength: 256
             pattern: ^-?\w*$
-            maxLength: 255
             enum:
               - date
               - '-date'
@@ -19720,7 +19722,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -19960,7 +19962,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -20173,7 +20175,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -20282,12 +20284,12 @@ paths:
                   titre:
                     description: Titre de la référence extérieure.
                     type: string
-                    maxLength: 255
+                    maxLength: 256
                     nullable: true
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
-                    maxLength: 255
+                    maxLength: 256
                     nullable: true
                 required:
                   - titre
@@ -20413,7 +20415,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -20637,7 +20639,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -20872,7 +20874,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -20971,7 +20973,7 @@ paths:
                 title:
                   description: Titre de l'événement.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 type:
                   description: Type de l'événement.
                   type: string
@@ -21114,7 +21116,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -21314,7 +21316,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -21517,7 +21519,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -21740,7 +21742,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -21957,7 +21959,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -22062,7 +22064,7 @@ paths:
                         titre:
                           description: Titre du message.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         type:
                           description: Type du message.
                           type: string
@@ -22191,7 +22193,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -22384,7 +22386,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -22584,7 +22586,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -22787,7 +22789,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -23023,7 +23025,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -23246,7 +23248,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -23357,7 +23359,7 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 description:
                   description: Description du fichier joint.
                   type: string
@@ -23491,7 +23493,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -23704,7 +23706,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -23810,7 +23812,7 @@ paths:
                 utilisateur_id:
                   description: Identifiant de l'utilisateur à affecter à la main courante.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
               required:
                 - utilisateur_id
               additionalProperties: false
@@ -23925,7 +23927,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -24125,7 +24127,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -24341,7 +24343,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -24440,7 +24442,7 @@ paths:
                 title:
                   description: Titre de la notification.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 message:
                   description: Contenu de la notification.
                   type: string
@@ -24455,12 +24457,12 @@ paths:
                   type: object
                   additionalProperties:
                     type: string
-                    maxLength: 255
+                    maxLength: 256
                   maxProperties: 10
                 utilisateur_id:
                   description: Identifiant de l'utilisateur cible de la notification.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
               required:
                 - title
                 - message
@@ -24578,7 +24580,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -24778,7 +24780,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -24981,7 +24983,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -25185,7 +25187,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -25391,7 +25393,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -25591,7 +25593,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -25832,7 +25834,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -26038,7 +26040,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -26254,7 +26256,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -26476,7 +26478,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -26700,7 +26702,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -26806,7 +26808,7 @@ paths:
                 nom:
                   description: Nom du géoservice.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 type:
                   description: Type de la norme utilisée par le géoservice.
                   type: string
@@ -26934,7 +26936,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -27138,7 +27140,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -27233,7 +27235,7 @@ paths:
           description: Filtre sur le nom de l'utilisateur
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -27367,7 +27369,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -27473,11 +27475,11 @@ paths:
                 utilisateur_id:
                   description: Identifiant de l'utilisateur lié.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 role:
                   description: Rôle du membre au sein de l'organisation.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   enum:
                     - membre
                     - invite
@@ -27597,7 +27599,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -27801,7 +27803,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -27906,7 +27908,7 @@ paths:
                 platau_id_acteur:
                   description: 'Identifiant représentant l''organisation dans Plat''AU. Voir : https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236'
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 platau_active:
                   description: Activation de la passerelle Plat'AU pour l'organisation.
@@ -27916,12 +27918,13 @@ paths:
                   description: Endpoint du bucket S3 lié au stockage des fichiers d'une organisation.
                   type: string
                   format: uri
-                  maxLength: 255
+                  maxLength: 512
                   nullable: true
                 rapport_modele_rapport_etude:
                   description: Modèle de rapport d'étude par défaut pour l'organisation.
                   type: string
-                  maxLength: 255
+                  format: uri
+                  maxLength: 512
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
@@ -28035,7 +28038,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -28239,7 +28242,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -28515,7 +28518,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -28603,8 +28606,8 @@ paths:
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
             type: string
+            maxLength: 256
             pattern: ^-?\w*$
-            maxLength: 255
             enum:
               - numero
               - '-numero'
@@ -28662,11 +28665,11 @@ paths:
           schema:
             oneOf:
               - type: string
-                maxLength: 255
+                maxLength: 256
               - type: array
                 items:
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 maxItems: 10
         - in: header
           name: Metarisc-Org-Id
@@ -28801,7 +28804,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -29066,12 +29069,12 @@ paths:
                         commune:
                           description: Nom de la commune.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         voie:
                           description: 'Libellé de la voie et de son type (exemple : "rue du point du jour").'
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         code_insee:
                           description: Code unique attribué à chaque commune de France.
@@ -29080,16 +29083,14 @@ paths:
                           maxLength: 5
                           nullable: true
                         arrondissement:
-                          description: Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l'outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département.
-                          type: integer
-                          format: int32
-                          minimum: 1
-                          maximum: 999999
+                          description: 'Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l''outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département. Ce code est une chaine de caractère car il peut être alphanumérique (exemple : 2A1 pour AJACCIO).'
+                          type: string
+                          maxLength: 256
                           nullable: true
                         arrondissement_municipal:
                           description: L'arrondissement municipal est une subdivision territoriale des communes.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                         latitude:
                           description: La latitude est une coordonnée géographique représentée par une valeur angulaire, expression de la position d'un point sur Terre, au nord ou au sud de l'équateur qui est le plan de référence. La latitude est une mesure angulaire ; elle varie entre la valeur 0° à l'équateur et 90° aux pôles.
@@ -29113,17 +29114,17 @@ paths:
                         complement:
                           description: Complément d'adresse.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                           nullable: true
                 numero_compteur:
                   description: Le numéro de série du compteur (PIBI).
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 numero_serie_appareil:
                   description: Numéro de série du PEI (si disponible).
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
               required:
                 - descriptif_technique
@@ -29240,7 +29241,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -29463,7 +29464,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -29696,7 +29697,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -29919,7 +29920,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -30025,42 +30026,42 @@ paths:
                 nom:
                   description: Nom de famille du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 prenom:
                   description: Prénom du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 fonction:
                   description: La fonction professionnelle d'un contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fixe:
                   description: Le numéro de téléphone fixe du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_portable:
                   description: Le numéro de téléphone portable du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 telephone_fax:
                   description: Le numéro de fax du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 adresse:
                   description: Adresse complète du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 site_web_url:
                   description: Le site internet du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 civilite:
                   description: Le titre de civilité utilisé.
@@ -30073,12 +30074,12 @@ paths:
                 societe:
                   description: Nom de la société / entreprise liée à ce contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 email:
                   description: Adresse email du contact.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   nullable: true
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
@@ -30197,7 +30198,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -30420,7 +30421,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -30531,7 +30532,7 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 description:
                   description: Description du fichier joint.
                   type: string
@@ -30665,7 +30666,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -30888,7 +30889,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -31002,7 +31003,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -31040,7 +31041,7 @@ paths:
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         numero_urbanisme_date:
                           description: Date du numéro d'urbanisme.
                           type: string
@@ -31050,11 +31051,11 @@ paths:
                         demandeur:
                           description: Demandeur ayant déposé le dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         service_instructeur:
                           description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         descriptif_travaux:
                           description: Descriptif des travaux.
                           type: string
@@ -31081,7 +31082,7 @@ paths:
                         objet:
                           description: Objet du dossier.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -31212,7 +31213,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -31416,7 +31417,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -31639,7 +31640,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -31853,7 +31854,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -31962,12 +31963,12 @@ paths:
                   titre:
                     description: Titre de la référence extérieure.
                     type: string
-                    maxLength: 255
+                    maxLength: 256
                     nullable: true
                   valeur:
                     description: La valeur de la référence extérieure.
                     type: string
-                    maxLength: 255
+                    maxLength: 256
                     nullable: true
                 required:
                   - titre
@@ -32093,7 +32094,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -32286,7 +32287,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -32381,7 +32382,7 @@ paths:
           description: Filtre sur les références des supports réglementaires de la prescription
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -32515,7 +32516,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -32746,7 +32747,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -32946,7 +32947,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -33149,7 +33150,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -33383,7 +33384,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -33472,8 +33473,8 @@ paths:
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
             type: string
+            maxLength: 256
             pattern: ^-?\w*$
-            maxLength: 255
             enum:
               - libelle
               - '-libelle'
@@ -33617,7 +33618,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -33831,7 +33832,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -34032,7 +34033,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -34235,7 +34236,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -34454,7 +34455,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -34549,7 +34550,7 @@ paths:
           description: Filtre sur la référence du support réglementaire
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -34683,7 +34684,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -34788,7 +34789,7 @@ paths:
                     - local
                 legifrance_cid:
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                   description: |-
                     Le CID est l’identifiant commun à l’ensemble des versions d’un objet Legifrance (article, section, texte).
                     Si le CID est renseigné, alors ce support réglementaire est sourcé depuis Legifrance.
@@ -34808,7 +34809,7 @@ paths:
                 reference:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
               required:
                 - nature
                 - contenu
@@ -34927,7 +34928,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -35127,7 +35128,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -35330,7 +35331,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -35418,7 +35419,7 @@ paths:
           description: Filtre sur le libellé
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - name: periode
           in: query
           description: Filtre sur les dates
@@ -35568,7 +35569,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -35673,7 +35674,7 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
@@ -35714,7 +35715,7 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
@@ -35856,7 +35857,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -36060,7 +36061,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -36283,7 +36284,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -36394,7 +36395,7 @@ paths:
                 nom:
                   description: Nom du fichier joint.
                   type: string
-                  maxLength: 255
+                  maxLength: 256
                 description:
                   description: Description du fichier joint.
                   type: string
@@ -36528,7 +36529,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -36732,7 +36733,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -36843,7 +36844,7 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
@@ -36880,7 +36881,7 @@ paths:
                         libelle:
                           description: Nom d'identification de la tournée.
                           type: string
-                          maxLength: 255
+                          maxLength: 256
                         description:
                           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                           type: string
@@ -37018,7 +37019,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -37241,7 +37242,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -37464,7 +37465,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -37680,7 +37681,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -37878,7 +37879,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -37966,7 +37967,7 @@ paths:
           description: Filtre sur le nom de l'utilisateur.
           schema:
             type: string
-            maxLength: 255
+            maxLength: 256
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -38100,7 +38101,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -38324,7 +38325,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -38529,7 +38530,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -38752,7 +38753,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -38957,7 +38958,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -39190,7 +39191,7 @@ paths:
               description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
               schema:
                 type: string
-                maxLength: 255
+                maxLength: 256
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
               schema:
@@ -39296,14 +39297,14 @@ components:
       description: Un objet commun Error (RFC 7807).
       properties:
         type:
+          description: Une référence Uri qui identifie le type de problème
           type: string
           format: uri
-          description: Une référence Uri qui identifie le type de problème
-          maxLength: 255
+          maxLength: 512
         title:
-          type: string
           description: Un résumé du type d'erreur rencontré
-          maxLength: 255
+          type: string
+          maxLength: 256
         status:
           type: integer
           format: int32
@@ -39370,12 +39371,12 @@ components:
         commune:
           description: Nom de la commune.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         voie:
           description: 'Libellé de la voie et de son type (exemple : "rue du point du jour").'
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         code_insee:
           description: Code unique attribué à chaque commune de France.
@@ -39384,16 +39385,14 @@ components:
           maxLength: 5
           nullable: true
         arrondissement:
-          description: Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l'outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département.
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 999999
+          description: 'Le "code arrondissement" contient un chiffre (à partir de 1). Chaque arrondissement français peut ainsi être identifié par un code unique à 3 (pour la métropole) ou 4 (pour l''outre-mer) chiffres, dont respectivement les deux ou trois premiers identifient le département. Ce code est une chaine de caractère car il peut être alphanumérique (exemple : 2A1 pour AJACCIO).'
+          type: string
+          maxLength: 256
           nullable: true
         arrondissement_municipal:
           description: L'arrondissement municipal est une subdivision territoriale des communes.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         latitude:
           description: La latitude est une coordonnée géographique représentée par une valeur angulaire, expression de la position d'un point sur Terre, au nord ou au sud de l'équateur qui est le plan de référence. La latitude est une mesure angulaire ; elle varie entre la valeur 0° à l'équateur et 90° aux pôles.
@@ -39417,7 +39416,7 @@ components:
         complement:
           description: Complément d'adresse.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
       required:
         - code_postal
@@ -39619,7 +39618,7 @@ components:
         activites_secondaire:
           description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
           type: array
-          maxItems: 5
+          maxItems: 10
           items:
             type: string
             enum:
@@ -40447,7 +40446,7 @@ components:
         libelle:
           description: Nom de la commission.
           type: string
-          maxLength: 255
+          maxLength: 256
         presidence:
           description: Organisation présidant la commission.
           allOf:
@@ -40509,8 +40508,15 @@ components:
           format: uri
           maxLength: 512
           nullable: true
+        rapport_modele_pv:
+          description: 'Modèle pour les rapports générés : Procès verbal de commission'
+          type: string
+          format: uri
+          maxLength: 512
+          nullable: true
       required:
         - rapport_modele_cr
+        - rapport_modele_pv
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
       x-extension-metarisc-codegen-context: query
     Contact:
@@ -40527,42 +40533,42 @@ components:
         nom:
           description: Nom de famille du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         prenom:
           description: Prénom du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         fonction:
           description: La fonction professionnelle d'un contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         telephone_fixe:
           description: Le numéro de téléphone fixe du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         telephone_portable:
           description: Le numéro de téléphone portable du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         telephone_fax:
           description: Le numéro de fax du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         adresse:
           description: Adresse complète du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         site_web_url:
           description: Le site internet du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         civilite:
           description: Le titre de civilité utilisé.
@@ -40575,12 +40581,12 @@ components:
         societe:
           description: Nom de la société / entreprise liée à ce contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         email:
           description: Adresse email du contact.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         observations:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
@@ -40757,7 +40763,7 @@ components:
             - projet
             - ferme
         periodicite:
-          description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
+          description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
           type: integer
           format: int32
           minimum: 0
@@ -40767,7 +40773,7 @@ components:
         libelle:
           description: Le nom commercial vise l'entreprise individuelle, le fonds de commerce ou l'activité exercée, c'est le nom sous lequel l'établissement est connu du grand public.
           type: string
-          maxLength: 255
+          maxLength: 256
         observations_generales:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
@@ -40898,11 +40904,11 @@ components:
         libelle:
           description: Libellé du document technique.
           type: string
-          maxLength: 255
+          maxLength: 256
         reference:
           description: Référence du document technique.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         type:
           description: Type du document technique.
@@ -40994,7 +41000,7 @@ components:
         objet:
           description: Objet du dossier.
           type: string
-          maxLength: 255
+          maxLength: 256
         date_de_creation:
           description: Date de création du dossier.
           type: string
@@ -41009,7 +41015,7 @@ components:
         application_utilisee_nom:
           description: Nom de l'application / intégration ayant généré le dossier.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         statut:
           description: Indicateur permettant de savoir si le dossier est en cours de traitement.
@@ -41175,7 +41181,7 @@ components:
             numero_urbanisme:
               description: Numéro d'urbanisme.
               type: string
-              maxLength: 255
+              maxLength: 256
               nullable: true
             numero_urbanisme_date:
               description: Date du numéro d'urbanisme.
@@ -41187,12 +41193,12 @@ components:
             demandeur:
               description: Demandeur ayant déposé le dossier.
               type: string
-              maxLength: 255
+              maxLength: 256
               nullable: true
             service_instructeur:
               description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
               type: string
-              maxLength: 255
+              maxLength: 256
               nullable: true
             descriptif_travaux:
               description: Descriptif des travaux.
@@ -41386,7 +41392,7 @@ components:
         local:
           description: La description du local dans lequel les personnes sont présentes.
           type: string
-          maxLength: 255
+          maxLength: 256
         activite_principale:
           description: L'activité exercée dans le local.
           type: string
@@ -41543,7 +41549,7 @@ components:
           description: Adresse email de l'utilisateur.
           type: string
           format: email
-          maxLength: 255
+          maxLength: 256
         is_primary:
           description: Une adresse email "primary" est utilisée pour les notifications, la gestion du compte et les communications.
           type: boolean
@@ -41625,7 +41631,7 @@ components:
         title:
           description: Titre de l'événement.
           type: string
-          maxLength: 255
+          maxLength: 256
         type:
           description: Type de l'événement.
           type: string
@@ -41674,7 +41680,7 @@ components:
         titre:
           description: Titre du message.
           type: string
-          maxLength: 255
+          maxLength: 256
         date_de_creation:
           description: Date de création du message.
           type: string
@@ -41859,7 +41865,7 @@ components:
         title:
           description: Titre de la notification.
           type: string
-          maxLength: 255
+          maxLength: 256
         message:
           description: Contenu de la notification.
           type: string
@@ -41874,7 +41880,7 @@ components:
           type: object
           additionalProperties:
             type: string
-            maxLength: 255
+            maxLength: 256
           maxProperties: 10
         date_creation:
           description: Date de déclenchement de la notification.
@@ -41918,7 +41924,7 @@ components:
         nom:
           description: Nom de l'organisation.
           type: string
-          maxLength: 255
+          maxLength: 256
         logo_url:
           description: Lien URL vers le logo représentant l'organisation.
           type: string
@@ -41955,7 +41961,7 @@ components:
         nom:
           description: Nom du géoservice.
           type: string
-          maxLength: 255
+          maxLength: 256
         type:
           description: Type de la norme utilisée par le géoservice.
           type: string
@@ -41997,7 +42003,7 @@ components:
         role:
           description: Rôle du membre au sein de l'organisation.
           type: string
-          maxLength: 255
+          maxLength: 256
           enum:
             - membre
             - invite
@@ -42016,7 +42022,7 @@ components:
         platau_id_acteur:
           description: 'Identifiant représentant l''organisation dans Plat''AU. Voir : https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044792236'
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         platau_active:
           description: Activation de la passerelle Plat'AU pour l'organisation.
@@ -42026,12 +42032,13 @@ components:
           description: Endpoint du bucket S3 lié au stockage des fichiers d'une organisation.
           type: string
           format: uri
-          maxLength: 255
+          maxLength: 512
           nullable: true
         rapport_modele_rapport_etude:
           description: Modèle de rapport d'étude par défaut pour l'organisation.
           type: string
-          maxLength: 255
+          format: uri
+          maxLength: 512
           nullable: true
       required:
         - platau_id_acteur
@@ -42079,12 +42086,12 @@ components:
         numero_compteur:
           description: Le numéro de série du compteur (PIBI).
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         numero_serie_appareil:
           description: Numéro de série du PEI (si disponible).
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         references_exterieures:
           description: Références externes du PEI.
@@ -42140,11 +42147,11 @@ components:
         libelle:
           description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
           type: string
-          maxLength: 255
+          maxLength: 256
         raison_reprogrammation:
           description: Si la date de passage en commission a été reprogrammé, alors cette propriété contient la raison de la reprogrammation.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         nb_dossiers:
           description: Nombre de dossiers à l'ordre du jour.
@@ -42243,7 +42250,7 @@ components:
         nom:
           description: Nom du fichier joint.
           type: string
-          maxLength: 255
+          maxLength: 256
         description:
           description: Description du fichier joint.
           type: string
@@ -42353,7 +42360,7 @@ components:
             - local
         legifrance_cid:
           type: string
-          maxLength: 255
+          maxLength: 256
           description: |-
             Le CID est l’identifiant commun à l’ensemble des versions d’un objet Legifrance (article, section, texte).
             Si le CID est renseigné, alors ce support réglementaire est sourcé depuis Legifrance.
@@ -42374,7 +42381,7 @@ components:
         reference:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
           type: string
-          maxLength: 255
+          maxLength: 256
       required:
         - id
         - nature
@@ -42442,11 +42449,11 @@ components:
         titre:
           description: Titre de la référence extérieure.
           type: string
-          maxLength: 255
+          maxLength: 256
         valeur:
           description: La valeur de la référence extérieure.
           type: string
-          maxLength: 255
+          maxLength: 256
       required:
         - titre
         - valeur
@@ -42571,7 +42578,7 @@ components:
         message:
           description: Libellé du tag.
           type: string
-          maxLength: 255
+          maxLength: 256
       required:
         - message
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
@@ -42598,7 +42605,7 @@ components:
         libelle:
           description: Nom d'identification de la tournée.
           type: string
-          maxLength: 255
+          maxLength: 256
         description:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
@@ -42776,16 +42783,16 @@ components:
         id:
           description: Identifiant unique de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 256
         first_name:
           description: Prénom de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         last_name:
           description: Nom de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         created_at:
           description: Date à laquelle l'utilisateur a été créé.
@@ -42803,7 +42810,7 @@ components:
         timezone:
           description: 'Identifiant ''tz database'' du Fuseau horaire de l''utilisateur. Voir : https://www.iana.org/time-zones Liste des fuseaux horaires : https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'
           type: string
-          maxLength: 255
+          maxLength: 256
         is_active:
           description: État d'activation du compte utilisateur.
           type: boolean
@@ -42813,7 +42820,7 @@ components:
         fonction:
           description: Fonction de l'utilisateur.
           type: string
-          maxLength: 255
+          maxLength: 256
           nullable: true
         avatar_url:
           description: Lien URL vers l'avatar de l'utilisateur.
@@ -42842,7 +42849,7 @@ components:
         name:
           description: Nom unique de l'étape.
           type: string
-          maxLength: 255
+          maxLength: 256
         workflow:
           type: object
           properties:
@@ -42870,7 +42877,7 @@ components:
           maxItems: 10
           items:
             type: string
-            maxLength: 255
+            maxLength: 256
       required:
         - name
         - workflow
@@ -42885,7 +42892,7 @@ components:
         dossier_type:
           description: Type du dossier.
           type: string
-          maxLength: 255
+          maxLength: 256
         steps:
           description: Étapes des workflows associés au dossier.
           type: array
