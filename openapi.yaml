@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-04-2025.1
+  version: 1.0/feature/textes-applicables/07-04-2025.1
   title: Metarisc API
   description: |-
 
@@ -9961,6 +9961,11 @@ paths:
                         description: Indique si l'essai est concluant ou non.
                         type: boolean
                         nullable: true
+                      observations_sur_les_resultats:
+                        description: Observations sur les résultats de l'essai. C'est un texte court qui contextualise le résultat de l'essai réalisé.
+                        type: string
+                        maxLength: 256
+                        nullable: true
                     required:
                       - libelle
                     additionalProperties: false
@@ -12483,6 +12488,31 @@ paths:
                         type: boolean
                     required:
                       - libelle
+                      - type
+                textes_applicables:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Texte Applicable
+                    description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+                    properties:
+                      texte:
+                        description: Texte réglementaire ou normatif applicable.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: Type du texte applicable.
+                        type: string
+                        enum:
+                          - Dispositions générales
+                          - Dispositions particulières
+                          - Dispositions établissement de 5ème Cat
+                          - Dispositions spéciales
+                          - Textes relatifs aux bâtiments d’habitation
+                          - Textes relatifs aux immeubles de grande hauteur
+                    required:
+                      - texte
                       - type
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
               x-extension-metarisc-codegen-context: update
@@ -41611,10 +41641,16 @@ components:
           description: Indique si l'essai est concluant ou non.
           type: boolean
           nullable: true
+        observations_sur_les_resultats:
+          description: Observations sur les résultats de l'essai. C'est un texte court qui contextualise le résultat de l'essai réalisé.
+          type: string
+          maxLength: 256
+          nullable: true
       required:
         - localisation
         - libelle
         - concluant
+        - observations_sur_les_resultats
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Essai'
       x-extension-metarisc-codegen-context: query
     Evenement:
@@ -42431,6 +42467,11 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/DocumentTechnique'
+        textes_applicables:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/TexteApplicable'
       required:
         - analyse_risque
         - observations
@@ -42439,6 +42480,7 @@ components:
         - proposition_avis_observations
         - facteur_dangerosite
         - documents_techniques
+        - textes_applicables
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       x-extension-metarisc-codegen-context: query
     ReferenceExterieure:
@@ -42582,6 +42624,30 @@ components:
       required:
         - message
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
+      x-extension-metarisc-codegen-context: query
+    TexteApplicable:
+      type: object
+      title: Objet Texte Applicable
+      description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+      properties:
+        texte:
+          description: Texte réglementaire ou normatif applicable.
+          type: string
+          maxLength: 256
+        type:
+          description: Type du texte applicable.
+          type: string
+          enum:
+            - Dispositions générales
+            - Dispositions particulières
+            - Dispositions établissement de 5ème Cat
+            - Dispositions spéciales
+            - Textes relatifs aux bâtiments d’habitation
+            - Textes relatifs aux immeubles de grande hauteur
+      required:
+        - texte
+        - type
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/TexteApplicable'
       x-extension-metarisc-codegen-context: query
     TourneeDeci:
       title: Objet Tournée Deci
