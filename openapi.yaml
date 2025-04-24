@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-04-2025.1
+  version: 1.0/feature/filtre-date-passage/24-04-2025.1
   title: Metarisc API
   description: |-
 
@@ -1691,6 +1691,14 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: from_date
+          in: query
+          description: Filtre sur les dates de passage programmées à une date supérieure ou égale à celle-ci.
+          schema:
+            type: string
+            format: date-time
+            maxLength: 50
+            minLength: 20
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
