@@ -1691,6 +1691,14 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: from_date
+          in: query
+          description: Filtre sur les dates de passage programmées à une date supérieure ou égale à celle-ci.
+          schema:
+            type: string
+            format: date-time
+            maxLength: 50
+            minLength: 20
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
