@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-04-2025.1
+  version: 1.0/main/25-04-2025.1
   title: Metarisc API
   description: |-
 
@@ -7433,6 +7433,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+                    - rapport de vérification réglementaire après travaux
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PieceJointe'
               x-extension-metarisc-codegen-context: update
@@ -9519,6 +9520,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+                    - rapport de vérification réglementaire après travaux
                 est_sensible:
                   description: Information permettant de savoir si le contenu du document doit être considéré comme sensible par Metarisc.
                   type: boolean
@@ -10910,6 +10912,14 @@ paths:
                             - erp:visite_controle
                             - erp:visite_inopinee
                             - erp:visite_chantier
+                            - erp:demande_avis
+                            - erp:demande_reclassement
+                            - erp:suivi_avis_defavorable
+                            - erp:levee_avis_defavorable
+                            - erp:dossier_ge_2
+                            - erp:schema_general_organisation_securite
+                            - erp:etude_ingenierie
+                            - erp:manifestation_temporaire
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -18690,6 +18700,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+                    - rapport de vérification réglementaire après travaux
                 est_sensible:
                   description: Information permettant de savoir si le contenu du document doit être considéré comme sensible par Metarisc.
                   type: boolean
@@ -19182,6 +19193,14 @@ paths:
                             - erp:visite_controle
                             - erp:visite_inopinee
                             - erp:visite_chantier
+                            - erp:demande_avis
+                            - erp:demande_reclassement
+                            - erp:suivi_avis_defavorable
+                            - erp:levee_avis_defavorable
+                            - erp:dossier_ge_2
+                            - erp:schema_general_organisation_securite
+                            - erp:etude_ingenierie
+                            - erp:manifestation_temporaire
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -24232,6 +24251,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+                    - rapport de vérification réglementaire après travaux
                 est_sensible:
                   description: Information permettant de savoir si le contenu du document doit être considéré comme sensible par Metarisc.
                   type: boolean
@@ -31405,6 +31425,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+                    - rapport de vérification réglementaire après travaux
                 est_sensible:
                   description: Information permettant de savoir si le contenu du document doit être considéré comme sensible par Metarisc.
                   type: boolean
@@ -31897,6 +31918,14 @@ paths:
                             - erp:visite_controle
                             - erp:visite_inopinee
                             - erp:visite_chantier
+                            - erp:demande_avis
+                            - erp:demande_reclassement
+                            - erp:suivi_avis_defavorable
+                            - erp:levee_avis_defavorable
+                            - erp:dossier_ge_2
+                            - erp:schema_general_organisation_securite
+                            - erp:etude_ingenierie
+                            - erp:manifestation_temporaire
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -37268,6 +37297,7 @@ paths:
                     - plan
                     - annexe
                     - divers
+                    - rapport de vérification réglementaire après travaux
                 est_sensible:
                   description: Information permettant de savoir si le contenu du document doit être considéré comme sensible par Metarisc.
                   type: boolean
@@ -42034,6 +42064,14 @@ components:
                 - erp:visite_controle
                 - erp:visite_inopinee
                 - erp:visite_chantier
+                - erp:demande_avis
+                - erp:demande_reclassement
+                - erp:suivi_avis_defavorable
+                - erp:levee_avis_defavorable
+                - erp:dossier_ge_2
+                - erp:schema_general_organisation_securite
+                - erp:etude_ingenierie
+                - erp:manifestation_temporaire
             erp:
               allOf:
                 - $ref: '#/components/schemas/ERP'
@@ -43153,6 +43191,7 @@ components:
             - plan
             - annexe
             - divers
+            - rapport de vérification réglementaire après travaux
         est_sensible:
           description: Information permettant de savoir si le contenu du document doit être considéré comme sensible par Metarisc.
           type: boolean
