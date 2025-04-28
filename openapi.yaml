@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-04-2025.1
+  version: 1.0/feature/filtre-email/28-04-2025.1
   title: Metarisc API
   description: |-
 
@@ -38884,6 +38884,13 @@ paths:
           description: Filtre sur le nom de l'utilisateur.
           schema:
             type: string
+            maxLength: 256
+        - name: email
+          in: query
+          description: Filtre sur les emails de l'utilisateur.
+          schema:
+            type: string
+            format: email
             maxLength: 256
         - in: header
           name: Metarisc-Org-Id
