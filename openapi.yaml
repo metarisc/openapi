@@ -38885,6 +38885,13 @@ paths:
           schema:
             type: string
             maxLength: 256
+        - name: email
+          in: query
+          description: Filtre sur les emails de l'utilisateur.
+          schema:
+            type: string
+            format: email
+            maxLength: 256
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
