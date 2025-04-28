@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-04-2025.1
+  version: 1.0/main/28-04-2025.1
   title: Metarisc API
   description: |-
 
@@ -12192,6 +12192,11 @@ paths:
                           description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
                           type: boolean
                           nullable: true
+                        evacuation_personnes_situation_handicap_observation:
+                          description: Les observations sur l'évacuation des personnes en situation de handicap.
+                          type: string
+                          maxLength: 8192
+                          nullable: true
                         degagement_espaces_attente_securises_informations_complementaires:
                           description: Les informations complémentaires sur les espaces d'attente sécurisés.
                           type: string
@@ -12295,9 +12300,13 @@ paths:
                           description: Présence de gaz en cuisine
                           type: boolean
                           nullable: true
-                        systeme_extraction:
-                          description: Présence d'un système d'extraction dans la cuisine.
-                          type: boolean
+                        systeme_ventilation:
+                          description: Information sur le système de ventilation present dans la cuisine.
+                          type: string
+                          enum:
+                            - Mécanique
+                            - Naturelle
+                            - Ventilateur d'extraction
                           nullable: true
                         risques_spéciaux_informations_complementaires:
                           description: Les informations complémentaires sur les risques spéciaux.
@@ -12333,11 +12342,12 @@ paths:
                           type: boolean
                           nullable: true
                         installation_extinction:
-                          description: Installation d'extinction automatique à eau.
+                          description: Information sur l'installation d'extinction présente dans le bâtiment.
                           type: string
                           enum:
-                            - Automatique
+                            - Automatique sprinkler
                             - Manuelle
+                            - Brouillard d'eau
                             - Autre
                           nullable: true
                         moyens_de_secours_informations_complementaires:
@@ -12352,6 +12362,10 @@ paths:
                           nullable: true
                         affichage_des_plans_intervention:
                           description: Présence d'affichage des plans d'intervention.
+                          type: boolean
+                          nullable: true
+                        affichage_des_consignes_de_securite:
+                          description: Présence d'affichage des consignes de sécurité.
                           type: boolean
                           nullable: true
                         tour_incendie:
@@ -17424,6 +17438,11 @@ paths:
                                       description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
                                       type: boolean
                                       nullable: true
+                                    evacuation_personnes_situation_handicap_observation:
+                                      description: Les observations sur l'évacuation des personnes en situation de handicap.
+                                      type: string
+                                      maxLength: 8192
+                                      nullable: true
                                     degagement_espaces_attente_securises_informations_complementaires:
                                       description: Les informations complémentaires sur les espaces d'attente sécurisés.
                                       type: string
@@ -17527,9 +17546,13 @@ paths:
                                       description: Présence de gaz en cuisine
                                       type: boolean
                                       nullable: true
-                                    systeme_extraction:
-                                      description: Présence d'un système d'extraction dans la cuisine.
-                                      type: boolean
+                                    systeme_ventilation:
+                                      description: Information sur le système de ventilation present dans la cuisine.
+                                      type: string
+                                      enum:
+                                        - Mécanique
+                                        - Naturelle
+                                        - Ventilateur d'extraction
                                       nullable: true
                                     risques_spéciaux_informations_complementaires:
                                       description: Les informations complémentaires sur les risques spéciaux.
@@ -17565,11 +17588,12 @@ paths:
                                       type: boolean
                                       nullable: true
                                     installation_extinction:
-                                      description: Installation d'extinction automatique à eau.
+                                      description: Information sur l'installation d'extinction présente dans le bâtiment.
                                       type: string
                                       enum:
-                                        - Automatique
+                                        - Automatique sprinkler
                                         - Manuelle
+                                        - Brouillard d'eau
                                         - Autre
                                       nullable: true
                                     moyens_de_secours_informations_complementaires:
@@ -17584,6 +17608,10 @@ paths:
                                       nullable: true
                                     affichage_des_plans_intervention:
                                       description: Présence d'affichage des plans d'intervention.
+                                      type: boolean
+                                      nullable: true
+                                    affichage_des_consignes_de_securite:
+                                      description: Présence d'affichage des consignes de sécurité.
                                       type: boolean
                                       nullable: true
                                     tour_incendie:
@@ -40958,6 +40986,11 @@ components:
           description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
           type: boolean
           nullable: true
+        evacuation_personnes_situation_handicap_observation:
+          description: Les observations sur l'évacuation des personnes en situation de handicap.
+          type: string
+          maxLength: 8192
+          nullable: true
         degagement_espaces_attente_securises_informations_complementaires:
           description: Les informations complémentaires sur les espaces d'attente sécurisés.
           type: string
@@ -41061,9 +41094,13 @@ components:
           description: Présence de gaz en cuisine
           type: boolean
           nullable: true
-        systeme_extraction:
-          description: Présence d'un système d'extraction dans la cuisine.
-          type: boolean
+        systeme_ventilation:
+          description: Information sur le système de ventilation present dans la cuisine.
+          type: string
+          enum:
+            - Mécanique
+            - Naturelle
+            - Ventilateur d'extraction
           nullable: true
         risques_spéciaux_informations_complementaires:
           description: Les informations complémentaires sur les risques spéciaux.
@@ -41099,11 +41136,12 @@ components:
           type: boolean
           nullable: true
         installation_extinction:
-          description: Installation d'extinction automatique à eau.
+          description: Information sur l'installation d'extinction présente dans le bâtiment.
           type: string
           enum:
-            - Automatique
+            - Automatique sprinkler
             - Manuelle
+            - Brouillard d'eau
             - Autre
           nullable: true
         moyens_de_secours_informations_complementaires:
@@ -41118,6 +41156,10 @@ components:
           nullable: true
         affichage_des_plans_intervention:
           description: Présence d'affichage des plans d'intervention.
+          type: boolean
+          nullable: true
+        affichage_des_consignes_de_securite:
+          description: Présence d'affichage des consignes de sécurité.
           type: boolean
           nullable: true
         tour_incendie:
@@ -41263,6 +41305,7 @@ components:
         - degagement_escaliers_description
         - degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description
         - presence_eas_ou_equivalents
+        - evacuation_personnes_situation_handicap_observation
         - degagement_espaces_attente_securises_informations_complementaires
         - degagement_tribunes_et_gradins_non_demontables_description
         - enfouissement
@@ -41282,7 +41325,7 @@ components:
         - puissance_cuisine
         - type_de_cuisine
         - presence_gaz_cuisine
-        - systeme_extraction
+        - systeme_ventilation
         - risques_spéciaux_informations_complementaires
         - presence_extincteur
         - presence_ria
@@ -41295,6 +41338,7 @@ components:
         - moyens_de_secours_informations_complementaires
         - deci_description
         - affichage_des_plans_intervention
+        - affichage_des_consignes_de_securite
         - tour_incendie
         - tremie_attaque
         - service_de_securite_incendie
