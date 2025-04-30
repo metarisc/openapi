@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/30-04-2025.2
+  version: 1.0/main/30-04-2025.5
   title: Metarisc API
   description: |-
 
@@ -19834,6 +19834,7 @@ paths:
                       required:
                         - erp_lie_id
                         - type
+                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
