@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-04-2025.1
+  version: 1.0/main/30-04-2025.2
   title: Metarisc API
   description: |-
 
@@ -1696,9 +1696,9 @@ paths:
           description: Filtre sur les dates de passage programmées à une date supérieure ou égale à celle-ci.
           schema:
             type: string
-            format: date-time
-            maxLength: 50
-            minLength: 20
+            format: date
+            maxLength: 10
+            minLength: 10
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
