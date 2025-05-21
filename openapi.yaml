@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/14-05-2025.1
+  version: 1.0/main/21-05-2025.1
   title: Metarisc API
   description: |-
 
@@ -12545,10 +12545,18 @@ paths:
                         enum:
                           - Dispositions générales
                           - Dispositions particulières
-                          - Dispositions établissement de 5ème Cat
                           - Dispositions spéciales
-                          - Textes relatifs aux bâtiments d’habitation
-                          - Textes relatifs aux immeubles de grande hauteur
+                          - Textes relatifs aux bâtiments d'habitation
+                          - ERP
+                          - ERP du 2ème groupe
+                          - Instructions techniques ERP
+                          - IGH / IMH
+                          - Habitation
+                          - Rubriques ICPE
+                          - Etablissements pénitentiaires
+                          - Pyrotechnie
+                          - Guides
+                          - Arrêtés préfectoraux
                     required:
                       - texte
                       - type
@@ -44716,10 +44724,18 @@ components:
           enum:
             - Dispositions générales
             - Dispositions particulières
-            - Dispositions établissement de 5ème Cat
             - Dispositions spéciales
-            - Textes relatifs aux bâtiments d’habitation
-            - Textes relatifs aux immeubles de grande hauteur
+            - Textes relatifs aux bâtiments d'habitation
+            - ERP
+            - ERP du 2ème groupe
+            - Instructions techniques ERP
+            - IGH / IMH
+            - Habitation
+            - Rubriques ICPE
+            - Etablissements pénitentiaires
+            - Pyrotechnie
+            - Guides
+            - Arrêtés préfectoraux
       required:
         - texte
         - type
