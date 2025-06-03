@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/21-05-2025.1
+  version: 1.0/main/03-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -39953,6 +39953,218 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: utilisateurs
       x-extension-metarisc-codegen-operation: get-utilisateurs-moi
+    patch:
+      tags:
+        - Utilisateurs API
+      summary: Mise à jour de l'utilisateur connecté
+      description: Mise à jour de l'utilisateur connecté.
+      operationId: PatchMoiUtilisateurs
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Utilisateur
+              properties:
+                avatar_url:
+                  description: Lien URL vers l'avatar de l'utilisateur.
+                  type: string
+                  format: uri
+                  maxLength: 512
+                  nullable: true
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilisateur'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: utilisateurs
+      x-extension-metarisc-codegen-operation: patch-moi
   /utilisateurs:
     get:
       tags:
@@ -41080,7 +41292,7 @@ paths:
                   maxLength: 50
                   minLength: 20
                 etat:
-                  description: 'État du workflow. Le workflow peut être dans 5 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours : Le workflow devient actif pour traitement ; - Validé : Le workflow est traité, vérouillé et peut débloquer d''autres workflows liés ; - Pause : Le workflow est en pause et ne peut être traité ; - Non concerné : Le workflow n''est pas concerné par le dossier en cours de traitement.'
+                  description: 'État du workflow. Le workflow peut être dans 5 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours : Le workflow devient actif pour traitement ; - Validé : Le workflow est traité, vérouillé et peut débloquer d''autres workflows liés ; - Pause : Le workflow est en pause et ne peut être traité ; - Non concerné : Le workflow n''est pas concerné par le dossier en cours de traitement ; - En attente de validation : Le workflow est en attente de validation par un utilisateur.'
                   type: string
                   enum:
                     - VALIDE
@@ -41088,6 +41300,7 @@ paths:
                     - ATTENTE
                     - PAUSE
                     - NON_CONCERNE
+                    - ATTENTE_VALIDATION
                 observations:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
                   type: string
@@ -45101,7 +45314,7 @@ components:
           description: Si le workflow a été géré par un processus automatisé.
           type: boolean
         etat:
-          description: 'État du workflow. Le workflow peut être dans 5 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours : Le workflow devient actif pour traitement ; - Validé : Le workflow est traité, vérouillé et peut débloquer d''autres workflows liés ; - Pause : Le workflow est en pause et ne peut être traité ; - Non concerné : Le workflow n''est pas concerné par le dossier en cours de traitement.'
+          description: 'État du workflow. Le workflow peut être dans 5 états : - En attente : Le workflow est en attente de la complétion d''autres workflows ; - En cours : Le workflow devient actif pour traitement ; - Validé : Le workflow est traité, vérouillé et peut débloquer d''autres workflows liés ; - Pause : Le workflow est en pause et ne peut être traité ; - Non concerné : Le workflow n''est pas concerné par le dossier en cours de traitement ; - En attente de validation : Le workflow est en attente de validation par un utilisateur.'
           type: string
           enum:
             - VALIDE
@@ -45109,6 +45322,7 @@ components:
             - ATTENTE
             - PAUSE
             - NON_CONCERNE
+            - ATTENTE_VALIDATION
         observations:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Souvent utile pour affichage aux utilisateurs.
           type: string
