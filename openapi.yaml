@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-06-2025.1
+  version: 1.0/feature/textes_applicables-erp/04-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -17771,6 +17771,40 @@ paths:
                       required:
                         - erp_lie_id
                         - type
+                textes_applicables:
+                  description: Textes réglementaires applicables à l'ERP.
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Texte Applicable
+                    description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+                    properties:
+                      texte:
+                        description: Texte réglementaire ou normatif applicable.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: Type du texte applicable.
+                        type: string
+                        enum:
+                          - Dispositions générales
+                          - Dispositions particulières
+                          - Dispositions spéciales
+                          - Textes relatifs aux bâtiments d'habitation
+                          - ERP
+                          - ERP du 2ème groupe
+                          - Instructions techniques ERP
+                          - IGH / IMH
+                          - Habitation
+                          - Rubriques ICPE
+                          - Etablissements pénitentiaires
+                          - Pyrotechnie
+                          - Guides
+                          - Arrêtés préfectoraux
+                    required:
+                      - texte
+                      - type
               required:
                 - implantation
                 - descriptif_technique
@@ -20923,6 +20957,40 @@ paths:
                         - erp_lie_id
                         - type
                   nullable: true
+                textes_applicables:
+                  description: Textes réglementaires applicables à l'ERP.
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Texte Applicable
+                    description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+                    properties:
+                      texte:
+                        description: Texte réglementaire ou normatif applicable.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: Type du texte applicable.
+                        type: string
+                        enum:
+                          - Dispositions générales
+                          - Dispositions particulières
+                          - Dispositions spéciales
+                          - Textes relatifs aux bâtiments d'habitation
+                          - ERP
+                          - ERP du 2ème groupe
+                          - Instructions techniques ERP
+                          - IGH / IMH
+                          - Habitation
+                          - Rubriques ICPE
+                          - Etablissements pénitentiaires
+                          - Pyrotechnie
+                          - Guides
+                          - Arrêtés préfectoraux
+                    required:
+                      - texte
+                      - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -43635,6 +43703,13 @@ components:
           description: Etablissement rattaché à l'ERP. Le rattachement permet de définir l'ERP courant comme une cellule commerciale ou un batiment non-isolé faisant partie d'un ERP plus grand.
           allOf:
             - $ref: '#/components/schemas/ERPLie'
+          nullable: true
+        textes_applicables:
+          description: Textes réglementaires applicables à l'ERP.
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/TexteApplicable'
       required:
         - id
         - date_de_realisation
@@ -43650,6 +43725,8 @@ components:
         - sites_geographiques
         - commission_de_securite
         - titulaires
+        - etablissement_rattache
+        - textes_applicables
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       x-extension-metarisc-codegen-context: query
     EffectifsNiveau:
