@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-06-2025.1
+  version: 1.0/feature/type-activite-pe2/05-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -11470,10 +11470,10 @@ paths:
                             - PA - Stades
                             - PA - Terrains de sport
                             - PA - Parc d'attraction
-                            - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                            - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                            - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                            - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                            - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                            - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                            - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                            - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                             - PS - Parcs de stationnement couverts
                             - PS - Parc de stationnement mixte
                             - PS - Parc de stationnement largement ventilé
@@ -11582,10 +11582,10 @@ paths:
                               - PA - Stades
                               - PA - Terrains de sport
                               - PA - Parc d'attraction
-                              - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                              - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                              - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                              - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                              - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                              - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                              - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                              - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                               - PS - Parcs de stationnement couverts
                               - PS - Parc de stationnement mixte
                               - PS - Parc de stationnement largement ventilé
@@ -11732,10 +11732,10 @@ paths:
                                   - PA - Stades
                                   - PA - Terrains de sport
                                   - PA - Parc d'attraction
-                                  - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                  - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                  - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                  - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                  - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                  - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                  - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                  - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                   - PS - Parcs de stationnement couverts
                                   - PS - Parc de stationnement mixte
                                   - PS - Parc de stationnement largement ventilé
@@ -16226,10 +16226,10 @@ paths:
               - PA - Stades
               - PA - Terrains de sport
               - PA - Parc d'attraction
-              - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-              - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-              - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-              - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+              - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+              - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+              - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+              - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
               - PS - Parcs de stationnement couverts
               - PS - Parc de stationnement mixte
               - PS - Parc de stationnement largement ventilé
@@ -16724,10 +16724,10 @@ paths:
                                         - PA - Stades
                                         - PA - Terrains de sport
                                         - PA - Parc d'attraction
-                                        - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                        - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                        - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                        - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                        - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                        - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                        - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                        - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                         - PS - Parcs de stationnement couverts
                                         - PS - Parc de stationnement mixte
                                         - PS - Parc de stationnement largement ventilé
@@ -16836,10 +16836,10 @@ paths:
                                           - PA - Stades
                                           - PA - Terrains de sport
                                           - PA - Parc d'attraction
-                                          - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                          - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                          - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                          - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                          - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                          - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                          - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                          - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                           - PS - Parcs de stationnement couverts
                                           - PS - Parc de stationnement mixte
                                           - PS - Parc de stationnement largement ventilé
@@ -16986,10 +16986,10 @@ paths:
                                               - PA - Stades
                                               - PA - Terrains de sport
                                               - PA - Parc d'attraction
-                                              - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                              - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                              - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                              - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                              - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                              - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                              - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                              - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                               - PS - Parcs de stationnement couverts
                                               - PS - Parc de stationnement mixte
                                               - PS - Parc de stationnement largement ventilé
@@ -19911,10 +19911,10 @@ paths:
                                         - PA - Stades
                                         - PA - Terrains de sport
                                         - PA - Parc d'attraction
-                                        - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                        - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                        - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                        - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                        - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                        - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                        - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                        - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                         - PS - Parcs de stationnement couverts
                                         - PS - Parc de stationnement mixte
                                         - PS - Parc de stationnement largement ventilé
@@ -20023,10 +20023,10 @@ paths:
                                           - PA - Stades
                                           - PA - Terrains de sport
                                           - PA - Parc d'attraction
-                                          - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                          - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                          - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                          - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                          - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                          - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                          - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                          - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                           - PS - Parcs de stationnement couverts
                                           - PS - Parc de stationnement mixte
                                           - PS - Parc de stationnement largement ventilé
@@ -20173,10 +20173,10 @@ paths:
                                               - PA - Stades
                                               - PA - Terrains de sport
                                               - PA - Parc d'attraction
-                                              - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-                                              - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-                                              - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-                                              - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                              - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                              - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                              - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                              - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
                                               - PS - Parcs de stationnement couverts
                                               - PS - Parc de stationnement mixte
                                               - PS - Parc de stationnement largement ventilé
@@ -41853,10 +41853,10 @@ components:
             - PA - Stades
             - PA - Terrains de sport
             - PA - Parc d'attraction
-            - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-            - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-            - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-            - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+            - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+            - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+            - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+            - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
             - PS - Parcs de stationnement couverts
             - PS - Parc de stationnement mixte
             - PS - Parc de stationnement largement ventilé
@@ -41965,10 +41965,10 @@ components:
               - PA - Stades
               - PA - Terrains de sport
               - PA - Parc d'attraction
-              - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-              - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-              - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-              - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+              - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+              - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+              - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+              - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
               - PS - Parcs de stationnement couverts
               - PS - Parc de stationnement mixte
               - PS - Parc de stationnement largement ventilé
@@ -43797,10 +43797,10 @@ components:
             - PA - Stades
             - PA - Terrains de sport
             - PA - Parc d'attraction
-            - PE 2 §2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
-            - PE 2 §2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
-            - PE 2 §2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
-            - PE 2 §2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+            - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+            - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+            - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+            - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
             - PS - Parcs de stationnement couverts
             - PS - Parc de stationnement mixte
             - PS - Parc de stationnement largement ventilé
