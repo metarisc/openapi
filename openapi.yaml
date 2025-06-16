@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-06-2025.1
+  version: 1.0/main/16-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -8153,6 +8153,8 @@ paths:
                     - admin
                     - preventionniste
                     - secretariat_prev
+                    - rapporteur
+                    - relecteur|valideur
                 utilisateur_id:
                   description: Identifiant de l'utilisateur à affecter au dossier.
                   type: string
@@ -14864,6 +14866,8 @@ paths:
                     - admin
                     - preventionniste
                     - secretariat_prev
+                    - rapporteur
+                    - relecteur|valideur
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierAffectation'
               x-extension-metarisc-codegen-context: update
@@ -43573,6 +43577,8 @@ components:
             - admin
             - preventionniste
             - secretariat_prev
+            - rapporteur
+            - relecteur|valideur
         utilisateur:
           description: Utilisateur affecté au dossier.
           allOf:
