@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-06-2025.1
+  version: 1.0/feature/site-geo-2/17-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -35795,8 +35795,19 @@ paths:
                   description: Libellé du site géographique.
                   type: string
                   maxLength: 256
+                notes:
+                  description: Note associée au site géographique. Elle est utilisée pour indiquer des informations importantes sur le site.
+                  type: string
+                  maxLength: 8192
+                type:
+                  description: Type de site géographique.
+                  type: string
+                  enum:
+                    - fonctionnel
+                    - géographique
               required:
                 - libelle
+                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/SiteGeographique'
               x-extension-metarisc-codegen-context: create
@@ -36420,6 +36431,17 @@ paths:
                   description: Libellé du site géographique.
                   type: string
                   maxLength: 256
+                notes:
+                  description: Note associée au site géographique. Elle est utilisée pour indiquer des informations importantes sur le site.
+                  type: string
+                  maxLength: 8192
+                  nullable: true
+                type:
+                  description: Type de site géographique.
+                  type: string
+                  enum:
+                    - fonctionnel
+                    - géographique
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/SiteGeographique'
               x-extension-metarisc-codegen-context: update
@@ -44985,11 +45007,23 @@ components:
           maximum: 60
           minimum: 0
           nullable: true
+        notes:
+          description: Note associée au site géographique. Elle est utilisée pour indiquer des informations importantes sur le site.
+          type: string
+          maxLength: 8192
+        type:
+          description: Type de site géographique.
+          type: string
+          enum:
+            - fonctionnel
+            - géographique
       required:
         - id
         - libelle
         - geojson
         - erp_periodicite_contrainte
+        - notes
+        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/SiteGeographique'
       x-extension-metarisc-codegen-context: query
     Tag:
