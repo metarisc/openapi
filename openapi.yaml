@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-06-2025.1
+  version: 1.0/main/19-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -12562,6 +12562,11 @@ paths:
                     required:
                       - texte
                       - type
+                descriptif_dossier:
+                  description: Descriptif du dossier d'analyse de risque.
+                  type: string
+                  maxLength: 8192
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -44822,6 +44827,11 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/TexteApplicable'
+        descriptif_dossier:
+          description: Descriptif du dossier d'analyse de risque.
+          type: string
+          maxLength: 8192
+          nullable: true
       required:
         - analyse_risque
         - observations
@@ -44831,6 +44841,7 @@ components:
         - facteur_dangerosite
         - documents_techniques
         - textes_applicables
+        - descriptif_dossier
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       x-extension-metarisc-codegen-context: query
     RapportVisite:
