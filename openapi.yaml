@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-06-2025.1
+  version: 1.0/main/20-06-2025.2
   title: Metarisc API
   description: |-
 
@@ -16166,6 +16166,7 @@ paths:
             maxLength: 8192
         - name: references_exterieures
           in: query
+          x-extension-metarisc-param-multiple: true
           description: Filtre sur les références extérieures de l'ERP.
           schema:
             oneOf:
@@ -30736,6 +30737,7 @@ paths:
             maxLength: 8192
         - name: references_exterieures
           in: query
+          x-extension-metarisc-param-multiple: true
           description: Filtre sur les références extérieures du PEI.
           schema:
             oneOf:
