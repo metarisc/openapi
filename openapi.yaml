@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-06-2025.1
+  version: 1.0/main/20-06-2025.1
   title: Metarisc API
   description: |-
 
@@ -5465,6 +5465,8 @@ paths:
                   maxItems: 255
                   items:
                     type: object
+                    title: Objet Tournée Deci PEI Liste Anomalies
+                    description: Anomalie détectée lors contrôle d'un PEI dans le cadre d'une Tournée DECI
                     properties:
                       code:
                         description: Code de l'anomalie.
@@ -45181,18 +45183,7 @@ components:
           type: array
           maxItems: 255
           items:
-            type: object
-            properties:
-              anomalie:
-                description: Informations sur l'anomalie liée.
-                allOf:
-                  - $ref: '#/components/schemas/AnomalieDECI'
-              a_lever:
-                description: Si l'anomalie est à lever.
-                type: boolean
-            required:
-              - anomalie
-              - a_lever
+            $ref: '#/components/schemas/TourneeDeciPeiListeAnomalies'
         essais_engin_utilise:
           description: Engin utilisé pour les essais hydrauliques.
           type: string
@@ -45225,6 +45216,23 @@ components:
         - est_controle
         - ordre
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPei'
+      x-extension-metarisc-codegen-context: query
+    TourneeDeciPeiListeAnomalies:
+      type: object
+      title: Objet Tournée Deci PEI Liste Anomalies
+      description: Anomalie détectée lors contrôle d'un PEI dans le cadre d'une Tournée DECI
+      properties:
+        anomalie:
+          description: Informations sur l'anomalie liée.
+          allOf:
+            - $ref: '#/components/schemas/AnomalieDECI'
+        a_lever:
+          description: Si l'anomalie est à lever.
+          type: boolean
+      required:
+        - anomalie
+        - a_lever
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPeiListeAnomalies'
       x-extension-metarisc-codegen-context: query
     TourneeDeciSimple:
       title: Objet Tournée Deci Simple
@@ -45340,6 +45348,34 @@ components:
         - avatar_url
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
       x-extension-metarisc-codegen-context: query
+    WorkflowStepWorflowData:
+      type: object
+      title: Objet Workflow Step WorflowData
+      description: Définition d'un worflow dans l'étape d'un workflow.
+      properties:
+        titre:
+          type: string
+          maxLength: 256
+        type:
+          type: string
+          enum:
+            - analyse_de_risque
+            - validation
+            - arrivee_sis
+            - arrivee_sis_prev
+            - arrivee_secretariat_commission
+            - consultation_sis
+            - passage_commission
+            - relecture
+            - visite
+            - arrivee_secretariat
+            - workflow
+            - reception_de_travaux_en_attente
+      required:
+        - titre
+        - type
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/WorkflowStepWorflowData'
+      x-extension-metarisc-codegen-context: query
     WorkflowStep:
       type: object
       title: Objet Workflow Step
@@ -45350,26 +45386,8 @@ components:
           type: string
           maxLength: 256
         workflow:
-          type: object
-          properties:
-            titre:
-              type: string
-              maxLength: 256
-            type:
-              type: string
-              enum:
-                - analyse_de_risque
-                - validation
-                - arrivee_sis
-                - arrivee_sis_prev
-                - arrivee_secretariat_commission
-                - consultation_sis
-                - passage_commission
-                - relecture
-                - visite
-                - arrivee_secretariat
-                - workflow
-                - reception_de_travaux_en_attente
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepWorflowData'
         needs:
           description: Les prérequis nécessaires à l'accomplissement de l'étape.
           type: array
