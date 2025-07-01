@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-06-2025.1
+  version: 1.0/feature/avis-exploitation/01-07-2025.1
   title: Metarisc API
   description: |-
 
@@ -17937,6 +17937,12 @@ paths:
                           required:
                             - statut
                             - libelle
+                avis_exploitation:
+                  description: Avis d'exploitation de l'ERP.
+                  type: string
+                  enum:
+                    - favorable
+                    - defavorable
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
