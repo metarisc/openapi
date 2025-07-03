@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/02-07-2025.1
+  version: 1.0/main/03-07-2025.2
   title: Metarisc API
   description: |-
 
@@ -19219,6 +19219,48 @@ paths:
             maxLength: 255
         - $ref: '#/components/parameters/PaginationPage'
         - $ref: '#/components/parameters/PaginationPerPage'
+        - name: type
+          in: query
+          description: Filtre sur le type du dossier.
+          schema:
+            type: string
+            enum:
+              - erp:autorisation_de_travaux
+              - erp:permis_de_construire
+              - erp:levee_de_prescriptions
+              - erp:changement_de_dus
+              - erp:salon_type_t
+              - erp:utilisation_exceptionnelle_de_locaux
+              - erp:demande_d_implantation_cts_inferieur_6_mois
+              - erp:demande_d_implantation_cts_superieur_6_mois
+              - erp:derogation
+              - erp:etude_cahier_des_charges_type_t
+              - erp:levee_de_reserve
+              - erp:echeancier_de_travaux
+              - erp:cahier_des_charges_ssi
+              - erp:etude_suite_a_un_avis_differe
+              - erp:visite_periodique
+              - erp:visite_reception
+              - erp:visite_avant_ouverture
+              - erp:visite_controle
+              - erp:visite_inopinee
+              - erp:visite_chantier
+              - erp:demande_avis
+              - erp:demande_reclassement
+              - erp:suivi_avis_defavorable
+              - erp:levee_avis_defavorable
+              - erp:dossier_ge_2
+              - erp:schema_general_organisation_securite
+              - erp:etude_ingenierie
+              - erp:manifestation_temporaire
+        - name: sort
+          in: query
+          description: Tri les dossiers par rapport à leur date de création.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
