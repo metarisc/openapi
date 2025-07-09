@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-07-2025.2
+  version: 1.0/feature/ordre-du-jour-v2/09-07-2025.1
   title: Metarisc API
   description: |-
 
@@ -6350,9 +6350,42 @@ paths:
                   format: date-time
                   maxLength: 50
                   minLength: 20
+                type:
+                  description: Type du dossier.
+                  type: string
+                  enum:
+                    - erp:autorisation_de_travaux
+                    - erp:permis_de_construire
+                    - erp:levee_de_prescriptions
+                    - erp:changement_de_dus
+                    - erp:salon_type_t
+                    - erp:utilisation_exceptionnelle_de_locaux
+                    - erp:demande_d_implantation_cts_inferieur_6_mois
+                    - erp:demande_d_implantation_cts_superieur_6_mois
+                    - erp:derogation
+                    - erp:etude_cahier_des_charges_type_t
+                    - erp:levee_de_reserve
+                    - erp:echeancier_de_travaux
+                    - erp:cahier_des_charges_ssi
+                    - erp:etude_suite_a_un_avis_differe
+                    - erp:visite_periodique
+                    - erp:visite_reception
+                    - erp:visite_avant_ouverture
+                    - erp:visite_controle
+                    - erp:visite_inopinee
+                    - erp:visite_chantier
+                    - erp:demande_avis
+                    - erp:demande_reclassement
+                    - erp:suivi_avis_defavorable
+                    - erp:levee_avis_defavorable
+                    - erp:dossier_ge_2
+                    - erp:schema_general_organisation_securite
+                    - erp:etude_ingenierie
+                    - erp:manifestation_temporaire
               required:
                 - dossier_id
                 - date_de_passage
+                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: create
@@ -28280,6 +28313,40 @@ paths:
                   format: int32
                   minimum: 5
                   maximum: 1440
+                type:
+                  description: Type du dossier.
+                  type: string
+                  enum:
+                    - erp:autorisation_de_travaux
+                    - erp:permis_de_construire
+                    - erp:levee_de_prescriptions
+                    - erp:changement_de_dus
+                    - erp:salon_type_t
+                    - erp:utilisation_exceptionnelle_de_locaux
+                    - erp:demande_d_implantation_cts_inferieur_6_mois
+                    - erp:demande_d_implantation_cts_superieur_6_mois
+                    - erp:derogation
+                    - erp:etude_cahier_des_charges_type_t
+                    - erp:levee_de_reserve
+                    - erp:echeancier_de_travaux
+                    - erp:cahier_des_charges_ssi
+                    - erp:etude_suite_a_un_avis_differe
+                    - erp:visite_periodique
+                    - erp:visite_reception
+                    - erp:visite_avant_ouverture
+                    - erp:visite_controle
+                    - erp:visite_inopinee
+                    - erp:visite_chantier
+                    - erp:demande_avis
+                    - erp:demande_reclassement
+                    - erp:suivi_avis_defavorable
+                    - erp:levee_avis_defavorable
+                    - erp:dossier_ge_2
+                    - erp:schema_general_organisation_securite
+                    - erp:etude_ingenierie
+                    - erp:manifestation_temporaire
+              required:
+                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -45696,10 +45763,13 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        dossier:
-          description: Dossier incrit à l'ordre du jour d'une date de passage en commission.
-          allOf:
-            - $ref: '#/components/schemas/Dossier'
+        PassageCommissionDossierMembreAvis:
+          description: Passage d'un membre de la commission sur un dossier avec avis.
+          type: array
+          maxItems: 10
+          items:
+            allOf:
+              - $ref: '#/components/schemas/PassageCommissionDossierMembreAvis'
         avis:
           description: Avis rendu de la commission sur le dossier.
           type: string
@@ -45732,16 +45802,129 @@ components:
           format: int32
           minimum: 5
           maximum: 1440
+        type:
+          description: Type du dossier.
+          type: string
+          enum:
+            - erp:autorisation_de_travaux
+            - erp:permis_de_construire
+            - erp:levee_de_prescriptions
+            - erp:changement_de_dus
+            - erp:salon_type_t
+            - erp:utilisation_exceptionnelle_de_locaux
+            - erp:demande_d_implantation_cts_inferieur_6_mois
+            - erp:demande_d_implantation_cts_superieur_6_mois
+            - erp:derogation
+            - erp:etude_cahier_des_charges_type_t
+            - erp:levee_de_reserve
+            - erp:echeancier_de_travaux
+            - erp:cahier_des_charges_ssi
+            - erp:etude_suite_a_un_avis_differe
+            - erp:visite_periodique
+            - erp:visite_reception
+            - erp:visite_avant_ouverture
+            - erp:visite_controle
+            - erp:visite_inopinee
+            - erp:visite_chantier
+            - erp:demande_avis
+            - erp:demande_reclassement
+            - erp:suivi_avis_defavorable
+            - erp:levee_avis_defavorable
+            - erp:dossier_ge_2
+            - erp:schema_general_organisation_securite
+            - erp:etude_ingenierie
+            - erp:manifestation_temporaire
       required:
         - id
-        - dossier
+        - PassageCommissionDossierMembreAvis
         - avis
         - ge4_3
         - date_de_passage
         - avis_differe
         - observations
         - duree_minutes
+        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisBase:
+      type: object
+      title: Objet de PassageCommissionDossierMembreAvis Base
+      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+      properties:
+        id:
+          description: Identifiant unique de l'objet.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        membre:
+          description: Membre de la commission.
+          allOf:
+            - $ref: '#/components/schemas/CommissionMembre'
+        membre_id:
+          description: Identifiant du membre de la commission.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+      required:
+        - id
+        - membre
+        - membre_id
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisDossiers:
+      title: Objet FeedMessage Texte
+      description: Message texte d'un flux d'activité.
+      allOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+        - type: object
+          properties:
+            dossiers:
+              description: Liste des dossiers associés au passage.
+              type: array
+              maxItems: 100
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/DossierErp'
+            dossier_id:
+              description: Identifiant du dossier associé au passage.
+              type: array
+              maxItems: 100
+              items:
+                type: string
+                format: uuid
+                maxLength: 36
+          required:
+            - dossiers
+            - dossier_id
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisDossiers'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisSimple:
+      title: Objet PassageCommissionDossierMembreAvis Simple
+      description: Passage d'un membre de la commission sans dossier associé.
+      allOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+        - type: object
+          properties:
+            avis_membre:
+              description: Proposition d'avis du membre.
+              type: string
+              enum:
+                - favorable
+                - defavorable
+              nullable: true
+          required:
+            - avis_membre
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisSimple'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvis:
+      title: Objet PassageCommissionDossierMembreAvis Dossiers
+      description: Passage d'un membre de la commission sur un dossier avec avis.
+      oneOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisSimple'
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisDossiers'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvis'
       x-extension-metarisc-codegen-context: query
     Permission:
       type: object
