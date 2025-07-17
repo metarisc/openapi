@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-07-2025.2
+  version: 1.0/feature/ordre-du-jour-v2/17-07-2025.1
   title: Metarisc API
   description: |-
 
@@ -6350,9 +6350,268 @@ paths:
                   format: date-time
                   maxLength: 50
                   minLength: 20
+                type:
+                  description: Type du dossier.
+                  type: string
+                  enum:
+                    - erp:autorisation_de_travaux
+                    - erp:permis_de_construire
+                    - erp:levee_de_prescriptions
+                    - erp:changement_de_dus
+                    - erp:salon_type_t
+                    - erp:utilisation_exceptionnelle_de_locaux
+                    - erp:demande_d_implantation_cts_inferieur_6_mois
+                    - erp:demande_d_implantation_cts_superieur_6_mois
+                    - erp:derogation
+                    - erp:etude_cahier_des_charges_type_t
+                    - erp:levee_de_reserve
+                    - erp:echeancier_de_travaux
+                    - erp:cahier_des_charges_ssi
+                    - erp:etude_suite_a_un_avis_differe
+                    - erp:visite_periodique
+                    - erp:visite_reception
+                    - erp:visite_avant_ouverture
+                    - erp:visite_controle
+                    - erp:visite_inopinee
+                    - erp:visite_chantier
+                    - erp:demande_avis
+                    - erp:demande_reclassement
+                    - erp:suivi_avis_defavorable
+                    - erp:levee_avis_defavorable
+                    - erp:dossier_ge_2
+                    - erp:schema_general_organisation_securite
+                    - erp:etude_ingenierie
+                    - erp:manifestation_temporaire
+                passage_commission_dossier_membre_avis:
+                  description: Passage d'un membre de la commission sur un dossier avec avis.
+                  type: array
+                  maxItems: 10
+                  items:
+                    title: Objet PassageCommissionDossierMembreAvis Dossiers
+                    description: Passage d'un membre de la commission sur un dossier avec avis.
+                    oneOf:
+                      - title: Objet PassageCommissionDossierMembreAvis Simple
+                        description: Passage d'un membre de la commission sans dossier associé.
+                        allOf:
+                          - type: object
+                            title: Objet de PassageCommissionDossierMembreAvis Base
+                            description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                            properties:
+                              membre:
+                                description: Membre de la commission.
+                                allOf:
+                                  - type: object
+                                    title: Objet Commission Membre
+                                    description: Représentation d'un membre amené à siéger au sein d'une commission.
+                                    properties:
+                                      titre:
+                                        description: Le titre du membre au sein de la commission.
+                                        type: string
+                                        enum:
+                                          - POLICE
+                                          - GENDARMERIE
+                                          - MAIRE
+                                          - SIS
+                                          - DDT/DDTM
+                                          - DISP
+                                      presence_obligatoire:
+                                        description: Le membre doit siéger obligatoirement lors des passages en commission.
+                                        type: boolean
+                                    required:
+                                      - titre
+                                      - presence_obligatoire
+                              membre_id:
+                                description: Identifiant du membre de la commission.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: Type de passage.
+                                type: string
+                                enum:
+                                  - avis_simple
+                                  - avis_dossier
+                              motivation_avis:
+                                description: Motivation de l'avis du membre.
+                                type: string
+                                maxLength: 8192
+                                nullable: true
+                            required:
+                              - membre
+                              - membre_id
+                              - type
+                          - type: object
+                            properties:
+                              avis_membre:
+                                description: Proposition d'avis du membre.
+                                type: string
+                                enum:
+                                  - favorable
+                                  - defavorable
+                                nullable: true
+                      - title: Objet PassageCommissionDossierMembreAvis Dossiers
+                        description: Message texte d'un flux d'activité.
+                        allOf:
+                          - type: object
+                            title: Objet de PassageCommissionDossierMembreAvis Base
+                            description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                            properties:
+                              membre:
+                                description: Membre de la commission.
+                                allOf:
+                                  - type: object
+                                    title: Objet Commission Membre
+                                    description: Représentation d'un membre amené à siéger au sein d'une commission.
+                                    properties:
+                                      titre:
+                                        description: Le titre du membre au sein de la commission.
+                                        type: string
+                                        enum:
+                                          - POLICE
+                                          - GENDARMERIE
+                                          - MAIRE
+                                          - SIS
+                                          - DDT/DDTM
+                                          - DISP
+                                      presence_obligatoire:
+                                        description: Le membre doit siéger obligatoirement lors des passages en commission.
+                                        type: boolean
+                                    required:
+                                      - titre
+                                      - presence_obligatoire
+                              membre_id:
+                                description: Identifiant du membre de la commission.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: Type de passage.
+                                type: string
+                                enum:
+                                  - avis_simple
+                                  - avis_dossier
+                              motivation_avis:
+                                description: Motivation de l'avis du membre.
+                                type: string
+                                maxLength: 8192
+                                nullable: true
+                            required:
+                              - membre
+                              - membre_id
+                              - type
+                          - type: object
+                            properties:
+                              dossiers:
+                                description: Liste des dossiers associés au passage.
+                                type: array
+                                maxItems: 100
+                                items:
+                                  allOf:
+                                    - type: object
+                                      title: Objet Dossier ERP
+                                      description: Dossier d'un ERP.
+                                      allOf:
+                                        - type: object
+                                          title: Objet Dossier Base
+                                          description: Dossier de base.
+                                          properties:
+                                            objet:
+                                              description: Objet du dossier.
+                                              type: string
+                                              maxLength: 256
+                                            enveloppe_id:
+                                              description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
+                                              type: string
+                                              format: uuid
+                                              maxLength: 36
+                                              minLength: 36
+                                          required:
+                                            - objet
+                                        - type: object
+                                          properties:
+                                            type:
+                                              description: Type du dossier.
+                                              type: string
+                                              enum:
+                                                - erp:autorisation_de_travaux
+                                                - erp:permis_de_construire
+                                                - erp:levee_de_prescriptions
+                                                - erp:changement_de_dus
+                                                - erp:salon_type_t
+                                                - erp:utilisation_exceptionnelle_de_locaux
+                                                - erp:demande_d_implantation_cts_inferieur_6_mois
+                                                - erp:demande_d_implantation_cts_superieur_6_mois
+                                                - erp:derogation
+                                                - erp:etude_cahier_des_charges_type_t
+                                                - erp:levee_de_reserve
+                                                - erp:echeancier_de_travaux
+                                                - erp:cahier_des_charges_ssi
+                                                - erp:etude_suite_a_un_avis_differe
+                                                - erp:visite_periodique
+                                                - erp:visite_reception
+                                                - erp:visite_avant_ouverture
+                                                - erp:visite_controle
+                                                - erp:visite_inopinee
+                                                - erp:visite_chantier
+                                                - erp:demande_avis
+                                                - erp:demande_reclassement
+                                                - erp:suivi_avis_defavorable
+                                                - erp:levee_avis_defavorable
+                                                - erp:dossier_ge_2
+                                                - erp:schema_general_organisation_securite
+                                                - erp:etude_ingenierie
+                                                - erp:manifestation_temporaire
+                                            numero_urbanisme:
+                                              description: Numéro d'urbanisme.
+                                              type: string
+                                              maxLength: 256
+                                            numero_urbanisme_date:
+                                              description: Date du numéro d'urbanisme.
+                                              type: string
+                                              format: date
+                                              maxLength: 10
+                                              minLength: 10
+                                            demandeur:
+                                              description: Demandeur ayant déposé le dossier.
+                                              type: string
+                                              maxLength: 256
+                                            service_instructeur:
+                                              description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
+                                              type: string
+                                              maxLength: 256
+                                            descriptif_travaux:
+                                              description: Descriptif des travaux.
+                                              type: string
+                                              maxLength: 8192
+                                            date_limite_traitement:
+                                              description: Date limite de traitement du dossier.
+                                              type: string
+                                              format: date
+                                              maxLength: 10
+                                              minLength: 10
+                                            dossier_complet:
+                                              description: Dossier complet.
+                                              type: boolean
+                                          required:
+                                            - type
+                              dossier_id:
+                                description: Identifiant du dossier associé au passage.
+                                type: array
+                                maxItems: 100
+                                items:
+                                  type: string
+                                  format: uuid
+                                  maxLength: 36
+                            required:
+                              - dossiers
+                              - dossier_id
               required:
                 - dossier_id
                 - date_de_passage
+                - type
+                - passage_commission_dossier_membre_avis
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: create
@@ -28280,6 +28539,245 @@ paths:
                   format: int32
                   minimum: 5
                   maximum: 1440
+                type:
+                  description: Type du dossier.
+                  type: string
+                  enum:
+                    - erp:autorisation_de_travaux
+                    - erp:permis_de_construire
+                    - erp:levee_de_prescriptions
+                    - erp:changement_de_dus
+                    - erp:salon_type_t
+                    - erp:utilisation_exceptionnelle_de_locaux
+                    - erp:demande_d_implantation_cts_inferieur_6_mois
+                    - erp:demande_d_implantation_cts_superieur_6_mois
+                    - erp:derogation
+                    - erp:etude_cahier_des_charges_type_t
+                    - erp:levee_de_reserve
+                    - erp:echeancier_de_travaux
+                    - erp:cahier_des_charges_ssi
+                    - erp:etude_suite_a_un_avis_differe
+                    - erp:visite_periodique
+                    - erp:visite_reception
+                    - erp:visite_avant_ouverture
+                    - erp:visite_controle
+                    - erp:visite_inopinee
+                    - erp:visite_chantier
+                    - erp:demande_avis
+                    - erp:demande_reclassement
+                    - erp:suivi_avis_defavorable
+                    - erp:levee_avis_defavorable
+                    - erp:dossier_ge_2
+                    - erp:schema_general_organisation_securite
+                    - erp:etude_ingenierie
+                    - erp:manifestation_temporaire
+                passage_commission_dossier_membre_avis:
+                  description: Passage d'un membre de la commission sur un dossier avec avis.
+                  type: array
+                  maxItems: 10
+                  items:
+                    title: Objet PassageCommissionDossierMembreAvis Dossiers
+                    description: Passage d'un membre de la commission sur un dossier avec avis.
+                    oneOf:
+                      - title: Objet PassageCommissionDossierMembreAvis Simple
+                        description: Passage d'un membre de la commission sans dossier associé.
+                        allOf:
+                          - type: object
+                            title: Objet de PassageCommissionDossierMembreAvis Base
+                            description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                            properties:
+                              membre:
+                                description: Membre de la commission.
+                                allOf:
+                                  - type: object
+                                    title: Objet Commission Membre
+                                    description: Représentation d'un membre amené à siéger au sein d'une commission.
+                                    properties:
+                                      titre:
+                                        description: Le titre du membre au sein de la commission.
+                                        type: string
+                                        enum:
+                                          - POLICE
+                                          - GENDARMERIE
+                                          - MAIRE
+                                          - SIS
+                                          - DDT/DDTM
+                                          - DISP
+                                      presence_obligatoire:
+                                        description: Le membre doit siéger obligatoirement lors des passages en commission.
+                                        type: boolean
+                              membre_id:
+                                description: Identifiant du membre de la commission.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              motivation_avis:
+                                description: Motivation de l'avis du membre.
+                                type: string
+                                maxLength: 8192
+                                nullable: true
+                          - type: object
+                            properties:
+                              avis_membre:
+                                description: Proposition d'avis du membre.
+                                type: string
+                                enum:
+                                  - favorable
+                                  - defavorable
+                                nullable: true
+                      - title: Objet PassageCommissionDossierMembreAvis Dossiers
+                        description: Message texte d'un flux d'activité.
+                        allOf:
+                          - type: object
+                            title: Objet de PassageCommissionDossierMembreAvis Base
+                            description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                            properties:
+                              membre:
+                                description: Membre de la commission.
+                                allOf:
+                                  - type: object
+                                    title: Objet Commission Membre
+                                    description: Représentation d'un membre amené à siéger au sein d'une commission.
+                                    properties:
+                                      titre:
+                                        description: Le titre du membre au sein de la commission.
+                                        type: string
+                                        enum:
+                                          - POLICE
+                                          - GENDARMERIE
+                                          - MAIRE
+                                          - SIS
+                                          - DDT/DDTM
+                                          - DISP
+                                      presence_obligatoire:
+                                        description: Le membre doit siéger obligatoirement lors des passages en commission.
+                                        type: boolean
+                              membre_id:
+                                description: Identifiant du membre de la commission.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              motivation_avis:
+                                description: Motivation de l'avis du membre.
+                                type: string
+                                maxLength: 8192
+                                nullable: true
+                          - type: object
+                            properties:
+                              dossiers:
+                                description: Liste des dossiers associés au passage.
+                                type: array
+                                maxItems: 100
+                                items:
+                                  allOf:
+                                    - type: object
+                                      title: Objet Dossier ERP
+                                      description: Dossier d'un ERP.
+                                      allOf:
+                                        - type: object
+                                          title: Objet Dossier Base
+                                          description: Dossier de base.
+                                          properties:
+                                            objet:
+                                              description: Objet du dossier.
+                                              type: string
+                                              maxLength: 256
+                                            modules:
+                                              description: Modules du dossier.
+                                              type: array
+                                              items:
+                                                type: string
+                                                enum:
+                                                  - erp:analyse_de_risque
+                                                  - erp:essais_visite
+                                                  - deci:controle_technique_pei
+                                              maxItems: 25
+                                            enveloppe_id:
+                                              description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
+                                              type: string
+                                              format: uuid
+                                              maxLength: 36
+                                              minLength: 36
+                                              nullable: true
+                                        - type: object
+                                          properties:
+                                            type:
+                                              description: Type du dossier.
+                                              type: string
+                                              enum:
+                                                - erp:autorisation_de_travaux
+                                                - erp:permis_de_construire
+                                                - erp:levee_de_prescriptions
+                                                - erp:changement_de_dus
+                                                - erp:salon_type_t
+                                                - erp:utilisation_exceptionnelle_de_locaux
+                                                - erp:demande_d_implantation_cts_inferieur_6_mois
+                                                - erp:demande_d_implantation_cts_superieur_6_mois
+                                                - erp:derogation
+                                                - erp:etude_cahier_des_charges_type_t
+                                                - erp:levee_de_reserve
+                                                - erp:echeancier_de_travaux
+                                                - erp:cahier_des_charges_ssi
+                                                - erp:etude_suite_a_un_avis_differe
+                                                - erp:visite_periodique
+                                                - erp:visite_reception
+                                                - erp:visite_avant_ouverture
+                                                - erp:visite_controle
+                                                - erp:visite_inopinee
+                                                - erp:visite_chantier
+                                                - erp:demande_avis
+                                                - erp:demande_reclassement
+                                                - erp:suivi_avis_defavorable
+                                                - erp:levee_avis_defavorable
+                                                - erp:dossier_ge_2
+                                                - erp:schema_general_organisation_securite
+                                                - erp:etude_ingenierie
+                                                - erp:manifestation_temporaire
+                                            numero_urbanisme:
+                                              description: Numéro d'urbanisme.
+                                              type: string
+                                              maxLength: 256
+                                            numero_urbanisme_date:
+                                              description: Date du numéro d'urbanisme.
+                                              type: string
+                                              format: date
+                                              maxLength: 10
+                                              minLength: 10
+                                            demandeur:
+                                              description: Demandeur ayant déposé le dossier.
+                                              type: string
+                                              maxLength: 256
+                                            service_instructeur:
+                                              description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
+                                              type: string
+                                              maxLength: 256
+                                            descriptif_travaux:
+                                              description: Descriptif des travaux.
+                                              type: string
+                                              maxLength: 8192
+                                            date_limite_traitement:
+                                              description: Date limite de traitement du dossier.
+                                              type: string
+                                              format: date
+                                              maxLength: 10
+                                              minLength: 10
+                                            dossier_complet:
+                                              description: Dossier complet.
+                                              type: boolean
+                                          required:
+                                            - type
+                              dossier_id:
+                                description: Identifiant du dossier associé au passage.
+                                type: array
+                                maxItems: 100
+                                items:
+                                  type: string
+                                  format: uuid
+                                  maxLength: 36
+              required:
+                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -45696,10 +46194,6 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        dossier:
-          description: Dossier incrit à l'ordre du jour d'une date de passage en commission.
-          allOf:
-            - $ref: '#/components/schemas/Dossier'
         avis:
           description: Avis rendu de la commission sur le dossier.
           type: string
@@ -45732,16 +46226,148 @@ components:
           format: int32
           minimum: 5
           maximum: 1440
+        type:
+          description: Type du dossier.
+          type: string
+          enum:
+            - erp:autorisation_de_travaux
+            - erp:permis_de_construire
+            - erp:levee_de_prescriptions
+            - erp:changement_de_dus
+            - erp:salon_type_t
+            - erp:utilisation_exceptionnelle_de_locaux
+            - erp:demande_d_implantation_cts_inferieur_6_mois
+            - erp:demande_d_implantation_cts_superieur_6_mois
+            - erp:derogation
+            - erp:etude_cahier_des_charges_type_t
+            - erp:levee_de_reserve
+            - erp:echeancier_de_travaux
+            - erp:cahier_des_charges_ssi
+            - erp:etude_suite_a_un_avis_differe
+            - erp:visite_periodique
+            - erp:visite_reception
+            - erp:visite_avant_ouverture
+            - erp:visite_controle
+            - erp:visite_inopinee
+            - erp:visite_chantier
+            - erp:demande_avis
+            - erp:demande_reclassement
+            - erp:suivi_avis_defavorable
+            - erp:levee_avis_defavorable
+            - erp:dossier_ge_2
+            - erp:schema_general_organisation_securite
+            - erp:etude_ingenierie
+            - erp:manifestation_temporaire
+        passage_commission_dossier_membre_avis:
+          description: Passage d'un membre de la commission sur un dossier avec avis.
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/PassageCommissionDossierMembreAvis'
       required:
         - id
-        - dossier
         - avis
         - ge4_3
         - date_de_passage
         - avis_differe
         - observations
         - duree_minutes
+        - type
+        - passage_commission_dossier_membre_avis
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisBase:
+      type: object
+      title: Objet de PassageCommissionDossierMembreAvis Base
+      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+      properties:
+        id:
+          description: Identifiant unique de l'objet.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        membre:
+          description: Membre de la commission.
+          allOf:
+            - $ref: '#/components/schemas/CommissionMembre'
+        membre_id:
+          description: Identifiant du membre de la commission.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        type:
+          description: Type de passage.
+          type: string
+          enum:
+            - avis_simple
+            - avis_dossier
+        motivation_avis:
+          description: Motivation de l'avis du membre.
+          type: string
+          maxLength: 8192
+          nullable: true
+      required:
+        - id
+        - membre
+        - membre_id
+        - type
+        - motivation_avis
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisDossiers:
+      title: Objet PassageCommissionDossierMembreAvis Dossiers
+      description: Message texte d'un flux d'activité.
+      allOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+        - type: object
+          properties:
+            dossiers:
+              description: Liste des dossiers associés au passage.
+              type: array
+              maxItems: 100
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/DossierErp'
+            dossier_id:
+              description: Identifiant du dossier associé au passage.
+              type: array
+              maxItems: 100
+              items:
+                type: string
+                format: uuid
+                maxLength: 36
+          required:
+            - dossiers
+            - dossier_id
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisDossiers'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisSimple:
+      title: Objet PassageCommissionDossierMembreAvis Simple
+      description: Passage d'un membre de la commission sans dossier associé.
+      allOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+        - type: object
+          properties:
+            avis_membre:
+              description: Proposition d'avis du membre.
+              type: string
+              enum:
+                - favorable
+                - defavorable
+              nullable: true
+          required:
+            - avis_membre
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisSimple'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvis:
+      title: Objet PassageCommissionDossierMembreAvis Dossiers
+      description: Passage d'un membre de la commission sur un dossier avec avis.
+      oneOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisSimple'
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisDossiers'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvis'
       x-extension-metarisc-codegen-context: query
     Permission:
       type: object
