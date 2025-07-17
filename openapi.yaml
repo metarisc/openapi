@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-07-2025.2
+  version: 1.0/feature/date-creation-dossier/17-07-2025.1
   title: Metarisc API
   description: |-
 
@@ -19509,6 +19509,12 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 256
+                        date_de_creation:
+                          description: Date de création du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 50
+                          minLength: 20
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -19596,6 +19602,12 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 256
+                        date_de_creation:
+                          description: Date de création du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 50
+                          minLength: 20
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -19614,7 +19626,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 13
+              maxProperties: 15
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -33778,6 +33790,12 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 256
+                        date_de_creation:
+                          description: Date de création du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 50
+                          minLength: 20
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -33865,6 +33883,12 @@ paths:
                           description: Objet du dossier.
                           type: string
                           maxLength: 256
+                        date_de_creation:
+                          description: Date de création du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 50
+                          minLength: 20
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -33883,7 +33907,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 13
+              maxProperties: 15
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
