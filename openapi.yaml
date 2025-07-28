@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-07-2025.1
+  version: 1.0/main/28-07-2025.2
   title: Metarisc API
   description: |-
 
@@ -3059,6 +3059,18 @@ paths:
                   nullable: true
                 rapport_modele_pv:
                   description: 'Modèle pour les rapports générés : Procès verbal de commission'
+                  type: string
+                  format: uri
+                  maxLength: 512
+                  nullable: true
+                rapport_modele_cr_global:
+                  description: 'Modèle pour les rapports générés : Compte rendu global de commission'
+                  type: string
+                  format: uri
+                  maxLength: 512
+                  nullable: true
+                rapport_modele_convoc:
+                  description: 'Modèle pour les rapports générés : Convocations de commission'
                   type: string
                   format: uri
                   maxLength: 512
@@ -44207,9 +44219,23 @@ components:
           format: uri
           maxLength: 512
           nullable: true
+        rapport_modele_cr_global:
+          description: 'Modèle pour les rapports générés : Compte rendu global de commission'
+          type: string
+          format: uri
+          maxLength: 512
+          nullable: true
+        rapport_modele_convoc:
+          description: 'Modèle pour les rapports générés : Convocations de commission'
+          type: string
+          format: uri
+          maxLength: 512
+          nullable: true
       required:
         - rapport_modele_cr
         - rapport_modele_pv
+        - rapport_modele_cr_global
+        - rapport_modele_convoc
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPreferences'
       x-extension-metarisc-codegen-context: query
     Contact:
