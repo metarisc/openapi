@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-07-2025.2
+  version: 1.0/feature/revue-clic-final/29-07-2025.1
   title: Metarisc API
   description: |-
 
@@ -12339,6 +12339,13 @@ paths:
                           description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
                           type: boolean
                           nullable: true
+                        nombre_voies_engins:
+                          description: Le nombre de voies d'accès pour les engins de pompiers.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
                         voie_echelle:
                           description: La voie des échelles est la voie facilitant l'accès des échelles.
                           type: boolean
@@ -17601,6 +17608,13 @@ paths:
                                       description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
                                       type: boolean
                                       nullable: true
+                                    nombre_voies_engins:
+                                      description: Le nombre de voies d'accès pour les engins de pompiers.
+                                      type: integer
+                                      format: int32
+                                      minimum: 0
+                                      maximum: 999999
+                                      nullable: true
                                     voie_echelle:
                                       description: La voie des échelles est la voie facilitant l'accès des échelles.
                                       type: boolean
@@ -20853,6 +20867,13 @@ paths:
                                     voie_engin:
                                       description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
                                       type: boolean
+                                      nullable: true
+                                    nombre_voies_engins:
+                                      description: Le nombre de voies d'accès pour les engins de pompiers.
+                                      type: integer
+                                      format: int32
+                                      minimum: 0
+                                      maximum: 999999
                                       nullable: true
                                     voie_echelle:
                                       description: La voie des échelles est la voie facilitant l'accès des échelles.
@@ -43542,6 +43563,13 @@ components:
           description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
           type: boolean
           nullable: true
+        nombre_voies_engins:
+          description: Le nombre de voies d'accès pour les engins de pompiers.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999999
+          nullable: true
         voie_echelle:
           description: La voie des échelles est la voie facilitant l'accès des échelles.
           type: boolean
@@ -44042,6 +44070,7 @@ components:
         - plancher_bas_du_dernier_niveau
         - plancher_bas_du_dernier_niveau_accessible_au_public
         - voie_engin
+        - nombre_voies_engins
         - voie_echelle
         - nombre_facades_accessibles
         - informations_acces_facades
