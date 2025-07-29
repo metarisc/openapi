@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-07-2025.1
+  version: 1.0/feature/tag-dossier/29-07-2025.1
   title: Metarisc API
   description: |-
 
@@ -14627,7 +14627,7 @@ paths:
         - Dossiers API
       summary: Liste des tags
       description: Récupération de la liste des tags d'un dossier.
-      operationId: PaginateTagsDossierDossiers
+      operationId: GetTagsDossierDossiers
       security:
         - IdMetariscFr:
             - openid
@@ -14641,8 +14641,6 @@ paths:
           schema:
             type: string
             maxLength: 255
-        - $ref: '#/components/parameters/PaginationPage'
-        - $ref: '#/components/parameters/PaginationPerPage'
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -14659,21 +14657,13 @@ paths:
                 type: object
                 properties:
                   data:
-                    description: Tableau d'objets contenu dans la page.
+                    description: Liste d'objets.
                     type: array
                     maxItems: 100
                     items:
                       $ref: '#/components/schemas/Tag'
-                  meta:
-                    type: object
-                    properties:
-                      pagination:
-                        $ref: '#/components/schemas/PaginationMetadata'
-                    required:
-                      - pagination
                 required:
                   - data
-                  - meta
           headers:
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
@@ -14842,10 +14832,245 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: paginate-dossier-tags
       x-extension-metarisc-codegen-visibility: public
+    post:
+      tags:
+        - Dossiers API
+      summary: Remplacer les tags d'un dossier
+      description: Permet de remplacer les tags d'un dossier existant par les valeurs transmis. Si un tableau vide est envoyé, les tags seront réinitialisés.
+      operationId: PostTagsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              maxItems: 3
+              items:
+                type: object
+                title: Objet Tag
+                description: Les tags sont des mots-clés permettant de classifier un objet.
+                properties:
+                  message:
+                    description: Libellé du tag.
+                    type: string
+                    enum:
+                      - reprise_de_donnees
+                      - platau
+                      - hors_delai
+                    nullable: true
+                additionalProperties: false
+                x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
+                x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Liste d'objets.
+                    type: array
+                    maxItems: 100
+                    items:
+                      $ref: '#/components/schemas/Tag'
+                required:
+                  - data
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-islist: true
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-tags-dossier
   /dossiers/{dossier_id}/workflows:
     get:
       tags:
@@ -46630,7 +46855,10 @@ components:
         message:
           description: Libellé du tag.
           type: string
-          maxLength: 256
+          enum:
+            - reprise_de_donnees
+            - platau
+            - hors_delai
       required:
         - message
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Tag'
