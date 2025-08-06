@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-07-2025.1
+  version: 1.0/feature/ordre-du-jour-v2/06-08-2025.1
   title: Metarisc API
   description: |-
 
@@ -6556,21 +6556,72 @@ paths:
               type: object
               title: Objet Passage en Commission Dossier
               properties:
-                dossier_id:
-                  description: Identifiant du dossier incrit à l'ordre du jour d'une date de passage en commission.
+                erp_id:
+                  description: Identifiant de l'établissement recevant du public (ERP) associé au dossier.
                   type: string
                   format: uuid
                   maxLength: 36
                   minLength: 36
+                  nullable: true
                 date_de_passage:
                   description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
                   type: string
                   format: date-time
                   maxLength: 50
                   minLength: 20
+                type:
+                  description: Type du dossier.
+                  type: string
+                  enum:
+                    - erp:autorisation_de_travaux
+                    - erp:permis_de_construire
+                    - erp:levee_de_prescriptions
+                    - erp:changement_de_dus
+                    - erp:salon_type_t
+                    - erp:utilisation_exceptionnelle_de_locaux
+                    - erp:demande_d_implantation_cts_inferieur_6_mois
+                    - erp:demande_d_implantation_cts_superieur_6_mois
+                    - erp:derogation
+                    - erp:etude_cahier_des_charges_type_t
+                    - erp:levee_de_reserve
+                    - erp:echeancier_de_travaux
+                    - erp:cahier_des_charges_ssi
+                    - erp:etude_suite_a_un_avis_differe
+                    - erp:visite_periodique
+                    - erp:visite_reception
+                    - erp:visite_avant_ouverture
+                    - erp:visite_controle
+                    - erp:visite_inopinee
+                    - erp:visite_chantier
+                    - erp:demande_avis
+                    - erp:demande_reclassement
+                    - erp:suivi_avis_defavorable
+                    - erp:levee_avis_defavorable
+                    - erp:dossier_ge_2
+                    - erp:schema_general_organisation_securite
+                    - erp:etude_ingenierie
+                    - erp:manifestation_temporaire
+                passage_commission_dossier_membre_avis_id:
+                  description: Les identifiants des supports réglementaires de la prescription.
+                  type: array
+                  maxItems: 10
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
+                prescriptions:
+                  description: Liste des prescriptions associées au passage en commission. Chaque prescription est un support réglementaire de la prescription.
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
               required:
-                - dossier_id
                 - date_de_passage
+                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: create
@@ -28839,6 +28890,13 @@ paths:
               type: object
               title: Objet Passage en Commission Dossier
               properties:
+                erp_id:
+                  description: Identifiant de l'établissement recevant du public (ERP) associé au dossier.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
+                  nullable: true
                 avis:
                   description: Avis rendu de la commission sur le dossier.
                   type: string
@@ -28867,6 +28925,58 @@ paths:
                   format: int32
                   minimum: 5
                   maximum: 1440
+                type:
+                  description: Type du dossier.
+                  type: string
+                  enum:
+                    - erp:autorisation_de_travaux
+                    - erp:permis_de_construire
+                    - erp:levee_de_prescriptions
+                    - erp:changement_de_dus
+                    - erp:salon_type_t
+                    - erp:utilisation_exceptionnelle_de_locaux
+                    - erp:demande_d_implantation_cts_inferieur_6_mois
+                    - erp:demande_d_implantation_cts_superieur_6_mois
+                    - erp:derogation
+                    - erp:etude_cahier_des_charges_type_t
+                    - erp:levee_de_reserve
+                    - erp:echeancier_de_travaux
+                    - erp:cahier_des_charges_ssi
+                    - erp:etude_suite_a_un_avis_differe
+                    - erp:visite_periodique
+                    - erp:visite_reception
+                    - erp:visite_avant_ouverture
+                    - erp:visite_controle
+                    - erp:visite_inopinee
+                    - erp:visite_chantier
+                    - erp:demande_avis
+                    - erp:demande_reclassement
+                    - erp:suivi_avis_defavorable
+                    - erp:levee_avis_defavorable
+                    - erp:dossier_ge_2
+                    - erp:schema_general_organisation_securite
+                    - erp:etude_ingenierie
+                    - erp:manifestation_temporaire
+                passage_commission_dossier_membre_avis_id:
+                  description: Les identifiants des supports réglementaires de la prescription.
+                  type: array
+                  maxItems: 10
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
+                prescriptions:
+                  description: Liste des prescriptions associées au passage en commission. Chaque prescription est un support réglementaire de la prescription.
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
+              required:
+                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -29047,6 +29157,1200 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: ordres_du_jour
       x-extension-metarisc-codegen-operation: update-commission-date-dossier
+  /ordres_du_jour/{dossier_id}/membre_avis:
+    get:
+      tags:
+        - Ordres Du Jour API
+      summary: Liste des avis des membres
+      description: Récupération d'une liste des avis des membres sur un ordre du jour
+      operationId: PaginateMembreAvisDossierOrdresDuJour
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 100
+                    items:
+                      $ref: '#/components/schemas/PassageCommissionDossierMembreAvis'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: ordres_du_jour
+      x-extension-metarisc-codegen-operation: paginate-avis-membre
+    post:
+      tags:
+        - Ordres Du Jour API
+      summary: Ajout d'un avis de membre de la commission.
+      description: Permet d'ajouter un avis d'un membre de la commission sur un dossier. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+      operationId: PostMembreAvisDossierOrdresDuJour
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Objet PassageCommissionDossierMembreAvis Dossiers
+              description: Passage d'un membre de la commission sur un dossier avec avis.
+              oneOf:
+                - title: Objet PassageCommissionDossierMembreAvis Simple
+                  description: Passage d'un membre de la commission sans dossier associé.
+                  allOf:
+                    - type: object
+                      title: Objet de PassageCommissionDossierMembreAvis Base
+                      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                      properties:
+                        membre_id:
+                          description: Identifiant du membre de la commission.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                        type:
+                          description: Type de passage.
+                          type: string
+                          enum:
+                            - avis_simple
+                            - avis_dossier
+                        motivation_avis:
+                          description: Motivation de l'avis du membre.
+                          type: string
+                          maxLength: 8192
+                          nullable: true
+                      required:
+                        - membre_id
+                        - type
+                    - type: object
+                      properties:
+                        avis_membre:
+                          description: Proposition d'avis du membre.
+                          type: string
+                          enum:
+                            - favorable
+                            - defavorable
+                      required:
+                        - avis_membre
+                - title: Objet PassageCommissionDossierMembreAvis Dossiers
+                  description: Passage d'un membre de la commission sur un ou plusieurs dossiers avec avis.
+                  allOf:
+                    - type: object
+                      title: Objet de PassageCommissionDossierMembreAvis Base
+                      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                      properties:
+                        membre_id:
+                          description: Identifiant du membre de la commission.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                        type:
+                          description: Type de passage.
+                          type: string
+                          enum:
+                            - avis_simple
+                            - avis_dossier
+                        motivation_avis:
+                          description: Motivation de l'avis du membre.
+                          type: string
+                          maxLength: 8192
+                          nullable: true
+                      required:
+                        - membre_id
+                        - type
+                    - type: object
+                      properties:
+                        dossier_id:
+                          description: Identifiant du dossier associé au passage.
+                          type: array
+                          maxItems: 100
+                          items:
+                            type: string
+                            format: uuid
+                            maxLength: 36
+                      required:
+                        - dossier_id
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvis'
+              x-extension-metarisc-codegen-context: create
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommissionDossierMembreAvis'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: ordres_du_jour
+      x-extension-metarisc-codegen-operation: post-avis-membre
+  /ordres_du_jour/{dossier_id}/membre_avis/{membre_avis_id}:
+    delete:
+      tags:
+        - Ordres Du Jour API
+      summary: Suppression d'un avis
+      description: Suppression d'un avis d'un membre de la commission sur un dossier.
+      operationId: DeleteMembreAvisMembreAvisDossierOrdresDuJour
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - name: membre_avis_id
+          in: path
+          required: true
+          description: Membre Avis Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '204':
+          description: No Content
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: ordres_du_jour
+      x-extension-metarisc-codegen-operation: delete-membre-avis-membre-avis-dossier
+    get:
+      tags:
+        - Ordres Du Jour API
+      summary: Détails d'un avis de membre de la commission sur un dossier
+      description: Récupération d'un avis de membre de la commission sur un dossier.
+      operationId: GetMembreAvisMembreAvisDossierOrdresDuJour
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - name: membre_avis_id
+          in: path
+          required: true
+          description: Membre Avis Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommissionDossierMembreAvis'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: ordres_du_jour
+      x-extension-metarisc-codegen-operation: get-contact
+    post:
+      tags:
+        - Ordres Du Jour API
+      summary: Ajout d'un avis de membre de la commission.
+      description: Permet d'ajouter un avis d'un membre de la commission sur un dossier. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+      operationId: PostMembreAvisMembreAvisDossierOrdresDuJour
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - name: membre_avis_id
+          in: path
+          required: true
+          description: Membre Avis Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Objet PassageCommissionDossierMembreAvis Dossiers
+              description: Passage d'un membre de la commission sur un dossier avec avis.
+              oneOf:
+                - title: Objet PassageCommissionDossierMembreAvis Simple
+                  description: Passage d'un membre de la commission sans dossier associé.
+                  allOf:
+                    - type: object
+                      title: Objet de PassageCommissionDossierMembreAvis Base
+                      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                      properties:
+                        motivation_avis:
+                          description: Motivation de l'avis du membre.
+                          type: string
+                          maxLength: 8192
+                          nullable: true
+                    - type: object
+                      properties:
+                        avis_membre:
+                          description: Proposition d'avis du membre.
+                          type: string
+                          enum:
+                            - favorable
+                            - defavorable
+                      required:
+                        - avis_membre
+                - title: Objet PassageCommissionDossierMembreAvis Dossiers
+                  description: Passage d'un membre de la commission sur un ou plusieurs dossiers avec avis.
+                  allOf:
+                    - type: object
+                      title: Objet de PassageCommissionDossierMembreAvis Base
+                      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+                      properties:
+                        motivation_avis:
+                          description: Motivation de l'avis du membre.
+                          type: string
+                          maxLength: 8192
+                          nullable: true
+                    - type: object
+                      properties:
+                        dossier_id:
+                          description: Identifiant du dossier associé au passage.
+                          type: array
+                          maxItems: 100
+                          items:
+                            type: string
+                            format: uuid
+                            maxLength: 36
+                      required:
+                        - dossier_id
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvis'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassageCommissionDossierMembreAvis'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: ordres_du_jour
+      x-extension-metarisc-codegen-operation: post-avis-membre
   /ordres_du_jour/{dossier_id}/proces_verbal_pdf:
     get:
       tags:
@@ -46317,10 +47621,11 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        dossier:
-          description: Dossier incrit à l'ordre du jour d'une date de passage en commission.
+        erp:
+          description: L'établissement recevant du public (ERP) associé au passage en commission.
           allOf:
-            - $ref: '#/components/schemas/Dossier'
+            - $ref: '#/components/schemas/ERP'
+          nullable: true
         avis:
           description: Avis rendu de la commission sur le dossier.
           type: string
@@ -46353,16 +47658,135 @@ components:
           format: int32
           minimum: 5
           maximum: 1440
+        type:
+          description: Type du dossier.
+          type: string
+          enum:
+            - erp:autorisation_de_travaux
+            - erp:permis_de_construire
+            - erp:levee_de_prescriptions
+            - erp:changement_de_dus
+            - erp:salon_type_t
+            - erp:utilisation_exceptionnelle_de_locaux
+            - erp:demande_d_implantation_cts_inferieur_6_mois
+            - erp:demande_d_implantation_cts_superieur_6_mois
+            - erp:derogation
+            - erp:etude_cahier_des_charges_type_t
+            - erp:levee_de_reserve
+            - erp:echeancier_de_travaux
+            - erp:cahier_des_charges_ssi
+            - erp:etude_suite_a_un_avis_differe
+            - erp:visite_periodique
+            - erp:visite_reception
+            - erp:visite_avant_ouverture
+            - erp:visite_controle
+            - erp:visite_inopinee
+            - erp:visite_chantier
+            - erp:demande_avis
+            - erp:demande_reclassement
+            - erp:suivi_avis_defavorable
+            - erp:levee_avis_defavorable
+            - erp:dossier_ge_2
+            - erp:schema_general_organisation_securite
+            - erp:etude_ingenierie
+            - erp:manifestation_temporaire
       required:
         - id
-        - dossier
         - avis
         - ge4_3
         - date_de_passage
         - avis_differe
         - observations
         - duree_minutes
+        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisBase:
+      type: object
+      title: Objet de PassageCommissionDossierMembreAvis Base
+      description: Passage d'un membre de la commission sur un dossier avec avis. Un passage est l'action d'un membre de la commission sur un dossier, qui peut être associé à un avis.
+      properties:
+        id:
+          description: Identifiant unique de l'objet.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        membre:
+          description: Membre de la commission.
+          allOf:
+            - $ref: '#/components/schemas/CommissionMembre'
+        type:
+          description: Type de passage.
+          type: string
+          enum:
+            - avis_simple
+            - avis_dossier
+        motivation_avis:
+          description: Motivation de l'avis du membre.
+          type: string
+          maxLength: 8192
+          nullable: true
+      required:
+        - id
+        - membre
+        - type
+        - motivation_avis
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisDossiers:
+      title: Objet PassageCommissionDossierMembreAvis Dossiers
+      description: Passage d'un membre de la commission sur un ou plusieurs dossiers avec avis.
+      allOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+        - type: object
+          properties:
+            dossiers:
+              description: Liste des dossiers associés au passage.
+              type: array
+              maxItems: 100
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/DossierErp'
+              nullable: true
+            dossier_id:
+              description: Identifiant du dossier associé au passage.
+              type: array
+              maxItems: 100
+              items:
+                type: string
+                format: uuid
+                maxLength: 36
+          required:
+            - dossiers
+            - dossier_id
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisDossiers'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvisSimple:
+      title: Objet PassageCommissionDossierMembreAvis Simple
+      description: Passage d'un membre de la commission sans dossier associé.
+      allOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisBase'
+        - type: object
+          properties:
+            avis_membre:
+              description: Proposition d'avis du membre.
+              type: string
+              enum:
+                - favorable
+                - defavorable
+              nullable: true
+          required:
+            - avis_membre
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvisSimple'
+      x-extension-metarisc-codegen-context: query
+    PassageCommissionDossierMembreAvis:
+      title: Objet PassageCommissionDossierMembreAvis Dossiers
+      description: Passage d'un membre de la commission sur un dossier avec avis.
+      oneOf:
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisSimple'
+        - $ref: '#/components/schemas/PassageCommissionDossierMembreAvisDossiers'
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossierMembreAvis'
       x-extension-metarisc-codegen-context: query
     Permission:
       type: object
