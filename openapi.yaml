@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-07-2025.1
+  version: 1.0/feature/filtre-passage-commission-type/13-08-2025.1
   title: Metarisc API
   description: |-
 
@@ -323,7 +323,7 @@ paths:
     get:
       tags:
         - Anomalies API
-      summary: Liste des anomalies types de la bibiliothèque DECI
+      summary: Liste des anomalies types de la bibliothèque DECI
       description: Retourne une liste des anomalies types dans la bibliothèque DECI.
       operationId: PaginateAnomalies
       security:
@@ -1699,6 +1699,19 @@ paths:
             format: date
             maxLength: 10
             minLength: 10
+        - name: type
+          in: query
+          description: Filtre sur le type de passage en commission.
+          schema:
+            type: string
+            enum:
+              - salle
+              - visite_de_securite
+              - groupe_de_visite
+              - visite_reception_travaux
+              - visite_periodique
+              - visite_inopinee
+              - visite_controle
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -46366,7 +46379,7 @@ components:
       x-extension-metarisc-codegen-context: query
     Permission:
       type: object
-      title: Objet Permission
+      title: Objet Permission Globale
       description: Permission associée à une ressource globale Metarisc.
       properties:
         name:
@@ -46385,7 +46398,7 @@ components:
       x-extension-metarisc-codegen-context: query
     PermissionDossier:
       type: object
-      title: Objet Permission
+      title: Objet Permission Dossier
       description: Permission associée à un dossier ERP Metarisc.
       properties:
         name:
@@ -46404,7 +46417,7 @@ components:
       x-extension-metarisc-codegen-context: query
     PermissionErp:
       type: object
-      title: Objet Permission
+      title: Objet Permission ERP
       description: Permission associée à un ERP Metarisc.
       properties:
         name:
@@ -46419,7 +46432,7 @@ components:
       x-extension-metarisc-codegen-context: query
     PermissionOrg:
       type: object
-      title: Objet Permission
+      title: Objet Permission Organisation
       description: Permission associée à une organisation Metarisc.
       properties:
         name:
