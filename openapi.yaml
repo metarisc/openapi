@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-07-2025.1
+  version: 1.0/feature/creation-type-IGH-et-EP/13-08-2025.1
   title: Metarisc API
   description: |-
 
@@ -323,7 +323,7 @@ paths:
     get:
       tags:
         - Anomalies API
-      summary: Liste des anomalies types de la bibiliothèque DECI
+      summary: Liste des anomalies types de la bibliothèque DECI
       description: Retourne une liste des anomalies types dans la bibliothèque DECI.
       operationId: PaginateAnomalies
       security:
@@ -11863,8 +11863,25 @@ paths:
                             - EF - Bateaux en stationnement sur les eaux intérieures
                             - EF - Bateaux stationnaires
                             - EF - Etablissements flottants
+                            - EP - Maison d'arrêt
+                            - EP - Maison centrale et centre de détention
+                            - EP - Centre pénitentiaire
+                            - EP - Centre de semi-liberté et centres pour peines aménagées
+                            - EP - Établissement pénitentiaire pour mineurs
+                            - EP - Centre de rétention administrative
                             - GA - Gares
                             - GEEM - Grands établissements à exploitation multiple
+                            - IGH - GHA (Habitation)
+                            - IGH - GHO (Hôtel)
+                            - IGH - GHR (Enseignement)
+                            - IGH - GHS (Dépôt d'archives)
+                            - IGH - GHU (Sanitaire)
+                            - IGH - GHW1 (Bureau)
+                            - IGH - GHW2 (Bureau)
+                            - IGH - GHZ (Mixte)
+                            - IGH - GHTC (Tour de contrôle)
+                            - IGH - ITGH
+                            - IGH - IMH
                             - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                             - J - Etablissements d'hébergement pour adultes handicapés
                             - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -11975,8 +11992,25 @@ paths:
                               - EF - Bateaux en stationnement sur les eaux intérieures
                               - EF - Bateaux stationnaires
                               - EF - Etablissements flottants
+                              - EP - Maison d'arrêt
+                              - EP - Maison centrale et centre de détention
+                              - EP - Centre pénitentiaire
+                              - EP - Centre de semi-liberté et centres pour peines aménagées
+                              - EP - Établissement pénitentiaire pour mineurs
+                              - EP - Centre de rétention administrative
                               - GA - Gares
                               - GEEM - Grands établissements à exploitation multiple
+                              - IGH - GHA (Habitation)
+                              - IGH - GHO (Hôtel)
+                              - IGH - GHR (Enseignement)
+                              - IGH - GHS (Dépôt d'archives)
+                              - IGH - GHU (Sanitaire)
+                              - IGH - GHW1 (Bureau)
+                              - IGH - GHW2 (Bureau)
+                              - IGH - GHZ (Mixte)
+                              - IGH - GHTC (Tour de contrôle)
+                              - IGH - ITGH
+                              - IGH - IMH
                               - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                               - J - Etablissements d'hébergement pour adultes handicapés
                               - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -12125,8 +12159,25 @@ paths:
                                   - EF - Bateaux en stationnement sur les eaux intérieures
                                   - EF - Bateaux stationnaires
                                   - EF - Etablissements flottants
+                                  - EP - Maison d'arrêt
+                                  - EP - Maison centrale et centre de détention
+                                  - EP - Centre pénitentiaire
+                                  - EP - Centre de semi-liberté et centres pour peines aménagées
+                                  - EP - Établissement pénitentiaire pour mineurs
+                                  - EP - Centre de rétention administrative
                                   - GA - Gares
                                   - GEEM - Grands établissements à exploitation multiple
+                                  - IGH - GHA (Habitation)
+                                  - IGH - GHO (Hôtel)
+                                  - IGH - GHR (Enseignement)
+                                  - IGH - GHS (Dépôt d'archives)
+                                  - IGH - GHU (Sanitaire)
+                                  - IGH - GHW1 (Bureau)
+                                  - IGH - GHW2 (Bureau)
+                                  - IGH - GHZ (Mixte)
+                                  - IGH - GHTC (Tour de contrôle)
+                                  - IGH - ITGH
+                                  - IGH - IMH
                                   - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                   - J - Etablissements d'hébergement pour adultes handicapés
                                   - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -16861,8 +16912,25 @@ paths:
                   - EF - Bateaux en stationnement sur les eaux intérieures
                   - EF - Bateaux stationnaires
                   - EF - Etablissements flottants
+                  - EP - Maison d'arrêt
+                  - EP - Maison centrale et centre de détention
+                  - EP - Centre pénitentiaire
+                  - EP - Centre de semi-liberté et centres pour peines aménagées
+                  - EP - Établissement pénitentiaire pour mineurs
+                  - EP - Centre de rétention administrative
                   - GA - Gares
                   - GEEM - Grands établissements à exploitation multiple
+                  - IGH - GHA (Habitation)
+                  - IGH - GHO (Hôtel)
+                  - IGH - GHR (Enseignement)
+                  - IGH - GHS (Dépôt d'archives)
+                  - IGH - GHU (Sanitaire)
+                  - IGH - GHW1 (Bureau)
+                  - IGH - GHW2 (Bureau)
+                  - IGH - GHZ (Mixte)
+                  - IGH - GHTC (Tour de contrôle)
+                  - IGH - ITGH
+                  - IGH - IMH
                   - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                   - J - Etablissements d'hébergement pour adultes handicapés
                   - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -16969,8 +17037,25 @@ paths:
                     - EF - Bateaux en stationnement sur les eaux intérieures
                     - EF - Bateaux stationnaires
                     - EF - Etablissements flottants
+                    - EP - Maison d'arrêt
+                    - EP - Maison centrale et centre de détention
+                    - EP - Centre pénitentiaire
+                    - EP - Centre de semi-liberté et centres pour peines aménagées
+                    - EP - Établissement pénitentiaire pour mineurs
+                    - EP - Centre de rétention administrative
                     - GA - Gares
                     - GEEM - Grands établissements à exploitation multiple
+                    - IGH - GHA (Habitation)
+                    - IGH - GHO (Hôtel)
+                    - IGH - GHR (Enseignement)
+                    - IGH - GHS (Dépôt d'archives)
+                    - IGH - GHU (Sanitaire)
+                    - IGH - GHW1 (Bureau)
+                    - IGH - GHW2 (Bureau)
+                    - IGH - GHZ (Mixte)
+                    - IGH - GHTC (Tour de contrôle)
+                    - IGH - ITGH
+                    - IGH - IMH
                     - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                     - J - Etablissements d'hébergement pour adultes handicapés
                     - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -17468,8 +17553,25 @@ paths:
                                         - EF - Bateaux en stationnement sur les eaux intérieures
                                         - EF - Bateaux stationnaires
                                         - EF - Etablissements flottants
+                                        - EP - Maison d'arrêt
+                                        - EP - Maison centrale et centre de détention
+                                        - EP - Centre pénitentiaire
+                                        - EP - Centre de semi-liberté et centres pour peines aménagées
+                                        - EP - Établissement pénitentiaire pour mineurs
+                                        - EP - Centre de rétention administrative
                                         - GA - Gares
                                         - GEEM - Grands établissements à exploitation multiple
+                                        - IGH - GHA (Habitation)
+                                        - IGH - GHO (Hôtel)
+                                        - IGH - GHR (Enseignement)
+                                        - IGH - GHS (Dépôt d'archives)
+                                        - IGH - GHU (Sanitaire)
+                                        - IGH - GHW1 (Bureau)
+                                        - IGH - GHW2 (Bureau)
+                                        - IGH - GHZ (Mixte)
+                                        - IGH - GHTC (Tour de contrôle)
+                                        - IGH - ITGH
+                                        - IGH - IMH
                                         - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                         - J - Etablissements d'hébergement pour adultes handicapés
                                         - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -17580,8 +17682,25 @@ paths:
                                           - EF - Bateaux en stationnement sur les eaux intérieures
                                           - EF - Bateaux stationnaires
                                           - EF - Etablissements flottants
+                                          - EP - Maison d'arrêt
+                                          - EP - Maison centrale et centre de détention
+                                          - EP - Centre pénitentiaire
+                                          - EP - Centre de semi-liberté et centres pour peines aménagées
+                                          - EP - Établissement pénitentiaire pour mineurs
+                                          - EP - Centre de rétention administrative
                                           - GA - Gares
                                           - GEEM - Grands établissements à exploitation multiple
+                                          - IGH - GHA (Habitation)
+                                          - IGH - GHO (Hôtel)
+                                          - IGH - GHR (Enseignement)
+                                          - IGH - GHS (Dépôt d'archives)
+                                          - IGH - GHU (Sanitaire)
+                                          - IGH - GHW1 (Bureau)
+                                          - IGH - GHW2 (Bureau)
+                                          - IGH - GHZ (Mixte)
+                                          - IGH - GHTC (Tour de contrôle)
+                                          - IGH - ITGH
+                                          - IGH - IMH
                                           - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                           - J - Etablissements d'hébergement pour adultes handicapés
                                           - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -17730,8 +17849,25 @@ paths:
                                               - EF - Bateaux en stationnement sur les eaux intérieures
                                               - EF - Bateaux stationnaires
                                               - EF - Etablissements flottants
+                                              - EP - Maison d'arrêt
+                                              - EP - Maison centrale et centre de détention
+                                              - EP - Centre pénitentiaire
+                                              - EP - Centre de semi-liberté et centres pour peines aménagées
+                                              - EP - Établissement pénitentiaire pour mineurs
+                                              - EP - Centre de rétention administrative
                                               - GA - Gares
                                               - GEEM - Grands établissements à exploitation multiple
+                                              - IGH - GHA (Habitation)
+                                              - IGH - GHO (Hôtel)
+                                              - IGH - GHR (Enseignement)
+                                              - IGH - GHS (Dépôt d'archives)
+                                              - IGH - GHU (Sanitaire)
+                                              - IGH - GHW1 (Bureau)
+                                              - IGH - GHW2 (Bureau)
+                                              - IGH - GHZ (Mixte)
+                                              - IGH - GHTC (Tour de contrôle)
+                                              - IGH - ITGH
+                                              - IGH - IMH
                                               - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                               - J - Etablissements d'hébergement pour adultes handicapés
                                               - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -20728,8 +20864,25 @@ paths:
                                         - EF - Bateaux en stationnement sur les eaux intérieures
                                         - EF - Bateaux stationnaires
                                         - EF - Etablissements flottants
+                                        - EP - Maison d'arrêt
+                                        - EP - Maison centrale et centre de détention
+                                        - EP - Centre pénitentiaire
+                                        - EP - Centre de semi-liberté et centres pour peines aménagées
+                                        - EP - Établissement pénitentiaire pour mineurs
+                                        - EP - Centre de rétention administrative
                                         - GA - Gares
                                         - GEEM - Grands établissements à exploitation multiple
+                                        - IGH - GHA (Habitation)
+                                        - IGH - GHO (Hôtel)
+                                        - IGH - GHR (Enseignement)
+                                        - IGH - GHS (Dépôt d'archives)
+                                        - IGH - GHU (Sanitaire)
+                                        - IGH - GHW1 (Bureau)
+                                        - IGH - GHW2 (Bureau)
+                                        - IGH - GHZ (Mixte)
+                                        - IGH - GHTC (Tour de contrôle)
+                                        - IGH - ITGH
+                                        - IGH - IMH
                                         - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                         - J - Etablissements d'hébergement pour adultes handicapés
                                         - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -20840,8 +20993,25 @@ paths:
                                           - EF - Bateaux en stationnement sur les eaux intérieures
                                           - EF - Bateaux stationnaires
                                           - EF - Etablissements flottants
+                                          - EP - Maison d'arrêt
+                                          - EP - Maison centrale et centre de détention
+                                          - EP - Centre pénitentiaire
+                                          - EP - Centre de semi-liberté et centres pour peines aménagées
+                                          - EP - Établissement pénitentiaire pour mineurs
+                                          - EP - Centre de rétention administrative
                                           - GA - Gares
                                           - GEEM - Grands établissements à exploitation multiple
+                                          - IGH - GHA (Habitation)
+                                          - IGH - GHO (Hôtel)
+                                          - IGH - GHR (Enseignement)
+                                          - IGH - GHS (Dépôt d'archives)
+                                          - IGH - GHU (Sanitaire)
+                                          - IGH - GHW1 (Bureau)
+                                          - IGH - GHW2 (Bureau)
+                                          - IGH - GHZ (Mixte)
+                                          - IGH - GHTC (Tour de contrôle)
+                                          - IGH - ITGH
+                                          - IGH - IMH
                                           - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                           - J - Etablissements d'hébergement pour adultes handicapés
                                           - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -20990,8 +21160,25 @@ paths:
                                               - EF - Bateaux en stationnement sur les eaux intérieures
                                               - EF - Bateaux stationnaires
                                               - EF - Etablissements flottants
+                                              - EP - Maison d'arrêt
+                                              - EP - Maison centrale et centre de détention
+                                              - EP - Centre pénitentiaire
+                                              - EP - Centre de semi-liberté et centres pour peines aménagées
+                                              - EP - Établissement pénitentiaire pour mineurs
+                                              - EP - Centre de rétention administrative
                                               - GA - Gares
                                               - GEEM - Grands établissements à exploitation multiple
+                                              - IGH - GHA (Habitation)
+                                              - IGH - GHO (Hôtel)
+                                              - IGH - GHR (Enseignement)
+                                              - IGH - GHS (Dépôt d'archives)
+                                              - IGH - GHU (Sanitaire)
+                                              - IGH - GHW1 (Bureau)
+                                              - IGH - GHW2 (Bureau)
+                                              - IGH - GHZ (Mixte)
+                                              - IGH - GHTC (Tour de contrôle)
+                                              - IGH - ITGH
+                                              - IGH - IMH
                                               - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
                                               - J - Etablissements d'hébergement pour adultes handicapés
                                               - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -43562,8 +43749,25 @@ components:
             - EF - Bateaux en stationnement sur les eaux intérieures
             - EF - Bateaux stationnaires
             - EF - Etablissements flottants
+            - EP - Maison d'arrêt
+            - EP - Maison centrale et centre de détention
+            - EP - Centre pénitentiaire
+            - EP - Centre de semi-liberté et centres pour peines aménagées
+            - EP - Établissement pénitentiaire pour mineurs
+            - EP - Centre de rétention administrative
             - GA - Gares
             - GEEM - Grands établissements à exploitation multiple
+            - IGH - GHA (Habitation)
+            - IGH - GHO (Hôtel)
+            - IGH - GHR (Enseignement)
+            - IGH - GHS (Dépôt d'archives)
+            - IGH - GHU (Sanitaire)
+            - IGH - GHW1 (Bureau)
+            - IGH - GHW2 (Bureau)
+            - IGH - GHZ (Mixte)
+            - IGH - GHTC (Tour de contrôle)
+            - IGH - ITGH
+            - IGH - IMH
             - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
             - J - Etablissements d'hébergement pour adultes handicapés
             - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -43674,8 +43878,25 @@ components:
               - EF - Bateaux en stationnement sur les eaux intérieures
               - EF - Bateaux stationnaires
               - EF - Etablissements flottants
+              - EP - Maison d'arrêt
+              - EP - Maison centrale et centre de détention
+              - EP - Centre pénitentiaire
+              - EP - Centre de semi-liberté et centres pour peines aménagées
+              - EP - Établissement pénitentiaire pour mineurs
+              - EP - Centre de rétention administrative
               - GA - Gares
               - GEEM - Grands établissements à exploitation multiple
+              - IGH - GHA (Habitation)
+              - IGH - GHO (Hôtel)
+              - IGH - GHR (Enseignement)
+              - IGH - GHS (Dépôt d'archives)
+              - IGH - GHU (Sanitaire)
+              - IGH - GHW1 (Bureau)
+              - IGH - GHW2 (Bureau)
+              - IGH - GHZ (Mixte)
+              - IGH - GHTC (Tour de contrôle)
+              - IGH - ITGH
+              - IGH - IMH
               - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
               - J - Etablissements d'hébergement pour adultes handicapés
               - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -45530,8 +45751,25 @@ components:
             - EF - Bateaux en stationnement sur les eaux intérieures
             - EF - Bateaux stationnaires
             - EF - Etablissements flottants
+            - EP - Maison d'arrêt
+            - EP - Maison centrale et centre de détention
+            - EP - Centre pénitentiaire
+            - EP - Centre de semi-liberté et centres pour peines aménagées
+            - EP - Établissement pénitentiaire pour mineurs
+            - EP - Centre de rétention administrative
             - GA - Gares
             - GEEM - Grands établissements à exploitation multiple
+            - IGH - GHA (Habitation)
+            - IGH - GHO (Hôtel)
+            - IGH - GHR (Enseignement)
+            - IGH - GHS (Dépôt d'archives)
+            - IGH - GHU (Sanitaire)
+            - IGH - GHW1 (Bureau)
+            - IGH - GHW2 (Bureau)
+            - IGH - GHZ (Mixte)
+            - IGH - GHTC (Tour de contrôle)
+            - IGH - ITGH
+            - IGH - IMH
             - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
             - J - Etablissements d'hébergement pour adultes handicapés
             - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
@@ -46366,7 +46604,7 @@ components:
       x-extension-metarisc-codegen-context: query
     Permission:
       type: object
-      title: Objet Permission
+      title: Objet Permission Globale
       description: Permission associée à une ressource globale Metarisc.
       properties:
         name:
@@ -46385,7 +46623,7 @@ components:
       x-extension-metarisc-codegen-context: query
     PermissionDossier:
       type: object
-      title: Objet Permission
+      title: Objet Permission Dossier
       description: Permission associée à un dossier ERP Metarisc.
       properties:
         name:
@@ -46404,7 +46642,7 @@ components:
       x-extension-metarisc-codegen-context: query
     PermissionErp:
       type: object
-      title: Objet Permission
+      title: Objet Permission ERP
       description: Permission associée à un ERP Metarisc.
       properties:
         name:
@@ -46419,7 +46657,7 @@ components:
       x-extension-metarisc-codegen-context: query
     PermissionOrg:
       type: object
-      title: Objet Permission
+      title: Objet Permission Organisation
       description: Permission associée à une organisation Metarisc.
       properties:
         name:
