@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/13-08-2025.1
+  version: 1.0/feature/hotfix-add-descriptif_dossier/19-08-2025.1
   title: Metarisc API
   description: |-
 
@@ -14506,6 +14506,11 @@ paths:
                         nullable: true
                     required:
                       - libelle
+                descriptif_dossier:
+                  description: Descriptif du dossier d'un rapport de visite.
+                  type: string
+                  maxLength: 8192
+                  nullable: true
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -47658,6 +47663,11 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/Essai'
+        descriptif_dossier:
+          description: Descriptif du dossier d'un rapport de visite.
+          type: string
+          maxLength: 8192
+          nullable: true
       required:
         - observations
         - prise_de_note_interne
@@ -47666,6 +47676,7 @@ components:
         - facteur_dangerosite
         - documents_techniques
         - essais
+        - descriptif_dossier
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
       x-extension-metarisc-codegen-context: query
     ReferenceExterieure:
