@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/02-09-2025.1
+  version: 1.0/main/04-09-2025.1
   title: Metarisc API
   description: |-
 
@@ -19998,7 +19998,7 @@ paths:
       tags:
         - ERP API
       summary: Liste des dossiers
-      description: Récupération de la liste des dossiers.
+      description: Récupération de la liste des dossiers. Cet endpoint partage certains paramètres de filtrage de /dossiers.
       operationId: PaginateDossiersErpErp
       security:
         - IdMetariscFr:
@@ -27954,7 +27954,7 @@ paths:
                   type: string
                   maxLength: 8192
                 type:
-                  description: Type de la notification.
+                  description: Type de la notification. Le type correspond à un événement particulier dans le système qui déclenche la création de la notification.
                   type: string
                   enum:
                     - info
@@ -46915,6 +46915,10 @@ components:
           format: date-time
           maxLength: 50
           minLength: 20
+        subject:
+          description: Sujet de l'événement.
+          oneOf:
+            - $ref: '#/components/schemas/PassageCommission'
       required:
         - id
         - title
@@ -47129,7 +47133,7 @@ components:
           type: string
           maxLength: 8192
         type:
-          description: Type de la notification.
+          description: Type de la notification. Le type correspond à un événement particulier dans le système qui déclenche la création de la notification.
           type: string
           enum:
             - info
