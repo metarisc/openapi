@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-09-2025.1
+  version: 1.0/main/09-09-2025.1
   title: Metarisc API
   description: |-
 
@@ -11187,7 +11187,8 @@ paths:
                               - erp:analyse_de_risque
                               - erp:essais_visite
                               - deci:controle_technique_pei
-                          maxItems: 25
+                          maxItems: 3
+                          uniqueItems: true
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -11283,7 +11284,8 @@ paths:
                               - erp:analyse_de_risque
                               - erp:essais_visite
                               - deci:controle_technique_pei
-                          maxItems: 25
+                          maxItems: 3
+                          uniqueItems: true
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
                           type: string
@@ -12067,9 +12069,8 @@ paths:
                             - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
                           nullable: true
                         activites_secondaire:
-                          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
+                          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
                           type: array
-                          maxItems: 10
                           items:
                             type: string
                             enum:
@@ -12194,6 +12195,8 @@ paths:
                               - X - Salles sportives spécialisées
                               - Y - Musées
                               - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                          maxItems: 10
+                          uniqueItems: true
                           nullable: true
                         categorie:
                           description: 'La catégorie d''un ERP est déterminée par le type d''activité principale exercée dans l''établissement. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977'
@@ -12631,12 +12634,14 @@ paths:
                         type_cloisonnement:
                           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                           type: array
-                          maxItems: 3
                           items:
+                            type: string
                             enum:
                               - Traditionnels
                               - Secteurs
                               - Compartiments
+                          maxItems: 3
+                          uniqueItems: true
                           nullable: true
                         construction_distribution_interieure_informations_complementaires:
                           description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -12846,8 +12851,8 @@ paths:
                         type_de_chauffage:
                           description: Information sur le type de chauffage present dans le batiment.
                           type: array
-                          maxItems: 7
                           items:
+                            type: string
                             enum:
                               - Sous-station
                               - Chaufferie
@@ -12856,6 +12861,8 @@ paths:
                               - Rooftop
                               - Chauffage urbain
                               - Autre
+                          maxItems: 7
+                          uniqueItems: true
                           nullable: true
                         chauffage_ventilation_informations_complementaires:
                           description: Les informations complémentaires au sujet du chauffage et de la ventilation.
@@ -17762,9 +17769,8 @@ paths:
                                         - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
                                       nullable: true
                                     activites_secondaire:
-                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
+                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
                                       type: array
-                                      maxItems: 10
                                       items:
                                         type: string
                                         enum:
@@ -17889,6 +17895,8 @@ paths:
                                           - X - Salles sportives spécialisées
                                           - Y - Musées
                                           - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                                      maxItems: 10
+                                      uniqueItems: true
                                       nullable: true
                                     categorie:
                                       description: 'La catégorie d''un ERP est déterminée par le type d''activité principale exercée dans l''établissement. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977'
@@ -18326,12 +18334,14 @@ paths:
                                     type_cloisonnement:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                                       type: array
-                                      maxItems: 3
                                       items:
+                                        type: string
                                         enum:
                                           - Traditionnels
                                           - Secteurs
                                           - Compartiments
+                                      maxItems: 3
+                                      uniqueItems: true
                                       nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -18541,8 +18551,8 @@ paths:
                                     type_de_chauffage:
                                       description: Information sur le type de chauffage present dans le batiment.
                                       type: array
-                                      maxItems: 7
                                       items:
+                                        type: string
                                         enum:
                                           - Sous-station
                                           - Chaufferie
@@ -18551,6 +18561,8 @@ paths:
                                           - Rooftop
                                           - Chauffage urbain
                                           - Autre
+                                      maxItems: 7
+                                      uniqueItems: true
                                       nullable: true
                                     chauffage_ventilation_informations_complementaires:
                                       description: Les informations complémentaires au sujet du chauffage et de la ventilation.
@@ -21155,9 +21167,8 @@ paths:
                                         - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
                                       nullable: true
                                     activites_secondaire:
-                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
+                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
                                       type: array
-                                      maxItems: 10
                                       items:
                                         type: string
                                         enum:
@@ -21282,6 +21293,8 @@ paths:
                                           - X - Salles sportives spécialisées
                                           - Y - Musées
                                           - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                                      maxItems: 10
+                                      uniqueItems: true
                                       nullable: true
                                     categorie:
                                       description: 'La catégorie d''un ERP est déterminée par le type d''activité principale exercée dans l''établissement. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977'
@@ -21719,12 +21732,14 @@ paths:
                                     type_cloisonnement:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                                       type: array
-                                      maxItems: 3
                                       items:
+                                        type: string
                                         enum:
                                           - Traditionnels
                                           - Secteurs
                                           - Compartiments
+                                      maxItems: 3
+                                      uniqueItems: true
                                       nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -21934,8 +21949,8 @@ paths:
                                     type_de_chauffage:
                                       description: Information sur le type de chauffage present dans le batiment.
                                       type: array
-                                      maxItems: 7
                                       items:
+                                        type: string
                                         enum:
                                           - Sous-station
                                           - Chaufferie
@@ -21944,6 +21959,8 @@ paths:
                                           - Rooftop
                                           - Chauffage urbain
                                           - Autre
+                                      maxItems: 7
+                                      uniqueItems: true
                                       nullable: true
                                     chauffage_ventilation_informations_complementaires:
                                       description: Les informations complémentaires au sujet du chauffage et de la ventilation.
@@ -32788,7 +32805,6 @@ paths:
                 pibi_performance_natures_performance_restreinte:
                   description: Liste des natures de PIBI qui auront quoiqu'il arrive une performance déclarée "restreinte".
                   type: array
-                  maxItems: 255
                   items:
                     type: string
                     enum:
@@ -32800,10 +32816,11 @@ paths:
                       - BI1x80
                       - BI1x100
                       - BI2x100
+                  maxItems: 8
+                  uniqueItems: true
                 pibi_performance_natures_a_reformer:
                   description: Les PIBI qui sont à réformer impérativement seront automatiquement non conforme.
                   type: array
-                  maxItems: 255
                   items:
                     type: string
                     enum:
@@ -32815,6 +32832,8 @@ paths:
                       - BI1x80
                       - BI1x100
                       - BI2x100
+                  maxItems: 8
+                  uniqueItems: true
                 pibi_performance_seuil_pesee_1bar:
                   description: Seuil au dessous duquel la performance du PIBI passe en "nulle".
                   type: number
@@ -44753,9 +44772,8 @@ components:
             - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
           nullable: true
         activites_secondaire:
-          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale.
+          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
           type: array
-          maxItems: 10
           items:
             type: string
             enum:
@@ -44880,6 +44898,8 @@ components:
               - X - Salles sportives spécialisées
               - Y - Musées
               - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+          maxItems: 10
+          uniqueItems: true
           nullable: true
         categorie:
           description: 'La catégorie d''un ERP est déterminée par le type d''activité principale exercée dans l''établissement. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977'
@@ -45161,12 +45181,14 @@ components:
         type_cloisonnement:
           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
           type: array
-          maxItems: 3
           items:
+            type: string
             enum:
               - Traditionnels
               - Secteurs
               - Compartiments
+          maxItems: 3
+          uniqueItems: true
           nullable: true
         construction_distribution_interieure_informations_complementaires:
           description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -45303,8 +45325,8 @@ components:
         type_de_chauffage:
           description: Information sur le type de chauffage present dans le batiment.
           type: array
-          maxItems: 7
           items:
+            type: string
             enum:
               - Sous-station
               - Chaufferie
@@ -45313,6 +45335,8 @@ components:
               - Rooftop
               - Chauffage urbain
               - Autre
+          maxItems: 7
+          uniqueItems: true
           nullable: true
         chauffage_ventilation_informations_complementaires:
           description: Les informations complémentaires au sujet du chauffage et de la ventilation.
@@ -46224,7 +46248,8 @@ components:
               - erp:analyse_de_risque
               - erp:essais_visite
               - deci:controle_technique_pei
-          maxItems: 25
+          maxItems: 3
+          uniqueItems: true
         tags:
           description: Tags du dossier.
           type: array
@@ -46269,7 +46294,8 @@ components:
               - arrivee_secretariat
               - workflow
               - reception_de_travaux_en_attente
-          maxItems: 25
+          maxItems: 12
+          uniqueItems: true
         nb_messages_fil_rouge:
           description: Nombre de messages dans le fil rouge du dossier.
           type: integer
@@ -47875,7 +47901,6 @@ components:
         pibi_performance_natures_performance_restreinte:
           description: Liste des natures de PIBI qui auront quoiqu'il arrive une performance déclarée "restreinte".
           type: array
-          maxItems: 255
           items:
             type: string
             enum:
@@ -47887,10 +47912,11 @@ components:
               - BI1x80
               - BI1x100
               - BI2x100
+          maxItems: 8
+          uniqueItems: true
         pibi_performance_natures_a_reformer:
           description: Les PIBI qui sont à réformer impérativement seront automatiquement non conforme.
           type: array
-          maxItems: 255
           items:
             type: string
             enum:
@@ -47902,6 +47928,8 @@ components:
               - BI1x80
               - BI1x100
               - BI2x100
+          maxItems: 8
+          uniqueItems: true
         pibi_performance_seuil_pesee_1bar:
           description: Seuil au dessous duquel la performance du PIBI passe en "nulle".
           type: number
