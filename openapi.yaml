@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-09-2025.1
+  version: 1.0/main/12-09-2025.1
   title: Metarisc API
   description: |-
 
@@ -48331,6 +48331,7 @@ components:
           type: string
           maxLength: 256
         type:
+          description: Le type de workflow.
           type: string
           enum:
             - analyse_de_risque
