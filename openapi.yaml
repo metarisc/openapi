@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/17-09-2025.1
+  version: 1.0/main/17-09-2025.2
   title: Metarisc API
   description: |-
 
@@ -338,6 +338,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * code : ordre croissant sur code (asc).
+              * -code : ordre décroissant sur code (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -1233,6 +1239,15 @@ paths:
               - Commission intercommunale
               - Commission d'arrondissement
               - CoDERST
+            description: |-
+              Type de la commission (peut être une commission de sécurité, un conseil départemental ...).
+
+              Valeurs possibles :
+              * Sous-commission départementale : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur le département.
+              * Commission communale : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur une commune.
+              * Commission intercommunale : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur une intercommunalité.
+              * Commission d'arrondissement : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur un arrondissement.
+              * CoDERST : Conseil départemental de l'environnement et des risques sanitaires et technologiques.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -1721,6 +1736,17 @@ paths:
               - visite_periodique
               - visite_inopinee
               - visite_controle
+            description: |-
+              Type du passage en commission.
+
+              Valeurs possibles :
+              * salle : Passage en commission en salle.
+              * visite_de_securite : Visite de sécurité.
+              * groupe_de_visite : Groupe de visite.
+              * visite_reception_travaux : Visite de réception de travaux.
+              * visite_periodique : Visite périodique.
+              * visite_inopinee : Visite inopinée.
+              * visite_controle : Visite de contrôle.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -7924,6 +7950,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * date_de_creation : ordre croissant sur date_de_creation (asc).
+              * -date_de_creation : ordre décroissant sur date_de_creation (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -7989,6 +8021,38 @@ paths:
                   - erp:schema_general_organisation_securite
                   - erp:etude_ingenierie
                   - erp:manifestation_temporaire
+                description: |-
+                  Type du dossier.
+
+                  Valeurs possibles :
+                  * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
+                  * erp:permis_de_construire : Dossier de permis de construire.
+                  * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
+                  * erp:changement_de_dus : Dossier de changement de destination.
+                  * erp:salon_type_t : Dossier de salon de type T.
+                  * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
+                  * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
+                  * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
+                  * erp:derogation : Dossier de dérogation.
+                  * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
+                  * erp:levee_de_reserve : Dossier de levée de réserve.
+                  * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
+                  * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
+                  * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
+                  * erp:visite_periodique : Dossier de visite périodique.
+                  * erp:visite_reception : Dossier de visite de réception.
+                  * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
+                  * erp:visite_controle : Dossier de visite de contrôle.
+                  * erp:visite_inopinee : Dossier de visite inopinée.
+                  * erp:visite_chantier : Dossier de visite de chantier.
+                  * erp:demande_avis : Dossier de demande d'avis.
+                  * erp:demande_reclassement : Dossier de demande de reclassement.
+                  * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
+                  * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
+                  * erp:dossier_ge_2 : Dossier GE 2.
+                  * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
+                  * erp:etude_ingenierie : Dossier d'étude ingénierie.
+                  * erp:manifestation_temporaire : Dossier de manifestation temporaire.
               - type: array
                 items:
                   type: string
@@ -8021,6 +8085,38 @@ paths:
                     - erp:schema_general_organisation_securite
                     - erp:etude_ingenierie
                     - erp:manifestation_temporaire
+                  description: |-
+                    Type du dossier.
+
+                    Valeurs possibles :
+                    * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
+                    * erp:permis_de_construire : Dossier de permis de construire.
+                    * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
+                    * erp:changement_de_dus : Dossier de changement de destination.
+                    * erp:salon_type_t : Dossier de salon de type T.
+                    * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
+                    * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
+                    * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
+                    * erp:derogation : Dossier de dérogation.
+                    * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
+                    * erp:levee_de_reserve : Dossier de levée de réserve.
+                    * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
+                    * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
+                    * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
+                    * erp:visite_periodique : Dossier de visite périodique.
+                    * erp:visite_reception : Dossier de visite de réception.
+                    * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
+                    * erp:visite_controle : Dossier de visite de contrôle.
+                    * erp:visite_inopinee : Dossier de visite inopinée.
+                    * erp:visite_chantier : Dossier de visite de chantier.
+                    * erp:demande_avis : Dossier de demande d'avis.
+                    * erp:demande_reclassement : Dossier de demande de reclassement.
+                    * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
+                    * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
+                    * erp:dossier_ge_2 : Dossier GE 2.
+                    * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
+                    * erp:etude_ingenierie : Dossier d'étude ingénierie.
+                    * erp:manifestation_temporaire : Dossier de manifestation temporaire.
                 maxItems: 10
         - name: workflow_actif
           in: query
@@ -8040,6 +8136,22 @@ paths:
               - arrivee_secretariat
               - workflow
               - reception_de_travaux_en_attente
+            description: |-
+              Type du workflow.
+
+              Valeurs possibles :
+              * analyse_de_risque : Analyse de risque.
+              * validation : Validation.
+              * arrivee_sis : Arrivée SIS.
+              * arrivee_sis_prev : Arrivée SIS préventive.
+              * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
+              * consultation_sis : Consultation SIS.
+              * passage_commission : Passage en commission.
+              * relecture : Relecture.
+              * visite : Visite.
+              * arrivee_secretariat : Arrivée au secrétariat.
+              * workflow : Workflow générique.
+              * reception_de_travaux_en_attente : Réception de travaux en attente.
         - name: affecte
           in: query
           description: Filtre sur les affectations du dossier
@@ -16618,6 +16730,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * titre : ordre croissant sur titre (asc).
+              * -titre : ordre décroissant sur titre (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -17689,6 +17807,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * libelle : ordre croissant sur libelle (asc).
+              * -libelle : ordre décroissant sur libelle (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -17856,6 +17980,133 @@ paths:
                   - X - Salles sportives spécialisées
                   - Y - Musées
                   - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                description: |-
+                  Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+                  Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+                  Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+                  Valeurs possibles :
+                  * CTS - Châpiteaux : CTS - Châpiteaux.
+                  * CTS - Structures : CTS - Structures.
+                  * CTS - Tentes : CTS - Tentes.
+                  * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                  * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                  * EF - Etablissements flottants : EF - Etablissements flottants.
+                  * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                  * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                  * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                  * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                  * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                  * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                  * GA - Gares : GA - Gares.
+                  * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                  * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                  * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                  * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                  * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                  * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                  * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                  * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                  * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                  * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                  * IGH - ITGH : IGH - ITGH.
+                  * IGH - IMH : IGH - IMH.
+                  * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                  * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                  * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                  * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                  * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                  * L - Cabarets : L - Cabarets.
+                  * L - Salles d'audition : L - Salles d'audition.
+                  * L - Salle de conférences : L - Salle de conférences.
+                  * L - Salles de pari : L - Salles de pari.
+                  * L - Salles de projection : L - Salles de projection.
+                  * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                  * L - Salles de réunions : L - Salles de réunions.
+                  * L - Salles de spectacles : L - Salles de spectacles.
+                  * L - Salles multimédia : L - Salles multimédia.
+                  * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                  * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                  * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                  * M - Aires de vente : M - Aires de vente.
+                  * M - Centres commerciaux : M - Centres commerciaux.
+                  * M - Locaux de vente : M - Locaux de vente.
+                  * M - Magasin de vente : M - Magasin de vente.
+                  * N - Bars : N - Bars.
+                  * N - Brasseries : N - Brasseries.
+                  * N - Cafétaria : N - Cafétaria.
+                  * N - Cafés : N - Cafés.
+                  * N - Cantines : N - Cantines.
+                  * N - Débits de boissons : N - Débits de boissons.
+                  * N - Restaurants : N - Restaurants.
+                  * O - Hôtels : O - Hôtels.
+                  * O - Pensions de famille : O - Pensions de famille.
+                  * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                  * P - Salle de bals : P - Salle de bals.
+                  * P - Dancing / discothèque : P - Dancing / discothèque.
+                  * P - Salles de jeux : P - Salles de jeux.
+                  * PA - Arènes : PA - Arènes.
+                  * PA - Hippodromes : PA - Hippodromes.
+                  * PA - Piscines : PA - Piscines.
+                  * PA - Pistes de patinage : PA - Pistes de patinage.
+                  * PA - Stades : PA - Stades.
+                  * PA - Terrains de sport : PA - Terrains de sport.
+                  * PA - Parc d'attraction : PA - Parc d'attraction.
+                  * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                  * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                  * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                  * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                  * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                  * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                  * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                  * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                  * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                  * R - Auto-écoles : R - Auto-écoles.
+                  * R - Centres aérés : R - Centres aérés.
+                  * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                  * R - Centres de vacances : R - Centres de vacances.
+                  * R - Colonies de vacances : R - Colonies de vacances.
+                  * R - Crèches : R - Crèches.
+                  * R - Ecoles maternelles : R - Ecoles maternelles.
+                  * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                  * R - Etablissements de formation : R - Etablissements de formation.
+                  * R - Haltes-garderies : R - Haltes-garderies.
+                  * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                  * R - Jardins d'enfant : R - Jardins d'enfant.
+                  * R - Lycee public : R - Lycee public.
+                  * R - Collège public : R - Collège public.
+                  * R - Lycee privé : R - Lycee privé.
+                  * R - Collège privé : R - Collège privé.
+                  * R - École élémentaire : R - École élémentaire.
+                  * REF - Refuges de montagne : REF - Refuges de montagne.
+                  * S - Bibliothèques : S - Bibliothèques.
+                  * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                  * SG - Structures gonflables : SG - Structures gonflables.
+                  * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                  * T - Foires-expositions : T - Foires-expositions.
+                  * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                  * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                  * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                  * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                  * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                  * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                  * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                  * V - Eglises : V - Eglises.
+                  * V - Mosquées : V - Mosquées.
+                  * V - Synagogues : V - Synagogues.
+                  * V - Temples : V - Temples.
+                  * W - Administrations : W - Administrations.
+                  * W - Banques : W - Banques.
+                  * W - Bureaux : W - Bureaux.
+                  * X - Manèges : X - Manèges.
+                  * X - Patinoires : X - Patinoires.
+                  * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                  * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                  * X - Salles omnisports : X - Salles omnisports.
+                  * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                  * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                  * Y - Musées : Y - Musées.
+                  * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
               - type: array
                 items:
                   type: string
@@ -17981,6 +18232,133 @@ paths:
                     - X - Salles sportives spécialisées
                     - Y - Musées
                     - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                  description: |-
+                    Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+                    Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+                    Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+                    Valeurs possibles :
+                    * CTS - Châpiteaux : CTS - Châpiteaux.
+                    * CTS - Structures : CTS - Structures.
+                    * CTS - Tentes : CTS - Tentes.
+                    * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                    * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                    * EF - Etablissements flottants : EF - Etablissements flottants.
+                    * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                    * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                    * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                    * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                    * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                    * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                    * GA - Gares : GA - Gares.
+                    * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                    * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                    * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                    * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                    * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                    * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                    * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                    * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                    * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                    * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                    * IGH - ITGH : IGH - ITGH.
+                    * IGH - IMH : IGH - IMH.
+                    * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                    * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                    * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                    * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                    * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                    * L - Cabarets : L - Cabarets.
+                    * L - Salles d'audition : L - Salles d'audition.
+                    * L - Salle de conférences : L - Salle de conférences.
+                    * L - Salles de pari : L - Salles de pari.
+                    * L - Salles de projection : L - Salles de projection.
+                    * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                    * L - Salles de réunions : L - Salles de réunions.
+                    * L - Salles de spectacles : L - Salles de spectacles.
+                    * L - Salles multimédia : L - Salles multimédia.
+                    * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                    * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                    * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                    * M - Aires de vente : M - Aires de vente.
+                    * M - Centres commerciaux : M - Centres commerciaux.
+                    * M - Locaux de vente : M - Locaux de vente.
+                    * M - Magasin de vente : M - Magasin de vente.
+                    * N - Bars : N - Bars.
+                    * N - Brasseries : N - Brasseries.
+                    * N - Cafétaria : N - Cafétaria.
+                    * N - Cafés : N - Cafés.
+                    * N - Cantines : N - Cantines.
+                    * N - Débits de boissons : N - Débits de boissons.
+                    * N - Restaurants : N - Restaurants.
+                    * O - Hôtels : O - Hôtels.
+                    * O - Pensions de famille : O - Pensions de famille.
+                    * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                    * P - Salle de bals : P - Salle de bals.
+                    * P - Dancing / discothèque : P - Dancing / discothèque.
+                    * P - Salles de jeux : P - Salles de jeux.
+                    * PA - Arènes : PA - Arènes.
+                    * PA - Hippodromes : PA - Hippodromes.
+                    * PA - Piscines : PA - Piscines.
+                    * PA - Pistes de patinage : PA - Pistes de patinage.
+                    * PA - Stades : PA - Stades.
+                    * PA - Terrains de sport : PA - Terrains de sport.
+                    * PA - Parc d'attraction : PA - Parc d'attraction.
+                    * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                    * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                    * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                    * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                    * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                    * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                    * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                    * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                    * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                    * R - Auto-écoles : R - Auto-écoles.
+                    * R - Centres aérés : R - Centres aérés.
+                    * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                    * R - Centres de vacances : R - Centres de vacances.
+                    * R - Colonies de vacances : R - Colonies de vacances.
+                    * R - Crèches : R - Crèches.
+                    * R - Ecoles maternelles : R - Ecoles maternelles.
+                    * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                    * R - Etablissements de formation : R - Etablissements de formation.
+                    * R - Haltes-garderies : R - Haltes-garderies.
+                    * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                    * R - Jardins d'enfant : R - Jardins d'enfant.
+                    * R - Lycee public : R - Lycee public.
+                    * R - Collège public : R - Collège public.
+                    * R - Lycee privé : R - Lycee privé.
+                    * R - Collège privé : R - Collège privé.
+                    * R - École élémentaire : R - École élémentaire.
+                    * REF - Refuges de montagne : REF - Refuges de montagne.
+                    * S - Bibliothèques : S - Bibliothèques.
+                    * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                    * SG - Structures gonflables : SG - Structures gonflables.
+                    * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                    * T - Foires-expositions : T - Foires-expositions.
+                    * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                    * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                    * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                    * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                    * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                    * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                    * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                    * V - Eglises : V - Eglises.
+                    * V - Mosquées : V - Mosquées.
+                    * V - Synagogues : V - Synagogues.
+                    * V - Temples : V - Temples.
+                    * W - Administrations : W - Administrations.
+                    * W - Banques : W - Banques.
+                    * W - Bureaux : W - Bureaux.
+                    * X - Manèges : X - Manèges.
+                    * X - Patinoires : X - Patinoires.
+                    * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                    * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                    * X - Salles omnisports : X - Salles omnisports.
+                    * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                    * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                    * Y - Musées : Y - Musées.
+                    * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                 maxItems: 10
         - name: avis_exploitation
           in: query
@@ -17990,6 +18368,12 @@ paths:
             enum:
               - favorable
               - defavorable
+            description: |-
+              Avis favorable ou défavorable.
+
+              Valeurs possibles :
+              * favorable : Avis favorable.
+              * defavorable : Avis défavorable.
         - name: a_visiter_en
           in: query
           description: Filtre sur l'année pour laquelle les ERP doivent être visités.
@@ -18029,6 +18413,16 @@ paths:
               - 3
               - 4
               - 5
+            description: |-
+              La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
+              Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+
+              Valeurs possibles :
+              * 1 : 1ère catégorie (plus de 1 500 personnes).
+              * 2 : 2ème catégorie (701 à 1 500 personnes).
+              * 3 : 3ème catégorie (301 à 700 personnes).
+              * 4 : 4ème catégorie (50 à 300 personnes).
+              * 5 : 5ème catégorie (moins de 50 personnes).
         - name: erp_rattache_a
           in: query
           description: Filtre sur les ERP rattachés à l'identifiant donné.
@@ -21341,6 +21735,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * date_de_creation : ordre croissant sur date_de_creation (asc).
+              * -date_de_creation : ordre décroissant sur date_de_creation (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -21390,6 +21790,38 @@ paths:
                   - erp:schema_general_organisation_securite
                   - erp:etude_ingenierie
                   - erp:manifestation_temporaire
+                description: |-
+                  Type du dossier.
+
+                  Valeurs possibles :
+                  * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
+                  * erp:permis_de_construire : Dossier de permis de construire.
+                  * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
+                  * erp:changement_de_dus : Dossier de changement de destination.
+                  * erp:salon_type_t : Dossier de salon de type T.
+                  * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
+                  * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
+                  * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
+                  * erp:derogation : Dossier de dérogation.
+                  * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
+                  * erp:levee_de_reserve : Dossier de levée de réserve.
+                  * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
+                  * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
+                  * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
+                  * erp:visite_periodique : Dossier de visite périodique.
+                  * erp:visite_reception : Dossier de visite de réception.
+                  * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
+                  * erp:visite_controle : Dossier de visite de contrôle.
+                  * erp:visite_inopinee : Dossier de visite inopinée.
+                  * erp:visite_chantier : Dossier de visite de chantier.
+                  * erp:demande_avis : Dossier de demande d'avis.
+                  * erp:demande_reclassement : Dossier de demande de reclassement.
+                  * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
+                  * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
+                  * erp:dossier_ge_2 : Dossier GE 2.
+                  * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
+                  * erp:etude_ingenierie : Dossier d'étude ingénierie.
+                  * erp:manifestation_temporaire : Dossier de manifestation temporaire.
               - type: array
                 items:
                   type: string
@@ -21422,6 +21854,38 @@ paths:
                     - erp:schema_general_organisation_securite
                     - erp:etude_ingenierie
                     - erp:manifestation_temporaire
+                  description: |-
+                    Type du dossier.
+
+                    Valeurs possibles :
+                    * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
+                    * erp:permis_de_construire : Dossier de permis de construire.
+                    * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
+                    * erp:changement_de_dus : Dossier de changement de destination.
+                    * erp:salon_type_t : Dossier de salon de type T.
+                    * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
+                    * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
+                    * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
+                    * erp:derogation : Dossier de dérogation.
+                    * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
+                    * erp:levee_de_reserve : Dossier de levée de réserve.
+                    * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
+                    * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
+                    * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
+                    * erp:visite_periodique : Dossier de visite périodique.
+                    * erp:visite_reception : Dossier de visite de réception.
+                    * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
+                    * erp:visite_controle : Dossier de visite de contrôle.
+                    * erp:visite_inopinee : Dossier de visite inopinée.
+                    * erp:visite_chantier : Dossier de visite de chantier.
+                    * erp:demande_avis : Dossier de demande d'avis.
+                    * erp:demande_reclassement : Dossier de demande de reclassement.
+                    * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
+                    * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
+                    * erp:dossier_ge_2 : Dossier GE 2.
+                    * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
+                    * erp:etude_ingenierie : Dossier d'étude ingénierie.
+                    * erp:manifestation_temporaire : Dossier de manifestation temporaire.
                 maxItems: 10
         - name: workflow_actif
           in: query
@@ -21441,6 +21905,22 @@ paths:
               - arrivee_secretariat
               - workflow
               - reception_de_travaux_en_attente
+            description: |-
+              Type du workflow.
+
+              Valeurs possibles :
+              * analyse_de_risque : Analyse de risque.
+              * validation : Validation.
+              * arrivee_sis : Arrivée SIS.
+              * arrivee_sis_prev : Arrivée SIS préventive.
+              * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
+              * consultation_sis : Consultation SIS.
+              * passage_commission : Passage en commission.
+              * relecture : Relecture.
+              * visite : Visite.
+              * arrivee_secretariat : Arrivée au secrétariat.
+              * workflow : Workflow générique.
+              * reception_de_travaux_en_attente : Réception de travaux en attente.
         - name: affecte
           in: query
           description: Filtre sur les affectations du dossier
@@ -24570,6 +25050,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * date : ordre croissant sur date (asc).
+              * -date : ordre décroissant sur date (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -26176,6 +26662,14 @@ paths:
               - RECONNAISSANCE_OPERATIONNELLE_ANNUELLE
               - VISITE_PERIODIQUE
               - COMMISSION_SECURITE
+            description: |-
+              Type de l'événement.
+
+              Valeurs possibles :
+              * DEFAUT : Événement par défaut.
+              * RECONNAISSANCE_OPERATIONNELLE_ANNUELLE : Reconnaissance opérationnelle annuelle.
+              * VISITE_PERIODIQUE : Visite périodique.
+              * COMMISSION_SECURITE : Commission de sécurité.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -35048,6 +35542,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * numero : ordre croissant sur numero (asc).
+              * -numero : ordre décroissant sur numero (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
@@ -35069,6 +35569,12 @@ paths:
             enum:
               - PIBI
               - PENA
+            description: |-
+              Permet de définir à quelle famille de points d’eau ce descriptif technique se rattache.
+
+              Valeurs possibles :
+              * PIBI : Poteau ou bouche d'eau incendie.
+              * PENA : Point d'eau naturel ou artificiel.
         - name: statut
           in: query
           description: Filtre sur le statut du PEI
@@ -35082,6 +35588,17 @@ paths:
               - projet
               - reforme
               - declaration_abandonnee
+            description: |-
+              Statut du PEI lors de l'établissement de son descriptif technique.
+
+              Valeurs possibles :
+              * reprise_de_donnees : Reprise de données.
+              * declaration_en_cours : Déclaration en cours.
+              * reconnaissance_operationnelle_initiale : Reconnaissance opérationnelle initiale.
+              * actif : Actif.
+              * projet : Projet.
+              * reforme : Réformé.
+              * declaration_abandonnee : Déclaration abandonnée.
         - name: est_disponible
           in: query
           description: Filtre sur la disponibilité du PEI
@@ -35096,6 +35613,13 @@ paths:
               - privee
               - publique
               - privee_conventionnee
+            description: |-
+              Le régime domanial, notamment en ce qui concerne le domaine public, s'appliquant au PEI.
+
+              Valeurs possibles :
+              * privee : Domanialité privée.
+              * publique : Domanialité publique.
+              * privee_conventionnee : Domanialité privée conventionnée.
         - name: geojson
           in: query
           description: Filtre sur la position des PEI
@@ -40273,6 +40797,12 @@ paths:
           in: query
           description: Propriété sur laquelle trier les résultats. L'ordre de tri par défaut est croissant (asc) sauf si la propriété est préfixée par un trait d'union (-), auquel cas l'ordre de tri sera décroissant (desc).
           schema:
+            description: |-
+              Propriété sur lesquelles les résultats seront triés.
+
+              Valeurs possibles :
+              * libelle : ordre croissant sur libelle (asc).
+              * -libelle : ordre décroissant sur libelle (desc).
             type: string
             maxLength: 256
             pattern: ^-?\w*$
