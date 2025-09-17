@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-09-2025.1
+  version: 1.0/main/17-09-2025.1
   title: Metarisc API
   description: |-
 
@@ -11267,6 +11267,14 @@ paths:
                               - erp:analyse_de_risque
                               - erp:essais_visite
                               - deci:controle_technique_pei
+                            description: |-
+                              Modules activables sur un dossier.
+                              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
+
+                              Valeurs possibles :
+                              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
+                              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+                              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
                           maxItems: 3
                           uniqueItems: true
                         enveloppe_id:
@@ -11395,6 +11403,14 @@ paths:
                               - erp:analyse_de_risque
                               - erp:essais_visite
                               - deci:controle_technique_pei
+                            description: |-
+                              Modules activables sur un dossier.
+                              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
+
+                              Valeurs possibles :
+                              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
+                              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+                              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
                           maxItems: 3
                           uniqueItems: true
                         enveloppe_id:
@@ -12434,6 +12450,133 @@ paths:
                               - X - Salles sportives spécialisées
                               - Y - Musées
                               - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                            description: |-
+                              Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+                              Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+                              Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+                              Valeurs possibles :
+                              * CTS - Châpiteaux : CTS - Châpiteaux.
+                              * CTS - Structures : CTS - Structures.
+                              * CTS - Tentes : CTS - Tentes.
+                              * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                              * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                              * EF - Etablissements flottants : EF - Etablissements flottants.
+                              * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                              * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                              * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                              * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                              * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                              * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                              * GA - Gares : GA - Gares.
+                              * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                              * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                              * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                              * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                              * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                              * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                              * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                              * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                              * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                              * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                              * IGH - ITGH : IGH - ITGH.
+                              * IGH - IMH : IGH - IMH.
+                              * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                              * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                              * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                              * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                              * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                              * L - Cabarets : L - Cabarets.
+                              * L - Salles d'audition : L - Salles d'audition.
+                              * L - Salle de conférences : L - Salle de conférences.
+                              * L - Salles de pari : L - Salles de pari.
+                              * L - Salles de projection : L - Salles de projection.
+                              * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                              * L - Salles de réunions : L - Salles de réunions.
+                              * L - Salles de spectacles : L - Salles de spectacles.
+                              * L - Salles multimédia : L - Salles multimédia.
+                              * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                              * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                              * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                              * M - Aires de vente : M - Aires de vente.
+                              * M - Centres commerciaux : M - Centres commerciaux.
+                              * M - Locaux de vente : M - Locaux de vente.
+                              * M - Magasin de vente : M - Magasin de vente.
+                              * N - Bars : N - Bars.
+                              * N - Brasseries : N - Brasseries.
+                              * N - Cafétaria : N - Cafétaria.
+                              * N - Cafés : N - Cafés.
+                              * N - Cantines : N - Cantines.
+                              * N - Débits de boissons : N - Débits de boissons.
+                              * N - Restaurants : N - Restaurants.
+                              * O - Hôtels : O - Hôtels.
+                              * O - Pensions de famille : O - Pensions de famille.
+                              * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                              * P - Salle de bals : P - Salle de bals.
+                              * P - Dancing / discothèque : P - Dancing / discothèque.
+                              * P - Salles de jeux : P - Salles de jeux.
+                              * PA - Arènes : PA - Arènes.
+                              * PA - Hippodromes : PA - Hippodromes.
+                              * PA - Piscines : PA - Piscines.
+                              * PA - Pistes de patinage : PA - Pistes de patinage.
+                              * PA - Stades : PA - Stades.
+                              * PA - Terrains de sport : PA - Terrains de sport.
+                              * PA - Parc d'attraction : PA - Parc d'attraction.
+                              * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                              * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                              * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                              * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                              * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                              * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                              * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                              * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                              * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                              * R - Auto-écoles : R - Auto-écoles.
+                              * R - Centres aérés : R - Centres aérés.
+                              * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                              * R - Centres de vacances : R - Centres de vacances.
+                              * R - Colonies de vacances : R - Colonies de vacances.
+                              * R - Crèches : R - Crèches.
+                              * R - Ecoles maternelles : R - Ecoles maternelles.
+                              * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                              * R - Etablissements de formation : R - Etablissements de formation.
+                              * R - Haltes-garderies : R - Haltes-garderies.
+                              * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                              * R - Jardins d'enfant : R - Jardins d'enfant.
+                              * R - Lycee public : R - Lycee public.
+                              * R - Collège public : R - Collège public.
+                              * R - Lycee privé : R - Lycee privé.
+                              * R - Collège privé : R - Collège privé.
+                              * R - École élémentaire : R - École élémentaire.
+                              * REF - Refuges de montagne : REF - Refuges de montagne.
+                              * S - Bibliothèques : S - Bibliothèques.
+                              * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                              * SG - Structures gonflables : SG - Structures gonflables.
+                              * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                              * T - Foires-expositions : T - Foires-expositions.
+                              * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                              * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                              * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                              * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                              * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                              * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                              * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                              * V - Eglises : V - Eglises.
+                              * V - Mosquées : V - Mosquées.
+                              * V - Synagogues : V - Synagogues.
+                              * V - Temples : V - Temples.
+                              * W - Administrations : W - Administrations.
+                              * W - Banques : W - Banques.
+                              * W - Bureaux : W - Bureaux.
+                              * X - Manèges : X - Manèges.
+                              * X - Patinoires : X - Patinoires.
+                              * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                              * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                              * X - Salles omnisports : X - Salles omnisports.
+                              * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                              * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                              * Y - Musées : Y - Musées.
+                              * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                           maxItems: 10
                           uniqueItems: true
                           nullable: true
@@ -13073,6 +13216,13 @@ paths:
                           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                           type: array
                           items:
+                            description: |-
+                              Type de cloisonnement
+
+                              Valeurs possibles :
+                              * Traditionnels : cloisonnement traditionnel.
+                              * Secteurs : par secteurs.
+                              * Compartiments : par compartiment.
                             type: string
                             enum:
                               - Traditionnels
@@ -13302,6 +13452,17 @@ paths:
                           description: Information sur le type de chauffage present dans le batiment.
                           type: array
                           items:
+                            description: |-
+                              Type de chauffage
+
+                              Valeurs possibles :
+                              * Sous-station : chauffage par sous-station.
+                              * Chaufferie : chauffage par chaufferie.
+                              * Climatisation : chauffage par climatisation.
+                              * Aerothermique : chauffage par aérothermique.
+                              * Rooftop : chauffage par rooftop.
+                              * Chauffage urbain : chauffage par chauffage urbain.
+                              * Autre : autre type de chauffage.
                             type: string
                             enum:
                               - Sous-station
@@ -18595,6 +18756,133 @@ paths:
                                           - X - Salles sportives spécialisées
                                           - Y - Musées
                                           - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                                        description: |-
+                                          Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+                                          Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+                                          Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+                                          Valeurs possibles :
+                                          * CTS - Châpiteaux : CTS - Châpiteaux.
+                                          * CTS - Structures : CTS - Structures.
+                                          * CTS - Tentes : CTS - Tentes.
+                                          * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                                          * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                                          * EF - Etablissements flottants : EF - Etablissements flottants.
+                                          * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                                          * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                                          * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                                          * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                                          * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                                          * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                                          * GA - Gares : GA - Gares.
+                                          * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                                          * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                                          * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                                          * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                                          * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                                          * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                                          * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                                          * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                                          * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                                          * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                                          * IGH - ITGH : IGH - ITGH.
+                                          * IGH - IMH : IGH - IMH.
+                                          * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                                          * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                                          * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                                          * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                                          * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                                          * L - Cabarets : L - Cabarets.
+                                          * L - Salles d'audition : L - Salles d'audition.
+                                          * L - Salle de conférences : L - Salle de conférences.
+                                          * L - Salles de pari : L - Salles de pari.
+                                          * L - Salles de projection : L - Salles de projection.
+                                          * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                                          * L - Salles de réunions : L - Salles de réunions.
+                                          * L - Salles de spectacles : L - Salles de spectacles.
+                                          * L - Salles multimédia : L - Salles multimédia.
+                                          * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                                          * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                                          * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                                          * M - Aires de vente : M - Aires de vente.
+                                          * M - Centres commerciaux : M - Centres commerciaux.
+                                          * M - Locaux de vente : M - Locaux de vente.
+                                          * M - Magasin de vente : M - Magasin de vente.
+                                          * N - Bars : N - Bars.
+                                          * N - Brasseries : N - Brasseries.
+                                          * N - Cafétaria : N - Cafétaria.
+                                          * N - Cafés : N - Cafés.
+                                          * N - Cantines : N - Cantines.
+                                          * N - Débits de boissons : N - Débits de boissons.
+                                          * N - Restaurants : N - Restaurants.
+                                          * O - Hôtels : O - Hôtels.
+                                          * O - Pensions de famille : O - Pensions de famille.
+                                          * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                                          * P - Salle de bals : P - Salle de bals.
+                                          * P - Dancing / discothèque : P - Dancing / discothèque.
+                                          * P - Salles de jeux : P - Salles de jeux.
+                                          * PA - Arènes : PA - Arènes.
+                                          * PA - Hippodromes : PA - Hippodromes.
+                                          * PA - Piscines : PA - Piscines.
+                                          * PA - Pistes de patinage : PA - Pistes de patinage.
+                                          * PA - Stades : PA - Stades.
+                                          * PA - Terrains de sport : PA - Terrains de sport.
+                                          * PA - Parc d'attraction : PA - Parc d'attraction.
+                                          * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                                          * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                                          * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                                          * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                          * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                                          * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                                          * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                                          * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                                          * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                                          * R - Auto-écoles : R - Auto-écoles.
+                                          * R - Centres aérés : R - Centres aérés.
+                                          * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                                          * R - Centres de vacances : R - Centres de vacances.
+                                          * R - Colonies de vacances : R - Colonies de vacances.
+                                          * R - Crèches : R - Crèches.
+                                          * R - Ecoles maternelles : R - Ecoles maternelles.
+                                          * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                                          * R - Etablissements de formation : R - Etablissements de formation.
+                                          * R - Haltes-garderies : R - Haltes-garderies.
+                                          * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                                          * R - Jardins d'enfant : R - Jardins d'enfant.
+                                          * R - Lycee public : R - Lycee public.
+                                          * R - Collège public : R - Collège public.
+                                          * R - Lycee privé : R - Lycee privé.
+                                          * R - Collège privé : R - Collège privé.
+                                          * R - École élémentaire : R - École élémentaire.
+                                          * REF - Refuges de montagne : REF - Refuges de montagne.
+                                          * S - Bibliothèques : S - Bibliothèques.
+                                          * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                                          * SG - Structures gonflables : SG - Structures gonflables.
+                                          * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                                          * T - Foires-expositions : T - Foires-expositions.
+                                          * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                                          * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                                          * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                                          * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                                          * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                                          * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                                          * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                                          * V - Eglises : V - Eglises.
+                                          * V - Mosquées : V - Mosquées.
+                                          * V - Synagogues : V - Synagogues.
+                                          * V - Temples : V - Temples.
+                                          * W - Administrations : W - Administrations.
+                                          * W - Banques : W - Banques.
+                                          * W - Bureaux : W - Bureaux.
+                                          * X - Manèges : X - Manèges.
+                                          * X - Patinoires : X - Patinoires.
+                                          * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                                          * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                                          * X - Salles omnisports : X - Salles omnisports.
+                                          * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                                          * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                                          * Y - Musées : Y - Musées.
+                                          * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       maxItems: 10
                                       uniqueItems: true
                                       nullable: true
@@ -19234,6 +19522,13 @@ paths:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                                       type: array
                                       items:
+                                        description: |-
+                                          Type de cloisonnement
+
+                                          Valeurs possibles :
+                                          * Traditionnels : cloisonnement traditionnel.
+                                          * Secteurs : par secteurs.
+                                          * Compartiments : par compartiment.
                                         type: string
                                         enum:
                                           - Traditionnels
@@ -19463,6 +19758,17 @@ paths:
                                       description: Information sur le type de chauffage present dans le batiment.
                                       type: array
                                       items:
+                                        description: |-
+                                          Type de chauffage
+
+                                          Valeurs possibles :
+                                          * Sous-station : chauffage par sous-station.
+                                          * Chaufferie : chauffage par chaufferie.
+                                          * Climatisation : chauffage par climatisation.
+                                          * Aerothermique : chauffage par aérothermique.
+                                          * Rooftop : chauffage par rooftop.
+                                          * Chauffage urbain : chauffage par chauffage urbain.
+                                          * Autre : autre type de chauffage.
                                         type: string
                                         enum:
                                           - Sous-station
@@ -22463,6 +22769,133 @@ paths:
                                           - X - Salles sportives spécialisées
                                           - Y - Musées
                                           - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                                        description: |-
+                                          Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+                                          Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+                                          Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+                                          Valeurs possibles :
+                                          * CTS - Châpiteaux : CTS - Châpiteaux.
+                                          * CTS - Structures : CTS - Structures.
+                                          * CTS - Tentes : CTS - Tentes.
+                                          * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                                          * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                                          * EF - Etablissements flottants : EF - Etablissements flottants.
+                                          * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                                          * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                                          * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                                          * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                                          * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                                          * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                                          * GA - Gares : GA - Gares.
+                                          * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                                          * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                                          * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                                          * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                                          * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                                          * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                                          * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                                          * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                                          * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                                          * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                                          * IGH - ITGH : IGH - ITGH.
+                                          * IGH - IMH : IGH - IMH.
+                                          * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                                          * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                                          * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                                          * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                                          * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                                          * L - Cabarets : L - Cabarets.
+                                          * L - Salles d'audition : L - Salles d'audition.
+                                          * L - Salle de conférences : L - Salle de conférences.
+                                          * L - Salles de pari : L - Salles de pari.
+                                          * L - Salles de projection : L - Salles de projection.
+                                          * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                                          * L - Salles de réunions : L - Salles de réunions.
+                                          * L - Salles de spectacles : L - Salles de spectacles.
+                                          * L - Salles multimédia : L - Salles multimédia.
+                                          * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                                          * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                                          * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                                          * M - Aires de vente : M - Aires de vente.
+                                          * M - Centres commerciaux : M - Centres commerciaux.
+                                          * M - Locaux de vente : M - Locaux de vente.
+                                          * M - Magasin de vente : M - Magasin de vente.
+                                          * N - Bars : N - Bars.
+                                          * N - Brasseries : N - Brasseries.
+                                          * N - Cafétaria : N - Cafétaria.
+                                          * N - Cafés : N - Cafés.
+                                          * N - Cantines : N - Cantines.
+                                          * N - Débits de boissons : N - Débits de boissons.
+                                          * N - Restaurants : N - Restaurants.
+                                          * O - Hôtels : O - Hôtels.
+                                          * O - Pensions de famille : O - Pensions de famille.
+                                          * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                                          * P - Salle de bals : P - Salle de bals.
+                                          * P - Dancing / discothèque : P - Dancing / discothèque.
+                                          * P - Salles de jeux : P - Salles de jeux.
+                                          * PA - Arènes : PA - Arènes.
+                                          * PA - Hippodromes : PA - Hippodromes.
+                                          * PA - Piscines : PA - Piscines.
+                                          * PA - Pistes de patinage : PA - Pistes de patinage.
+                                          * PA - Stades : PA - Stades.
+                                          * PA - Terrains de sport : PA - Terrains de sport.
+                                          * PA - Parc d'attraction : PA - Parc d'attraction.
+                                          * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                                          * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                                          * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                                          * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                          * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                                          * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                                          * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                                          * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                                          * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                                          * R - Auto-écoles : R - Auto-écoles.
+                                          * R - Centres aérés : R - Centres aérés.
+                                          * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                                          * R - Centres de vacances : R - Centres de vacances.
+                                          * R - Colonies de vacances : R - Colonies de vacances.
+                                          * R - Crèches : R - Crèches.
+                                          * R - Ecoles maternelles : R - Ecoles maternelles.
+                                          * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                                          * R - Etablissements de formation : R - Etablissements de formation.
+                                          * R - Haltes-garderies : R - Haltes-garderies.
+                                          * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                                          * R - Jardins d'enfant : R - Jardins d'enfant.
+                                          * R - Lycee public : R - Lycee public.
+                                          * R - Collège public : R - Collège public.
+                                          * R - Lycee privé : R - Lycee privé.
+                                          * R - Collège privé : R - Collège privé.
+                                          * R - École élémentaire : R - École élémentaire.
+                                          * REF - Refuges de montagne : REF - Refuges de montagne.
+                                          * S - Bibliothèques : S - Bibliothèques.
+                                          * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                                          * SG - Structures gonflables : SG - Structures gonflables.
+                                          * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                                          * T - Foires-expositions : T - Foires-expositions.
+                                          * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                                          * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                                          * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                                          * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                                          * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                                          * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                                          * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                                          * V - Eglises : V - Eglises.
+                                          * V - Mosquées : V - Mosquées.
+                                          * V - Synagogues : V - Synagogues.
+                                          * V - Temples : V - Temples.
+                                          * W - Administrations : W - Administrations.
+                                          * W - Banques : W - Banques.
+                                          * W - Bureaux : W - Bureaux.
+                                          * X - Manèges : X - Manèges.
+                                          * X - Patinoires : X - Patinoires.
+                                          * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                                          * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                                          * X - Salles omnisports : X - Salles omnisports.
+                                          * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                                          * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                                          * Y - Musées : Y - Musées.
+                                          * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       maxItems: 10
                                       uniqueItems: true
                                       nullable: true
@@ -23102,6 +23535,13 @@ paths:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                                       type: array
                                       items:
+                                        description: |-
+                                          Type de cloisonnement
+
+                                          Valeurs possibles :
+                                          * Traditionnels : cloisonnement traditionnel.
+                                          * Secteurs : par secteurs.
+                                          * Compartiments : par compartiment.
                                         type: string
                                         enum:
                                           - Traditionnels
@@ -23331,6 +23771,17 @@ paths:
                                       description: Information sur le type de chauffage present dans le batiment.
                                       type: array
                                       items:
+                                        description: |-
+                                          Type de chauffage
+
+                                          Valeurs possibles :
+                                          * Sous-station : chauffage par sous-station.
+                                          * Chaufferie : chauffage par chaufferie.
+                                          * Climatisation : chauffage par climatisation.
+                                          * Aerothermique : chauffage par aérothermique.
+                                          * Rooftop : chauffage par rooftop.
+                                          * Chauffage urbain : chauffage par chauffage urbain.
+                                          * Autre : autre type de chauffage.
                                         type: string
                                         enum:
                                           - Sous-station
@@ -34332,6 +34783,18 @@ paths:
                       - BI1x80
                       - BI1x100
                       - BI2x100
+                    description: |-
+                      Nature du PIBI.
+
+                      Valeurs possibles :
+                      * PI1x65 : Poteau incendie 1x65.
+                      * PI1x65+PI2x45 : Poteau incendie 1x65 + 2x45.
+                      * PI1x100 : Poteau incendie 1x100.
+                      * PI2x100 : Poteau incendie 2x100.
+                      * BI1x65 : Bouche incendie 1x65.
+                      * BI1x80 : Bouche incendie 1x80.
+                      * BI1x100 : Bouche incendie 1x100.
+                      * BI2x100 : Bouche incendie 2x100.
                   maxItems: 8
                   uniqueItems: true
                 pibi_performance_natures_a_reformer:
@@ -34348,6 +34811,18 @@ paths:
                       - BI1x80
                       - BI1x100
                       - BI2x100
+                    description: |-
+                      Nature du PIBI.
+
+                      Valeurs possibles :
+                      * PI1x65 : Poteau incendie 1x65.
+                      * PI1x65+PI2x45 : Poteau incendie 1x65 + 2x45.
+                      * PI1x100 : Poteau incendie 1x100.
+                      * PI2x100 : Poteau incendie 2x100.
+                      * BI1x65 : Bouche incendie 1x65.
+                      * BI1x80 : Bouche incendie 1x80.
+                      * BI1x100 : Bouche incendie 1x100.
+                      * BI2x100 : Bouche incendie 2x100.
                   maxItems: 8
                   uniqueItems: true
                 pibi_performance_seuil_pesee_1bar:
@@ -46721,6 +47196,133 @@ components:
               - X - Salles sportives spécialisées
               - Y - Musées
               - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+            description: |-
+              Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+              Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+              Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+              Valeurs possibles :
+              * CTS - Châpiteaux : CTS - Châpiteaux.
+              * CTS - Structures : CTS - Structures.
+              * CTS - Tentes : CTS - Tentes.
+              * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+              * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+              * EF - Etablissements flottants : EF - Etablissements flottants.
+              * EP - Maison d'arrêt : EP - Maison d'arrêt.
+              * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+              * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+              * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+              * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+              * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+              * GA - Gares : GA - Gares.
+              * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+              * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+              * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+              * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+              * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+              * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+              * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+              * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+              * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+              * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+              * IGH - ITGH : IGH - ITGH.
+              * IGH - IMH : IGH - IMH.
+              * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+              * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+              * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+              * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+              * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+              * L - Cabarets : L - Cabarets.
+              * L - Salles d'audition : L - Salles d'audition.
+              * L - Salle de conférences : L - Salle de conférences.
+              * L - Salles de pari : L - Salles de pari.
+              * L - Salles de projection : L - Salles de projection.
+              * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+              * L - Salles de réunions : L - Salles de réunions.
+              * L - Salles de spectacles : L - Salles de spectacles.
+              * L - Salles multimédia : L - Salles multimédia.
+              * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+              * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+              * L - Salles réservées aux associations : L - Salles réservées aux associations.
+              * M - Aires de vente : M - Aires de vente.
+              * M - Centres commerciaux : M - Centres commerciaux.
+              * M - Locaux de vente : M - Locaux de vente.
+              * M - Magasin de vente : M - Magasin de vente.
+              * N - Bars : N - Bars.
+              * N - Brasseries : N - Brasseries.
+              * N - Cafétaria : N - Cafétaria.
+              * N - Cafés : N - Cafés.
+              * N - Cantines : N - Cantines.
+              * N - Débits de boissons : N - Débits de boissons.
+              * N - Restaurants : N - Restaurants.
+              * O - Hôtels : O - Hôtels.
+              * O - Pensions de famille : O - Pensions de famille.
+              * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+              * P - Salle de bals : P - Salle de bals.
+              * P - Dancing / discothèque : P - Dancing / discothèque.
+              * P - Salles de jeux : P - Salles de jeux.
+              * PA - Arènes : PA - Arènes.
+              * PA - Hippodromes : PA - Hippodromes.
+              * PA - Piscines : PA - Piscines.
+              * PA - Pistes de patinage : PA - Pistes de patinage.
+              * PA - Stades : PA - Stades.
+              * PA - Terrains de sport : PA - Terrains de sport.
+              * PA - Parc d'attraction : PA - Parc d'attraction.
+              * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+              * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+              * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+              * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+              * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+              * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+              * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+              * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+              * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+              * R - Auto-écoles : R - Auto-écoles.
+              * R - Centres aérés : R - Centres aérés.
+              * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+              * R - Centres de vacances : R - Centres de vacances.
+              * R - Colonies de vacances : R - Colonies de vacances.
+              * R - Crèches : R - Crèches.
+              * R - Ecoles maternelles : R - Ecoles maternelles.
+              * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+              * R - Etablissements de formation : R - Etablissements de formation.
+              * R - Haltes-garderies : R - Haltes-garderies.
+              * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+              * R - Jardins d'enfant : R - Jardins d'enfant.
+              * R - Lycee public : R - Lycee public.
+              * R - Collège public : R - Collège public.
+              * R - Lycee privé : R - Lycee privé.
+              * R - Collège privé : R - Collège privé.
+              * R - École élémentaire : R - École élémentaire.
+              * REF - Refuges de montagne : REF - Refuges de montagne.
+              * S - Bibliothèques : S - Bibliothèques.
+              * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+              * SG - Structures gonflables : SG - Structures gonflables.
+              * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+              * T - Foires-expositions : T - Foires-expositions.
+              * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+              * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+              * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+              * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+              * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+              * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+              * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+              * V - Eglises : V - Eglises.
+              * V - Mosquées : V - Mosquées.
+              * V - Synagogues : V - Synagogues.
+              * V - Temples : V - Temples.
+              * W - Administrations : W - Administrations.
+              * W - Banques : W - Banques.
+              * W - Bureaux : W - Bureaux.
+              * X - Manèges : X - Manèges.
+              * X - Patinoires : X - Patinoires.
+              * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+              * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+              * X - Salles omnisports : X - Salles omnisports.
+              * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+              * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+              * Y - Musées : Y - Musées.
+              * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
           maxItems: 10
           uniqueItems: true
           nullable: true
@@ -47080,6 +47682,13 @@ components:
           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
           type: array
           items:
+            description: |-
+              Type de cloisonnement
+
+              Valeurs possibles :
+              * Traditionnels : cloisonnement traditionnel.
+              * Secteurs : par secteurs.
+              * Compartiments : par compartiment.
             type: string
             enum:
               - Traditionnels
@@ -47230,6 +47839,17 @@ components:
           description: Information sur le type de chauffage present dans le batiment.
           type: array
           items:
+            description: |-
+              Type de chauffage
+
+              Valeurs possibles :
+              * Sous-station : chauffage par sous-station.
+              * Chaufferie : chauffage par chaufferie.
+              * Climatisation : chauffage par climatisation.
+              * Aerothermique : chauffage par aérothermique.
+              * Rooftop : chauffage par rooftop.
+              * Chauffage urbain : chauffage par chauffage urbain.
+              * Autre : autre type de chauffage.
             type: string
             enum:
               - Sous-station
@@ -48296,6 +48916,14 @@ components:
               - erp:analyse_de_risque
               - erp:essais_visite
               - deci:controle_technique_pei
+            description: |-
+              Modules activables sur un dossier.
+              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
+
+              Valeurs possibles :
+              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
+              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
           maxItems: 3
           uniqueItems: true
         tags:
@@ -48347,6 +48975,22 @@ components:
               - arrivee_secretariat
               - workflow
               - reception_de_travaux_en_attente
+            description: |-
+              Type du workflow.
+
+              Valeurs possibles :
+              * analyse_de_risque : Analyse de risque.
+              * validation : Validation.
+              * arrivee_sis : Arrivée SIS.
+              * arrivee_sis_prev : Arrivée SIS préventive.
+              * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
+              * consultation_sis : Consultation SIS.
+              * passage_commission : Passage en commission.
+              * relecture : Relecture.
+              * visite : Visite.
+              * arrivee_secretariat : Arrivée au secrétariat.
+              * workflow : Workflow générique.
+              * reception_de_travaux_en_attente : Réception de travaux en attente.
           maxItems: 12
           uniqueItems: true
         nb_messages_fil_rouge:
@@ -50263,6 +50907,18 @@ components:
               - BI1x80
               - BI1x100
               - BI2x100
+            description: |-
+              Nature du PIBI.
+
+              Valeurs possibles :
+              * PI1x65 : Poteau incendie 1x65.
+              * PI1x65+PI2x45 : Poteau incendie 1x65 + 2x45.
+              * PI1x100 : Poteau incendie 1x100.
+              * PI2x100 : Poteau incendie 2x100.
+              * BI1x65 : Bouche incendie 1x65.
+              * BI1x80 : Bouche incendie 1x80.
+              * BI1x100 : Bouche incendie 1x100.
+              * BI2x100 : Bouche incendie 2x100.
           maxItems: 8
           uniqueItems: true
         pibi_performance_natures_a_reformer:
@@ -50279,6 +50935,18 @@ components:
               - BI1x80
               - BI1x100
               - BI2x100
+            description: |-
+              Nature du PIBI.
+
+              Valeurs possibles :
+              * PI1x65 : Poteau incendie 1x65.
+              * PI1x65+PI2x45 : Poteau incendie 1x65 + 2x45.
+              * PI1x100 : Poteau incendie 1x100.
+              * PI2x100 : Poteau incendie 2x100.
+              * BI1x65 : Bouche incendie 1x65.
+              * BI1x80 : Bouche incendie 1x80.
+              * BI1x100 : Bouche incendie 1x100.
+              * BI2x100 : Bouche incendie 2x100.
           maxItems: 8
           uniqueItems: true
         pibi_performance_seuil_pesee_1bar:
