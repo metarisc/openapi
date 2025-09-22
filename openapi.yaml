@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/22-09-2025.1
+  version: 1.0/main/22-09-2025.2
   title: Metarisc API
   description: |-
 
@@ -10931,6 +10931,7 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               title: Objet Fil Rouge Message
               description: Message associé à un fil rouge d'un dossier.
               properties:
@@ -10940,6 +10941,7 @@ paths:
                   maxLength: 8192
               required:
                 - message
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FilRougeMessage'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -12175,6 +12177,7 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               title: 'Objet : Analyse de Risque'
               description: Gestion de l'analyse de risque.
               properties:
@@ -13960,6 +13963,7 @@ paths:
                   type: string
                   maxLength: 8192
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -15296,6 +15300,7 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               title: 'Objet : Analyse de Risque'
               description: Gestion de l'analyse de risque.
               properties:
@@ -15420,6 +15425,7 @@ paths:
                   type: string
                   maxLength: 8192
                   nullable: true
+              additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -27987,10 +27993,12 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               title: Objet Feed Message
               description: Message associé à un flux d'activité.
               oneOf:
-                - title: Objet FeedMessage Texte
+                - type: object
+                  title: Objet FeedMessage Texte
                   description: Message texte d'un flux d'activité.
                   allOf:
                     - type: object
@@ -28023,6 +28031,8 @@ paths:
                           maxLength: 8192
                       required:
                         - texte
+              additionalProperties: {}
+              maxProperties: 3
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -35875,7 +35885,8 @@ paths:
                       title: Objet Descriptif Technique DECI
                       description: Descriptif technique associé à un PEI.
                       oneOf:
-                        - title: Objet Descriptif Technique DECI PIBI
+                        - type: object
+                          title: Objet Descriptif Technique DECI PIBI
                           description: Descriptif technique d'un PIBI - Poteau incendie ou Bouche incendie.
                           allOf:
                             - type: object
@@ -35988,7 +35999,8 @@ paths:
                                   nullable: true
                               required:
                                 - nature
-                        - title: Objet Descriptif Technique DECI PENA
+                        - type: object
+                          title: Objet Descriptif Technique DECI PENA
                           description: Descriptif technique d'un PENA - Point d'Eau Naturel ou Artificiel.
                           allOf:
                             - type: object
@@ -43034,10 +43046,12 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               title: Objet Tournée Deci
               description: Une tournée de reconnaissance opérationnelle portant sur la visibilité, l’accessibilité,  la signalisation et la manoeuvrabilité (ouverture et fermeture) des PEI.
               oneOf:
-                - title: Objet Tournée Deci Simple
+                - type: object
+                  title: Objet Tournée Deci Simple
                   description: Tournéee DECI déclenchée
                   allOf:
                     - type: object
@@ -43082,7 +43096,8 @@ paths:
                         - type
                         - date_de_debut
                         - date_de_fin
-                - title: Objet Tournee Deci Modele
+                - type: object
+                  title: Objet Tournee Deci Modele
                   description: Modèle de tournée DECI permettant une programmation cyclique.
                   allOf:
                     - type: object
@@ -43127,6 +43142,8 @@ paths:
                         - type
                         - mois_debut
                         - mois_fin
+              additionalProperties: {}
+              maxProperties: 10
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -44221,10 +44238,12 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               title: Objet Tournée Deci
               description: Une tournée de reconnaissance opérationnelle portant sur la visibilité, l’accessibilité,  la signalisation et la manoeuvrabilité (ouverture et fermeture) des PEI.
               oneOf:
-                - title: Objet Tournée Deci Simple
+                - type: object
+                  title: Objet Tournée Deci Simple
                   description: Tournéee DECI déclenchée
                   allOf:
                     - type: object
@@ -44265,7 +44284,8 @@ paths:
                           minLength: 20
                       required:
                         - type
-                - title: Objet Tournee Deci Modele
+                - type: object
+                  title: Objet Tournee Deci Modele
                   description: Modèle de tournée DECI permettant une programmation cyclique.
                   allOf:
                     - type: object
@@ -44306,6 +44326,8 @@ paths:
                           maximum: 12
                       required:
                         - type
+              additionalProperties: {}
+              maxProperties: 10
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeci'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -49175,6 +49197,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniqueERP'
       x-extension-metarisc-codegen-context: query
     DescriptifTechniquePENA:
+      type: object
       title: Objet Descriptif Technique DECI PENA
       description: Descriptif technique d'un PENA - Point d'Eau Naturel ou Artificiel.
       allOf:
@@ -49227,6 +49250,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DescriptifTechniquePENA'
       x-extension-metarisc-codegen-context: query
     DescriptifTechniquePIBI:
+      type: object
       title: Objet Descriptif Technique DECI PIBI
       description: Descriptif technique d'un PIBI - Poteau incendie ou Bouche incendie.
       allOf:
@@ -50405,6 +50429,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageBase'
       x-extension-metarisc-codegen-context: query
     FeedMessageTexte:
+      type: object
       title: Objet FeedMessage Texte
       description: Message texte d'un flux d'activité.
       allOf:
@@ -50420,6 +50445,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
       x-extension-metarisc-codegen-context: query
     FeedMessage:
+      type: object
       title: Objet Feed Message
       description: Message associé à un flux d'activité.
       oneOf:
@@ -50427,6 +50453,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
       x-extension-metarisc-codegen-context: query
     FilRougeMessage:
+      type: object
       title: Objet Fil Rouge Message
       description: Message associé à un fil rouge d'un dossier.
       properties:
@@ -51262,6 +51289,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
       x-extension-metarisc-codegen-context: query
     RapportEtude:
+      type: object
       title: 'Objet : Analyse de Risque'
       description: Gestion de l'analyse de risque.
       properties:
@@ -51330,6 +51358,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
       x-extension-metarisc-codegen-context: query
     RapportVisite:
+      type: object
       title: 'Objet : Analyse de Risque'
       description: Gestion de l'analyse de risque.
       properties:
@@ -51636,6 +51665,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TexteApplicable'
       x-extension-metarisc-codegen-context: query
     TourneeDeci:
+      type: object
       title: Objet Tournée Deci
       description: Une tournée de reconnaissance opérationnelle portant sur la visibilité, l’accessibilité,  la signalisation et la manoeuvrabilité (ouverture et fermeture) des PEI.
       oneOf:
@@ -51677,6 +51707,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciBase'
       x-extension-metarisc-codegen-context: query
     TourneeDeciModele:
+      type: object
       title: Objet Tournee Deci Modele
       description: Modèle de tournée DECI permettant une programmation cyclique.
       allOf:
@@ -51797,6 +51828,7 @@ components:
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/TourneeDeciPeiListeAnomalies'
       x-extension-metarisc-codegen-context: query
     TourneeDeciSimple:
+      type: object
       title: Objet Tournée Deci Simple
       description: Tournéee DECI déclenchée
       allOf:
