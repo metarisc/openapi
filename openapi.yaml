@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/22-09-2025.2
+  version: 1.0/main/25-09-2025.1
   title: Metarisc API
   description: |-
 
@@ -387,6 +387,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/AnomalieDECI'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -1270,6 +1271,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Commission'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -1769,6 +1771,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PassageCommission'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -2461,6 +2464,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/CommissionMembre'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -3359,6 +3363,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/CommissionMembre'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -4216,6 +4221,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -6432,6 +6438,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PassageCommissionDossier'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -7107,6 +7114,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -8194,6 +8202,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Dossier'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -9270,6 +9279,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -9777,6 +9787,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -10721,6 +10732,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/FilRougeMessage'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -16105,6 +16117,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Workflow'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -16777,6 +16790,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Enveloppe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -18459,6 +18473,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/ERP'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -20775,6 +20790,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -21282,6 +21298,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -21969,6 +21986,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Dossier'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -24852,6 +24870,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/DescriptifTechniqueERP'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -25093,6 +25112,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/MainCourante'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -25777,6 +25797,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Prescription'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -26455,6 +26476,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PrescriptionSupportReglementaire'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -26698,6 +26720,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Evenement'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -27573,6 +27596,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Utilisateur'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -27790,6 +27814,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/FeedMessage'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -29095,6 +29120,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -30199,6 +30225,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Notification'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -32839,6 +32866,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Organisation'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -33063,6 +33091,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/WorkflowType'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -33287,6 +33316,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/OrganisationGeoservice'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -33959,6 +33989,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/OrganisationMembre'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -35671,6 +35702,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PEI'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -36401,6 +36433,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/AnomaliePEI'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -36857,6 +36890,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Contact'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -37364,6 +37398,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -37841,6 +37876,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Dossier'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -38647,6 +38683,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/DescriptifTechniqueDECI'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -39730,6 +39767,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Prescription'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -40850,6 +40888,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/SiteGeographique'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -41948,6 +41987,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PrescriptionSupportReglementaire'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -42843,6 +42883,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/TourneeDeci'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -43571,6 +43612,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/PieceJointe'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -44551,6 +44593,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/TourneeDeciPei'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -44990,6 +45033,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Email'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -45629,6 +45673,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Utilisateur'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -45853,6 +45898,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Email'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -46281,6 +46327,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/OrganisationMembre'
                   meta:
+                    description: Métadonnées de la pagination.
                     type: object
                     properties:
                       pagination:
@@ -49910,7 +49957,7 @@ components:
         titulaires:
           description: Liste des titulaires de l'ERP. Un titulaire est un utilisateur Metarisc désigné comme référent de l'ERP. Cela peut être utile pour planifier des visites, des alertes ou des notifications.
           type: array
-          maxItems: 2
+          maxItems: 3
           items:
             $ref: '#/components/schemas/Utilisateur'
         etablissement_rattache:
