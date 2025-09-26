@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-09-2025.1
+  version: 1.0/main/26-09-2025.2
   title: Metarisc API
   description: |-
 
@@ -47171,34 +47171,123 @@ paths:
       x-extension-metarisc-codegen-operation: update-workflows-details
 tags:
   - name: Moi API
+    description: Utilisez l'API REST Moi pour accéder aux informations personnelles de l'utilisateur connecté sur Metarisc.
   - name: Anomalies API
+    description: Utilisez l'API REST des Anomalies pour lister, créer, mettre à jour et supprimer les anomalies sur Metarisc.
   - name: Commissions API
+    description: Utilisez l'API REST des Commissions pour lister, créer, mettre à jour et supprimer les commissions sur Metarisc.,
   - name: Commissions Membres API
+    description: Utilisez l'API REST des Commissions Membres pour lister, créer, mettre à jour et supprimer les membres des commissions sur Metarisc.
   - name: Contacts API
+    description: Utilisez l'API REST des Contacts pour lister, créer, mettre à jour et supprimer les contacts sur Metarisc.
   - name: Controles PEI API
+    description: Utilisez l'API REST des Contrôles PEI pour lister, créer, mettre à jour et supprimer les contrôles de points d'eau incendie sur Metarisc.
   - name: Dates Passage Commission API
+    description: Utilisez l'API REST des Dates Passage Commission pour lister, créer, mettre à jour et supprimer les dates de passage en commission sur Metarisc.
   - name: Documents API
+    description: Utilisez l'API REST des Documents pour lister, créer, mettre à jour et supprimer les documents sur Metarisc.
   - name: Dossiers API
+    description: Utilisez l'API REST des Dossiers pour lister, créer, mettre à jour et supprimer les dossiers sur Metarisc.
   - name: Dossiers Affectations API
+    description: Utilisez l'API REST des Dossiers Affectations pour lister, créer, mettre à jour et supprimer les affectations de dossiers sur Metarisc.
   - name: Enveloppes API
+    description: Utilisez l'API REST des Enveloppes pour lister, créer, mettre à jour et supprimer les enveloppes sur Metarisc.
   - name: ERP API
+    description: Utilisez l'API REST ERP pour lister, créer, mettre à jour et supprimer les établissements recevant du public sur Metarisc.
   - name: Evenements API
+    description: Utilisez l'API REST des Événements pour lister, créer, mettre à jour et supprimer les événements sur Metarisc.
   - name: Feed API
+    description: Utilisez l'API REST Feed pour accéder aux flux d'actualités et notifications sur Metarisc.
   - name: Healthcheck API
+    description: Utilisez l'API REST Healthcheck pour vérifier l'état de santé de l'application Metarisc.
   - name: Mains Courantes API
+    description: Utilisez l'API REST des Mains Courantes pour lister, créer, mettre à jour et supprimer les mains courantes sur Metarisc.
   - name: Mains Courantes Participants API
+    description: Utilisez l'API REST des Mains Courantes Participants pour lister, créer, mettre à jour et supprimer les participants aux mains courantes sur Metarisc.
   - name: Notifications API
+    description: Utilisez l'API REST des Notifications pour lister, créer, mettre à jour et supprimer les notifications sur Metarisc.
   - name: Ordres Du Jour API
+    description: Utilisez l'API REST des Ordres du Jour pour lister, créer, mettre à jour et supprimer les ordres du jour sur Metarisc.
   - name: Organisations API
+    description: Utilisez l'API REST des Organisations pour lister, créer, mettre à jour et supprimer les organisations sur Metarisc.
   - name: PEI API
+    description: Utilisez l'API REST PEI pour lister, créer, mettre à jour et supprimer les points d'eau incendie sur Metarisc.
   - name: Permissions API
+    description: Utilisez l'API REST des Permissions pour lister, créer, mettre à jour et supprimer les permissions sur Metarisc.
   - name: Ping API
+    description: Utilisez l'API REST Ping pour tester la connectivité et la disponibilité de l'application Metarisc.
   - name: Prescriptions API
+    description: Utilisez l'API REST des Prescriptions pour lister, créer, mettre à jour et supprimer les prescriptions sur Metarisc.
   - name: Sites Geographiques API
+    description: Utilisez l'API REST des Sites Géographiques pour lister, créer, mettre à jour et supprimer les sites géographiques sur Metarisc.
   - name: Supports Reglementaires API
+    description: Utilisez l'API REST des Supports Réglementaires pour lister, créer, mettre à jour et supprimer les supports réglementaires sur Metarisc.
   - name: Tournées DECI API
+    description: Utilisez l'API REST des Tournées DECI pour lister, créer, mettre à jour et supprimer les tournées de défense extérieure contre l'incendie sur Metarisc.
   - name: Utilisateurs API
+    description: Utilisez l'API REST des Utilisateurs pour lister, créer, mettre à jour et supprimer les utilisateurs sur Metarisc.
   - name: Workflows API
+    description: Utilisez l'API REST des Workflows pour lister, créer, mettre à jour et supprimer les workflows sur Metarisc.
+x-tagGroups:
+  - name: Utilisateurs
+    tags:
+      - Moi API
+      - Permissions API
+      - Utilisateurs API
+  - name: Gestion des anomalies DECI
+    tags:
+      - Anomalies API
+  - name: Commissions de sécurité
+    tags:
+      - Commissions API
+      - Commissions Membres API
+      - Dates Passage Commission API
+      - Ordres Du Jour API
+  - name: Contacts
+    tags:
+      - Contacts API
+  - name: Poteau d'eau incendie
+    tags:
+      - Controles PEI API
+      - PEI API
+  - name: Documents
+    tags:
+      - Documents API
+  - name: Dossiers
+    tags:
+      - Dossiers API
+      - Dossiers Affectations API
+      - Enveloppes API
+      - Workflows API
+  - name: ERP
+    tags:
+      - ERP API
+      - Mains Courantes API
+      - Mains Courantes Participants API
+      - Sites Geographiques API
+  - name: Calendrier
+    tags:
+      - Evenements API
+  - name: Flux d'actualités
+    tags:
+      - Feed API
+  - name: Utilitaires
+    tags:
+      - Healthcheck API
+      - Ping API
+  - name: Notifications
+    tags:
+      - Notifications API
+  - name: Organisations
+    tags:
+      - Organisations API
+  - name: Prescriptions ERP
+    tags:
+      - Prescriptions API
+      - Supports Reglementaires API
+  - name: Tournées DECI
+    tags:
+      - Tournées DECI API
 components:
   schemas:
     Error:
