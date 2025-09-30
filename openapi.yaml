@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-09-2025.2
+  version: 1.0/main/30-09-2025.1
   title: Metarisc API
   description: |-
 
@@ -323,7 +323,7 @@ paths:
     get:
       tags:
         - Anomalies API
-      summary: Liste des anomalies types de la bibliothèque DECI
+      summary: Liste paginée des anomalies types de la bibliothèque DECI
       description: Retourne une liste des anomalies types dans la bibliothèque DECI.
       operationId: PaginateAnomalies
       security:
@@ -1212,7 +1212,7 @@ paths:
     get:
       tags:
         - Commissions API
-      summary: Liste des commissions
+      summary: Liste paginée des commissions
       description: Liste des commissions.
       operationId: PaginateCommissions
       security:
@@ -1699,7 +1699,7 @@ paths:
     get:
       tags:
         - Commissions API
-      summary: Liste des dates de passage prévues de la commission
+      summary: Liste paginée des dates de passage prévues de la commission
       description: Récupération de la liste des dates de passage de la commission. Cela peut représenter une visite périodique sur site de la commission, ou un passage en salle.
       operationId: PaginateDatesCommissionCommissions
       security:
@@ -2416,7 +2416,7 @@ paths:
     get:
       tags:
         - Commissions API
-      summary: Liste des membres de la commission.
+      summary: Liste paginée des membres de la commission
       description: Récupération de la liste des membres de la commission.
       operationId: PaginateMembresCommissionCommissions
       security:
@@ -2648,7 +2648,7 @@ paths:
     post:
       tags:
         - Commissions API
-      summary: Ajout d'un membre dans la commission.
+      summary: Ajout d'un membre dans la commission
       description: Ajout d'un membre dans la commission.
       operationId: PostMembresCommissionCommissions
       security:
@@ -3330,7 +3330,7 @@ paths:
     get:
       tags:
         - Commissions Membres API
-      summary: Liste des membres des commissions.
+      summary: Liste paginée des membres des commissions
       description: Récupération de la liste membres des commissions.
       operationId: PaginateCommissionsMembres
       security:
@@ -3549,7 +3549,7 @@ paths:
     delete:
       tags:
         - Commissions Membres API
-      summary: Suppression d'un membre de commission.
+      summary: Suppression d'un membre de commission
       description: Suppression d'un membre de commission existant.
       operationId: DeleteMembreCommissionsMembres
       security:
@@ -4188,7 +4188,7 @@ paths:
     get:
       tags:
         - Contacts API
-      summary: Liste des contacts
+      summary: Liste paginée des contacts
       description: Récupération de la liste des contacts.
       operationId: PaginateContacts
       security:
@@ -6398,7 +6398,7 @@ paths:
     get:
       tags:
         - Dates Passage Commission API
-      summary: Liste des dossiers d'une date de passage en commission
+      summary: Liste paginée des dossiers d'une date de passage en commission
       description: Récupération d'une liste de dossiers à l'ordre du jour liés à une date de passage en commission.
       operationId: PaginateOrdreDuJourDateDatesPassageCommission
       security:
@@ -7081,7 +7081,7 @@ paths:
     get:
       tags:
         - Documents API
-      summary: Liste des documents
+      summary: Liste paginée des documents
       description: Récupération de la liste des documents.
       operationId: PaginateDocuments
       security:
@@ -7943,7 +7943,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des dossiers
+      summary: Liste paginée des dossiers
       description: Récupération de la liste des dossiers selon des critères de recherche.
       operationId: PaginateDossiers
       security:
@@ -8388,7 +8388,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Affectations du dossier
+      summary: Liste complète des affectations du dossier
       description: Liste des affectations du dossier.
       operationId: GetAffectationsDossierDossiers
       security:
@@ -9239,7 +9239,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des contacts
+      summary: Liste paginée des contacts
       description: Récupération de la liste des contacts.
       operationId: PaginateContactsDossierDossiers
       security:
@@ -9747,7 +9747,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des documents
+      summary: Liste paginée des documents
       description: Récupération de la liste des documents.
       operationId: PaginateDocumentsDossierDossiers
       security:
@@ -10225,7 +10225,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des essais réalisés d'un dossier de visite
+      summary: Liste complète des essais réalisés d'un dossier de visite
       description: Récupération des essais réalisés d'un dossier de visite.
       operationId: GetEssaisDossierDossiers
       security:
@@ -10692,7 +10692,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Fil rouge du dossier
+      summary: Liste paginée du fil rouge du dossier
       description: Consulter l'espace d'échange pour le suivi du dossier.
       operationId: PaginateFilRougeDossierDossiers
       security:
@@ -11745,7 +11745,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des permissions de l'utilisateur connecté sur le dossier
+      summary: Liste complète des permissions de l'utilisateur connecté sur le dossier
       description: Ensemble des permissions de l'utilisateur connecté sur le dossier.
       operationId: GetPermissionsDossierDossiers
       security:
@@ -14365,7 +14365,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des prescriptions sur le rapport d'étude
+      summary: Liste complète des prescriptions sur le rapport d'étude
       description: Récupération de la liste des prescriptions sur le rapport d'étude.
       operationId: GetPrescriptionsRapportEtudeDossierDossiers
       security:
@@ -15285,7 +15285,7 @@ paths:
     post:
       tags:
         - Dossiers API
-      summary: Mise à jour du rapport de visite.
+      summary: Mise à jour du rapport de visite
       description: Mise à jour du rapport de visite en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
       operationId: PostRapportVisiteDossierDossiers
       security:
@@ -15621,7 +15621,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des tags
+      summary: Liste complète des tags
       description: Récupération de la liste des tags d'un dossier.
       operationId: GetTagsDossierDossiers
       security:
@@ -16077,7 +16077,7 @@ paths:
     get:
       tags:
         - Dossiers API
-      summary: Liste des workflows
+      summary: Liste paginée des workflows
       description: Récupération de la liste des workflows d'un dossier.
       operationId: PaginateWorkflowsDossierDossiers
       security:
@@ -16734,7 +16734,7 @@ paths:
     get:
       tags:
         - Enveloppes API
-      summary: Recherche les enveloppes
+      summary: Liste paginée des enveloppes
       description: Récupération de la liste des enveloppes selon des critères de recherche.
       operationId: PaginateEnveloppes
       security:
@@ -16974,7 +16974,7 @@ paths:
     post:
       tags:
         - Enveloppes API
-      summary: Créer une enveloppe.
+      summary: Créer une enveloppe
       description: Création d'une nouvelle enveloppe.
       operationId: PostEnveloppes
       security:
@@ -17592,7 +17592,7 @@ paths:
     patch:
       tags:
         - Enveloppes API
-      summary: Mise à jour d'une enveloppe.
+      summary: Mise à jour d'une enveloppe
       description: Mise à jour d'une nouvelle enveloppe.
       operationId: PatchEnveloppeEnveloppes
       security:
@@ -17812,7 +17812,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Recherche des ERP
+      summary: Liste paginée des ERP
       description: Récupération de la liste des Établissements Recevant du Public (ERP) selon des critères de recherche.
       operationId: PaginateErp
       security:
@@ -20750,7 +20750,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Liste des contacts
+      summary: Liste paginée des contacts
       description: Récupération de la liste des contacts.
       operationId: PaginateContactsErpErp
       security:
@@ -21258,7 +21258,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Liste des documents
+      summary: Liste paginée des documents
       description: Récupération de la liste des documents.
       operationId: PaginateDocumentsErpErp
       security:
@@ -21736,7 +21736,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Liste des dossiers
+      summary: Liste paginée des dossiers
       description: Récupération de la liste des dossiers. Cet endpoint partage certains paramètres de filtrage de /dossiers.
       operationId: PaginateDossiersErpErp
       security:
@@ -24830,7 +24830,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Historique d'un ERP
+      summary: Liste paginée représentant l'historique d'un ERP
       description: Récupération de l'historique d'un ERP.
       operationId: PaginateHistoriqueErpErp
       security:
@@ -25055,7 +25055,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Liste des des mains courantes
+      summary: Liste paginée des mains courantes
       description: Récupération de la liste des mains courantes.
       operationId: PaginateMainsCourantesErpErp
       security:
@@ -25296,7 +25296,7 @@ paths:
     post:
       tags:
         - ERP API
-      summary: Ajout d'une main courante.
+      summary: Ajout d'une main courante
       description: Ajout d'une main courante.
       operationId: PostMainsCourantesErpErp
       security:
@@ -25543,7 +25543,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Liste des permissions de l'utilisateur connecté sur l'ERP
+      summary: Liste complète des permissions de l'utilisateur connecté sur l'ERP
       description: Ensemble des permissions de l'utilisateur connecté sur l'ERP.
       operationId: GetPermissionsErpErp
       security:
@@ -25757,7 +25757,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Prescriptions de l'ERP
+      summary: Liste paginée des prescriptions de l'ERP
       description: Retourne la liste des prescriptions soulevées dans les visites et les études de l'ERP.
       operationId: PaginatePrescriptionsErpErp
       security:
@@ -25982,7 +25982,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Récupération de toutes les références extérieures.
+      summary: Liste complète des références extérieures de l'ERP
       description: Récupération de toutes les références extérieures de l'objet.
       operationId: GetReferencesExterieuresErpErp
       security:
@@ -26436,7 +26436,7 @@ paths:
     get:
       tags:
         - ERP API
-      summary: Textes applicables d'un ERP
+      summary: Liste paginée des textes applicables d'un ERP
       description: Retourne la liste des textes applicables d'un ERP en fonction de son type d'activité.
       operationId: PaginateTextesApplicablesErpErp
       security:
@@ -26661,7 +26661,7 @@ paths:
     get:
       tags:
         - Evenements API
-      summary: Liste des événements
+      summary: Liste paginée des événements
       description: Récupération des détails de tous les événements calendaires existants.
       operationId: PaginateEvenements
       security:
@@ -27556,7 +27556,7 @@ paths:
     get:
       tags:
         - Evenements API
-      summary: Liste des utilisateurs liés à un événement
+      summary: Liste paginée des utilisateurs liés à un événement
       description: Récupération d'une liste paginée d'utilisateurs liés à un événement calendaire.
       operationId: PaginateUtilisateursEvenementEvenements
       security:
@@ -27781,7 +27781,7 @@ paths:
     get:
       tags:
         - Feed API
-      summary: Liste des messages du feed
+      summary: Liste paginée des messages du feed
       description: Récupération d'une liste de message composant un flux d'activité pour l'utilisateur connecté.
       operationId: PaginateFeed
       security:
@@ -28434,7 +28434,7 @@ paths:
     delete:
       tags:
         - Mains Courantes API
-      summary: Suppression d'une main courante.
+      summary: Suppression d'une main courante
       description: Suppression d'une main courante existante.
       operationId: DeleteMainCouranteMainsCourantes
       security:
@@ -28633,7 +28633,7 @@ paths:
     get:
       tags:
         - Mains Courantes API
-      summary: Détails d'une main courante.
+      summary: Détails d'une main courante
       description: Récupération d'une main courante existante.
       operationId: GetMainCouranteMainsCourantes
       security:
@@ -29080,7 +29080,7 @@ paths:
     get:
       tags:
         - Mains Courantes API
-      summary: Liste des documents
+      summary: Liste paginée des documents
       description: Récupération de la liste des documents.
       operationId: PaginateDocumentsMainCouranteMainsCourantes
       security:
@@ -29558,7 +29558,7 @@ paths:
     get:
       tags:
         - Mains Courantes API
-      summary: Participants de la main courante
+      summary: Liste complète des participants de la main courante
       description: Liste des participants de la main courante.
       operationId: GetParticipantsMainCouranteMainsCourantes
       security:
@@ -30192,7 +30192,7 @@ paths:
     get:
       tags:
         - Notifications API
-      summary: Liste des notifications
+      summary: Liste paginée des notifications
       description: Récupération des détails de toutes les notifications existantes pour l'utilisateur connecté.
       operationId: PaginateNotifications
       security:
@@ -31054,7 +31054,7 @@ paths:
     post:
       tags:
         - Notifications API
-      summary: Marquer la notification comme lue.
+      summary: Marquer la notification comme lue
       description: Permet de marquer la notification donnée comme lue par l'utilisateur.
       operationId: PostMarquerCommeLueNotificationNotifications
       security:
@@ -31910,7 +31910,7 @@ paths:
     get:
       tags:
         - Ordres Du Jour API
-      summary: Liste des prescriptions sur un dossier à l'ordre du jour
+      summary: Liste complète des prescriptions sur un dossier à l'ordre du jour
       description: Liste des prescriptions sur un dossier à l'ordre du jour d'une date de passage en commission. Les prescriptions sont ordonnées par leur numéro d'ordre.
       operationId: GetPrescriptionsDossierOrdresDuJour
       security:
@@ -32833,7 +32833,7 @@ paths:
     get:
       tags:
         - Organisations API
-      summary: Liste des organisations
+      summary: Liste paginée des organisations
       description: Liste paginée des organisations.
       operationId: PaginateOrganisations
       security:
@@ -33051,7 +33051,7 @@ paths:
     get:
       tags:
         - Organisations API
-      summary: Référentiel des workflows d'un dossier
+      summary: Liste paginée des workflows d'un dossier
       description: Retourne le référentiel du paramétrage des workflows pour l'organisation.
       operationId: PaginateDossiersWorkflowsSuitesOrgOrganisations
       security:
@@ -33276,7 +33276,7 @@ paths:
     get:
       tags:
         - Organisations API
-      summary: Liste des géo-services d'une organisation
+      summary: Liste paginée des géo-services d'une organisation
       description: Récupération de la liste des géo-services d'une organisation.
       operationId: PaginateGeoservicesOrgOrganisations
       security:
@@ -33943,7 +33943,7 @@ paths:
     get:
       tags:
         - Organisations API
-      summary: Liste des membres d'une organisation
+      summary: Liste paginée des membres d'une organisation
       description: Récupération de la liste des membres d'une organisation.
       operationId: PaginateMembresOrgOrganisations
       security:
@@ -34409,7 +34409,7 @@ paths:
     get:
       tags:
         - Organisations API
-      summary: Liste des permissions de l'utilisateur connecté sur l'organisation
+      summary: Liste complète des permissions de l'utilisateur connecté sur l'organisation
       description: Ensemble des permissions de l'utilisateur connecté sur l'organisation.
       operationId: GetPermissionsOrgOrganisations
       security:
@@ -35568,7 +35568,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Recherche des Points d'Eau Incendie
+      summary: Liste paginée des Points d'Eau Incendie
       description: Récupération de la liste des Points d'Eau Incendie (PEI) selon des critères de recherche.
       operationId: PaginatePei
       security:
@@ -36393,7 +36393,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Liste des anomalies liées au PEI
+      summary: Liste paginée des anomalies liées au PEI
       description: Récupération de la liste des anomalies DECI détectées sur le PEI.
       operationId: PaginateAnomaliesPeiPei
       security:
@@ -36850,7 +36850,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Liste des contacts
+      summary: Liste paginée des contacts
       description: Récupération de la liste des contacts.
       operationId: PaginateContactsPeiPei
       security:
@@ -37358,7 +37358,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Liste des documents
+      summary: Liste paginée des documents
       description: Récupération de la liste des documents.
       operationId: PaginateDocumentsPeiPei
       security:
@@ -37836,7 +37836,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Liste des dossiers
+      summary: Liste paginée des dossiers
       description: Récupération de la liste des dossiers.
       operationId: PaginateDossiersPeiPei
       security:
@@ -38643,7 +38643,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Historique d'un Point d'Eau Incendie
+      summary: Liste paginée représentant l'historique d'un Point d'Eau Incendie
       description: Récupération de l'historique d'un POI.
       operationId: PaginateHistoriquePeiPei
       security:
@@ -38868,7 +38868,7 @@ paths:
     get:
       tags:
         - PEI API
-      summary: Récupération de toutes les références extérieures.
+      summary: Liste complète des références extérieures du PEI
       description: Récupération de toutes les références extérieures de l'objet.
       operationId: GetReferencesExterieuresPeiPei
       security:
@@ -39322,7 +39322,7 @@ paths:
     get:
       tags:
         - Permissions API
-      summary: Récupération des permissions de l'utilisateur connecté
+      summary: Liste complète des permissions de l'utilisateur connecté
       description: Retourne l'ensemble des permissions de l'utilisateur Metarisc connecté.
       operationId: GetPermissions
       security:
@@ -39722,7 +39722,7 @@ paths:
     get:
       tags:
         - Prescriptions API
-      summary: Liste des prescriptions
+      summary: Liste paginée des prescriptions
       description: Liste des prescriptions.
       operationId: PaginatePrescriptions
       security:
@@ -40832,7 +40832,7 @@ paths:
     get:
       tags:
         - Sites Geographiques API
-      summary: Recherche les sites géographiques.
+      summary: Liste paginée des sites géographiques
       description: Récupération de la liste des sites géographiques selon des critères de recherche.
       operationId: PaginateSitesGeographiques
       security:
@@ -41072,7 +41072,7 @@ paths:
     post:
       tags:
         - Sites Geographiques API
-      summary: Créer un site géographique.
+      summary: Créer un site géographique
       description: Création d'un site géographique.
       operationId: PostSitesGeographiques
       security:
@@ -41303,7 +41303,7 @@ paths:
     delete:
       tags:
         - Sites Geographiques API
-      summary: Suppression d'un site géographique.
+      summary: Suppression d'un site géographique
       description: Suppression d'un site géographique (cette opération n'impacte pas les ERP liés).
       operationId: DeleteSiteGeographiqueSitesGeographiques
       security:
@@ -41706,7 +41706,7 @@ paths:
     patch:
       tags:
         - Sites Geographiques API
-      summary: Mise à jour d'un site géographique.
+      summary: Mise à jour d'un site géographique
       description: Mise à jour d'un site géographique.
       operationId: PatchSiteGeographiqueSitesGeographiques
       security:
@@ -41942,7 +41942,7 @@ paths:
     get:
       tags:
         - Prescriptions API
-      summary: Liste des supports réglementaires
+      summary: Liste paginée des supports réglementaires
       description: Liste des supports réglementaires.
       operationId: PaginateSupportsReglementaires
       security:
@@ -42828,7 +42828,7 @@ paths:
     get:
       tags:
         - Tournées DECI API
-      summary: Liste des tournées DECI
+      summary: Liste paginée des tournées DECI
       description: Liste des tournées DECI.
       operationId: PaginateTourneesDeci
       security:
@@ -43572,7 +43572,7 @@ paths:
     get:
       tags:
         - Tournées DECI API
-      summary: Liste des documents
+      summary: Liste paginée des documents
       description: Récupération de la liste des documents.
       operationId: PaginateDocumentsTourneeDeciTourneesDeci
       security:
@@ -44553,7 +44553,7 @@ paths:
     get:
       tags:
         - Tournées DECI API
-      summary: Liste des PEI liés à la tournée DECI
+      summary: Liste paginée des PEI liés à la tournée DECI
       description: Récupération de la liste des contrôles PEI liés à la tournée DECI.
       operationId: PaginatePeiTourneeDeciTourneesDeci
       security:
@@ -45000,7 +45000,7 @@ paths:
     get:
       tags:
         - Utilisateurs API
-      summary: Liste des adresses mail de l'utilisateur connecté
+      summary: Liste paginée des adresses mail de l'utilisateur connecté
       description: Liste toutes les adresses mail de l'utilisateur connecté, y compris les adresses non publiquement accessibles.
       operationId: PaginateEmailsMoiUtilisateurs
       security:
@@ -45627,7 +45627,7 @@ paths:
     get:
       tags:
         - Utilisateurs API
-      summary: Liste des utilisateurs
+      summary: Liste paginée des utilisateurs
       description: Liste des utilisateurs.
       operationId: PaginateUtilisateurs
       security:
@@ -45858,7 +45858,7 @@ paths:
     get:
       tags:
         - Utilisateurs API
-      summary: Liste des adresses mail d'un utilisateur
+      summary: Liste paginée des adresses mail d'un utilisateur
       description: Retourne une liste des adresses mail publiques d'un utilisateur.
       operationId: PaginateEmailsUtilisateurUtilisateurs
       security:
@@ -46287,7 +46287,7 @@ paths:
     get:
       tags:
         - Utilisateurs API
-      summary: Liste des organisations d'un utilisateur
+      summary: Liste paginée des organisations d'un utilisateur
       description: Retourne une liste d'organisations dont l'utilisateur est membre.
       operationId: PaginateOrganisationsUtilisateurUtilisateurs
       security:
@@ -46512,7 +46512,7 @@ paths:
     get:
       tags:
         - Utilisateurs API
-      summary: Récupération des permissions d'un utilisateur
+      summary: Liste complète des permissions d'un utilisateur
       description: Retourne l'ensemble des permissions d'un utilisateur Metarisc.
       operationId: GetPermissionsUtilisateurUtilisateurs
       security:
