@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/30-09-2025.1
+  version: 1.0/main/01-10-2025.1
   title: Metarisc API
   description: |-
 
@@ -12713,11 +12713,11 @@ paths:
                             Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
                             Valeurs possibles :
-                            * 1 : 1ère catégorie (plus de 1 500 personnes).
-                            * 2 : 2ème catégorie (701 à 1 500 personnes).
-                            * 3 : 3ème catégorie (301 à 700 personnes).
-                            * 4 : 4ème catégorie (50 à 300 personnes).
-                            * 5 : 5ème catégorie (moins de 50 personnes).
+                            * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                            * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                            * 3 : 3ème catégorie (de 301 à 700 personnes).
+                            * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                            * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
                           type: integer
                           minimum: 1
                           maximum: 5
@@ -18438,11 +18438,11 @@ paths:
               Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
               Valeurs possibles :
-              * 1 : 1ère catégorie (plus de 1 500 personnes).
-              * 2 : 2ème catégorie (701 à 1 500 personnes).
-              * 3 : 3ème catégorie (301 à 700 personnes).
-              * 4 : 4ème catégorie (50 à 300 personnes).
-              * 5 : 5ème catégorie (moins de 50 personnes).
+              * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+              * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+              * 3 : 3ème catégorie (de 301 à 700 personnes).
+              * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+              * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
         - name: erp_rattache_a
           in: query
           description: Filtre sur les ERP rattachés à l'identifiant donné.
@@ -19307,11 +19307,11 @@ paths:
                                         Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
                                         Valeurs possibles :
-                                        * 1 : 1ère catégorie (plus de 1 500 personnes).
-                                        * 2 : 2ème catégorie (701 à 1 500 personnes).
-                                        * 3 : 3ème catégorie (301 à 700 personnes).
-                                        * 4 : 4ème catégorie (50 à 300 personnes).
-                                        * 5 : 5ème catégorie (moins de 50 personnes).
+                                        * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                                        * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                                        * 3 : 3ème catégorie (de 301 à 700 personnes).
+                                        * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                                        * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
                                       type: integer
                                       minimum: 1
                                       maximum: 5
@@ -23409,11 +23409,11 @@ paths:
                                         Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
                                         Valeurs possibles :
-                                        * 1 : 1ère catégorie (plus de 1 500 personnes).
-                                        * 2 : 2ème catégorie (701 à 1 500 personnes).
-                                        * 3 : 3ème catégorie (301 à 700 personnes).
-                                        * 4 : 4ème catégorie (50 à 300 personnes).
-                                        * 5 : 5ème catégorie (moins de 50 personnes).
+                                        * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                                        * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                                        * 3 : 3ème catégorie (de 301 à 700 personnes).
+                                        * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                                        * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
                                       type: integer
                                       minimum: 1
                                       maximum: 5
@@ -48020,11 +48020,11 @@ components:
             Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
             Valeurs possibles :
-            * 1 : 1ère catégorie (plus de 1 500 personnes).
-            * 2 : 2ème catégorie (701 à 1 500 personnes).
-            * 3 : 3ème catégorie (301 à 700 personnes).
-            * 4 : 4ème catégorie (50 à 300 personnes).
-            * 5 : 5ème catégorie (moins de 50 personnes).
+            * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+            * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+            * 3 : 3ème catégorie (de 301 à 700 personnes).
+            * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+            * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
           type: integer
           minimum: 1
           maximum: 5
