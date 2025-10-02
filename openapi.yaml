@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/01-10-2025.1
+  version: 1.0/main/02-10-2025.1
   title: Metarisc API
   description: |-
 
@@ -8126,6 +8126,7 @@ paths:
                     * erp:etude_ingenierie : Dossier d'étude ingénierie.
                     * erp:manifestation_temporaire : Dossier de manifestation temporaire.
                 maxItems: 10
+                uniqueItems: true
         - name: workflow_actif
           in: query
           description: Filtre sur le workflow qui est actuellement actif sur le dossier
@@ -17865,6 +17866,7 @@ paths:
                   type: string
                   maxLength: 256
                 maxItems: 10
+                uniqueItems: true
         - name: presence_locaux_sommeil
           in: query
           description: Filtre sur la présence de locaux à sommeil dans l'ERP.
@@ -18380,6 +18382,7 @@ paths:
                     * Y - Musées : Y - Musées.
                     * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                 maxItems: 10
+                uniqueItems: true
         - name: avis_exploitation
           in: query
           description: Filtre sur l'avis d'exploitation.
@@ -21910,6 +21913,7 @@ paths:
                     * erp:etude_ingenierie : Dossier d'étude ingénierie.
                     * erp:manifestation_temporaire : Dossier de manifestation temporaire.
                 maxItems: 10
+                uniqueItems: true
         - name: workflow_actif
           in: query
           description: Filtre sur le workflow qui est actuellement actif sur le dossier
@@ -35680,6 +35684,7 @@ paths:
                   type: string
                   maxLength: 256
                 maxItems: 10
+                uniqueItems: true
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
