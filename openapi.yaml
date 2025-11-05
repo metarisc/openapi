@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-11-2025.1
+  version: 1.0/main/05-11-2025.2
   title: Metarisc API
   description: |-
 
@@ -42765,7 +42765,7 @@ paths:
   /supports_reglementaires:
     get:
       tags:
-        - Prescriptions API
+        - Supports Reglementaires API
       summary: Liste paginée des supports réglementaires
       description: Liste des supports réglementaires.
       operationId: PaginateSupportsReglementaires
@@ -42994,7 +42994,7 @@ paths:
       x-extension-metarisc-codegen-operation: paginate-supports-reglementaires
     post:
       tags:
-        - Prescriptions API
+        - Supports Reglementaires API
       summary: Ajout d'un support réglementaire
       description: Ajouter un support réglementaire.
       operationId: PostSupportsReglementaires
@@ -43248,7 +43248,7 @@ paths:
   /supports_reglementaires/{support_reglementaire_id}:
     delete:
       tags:
-        - Prescriptions API
+        - Supports Reglementaires API
       summary: Suppression d'un support réglementaire
       description: Suppression d'un support réglementaire.
       operationId: DeleteSupportReglementaireSupportsReglementaires
@@ -43447,7 +43447,7 @@ paths:
       x-extension-metarisc-codegen-operation: delete-support-reglementaire
     get:
       tags:
-        - Prescriptions API
+        - Supports Reglementaires API
       summary: Détails d'un support réglementaire
       description: Récupération des détails d'un support réglementaire.
       operationId: GetSupportReglementaireSupportsReglementaires
