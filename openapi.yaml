@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-11-2025.2
+  version: 1.0/feature/modifier-support-reglementaire-nature/13-11-2025.1
   title: Metarisc API
   description: |-
 
@@ -43026,12 +43026,26 @@ paths:
                     Valeurs possibles :
                     * arrete : Arrêté.
                     * article : Article.
-                    * local : Document local.
+                    * arretes_prefectoraux : Ensemble d'arrêtés préfectoraux.
+                    * articles : Ensemble d'articles.
+                    * guides : Guides.
+                    * local_autre_texte : Texte réglementaire local.
+                    * doctrine : Doctrine.
+                    * textes_nationaux_autre_texte : Texte réglementaire national.
+                    * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
+                    * instructions_techniques : Instructions techniques.
                   type: string
                   enum:
                     - arrete
                     - article
-                    - local
+                    - arretes_prefectoraux
+                    - articles
+                    - guides
+                    - local_autre_texte
+                    - doctrine
+                    - textes_nationaux_autre_texte
+                    - avis_ccs
+                    - instructions_techniques
                 legifrance_cid:
                   type: string
                   maxLength: 256
@@ -43689,12 +43703,26 @@ paths:
                     Valeurs possibles :
                     * arrete : Arrêté.
                     * article : Article.
-                    * local : Document local.
+                    * arretes_prefectoraux : Ensemble d'arrêtés préfectoraux.
+                    * articles : Ensemble d'articles.
+                    * guides : Guides.
+                    * local_autre_texte : Texte réglementaire local.
+                    * doctrine : Doctrine.
+                    * textes_nationaux_autre_texte : Texte réglementaire national.
+                    * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
+                    * instructions_techniques : Instructions techniques.
                   type: string
                   enum:
                     - arrete
                     - article
-                    - local
+                    - arretes_prefectoraux
+                    - articles
+                    - guides
+                    - local_autre_texte
+                    - doctrine
+                    - textes_nationaux_autre_texte
+                    - avis_ccs
+                    - instructions_techniques
                 contenu:
                   description: Contenu du support réglementaire.
                   type: string
@@ -52460,12 +52488,26 @@ components:
             Valeurs possibles :
             * arrete : Arrêté.
             * article : Article.
-            * local : Document local.
+            * arretes_prefectoraux : Ensemble d'arrêtés préfectoraux.
+            * articles : Ensemble d'articles.
+            * guides : Guides.
+            * local_autre_texte : Texte réglementaire local.
+            * doctrine : Doctrine.
+            * textes_nationaux_autre_texte : Texte réglementaire national.
+            * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
+            * instructions_techniques : Instructions techniques.
           type: string
           enum:
             - arrete
             - article
-            - local
+            - arretes_prefectoraux
+            - articles
+            - guides
+            - local_autre_texte
+            - doctrine
+            - textes_nationaux_autre_texte
+            - avis_ccs
+            - instructions_techniques
         legifrance_cid:
           type: string
           maxLength: 256
