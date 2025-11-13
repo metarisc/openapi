@@ -2412,6 +2412,254 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: commissions
       x-extension-metarisc-codegen-operation: get-commission
+    patch:
+      tags:
+        - Commissions API
+      summary: Mettre à jour d'une Commission
+      description: Modification d'une commission existant en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PatchCommissionCommissions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: commission_id
+          in: path
+          required: true
+          description: Commission Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Commission
+              description: Une commission est un organisme compétent pour donner des avis.
+              properties:
+                type:
+                  description: |-
+                    Type de la commission (peut être une commission de sécurité, un conseil départemental ...).
+
+                    Valeurs possibles :
+                    * Sous-commission départementale : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur le département.
+                    * Commission communale : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur une commune.
+                    * Commission intercommunale : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur une intercommunalité.
+                    * Commission d'arrondissement : Commission de sécurité des établissements recevant du public (ERP) et des immeubles de grande hauteur (IGH) compétente sur un arrondissement.
+                    * CoDERST : Conseil départemental de l'environnement et des risques sanitaires et technologiques.
+                  type: string
+                  enum:
+                    - Sous-commission départementale
+                    - Commission communale
+                    - Commission intercommunale
+                    - Commission d'arrondissement
+                    - CoDERST
+                libelle:
+                  description: Nom de la commission.
+                  type: string
+                  maxLength: 256
+                presidence_id:
+                  description: Identifiant de l'organisation présidant la commission. Par défaut l'organisation tenant la présidence est celle de l'utilisateur connecté.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
+                secretariat_id:
+                  description: Identifiant de l'organisation tenant le secrétariat de la commission. Par défaut l'organisation tenant le secrétariat est celle de l'utilisateur connecté.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commission'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: commissions
+      x-extension-metarisc-codegen-operation: patch-commission
+      x-extension-metarisc-codegen-visibility: public
   /commissions/{commission_id}/membres:
     get:
       tags:
