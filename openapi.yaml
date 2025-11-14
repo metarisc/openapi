@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/13-11-2025.1
+  version: 1.0/main/14-11-2025.1
   title: Metarisc API
   description: |-
 
@@ -1512,6 +1512,12 @@ paths:
                   format: uuid
                   maxLength: 36
                   minLength: 36
+                couleur:
+                  description: 'Couleur associée à la commission, utilisée notamment pour l''affichage dans les calendriers. La couleur doit être au format hexadécimal sans le symbole ''#'' (Ex: RRGGBB).'
+                  type: string
+                  maxLength: 6
+                  minLength: 6
+                  pattern: ^[0-9A-Fa-f]{6}$
               required:
                 - type
                 - libelle
@@ -2479,6 +2485,12 @@ paths:
                   format: uuid
                   maxLength: 36
                   minLength: 36
+                couleur:
+                  description: 'Couleur associée à la commission, utilisée notamment pour l''affichage dans les calendriers. La couleur doit être au format hexadécimal sans le symbole ''#'' (Ex: RRGGBB).'
+                  type: string
+                  maxLength: 6
+                  minLength: 6
+                  pattern: ^[0-9A-Fa-f]{6}$
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
               x-extension-metarisc-codegen-context: update
@@ -50283,6 +50295,13 @@ components:
           description: Organisation tenant le secrétariat de la commission.
           allOf:
             - $ref: '#/components/schemas/Organisation'
+        couleur:
+          description: 'Couleur associée à la commission, utilisée notamment pour l''affichage dans les calendriers. La couleur doit être au format hexadécimal sans le symbole ''#'' (Ex: RRGGBB).'
+          type: string
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-Fa-f]{6}$
+          nullable: true
       required:
         - id
         - type
