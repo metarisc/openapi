@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/14-11-2025.1
+  version: 1.0/main/17-11-2025.1
   title: Metarisc API
   description: |-
 
@@ -14096,12 +14096,12 @@ paths:
                 observations:
                   description: Observations sur l'analyse de risque.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                   nullable: true
                 prise_de_note_interne:
                   description: Prise de note interne.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                   nullable: true
                 proposition_avis:
                   type: string
@@ -14234,7 +14234,7 @@ paths:
                 descriptif_dossier:
                   description: Descriptif du dossier d'analyse de risque.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
@@ -15580,12 +15580,12 @@ paths:
                 observations:
                   description: Observations sur l'analyse de risque.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                   nullable: true
                 prise_de_note_interne:
                   description: Prise de note interne.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                   nullable: true
                 proposition_avis:
                   type: string
@@ -15696,7 +15696,7 @@ paths:
                 descriptif_dossier:
                   description: Descriptif du dossier d'un rapport de visite.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
@@ -25604,7 +25604,7 @@ paths:
                 compte_rendu:
                   description: Contenu de la main courante.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                 type:
                   description: |-
                     Type de la main courante.
@@ -29144,7 +29144,7 @@ paths:
                 compte_rendu:
                   description: Contenu de la main courante.
                   type: string
-                  maxLength: 8192
+                  maxLength: 32768
                 type:
                   description: |-
                     Type de la main courante.
@@ -52060,7 +52060,7 @@ components:
         compte_rendu:
           description: Contenu de la main courante.
           type: string
-          maxLength: 8192
+          maxLength: 32768
         type:
           description: |-
             Type de la main courante.
@@ -52823,12 +52823,12 @@ components:
         observations:
           description: Observations sur l'analyse de risque.
           type: string
-          maxLength: 8192
+          maxLength: 32768
           nullable: true
         prise_de_note_interne:
           description: Prise de note interne.
           type: string
-          maxLength: 8192
+          maxLength: 32768
           nullable: true
         proposition_avis:
           type: string
@@ -52866,7 +52866,7 @@ components:
         descriptif_dossier:
           description: Descriptif du dossier d'analyse de risque.
           type: string
-          maxLength: 8192
+          maxLength: 32768
           nullable: true
       required:
         - analyse_risque
@@ -52888,12 +52888,12 @@ components:
         observations:
           description: Observations sur l'analyse de risque.
           type: string
-          maxLength: 8192
+          maxLength: 32768
           nullable: true
         prise_de_note_interne:
           description: Prise de note interne.
           type: string
-          maxLength: 8192
+          maxLength: 32768
           nullable: true
         proposition_avis:
           type: string
@@ -52931,7 +52931,7 @@ components:
         descriptif_dossier:
           description: Descriptif du dossier d'un rapport de visite.
           type: string
-          maxLength: 8192
+          maxLength: 32768
           nullable: true
       required:
         - observations
