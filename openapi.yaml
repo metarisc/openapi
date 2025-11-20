@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-11-2025.2
+  version: 1.0/main/20-11-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -15062,7 +15062,6 @@ paths:
                         minLength: 36
                   required:
                     - contenu
-                    - type
                 - type: object
                   properties:
                     numero:
@@ -32610,7 +32609,6 @@ paths:
                         minLength: 36
                   required:
                     - contenu
-                    - type
                 - type: object
                   properties:
                     numero:
@@ -40428,7 +40426,6 @@ paths:
                     minLength: 36
               required:
                 - contenu
-                - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
               x-extension-metarisc-codegen-context: create
@@ -52866,6 +52863,7 @@ components:
             - liee_a_l_exploitation
             - liee_a_l_amelioration
             - rappel_reglementaire
+          nullable: true
         supports_reglementaires:
           description: Les supports réglementaires de la prescription.
           type: array
