@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-11-2025.1
+  version: 1.0/main/27-11-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -15060,6 +15060,19 @@ paths:
                         format: uuid
                         maxLength: 36
                         minLength: 36
+                    chemins:
+                      description: |-
+                        Chemins de la prescription.
+                        Emplacements dans lesquels on peut trouver la prescription dans la structure de répertoires (mode exploration).
+                        Le nombre de niveaux dans le chemin est limité à 10.
+                      type: array
+                      maxItems: 10
+                      items:
+                        type: string
+                        maxLength: 255
+                        pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+                      default:
+                        - /
                   required:
                     - contenu
                 - type: object
@@ -15073,7 +15086,7 @@ paths:
                   required:
                     - numero
               additionalProperties: {}
-              maxProperties: 4
+              maxProperties: 5
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -32607,6 +32620,19 @@ paths:
                         format: uuid
                         maxLength: 36
                         minLength: 36
+                    chemins:
+                      description: |-
+                        Chemins de la prescription.
+                        Emplacements dans lesquels on peut trouver la prescription dans la structure de répertoires (mode exploration).
+                        Le nombre de niveaux dans le chemin est limité à 10.
+                      type: array
+                      maxItems: 10
+                      items:
+                        type: string
+                        maxLength: 255
+                        pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+                      default:
+                        - /
                   required:
                     - contenu
                 - type: object
@@ -32620,7 +32646,7 @@ paths:
                   required:
                     - numero
               additionalProperties: {}
-              maxProperties: 4
+              maxProperties: 5
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -40141,6 +40167,246 @@ paths:
       x-extension-metarisc-codegen-name: ping
       x-extension-metarisc-codegen-operation: ping
       x-extension-metarisc-codegen-scope: ping
+  /prescriptions/explore:
+    get:
+      tags:
+        - Prescriptions API
+      summary: Liste paginée d'exploration des prescriptions
+      description: |-
+        Cette opération permet d'explorer les prescriptions en fonction de leur emplacement dans la structure de répertoires.
+        Il est possible de filtrer les prescriptions en fonction de leur contenu ou de références aux supports réglementaires.
+        Les résultats retournés peuvent être des prescriptions ou des chemins (répertoires).
+      operationId: PaginateExplorePrescriptions
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - name: contenu
+          in: query
+          description: Filtre sur le contenu de la prescription
+          schema:
+            type: string
+            maxLength: 8192
+        - name: support_reglementaire_reference
+          in: query
+          description: Filtre sur les références des supports réglementaires de la prescription
+          schema:
+            type: string
+            maxLength: 256
+        - name: chemin
+          in: query
+          description: Chemin dans lequel explorer les prescriptions
+          schema:
+            type: string
+            maxLength: 255
+            pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 100
+                    items:
+                      $ref: '#/components/schemas/PrescriptionExploreResult'
+                  meta:
+                    description: Métadonnées de la pagination.
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: prescriptions
+      x-extension-metarisc-codegen-operation: paginate-explore
   /prescriptions:
     get:
       tags:
@@ -40424,6 +40690,19 @@ paths:
                     format: uuid
                     maxLength: 36
                     minLength: 36
+                chemins:
+                  description: |-
+                    Chemins de la prescription.
+                    Emplacements dans lesquels on peut trouver la prescription dans la structure de répertoires (mode exploration).
+                    Le nombre de niveaux dans le chemin est limité à 10.
+                  type: array
+                  maxItems: 10
+                  items:
+                    type: string
+                    maxLength: 255
+                    pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+                  default:
+                    - /
               required:
                 - contenu
               additionalProperties: false
@@ -41069,6 +41348,19 @@ paths:
                     format: uuid
                     maxLength: 36
                     minLength: 36
+                chemins:
+                  description: |-
+                    Chemins de la prescription.
+                    Emplacements dans lesquels on peut trouver la prescription dans la structure de répertoires (mode exploration).
+                    Le nombre de niveaux dans le chemin est limité à 10.
+                  type: array
+                  maxItems: 10
+                  items:
+                    type: string
+                    maxLength: 255
+                    pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+                  default:
+                    - /
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
               x-extension-metarisc-codegen-context: update
@@ -52870,11 +53162,25 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/PrescriptionSupportReglementaire'
+        chemins:
+          description: |-
+            Chemins de la prescription.
+            Emplacements dans lesquels on peut trouver la prescription dans la structure de répertoires (mode exploration).
+            Le nombre de niveaux dans le chemin est limité à 10.
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 255
+            pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+          default:
+            - /
       required:
         - id
         - contenu
         - type
         - supports_reglementaires
+        - chemins
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Prescription'
       x-extension-metarisc-codegen-context: query
     PrescriptionAnalyseDeRisque:
@@ -52894,6 +53200,28 @@ components:
           required:
             - numero
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionAnalyseDeRisque'
+      x-extension-metarisc-codegen-context: query
+    PrescriptionExploreResult:
+      type: object
+      title: Objet Prescription Explore Result
+      description: Item d'un résultat issu de l'exploration des prescriptions. Cet item peut représenter une prescription ou un chemin.
+      oneOf:
+        - type: object
+          properties:
+            prescription:
+              allOf:
+                - $ref: '#/components/schemas/Prescription'
+          required:
+            - prescription
+        - type: object
+          properties:
+            chemin:
+              type: string
+              maxLength: 255
+              pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+          required:
+            - chemin
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionExploreResult'
       x-extension-metarisc-codegen-context: query
     PrescriptionSupportReglementaire:
       type: object
