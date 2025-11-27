@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-11-2025.1
+  version: 1.0/main/27-11-2025.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -14268,12 +14268,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - favorable_exploitation
+                    - defavorable_exploitation
                   description: |-
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Avis favorable à l'étude.
+                    * defavorable : Avis défavorable à l'étude.
+                    * favorable_exploitation : Avis favorable à l'exploitation.
+                    * defavorable_exploitation : Avis défavorable à l'exploitation.
                   nullable: true
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
@@ -15764,12 +15768,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - favorable_exploitation
+                    - defavorable_exploitation
                   description: |-
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Avis favorable à l'étude.
+                    * defavorable : Avis défavorable à l'étude.
+                    * favorable_exploitation : Avis favorable à l'exploitation.
+                    * defavorable_exploitation : Avis défavorable à l'exploitation.
                   nullable: true
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
@@ -18823,12 +18831,16 @@ paths:
             enum:
               - favorable
               - defavorable
+              - favorable_exploitation
+              - defavorable_exploitation
             description: |-
               Avis favorable ou défavorable.
 
               Valeurs possibles :
-              * favorable : Avis favorable.
-              * defavorable : Avis défavorable.
+              * favorable : Avis favorable à l'étude.
+              * defavorable : Avis défavorable à l'étude.
+              * favorable_exploitation : Avis favorable à l'exploitation.
+              * defavorable_exploitation : Avis défavorable à l'exploitation.
         - name: a_visiter_en
           in: query
           description: Filtre sur l'année pour laquelle les ERP doivent être visités.
@@ -20869,12 +20881,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - favorable_exploitation
+                    - defavorable_exploitation
                   description: |-
                     Avis d'exploitation de l'ERP.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Avis favorable à l'étude.
+                    * defavorable : Avis défavorable à l'étude.
+                    * favorable_exploitation : Avis favorable à l'exploitation.
+                    * defavorable_exploitation : Avis défavorable à l'exploitation.
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
@@ -32134,12 +32150,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - favorable_exploitation
+                    - defavorable_exploitation
                   description: |-
                     Avis rendu de la commission sur le dossier.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Avis favorable à l'étude.
+                    * defavorable : Avis défavorable à l'étude.
+                    * favorable_exploitation : Avis favorable à l'exploitation.
+                    * defavorable_exploitation : Avis défavorable à l'exploitation.
                 ge4_3:
                   description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
                   type: boolean
@@ -42117,12 +42137,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - favorable_exploitation
+                    - defavorable_exploitation
                   description: |-
                     Avis favorable ou défavorable.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Avis favorable à l'étude.
+                    * defavorable : Avis défavorable à l'étude.
+                    * favorable_exploitation : Avis favorable à l'exploitation.
+                    * defavorable_exploitation : Avis défavorable à l'exploitation.
                 a_visiter_en:
                   type: string
                   format: year
@@ -51457,12 +51481,16 @@ components:
           enum:
             - favorable
             - defavorable
+            - favorable_exploitation
+            - defavorable_exploitation
           description: |-
             Avis rendu de la commission sur le dossier.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Avis favorable à l'étude.
+            * defavorable : Avis défavorable à l'étude.
+            * favorable_exploitation : Avis favorable à l'exploitation.
+            * defavorable_exploitation : Avis défavorable à l'exploitation.
           nullable: true
         enveloppe:
           description: Enveloppe du dossier.
@@ -51807,12 +51835,16 @@ components:
           enum:
             - favorable
             - defavorable
+            - favorable_exploitation
+            - defavorable_exploitation
           description: |-
             Avis d'exploitation de l'ERP.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Avis favorable à l'étude.
+            * defavorable : Avis défavorable à l'étude.
+            * favorable_exploitation : Avis favorable à l'exploitation.
+            * defavorable_exploitation : Avis défavorable à l'exploitation.
           nullable: true
         date_pc_initial:
           description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
@@ -52925,12 +52957,16 @@ components:
           enum:
             - favorable
             - defavorable
+            - favorable_exploitation
+            - defavorable_exploitation
           description: |-
             Avis rendu de la commission sur le dossier.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Avis favorable à l'étude.
+            * defavorable : Avis défavorable à l'étude.
+            * favorable_exploitation : Avis favorable à l'exploitation.
+            * defavorable_exploitation : Avis défavorable à l'exploitation.
           nullable: true
         ge4_3:
           description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
@@ -53321,12 +53357,16 @@ components:
           enum:
             - favorable
             - defavorable
+            - favorable_exploitation
+            - defavorable_exploitation
           description: |-
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Avis favorable à l'étude.
+            * defavorable : Avis défavorable à l'étude.
+            * favorable_exploitation : Avis favorable à l'exploitation.
+            * defavorable_exploitation : Avis défavorable à l'exploitation.
           nullable: true
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
@@ -53386,12 +53426,16 @@ components:
           enum:
             - favorable
             - defavorable
+            - favorable_exploitation
+            - defavorable_exploitation
           description: |-
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Avis favorable à l'étude.
+            * defavorable : Avis défavorable à l'étude.
+            * favorable_exploitation : Avis favorable à l'exploitation.
+            * defavorable_exploitation : Avis défavorable à l'exploitation.
           nullable: true
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
