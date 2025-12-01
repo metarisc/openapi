@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/01-12-2025.2
+  version: 1.0/main/01-12-2025.3
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -53077,6 +53077,7 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/MembreAvis'
+          nullable: true
       required:
         - id
         - dossier
