@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/01-12-2025.1
+  version: 1.0/main/01-12-2025.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -53327,22 +53327,34 @@ components:
       title: Objet Prescription Explore Result
       description: Item d'un résultat issu de l'exploration des prescriptions. Cet item peut représenter une prescription ou un chemin.
       oneOf:
-        - type: object
-          properties:
-            prescription:
-              allOf:
-                - $ref: '#/components/schemas/Prescription'
-          required:
-            - prescription
-        - type: object
-          properties:
-            chemin:
-              type: string
-              maxLength: 255
-              pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
-          required:
-            - chemin
+        - $ref: '#/components/schemas/PrescriptionExploreResultPrescription'
+        - $ref: '#/components/schemas/PrescriptionExploreResultChemin'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionExploreResult'
+      x-extension-metarisc-codegen-context: query
+    PrescriptionExploreResultChemin:
+      type: object
+      title: Objet Prescription Explore Result Chemin
+      description: Item d'un résultat de type Chemin issu de l'exploration des prescriptions.
+      properties:
+        chemin:
+          type: string
+          maxLength: 255
+          pattern: ^\/(?:[a-zA-Zà-úÀ-Ú0-9\s\/\-])*$
+      required:
+        - chemin
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionExploreResultChemin'
+      x-extension-metarisc-codegen-context: query
+    PrescriptionExploreResultPrescription:
+      type: object
+      title: Objet Prescription Explore Result Prescription
+      description: Item d'un résultat de type Prescription issu de l'exploration des prescriptions.
+      properties:
+        prescription:
+          allOf:
+            - $ref: '#/components/schemas/Prescription'
+      required:
+        - prescription
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionExploreResultPrescription'
       x-extension-metarisc-codegen-context: query
     PrescriptionSupportReglementaire:
       type: object
