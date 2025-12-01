@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-11-2025.1
+  version: 1.0/main/01-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -7092,34 +7092,7 @@ paths:
                     type: object
                     title: Objet Membre Avis
                     description: Objet représentant l'avis rendu par un membre de la commission lors d'une commission.
-                    properties:
-                      membre_id:
-                        description: Identifiant du membre de la commission.
-                        type: string
-                        format: uuid
-                        maxLength: 36
-                        minLength: 36
-                      avis:
-                        type: string
-                        enum:
-                          - favorable
-                          - defavorable
-                          - favorable_exploitation
-                          - defavorable_exploitation
-                        description: |-
-                          Proposition d'avis de membre.
-
-                          Valeurs possibles :
-                          * favorable : Avis favorable à l'étude.
-                          * defavorable : Avis défavorable à l'étude.
-                          * favorable_exploitation : Avis favorable à l'exploitation.
-                          * defavorable_exploitation : Avis défavorable à l'exploitation.
-                      motivation_avis:
-                        description: Justification de l'avis rendu par le membre de la commission sur le dossier.
-                        type: string
-                        maxLength: 8192
-                    required:
-                      - membre_id
+                    properties: {}
               required:
                 - dossier_id
                 - date_de_passage
@@ -32228,6 +32201,12 @@ paths:
                     title: Objet Membre Avis
                     description: Objet représentant l'avis rendu par un membre de la commission lors d'une commission.
                     properties:
+                      membre_id:
+                        description: Identifiant du membre de la commission.
+                        type: string
+                        format: uuid
+                        maxLength: 36
+                        minLength: 36
                       avis:
                         type: string
                         enum:
