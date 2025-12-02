@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/01-12-2025.3
+  version: 1.0/main/02-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -7084,15 +7084,6 @@ paths:
                   format: date-time
                   maxLength: 50
                   minLength: 20
-                membres_avis:
-                  description: Avis rendus par les membres de la commission sur le dossier.
-                  type: array
-                  maxItems: 50
-                  items:
-                    type: object
-                    title: Objet Membre Avis
-                    description: Objet représentant l'avis rendu par un membre de la commission lors d'une commission.
-                    properties: {}
               required:
                 - dossier_id
                 - date_de_passage
