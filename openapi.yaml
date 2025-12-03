@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/02-12-2025.1
+  version: 1.0/main/03-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
