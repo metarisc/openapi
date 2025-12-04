@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-12-2025.1
+  version: 1.0/main/04-12-2025.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -14272,8 +14272,8 @@ paths:
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable à l'étude.
-                    * defavorable : Avis défavorable à l'étude.
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
                   nullable: true
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
@@ -15768,8 +15768,8 @@ paths:
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable à l'étude.
-                    * defavorable : Avis défavorable à l'étude.
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
                   nullable: true
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
@@ -18827,8 +18827,8 @@ paths:
               Avis favorable ou défavorable.
 
               Valeurs possibles :
-              * favorable : Avis favorable à l'étude.
-              * defavorable : Avis défavorable à l'étude.
+              * favorable : Avis favorable.
+              * defavorable : Avis défavorable.
         - name: a_visiter_en
           in: query
           description: Filtre sur l'année pour laquelle les ERP doivent être visités.
@@ -20873,8 +20873,8 @@ paths:
                     Avis d'exploitation de l'ERP.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable à l'étude.
-                    * defavorable : Avis défavorable à l'étude.
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
@@ -32139,8 +32139,8 @@ paths:
                     Avis rendu de la commission sur le dossier.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable à l'étude.
-                    * defavorable : Avis défavorable à l'étude.
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
                 ge4_3:
                   description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
                   type: boolean
@@ -32187,8 +32187,8 @@ paths:
                           Proposition d'avis de membre.
 
                           Valeurs possibles :
-                          * favorable : Avis favorable à l'étude.
-                          * defavorable : Avis défavorable à l'étude.
+                          * favorable : Avis favorable.
+                          * defavorable : Avis défavorable.
                       motivation_avis:
                         description: Justification de l'avis rendu par le membre de la commission sur le dossier.
                         type: string
@@ -42152,8 +42152,8 @@ paths:
                     Avis favorable ou défavorable.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable à l'étude.
-                    * defavorable : Avis défavorable à l'étude.
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
                 a_visiter_en:
                   type: string
                   format: year
@@ -51492,8 +51492,8 @@ components:
             Avis rendu de la commission sur le dossier.
 
             Valeurs possibles :
-            * favorable : Avis favorable à l'étude.
-            * defavorable : Avis défavorable à l'étude.
+            * favorable : Avis favorable.
+            * defavorable : Avis défavorable.
           nullable: true
         enveloppe:
           description: Enveloppe du dossier.
@@ -51842,8 +51842,8 @@ components:
             Avis d'exploitation de l'ERP.
 
             Valeurs possibles :
-            * favorable : Avis favorable à l'étude.
-            * defavorable : Avis défavorable à l'étude.
+            * favorable : Avis favorable.
+            * defavorable : Avis défavorable.
           nullable: true
         date_pc_initial:
           description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
@@ -52602,8 +52602,8 @@ components:
             Proposition d'avis de membre.
 
             Valeurs possibles :
-            * favorable : Avis favorable à l'étude.
-            * defavorable : Avis défavorable à l'étude.
+            * favorable : Avis favorable.
+            * defavorable : Avis défavorable.
         motivation_avis:
           description: Justification de l'avis rendu par le membre de la commission sur le dossier.
           type: string
@@ -52990,8 +52990,8 @@ components:
             Avis rendu de la commission sur le dossier.
 
             Valeurs possibles :
-            * favorable : Avis favorable à l'étude.
-            * defavorable : Avis défavorable à l'étude.
+            * favorable : Avis favorable.
+            * defavorable : Avis défavorable.
           nullable: true
         ge4_3:
           description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
@@ -53406,8 +53406,8 @@ components:
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
-            * favorable : Avis favorable à l'étude.
-            * defavorable : Avis défavorable à l'étude.
+            * favorable : Avis favorable.
+            * defavorable : Avis défavorable.
           nullable: true
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
@@ -53471,8 +53471,8 @@ components:
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
-            * favorable : Avis favorable à l'étude.
-            * defavorable : Avis défavorable à l'étude.
+            * favorable : Avis favorable.
+            * defavorable : Avis défavorable.
           nullable: true
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
