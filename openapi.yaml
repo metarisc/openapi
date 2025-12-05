@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-12-2025.2
+  version: 1.0/main/05-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -40207,6 +40207,7 @@ paths:
         Cette opération permet d'explorer les prescriptions en fonction de leur emplacement dans la structure de répertoires.
         Il est possible de filtrer les prescriptions en fonction de leur contenu ou de références aux supports réglementaires.
         Les résultats retournés peuvent être des prescriptions ou des chemins (répertoires).
+        Les résultats sont trié de manière à afficher en premier les répertoires (chemins) puis les prescriptions.
       operationId: PaginateExplorePrescriptions
       security:
         - IdMetariscFr:
