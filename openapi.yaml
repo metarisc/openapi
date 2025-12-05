@@ -27135,6 +27135,14 @@ paths:
               * RECONNAISSANCE_OPERATIONNELLE_ANNUELLE : Reconnaissance opérationnelle annuelle.
               * VISITE_PERIODIQUE : Visite périodique.
               * COMMISSION_SECURITE : Commission de sécurité.
+        - name: subject_id
+          in: query
+          description: L'identifiant du sujet de l'événement. Ce filtre est à utiliser conjointement avec le paramètre `type`.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -52377,6 +52385,7 @@ components:
         - description
         - date_debut
         - date_fin
+        - subject
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
       x-extension-metarisc-codegen-context: query
     FeedMessageBase:
