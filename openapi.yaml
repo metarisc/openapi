@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-12-2025.3
+  version: 1.0/main/08-12-2025.4
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -1638,25 +1638,39 @@ paths:
             type: string
             enum:
               - salle
-              - visite_reception_travaux
-              - visite_reception_avant_ouverture
-              - visite_periodique
-              - visite_inopinee
-              - visite_controle
-              - visite_chantier
-              - visite_conseil
+              - visite_reception_travaux_en_groupe_de_visite
+              - visite_reception_avant_ouverture_en_groupe_de_visite
+              - visite_periodique_en_groupe_de_visite
+              - visite_inopinee_en_groupe_de_visite
+              - visite_controle_en_groupe_de_visite
+              - visite_chantier_en_groupe_de_visite
+              - visite_conseil_en_groupe_de_visite
+              - visite_reception_travaux_en_pleniere
+              - visite_reception_avant_ouverture_en_pleniere
+              - visite_periodique_en_pleniere
+              - visite_inopinee_en_pleniere
+              - visite_controle_en_pleniere
+              - visite_chantier_en_pleniere
+              - visite_conseil_en_pleniere
             description: |-
               Type du passage en commission.
 
               Valeurs possibles :
               * salle : Passage en commission en salle.
-              * visite_reception_travaux : Visite de réception de travaux.
-              * visite_reception_avant_ouverture : Visite de réception avant ouverture.
-              * visite_periodique : Visite périodique.
-              * visite_inopinee : Visite inopinée.
-              * visite_controle : Visite de contrôle.
-              * visite_chantier : Visite de chantier.
-              * visite_conseil : Visite de conseil.
+              * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
+              * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
+              * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
+              * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
+              * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
+              * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
+              * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
+              * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
+              * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
+              * visite_periodique_en_pleniere : Visite périodique en plénière.
+              * visite_inopinee_en_pleniere : Visite inopinée en plénière.
+              * visite_controle_en_pleniere : Visite de contrôle en plénière.
+              * visite_chantier_en_pleniere : Visite de chantier en plénière.
+              * visite_conseil_en_pleniere : Visite de conseil en plénière.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -1912,23 +1926,37 @@ paths:
 
                     Valeurs possibles :
                     * salle : Passage en commission en salle.
-                    * visite_reception_travaux : Visite de réception de travaux.
-                    * visite_reception_avant_ouverture : Visite de réception avant ouverture.
-                    * visite_periodique : Visite périodique.
-                    * visite_inopinee : Visite inopinée.
-                    * visite_controle : Visite de contrôle.
-                    * visite_chantier : Visite de chantier.
-                    * visite_conseil : Visite de conseil.
+                    * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
+                    * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
+                    * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
+                    * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
+                    * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
+                    * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
+                    * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
+                    * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
+                    * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
+                    * visite_periodique_en_pleniere : Visite périodique en plénière.
+                    * visite_inopinee_en_pleniere : Visite inopinée en plénière.
+                    * visite_controle_en_pleniere : Visite de contrôle en plénière.
+                    * visite_chantier_en_pleniere : Visite de chantier en plénière.
+                    * visite_conseil_en_pleniere : Visite de conseil en plénière.
                   type: string
                   enum:
                     - salle
-                    - visite_reception_travaux
-                    - visite_reception_avant_ouverture
-                    - visite_periodique
-                    - visite_inopinee
-                    - visite_controle
-                    - visite_chantier
-                    - visite_conseil
+                    - visite_reception_travaux_en_groupe_de_visite
+                    - visite_reception_avant_ouverture_en_groupe_de_visite
+                    - visite_periodique_en_groupe_de_visite
+                    - visite_inopinee_en_groupe_de_visite
+                    - visite_controle_en_groupe_de_visite
+                    - visite_chantier_en_groupe_de_visite
+                    - visite_conseil_en_groupe_de_visite
+                    - visite_reception_travaux_en_pleniere
+                    - visite_reception_avant_ouverture_en_pleniere
+                    - visite_periodique_en_pleniere
+                    - visite_inopinee_en_pleniere
+                    - visite_controle_en_pleniere
+                    - visite_chantier_en_pleniere
+                    - visite_conseil_en_pleniere
                 libelle:
                   description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
                   type: string
@@ -2178,23 +2206,37 @@ paths:
 
                     Valeurs possibles :
                     * salle : Passage en commission en salle.
-                    * visite_reception_travaux : Visite de réception de travaux.
-                    * visite_reception_avant_ouverture : Visite de réception avant ouverture.
-                    * visite_periodique : Visite périodique.
-                    * visite_inopinee : Visite inopinée.
-                    * visite_controle : Visite de contrôle.
-                    * visite_chantier : Visite de chantier.
-                    * visite_conseil : Visite de conseil.
+                    * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
+                    * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
+                    * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
+                    * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
+                    * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
+                    * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
+                    * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
+                    * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
+                    * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
+                    * visite_periodique_en_pleniere : Visite périodique en plénière.
+                    * visite_inopinee_en_pleniere : Visite inopinée en plénière.
+                    * visite_controle_en_pleniere : Visite de contrôle en plénière.
+                    * visite_chantier_en_pleniere : Visite de chantier en plénière.
+                    * visite_conseil_en_pleniere : Visite de conseil en plénière.
                   type: string
                   enum:
                     - salle
-                    - visite_reception_travaux
-                    - visite_reception_avant_ouverture
-                    - visite_periodique
-                    - visite_inopinee
-                    - visite_controle
-                    - visite_chantier
-                    - visite_conseil
+                    - visite_reception_travaux_en_groupe_de_visite
+                    - visite_reception_avant_ouverture_en_groupe_de_visite
+                    - visite_periodique_en_groupe_de_visite
+                    - visite_inopinee_en_groupe_de_visite
+                    - visite_controle_en_groupe_de_visite
+                    - visite_chantier_en_groupe_de_visite
+                    - visite_conseil_en_groupe_de_visite
+                    - visite_reception_travaux_en_pleniere
+                    - visite_reception_avant_ouverture_en_pleniere
+                    - visite_periodique_en_pleniere
+                    - visite_inopinee_en_pleniere
+                    - visite_controle_en_pleniere
+                    - visite_chantier_en_pleniere
+                    - visite_conseil_en_pleniere
                 libelle:
                   description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
                   type: string
@@ -52938,23 +52980,37 @@ components:
 
             Valeurs possibles :
             * salle : Passage en commission en salle.
-            * visite_reception_travaux : Visite de réception de travaux.
-            * visite_reception_avant_ouverture : Visite de réception avant ouverture.
-            * visite_periodique : Visite périodique.
-            * visite_inopinee : Visite inopinée.
-            * visite_controle : Visite de contrôle.
-            * visite_chantier : Visite de chantier.
-            * visite_conseil : Visite de conseil.
+            * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
+            * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
+            * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
+            * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
+            * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
+            * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
+            * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
+            * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
+            * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
+            * visite_periodique_en_pleniere : Visite périodique en plénière.
+            * visite_inopinee_en_pleniere : Visite inopinée en plénière.
+            * visite_controle_en_pleniere : Visite de contrôle en plénière.
+            * visite_chantier_en_pleniere : Visite de chantier en plénière.
+            * visite_conseil_en_pleniere : Visite de conseil en plénière.
           type: string
           enum:
             - salle
-            - visite_reception_travaux
-            - visite_reception_avant_ouverture
-            - visite_periodique
-            - visite_inopinee
-            - visite_controle
-            - visite_chantier
-            - visite_conseil
+            - visite_reception_travaux_en_groupe_de_visite
+            - visite_reception_avant_ouverture_en_groupe_de_visite
+            - visite_periodique_en_groupe_de_visite
+            - visite_inopinee_en_groupe_de_visite
+            - visite_controle_en_groupe_de_visite
+            - visite_chantier_en_groupe_de_visite
+            - visite_conseil_en_groupe_de_visite
+            - visite_reception_travaux_en_pleniere
+            - visite_reception_avant_ouverture_en_pleniere
+            - visite_periodique_en_pleniere
+            - visite_inopinee_en_pleniere
+            - visite_controle_en_pleniere
+            - visite_chantier_en_pleniere
+            - visite_conseil_en_pleniere
         libelle:
           description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
           type: string
