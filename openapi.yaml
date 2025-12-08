@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-12-2025.1
+  version: 1.0/main/08-12-2025.3
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -1638,23 +1638,25 @@ paths:
             type: string
             enum:
               - salle
-              - visite_de_securite
-              - groupe_de_visite
               - visite_reception_travaux
+              - visite_reception_avant_ouverture
               - visite_periodique
               - visite_inopinee
               - visite_controle
+              - visite_chantier
+              - visite_conseil
             description: |-
               Type du passage en commission.
 
               Valeurs possibles :
               * salle : Passage en commission en salle.
-              * visite_de_securite : Visite de sécurité.
-              * groupe_de_visite : Groupe de visite.
               * visite_reception_travaux : Visite de réception de travaux.
+              * visite_reception_avant_ouverture : Visite de réception avant ouverture.
               * visite_periodique : Visite périodique.
               * visite_inopinee : Visite inopinée.
               * visite_controle : Visite de contrôle.
+              * visite_chantier : Visite de chantier.
+              * visite_conseil : Visite de conseil.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -1910,21 +1912,23 @@ paths:
 
                     Valeurs possibles :
                     * salle : Passage en commission en salle.
-                    * visite_de_securite : Visite de sécurité.
-                    * groupe_de_visite : Groupe de visite.
                     * visite_reception_travaux : Visite de réception de travaux.
+                    * visite_reception_avant_ouverture : Visite de réception avant ouverture.
                     * visite_periodique : Visite périodique.
                     * visite_inopinee : Visite inopinée.
                     * visite_controle : Visite de contrôle.
+                    * visite_chantier : Visite de chantier.
+                    * visite_conseil : Visite de conseil.
                   type: string
                   enum:
                     - salle
-                    - visite_de_securite
-                    - groupe_de_visite
                     - visite_reception_travaux
+                    - visite_reception_avant_ouverture
                     - visite_periodique
                     - visite_inopinee
                     - visite_controle
+                    - visite_chantier
+                    - visite_conseil
                 libelle:
                   description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
                   type: string
@@ -2174,21 +2178,23 @@ paths:
 
                     Valeurs possibles :
                     * salle : Passage en commission en salle.
-                    * visite_de_securite : Visite de sécurité.
-                    * groupe_de_visite : Groupe de visite.
                     * visite_reception_travaux : Visite de réception de travaux.
+                    * visite_reception_avant_ouverture : Visite de réception avant ouverture.
                     * visite_periodique : Visite périodique.
                     * visite_inopinee : Visite inopinée.
                     * visite_controle : Visite de contrôle.
+                    * visite_chantier : Visite de chantier.
+                    * visite_conseil : Visite de conseil.
                   type: string
                   enum:
                     - salle
-                    - visite_de_securite
-                    - groupe_de_visite
                     - visite_reception_travaux
+                    - visite_reception_avant_ouverture
                     - visite_periodique
                     - visite_inopinee
                     - visite_controle
+                    - visite_chantier
+                    - visite_conseil
                 libelle:
                   description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
                   type: string
@@ -52932,21 +52938,23 @@ components:
 
             Valeurs possibles :
             * salle : Passage en commission en salle.
-            * visite_de_securite : Visite de sécurité.
-            * groupe_de_visite : Groupe de visite.
             * visite_reception_travaux : Visite de réception de travaux.
+            * visite_reception_avant_ouverture : Visite de réception avant ouverture.
             * visite_periodique : Visite périodique.
             * visite_inopinee : Visite inopinée.
             * visite_controle : Visite de contrôle.
+            * visite_chantier : Visite de chantier.
+            * visite_conseil : Visite de conseil.
           type: string
           enum:
             - salle
-            - visite_de_securite
-            - groupe_de_visite
             - visite_reception_travaux
+            - visite_reception_avant_ouverture
             - visite_periodique
             - visite_inopinee
             - visite_controle
+            - visite_chantier
+            - visite_conseil
         libelle:
           description: Libellé de la date de passage en commission. Souvent utile pour affichage aux utilisateurs.
           type: string
