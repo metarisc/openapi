@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-12-2025.4
+  version: 1.0/main/11-12-2025.7
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -10212,6 +10212,442 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: post-contacts-dossier
+  /dossiers/{dossier_id}/derogations:
+    get:
+      tags:
+        - Dossiers API
+      summary: Liste des dérogations du dossier
+      description: Récupération de la liste des dérogations associées à un dossier spécifique.
+      operationId: GetDerogationsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Derogation'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-derogations-dossier
+    post:
+      tags:
+        - Dossiers API
+      summary: Mise à jour des dérogations du dossier
+      description: Mise à jour des dérogations associées à un dossier spécifique.
+      operationId: PostDerogationsDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Dérogation
+              description: Représente une dérogation avec ses justifications et mesures compensatoires.
+              properties:
+                derogations:
+                  description: Description des dérogations
+                  type: string
+                  maxLength: 32768
+                justifications:
+                  description: Justifications des dérogations
+                  type: string
+                  maxLength: 32768
+                mesures_compensatoires_proposees:
+                  description: Mesures compensatoires proposées
+                  type: string
+                  maxLength: 32768
+                mesures_compensatoires_a_respecter:
+                  description: Mesures compensatoires à respecter obligatoirement
+                  type: string
+                  maxLength: 32768
+              required:
+                - derogations
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Derogation'
+              x-extension-metarisc-codegen-context: create
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Derogation'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-derogations-dossier
   /dossiers/{dossier_id}/documents:
     get:
       tags:
@@ -11861,6 +12297,7 @@ paths:
                             enum:
                               - erp:analyse_de_risque
                               - erp:essais_visite
+                              - erp:derogations
                               - deci:controle_technique_pei
                             description: |-
                               Modules activables sur un dossier.
@@ -11869,8 +12306,9 @@ paths:
                               Valeurs possibles :
                               * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
                               * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+                              * erp:derogations : Module de gestion des dérogations pour les ERP.
                               * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
-                          maxItems: 3
+                          maxItems: 4
                           uniqueItems: true
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
@@ -11997,6 +12435,7 @@ paths:
                             enum:
                               - erp:analyse_de_risque
                               - erp:essais_visite
+                              - erp:derogations
                               - deci:controle_technique_pei
                             description: |-
                               Modules activables sur un dossier.
@@ -12005,8 +12444,9 @@ paths:
                               Valeurs possibles :
                               * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
                               * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+                              * erp:derogations : Module de gestion des dérogations pour les ERP.
                               * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
-                          maxItems: 3
+                          maxItems: 4
                           uniqueItems: true
                         enveloppe_id:
                           description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
@@ -51044,6 +51484,34 @@ components:
         - nombre_unite_passage
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Degagement'
       x-extension-metarisc-codegen-context: query
+    Derogation:
+      type: object
+      title: Objet Dérogation
+      description: Représente une dérogation avec ses justifications et mesures compensatoires.
+      properties:
+        derogations:
+          description: Description des dérogations
+          type: string
+          maxLength: 32768
+        justifications:
+          description: Justifications des dérogations
+          type: string
+          maxLength: 32768
+        mesures_compensatoires_proposees:
+          description: Mesures compensatoires proposées
+          type: string
+          maxLength: 32768
+        mesures_compensatoires_a_respecter:
+          description: Mesures compensatoires à respecter obligatoirement
+          type: string
+          maxLength: 32768
+      required:
+        - derogations
+        - justifications
+        - mesures_compensatoires_proposees
+        - mesures_compensatoires_a_respecter
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/Derogation'
+      x-extension-metarisc-codegen-context: query
     DescriptifTechniqueDECIBase:
       type: object
       title: Objet Descriptif Technique DECI Base
@@ -51515,6 +51983,7 @@ components:
             enum:
               - erp:analyse_de_risque
               - erp:essais_visite
+              - erp:derogations
               - deci:controle_technique_pei
             description: |-
               Modules activables sur un dossier.
@@ -51523,8 +51992,9 @@ components:
               Valeurs possibles :
               * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
               * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+              * erp:derogations : Module de gestion des dérogations pour les ERP.
               * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
-          maxItems: 3
+          maxItems: 4
           uniqueItems: true
         tags:
           description: Tags du dossier.
