@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/11-12-2025.7
+  version: 1.0/main/15-12-2025.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -10419,8 +10419,8 @@ paths:
     post:
       tags:
         - Dossiers API
-      summary: Mise à jour des dérogations du dossier
-      description: Mise à jour des dérogations associées à un dossier spécifique.
+      summary: Mise a jour d'une derogation
+      description: Mise a jour d'une dérogation dans un dossier.
       operationId: PostDerogationsDossierDossiers
       security:
         - IdMetariscFr:
@@ -10472,7 +10472,7 @@ paths:
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Derogation'
               x-extension-metarisc-codegen-context: create
       responses:
-        '200':
+        '201':
           description: OK
           content:
             application/json:
