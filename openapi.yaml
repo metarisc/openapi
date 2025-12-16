@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-12-2025.2
+  version: 1.0/main/16-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -28974,10 +28974,12 @@ paths:
                             Valeurs possibles :
                             * texte : Message de type texte.
                             * liste_pei : Message contenant une liste de PEI.
+                            * message_utilisateur : Message rédigé par un utilisateur.
                           type: string
                           enum:
                             - texte
                             - liste_pei
+                            - message_utilisateur
                       required:
                         - titre
                         - type
@@ -28989,8 +28991,44 @@ paths:
                           maxLength: 8192
                       required:
                         - texte
+                - type: object
+                  title: Objet FeedMessage MessageUtilisateur
+                  description: Message utilisateur sur le flux d'activité.
+                  allOf:
+                    - type: object
+                      title: Objet Feed Message Base
+                      description: Message de base d'un flux d'activité.
+                      properties:
+                        titre:
+                          description: Titre du message.
+                          type: string
+                          maxLength: 256
+                        type:
+                          description: |-
+                            Type du message.
+
+                            Valeurs possibles :
+                            * texte : Message de type texte.
+                            * liste_pei : Message contenant une liste de PEI.
+                            * message_utilisateur : Message rédigé par un utilisateur.
+                          type: string
+                          enum:
+                            - texte
+                            - liste_pei
+                            - message_utilisateur
+                      required:
+                        - titre
+                        - type
+                    - type: object
+                      properties:
+                        texte:
+                          description: Contenu du message.
+                          type: string
+                          maxLength: 32768
+                      required:
+                        - texte
               additionalProperties: {}
-              maxProperties: 3
+              maxProperties: 6
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -52934,16 +52972,39 @@ components:
             Valeurs possibles :
             * texte : Message de type texte.
             * liste_pei : Message contenant une liste de PEI.
+            * message_utilisateur : Message rédigé par un utilisateur.
           type: string
           enum:
             - texte
             - liste_pei
+            - message_utilisateur
       required:
         - id
         - titre
         - date_de_creation
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageBase'
+      x-extension-metarisc-codegen-context: query
+    FeedMessageMessageUtilisateur:
+      type: object
+      title: Objet FeedMessage MessageUtilisateur
+      description: Message utilisateur sur le flux d'activité.
+      allOf:
+        - $ref: '#/components/schemas/FeedMessageBase'
+        - type: object
+          properties:
+            texte:
+              description: Contenu du message.
+              type: string
+              maxLength: 32768
+            redacteur:
+              description: Utilisateur ayant rédigé le message.
+              allOf:
+                - $ref: '#/components/schemas/Utilisateur'
+          required:
+            - texte
+            - redacteur
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageMessageUtilisateur'
       x-extension-metarisc-codegen-context: query
     FeedMessageTexte:
       type: object
@@ -52967,6 +53028,7 @@ components:
       description: Message associé à un flux d'activité.
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
+        - $ref: '#/components/schemas/FeedMessageMessageUtilisateur'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
       x-extension-metarisc-codegen-context: query
     FilRougeMessage:
