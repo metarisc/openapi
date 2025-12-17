@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-12-2025.3
+  version: 1.0/feature/comment-feed/17-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -29168,6 +29168,470 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: feed
       x-extension-metarisc-codegen-operation: post-message
+  /feed/{message_id}/comments:
+    get:
+      tags:
+        - Feed API
+      summary: Liste paginée des commentaires d'un message du feed
+      description: Récupération d'une liste de commentaires associés à un message spécifique composant un flux d'activité pour l'utilisateur connecté.
+      operationId: PaginateCommentsMessageFeed
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          description: Message Id
+          schema:
+            type: string
+            maxLength: 255
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 100
+                    items:
+                      $ref: '#/components/schemas/FeedComment'
+                  meta:
+                    description: Métadonnées de la pagination.
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
+      x-extension-metarisc-codegen-name: feed
+      x-extension-metarisc-codegen-operation: paginate-feed-messages
+    post:
+      tags:
+        - Feed API
+      summary: Création d'un commentaire sur un message du feed
+      description: Création d'un nouveau commentaire associé à un message spécifique composant un flux d'activité pour l'utilisateur connecté.
+      operationId: PostCommentsMessageFeed
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          description: Message Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Feed comment
+              description: Commentaire d'un flux d'activité.
+              properties:
+                contenu:
+                  description: Contenu du commentaire.
+                  type: string
+                  maxLength: 8192
+                date_de_creation:
+                  description: Date de création du commentaire.
+                  type: string
+                  format: date-time
+                  maxLength: 50
+                  minLength: 20
+                utilisateur_id:
+                  description: Identifiant de l'utilisateur ayant créé le commentaire.
+                  type: string
+                  maxLength: 256
+                message_id:
+                  description: Identifiant de message auquel appartient le commentaire.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
+              required:
+                - contenu
+                - date_de_creation
+                - utilisateur_id
+                - message_id
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedComment'
+              x-extension-metarisc-codegen-context: create
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedComment'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: feed
+      x-extension-metarisc-codegen-operation: create-feed-comment
   /healthcheck:
     get:
       tags:
@@ -48619,225 +49083,6 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: utilisateurs
       x-extension-metarisc-codegen-operation: get-utilisateur-details
-    patch:
-      tags:
-        - Utilisateurs API
-      summary: Mise à jour de l'utilisateur
-      description: Mise à jour de l'utilisateur.
-      operationId: PatchUtilisateurUtilisateurs
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: utilisateur_id
-          in: path
-          required: true
-          description: Utilisateur Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              title: Objet Utilisateur
-              properties:
-                avatar_url:
-                  description: Lien URL vers l'avatar de l'utilisateur.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
-              additionalProperties: false
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
-              x-extension-metarisc-codegen-context: update
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Utilisateur'
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 256
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: utilisateurs
-      x-extension-metarisc-codegen-operation: patch-utilisateur
   /utilisateurs/{utilisateur_id}/organisations:
     get:
       tags:
@@ -53122,6 +53367,39 @@ components:
         - date_fin
         - subject
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
+      x-extension-metarisc-codegen-context: query
+    FeedComment:
+      type: object
+      title: Objet Feed comment
+      description: Commentaire d'un flux d'activité.
+      properties:
+        id:
+          description: Identifiant unique du commentaire.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        contenu:
+          description: Contenu du commentaire.
+          type: string
+          maxLength: 8192
+        date_de_creation:
+          description: Date de création du commentaire.
+          type: string
+          format: date-time
+          maxLength: 50
+          minLength: 20
+        utilisateur:
+          description: Utilisateur ayant créé le commentaire.
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+          nullable: true
+      required:
+        - id
+        - contenu
+        - date_de_creation
+        - utilisateur
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedComment'
       x-extension-metarisc-codegen-context: query
     FeedMessageBase:
       type: object
