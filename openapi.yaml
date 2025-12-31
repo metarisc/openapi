@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/30-12-2025.1
+  version: 1.0/main/31-12-2025.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -52222,10 +52222,12 @@ components:
         est_archive:
           description: Indicateur permettant de savoir si le dossier est archivé. Un dossier archivé ne peut plus être modifié. Cela peut être utile pour des raisons de traçabilité.
           type: boolean
-        passage_en_commission:
-          description: Information permettant de savoir si le dossier est actuellement programmé à l'ordre du jour d'une commission.
-          allOf:
-            - $ref: '#/components/schemas/PassageCommission'
+        passages_en_commission:
+          description: Information permettant de savoir si le dossier est actuellement programmé à l'ordre du jour d'une ou plusieurs commissions.
+          type: array
+          items:
+            $ref: '#/components/schemas/PassageCommission'
+          maxItems: 5
           nullable: true
         avis:
           type: string
@@ -52314,7 +52316,7 @@ components:
         - modules
         - tags
         - est_archive
-        - passage_en_commission
+        - passages_en_commission
         - avis
         - enveloppe
         - workflows_actifs
