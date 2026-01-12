@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/31-12-2025.1
+  version: 1.0/feature/comment-feed/12-01-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -29168,13 +29168,13 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: feed
       x-extension-metarisc-codegen-operation: post-message
-  /feed/{message_id}:
-    delete:
+  /feed/{message_id}/comments:
+    get:
       tags:
         - Feed API
-      summary: Suppression d'un message dans le feed
-      description: Suppression d'un message existant.
-      operationId: DeleteMessageFeed
+      summary: Liste paginée des commentaires d'un message du feed
+      description: Récupération d'une liste de commentaires associés à un message spécifique composant un flux d'activité pour l'utilisateur connecté.
+      operationId: PaginateCommentsMessageFeed
       security:
         - IdMetariscFr:
             - openid
@@ -29188,6 +29188,8 @@ paths:
           schema:
             type: string
             maxLength: 255
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPerPage'
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -29196,8 +29198,30 @@ paths:
             format: uuid
             maxLength: 255
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Tableau d'objets contenu dans la page.
+                    type: array
+                    maxItems: 100
+                    items:
+                      $ref: '#/components/schemas/FeedComment'
+                  meta:
+                    description: Métadonnées de la pagination.
+                    type: object
+                    properties:
+                      pagination:
+                        $ref: '#/components/schemas/PaginationMetadata'
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
           headers:
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
@@ -29366,14 +29390,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: feed
-      x-extension-metarisc-codegen-operation: delete-message
-    patch:
+      x-extension-metarisc-codegen-operation: paginate-feed-messages
+    post:
       tags:
         - Feed API
-      summary: Modification d'un message dans le feed
-      description: Modifier un message dans le feed général.
-      operationId: PatchMessageFeed
+      summary: Création d'un commentaire sur un message du feed
+      description: Création d'un nouveau commentaire associé à un message spécifique composant un flux d'activité pour l'utilisateur connecté.
+      operationId: PostCommentsMessageFeed
       security:
         - IdMetariscFr:
             - openid
@@ -29399,34 +29424,37 @@ paths:
           application/json:
             schema:
               type: object
-              title: Objet FeedMessage MessageUtilisateur
-              description: Message utilisateur sur le flux d'activité.
-              allOf:
-                - type: object
-                  title: Objet Feed Message Base
-                  description: Message de base d'un flux d'activité.
-                  properties:
-                    titre:
-                      description: Titre du message.
-                      type: string
-                      maxLength: 256
-                - type: object
-                  properties:
-                    texte:
-                      description: Contenu du message.
-                      type: string
-                      maxLength: 32768
-              additionalProperties: {}
-              maxProperties: 2
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageMessageUtilisateur'
-              x-extension-metarisc-codegen-context: update
+              title: Objet Feed comment
+              description: Commentaire d'un flux d'activité.
+              properties:
+                contenu:
+                  description: Contenu du commentaire.
+                  type: string
+                  maxLength: 8192
+                utilisateur_id:
+                  description: Identifiant de l'utilisateur ayant créé le commentaire.
+                  type: string
+                  maxLength: 256
+                message_id:
+                  description: Identifiant de message auquel appartient le commentaire.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
+              required:
+                - contenu
+                - utilisateur_id
+                - message_id
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedComment'
+              x-extension-metarisc-codegen-context: create
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FeedMessageMessageUtilisateur'
+                $ref: '#/components/schemas/FeedComment'
           headers:
             RateLimit-Limit:
               description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
@@ -29596,7 +29624,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: feed
-      x-extension-metarisc-codegen-operation: post-message
+      x-extension-metarisc-codegen-operation: create-feed-comment
   /healthcheck:
     get:
       tags:
@@ -49048,225 +49076,6 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: utilisateurs
       x-extension-metarisc-codegen-operation: get-utilisateur-details
-    patch:
-      tags:
-        - Utilisateurs API
-      summary: Mise à jour de l'utilisateur
-      description: Mise à jour de l'utilisateur.
-      operationId: PatchUtilisateurUtilisateurs
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: utilisateur_id
-          in: path
-          required: true
-          description: Utilisateur Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              title: Objet Utilisateur
-              properties:
-                avatar_url:
-                  description: Lien URL vers l'avatar de l'utilisateur.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
-              additionalProperties: false
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
-              x-extension-metarisc-codegen-context: update
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Utilisateur'
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 256
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: utilisateurs
-      x-extension-metarisc-codegen-operation: patch-utilisateur
   /utilisateurs/{utilisateur_id}/organisations:
     get:
       tags:
@@ -52651,12 +52460,10 @@ components:
         est_archive:
           description: Indicateur permettant de savoir si le dossier est archivé. Un dossier archivé ne peut plus être modifié. Cela peut être utile pour des raisons de traçabilité.
           type: boolean
-        passages_en_commission:
-          description: Information permettant de savoir si le dossier est actuellement programmé à l'ordre du jour d'une ou plusieurs commissions.
-          type: array
-          items:
-            $ref: '#/components/schemas/PassageCommission'
-          maxItems: 5
+        passage_en_commission:
+          description: Information permettant de savoir si le dossier est actuellement programmé à l'ordre du jour d'une commission.
+          allOf:
+            - $ref: '#/components/schemas/PassageCommission'
           nullable: true
         avis:
           type: string
@@ -52745,7 +52552,7 @@ components:
         - modules
         - tags
         - est_archive
-        - passages_en_commission
+        - passage_en_commission
         - avis
         - enveloppe
         - workflows_actifs
@@ -53554,6 +53361,39 @@ components:
         - subject
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
       x-extension-metarisc-codegen-context: query
+    FeedComment:
+      type: object
+      title: Objet Feed comment
+      description: Commentaire d'un flux d'activité.
+      properties:
+        id:
+          description: Identifiant unique du commentaire.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        contenu:
+          description: Contenu du commentaire.
+          type: string
+          maxLength: 8192
+        date_de_creation:
+          description: Date de création du commentaire.
+          type: string
+          format: date-time
+          maxLength: 50
+          minLength: 20
+        utilisateur:
+          description: Utilisateur ayant créé le commentaire.
+          allOf:
+            - $ref: '#/components/schemas/Utilisateur'
+          nullable: true
+      required:
+        - id
+        - contenu
+        - date_de_creation
+        - utilisateur
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedComment'
+      x-extension-metarisc-codegen-context: query
     FeedMessageBase:
       type: object
       title: Objet Feed Message Base
@@ -53867,10 +53707,6 @@ components:
           description: Utilisateur cible de la notification.
           allOf:
             - $ref: '#/components/schemas/Utilisateur'
-        subject:
-          description: Sujet de la notification.
-          oneOf:
-            - $ref: '#/components/schemas/DossierErp'
       required:
         - id
         - title
@@ -53880,7 +53716,6 @@ components:
         - date_creation
         - date_de_lecture
         - utilisateur
-        - subject
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Notification'
       x-extension-metarisc-codegen-context: query
     Organisation:
