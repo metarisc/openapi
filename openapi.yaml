@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/31-12-2025.1
+  version: 1.0/main/14-01-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -53870,7 +53870,8 @@ components:
         subject:
           description: Sujet de la notification.
           oneOf:
-            - $ref: '#/components/schemas/DossierErp'
+            - $ref: '#/components/schemas/Dossier'
+          nullable: true
       required:
         - id
         - title
