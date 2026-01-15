@@ -19374,6 +19374,12 @@ paths:
             format: uuid
             maxLength: 36
             minLength: 36
+        - name: titulaires
+          in: query
+          description: Filtre sur les titulaires d'un ERP.
+          schema:
+            type: string
+            maxLength: 256
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -43120,6 +43126,9 @@ paths:
                   format: uuid
                   maxLength: 36
                   minLength: 36
+                titulaires:
+                  type: string
+                  maxLength: 256
       responses:
         '200':
           description: OK
