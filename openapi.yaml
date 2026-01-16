@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-01-2026.1
+  version: 1.0/main/16-01-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -29602,7 +29602,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: feed
-      x-extension-metarisc-codegen-operation: post-message
+      x-extension-metarisc-codegen-operation: patch-message
   /healthcheck:
     get:
       tags:
