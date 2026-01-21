@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-01-2026.1
+  version: 1.0/feature/ajout-categorie-aux-messages-textes-du-feed/21-01-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -28987,14 +28987,26 @@ paths:
                     - type
                 - type: object
                   properties:
+                    categorie:
+                      description: |-
+                        Catégorie du message.
+
+                        Valeurs possibles :
+                        * doctrine_procedure : Message lié à une doctrine ou une procédure.
+                        * information : Message d'information général.
+                      type: string
+                      enum:
+                        - doctrine_procedure
+                        - information
                     texte:
                       description: Contenu du message.
                       type: string
                       maxLength: 32768
                   required:
+                    - categorie
                     - texte
               additionalProperties: {}
-              maxProperties: 3
+              maxProperties: 4
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageMessageUtilisateur'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -53612,6 +53624,17 @@ components:
         - $ref: '#/components/schemas/FeedMessageBase'
         - type: object
           properties:
+            categorie:
+              description: |-
+                Catégorie du message.
+
+                Valeurs possibles :
+                * doctrine_procedure : Message lié à une doctrine ou une procédure.
+                * information : Message d'information général.
+              type: string
+              enum:
+                - doctrine_procedure
+                - information
             texte:
               description: Contenu du message.
               type: string
@@ -53621,6 +53644,7 @@ components:
               allOf:
                 - $ref: '#/components/schemas/Utilisateur'
           required:
+            - categorie
             - texte
             - redacteur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageMessageUtilisateur'
