@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-01-2026.1
+  version: 1.0/main/28-01-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -28720,7 +28720,7 @@ paths:
     get:
       tags:
         - Feed API
-      summary: Liste paginée des messages du feed
+      summary: Liste paginée des messages
       description: Récupération d'une liste de message composant un flux d'activité pour l'utilisateur connecté.
       operationId: PaginateFeed
       security:
