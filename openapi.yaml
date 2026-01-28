@@ -28933,7 +28933,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: feed
-      x-extension-metarisc-codegen-operation: paginate
+      x-extension-metarisc-codegen-operation: paginate-feed-messages
     post:
       tags:
         - Feed API
