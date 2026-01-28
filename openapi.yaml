@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-01-2026.4
+  version: 1.0/main/28-01-2026.5
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -19611,7 +19611,7 @@ paths:
               description: Les établissements recevant du public (ERP) sont des bâtiments, des locaux ou des enceintes dans lesquels sont admises des personnes extérieures.
               properties:
                 implantation:
-                  description: Adresse postale de l'ERP.
+                  description: Adresse postale d'un ERP.
                   allOf:
                     - type: object
                       title: Objet Adresse Postale
@@ -23714,7 +23714,7 @@ paths:
               description: Les établissements recevant du public (ERP) sont des bâtiments, des locaux ou des enceintes dans lesquels sont admises des personnes extérieures.
               properties:
                 implantation:
-                  description: Adresse postale de l'ERP.
+                  description: Adresse postale d'un ERP.
                   allOf:
                     - type: object
                       title: Objet Adresse Postale
@@ -53010,7 +53010,7 @@ components:
           minLength: 20
           nullable: true
         implantation:
-          description: Adresse postale de l'ERP.
+          description: Adresse postale d'un ERP.
           allOf:
             - $ref: '#/components/schemas/AdressePostale'
         descriptif_technique:
