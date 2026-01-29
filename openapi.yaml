@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-01-2026.5
+  version: 1.0/feature/filtre-celulle-erp/29-01-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -19380,6 +19380,20 @@ paths:
           schema:
             type: string
             maxLength: 256
+        - name: genre
+          in: query
+          description: Filtre sur le genre de l'ERP.
+          schema:
+            type: string
+            enum:
+              - cellule
+              - erp
+            description: |-
+              Genre de l'établissement.
+
+              Valeurs possibles :
+              * cellule : Cellule commerciale.
+              * erp : ERP principal.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -43129,6 +43143,17 @@ paths:
                 titulaires:
                   type: string
                   maxLength: 256
+                genre:
+                  type: string
+                  enum:
+                    - cellule
+                    - erp
+                  description: |-
+                    Genre de l'établissement.
+
+                    Valeurs possibles :
+                    * cellule : Cellule commerciale.
+                    * erp : ERP principal.
       responses:
         '200':
           description: OK
@@ -53097,6 +53122,17 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/TexteApplicable'
+        genre:
+          description: |-
+            Genre de l'établissement.
+
+            Valeurs possibles :
+            * cellule : Cellule commerciale.
+            * erp : ERP principal.
+          type: string
+          enum:
+            - cellule
+            - erp
       required:
         - id
         - date_de_realisation
@@ -53114,6 +53150,7 @@ components:
         - titulaires
         - etablissement_rattache
         - textes_applicables
+        - genre
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       x-extension-metarisc-codegen-context: query
     EffectifsNiveau:
