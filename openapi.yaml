@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/29-01-2026.1
+  version: 1.0/main/03-02-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -14795,6 +14795,8 @@ paths:
                           Type du document technique.
 
                           Valeurs possibles :
+                          * CERFA : Document CERFA.
+                          * courrier_de_la_mairie : Courrier de la mairie.
                           * notice_descriptive : Notice descriptive.
                           * plan : Plan.
                           * certificat_de_verification : Certificat de vérification.
@@ -14804,6 +14806,8 @@ paths:
                           * divers : Divers.
                         type: string
                         enum:
+                          - CERFA
+                          - courrier_de_la_mairie
                           - notice_descriptive
                           - plan
                           - certificat_de_verification
@@ -16291,6 +16295,8 @@ paths:
                           Type du document technique.
 
                           Valeurs possibles :
+                          * CERFA : Document CERFA.
+                          * courrier_de_la_mairie : Courrier de la mairie.
                           * notice_descriptive : Notice descriptive.
                           * plan : Plan.
                           * certificat_de_verification : Certificat de vérification.
@@ -16300,6 +16306,8 @@ paths:
                           * divers : Divers.
                         type: string
                         enum:
+                          - CERFA
+                          - courrier_de_la_mairie
                           - notice_descriptive
                           - plan
                           - certificat_de_verification
@@ -18772,7 +18780,7 @@ paths:
           description: Filtre sur la position des ERP.
           schema:
             type: string
-            maxLength: 8192
+            maxLength: 16384
         - name: references_exterieures
           in: query
           x-extension-metarisc-param-multiple: true
@@ -42567,7 +42575,7 @@ paths:
                   maxLength: 256
                 geojson:
                   type: string
-                  maxLength: 8192
+                  maxLength: 16384
                 references_exterieures:
                   oneOf:
                     - type: string
@@ -52532,6 +52540,8 @@ components:
             Type du document technique.
 
             Valeurs possibles :
+            * CERFA : Document CERFA.
+            * courrier_de_la_mairie : Courrier de la mairie.
             * notice_descriptive : Notice descriptive.
             * plan : Plan.
             * certificat_de_verification : Certificat de vérification.
@@ -52541,6 +52551,8 @@ components:
             * divers : Divers.
           type: string
           enum:
+            - CERFA
+            - courrier_de_la_mairie
             - notice_descriptive
             - plan
             - certificat_de_verification
