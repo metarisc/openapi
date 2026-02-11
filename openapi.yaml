@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-02-2026.1
+  version: 1.0/feature/organisation-data/11-02-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -51967,12 +51967,19 @@ components:
           minLength: 6
           pattern: ^[0-9A-Fa-f]{6}$
           nullable: true
+        organisation_id:
+          description: 'Identifiant de l’organisation de la commission. '
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
       required:
         - id
         - type
         - libelle
         - presidence
         - secretariat
+        - organisation_id
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Commission'
       x-extension-metarisc-codegen-context: query
     CommissionMembre:
@@ -52781,6 +52788,12 @@ components:
           items:
             $ref: '#/components/schemas/DossierAffectation'
           maxItems: 25
+        organisation_id:
+          description: 'Identifiant de l’organisation à laquelle appartient le dossier. '
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
       required:
         - id
         - objet
@@ -52799,6 +52812,7 @@ components:
         - nb_contacts
         - nb_pieces_jointes
         - affectations
+        - organisation_id
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       x-extension-metarisc-codegen-context: query
     DossierDeci:
@@ -53145,6 +53159,12 @@ components:
           enum:
             - cellule
             - erp
+        organisation_id:
+          description: 'Identifiant de l’organisation à laquelle appartient l''ERP. '
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
       required:
         - id
         - date_de_realisation
@@ -53163,6 +53183,7 @@ components:
         - etablissement_rattache
         - textes_applicables
         - genre
+        - organisation_id
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       x-extension-metarisc-codegen-context: query
     EffectifsNiveau:
@@ -53602,6 +53623,12 @@ components:
           description: Sujet de l'événement.
           oneOf:
             - $ref: '#/components/schemas/PassageCommission'
+        organisation_id:
+          description: 'Identifiant de l’organisation à laquelle appartient l''événement. '
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
       required:
         - id
         - title
@@ -53610,6 +53637,7 @@ components:
         - date_debut
         - date_fin
         - subject
+        - organisation_id
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Evenement'
       x-extension-metarisc-codegen-context: query
     FeedMessageBase:
@@ -54236,6 +54264,12 @@ components:
           description: Commission en charge du passage en commission.
           allOf:
             - $ref: '#/components/schemas/Commission'
+        organisation_id:
+          description: 'Identifiant de l’organisation de la commission. '
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
       required:
         - id
         - date_debut
@@ -54245,6 +54279,7 @@ components:
         - raison_reprogrammation
         - nb_dossiers
         - commission
+        - organisation_id
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommission'
       x-extension-metarisc-codegen-context: query
     PassageCommissionDossier:
