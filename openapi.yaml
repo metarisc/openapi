@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-02-2026.1
+  version: 1.0/main/16-02-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -28991,32 +28991,40 @@ paths:
                       description: Titre du message.
                       type: string
                       maxLength: 256
+                  required:
+                    - titre
+                - type: object
+                  properties:
                     type:
+                      type: string
                       description: |-
                         Type du message.
 
                         Valeurs possibles :
-                        * texte : Message de type texte.
-                        * liste_pei : Message contenant une liste de PEI.
                         * message_utilisateur : Message rédigé par un utilisateur.
+                      enum:
+                        - message_utilisateur
+                    categorie:
+                      description: |-
+                        Catégorie du message.
+
+                        Valeurs possibles :
+                        * doctrine_procedure : Message lié à une doctrine ou une procédure.
+                        * information : Message d'information général.
                       type: string
                       enum:
-                        - texte
-                        - liste_pei
-                        - message_utilisateur
-                  required:
-                    - titre
-                    - type
-                - type: object
-                  properties:
+                        - doctrine_procedure
+                        - information
                     texte:
                       description: Contenu du message.
                       type: string
                       maxLength: 32768
                   required:
+                    - type
+                    - categorie
                     - texte
               additionalProperties: {}
-              maxProperties: 3
+              maxProperties: 4
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageMessageUtilisateur'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -53633,24 +53641,10 @@ components:
           format: date-time
           maxLength: 50
           minLength: 20
-        type:
-          description: |-
-            Type du message.
-
-            Valeurs possibles :
-            * texte : Message de type texte.
-            * liste_pei : Message contenant une liste de PEI.
-            * message_utilisateur : Message rédigé par un utilisateur.
-          type: string
-          enum:
-            - texte
-            - liste_pei
-            - message_utilisateur
       required:
         - id
         - titre
         - date_de_creation
-        - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageBase'
       x-extension-metarisc-codegen-context: query
     FeedMessageMessageUtilisateur:
@@ -53661,6 +53655,26 @@ components:
         - $ref: '#/components/schemas/FeedMessageBase'
         - type: object
           properties:
+            type:
+              type: string
+              description: |-
+                Type du message.
+
+                Valeurs possibles :
+                * message_utilisateur : Message rédigé par un utilisateur.
+              enum:
+                - message_utilisateur
+            categorie:
+              description: |-
+                Catégorie du message.
+
+                Valeurs possibles :
+                * doctrine_procedure : Message lié à une doctrine ou une procédure.
+                * information : Message d'information général.
+              type: string
+              enum:
+                - doctrine_procedure
+                - information
             texte:
               description: Contenu du message.
               type: string
@@ -53670,6 +53684,8 @@ components:
               allOf:
                 - $ref: '#/components/schemas/Utilisateur'
           required:
+            - type
+            - categorie
             - texte
             - redacteur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageMessageUtilisateur'
@@ -53682,11 +53698,21 @@ components:
         - $ref: '#/components/schemas/FeedMessageBase'
         - type: object
           properties:
+            type:
+              type: string
+              description: |-
+                Type du message.
+
+                Valeurs possibles :
+                * texte : Message de type texte.
+              enum:
+                - texte
             texte:
               description: Contenu du message.
               type: string
               maxLength: 16384
           required:
+            - type
             - texte
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessageTexte'
       x-extension-metarisc-codegen-context: query
@@ -53697,6 +53723,11 @@ components:
       oneOf:
         - $ref: '#/components/schemas/FeedMessageTexte'
         - $ref: '#/components/schemas/FeedMessageMessageUtilisateur'
+      discriminator:
+        propertyName: type
+        mapping:
+          texte: '#/components/schemas/FeedMessageTexte'
+          message_utilisateur: '#/components/schemas/FeedMessageMessageUtilisateur'
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/FeedMessage'
       x-extension-metarisc-codegen-context: query
     FilRougeMessage:
