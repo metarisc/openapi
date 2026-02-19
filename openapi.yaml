@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/17-02-2026.1
+  version: 1.0/main/19-02-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -48258,6 +48258,38 @@ paths:
                   format: uri
                   maxLength: 512
                   nullable: true
+                roles:
+                  description: Liste des rôles de l'utilisateur.
+                  type: array
+                  maxItems: 10
+                  uniqueItems: true
+                  items:
+                    type: string
+                    enum:
+                      - administrateur_fonctionnel
+                      - valideur
+                      - visionneur_simple
+                      - visionneur_complet
+                      - attributeur
+                      - relecteur
+                      - rapporteur
+                      - preventionniste
+                      - secretariat_commission_securite
+                      - secretariat
+                    description: |-
+                      Le rôle de l'utilisateur.
+
+                      Valeurs possibles :
+                      * administrateur_fonctionnel : Administrateur fonctionnel.
+                      * valideur : Valideur.
+                      * visionneur_simple : Visionneur simple.
+                      * visionneur_complet : Visionneur complet.
+                      * attributeur : Attributeur.
+                      * relecteur : Relecteur.
+                      * rapporteur : Rapporteur.
+                      * preventionniste : Préventionniste.
+                      * secretariat_commission_securite : Secrétariat commission de sécurité.
+                      * secretariat : Secrétariat.
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
               x-extension-metarisc-codegen-context: update
@@ -49137,6 +49169,38 @@ paths:
                   format: uri
                   maxLength: 512
                   nullable: true
+                roles:
+                  description: Liste des rôles de l'utilisateur.
+                  type: array
+                  maxItems: 10
+                  uniqueItems: true
+                  items:
+                    type: string
+                    enum:
+                      - administrateur_fonctionnel
+                      - valideur
+                      - visionneur_simple
+                      - visionneur_complet
+                      - attributeur
+                      - relecteur
+                      - rapporteur
+                      - preventionniste
+                      - secretariat_commission_securite
+                      - secretariat
+                    description: |-
+                      Le rôle de l'utilisateur.
+
+                      Valeurs possibles :
+                      * administrateur_fonctionnel : Administrateur fonctionnel.
+                      * valideur : Valideur.
+                      * visionneur_simple : Visionneur simple.
+                      * visionneur_complet : Visionneur complet.
+                      * attributeur : Attributeur.
+                      * relecteur : Relecteur.
+                      * rapporteur : Rapporteur.
+                      * preventionniste : Préventionniste.
+                      * secretariat_commission_securite : Secrétariat commission de sécurité.
+                      * secretariat : Secrétariat.
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
               x-extension-metarisc-codegen-context: update
@@ -55376,6 +55440,39 @@ components:
           format: uri
           maxLength: 512
           nullable: true
+        roles:
+          description: Liste des rôles de l'utilisateur.
+          type: array
+          maxItems: 10
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+              - administrateur_fonctionnel
+              - valideur
+              - visionneur_simple
+              - visionneur_complet
+              - attributeur
+              - relecteur
+              - rapporteur
+              - preventionniste
+              - secretariat_commission_securite
+              - secretariat
+            description: |-
+              Le rôle de l'utilisateur.
+
+              Valeurs possibles :
+              * administrateur_fonctionnel : Administrateur fonctionnel.
+              * valideur : Valideur.
+              * visionneur_simple : Visionneur simple.
+              * visionneur_complet : Visionneur complet.
+              * attributeur : Attributeur.
+              * relecteur : Relecteur.
+              * rapporteur : Rapporteur.
+              * preventionniste : Préventionniste.
+              * secretariat_commission_securite : Secrétariat commission de sécurité.
+              * secretariat : Secrétariat.
+          nullable: true
       required:
         - id
         - first_name
@@ -55387,6 +55484,7 @@ components:
         - is_verified
         - fonction
         - avatar_url
+        - roles
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Utilisateur'
       x-extension-metarisc-codegen-context: query
     WorkflowStepWorflowData:
