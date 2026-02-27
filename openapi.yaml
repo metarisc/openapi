@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-02-2026.1
+  version: 1.0/main/27-02-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -44748,6 +44748,8 @@ paths:
                     * textes_nationaux_autre_texte : Texte réglementaire national.
                     * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
                     * instructions_techniques : Instructions techniques.
+                    * decret : Décret.
+                    * circulaire : Circulaire.
                   type: string
                   enum:
                     - arrete
@@ -44760,6 +44762,8 @@ paths:
                     - textes_nationaux_autre_texte
                     - avis_ccs
                     - instructions_techniques
+                    - decret
+                    - circulaire
                 legifrance_cid:
                   type: string
                   maxLength: 256
@@ -45425,6 +45429,8 @@ paths:
                     * textes_nationaux_autre_texte : Texte réglementaire national.
                     * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
                     * instructions_techniques : Instructions techniques.
+                    * decret : Décret.
+                    * circulaire : Circulaire.
                   type: string
                   enum:
                     - arrete
@@ -45437,6 +45443,8 @@ paths:
                     - textes_nationaux_autre_texte
                     - avis_ccs
                     - instructions_techniques
+                    - decret
+                    - circulaire
                 contenu:
                   description: Contenu du support réglementaire.
                   type: string
@@ -54747,6 +54755,8 @@ components:
             * textes_nationaux_autre_texte : Texte réglementaire national.
             * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
             * instructions_techniques : Instructions techniques.
+            * decret : Décret.
+            * circulaire : Circulaire.
           type: string
           enum:
             - arrete
@@ -54759,6 +54769,8 @@ components:
             - textes_nationaux_autre_texte
             - avis_ccs
             - instructions_techniques
+            - decret
+            - circulaire
         legifrance_cid:
           type: string
           maxLength: 256
