@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-02-2026.1
+  version: 1.0/feature/add-site-orgid/27-02-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55091,6 +55091,12 @@ components:
           enum:
             - fonctionnel
             - géographique
+        organisation_id:
+          description: 'Identifiant de l’organisation à laquelle appartient le site géographique. '
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
       required:
         - id
         - libelle
@@ -55098,6 +55104,7 @@ components:
         - erp_periodicite_contrainte
         - notes
         - type
+        - organisation_id
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/SiteGeographique'
       x-extension-metarisc-codegen-context: query
     Tag:
