@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-03-2026.1
+  version: 1.0/main/12-03-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -54475,17 +54475,71 @@ components:
             * deci:access : Accès aux fonctionnalités DECI.
             * erp:access : Accès aux fonctionnalités ERP.
             * sirene:access : Accès aux fonctionnalités SIRENE.
-            * dossier:create : Création de dossiers ERP.
-            * erp:create : Création d'ERP.
             * commission:access : Accès aux commissions de sécurité.
+            * dossier:create : Création de dossiers.
+            * dossier:edit:* : Modification de tous les champs d'un dossier.
+            * dossier:delete : Suppression de dossiers.
+            * dossier:view : Consultation de dossiers.
+            * erp:create : Création d'ERP.
+            * erp:edit:* : Modification de tous les champs d'un ERP.
+            * erp:edit:titulaires : Modification des titulaires d'un ERP.
+            * erp:delete : Suppression d'ERP.
+            * erp:view : Consultation d'ERP.
+            * organisation:create : Création d'organisations.
+            * organisation:edit:* : Modification de tous les champs d'une organisation.
+            * organisation:delete : Suppression d'organisations.
+            * organisation:view : Consultation d'organisations.
+            * utilisateur:create : Création d'utilisateurs.
+            * utilisateur:edit:* : Modification de tous les champs d'un utilisateur.
+            * utilisateur:delete : Suppression d'utilisateurs.
+            * utilisateur:view : Consultation d'utilisateurs.
+            * message:create : Création de messages.
+            * message:edit:* : Modification de tous les champs d'un message.
+            * message:delete : Suppression de messages.
+            * message:view : Consultation de messages.
+            * commission:create : Création de commissions.
+            * commission:edit:* : Modification de tous les champs d'une commission.
+            * commission:delete : Suppression de commissions.
+            * commission:view : Consultation de commissions.
+            * evenement:create : Création d'événements.
+            * evenement:edit:* : Modification de tous les champs d'un événement.
+            * evenement:delete : Suppression d'événements.
+            * evenement:view : Consultation d'événements.
           type: string
           enum:
             - deci:access
             - erp:access
             - sirene:access
-            - dossier:create
-            - erp:create
             - commission:access
+            - dossier:create
+            - dossier:edit:*
+            - dossier:delete
+            - dossier:view
+            - erp:create
+            - erp:edit:*
+            - erp:edit:titulaires
+            - erp:delete
+            - erp:view
+            - organisation:create
+            - organisation:edit:*
+            - organisation:delete
+            - organisation:view
+            - utilisateur:create
+            - utilisateur:edit:*
+            - utilisateur:delete
+            - utilisateur:view
+            - message:create
+            - message:edit:*
+            - message:delete
+            - message:view
+            - commission:create
+            - commission:edit:*
+            - commission:delete
+            - commission:view
+            - evenement:create
+            - evenement:edit:*
+            - evenement:delete
+            - evenement:view
       required:
         - name
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Permission'
