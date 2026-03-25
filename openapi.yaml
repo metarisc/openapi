@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-03-2026.1
+  version: 1.0/main/25-03-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -50066,8 +50066,8 @@ paths:
               title: Objet Workflow
               description: Workflow du traitement d'un dossier. Il représente une étape dans la vie du dossier.
               properties:
-                date_de_fin:
-                  description: Date de fin de traitement du workflow (date à laquelle il est passé en terminé).
+                date_de_reception:
+                  description: Date de réception.
                   type: string
                   format: date-time
                   maxLength: 50
@@ -55670,6 +55670,13 @@ components:
           format: date-time
           maxLength: 50
           minLength: 20
+        date_de_reception:
+          description: Date de réception.
+          type: string
+          format: date-time
+          maxLength: 50
+          minLength: 20
+          nullable: true
         date_de_debut:
           description: Date du déclenchement du workflow (date à laquelle il est passé actif).
           type: string
@@ -55746,6 +55753,7 @@ components:
         - id
         - titre
         - date_de_creation
+        - date_de_reception
         - date_de_debut
         - date_de_fin
         - workflow_automatise
