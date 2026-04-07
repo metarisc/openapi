@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-03-2026.1
+  version: 1.0/main/07-04-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -19402,6 +19402,28 @@ paths:
               Valeurs possibles :
               * cellule : Cellule commerciale.
               * erp : ERP principal.
+        - name: statut
+          in: query
+          description: Filtre sur le statut de l'ERP.
+          schema:
+            type: string
+            enum:
+              - reprise_de_donnees
+              - ouvert
+              - projet
+              - ferme
+              - itinerant_periodique
+              - erreur_saisie
+            description: |-
+              Statut de l'ERP lors de l'établissement de son descriptif technique.
+
+              Valeurs possibles :
+              * reprise_de_donnees : Reprise de données.
+              * ouvert : Ouvert.
+              * projet : Projet.
+              * ferme : Fermé.
+              * itinerant_periodique : Itinérant périodique.
+              * erreur_saisie : Erreur de saisie.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -19715,12 +19737,16 @@ paths:
                                 * ouvert : Ouvert.
                                 * projet : Projet.
                                 * ferme : Fermé.
+                                * itinerant_periodique : Itinérant périodique.
+                                * erreur_saisie : Erreur de saisie.
                               type: string
                               enum:
                                 - reprise_de_donnees
                                 - ouvert
                                 - projet
                                 - ferme
+                                - itinerant_periodique
+                                - erreur_saisie
                             periodicite:
                               description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
                               type: integer
@@ -23818,12 +23844,16 @@ paths:
                                 * ouvert : Ouvert.
                                 * projet : Projet.
                                 * ferme : Fermé.
+                                * itinerant_periodique : Itinérant périodique.
+                                * erreur_saisie : Erreur de saisie.
                               type: string
                               enum:
                                 - reprise_de_donnees
                                 - ouvert
                                 - projet
                                 - ferme
+                                - itinerant_periodique
+                                - erreur_saisie
                             periodicite:
                               description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
                               type: integer
@@ -43170,6 +43200,25 @@ paths:
                     Valeurs possibles :
                     * cellule : Cellule commerciale.
                     * erp : ERP principal.
+                statut:
+                  type: string
+                  enum:
+                    - reprise_de_donnees
+                    - ouvert
+                    - projet
+                    - ferme
+                    - itinerant_periodique
+                    - erreur_saisie
+                  description: |-
+                    Statut de l'ERP lors de l'établissement de son descriptif technique.
+
+                    Valeurs possibles :
+                    * reprise_de_donnees : Reprise de données.
+                    * ouvert : Ouvert.
+                    * projet : Projet.
+                    * ferme : Fermé.
+                    * itinerant_periodique : Itinérant périodique.
+                    * erreur_saisie : Erreur de saisie.
       responses:
         '200':
           description: OK
@@ -52440,12 +52489,16 @@ components:
             * ouvert : Ouvert.
             * projet : Projet.
             * ferme : Fermé.
+            * itinerant_periodique : Itinérant périodique.
+            * erreur_saisie : Erreur de saisie.
           type: string
           enum:
             - reprise_de_donnees
             - ouvert
             - projet
             - ferme
+            - itinerant_periodique
+            - erreur_saisie
         periodicite:
           description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
           type: integer
