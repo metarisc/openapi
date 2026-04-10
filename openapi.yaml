@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/07-04-2026.1
+  version: 1.0/feature/insert-dossier-enhanced/10-04-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -22709,6 +22709,408 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: erp
       x-extension-metarisc-codegen-operation: post-documents-erp
+  /erp/{erp_id}/dossiers/enhanced:
+    post:
+      tags:
+        - ERP API
+      summary: Ajout d'un dossier avec des champs supplémentaires (reprise de données)
+      description: Ajout d'un dossier avec des champs supplémentaires (reprise de données).
+      operationId: PostEnhancedDossiersErpErp
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: erp_id
+          in: path
+          required: true
+          description: Erp Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Dossier ERP avec champs supplémentaires (reprise de données)
+              description: Dossier d'un ERP avec champs supplémentaires (reprise de données).
+              allOf:
+                - type: object
+                  title: Objet Dossier ERP
+                  description: Dossier d'un ERP.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 256
+                        date_de_creation:
+                          description: Date de création du dossier.
+                          type: string
+                          format: date-time
+                          maxLength: 50
+                          minLength: 20
+                        enveloppe_id:
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                      required:
+                        - objet
+                    - type: object
+                      properties:
+                        type:
+                          description: |-
+                            Type du dossier.
+
+                            Valeurs possibles :
+                            * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
+                            * erp:permis_de_construire : Dossier de permis de construire.
+                            * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
+                            * erp:changement_de_dus : Dossier de changement de destination.
+                            * erp:salon_type_t : Dossier de salon de type T.
+                            * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
+                            * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
+                            * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
+                            * erp:derogation : Dossier de dérogation.
+                            * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
+                            * erp:levee_de_reserve : Dossier de levée de réserve.
+                            * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
+                            * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
+                            * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
+                            * erp:visite_periodique : Dossier de visite périodique.
+                            * erp:visite_reception : Dossier de visite de réception.
+                            * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
+                            * erp:visite_controle : Dossier de visite de contrôle.
+                            * erp:visite_inopinee : Dossier de visite inopinée.
+                            * erp:visite_chantier : Dossier de visite de chantier.
+                            * erp:demande_avis : Dossier de demande d'avis.
+                            * erp:demande_reclassement : Dossier de demande de reclassement.
+                            * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
+                            * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
+                            * erp:dossier_ge_2 : Dossier GE 2.
+                            * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
+                            * erp:etude_ingenierie : Dossier d'étude ingénierie.
+                            * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                          type: string
+                          enum:
+                            - erp:autorisation_de_travaux
+                            - erp:permis_de_construire
+                            - erp:levee_de_prescriptions
+                            - erp:changement_de_dus
+                            - erp:salon_type_t
+                            - erp:utilisation_exceptionnelle_de_locaux
+                            - erp:demande_d_implantation_cts_inferieur_6_mois
+                            - erp:demande_d_implantation_cts_superieur_6_mois
+                            - erp:derogation
+                            - erp:etude_cahier_des_charges_type_t
+                            - erp:levee_de_reserve
+                            - erp:echeancier_de_travaux
+                            - erp:cahier_des_charges_ssi
+                            - erp:etude_suite_a_un_avis_differe
+                            - erp:visite_periodique
+                            - erp:visite_reception
+                            - erp:visite_avant_ouverture
+                            - erp:visite_controle
+                            - erp:visite_inopinee
+                            - erp:visite_chantier
+                            - erp:demande_avis
+                            - erp:demande_reclassement
+                            - erp:suivi_avis_defavorable
+                            - erp:levee_avis_defavorable
+                            - erp:dossier_ge_2
+                            - erp:schema_general_organisation_securite
+                            - erp:etude_ingenierie
+                            - erp:manifestation_temporaire
+                        numero_urbanisme:
+                          description: Numéro d'urbanisme.
+                          type: string
+                          maxLength: 256
+                        numero_urbanisme_date:
+                          description: Date du numéro d'urbanisme.
+                          type: string
+                          format: date
+                          maxLength: 10
+                          minLength: 10
+                        demandeur:
+                          description: Demandeur ayant déposé le dossier.
+                          type: string
+                          maxLength: 256
+                        service_instructeur:
+                          description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
+                          type: string
+                          maxLength: 256
+                        descriptif_travaux:
+                          description: Descriptif des travaux.
+                          type: string
+                          maxLength: 16384
+                        date_limite_traitement:
+                          description: Date limite de traitement du dossier.
+                          type: string
+                          format: date
+                          maxLength: 10
+                          minLength: 10
+                        dossier_complet:
+                          description: Dossier complet.
+                          type: boolean
+                      required:
+                        - type
+                - type: object
+                  properties:
+                    libelle_commission:
+                      description: Nom de la commission.
+                      type: string
+                      maxLength: 256
+                    date_de_passage:
+                      description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
+                      type: string
+                      format: date-time
+                      maxLength: 50
+                      minLength: 20
+                    proposition_avis:
+                      type: string
+                      enum:
+                        - favorable
+                        - defavorable
+                      description: |-
+                        Proposition d'avis du préventionniste.
+
+                        Valeurs possibles :
+                        * favorable : Avis favorable.
+                        * defavorable : Avis défavorable.
+                    avis_sis:
+                      type: string
+                      enum:
+                        - favorable
+                        - defavorable
+                      description: |-
+                        Avis du membre représentant le SIS.
+
+                        Valeurs possibles :
+                        * favorable : Avis favorable.
+                        * defavorable : Avis défavorable.
+                    avis_commission:
+                      type: string
+                      enum:
+                        - favorable
+                        - defavorable
+                      description: |-
+                        Avis rendu par la commission.
+
+                        Valeurs possibles :
+                        * favorable : Avis favorable.
+                        * defavorable : Avis défavorable.
+                    avis_differe:
+                      description: La commission de sécurité peut décider de reporter son avis à une date ultérieure. Dans ce cas, la date de passage est reportée et un avis différé est émis.
+                      type: boolean
+                    facteur_dangerosite:
+                      description: 'Facteur de dangerosité de la prescription. Il est déterminé par l''analyse de risque, et est classifié comme suit : - 0 : DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ ELEVÉE'
+                      type: integer
+                      format: int32
+                      minimum: 0
+                      maximum: 3
+                    observations:
+                      description: La commission de sécurité émet soit un avis favorable soit un avis défavorable. Afin de motiver les décisions prises, la commission peut émettre des observations.
+                      type: string
+                      maxLength: 16384
+                    proposition_avis_observations:
+                      description: Observations sur l'avis du préventionniste.
+                      type: string
+                      maxLength: 16384
+              additionalProperties: {}
+              maxProperties: 20
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
+              x-extension-metarisc-codegen-context: create
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DossierEnhanced'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: erp
+      x-extension-metarisc-codegen-operation: post-enhanced-dossiers-erp
   /erp/{erp_id}/dossiers:
     get:
       tags:
@@ -53096,6 +53498,16 @@ components:
             - date_limite_traitement
             - dossier_complet
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
+      x-extension-metarisc-codegen-context: query
+    DossierEnhanced:
+      type: object
+      title: Objet Dossier ERP avec champs supplémentaires (reprise de données)
+      description: Dossier d'un ERP avec champs supplémentaires (reprise de données).
+      allOf:
+        - $ref: '#/components/schemas/DossierErp'
+        - type: object
+          properties: {}
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
       x-extension-metarisc-codegen-context: query
     Dossier:
       type: object
