@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/13-04-2026.1
+  version: 1.0/feature/rattachement-dossier-a-dossier-parent/17-04-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -8643,12 +8643,25 @@ paths:
             format: uuid
             maxLength: 36
             minLength: 36
+        - name: dossier_rattache_a
+          in: query
+          description: Filtre sur les dossiers rattachés au dossier.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
         - name: numero_urba
           in: query
           description: Filtre sur le numéro d'urbanisme du dossier.
           schema:
             type: string
             maxLength: 256
+        - name: est_parent
+          in: query
+          description: Filtre sur les dossiers parents ou non.
+          schema:
+            type: boolean
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -12317,6 +12330,34 @@ paths:
                           maxLength: 36
                           minLength: 36
                           nullable: true
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
+                          nullable: true
                     - type: object
                       properties:
                         type:
@@ -12455,6 +12496,34 @@ paths:
                           maxLength: 36
                           minLength: 36
                           nullable: true
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
+                          nullable: true
                     - type: object
                       properties:
                         type:
@@ -12469,7 +12538,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 15
+              maxProperties: 17
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -22768,6 +22837,33 @@ paths:
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
                       required:
                         - objet
                     - type: object
@@ -22931,7 +23027,7 @@ paths:
                       type: string
                       maxLength: 16384
               additionalProperties: {}
-              maxProperties: 20
+              maxProperties: 21
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -23605,6 +23701,33 @@ paths:
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
                       required:
                         - objet
                     - type: object
@@ -23729,6 +23852,33 @@ paths:
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
                       required:
                         - objet
                     - type: object
@@ -23745,7 +23895,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 15
+              maxProperties: 17
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -39986,6 +40136,33 @@ paths:
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
                       required:
                         - objet
                     - type: object
@@ -40110,6 +40287,33 @@ paths:
                           format: uuid
                           maxLength: 36
                           minLength: 36
+                        dossier_rattache:
+                          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+                          type: array
+                          items:
+                            type: object
+                            title: Dossier Lié
+                            description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+                            properties:
+                              dossier_lie_id:
+                                description: Identifiant du dossier lié.
+                                type: string
+                                format: uuid
+                                maxLength: 36
+                                minLength: 36
+                              type:
+                                description: |-
+                                  Type de la relation entre les dossiers.
+
+                                  Valeurs possibles :
+                                  * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+                                type: string
+                                enum:
+                                  - SOUS_DOSSIER
+                            required:
+                              - dossier_lie_id
+                              - type
+                          maxItems: 25
                       required:
                         - objet
                     - type: object
@@ -40126,7 +40330,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 15
+              maxProperties: 17
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -53167,6 +53371,29 @@ components:
         - debit_gueule_bee
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DonneesHydrauliques'
       x-extension-metarisc-codegen-context: query
+    DossierBaseLie:
+      type: object
+      title: Dossier Lié
+      description: Dossier rattaché à un autre dossier. Le rattachement permet de définir une relation entre deux dossiers. Un dossier peut être rattaché à un seul autre dossier, mais peut avoir plusieurs dossiers rattachés à lui.
+      properties:
+        dossier_lie:
+          description: Dossier lié à ce dossier.
+          allOf:
+            - $ref: '#/components/schemas/DossierBase'
+        type:
+          description: |-
+            Type de la relation entre les dossiers.
+
+            Valeurs possibles :
+            * SOUS_DOSSIER : Le dossier est rattaché à un autre dossier.
+          type: string
+          enum:
+            - SOUS_DOSSIER
+      required:
+        - dossier_lie
+        - type
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBaseLie'
+      x-extension-metarisc-codegen-context: query
     DossierBase:
       type: object
       title: Objet Dossier Base
@@ -53329,6 +53556,13 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        dossier_rattache:
+          description: Dossier rattaché au dossier. Le rattachement permet de définir une relation entre deux dossiers.
+          type: array
+          items:
+            $ref: '#/components/schemas/DossierBaseLie'
+          maxItems: 25
+          nullable: true
       required:
         - id
         - objet
@@ -53348,6 +53582,7 @@ components:
         - nb_pieces_jointes
         - affectations
         - organisation_id
+        - dossier_rattache
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       x-extension-metarisc-codegen-context: query
     DossierDeci:
