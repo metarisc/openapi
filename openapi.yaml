@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-04-2026.1
+  version: 1.0/feature/resume-historique/29-04-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -22413,6 +22413,10 @@ paths:
                     required:
                       - texte
                       - type
+                resume_historique:
+                  description: Résumé de l'historique de l'ERP.
+                  type: string
+                  maxLength: 16384
               required:
                 - implantation
                 - descriptif_technique
@@ -26904,6 +26908,10 @@ paths:
                     required:
                       - texte
                       - type
+                resume_historique:
+                  description: Résumé de l'historique de l'ERP.
+                  type: string
+                  maxLength: 16384
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -54623,6 +54631,11 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        resume_historique:
+          description: Résumé de l'historique de l'ERP.
+          type: string
+          maxLength: 16384
+          nullable: true
       required:
         - id
         - date_de_realisation
@@ -54642,6 +54655,7 @@ components:
         - textes_applicables
         - genre
         - organisation_id
+        - resume_historique
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       x-extension-metarisc-codegen-context: query
     EffectifsNiveau:
