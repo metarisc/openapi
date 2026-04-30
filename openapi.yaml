@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/28-04-2026.1
+  version: 1.0/main/30-04-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -12418,6 +12418,10 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
+                        dossier_complet_observations:
+                          description: Observations dans le cas d'un dossier incomplet.
+                          type: string
+                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -12474,7 +12478,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 15
+              maxProperties: 16
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -23740,6 +23744,10 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
+                        dossier_complet_observations:
+                          description: Observations dans le cas d'un dossier incomplet.
+                          type: string
+                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -23805,7 +23813,7 @@ paths:
                       type: string
                       maxLength: 16384
               additionalProperties: {}
-              maxProperties: 20
+              maxProperties: 21
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -24577,6 +24585,10 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
+                        dossier_complet_observations:
+                          description: Observations dans le cas d'un dossier incomplet.
+                          type: string
+                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -24619,7 +24631,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 15
+              maxProperties: 16
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -40958,6 +40970,10 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
+                        dossier_complet_observations:
+                          description: Observations dans le cas d'un dossier incomplet.
+                          type: string
+                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -41000,7 +41016,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 15
+              maxProperties: 16
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -54400,6 +54416,11 @@ components:
               description: Dossier complet.
               type: boolean
               nullable: true
+            dossier_complet_observations:
+              description: Observations dans le cas d'un dossier incomplet.
+              type: string
+              maxLength: 32768
+              nullable: true
           required:
             - type
             - erp
@@ -54410,6 +54431,7 @@ components:
             - descriptif_travaux
             - date_limite_traitement
             - dossier_complet
+            - dossier_complet_observations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
       x-extension-metarisc-codegen-context: query
     DossierEnhanced:
