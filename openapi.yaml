@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-05-2026.2
+  version: 1.0/main/06-05-2026.3
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55924,6 +55924,12 @@ components:
             * evenement:view : Consultation d'événements.
             * dossier:update:piece_jointe : Modification des pièces jointes d'un dossier.
             * dossier:workflow:rapportdetude/visite:valider : Validation du rapport d'étude ou de visite d'un dossier.
+            * commission:generate:convocation : Génération de convocations pour une commission.
+            * commission:update:avis : Mise à jour des avis d'une commission.
+            * dossier:update:validation : Modification de l'état de validation d'un dossier.
+            * dossier:update:archive : Archivage ou désarchivage d'un dossier.
+            * document:dossier:create : Ajout de documents à un dossier.
+            * document:dossier:delete : Suppression de documents d'un dossier.
           type: string
           enum:
             - deci:access
@@ -55964,6 +55970,12 @@ components:
             - evenement:view
             - dossier:update:piece_jointe
             - dossier:workflow:rapportdetude/visite:valider
+            - commission:generate:convocation
+            - commission:update:avis
+            - dossier:update:validation
+            - dossier:update:archive
+            - document:dossier:create
+            - document:dossier:delete
       required:
         - name
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Permission'
