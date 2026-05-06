@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-05-2026.1
+  version: 1.0/main/06-05-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55922,6 +55922,7 @@ components:
             * evenement:edit:* : Modification de tous les champs d'un événement.
             * evenement:delete : Suppression d'événements.
             * evenement:view : Consultation d'événements.
+            * dossier:update:piece_jointe : Modification des pièces jointes d'un dossier.
           type: string
           enum:
             - deci:access
@@ -55960,6 +55961,7 @@ components:
             - evenement:edit:*
             - evenement:delete
             - evenement:view
+            - dossier:update:piece_jointe
       required:
         - name
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Permission'
