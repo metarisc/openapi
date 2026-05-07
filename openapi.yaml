@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/07-05-2026.2
+  version: 1.0/main/07-05-2026.3
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -26810,6 +26810,12 @@ paths:
                   minLength: 10
                 date_ouverture:
                   description: Date d'ouverture de l'ERP.
+                  type: string
+                  format: date
+                  maxLength: 10
+                  minLength: 10
+                date_derniere_visite:
+                  description: Date de la dernière visite de l'ERP.
                   type: string
                   format: date
                   maxLength: 10
