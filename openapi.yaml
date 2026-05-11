@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/11-05-2026.1
+  version: 1.0/main/11-05-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55925,6 +55925,10 @@ components:
             * commission:edit:preferences : Modification des préférences d'une commission.
             * commission:delete : Suppression de commissions.
             * commission:view : Consultation de commissions.
+            * enveloppe:create : Création d'enveloppes.
+            * enveloppe:edit:* : Modification de tous les champs d'une enveloppe.
+            * enveloppe:delete : Suppression d'enveloppes.
+            * enveloppe:view : Consultation d'enveloppes.
             * evenement:create : Création d'événements.
             * evenement:edit:* : Modification de tous les champs d'un événement.
             * evenement:delete : Suppression d'événements.
@@ -55974,6 +55978,10 @@ components:
             - commission:edit:preferences
             - commission:delete
             - commission:view
+            - enveloppe:create
+            - enveloppe:edit:*
+            - enveloppe:delete
+            - enveloppe:view
             - evenement:create
             - evenement:edit:*
             - evenement:delete
