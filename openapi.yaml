@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/11-05-2026.3
+  version: 1.0/main/12-05-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -3158,6 +3158,11 @@ paths:
                     * SIS : Membre représentant le service d'incendie et de secours.
                     * DDT/DDTM : Membre représentant la direction départementale des territoires.
                     * DISP : Membre représentant la direction interrégionale des services pénitentiaires.
+                    * PREFECTURE : Membre représentant la préfecture.
+                    * SOUS_PREFECTURE : Membre représentant la sous-préfecture.
+                    * AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE : Membre représentant un établissement public de coopération intercommunale.
+                    * AGENT_DE_LA_COMMUNE : Membre représentant la commune.
+                    * IGSI : Membre représentant l'inspection générale de la sécurité incendie.
                   type: string
                   enum:
                     - POLICE
@@ -3166,6 +3171,11 @@ paths:
                     - SIS
                     - DDT/DDTM
                     - DISP
+                    - PREFECTURE
+                    - SOUS_PREFECTURE
+                    - AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE
+                    - AGENT_DE_LA_COMMUNE
+                    - IGSI
                 presence_obligatoire:
                   description: Le membre doit siéger obligatoirement lors des passages en commission.
                   type: boolean
@@ -4461,6 +4471,11 @@ paths:
                     * SIS : Membre représentant le service d'incendie et de secours.
                     * DDT/DDTM : Membre représentant la direction départementale des territoires.
                     * DISP : Membre représentant la direction interrégionale des services pénitentiaires.
+                    * PREFECTURE : Membre représentant la préfecture.
+                    * SOUS_PREFECTURE : Membre représentant la sous-préfecture.
+                    * AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE : Membre représentant un établissement public de coopération intercommunale.
+                    * AGENT_DE_LA_COMMUNE : Membre représentant la commune.
+                    * IGSI : Membre représentant l'inspection générale de la sécurité incendie.
                   type: string
                   enum:
                     - POLICE
@@ -4469,6 +4484,11 @@ paths:
                     - SIS
                     - DDT/DDTM
                     - DISP
+                    - PREFECTURE
+                    - SOUS_PREFECTURE
+                    - AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE
+                    - AGENT_DE_LA_COMMUNE
+                    - IGSI
                 presence_obligatoire:
                   description: Le membre doit siéger obligatoirement lors des passages en commission.
                   type: boolean
@@ -53442,6 +53462,11 @@ components:
             * SIS : Membre représentant le service d'incendie et de secours.
             * DDT/DDTM : Membre représentant la direction départementale des territoires.
             * DISP : Membre représentant la direction interrégionale des services pénitentiaires.
+            * PREFECTURE : Membre représentant la préfecture.
+            * SOUS_PREFECTURE : Membre représentant la sous-préfecture.
+            * AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE : Membre représentant un établissement public de coopération intercommunale.
+            * AGENT_DE_LA_COMMUNE : Membre représentant la commune.
+            * IGSI : Membre représentant l'inspection générale de la sécurité incendie.
           type: string
           enum:
             - POLICE
@@ -53450,6 +53475,11 @@ components:
             - SIS
             - DDT/DDTM
             - DISP
+            - PREFECTURE
+            - SOUS_PREFECTURE
+            - AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE
+            - AGENT_DE_LA_COMMUNE
+            - IGSI
         presence_obligatoire:
           description: Le membre doit siéger obligatoirement lors des passages en commission.
           type: boolean
