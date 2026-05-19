@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/12-05-2026.1
+  version: 1.0/feature/rattachement-dossier-a-dossier-parent/19-05-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -3158,11 +3158,6 @@ paths:
                     * SIS : Membre représentant le service d'incendie et de secours.
                     * DDT/DDTM : Membre représentant la direction départementale des territoires.
                     * DISP : Membre représentant la direction interrégionale des services pénitentiaires.
-                    * PREFECTURE : Membre représentant la préfecture.
-                    * SOUS_PREFECTURE : Membre représentant la sous-préfecture.
-                    * AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE : Membre représentant un établissement public de coopération intercommunale.
-                    * AGENT_DE_LA_COMMUNE : Membre représentant la commune.
-                    * IGSI : Membre représentant l'inspection générale de la sécurité incendie.
                   type: string
                   enum:
                     - POLICE
@@ -3171,11 +3166,6 @@ paths:
                     - SIS
                     - DDT/DDTM
                     - DISP
-                    - PREFECTURE
-                    - SOUS_PREFECTURE
-                    - AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE
-                    - AGENT_DE_LA_COMMUNE
-                    - IGSI
                 presence_obligatoire:
                   description: Le membre doit siéger obligatoirement lors des passages en commission.
                   type: boolean
@@ -4471,11 +4461,6 @@ paths:
                     * SIS : Membre représentant le service d'incendie et de secours.
                     * DDT/DDTM : Membre représentant la direction départementale des territoires.
                     * DISP : Membre représentant la direction interrégionale des services pénitentiaires.
-                    * PREFECTURE : Membre représentant la préfecture.
-                    * SOUS_PREFECTURE : Membre représentant la sous-préfecture.
-                    * AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE : Membre représentant un établissement public de coopération intercommunale.
-                    * AGENT_DE_LA_COMMUNE : Membre représentant la commune.
-                    * IGSI : Membre représentant l'inspection générale de la sécurité incendie.
                   type: string
                   enum:
                     - POLICE
@@ -4484,11 +4469,6 @@ paths:
                     - SIS
                     - DDT/DDTM
                     - DISP
-                    - PREFECTURE
-                    - SOUS_PREFECTURE
-                    - AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE
-                    - AGENT_DE_LA_COMMUNE
-                    - IGSI
                 presence_obligatoire:
                   description: Le membre doit siéger obligatoirement lors des passages en commission.
                   type: boolean
@@ -12438,10 +12418,6 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
-                        dossier_complet_observations:
-                          description: Observations dans le cas d'un dossier incomplet.
-                          type: string
-                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -12498,7 +12474,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 15
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -22437,10 +22413,6 @@ paths:
                     required:
                       - texte
                       - type
-                resume_historique:
-                  description: Résumé de l'historique de l'ERP.
-                  type: string
-                  maxLength: 16384
               required:
                 - implantation
                 - descriptif_technique
@@ -23768,10 +23740,6 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
-                        dossier_complet_observations:
-                          description: Observations dans le cas d'un dossier incomplet.
-                          type: string
-                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -23837,7 +23805,7 @@ paths:
                       type: string
                       maxLength: 16384
               additionalProperties: {}
-              maxProperties: 21
+              maxProperties: 20
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -24609,10 +24577,6 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
-                        dossier_complet_observations:
-                          description: Observations dans le cas d'un dossier incomplet.
-                          type: string
-                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -24655,7 +24619,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 15
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -26834,12 +26798,6 @@ paths:
                   format: date
                   maxLength: 10
                   minLength: 10
-                date_derniere_visite:
-                  description: Date de la dernière visite de l'ERP.
-                  type: string
-                  format: date
-                  maxLength: 10
-                  minLength: 10
                 notes_internes:
                   description: Notes internes sur l'ERP.
                   type: string
@@ -26946,10 +26904,6 @@ paths:
                     required:
                       - texte
                       - type
-                resume_historique:
-                  description: Résumé de l'historique de l'ERP.
-                  type: string
-                  maxLength: 16384
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -41004,10 +40958,6 @@ paths:
                         dossier_complet:
                           description: Dossier complet.
                           type: boolean
-                        dossier_complet_observations:
-                          description: Observations dans le cas d'un dossier incomplet.
-                          type: string
-                          maxLength: 32768
                       required:
                         - type
                 - type: object
@@ -41050,7 +41000,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 15
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -53462,11 +53412,6 @@ components:
             * SIS : Membre représentant le service d'incendie et de secours.
             * DDT/DDTM : Membre représentant la direction départementale des territoires.
             * DISP : Membre représentant la direction interrégionale des services pénitentiaires.
-            * PREFECTURE : Membre représentant la préfecture.
-            * SOUS_PREFECTURE : Membre représentant la sous-préfecture.
-            * AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE : Membre représentant un établissement public de coopération intercommunale.
-            * AGENT_DE_LA_COMMUNE : Membre représentant la commune.
-            * IGSI : Membre représentant l'inspection générale de la sécurité incendie.
           type: string
           enum:
             - POLICE
@@ -53475,11 +53420,6 @@ components:
             - SIS
             - DDT/DDTM
             - DISP
-            - PREFECTURE
-            - SOUS_PREFECTURE
-            - AGENT_DE_L_ETABLISSSEMENT_PUBLIC_DE_COOPERATION_INTERCOMMUNALE
-            - AGENT_DE_LA_COMMUNE
-            - IGSI
         presence_obligatoire:
           description: Le membre doit siéger obligatoirement lors des passages en commission.
           type: boolean
@@ -54302,6 +54242,11 @@ components:
           items:
             $ref: '#/components/schemas/DossierBaseRattachement'
           maxItems: 100
+        dossier_parent:
+          description: Dossier parent du dossier. Le rattachement permet de définir une relation entre deux dossiers.
+          allOf:
+            - $ref: '#/components/schemas/DossierBase'
+          nullable: true
       required:
         - id
         - objet
@@ -54313,6 +54258,7 @@ components:
         - tags
         - est_archive
         - passages_en_commission
+        - avis
         - enveloppe
         - workflows_actifs
         - nb_messages_fil_rouge
@@ -54321,6 +54267,7 @@ components:
         - affectations
         - organisation_id
         - dossiers_enfants
+        - dossier_parent
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierBase'
       x-extension-metarisc-codegen-context: query
     DossierDeci:
@@ -54460,11 +54407,6 @@ components:
               description: Dossier complet.
               type: boolean
               nullable: true
-            dossier_complet_observations:
-              description: Observations dans le cas d'un dossier incomplet.
-              type: string
-              maxLength: 32768
-              nullable: true
           required:
             - type
             - erp
@@ -54475,7 +54417,6 @@ components:
             - descriptif_travaux
             - date_limite_traitement
             - dossier_complet
-            - dossier_complet_observations
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierErp'
       x-extension-metarisc-codegen-context: query
     DossierEnhanced:
@@ -54689,11 +54630,6 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        resume_historique:
-          description: Résumé de l'historique de l'ERP.
-          type: string
-          maxLength: 16384
-          nullable: true
       required:
         - id
         - date_de_realisation
@@ -54713,7 +54649,6 @@ components:
         - textes_applicables
         - genre
         - organisation_id
-        - resume_historique
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
       x-extension-metarisc-codegen-context: query
     EffectifsNiveau:
@@ -55930,8 +55865,6 @@ components:
             * dossier:edit:* : Modification de tous les champs d'un dossier.
             * dossier:delete : Suppression de dossiers.
             * dossier:view : Consultation de dossiers.
-            * dossier:view:validation : Consultation des dossiers en attente de validation.
-            * dossier:view:validation:!avis : Consultation des dossiers en attente de validation sans accès aux avis.
             * erp:create : Création d'ERP.
             * erp:edit:* : Modification de tous les champs d'un ERP.
             * erp:edit:titulaires : Modification des titulaires d'un ERP.
@@ -55943,7 +55876,6 @@ components:
             * organisation:view : Consultation d'organisations.
             * utilisateur:create : Création d'utilisateurs.
             * utilisateur:edit:* : Modification de tous les champs d'un utilisateur.
-            * utilisateur:edit:roles : Modification des rôles d'un utilisateur.
             * utilisateur:delete : Suppression d'utilisateurs.
             * utilisateur:view : Consultation d'utilisateurs.
             * message:create : Création de messages.
@@ -55952,31 +55884,12 @@ components:
             * message:view : Consultation de messages.
             * commission:create : Création de commissions.
             * commission:edit:* : Modification de tous les champs d'une commission.
-            * commission:edit:preferences : Modification des préférences d'une commission.
             * commission:delete : Suppression de commissions.
             * commission:view : Consultation de commissions.
-            * enveloppe:create : Création d'enveloppes.
-            * enveloppe:edit:* : Modification de tous les champs d'une enveloppe.
-            * enveloppe:delete : Suppression d'enveloppes.
-            * enveloppe:view : Consultation d'enveloppes.
             * evenement:create : Création d'événements.
             * evenement:edit:* : Modification de tous les champs d'un événement.
             * evenement:delete : Suppression d'événements.
             * evenement:view : Consultation d'événements.
-            * dossier:update:piece_jointe : Modification des pièces jointes d'un dossier.
-            * dossier:workflow:rapportdetude/visite:valider : Validation du rapport d'étude ou de visite d'un dossier.
-            * commission:generate:convocation : Génération de convocations pour une commission.
-            * commission:update:avis : Mise à jour des avis d'une commission.
-            * dossier:update:validation : Modification de l'état de validation d'un dossier.
-            * dossier:update:archive : Archivage ou désarchivage d'un dossier.
-            * document:dossier:create : Ajout de documents à un dossier.
-            * document:dossier:delete : Suppression de documents d'un dossier.
-            * commission:generate:procesverbal : Génération de convocations pour une commission.
-            * document:model:update : Modification des documents models.
-            * feed:create : Création de messages dans le feed.
-            * feed:edit:* : Modification d'un message dans le feed.
-            * feed:delete : Suppression de messages dans le feed.
-            * feed:view : Consultation de messages dans le feed.
           type: string
           enum:
             - deci:access
@@ -55987,8 +55900,6 @@ components:
             - dossier:edit:*
             - dossier:delete
             - dossier:view
-            - dossier:view:validation
-            - dossier:view:validation:!avis
             - erp:create
             - erp:edit:*
             - erp:edit:titulaires
@@ -56000,7 +55911,6 @@ components:
             - organisation:view
             - utilisateur:create
             - utilisateur:edit:*
-            - utilisateur:edit:roles
             - utilisateur:delete
             - utilisateur:view
             - message:create
@@ -56009,31 +55919,12 @@ components:
             - message:view
             - commission:create
             - commission:edit:*
-            - commission:edit:preferences
             - commission:delete
             - commission:view
-            - enveloppe:create
-            - enveloppe:edit:*
-            - enveloppe:delete
-            - enveloppe:view
             - evenement:create
             - evenement:edit:*
             - evenement:delete
             - evenement:view
-            - dossier:update:piece_jointe
-            - dossier:workflow:rapportdetude/visite:valider
-            - commission:generate:convocation
-            - commission:update:avis
-            - dossier:update:validation
-            - dossier:update:archive
-            - document:dossier:create
-            - document:dossier:delete
-            - commission:generate:procesverbal
-            - document:model:update
-            - feed:create
-            - feed:edit:*
-            - feed:delete
-            - feed:view
       required:
         - name
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Permission'
