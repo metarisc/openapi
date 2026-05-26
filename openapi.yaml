@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/12-05-2026.1
+  version: 1.0/feature/details-periodicite/26-05-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -20646,12 +20646,21 @@ paths:
                                 - itinerant_periodique
                                 - erreur_saisie
                             periodicite:
-                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
                               type: integer
                               format: int32
                               minimum: 0
                               maximum: 60
                               multipleOf: 12
+                              nullable: true
+                            modification_periodicite_ge4:
+                              description: ERP impacté par la modification de la périodicité lié par l'article GE 4.
+                              type: boolean
+                              nullable: true
+                            observations_periodicite:
+                              description: Les observations relatives à la périodicité.
+                              type: string
+                              maxLength: 16384
                               nullable: true
                             libelle:
                               description: Le nom commercial vise l'entreprise individuelle, le fonds de commerce ou l'activité exercée, c'est le nom sous lequel l'établissement est connu du grand public.
@@ -25167,12 +25176,21 @@ paths:
                                 - itinerant_periodique
                                 - erreur_saisie
                             periodicite:
-                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
                               type: integer
                               format: int32
                               minimum: 0
                               maximum: 60
                               multipleOf: 12
+                              nullable: true
+                            modification_periodicite_ge4:
+                              description: ERP impacté par la modification de la périodicité lié par l'article GE 4.
+                              type: boolean
+                              nullable: true
+                            observations_periodicite:
+                              description: Les observations relatives à la périodicité.
+                              type: string
+                              maxLength: 16384
                               nullable: true
                             libelle:
                               description: Le nom commercial vise l'entreprise individuelle, le fonds de commerce ou l'activité exercée, c'est le nom sous lequel l'établissement est connu du grand public.
@@ -53839,12 +53857,29 @@ components:
             - itinerant_periodique
             - erreur_saisie
         periodicite:
-          description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+          description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
           type: integer
           format: int32
           minimum: 0
           maximum: 60
           multipleOf: 12
+          nullable: true
+        periodicite_calcule:
+          description: Périodicité calculée en fonction du tableau des périodicités.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 60
+          multipleOf: 12
+          nullable: true
+        modification_periodicite_ge4:
+          description: ERP impacté par la modification de la périodicité lié par l'article GE 4.
+          type: boolean
+          nullable: true
+        observations_periodicite:
+          description: Les observations relatives à la périodicité.
+          type: string
+          maxLength: 16384
           nullable: true
         libelle:
           description: Le nom commercial vise l'entreprise individuelle, le fonds de commerce ou l'activité exercée, c'est le nom sous lequel l'établissement est connu du grand public.
@@ -53864,6 +53899,9 @@ components:
         - date
         - statut
         - periodicite
+        - periodicite_calcule
+        - modification_periodicite_ge4
+        - observations_periodicite
         - libelle
         - observations_generales
         - analyse_risque
