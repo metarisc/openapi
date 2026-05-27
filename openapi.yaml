@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-05-2026.2
+  version: 1.0/main/27-05-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -13430,7 +13430,7 @@ paths:
                             * Y - Musées : Y - Musées.
                             * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                           nullable: true
-                        activites_secondaire:
+                        autres_activites:
                           description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
                           type: array
                           items:
@@ -14173,8 +14173,8 @@ paths:
                             - Autre
                             - Non concerné
                           nullable: true
-                        isolement_contigus_realise_degre_cf_autre_precision:
-                          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                        isolement_contigus_realise_degre_cf_informations_complementaires:
+                          description: Informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                           type: string
                           maxLength: 16384
                           nullable: true
@@ -14248,8 +14248,8 @@ paths:
                             - Autre
                             - Non concerné
                           nullable: true
-                        isolement_superpose_realise_degre_cf_autre_precision:
-                          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                        isolement_superpose_realise_degre_cf_informations_complementaires:
+                          description: Informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                           type: string
                           maxLength: 16384
                           nullable: true
@@ -14319,24 +14319,39 @@ paths:
                           type: string
                           maxLength: 16384
                           nullable: true
-                        type_cloisonnement:
+                        cloisonnements:
                           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                           type: array
-                          items:
-                            description: |-
-                              Type de cloisonnement
-
-                              Valeurs possibles :
-                              * Traditionnels : cloisonnement traditionnel.
-                              * Secteurs : par secteurs.
-                              * Compartiments : par compartiment.
-                            type: string
-                            enum:
-                              - Traditionnels
-                              - Secteurs
-                              - Compartiments
                           maxItems: 3
-                          uniqueItems: true
+                          items:
+                            type: object
+                            title: Objet Cloisonnement
+                            description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+                            properties:
+                              type:
+                                description: |-
+                                  Type de cloisonnement.
+
+                                  Valeurs possibles :
+                                  * Traditionnels : cloisonnement traditionnel.
+                                  * Secteurs : par secteurs.
+                                  * Compartiments : par compartiment.
+                                type: string
+                                enum:
+                                  - Traditionnels
+                                  - Secteurs
+                                  - Compartiments
+                                nullable: true
+                              localisation:
+                                description: Localisation de la cloison.
+                                type: string
+                                maxLength: 256
+                                nullable: true
+                              observations:
+                                description: Observations sur le cloisonnement.
+                                type: string
+                                maxLength: 32768
+                                nullable: true
                           nullable: true
                         construction_distribution_interieure_informations_complementaires:
                           description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -14394,7 +14409,7 @@ paths:
                           type: string
                           maxLength: 16384
                           nullable: true
-                        degagement_normaux:
+                        degagements_normaux:
                           description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
                           type: array
                           maxItems: 10
@@ -14438,12 +14453,12 @@ paths:
                                 minimum: 0
                                 maximum: 999999
                           nullable: true
-                        degagement_exigibles_informations_complementaires:
+                        degagements_exigibles_informations_complementaires:
                           description: Les informations complémentaires sur les dégagements exigibles.
                           type: string
                           maxLength: 16384
                           nullable: true
-                        degagement_supplementaires:
+                        degagements_supplementaires:
                           description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
                           type: array
                           maxItems: 10
@@ -14740,36 +14755,38 @@ paths:
                             Il existe 5 types de SSI.
 
                             Valeurs possibles :
-                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                            * B : un centralisateur de mise en sécurité incendie (CMSI).
                             * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                            * A option IGH : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI) avec des fonctions spécifiques pour les immeubles de grande hauteur (IGH).
+                            * B : un centralisateur de mise en sécurité incendie (CMSI).
+                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                           type: string
                           enum:
-                            - E
-                            - D
-                            - C
-                            - B
                             - A
+                            - A option IGH
+                            - B
+                            - C
+                            - D
+                            - E
                           nullable: true
                         type_alarme:
                           description: |-
                             Il existe 5 types d’alarme incendie.
 
                             Valeurs possibles :
-                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                            * 3 : Les alarmes incendie Type 3.
-                            * 2B : Les alarmes incendie Type 2B.
-                            * 2A : Les alarmes incendie Type 2A.
                             * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                            * 2A : Les alarmes incendie Type 2A.
+                            * 2B : Les alarmes incendie Type 2B.
+                            * 3 : Les alarmes incendie Type 3.
+                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                           type: string
                           enum:
-                            - '4'
-                            - '3'
-                            - 2B
-                            - 2A
                             - '1'
+                            - 2A
+                            - 2B
+                            - '3'
+                            - '4'
                           nullable: true
                         temporisation_alarme_en_minutes:
                           description: Temporisation de l'alarme en minutes
@@ -14793,10 +14810,12 @@ paths:
                             Valeurs possibles :
                             * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                             * GSM : Téléphone mobile.
+                            * Téléphone direct relié au PCS : Téléphone direct relié au Poste Central de Sécurité.
                           type: string
                           enum:
                             - Telephone urbain fixe ou box secourue
                             - GSM
+                            - Téléphone direct relié au PCS
                           nullable: true
                         systeme_securite_incendie_informations_complementaires:
                           description: Les informations complémentaires sur le système de sécurité incendie.
@@ -14874,6 +14893,7 @@ paths:
                           * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
                           * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
                           * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
+                          * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
                           * divers : Divers.
                         type: string
                         enum:
@@ -14885,6 +14905,7 @@ paths:
                           - RVRAT
                           - RVRE
                           - RVRMD
+                          - lettre_accompagnement_RUS
                           - divers
                       date_de_reception:
                         description: Date de réception du document technique.
@@ -16374,6 +16395,7 @@ paths:
                           * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
                           * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
                           * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
+                          * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
                           * divers : Divers.
                         type: string
                         enum:
@@ -16385,6 +16407,7 @@ paths:
                           - RVRAT
                           - RVRE
                           - RVRMD
+                          - lettre_accompagnement_RUS
                           - divers
                       date_de_reception:
                         description: Date de réception du document technique.
@@ -20961,7 +20984,7 @@ paths:
                                         * Y - Musées : Y - Musées.
                                         * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       nullable: true
-                                    activites_secondaire:
+                                    autres_activites:
                                       description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
                                       type: array
                                       items:
@@ -21704,8 +21727,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_contigus_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                                    isolement_contigus_realise_degre_cf_informations_complementaires:
+                                      description: Informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                                       type: string
                                       maxLength: 16384
                                       nullable: true
@@ -21779,8 +21802,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_superpose_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                                    isolement_superpose_realise_degre_cf_informations_complementaires:
+                                      description: Informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                                       type: string
                                       maxLength: 16384
                                       nullable: true
@@ -21850,24 +21873,39 @@ paths:
                                       type: string
                                       maxLength: 16384
                                       nullable: true
-                                    type_cloisonnement:
+                                    cloisonnements:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                                       type: array
-                                      items:
-                                        description: |-
-                                          Type de cloisonnement
-
-                                          Valeurs possibles :
-                                          * Traditionnels : cloisonnement traditionnel.
-                                          * Secteurs : par secteurs.
-                                          * Compartiments : par compartiment.
-                                        type: string
-                                        enum:
-                                          - Traditionnels
-                                          - Secteurs
-                                          - Compartiments
                                       maxItems: 3
-                                      uniqueItems: true
+                                      items:
+                                        type: object
+                                        title: Objet Cloisonnement
+                                        description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+                                        properties:
+                                          type:
+                                            description: |-
+                                              Type de cloisonnement.
+
+                                              Valeurs possibles :
+                                              * Traditionnels : cloisonnement traditionnel.
+                                              * Secteurs : par secteurs.
+                                              * Compartiments : par compartiment.
+                                            type: string
+                                            enum:
+                                              - Traditionnels
+                                              - Secteurs
+                                              - Compartiments
+                                            nullable: true
+                                          localisation:
+                                            description: Localisation de la cloison.
+                                            type: string
+                                            maxLength: 256
+                                            nullable: true
+                                          observations:
+                                            description: Observations sur le cloisonnement.
+                                            type: string
+                                            maxLength: 32768
+                                            nullable: true
                                       nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -21925,7 +21963,7 @@ paths:
                                       type: string
                                       maxLength: 16384
                                       nullable: true
-                                    degagement_normaux:
+                                    degagements_normaux:
                                       description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
                                       type: array
                                       maxItems: 10
@@ -21969,12 +22007,12 @@ paths:
                                             minimum: 0
                                             maximum: 999999
                                       nullable: true
-                                    degagement_exigibles_informations_complementaires:
+                                    degagements_exigibles_informations_complementaires:
                                       description: Les informations complémentaires sur les dégagements exigibles.
                                       type: string
                                       maxLength: 16384
                                       nullable: true
-                                    degagement_supplementaires:
+                                    degagements_supplementaires:
                                       description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
                                       type: array
                                       maxItems: 10
@@ -22271,36 +22309,38 @@ paths:
                                         Il existe 5 types de SSI.
 
                                         Valeurs possibles :
-                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
                                         * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                                        * A option IGH : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI) avec des fonctions spécifiques pour les immeubles de grande hauteur (IGH).
+                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
+                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                                       type: string
                                       enum:
-                                        - E
-                                        - D
-                                        - C
-                                        - B
                                         - A
+                                        - A option IGH
+                                        - B
+                                        - C
+                                        - D
+                                        - E
                                       nullable: true
                                     type_alarme:
                                       description: |-
                                         Il existe 5 types d’alarme incendie.
 
                                         Valeurs possibles :
-                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                                        * 3 : Les alarmes incendie Type 3.
-                                        * 2B : Les alarmes incendie Type 2B.
-                                        * 2A : Les alarmes incendie Type 2A.
                                         * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                                        * 2A : Les alarmes incendie Type 2A.
+                                        * 2B : Les alarmes incendie Type 2B.
+                                        * 3 : Les alarmes incendie Type 3.
+                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                                       type: string
                                       enum:
-                                        - '4'
-                                        - '3'
-                                        - 2B
-                                        - 2A
                                         - '1'
+                                        - 2A
+                                        - 2B
+                                        - '3'
+                                        - '4'
                                       nullable: true
                                     temporisation_alarme_en_minutes:
                                       description: Temporisation de l'alarme en minutes
@@ -22324,10 +22364,12 @@ paths:
                                         Valeurs possibles :
                                         * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                                         * GSM : Téléphone mobile.
+                                        * Téléphone direct relié au PCS : Téléphone direct relié au Poste Central de Sécurité.
                                       type: string
                                       enum:
                                         - Telephone urbain fixe ou box secourue
                                         - GSM
+                                        - Téléphone direct relié au PCS
                                       nullable: true
                                     systeme_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le système de sécurité incendie.
@@ -25482,7 +25524,7 @@ paths:
                                         * Y - Musées : Y - Musées.
                                         * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       nullable: true
-                                    activites_secondaire:
+                                    autres_activites:
                                       description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
                                       type: array
                                       items:
@@ -26225,8 +26267,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_contigus_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                                    isolement_contigus_realise_degre_cf_informations_complementaires:
+                                      description: Informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                                       type: string
                                       maxLength: 16384
                                       nullable: true
@@ -26300,8 +26342,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_superpose_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                                    isolement_superpose_realise_degre_cf_informations_complementaires:
+                                      description: Informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                                       type: string
                                       maxLength: 16384
                                       nullable: true
@@ -26371,24 +26413,39 @@ paths:
                                       type: string
                                       maxLength: 16384
                                       nullable: true
-                                    type_cloisonnement:
+                                    cloisonnements:
                                       description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
                                       type: array
-                                      items:
-                                        description: |-
-                                          Type de cloisonnement
-
-                                          Valeurs possibles :
-                                          * Traditionnels : cloisonnement traditionnel.
-                                          * Secteurs : par secteurs.
-                                          * Compartiments : par compartiment.
-                                        type: string
-                                        enum:
-                                          - Traditionnels
-                                          - Secteurs
-                                          - Compartiments
                                       maxItems: 3
-                                      uniqueItems: true
+                                      items:
+                                        type: object
+                                        title: Objet Cloisonnement
+                                        description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+                                        properties:
+                                          type:
+                                            description: |-
+                                              Type de cloisonnement.
+
+                                              Valeurs possibles :
+                                              * Traditionnels : cloisonnement traditionnel.
+                                              * Secteurs : par secteurs.
+                                              * Compartiments : par compartiment.
+                                            type: string
+                                            enum:
+                                              - Traditionnels
+                                              - Secteurs
+                                              - Compartiments
+                                            nullable: true
+                                          localisation:
+                                            description: Localisation de la cloison.
+                                            type: string
+                                            maxLength: 256
+                                            nullable: true
+                                          observations:
+                                            description: Observations sur le cloisonnement.
+                                            type: string
+                                            maxLength: 32768
+                                            nullable: true
                                       nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -26446,7 +26503,7 @@ paths:
                                       type: string
                                       maxLength: 16384
                                       nullable: true
-                                    degagement_normaux:
+                                    degagements_normaux:
                                       description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
                                       type: array
                                       maxItems: 10
@@ -26490,12 +26547,12 @@ paths:
                                             minimum: 0
                                             maximum: 999999
                                       nullable: true
-                                    degagement_exigibles_informations_complementaires:
+                                    degagements_exigibles_informations_complementaires:
                                       description: Les informations complémentaires sur les dégagements exigibles.
                                       type: string
                                       maxLength: 16384
                                       nullable: true
-                                    degagement_supplementaires:
+                                    degagements_supplementaires:
                                       description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
                                       type: array
                                       maxItems: 10
@@ -26792,36 +26849,38 @@ paths:
                                         Il existe 5 types de SSI.
 
                                         Valeurs possibles :
-                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
                                         * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                                        * A option IGH : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI) avec des fonctions spécifiques pour les immeubles de grande hauteur (IGH).
+                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
+                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                                       type: string
                                       enum:
-                                        - E
-                                        - D
-                                        - C
-                                        - B
                                         - A
+                                        - A option IGH
+                                        - B
+                                        - C
+                                        - D
+                                        - E
                                       nullable: true
                                     type_alarme:
                                       description: |-
                                         Il existe 5 types d’alarme incendie.
 
                                         Valeurs possibles :
-                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                                        * 3 : Les alarmes incendie Type 3.
-                                        * 2B : Les alarmes incendie Type 2B.
-                                        * 2A : Les alarmes incendie Type 2A.
                                         * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                                        * 2A : Les alarmes incendie Type 2A.
+                                        * 2B : Les alarmes incendie Type 2B.
+                                        * 3 : Les alarmes incendie Type 3.
+                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                                       type: string
                                       enum:
-                                        - '4'
-                                        - '3'
-                                        - 2B
-                                        - 2A
                                         - '1'
+                                        - 2A
+                                        - 2B
+                                        - '3'
+                                        - '4'
                                       nullable: true
                                     temporisation_alarme_en_minutes:
                                       description: Temporisation de l'alarme en minutes
@@ -26845,10 +26904,12 @@ paths:
                                         Valeurs possibles :
                                         * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                                         * GSM : Téléphone mobile.
+                                        * Téléphone direct relié au PCS : Téléphone direct relié au Poste Central de Sécurité.
                                       type: string
                                       enum:
                                         - Telephone urbain fixe ou box secourue
                                         - GSM
+                                        - Téléphone direct relié au PCS
                                       nullable: true
                                     systeme_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le système de sécurité incendie.
@@ -52288,7 +52349,7 @@ components:
             * Y - Musées : Y - Musées.
             * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
           nullable: true
-        activites_secondaire:
+        autres_activites:
           description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
           type: array
           items:
@@ -52751,8 +52812,8 @@ components:
             - Autre
             - Non concerné
           nullable: true
-        isolement_contigus_realise_degre_cf_autre_precision:
-          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+        isolement_contigus_realise_degre_cf_informations_complementaires:
+          description: Informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
           type: string
           maxLength: 16384
           nullable: true
@@ -52826,8 +52887,8 @@ components:
             - Autre
             - Non concerné
           nullable: true
-        isolement_superpose_realise_degre_cf_autre_precision:
-          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+        isolement_superpose_realise_degre_cf_informations_complementaires:
+          description: Informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
           type: string
           maxLength: 16384
           nullable: true
@@ -52897,24 +52958,12 @@ components:
           type: string
           maxLength: 16384
           nullable: true
-        type_cloisonnement:
+        cloisonnements:
           description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
           type: array
-          items:
-            description: |-
-              Type de cloisonnement
-
-              Valeurs possibles :
-              * Traditionnels : cloisonnement traditionnel.
-              * Secteurs : par secteurs.
-              * Compartiments : par compartiment.
-            type: string
-            enum:
-              - Traditionnels
-              - Secteurs
-              - Compartiments
           maxItems: 3
-          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/Cloisonnement'
           nullable: true
         construction_distribution_interieure_informations_complementaires:
           description: Les informations complémentaires sur la distribution intérieure de la construction.
@@ -52938,7 +52987,7 @@ components:
           type: string
           maxLength: 16384
           nullable: true
-        degagement_normaux:
+        degagements_normaux:
           description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
           type: array
           maxItems: 10
@@ -52952,12 +53001,12 @@ components:
           items:
             $ref: '#/components/schemas/Degagement'
           nullable: true
-        degagement_exigibles_informations_complementaires:
+        degagements_exigibles_informations_complementaires:
           description: Les informations complémentaires sur les dégagements exigibles.
           type: string
           maxLength: 16384
           nullable: true
-        degagement_supplementaires:
+        degagements_supplementaires:
           description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
           type: array
           maxItems: 10
@@ -53239,36 +53288,38 @@ components:
             Il existe 5 types de SSI.
 
             Valeurs possibles :
-            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-            * B : un centralisateur de mise en sécurité incendie (CMSI).
             * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+            * A option IGH : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI) avec des fonctions spécifiques pour les immeubles de grande hauteur (IGH).
+            * B : un centralisateur de mise en sécurité incendie (CMSI).
+            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
           type: string
           enum:
-            - E
-            - D
-            - C
-            - B
             - A
+            - A option IGH
+            - B
+            - C
+            - D
+            - E
           nullable: true
         type_alarme:
           description: |-
             Il existe 5 types d’alarme incendie.
 
             Valeurs possibles :
-            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-            * 3 : Les alarmes incendie Type 3.
-            * 2B : Les alarmes incendie Type 2B.
-            * 2A : Les alarmes incendie Type 2A.
             * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+            * 2A : Les alarmes incendie Type 2A.
+            * 2B : Les alarmes incendie Type 2B.
+            * 3 : Les alarmes incendie Type 3.
+            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
           type: string
           enum:
-            - '4'
-            - '3'
-            - 2B
-            - 2A
             - '1'
+            - 2A
+            - 2B
+            - '3'
+            - '4'
           nullable: true
         temporisation_alarme_en_minutes:
           description: Temporisation de l'alarme en minutes
@@ -53292,10 +53343,12 @@ components:
             Valeurs possibles :
             * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
             * GSM : Téléphone mobile.
+            * Téléphone direct relié au PCS : Téléphone direct relié au Poste Central de Sécurité.
           type: string
           enum:
             - Telephone urbain fixe ou box secourue
             - GSM
+            - Téléphone direct relié au PCS
           nullable: true
         systeme_securite_incendie_informations_complementaires:
           description: Les informations complémentaires sur le système de sécurité incendie.
@@ -53313,7 +53366,7 @@ components:
           nullable: true
       required:
         - activite_principale
-        - activites_secondaire
+        - autres_activites
         - categorie
         - groupement_etablissement
         - tableau_des_effectifs
@@ -53341,14 +53394,14 @@ components:
         - desserte_informations_complementaires
         - presence_erp_ou_tiers_contigus
         - isolement_contigus_realise_degre_cf
-        - isolement_contigus_realise_degre_cf_autre_precision
+        - isolement_contigus_realise_degre_cf_informations_complementaires
         - isolement_contigus_informations_complementaires
         - air_libre
         - vis_a_vis
         - isolement_vis_a_vis_informations_complementaires
         - presence_erp_ou_tiers_superpose
         - isolement_superpose_realise_degre_cf
-        - isolement_superpose_realise_degre_cf_autre_precision
+        - isolement_superpose_realise_degre_cf_informations_complementaires
         - isolement_superpose_informations_complementaires
         - structure_sf
         - plancher_sf
@@ -53357,15 +53410,15 @@ components:
         - construction_structures_description
         - construction_couverture_description
         - construction_facades_description
-        - type_cloisonnement
+        - cloisonnements
         - construction_distribution_interieure_informations_complementaires
         - locaux
         - construction_conduits_et_gaines_description
         - construction_amenagements_interieurs_description
-        - degagement_normaux
+        - degagements_normaux
         - degagements_accessoires
-        - degagement_exigibles_informations_complementaires
-        - degagement_supplementaires
+        - degagements_exigibles_informations_complementaires
+        - degagements_supplementaires
         - degagement_escaliers_description
         - degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description
         - presence_eas_ou_equivalents
@@ -53419,6 +53472,41 @@ components:
         - defibrillateur
         - specificites_informations_complementaires
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Clicdvcrem'
+      x-extension-metarisc-codegen-context: query
+    Cloisonnement:
+      type: object
+      title: Objet Cloisonnement
+      description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+      properties:
+        type:
+          description: |-
+            Type de cloisonnement.
+
+            Valeurs possibles :
+            * Traditionnels : cloisonnement traditionnel.
+            * Secteurs : par secteurs.
+            * Compartiments : par compartiment.
+          type: string
+          enum:
+            - Traditionnels
+            - Secteurs
+            - Compartiments
+          nullable: true
+        localisation:
+          description: Localisation de la cloison.
+          type: string
+          maxLength: 256
+          nullable: true
+        observations:
+          description: Observations sur le cloisonnement.
+          type: string
+          maxLength: 32768
+          nullable: true
+      required:
+        - type
+        - localisation
+        - observations
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/Cloisonnement'
       x-extension-metarisc-codegen-context: query
     Commission:
       type: object
@@ -54069,6 +54157,7 @@ components:
             * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
             * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
             * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
+            * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
             * divers : Divers.
           type: string
           enum:
@@ -54080,6 +54169,7 @@ components:
             - RVRAT
             - RVRE
             - RVRMD
+            - lettre_accompagnement_RUS
             - divers
         date_de_reception:
           description: Date de réception du document technique.
