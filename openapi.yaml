@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/12-05-2026.1
+  version: 1.0/main/27-05-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55977,6 +55977,9 @@ components:
             * feed:edit:* : Modification d'un message dans le feed.
             * feed:delete : Suppression de messages dans le feed.
             * feed:view : Consultation de messages dans le feed.
+            * commission:passage:add:dossier : Ajout de dossiers à une commission.
+            * site:create:fonctionnel : Création de sites fonctionnels.
+            * site:create:geographique : Création de sites géographiques.
           type: string
           enum:
             - deci:access
@@ -56034,6 +56037,9 @@ components:
             - feed:edit:*
             - feed:delete
             - feed:view
+            - commission:passage:add:dossier
+            - site:create:fonctionnel
+            - site:create:geographique
       required:
         - name
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Permission'
