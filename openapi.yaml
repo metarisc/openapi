@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-05-2026.1
+  version: 1.0/main/05-06-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -23920,8 +23920,12 @@ paths:
                       description: Observations sur l'avis du préventionniste.
                       type: string
                       maxLength: 16384
+                    descriptif_dossier:
+                      description: Descriptif du dossier d'analyse de risque.
+                      type: string
+                      maxLength: 32768
               additionalProperties: {}
-              maxProperties: 21
+              maxProperties: 22
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
