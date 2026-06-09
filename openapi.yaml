@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-06-2026.5
+  version: 1.0/feature/unique_id_per_org/09-06-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -21198,6 +21198,14 @@ paths:
               * ferme : Fermé.
               * itinerant_periodique : Itinérant périodique.
               * erreur_saisie : Erreur de saisie.
+        - name: numero_unique
+          in: query
+          description: Filtre sur le numéro unique de l'ERP.
+          schema:
+            type: integer
+            format: int32
+            maximum: 999999
+            minimum: 1
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -45649,6 +45657,11 @@ paths:
                     * ferme : Fermé.
                     * itinerant_periodique : Itinérant périodique.
                     * erreur_saisie : Erreur de saisie.
+                numero_unique:
+                  type: integer
+                  format: int32
+                  maximum: 999999
+                  minimum: 1
       responses:
         '200':
           description: OK
@@ -55684,6 +55697,12 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        numero_unique:
+          description: Numero unique de l'objet utilisable pour la recherche.
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 999999
         date_de_realisation:
           description: Date à laquelle l'ERP a intégré Metarisc.
           type: string
@@ -55809,6 +55828,7 @@ components:
           nullable: true
       required:
         - id
+        - numero_unique
         - date_de_realisation
         - date_de_derniere_mise_a_jour
         - implantation
