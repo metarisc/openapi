@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/10-06-2026.1
+  version: 1.0/main/10-06-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -38748,31 +38748,31 @@ paths:
                   format: uri
                   maxLength: 512
                   nullable: true
-                rapport_modele_rapport_etude:
+                modele_rapport_etude:
                   description: Modèle de rapport d'étude par défaut pour l'organisation.
                   type: string
                   format: uri
                   maxLength: 512
                   nullable: true
-                rapport_modele_rapport_visite:
+                modele_rapport_visite:
                   description: Modèle de rapport de visite par défaut pour l'organisation.
                   type: string
                   format: uri
                   maxLength: 512
                   nullable: true
-                rapport_modele_rapport_levee_de_reserve:
+                modele_levee_de_reserve:
                   description: Modèle de rapport de levée de réserve par défaut pour l'organisation.
                   type: string
                   format: uri
                   maxLength: 512
                   nullable: true
-                rapport_modele_rapport_levee_de_prescription:
+                modele_levee_de_prescription:
                   description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
                   type: string
                   format: uri
                   maxLength: 512
                   nullable: true
-                rapport_modele_rapport_preparation_visite:
+                modele_preparation_visite:
                   description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
                   type: string
                   format: uri
@@ -56788,31 +56788,31 @@ components:
           format: uri
           maxLength: 512
           nullable: true
-        rapport_modele_rapport_etude:
+        modele_rapport_etude:
           description: Modèle de rapport d'étude par défaut pour l'organisation.
           type: string
           format: uri
           maxLength: 512
           nullable: true
-        rapport_modele_rapport_visite:
+        modele_rapport_visite:
           description: Modèle de rapport de visite par défaut pour l'organisation.
           type: string
           format: uri
           maxLength: 512
           nullable: true
-        rapport_modele_rapport_levee_de_reserve:
+        modele_levee_de_reserve:
           description: Modèle de rapport de levée de réserve par défaut pour l'organisation.
           type: string
           format: uri
           maxLength: 512
           nullable: true
-        rapport_modele_rapport_levee_de_prescription:
+        modele_levee_de_prescription:
           description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
           type: string
           format: uri
           maxLength: 512
           nullable: true
-        rapport_modele_rapport_preparation_visite:
+        modele_preparation_visite:
           description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
           type: string
           format: uri
@@ -56822,11 +56822,11 @@ components:
         - platau_id_acteur
         - platau_active
         - s3_global_endpoint
-        - rapport_modele_rapport_etude
-        - rapport_modele_rapport_visite
-        - rapport_modele_rapport_levee_de_reserve
-        - rapport_modele_rapport_levee_de_prescription
-        - rapport_modele_rapport_preparation_visite
+        - modele_rapport_etude
+        - modele_rapport_visite
+        - modele_levee_de_reserve
+        - modele_levee_de_prescription
+        - modele_preparation_visite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       x-extension-metarisc-codegen-context: query
     PEI:
