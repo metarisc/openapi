@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-06-2026.5
+  version: 1.0/main/10-06-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -38772,6 +38772,12 @@ paths:
                   format: uri
                   maxLength: 512
                   nullable: true
+                rapport_modele_rapport_preparation_visite:
+                  description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
+                  type: string
+                  format: uri
+                  maxLength: 512
+                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
               x-extension-metarisc-codegen-context: update
@@ -56806,6 +56812,12 @@ components:
           format: uri
           maxLength: 512
           nullable: true
+        rapport_modele_rapport_preparation_visite:
+          description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
+          type: string
+          format: uri
+          maxLength: 512
+          nullable: true
       required:
         - platau_id_acteur
         - platau_active
@@ -56814,6 +56826,7 @@ components:
         - rapport_modele_rapport_visite
         - rapport_modele_rapport_levee_de_reserve
         - rapport_modele_rapport_levee_de_prescription
+        - rapport_modele_rapport_preparation_visite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       x-extension-metarisc-codegen-context: query
     PEI:
