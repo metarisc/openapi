@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/12-06-2026.1
+  version: 1.0/main/18-06-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -57118,7 +57118,8 @@ components:
             * dossier:update:archive : Archivage ou désarchivage d'un dossier.
             * document:dossier:create : Ajout de documents à un dossier.
             * document:dossier:delete : Suppression de documents d'un dossier.
-            * commission:generate:procesverbal : Génération de convocations pour une commission.
+            * commission:generate:procesverbal : Génération de proces verbal pour une commission.
+            * commission:generate:compte-rendu : Génération de compte-rendu pour une commission.
             * document:model:update : Modification des documents models.
             * feed:create : Création de messages dans le feed.
             * feed:edit:* : Modification d'un message dans le feed.
@@ -57179,6 +57180,7 @@ components:
             - document:dossier:create
             - document:dossier:delete
             - commission:generate:procesverbal
+            - commission:generate:compte-rendu
             - document:model:update
             - feed:create
             - feed:edit:*
