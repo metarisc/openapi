@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-06-2026.1
+  version: 1.0/main/23-06-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -24656,8 +24656,24 @@ paths:
                       description: Nom de la commission.
                       type: string
                       maxLength: 256
+                    libelle_passage_commission:
+                      description: Nom du passage en commission.
+                      type: string
+                      maxLength: 256
                     date_de_passage:
                       description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
+                      type: string
+                      format: date-time
+                      maxLength: 50
+                      minLength: 20
+                    date_debut_passage_commission:
+                      description: Date de début du passage en commission programmée.
+                      type: string
+                      format: date-time
+                      maxLength: 50
+                      minLength: 20
+                    date_fin_passage_commission:
+                      description: Date de fin du passage en commission programmée.
                       type: string
                       format: date-time
                       maxLength: 50
@@ -24717,7 +24733,7 @@ paths:
                       type: string
                       maxLength: 32768
               additionalProperties: {}
-              maxProperties: 22
+              maxProperties: 25
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
