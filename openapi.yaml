@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/23-06-2026.5
+  version: 1.0/feature/texte-appl-rapport-visite/24-06-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -17065,6 +17065,56 @@ paths:
                   type: string
                   maxLength: 32768
                   nullable: true
+                textes_applicables:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Texte Applicable
+                    description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+                    properties:
+                      texte:
+                        description: Texte réglementaire ou normatif applicable.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: |-
+                          Type du texte applicable.
+
+                          Valeurs possibles :
+                          * Dispositions générales : Dispositions générales.
+                          * Dispositions particulières : Dispositions particulières.
+                          * Dispositions spéciales : Dispositions spéciales.
+                          * Textes relatifs aux bâtiments d'habitation : Textes relatifs aux bâtiments d'habitation.
+                          * ERP : Établissements Recevant du Public.
+                          * ERP du 2ème groupe : ERP du 2ème groupe.
+                          * Instructions techniques ERP : Instructions techniques ERP.
+                          * IGH / IMH : Immeubles de Grande Hauteur / Immeubles de Moyenne Hauteur.
+                          * Habitation : Habitation.
+                          * Rubriques ICPE : Rubriques ICPE.
+                          * Etablissements pénitentiaires : Établissements pénitentiaires.
+                          * Pyrotechnie : Pyrotechnie.
+                          * Guides : Guides.
+                          * Arrêtés préfectoraux : Arrêtés préfectoraux.
+                        type: string
+                        enum:
+                          - Dispositions générales
+                          - Dispositions particulières
+                          - Dispositions spéciales
+                          - Textes relatifs aux bâtiments d'habitation
+                          - ERP
+                          - ERP du 2ème groupe
+                          - Instructions techniques ERP
+                          - IGH / IMH
+                          - Habitation
+                          - Rubriques ICPE
+                          - Etablissements pénitentiaires
+                          - Pyrotechnie
+                          - Guides
+                          - Arrêtés préfectoraux
+                    required:
+                      - texte
+                      - type
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
               x-extension-metarisc-codegen-context: update
@@ -57685,6 +57735,11 @@ components:
           type: string
           maxLength: 32768
           nullable: true
+        textes_applicables:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/TexteApplicable'
       required:
         - observations
         - prise_de_note_interne
@@ -57694,6 +57749,7 @@ components:
         - documents_techniques
         - essais
         - descriptif_dossier
+        - textes_applicables
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
       x-extension-metarisc-codegen-context: query
     ReferenceExterieure:
