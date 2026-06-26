@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-06-2026.1
+  version: 1.0/main/26-06-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55367,6 +55367,10 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        metarisc_dossier_id:
+          description: Identifiant unique de l'objet.
+          type: string
+          maxLength: 12
         objet:
           description: Objet du dossier.
           type: string
@@ -55793,6 +55797,10 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        metarisc_erp_id:
+          description: Identifiant unique de l'objet.
+          type: string
+          maxLength: 10
         date_de_realisation:
           description: Date à laquelle l'ERP a intégré Metarisc.
           type: string
