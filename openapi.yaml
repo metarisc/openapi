@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/30-06-2026.1
+  version: 1.0/feature/metarisc-dossier-erp-id/06-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55735,6 +55735,7 @@ components:
           maxItems: 100
       required:
         - id
+        - metarisc_dossier_id
         - objet
         - date_de_creation
         - createur
@@ -56131,6 +56132,7 @@ components:
           nullable: true
       required:
         - id
+        - metarisc_erp_id
         - date_de_realisation
         - date_de_derniere_mise_a_jour
         - implantation
