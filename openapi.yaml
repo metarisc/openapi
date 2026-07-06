@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-07-2026.1
+  version: 1.0/main/06-07-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -8722,6 +8722,12 @@ paths:
           description: Filtre sur les dossiers parents ou non.
           schema:
             type: boolean
+        - name: metarisc_dossier_id
+          in: query
+          description: Filtre sur l'identifiant Metarisc du dossier.
+          schema:
+            type: string
+            maxLength: 10
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -21248,6 +21254,12 @@ paths:
               * ferme : Fermé.
               * itinerant_periodique : Itinérant périodique.
               * erreur_saisie : Erreur de saisie.
+        - name: metarisc_erp_id
+          in: query
+          description: Filtre sur l'identifiant Metarisc de l'ERP.
+          schema:
+            type: string
+            maxLength: 8
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -45958,6 +45970,9 @@ paths:
                     * ferme : Fermé.
                     * itinerant_periodique : Itinérant périodique.
                     * erreur_saisie : Erreur de saisie.
+                metarisc_erp_id:
+                  type: string
+                  maxLength: 8
       responses:
         '200':
           description: OK
