@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-07-2026.2
+  version: 1.0/main/07-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -13813,6 +13813,7 @@ paths:
                         activite_principale:
                           type: string
                           enum:
+                            - AUTRE - En attente de classement
                             - CTS - Châpiteaux
                             - CTS - Structures
                             - CTS - Tentes
@@ -13883,6 +13884,7 @@ paths:
                             - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                             - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                             - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                            - PE 2_2 - Autre petit établissement
                             - PS - Parcs de stationnement couverts
                             - PS - Parc de stationnement mixte
                             - PS - Parc de stationnement largement ventilé
@@ -13938,6 +13940,7 @@ paths:
                             L'activité principale est l'activité exercée dans l'établissement.
 
                             Valeurs possibles :
+                            * AUTRE - En attente de classement : AUTRE - En attente de classement.
                             * CTS - Châpiteaux : CTS - Châpiteaux.
                             * CTS - Structures : CTS - Structures.
                             * CTS - Tentes : CTS - Tentes.
@@ -14008,6 +14011,7 @@ paths:
                             * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                             * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                             * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                            * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                             * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                             * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                             * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -14066,6 +14070,7 @@ paths:
                           items:
                             type: string
                             enum:
+                              - AUTRE - En attente de classement
                               - CTS - Châpiteaux
                               - CTS - Structures
                               - CTS - Tentes
@@ -14136,6 +14141,7 @@ paths:
                               - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                               - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                               - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                              - PE 2_2 - Autre petit établissement
                               - PS - Parcs de stationnement couverts
                               - PS - Parc de stationnement mixte
                               - PS - Parc de stationnement largement ventilé
@@ -14193,6 +14199,7 @@ paths:
                               Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                               Valeurs possibles :
+                              * AUTRE - En attente de classement : AUTRE - En attente de classement.
                               * CTS - Châpiteaux : CTS - Châpiteaux.
                               * CTS - Structures : CTS - Structures.
                               * CTS - Tentes : CTS - Tentes.
@@ -14263,6 +14270,7 @@ paths:
                               * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                               * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                               * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                              * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                               * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                               * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                               * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -14377,6 +14385,7 @@ paths:
                               activite_principale:
                                 type: string
                                 enum:
+                                  - AUTRE - En attente de classement
                                   - CTS - Châpiteaux
                                   - CTS - Structures
                                   - CTS - Tentes
@@ -14447,6 +14456,7 @@ paths:
                                   - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                   - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                   - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                  - PE 2_2 - Autre petit établissement
                                   - PS - Parcs de stationnement couverts
                                   - PS - Parc de stationnement mixte
                                   - PS - Parc de stationnement largement ventilé
@@ -14502,6 +14512,7 @@ paths:
                                   L'activité exercée dans le local.
 
                                   Valeurs possibles :
+                                  * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                   * CTS - Châpiteaux : CTS - Châpiteaux.
                                   * CTS - Structures : CTS - Structures.
                                   * CTS - Tentes : CTS - Tentes.
@@ -14572,6 +14583,7 @@ paths:
                                   * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                   * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                   * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                  * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                   * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                   * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                   * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -20639,6 +20651,7 @@ paths:
             oneOf:
               - type: string
                 enum:
+                  - AUTRE - En attente de classement
                   - CTS - Châpiteaux
                   - CTS - Structures
                   - CTS - Tentes
@@ -20709,6 +20722,7 @@ paths:
                   - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                   - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                   - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                  - PE 2_2 - Autre petit établissement
                   - PS - Parcs de stationnement couverts
                   - PS - Parc de stationnement mixte
                   - PS - Parc de stationnement largement ventilé
@@ -20766,6 +20780,7 @@ paths:
                   Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                   Valeurs possibles :
+                  * AUTRE - En attente de classement : AUTRE - En attente de classement.
                   * CTS - Châpiteaux : CTS - Châpiteaux.
                   * CTS - Structures : CTS - Structures.
                   * CTS - Tentes : CTS - Tentes.
@@ -20836,6 +20851,7 @@ paths:
                   * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                   * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                   * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                  * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                   * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                   * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                   * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -20891,6 +20907,7 @@ paths:
                 items:
                   type: string
                   enum:
+                    - AUTRE - En attente de classement
                     - CTS - Châpiteaux
                     - CTS - Structures
                     - CTS - Tentes
@@ -20961,6 +20978,7 @@ paths:
                     - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                     - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                     - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                    - PE 2_2 - Autre petit établissement
                     - PS - Parcs de stationnement couverts
                     - PS - Parc de stationnement mixte
                     - PS - Parc de stationnement largement ventilé
@@ -21018,6 +21036,7 @@ paths:
                     Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                     Valeurs possibles :
+                    * AUTRE - En attente de classement : AUTRE - En attente de classement.
                     * CTS - Châpiteaux : CTS - Châpiteaux.
                     * CTS - Structures : CTS - Structures.
                     * CTS - Tentes : CTS - Tentes.
@@ -21088,6 +21107,7 @@ paths:
                     * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                     * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                     * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                    * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                     * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                     * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                     * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -21610,6 +21630,7 @@ paths:
                                     activite_principale:
                                       type: string
                                       enum:
+                                        - AUTRE - En attente de classement
                                         - CTS - Châpiteaux
                                         - CTS - Structures
                                         - CTS - Tentes
@@ -21680,6 +21701,7 @@ paths:
                                         - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                         - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                         - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                        - PE 2_2 - Autre petit établissement
                                         - PS - Parcs de stationnement couverts
                                         - PS - Parc de stationnement mixte
                                         - PS - Parc de stationnement largement ventilé
@@ -21735,6 +21757,7 @@ paths:
                                         L'activité principale est l'activité exercée dans l'établissement.
 
                                         Valeurs possibles :
+                                        * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                         * CTS - Châpiteaux : CTS - Châpiteaux.
                                         * CTS - Structures : CTS - Structures.
                                         * CTS - Tentes : CTS - Tentes.
@@ -21805,6 +21828,7 @@ paths:
                                         * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                         * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                         * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                        * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                         * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                         * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                         * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -21863,6 +21887,7 @@ paths:
                                       items:
                                         type: string
                                         enum:
+                                          - AUTRE - En attente de classement
                                           - CTS - Châpiteaux
                                           - CTS - Structures
                                           - CTS - Tentes
@@ -21933,6 +21958,7 @@ paths:
                                           - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                           - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                           - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                          - PE 2_2 - Autre petit établissement
                                           - PS - Parcs de stationnement couverts
                                           - PS - Parc de stationnement mixte
                                           - PS - Parc de stationnement largement ventilé
@@ -21990,6 +22016,7 @@ paths:
                                           Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                                           Valeurs possibles :
+                                          * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                           * CTS - Châpiteaux : CTS - Châpiteaux.
                                           * CTS - Structures : CTS - Structures.
                                           * CTS - Tentes : CTS - Tentes.
@@ -22060,6 +22087,7 @@ paths:
                                           * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                           * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                           * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                          * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                           * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                           * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                           * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -22174,6 +22202,7 @@ paths:
                                           activite_principale:
                                             type: string
                                             enum:
+                                              - AUTRE - En attente de classement
                                               - CTS - Châpiteaux
                                               - CTS - Structures
                                               - CTS - Tentes
@@ -22244,6 +22273,7 @@ paths:
                                               - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                               - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                               - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                              - PE 2_2 - Autre petit établissement
                                               - PS - Parcs de stationnement couverts
                                               - PS - Parc de stationnement mixte
                                               - PS - Parc de stationnement largement ventilé
@@ -22299,6 +22329,7 @@ paths:
                                               L'activité exercée dans le local.
 
                                               Valeurs possibles :
+                                              * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                               * CTS - Châpiteaux : CTS - Châpiteaux.
                                               * CTS - Structures : CTS - Structures.
                                               * CTS - Tentes : CTS - Tentes.
@@ -22369,6 +22400,7 @@ paths:
                                               * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                               * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                               * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                              * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                               * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                               * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                               * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -26188,6 +26220,7 @@ paths:
                                     activite_principale:
                                       type: string
                                       enum:
+                                        - AUTRE - En attente de classement
                                         - CTS - Châpiteaux
                                         - CTS - Structures
                                         - CTS - Tentes
@@ -26258,6 +26291,7 @@ paths:
                                         - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                         - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                         - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                        - PE 2_2 - Autre petit établissement
                                         - PS - Parcs de stationnement couverts
                                         - PS - Parc de stationnement mixte
                                         - PS - Parc de stationnement largement ventilé
@@ -26313,6 +26347,7 @@ paths:
                                         L'activité principale est l'activité exercée dans l'établissement.
 
                                         Valeurs possibles :
+                                        * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                         * CTS - Châpiteaux : CTS - Châpiteaux.
                                         * CTS - Structures : CTS - Structures.
                                         * CTS - Tentes : CTS - Tentes.
@@ -26383,6 +26418,7 @@ paths:
                                         * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                         * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                         * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                        * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                         * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                         * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                         * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -26441,6 +26477,7 @@ paths:
                                       items:
                                         type: string
                                         enum:
+                                          - AUTRE - En attente de classement
                                           - CTS - Châpiteaux
                                           - CTS - Structures
                                           - CTS - Tentes
@@ -26511,6 +26548,7 @@ paths:
                                           - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                           - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                           - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                          - PE 2_2 - Autre petit établissement
                                           - PS - Parcs de stationnement couverts
                                           - PS - Parc de stationnement mixte
                                           - PS - Parc de stationnement largement ventilé
@@ -26568,6 +26606,7 @@ paths:
                                           Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                                           Valeurs possibles :
+                                          * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                           * CTS - Châpiteaux : CTS - Châpiteaux.
                                           * CTS - Structures : CTS - Structures.
                                           * CTS - Tentes : CTS - Tentes.
@@ -26638,6 +26677,7 @@ paths:
                                           * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                           * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                           * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                          * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                           * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                           * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                           * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -26752,6 +26792,7 @@ paths:
                                           activite_principale:
                                             type: string
                                             enum:
+                                              - AUTRE - En attente de classement
                                               - CTS - Châpiteaux
                                               - CTS - Structures
                                               - CTS - Tentes
@@ -26822,6 +26863,7 @@ paths:
                                               - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                                               - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                                               - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                              - PE 2_2 - Autre petit établissement
                                               - PS - Parcs de stationnement couverts
                                               - PS - Parc de stationnement mixte
                                               - PS - Parc de stationnement largement ventilé
@@ -26877,6 +26919,7 @@ paths:
                                               L'activité exercée dans le local.
 
                                               Valeurs possibles :
+                                              * AUTRE - En attente de classement : AUTRE - En attente de classement.
                                               * CTS - Châpiteaux : CTS - Châpiteaux.
                                               * CTS - Structures : CTS - Structures.
                                               * CTS - Tentes : CTS - Tentes.
@@ -26947,6 +26990,7 @@ paths:
                                               * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                                               * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                                               * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                              * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                                               * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                                               * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                                               * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -45382,6 +45426,7 @@ paths:
                   oneOf:
                     - type: string
                       enum:
+                        - AUTRE - En attente de classement
                         - CTS - Châpiteaux
                         - CTS - Structures
                         - CTS - Tentes
@@ -45452,6 +45497,7 @@ paths:
                         - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                         - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                         - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                        - PE 2_2 - Autre petit établissement
                         - PS - Parcs de stationnement couverts
                         - PS - Parc de stationnement mixte
                         - PS - Parc de stationnement largement ventilé
@@ -45509,6 +45555,7 @@ paths:
                         Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                         Valeurs possibles :
+                        * AUTRE - En attente de classement : AUTRE - En attente de classement.
                         * CTS - Châpiteaux : CTS - Châpiteaux.
                         * CTS - Structures : CTS - Structures.
                         * CTS - Tentes : CTS - Tentes.
@@ -45579,6 +45626,7 @@ paths:
                         * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                         * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                         * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                        * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                         * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                         * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                         * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -45634,6 +45682,7 @@ paths:
                       items:
                         type: string
                         enum:
+                          - AUTRE - En attente de classement
                           - CTS - Châpiteaux
                           - CTS - Structures
                           - CTS - Tentes
@@ -45704,6 +45753,7 @@ paths:
                           - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
                           - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
                           - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                          - PE 2_2 - Autre petit établissement
                           - PS - Parcs de stationnement couverts
                           - PS - Parc de stationnement mixte
                           - PS - Parc de stationnement largement ventilé
@@ -45761,6 +45811,7 @@ paths:
                           Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
                           Valeurs possibles :
+                          * AUTRE - En attente de classement : AUTRE - En attente de classement.
                           * CTS - Châpiteaux : CTS - Châpiteaux.
                           * CTS - Structures : CTS - Structures.
                           * CTS - Tentes : CTS - Tentes.
@@ -45831,6 +45882,7 @@ paths:
                           * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
                           * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
                           * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                          * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
                           * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
                           * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
                           * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -53432,6 +53484,7 @@ components:
         activite_principale:
           type: string
           enum:
+            - AUTRE - En attente de classement
             - CTS - Châpiteaux
             - CTS - Structures
             - CTS - Tentes
@@ -53502,6 +53555,7 @@ components:
             - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
             - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
             - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+            - PE 2_2 - Autre petit établissement
             - PS - Parcs de stationnement couverts
             - PS - Parc de stationnement mixte
             - PS - Parc de stationnement largement ventilé
@@ -53557,6 +53611,7 @@ components:
             L'activité principale est l'activité exercée dans l'établissement.
 
             Valeurs possibles :
+            * AUTRE - En attente de classement : AUTRE - En attente de classement.
             * CTS - Châpiteaux : CTS - Châpiteaux.
             * CTS - Structures : CTS - Structures.
             * CTS - Tentes : CTS - Tentes.
@@ -53627,6 +53682,7 @@ components:
             * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
             * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
             * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+            * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
             * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
             * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
             * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -53685,6 +53741,7 @@ components:
           items:
             type: string
             enum:
+              - AUTRE - En attente de classement
               - CTS - Châpiteaux
               - CTS - Structures
               - CTS - Tentes
@@ -53755,6 +53812,7 @@ components:
               - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
               - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
               - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+              - PE 2_2 - Autre petit établissement
               - PS - Parcs de stationnement couverts
               - PS - Parc de stationnement mixte
               - PS - Parc de stationnement largement ventilé
@@ -53812,6 +53870,7 @@ components:
               Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
 
               Valeurs possibles :
+              * AUTRE - En attente de classement : AUTRE - En attente de classement.
               * CTS - Châpiteaux : CTS - Châpiteaux.
               * CTS - Structures : CTS - Structures.
               * CTS - Tentes : CTS - Tentes.
@@ -53882,6 +53941,7 @@ components:
               * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
               * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
               * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+              * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
               * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
               * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
               * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
@@ -56186,6 +56246,7 @@ components:
         activite_principale:
           type: string
           enum:
+            - AUTRE - En attente de classement
             - CTS - Châpiteaux
             - CTS - Structures
             - CTS - Tentes
@@ -56256,6 +56317,7 @@ components:
             - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
             - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
             - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+            - PE 2_2 - Autre petit établissement
             - PS - Parcs de stationnement couverts
             - PS - Parc de stationnement mixte
             - PS - Parc de stationnement largement ventilé
@@ -56311,6 +56373,7 @@ components:
             L'activité exercée dans le local.
 
             Valeurs possibles :
+            * AUTRE - En attente de classement : AUTRE - En attente de classement.
             * CTS - Châpiteaux : CTS - Châpiteaux.
             * CTS - Structures : CTS - Structures.
             * CTS - Tentes : CTS - Tentes.
@@ -56381,6 +56444,7 @@ components:
             * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
             * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
             * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+            * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
             * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
             * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
             * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
