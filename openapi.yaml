@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-07-2026.1
+  version: 1.0/main/09-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -58174,7 +58174,6 @@ components:
         - analyse_risque
         - observations
         - prise_de_note_interne
-        - proposition_avis_observations
         - facteur_dangerosite
         - documents_techniques
         - textes_applicables
@@ -58242,7 +58241,6 @@ components:
       required:
         - observations
         - prise_de_note_interne
-        - proposition_avis_observations
         - facteur_dangerosite
         - documents_techniques
         - essais
