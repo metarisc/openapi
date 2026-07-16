@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-07-2026.1
+  version: 1.0/feature/periodicite-non-calcule/16-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -22222,8 +22222,16 @@ paths:
                                 - ferme
                                 - itinerant_periodique
                                 - erreur_saisie
-                            periodicite:
+                            periodicite_calculee:
                               description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+                              type: integer
+                              format: int32
+                              minimum: 0
+                              maximum: 60
+                              multipleOf: 12
+                              nullable: true
+                            periodicite:
+                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
                               type: integer
                               format: int32
                               minimum: 0
@@ -26812,8 +26820,16 @@ paths:
                                 - ferme
                                 - itinerant_periodique
                                 - erreur_saisie
-                            periodicite:
+                            periodicite_calculee:
                               description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+                              type: integer
+                              format: int32
+                              minimum: 0
+                              maximum: 60
+                              multipleOf: 12
+                              nullable: true
+                            periodicite:
+                              description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
                               type: integer
                               format: int32
                               minimum: 0
@@ -55957,8 +55973,16 @@ components:
             - ferme
             - itinerant_periodique
             - erreur_saisie
-        periodicite:
+        periodicite_calculee:
           description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois. Si à la création ou modification, la périodicité est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 60
+          multipleOf: 12
+          nullable: true
+        periodicite:
+          description: Les établissements des 1re, 2e, 3e et 4e catégories doivent être visités périodiquement par les commissions de sécurité. La fréquence est fixée selon le type et de la catégorie. La périodicité est en mois.
           type: integer
           format: int32
           minimum: 0
@@ -55982,6 +56006,7 @@ components:
         - id
         - date
         - statut
+        - periodicite_calculee
         - periodicite
         - libelle
         - observations_generales
