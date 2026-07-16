@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-07-2026.1
+  version: 1.0/feature/delete-dossier/16-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -10917,6 +10917,821 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: post-contacts-dossier
+  /dossiers/{dossier_id}:
+    delete:
+      tags:
+        - Dossiers API
+      summary: Suppression d'un dossier
+      description: Suppression d'un dossier a partir de son identifiant.
+      operationId: DeleteDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '204':
+          description: No Content
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: delete-dossier
+    get:
+      tags:
+        - Dossiers API
+      summary: Détails d'un dossier
+      description: Récupération de l'ensemble des données d'un dossier.
+      operationId: GetDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-dossier
+      x-extension-metarisc-codegen-visibility: public
+    post:
+      tags:
+        - Dossiers API
+      summary: Mettre à jour un dossier
+      description: Modification d'un dossier existant en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PostDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Objet Dossier
+              description: Les dossiers sont un ensemble de documents administratifs et techniques. L'instruction du dossier suit une logique pré-définie selon le type.
+              oneOf:
+                - type: object
+                  title: Objet Dossier ERP
+                  description: Dossier d'un ERP.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 256
+                        modules:
+                          description: Modules du dossier.
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - erp:analyse_de_risque
+                              - erp:essais_visite
+                              - erp:derogations
+                              - deci:controle_technique_pei
+                            description: |-
+                              Modules activables sur un dossier.
+                              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
+
+                              Valeurs possibles :
+                              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
+                              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+                              * erp:derogations : Module de gestion des dérogations pour les ERP.
+                              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
+                          maxItems: 4
+                          uniqueItems: true
+                        enveloppe_id:
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                          nullable: true
+                    - type: object
+                      properties:
+                        type:
+                          description: |-
+                            Type du dossier.
+
+                            Valeurs possibles :
+                            * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
+                            * erp:permis_de_construire : Dossier de permis de construire.
+                            * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
+                            * erp:changement_de_dus : Dossier de changement de destination.
+                            * erp:salon_type_t : Dossier de salon de type T.
+                            * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
+                            * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
+                            * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
+                            * erp:derogation : Dossier de dérogation.
+                            * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
+                            * erp:levee_de_reserve : Dossier de levée de réserve.
+                            * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
+                            * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
+                            * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
+                            * erp:visite_periodique : Dossier de visite périodique.
+                            * erp:visite_reception : Dossier de visite de réception.
+                            * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
+                            * erp:visite_controle : Dossier de visite de contrôle.
+                            * erp:visite_inopinee : Dossier de visite inopinée.
+                            * erp:visite_chantier : Dossier de visite de chantier.
+                            * erp:demande_avis : Dossier de demande d'avis.
+                            * erp:demande_reclassement : Dossier de demande de reclassement.
+                            * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
+                            * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
+                            * erp:dossier_ge_2 : Dossier GE 2.
+                            * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
+                            * erp:etude_ingenierie : Dossier d'étude ingénierie.
+                            * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                          type: string
+                          enum:
+                            - erp:autorisation_de_travaux
+                            - erp:permis_de_construire
+                            - erp:levee_de_prescriptions
+                            - erp:changement_de_dus
+                            - erp:salon_type_t
+                            - erp:utilisation_exceptionnelle_de_locaux
+                            - erp:demande_d_implantation_cts_inferieur_6_mois
+                            - erp:demande_d_implantation_cts_superieur_6_mois
+                            - erp:derogation
+                            - erp:etude_cahier_des_charges_type_t
+                            - erp:levee_de_reserve
+                            - erp:echeancier_de_travaux
+                            - erp:cahier_des_charges_ssi
+                            - erp:etude_suite_a_un_avis_differe
+                            - erp:visite_periodique
+                            - erp:visite_reception
+                            - erp:visite_avant_ouverture
+                            - erp:visite_controle
+                            - erp:visite_inopinee
+                            - erp:visite_chantier
+                            - erp:demande_avis
+                            - erp:demande_reclassement
+                            - erp:suivi_avis_defavorable
+                            - erp:levee_avis_defavorable
+                            - erp:dossier_ge_2
+                            - erp:schema_general_organisation_securite
+                            - erp:etude_ingenierie
+                            - erp:manifestation_temporaire
+                        numero_urbanisme:
+                          description: Numéro d'urbanisme.
+                          type: string
+                          maxLength: 256
+                        numero_urbanisme_date:
+                          description: Date du numéro d'urbanisme.
+                          type: string
+                          format: date
+                          maxLength: 10
+                          minLength: 10
+                        demandeur:
+                          description: Demandeur ayant déposé le dossier.
+                          type: string
+                          maxLength: 256
+                        service_instructeur:
+                          description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
+                          type: string
+                          maxLength: 256
+                        descriptif_travaux:
+                          description: Descriptif des travaux.
+                          type: string
+                          maxLength: 65536
+                        date_limite_traitement:
+                          description: Date limite de traitement du dossier.
+                          type: string
+                          format: date
+                          maxLength: 10
+                          minLength: 10
+                        dossier_complet:
+                          description: Dossier complet.
+                          type: boolean
+                        dossier_complet_observations:
+                          description: Observations dans le cas d'un dossier incomplet.
+                          type: string
+                          maxLength: 65536
+                      required:
+                        - type
+                - type: object
+                  title: Objet Dossier DECI
+                  description: Dossier d'un DECI.
+                  allOf:
+                    - type: object
+                      title: Objet Dossier Base
+                      description: Dossier de base.
+                      properties:
+                        objet:
+                          description: Objet du dossier.
+                          type: string
+                          maxLength: 256
+                        modules:
+                          description: Modules du dossier.
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - erp:analyse_de_risque
+                              - erp:essais_visite
+                              - erp:derogations
+                              - deci:controle_technique_pei
+                            description: |-
+                              Modules activables sur un dossier.
+                              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
+
+                              Valeurs possibles :
+                              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
+                              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
+                              * erp:derogations : Module de gestion des dérogations pour les ERP.
+                              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
+                          maxItems: 4
+                          uniqueItems: true
+                        enveloppe_id:
+                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
+                          type: string
+                          format: uuid
+                          maxLength: 36
+                          minLength: 36
+                          nullable: true
+                    - type: object
+                      properties:
+                        type:
+                          description: |-
+                            Type du dossier.
+
+                            Valeurs possibles :
+                            * deci:declaration_pei : Dossier de déclaration de PEI (Point d'Eau Incendie).
+                          type: string
+                          enum:
+                            - deci:declaration_pei
+                      required:
+                        - type
+              additionalProperties: {}
+              maxProperties: 16
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: patch-dossier
+      x-extension-metarisc-codegen-visibility: public
   /dossiers/{dossier_id}/derogations:
     get:
       tags:
@@ -12743,622 +13558,6 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: post-fil-rouge-dossier
-  /dossiers/{dossier_id}:
-    get:
-      tags:
-        - Dossiers API
-      summary: Détails d'un dossier
-      description: Récupération de l'ensemble des données d'un dossier.
-      operationId: GetDossierDossiers
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: dossier_id
-          in: path
-          required: true
-          description: Dossier Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Dossier'
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 256
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: dossiers
-      x-extension-metarisc-codegen-operation: get-dossier
-      x-extension-metarisc-codegen-visibility: public
-    post:
-      tags:
-        - Dossiers API
-      summary: Mettre à jour un dossier
-      description: Modification d'un dossier existant en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
-      operationId: PostDossierDossiers
-      security:
-        - IdMetariscFr:
-            - openid
-            - email
-            - profile
-      parameters:
-        - name: dossier_id
-          in: path
-          required: true
-          description: Dossier Id
-          schema:
-            type: string
-            maxLength: 255
-        - in: header
-          name: Metarisc-Org-Id
-          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
-          schema:
-            type: string
-            format: uuid
-            maxLength: 255
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              title: Objet Dossier
-              description: Les dossiers sont un ensemble de documents administratifs et techniques. L'instruction du dossier suit une logique pré-définie selon le type.
-              oneOf:
-                - type: object
-                  title: Objet Dossier ERP
-                  description: Dossier d'un ERP.
-                  allOf:
-                    - type: object
-                      title: Objet Dossier Base
-                      description: Dossier de base.
-                      properties:
-                        objet:
-                          description: Objet du dossier.
-                          type: string
-                          maxLength: 256
-                        modules:
-                          description: Modules du dossier.
-                          type: array
-                          items:
-                            type: string
-                            enum:
-                              - erp:analyse_de_risque
-                              - erp:essais_visite
-                              - erp:derogations
-                              - deci:controle_technique_pei
-                            description: |-
-                              Modules activables sur un dossier.
-                              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
-
-                              Valeurs possibles :
-                              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
-                              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
-                              * erp:derogations : Module de gestion des dérogations pour les ERP.
-                              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
-                          maxItems: 4
-                          uniqueItems: true
-                        enveloppe_id:
-                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
-                          type: string
-                          format: uuid
-                          maxLength: 36
-                          minLength: 36
-                          nullable: true
-                    - type: object
-                      properties:
-                        type:
-                          description: |-
-                            Type du dossier.
-
-                            Valeurs possibles :
-                            * erp:autorisation_de_travaux : Dossier d'autorisation de travaux.
-                            * erp:permis_de_construire : Dossier de permis de construire.
-                            * erp:levee_de_prescriptions : Dossier de levée de prescriptions.
-                            * erp:changement_de_dus : Dossier de changement de destination.
-                            * erp:salon_type_t : Dossier de salon de type T.
-                            * erp:utilisation_exceptionnelle_de_locaux : Dossier d'utilisation exceptionnelle de locaux.
-                            * erp:demande_d_implantation_cts_inferieur_6_mois : Dossier de demande d'implantation de CTS inférieur à 6 mois.
-                            * erp:demande_d_implantation_cts_superieur_6_mois : Dossier de demande d'implantation de CTS supérieur à 6 mois.
-                            * erp:derogation : Dossier de dérogation.
-                            * erp:etude_cahier_des_charges_type_t : Dossier d'étude de cahier des charges de type T.
-                            * erp:levee_de_reserve : Dossier de levée de réserve.
-                            * erp:echeancier_de_travaux : Dossier d'échéancier de travaux.
-                            * erp:cahier_des_charges_ssi : Dossier de cahier des charges SSI.
-                            * erp:etude_suite_a_un_avis_differe : Dossier d'étude suite à un avis différé.
-                            * erp:visite_periodique : Dossier de visite périodique.
-                            * erp:visite_reception : Dossier de visite de réception.
-                            * erp:visite_avant_ouverture : Dossier de visite avant ouverture.
-                            * erp:visite_controle : Dossier de visite de contrôle.
-                            * erp:visite_inopinee : Dossier de visite inopinée.
-                            * erp:visite_chantier : Dossier de visite de chantier.
-                            * erp:demande_avis : Dossier de demande d'avis.
-                            * erp:demande_reclassement : Dossier de demande de reclassement.
-                            * erp:suivi_avis_defavorable : Dossier de suivi d'avis défavorable.
-                            * erp:levee_avis_defavorable : Dossier de levée d'avis défavorable.
-                            * erp:dossier_ge_2 : Dossier GE 2.
-                            * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
-                            * erp:etude_ingenierie : Dossier d'étude ingénierie.
-                            * erp:manifestation_temporaire : Dossier de manifestation temporaire.
-                          type: string
-                          enum:
-                            - erp:autorisation_de_travaux
-                            - erp:permis_de_construire
-                            - erp:levee_de_prescriptions
-                            - erp:changement_de_dus
-                            - erp:salon_type_t
-                            - erp:utilisation_exceptionnelle_de_locaux
-                            - erp:demande_d_implantation_cts_inferieur_6_mois
-                            - erp:demande_d_implantation_cts_superieur_6_mois
-                            - erp:derogation
-                            - erp:etude_cahier_des_charges_type_t
-                            - erp:levee_de_reserve
-                            - erp:echeancier_de_travaux
-                            - erp:cahier_des_charges_ssi
-                            - erp:etude_suite_a_un_avis_differe
-                            - erp:visite_periodique
-                            - erp:visite_reception
-                            - erp:visite_avant_ouverture
-                            - erp:visite_controle
-                            - erp:visite_inopinee
-                            - erp:visite_chantier
-                            - erp:demande_avis
-                            - erp:demande_reclassement
-                            - erp:suivi_avis_defavorable
-                            - erp:levee_avis_defavorable
-                            - erp:dossier_ge_2
-                            - erp:schema_general_organisation_securite
-                            - erp:etude_ingenierie
-                            - erp:manifestation_temporaire
-                        numero_urbanisme:
-                          description: Numéro d'urbanisme.
-                          type: string
-                          maxLength: 256
-                        numero_urbanisme_date:
-                          description: Date du numéro d'urbanisme.
-                          type: string
-                          format: date
-                          maxLength: 10
-                          minLength: 10
-                        demandeur:
-                          description: Demandeur ayant déposé le dossier.
-                          type: string
-                          maxLength: 256
-                        service_instructeur:
-                          description: Service instructeur du dossier. C'est un service administratif chargé de l'examen d'un dossier.
-                          type: string
-                          maxLength: 256
-                        descriptif_travaux:
-                          description: Descriptif des travaux.
-                          type: string
-                          maxLength: 65536
-                        date_limite_traitement:
-                          description: Date limite de traitement du dossier.
-                          type: string
-                          format: date
-                          maxLength: 10
-                          minLength: 10
-                        dossier_complet:
-                          description: Dossier complet.
-                          type: boolean
-                        dossier_complet_observations:
-                          description: Observations dans le cas d'un dossier incomplet.
-                          type: string
-                          maxLength: 65536
-                      required:
-                        - type
-                - type: object
-                  title: Objet Dossier DECI
-                  description: Dossier d'un DECI.
-                  allOf:
-                    - type: object
-                      title: Objet Dossier Base
-                      description: Dossier de base.
-                      properties:
-                        objet:
-                          description: Objet du dossier.
-                          type: string
-                          maxLength: 256
-                        modules:
-                          description: Modules du dossier.
-                          type: array
-                          items:
-                            type: string
-                            enum:
-                              - erp:analyse_de_risque
-                              - erp:essais_visite
-                              - erp:derogations
-                              - deci:controle_technique_pei
-                            description: |-
-                              Modules activables sur un dossier.
-                              Un module est une fonctionnalité qui peut être activée ou désactivée sur un dossier.
-
-                              Valeurs possibles :
-                              * erp:analyse_de_risque : Module d'analyse de risque pour les ERP.
-                              * erp:essais_visite : Module de gestion des essais et visites pour les ERP.
-                              * erp:derogations : Module de gestion des dérogations pour les ERP.
-                              * deci:controle_technique_pei : Module de gestion des contrôles techniques pour les PEI.
-                          maxItems: 4
-                          uniqueItems: true
-                        enveloppe_id:
-                          description: L'identifiant de l'enveloppe à laquelle associer ce dossier, ou "null" pour supprimer l'enveloppe actuelle.
-                          type: string
-                          format: uuid
-                          maxLength: 36
-                          minLength: 36
-                          nullable: true
-                    - type: object
-                      properties:
-                        type:
-                          description: |-
-                            Type du dossier.
-
-                            Valeurs possibles :
-                            * deci:declaration_pei : Dossier de déclaration de PEI (Point d'Eau Incendie).
-                          type: string
-                          enum:
-                            - deci:declaration_pei
-                      required:
-                        - type
-              additionalProperties: {}
-              maxProperties: 16
-              x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
-              x-extension-metarisc-codegen-context: update
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Dossier'
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                enum:
-                  - '*'
-        '400':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
-              schema:
-                type: string
-                maxLength: 256
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Bad Request
-          headers:
-            RateLimit-Limit:
-              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Reset:
-              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            RateLimit-Remaining:
-              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
-              schema:
-                type: integer
-                format: int32
-                minimum: 1
-                maximum: 50
-            Access-Control-Allow-Origin:
-              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
-              schema:
-                type: string
-                enum:
-                  - '*'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      x-extension-metarisc-codegen-name: dossiers
-      x-extension-metarisc-codegen-operation: patch-dossier
-      x-extension-metarisc-codegen-visibility: public
   /dossiers/{dossier_id}/levee_de_prescriptions/pdf:
     get:
       tags:
