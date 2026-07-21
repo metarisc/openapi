@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-07-2026.1
+  version: 1.0/main/21-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -58085,10 +58085,6 @@ components:
             Nom de la permission.
 
             Valeurs possibles :
-            * deci:access : Accès aux fonctionnalités DECI.
-            * erp:access : Accès aux fonctionnalités ERP.
-            * sirene:access : Accès aux fonctionnalités SIRENE.
-            * commission:access : Accès aux commissions de sécurité.
             * dossier:create : Création de dossiers.
             * dossier:edit:* : Modification de tous les champs d'un dossier.
             * dossier:delete : Suppression de dossiers.
@@ -58144,12 +58140,11 @@ components:
             * commission:passage:add:dossier : Ajout de dossiers à une commission.
             * site:create:fonctionnel : Création de sites fonctionnels.
             * site:create:geographique : Création de sites géographiques.
+            * dossier:create:erp : Création d'ERP dans un dossier.
+            * dossier:update:affectation : Modification de l'affectation d'un dossier.
+            * prescription:bibliotheque:type : Gestion des types de prescriptions dans la bibliothèque.
           type: string
           enum:
-            - deci:access
-            - erp:access
-            - sirene:access
-            - commission:access
             - dossier:create
             - dossier:edit:*
             - dossier:delete
@@ -58205,6 +58200,9 @@ components:
             - commission:passage:add:dossier
             - site:create:fonctionnel
             - site:create:geographique
+            - dossier:create:erp
+            - dossier:update:affectation
+            - prescription:bibliotheque:type
       required:
         - name
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Permission'
