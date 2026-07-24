@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-07-2026.1
+  version: 1.0/feature/ajout-template-ds-preferences-commission/24-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -39791,36 +39791,6 @@ paths:
                   format: uri
                   maxLength: 512
                   nullable: true
-                modele_rapport_etude:
-                  description: Modèle de rapport d'étude par défaut pour l'organisation.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
-                modele_rapport_visite:
-                  description: Modèle de rapport de visite par défaut pour l'organisation.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
-                modele_levee_de_reserve:
-                  description: Modèle de rapport de levée de réserve par défaut pour l'organisation.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
-                modele_levee_de_prescription:
-                  description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
-                modele_preparation_visite:
-                  description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
-                  type: string
-                  format: uri
-                  maxLength: 512
-                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
               x-extension-metarisc-codegen-context: update
@@ -57904,45 +57874,10 @@ components:
           format: uri
           maxLength: 512
           nullable: true
-        modele_rapport_etude:
-          description: Modèle de rapport d'étude par défaut pour l'organisation.
-          type: string
-          format: uri
-          maxLength: 512
-          nullable: true
-        modele_rapport_visite:
-          description: Modèle de rapport de visite par défaut pour l'organisation.
-          type: string
-          format: uri
-          maxLength: 512
-          nullable: true
-        modele_levee_de_reserve:
-          description: Modèle de rapport de levée de réserve par défaut pour l'organisation.
-          type: string
-          format: uri
-          maxLength: 512
-          nullable: true
-        modele_levee_de_prescription:
-          description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
-          type: string
-          format: uri
-          maxLength: 512
-          nullable: true
-        modele_preparation_visite:
-          description: Modèle de rapport de levée de prescription par défaut pour l'organisation.
-          type: string
-          format: uri
-          maxLength: 512
-          nullable: true
       required:
         - platau_id_acteur
         - platau_active
         - s3_global_endpoint
-        - modele_rapport_etude
-        - modele_rapport_visite
-        - modele_levee_de_reserve
-        - modele_levee_de_prescription
-        - modele_preparation_visite
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/OrganisationPreferences'
       x-extension-metarisc-codegen-context: query
     PEI:
