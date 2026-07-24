@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-07-2026.1
+  version: 1.0/main/24-07-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -40297,6 +40297,12 @@ paths:
                   format: float
                   minimum: 0
                   maximum: 999999
+                pena_conformite_seuil_volume_citerne_:
+                  description: Volume minimum d'une citerne pour le calcul de sa conformité.
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 999999
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
               x-extension-metarisc-codegen-context: create
@@ -58805,6 +58811,12 @@ components:
           format: float
           minimum: 0
           maximum: 999999
+        pena_conformite_seuil_volume_citerne_:
+          description: Volume minimum d'une citerne pour le calcul de sa conformité.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 999999
       required:
         - pibi_conformite_matrice_seuil_pesee_1bar_par_nature
         - pibi_performance_natures_performance_restreinte
@@ -58813,6 +58825,7 @@ components:
         - pibi_conformite_seuil_surpression
         - pibi_conformite_matrice_seuil_pesee_1bar_par_defaut
         - pena_conformite_seuil_volume_citerne
+        - pena_conformite_seuil_volume_citerne_
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/ReglesDeci'
       x-extension-metarisc-codegen-context: query
     SiteGeographique:
