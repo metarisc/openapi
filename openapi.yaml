@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-07-2026.2
+  version: 1.0/feature/erp-update-id/27-07-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -25434,65 +25434,6 @@ paths:
                       description: Nom de la commission.
                       type: string
                       maxLength: 256
-                    libelle_passage_commission:
-                      description: Nom du passage en commission.
-                      type: string
-                      maxLength: 256
-                    date_de_passage:
-                      description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
-                      type: string
-                      format: date-time
-                      maxLength: 50
-                      minLength: 20
-                    type_passage_commission:
-                      description: |-
-                        Type du passage en commission.
-
-                        Valeurs possibles :
-                        * salle : Passage en commission en salle.
-                        * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
-                        * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
-                        * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
-                        * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
-                        * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
-                        * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
-                        * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
-                        * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
-                        * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
-                        * visite_periodique_en_pleniere : Visite périodique en plénière.
-                        * visite_inopinee_en_pleniere : Visite inopinée en plénière.
-                        * visite_controle_en_pleniere : Visite de contrôle en plénière.
-                        * visite_chantier_en_pleniere : Visite de chantier en plénière.
-                        * visite_conseil_en_pleniere : Visite de conseil en plénière.
-                      type: string
-                      enum:
-                        - salle
-                        - visite_reception_travaux_en_groupe_de_visite
-                        - visite_reception_avant_ouverture_en_groupe_de_visite
-                        - visite_periodique_en_groupe_de_visite
-                        - visite_inopinee_en_groupe_de_visite
-                        - visite_controle_en_groupe_de_visite
-                        - visite_chantier_en_groupe_de_visite
-                        - visite_conseil_en_groupe_de_visite
-                        - visite_reception_travaux_en_pleniere
-                        - visite_reception_avant_ouverture_en_pleniere
-                        - visite_periodique_en_pleniere
-                        - visite_inopinee_en_pleniere
-                        - visite_controle_en_pleniere
-                        - visite_chantier_en_pleniere
-                        - visite_conseil_en_pleniere
-                    date_debut_passage_commission:
-                      description: Date de début du passage en commission programmée.
-                      type: string
-                      format: date-time
-                      maxLength: 50
-                      minLength: 20
-                    date_fin_passage_commission:
-                      description: Date de fin du passage en commission programmée.
-                      type: string
-                      format: date-time
-                      maxLength: 50
-                      minLength: 20
                     proposition_avis:
                       type: string
                       enum:
@@ -25547,8 +25488,78 @@ paths:
                       description: Descriptif du dossier d'analyse de risque.
                       type: string
                       maxLength: 65536
+                    passages:
+                      description: Liste des passages en commission.
+                      type: array
+                      maxItems: 10
+                      items:
+                        type: object
+                        title: Objet Passage en Commission
+                        description: Utilisation de l'objet Passage en Commission pour la reprise de donnée.
+                        properties:
+                          libelle_passage_commission:
+                            description: Nom du passage en commission.
+                            type: string
+                            maxLength: 256
+                          date_de_passage:
+                            description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
+                            type: string
+                            format: date-time
+                            maxLength: 50
+                            minLength: 20
+                          type_passage_commission:
+                            description: |-
+                              Type du passage en commission.
+
+                              Valeurs possibles :
+                              * salle : Passage en commission en salle.
+                              * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
+                              * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
+                              * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
+                              * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
+                              * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
+                              * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
+                              * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
+                              * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
+                              * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
+                              * visite_periodique_en_pleniere : Visite périodique en plénière.
+                              * visite_inopinee_en_pleniere : Visite inopinée en plénière.
+                              * visite_controle_en_pleniere : Visite de contrôle en plénière.
+                              * visite_chantier_en_pleniere : Visite de chantier en plénière.
+                              * visite_conseil_en_pleniere : Visite de conseil en plénière.
+                            type: string
+                            enum:
+                              - salle
+                              - visite_reception_travaux_en_groupe_de_visite
+                              - visite_reception_avant_ouverture_en_groupe_de_visite
+                              - visite_periodique_en_groupe_de_visite
+                              - visite_inopinee_en_groupe_de_visite
+                              - visite_controle_en_groupe_de_visite
+                              - visite_chantier_en_groupe_de_visite
+                              - visite_conseil_en_groupe_de_visite
+                              - visite_reception_travaux_en_pleniere
+                              - visite_reception_avant_ouverture_en_pleniere
+                              - visite_periodique_en_pleniere
+                              - visite_inopinee_en_pleniere
+                              - visite_controle_en_pleniere
+                              - visite_chantier_en_pleniere
+                              - visite_conseil_en_pleniere
+                          date_debut_passage_commission:
+                            description: Date de début du passage en commission programmée.
+                            type: string
+                            format: date-time
+                            maxLength: 50
+                            minLength: 20
+                          date_fin_passage_commission:
+                            description: Date de fin du passage en commission programmée.
+                            type: string
+                            format: date-time
+                            maxLength: 50
+                            minLength: 20
+                        required:
+                          - type_passage_commission
               additionalProperties: {}
-              maxProperties: 26
+              maxProperties: 22
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -57942,6 +57953,52 @@ components:
         - numero_serie_appareil
         - references_exterieures
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PEI'
+      x-extension-metarisc-codegen-context: query
+    PassageReprise:
+      type: object
+      title: Objet Passage en Commission
+      description: Utilisation de l'objet Passage en Commission pour la reprise de donnée.
+      properties:
+        type_passage_commission:
+          description: |-
+            Type du passage en commission.
+
+            Valeurs possibles :
+            * salle : Passage en commission en salle.
+            * visite_reception_travaux_en_groupe_de_visite : Visite de réception de travaux en groupe de visite.
+            * visite_reception_avant_ouverture_en_groupe_de_visite : Visite de réception avant ouverture en groupe de visite.
+            * visite_periodique_en_groupe_de_visite : Visite périodique en groupe de visite.
+            * visite_inopinee_en_groupe_de_visite : Visite inopinée en groupe de visite.
+            * visite_controle_en_groupe_de_visite : Visite de contrôle en groupe de visite.
+            * visite_chantier_en_groupe_de_visite : Visite de chantier en groupe de visite.
+            * visite_conseil_en_groupe_de_visite : Visite de conseil en groupe de visite.
+            * visite_reception_travaux_en_pleniere : Visite de réception de travaux en plénière.
+            * visite_reception_avant_ouverture_en_pleniere : Visite de réception avant ouverture en plénière.
+            * visite_periodique_en_pleniere : Visite périodique en plénière.
+            * visite_inopinee_en_pleniere : Visite inopinée en plénière.
+            * visite_controle_en_pleniere : Visite de contrôle en plénière.
+            * visite_chantier_en_pleniere : Visite de chantier en plénière.
+            * visite_conseil_en_pleniere : Visite de conseil en plénière.
+          type: string
+          enum:
+            - salle
+            - visite_reception_travaux_en_groupe_de_visite
+            - visite_reception_avant_ouverture_en_groupe_de_visite
+            - visite_periodique_en_groupe_de_visite
+            - visite_inopinee_en_groupe_de_visite
+            - visite_controle_en_groupe_de_visite
+            - visite_chantier_en_groupe_de_visite
+            - visite_conseil_en_groupe_de_visite
+            - visite_reception_travaux_en_pleniere
+            - visite_reception_avant_ouverture_en_pleniere
+            - visite_periodique_en_pleniere
+            - visite_inopinee_en_pleniere
+            - visite_controle_en_pleniere
+            - visite_chantier_en_pleniere
+            - visite_conseil_en_pleniere
+      required:
+        - type_passage_commission
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageReprise'
       x-extension-metarisc-codegen-context: query
     PassageCommission:
       type: object
