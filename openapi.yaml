@@ -14877,6 +14877,2020 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: get-rapport-etude-dossier
+    patch:
+      tags:
+        - Dossiers API
+      summary: Mise à jour du rapport d'étude avec un patch
+      description: Mise à jour du rapport d'étude en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PatchRapportEtudeDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: 'Objet : Analyse de Risque'
+              description: Gestion de l'analyse de risque.
+              properties:
+                analyse_risque:
+                  description: Analyse des risques.
+                  allOf:
+                    - type: object
+                      title: Objet CLICDVCREM
+                      description: Objet représentant les caractéristiques liées à l'activité, l'implantation, la construction, les dégagements, la ventilation et désenfumage, l'électricité, éclairage, chauffage et climatisation, les risques particuliers, les moyens de secours d'un ERP.
+                      properties:
+                        activite_principale:
+                          type: string
+                          enum:
+                            - AUTRE - En attente de classement
+                            - CTS - Châpiteaux
+                            - CTS - Structures
+                            - CTS - Tentes
+                            - EF - Bateaux en stationnement sur les eaux intérieures
+                            - EF - Bateaux stationnaires
+                            - EF - Etablissements flottants
+                            - EP - Maison d'arrêt
+                            - EP - Maison centrale et centre de détention
+                            - EP - Centre pénitentiaire
+                            - EP - Centre de semi-liberté et centres pour peines aménagées
+                            - EP - Établissement pénitentiaire pour mineurs
+                            - EP - Centre de rétention administrative
+                            - GA - Gares
+                            - GEEM - Grands établissements à exploitation multiple
+                            - IGH - GHA (Habitation)
+                            - IGH - GHO (Hôtel)
+                            - IGH - GHR (Enseignement)
+                            - IGH - GHS (Dépôt d'archives)
+                            - IGH - GHU (Sanitaire)
+                            - IGH - GHW1 (Bureau)
+                            - IGH - GHW2 (Bureau)
+                            - IGH - GHZ (Mixte)
+                            - IGH - GHTC (Tour de contrôle)
+                            - IGH - ITGH
+                            - IGH - IMH
+                            - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
+                            - J - Etablissements d'hébergement pour adultes handicapés
+                            - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
+                            - J - Structures d'accueil pour personnes âgées
+                            - J - Structures d'accueil pour personnes handicapées
+                            - L - Cabarets
+                            - L - Salles d'audition
+                            - L - Salle de conférences
+                            - L - Salles de pari
+                            - L - Salles de projection
+                            - L - Salles de quartier (ou assimilée)
+                            - L - Salles de réunions
+                            - L - Salles de spectacles
+                            - L - Salles multimédia
+                            - L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2
+                            - L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique)
+                            - L - Salles réservées aux associations
+                            - M - Aires de vente
+                            - M - Centres commerciaux
+                            - M - Locaux de vente
+                            - M - Magasin de vente
+                            - N - Bars
+                            - N - Brasseries
+                            - N - Cafétaria
+                            - N - Cafés
+                            - N - Cantines
+                            - N - Débits de boissons
+                            - N - Restaurants
+                            - O - Hôtels
+                            - O - Pensions de famille
+                            - OA - Hôtels-restaurants d'altitude
+                            - P - Salle de bals
+                            - P - Dancing / discothèque
+                            - P - Salles de jeux
+                            - PA - Arènes
+                            - PA - Hippodromes
+                            - PA - Piscines
+                            - PA - Pistes de patinage
+                            - PA - Stades
+                            - PA - Terrains de sport
+                            - PA - Parc d'attraction
+                            - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                            - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                            - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                            - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                            - PE 2_2 - Autre petit établissement
+                            - PS - Parcs de stationnement couverts
+                            - PS - Parc de stationnement mixte
+                            - PS - Parc de stationnement largement ventilé
+                            - PS - Parc de stationnement à rangement automatisé
+                            - R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil)
+                            - R - Auto-écoles
+                            - R - Centres aérés
+                            - R - Centres de loisirs (sans hébergement)
+                            - R - Centres de vacances
+                            - R - Colonies de vacances
+                            - R - Crèches
+                            - R - Ecoles maternelles
+                            - R - Etablissements d'enseignement
+                            - R - Etablissements de formation
+                            - R - Haltes-garderies
+                            - R - Internats des établissements de l'enseignement primaire et secondaire
+                            - R - Jardins d'enfant
+                            - R - Lycee public
+                            - R - Collège public
+                            - R - Lycee privé
+                            - R - Collège privé
+                            - R - École élémentaire
+                            - REF - Refuges de montagne
+                            - S - Bibliothèques
+                            - S - Centres de documentation et de consultation d'archives
+                            - SG - Structures gonflables
+                            - T - Etablissements à vocation commerciale destinés à des expositions
+                            - T - Foires-expositions
+                            - T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon
+                            - T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables
+                            - T - Salons à caractère temporaire
+                            - U - Etablissements de cure thermale ou de thalassothérapie
+                            - U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique
+                            - U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante
+                            - U - Pouponnières (enfants de moins de 3 ans)
+                            - V - Eglises
+                            - V - Mosquées
+                            - V - Synagogues
+                            - V - Temples
+                            - W - Administrations
+                            - W - Banques
+                            - W - Bureaux
+                            - X - Manèges
+                            - X - Patinoires
+                            - X - Piscines couvertes, transformables et mixtes
+                            - X - Salles d'éducation physique et sportive
+                            - X - Salles omnisports
+                            - X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres
+                            - X - Salles sportives spécialisées
+                            - Y - Musées
+                            - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                          description: |-
+                            L'activité principale est l'activité exercée dans l'établissement.
+
+                            Valeurs possibles :
+                            * AUTRE - En attente de classement : AUTRE - En attente de classement.
+                            * CTS - Châpiteaux : CTS - Châpiteaux.
+                            * CTS - Structures : CTS - Structures.
+                            * CTS - Tentes : CTS - Tentes.
+                            * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                            * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                            * EF - Etablissements flottants : EF - Etablissements flottants.
+                            * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                            * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                            * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                            * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                            * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                            * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                            * GA - Gares : GA - Gares.
+                            * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                            * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                            * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                            * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                            * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                            * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                            * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                            * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                            * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                            * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                            * IGH - ITGH : IGH - ITGH.
+                            * IGH - IMH : IGH - IMH.
+                            * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                            * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                            * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                            * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                            * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                            * L - Cabarets : L - Cabarets.
+                            * L - Salles d'audition : L - Salles d'audition.
+                            * L - Salle de conférences : L - Salle de conférences.
+                            * L - Salles de pari : L - Salles de pari.
+                            * L - Salles de projection : L - Salles de projection.
+                            * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                            * L - Salles de réunions : L - Salles de réunions.
+                            * L - Salles de spectacles : L - Salles de spectacles.
+                            * L - Salles multimédia : L - Salles multimédia.
+                            * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                            * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                            * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                            * M - Aires de vente : M - Aires de vente.
+                            * M - Centres commerciaux : M - Centres commerciaux.
+                            * M - Locaux de vente : M - Locaux de vente.
+                            * M - Magasin de vente : M - Magasin de vente.
+                            * N - Bars : N - Bars.
+                            * N - Brasseries : N - Brasseries.
+                            * N - Cafétaria : N - Cafétaria.
+                            * N - Cafés : N - Cafés.
+                            * N - Cantines : N - Cantines.
+                            * N - Débits de boissons : N - Débits de boissons.
+                            * N - Restaurants : N - Restaurants.
+                            * O - Hôtels : O - Hôtels.
+                            * O - Pensions de famille : O - Pensions de famille.
+                            * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                            * P - Salle de bals : P - Salle de bals.
+                            * P - Dancing / discothèque : P - Dancing / discothèque.
+                            * P - Salles de jeux : P - Salles de jeux.
+                            * PA - Arènes : PA - Arènes.
+                            * PA - Hippodromes : PA - Hippodromes.
+                            * PA - Piscines : PA - Piscines.
+                            * PA - Pistes de patinage : PA - Pistes de patinage.
+                            * PA - Stades : PA - Stades.
+                            * PA - Terrains de sport : PA - Terrains de sport.
+                            * PA - Parc d'attraction : PA - Parc d'attraction.
+                            * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                            * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                            * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                            * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                            * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
+                            * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                            * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                            * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                            * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                            * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                            * R - Auto-écoles : R - Auto-écoles.
+                            * R - Centres aérés : R - Centres aérés.
+                            * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                            * R - Centres de vacances : R - Centres de vacances.
+                            * R - Colonies de vacances : R - Colonies de vacances.
+                            * R - Crèches : R - Crèches.
+                            * R - Ecoles maternelles : R - Ecoles maternelles.
+                            * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                            * R - Etablissements de formation : R - Etablissements de formation.
+                            * R - Haltes-garderies : R - Haltes-garderies.
+                            * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                            * R - Jardins d'enfant : R - Jardins d'enfant.
+                            * R - Lycee public : R - Lycee public.
+                            * R - Collège public : R - Collège public.
+                            * R - Lycee privé : R - Lycee privé.
+                            * R - Collège privé : R - Collège privé.
+                            * R - École élémentaire : R - École élémentaire.
+                            * REF - Refuges de montagne : REF - Refuges de montagne.
+                            * S - Bibliothèques : S - Bibliothèques.
+                            * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                            * SG - Structures gonflables : SG - Structures gonflables.
+                            * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                            * T - Foires-expositions : T - Foires-expositions.
+                            * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                            * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                            * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                            * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                            * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                            * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                            * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                            * V - Eglises : V - Eglises.
+                            * V - Mosquées : V - Mosquées.
+                            * V - Synagogues : V - Synagogues.
+                            * V - Temples : V - Temples.
+                            * W - Administrations : W - Administrations.
+                            * W - Banques : W - Banques.
+                            * W - Bureaux : W - Bureaux.
+                            * X - Manèges : X - Manèges.
+                            * X - Patinoires : X - Patinoires.
+                            * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                            * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                            * X - Salles omnisports : X - Salles omnisports.
+                            * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                            * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                            * Y - Musées : Y - Musées.
+                            * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
+                          nullable: true
+                        activites_secondaire:
+                          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - AUTRE - En attente de classement
+                              - CTS - Châpiteaux
+                              - CTS - Structures
+                              - CTS - Tentes
+                              - EF - Bateaux en stationnement sur les eaux intérieures
+                              - EF - Bateaux stationnaires
+                              - EF - Etablissements flottants
+                              - EP - Maison d'arrêt
+                              - EP - Maison centrale et centre de détention
+                              - EP - Centre pénitentiaire
+                              - EP - Centre de semi-liberté et centres pour peines aménagées
+                              - EP - Établissement pénitentiaire pour mineurs
+                              - EP - Centre de rétention administrative
+                              - GA - Gares
+                              - GEEM - Grands établissements à exploitation multiple
+                              - IGH - GHA (Habitation)
+                              - IGH - GHO (Hôtel)
+                              - IGH - GHR (Enseignement)
+                              - IGH - GHS (Dépôt d'archives)
+                              - IGH - GHU (Sanitaire)
+                              - IGH - GHW1 (Bureau)
+                              - IGH - GHW2 (Bureau)
+                              - IGH - GHZ (Mixte)
+                              - IGH - GHTC (Tour de contrôle)
+                              - IGH - ITGH
+                              - IGH - IMH
+                              - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
+                              - J - Etablissements d'hébergement pour adultes handicapés
+                              - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
+                              - J - Structures d'accueil pour personnes âgées
+                              - J - Structures d'accueil pour personnes handicapées
+                              - L - Cabarets
+                              - L - Salles d'audition
+                              - L - Salle de conférences
+                              - L - Salles de pari
+                              - L - Salles de projection
+                              - L - Salles de quartier (ou assimilée)
+                              - L - Salles de réunions
+                              - L - Salles de spectacles
+                              - L - Salles multimédia
+                              - L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2
+                              - L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique)
+                              - L - Salles réservées aux associations
+                              - M - Aires de vente
+                              - M - Centres commerciaux
+                              - M - Locaux de vente
+                              - M - Magasin de vente
+                              - N - Bars
+                              - N - Brasseries
+                              - N - Cafétaria
+                              - N - Cafés
+                              - N - Cantines
+                              - N - Débits de boissons
+                              - N - Restaurants
+                              - O - Hôtels
+                              - O - Pensions de famille
+                              - OA - Hôtels-restaurants d'altitude
+                              - P - Salle de bals
+                              - P - Dancing / discothèque
+                              - P - Salles de jeux
+                              - PA - Arènes
+                              - PA - Hippodromes
+                              - PA - Piscines
+                              - PA - Pistes de patinage
+                              - PA - Stades
+                              - PA - Terrains de sport
+                              - PA - Parc d'attraction
+                              - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                              - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                              - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                              - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                              - PE 2_2 - Autre petit établissement
+                              - PS - Parcs de stationnement couverts
+                              - PS - Parc de stationnement mixte
+                              - PS - Parc de stationnement largement ventilé
+                              - PS - Parc de stationnement à rangement automatisé
+                              - R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil)
+                              - R - Auto-écoles
+                              - R - Centres aérés
+                              - R - Centres de loisirs (sans hébergement)
+                              - R - Centres de vacances
+                              - R - Colonies de vacances
+                              - R - Crèches
+                              - R - Ecoles maternelles
+                              - R - Etablissements d'enseignement
+                              - R - Etablissements de formation
+                              - R - Haltes-garderies
+                              - R - Internats des établissements de l'enseignement primaire et secondaire
+                              - R - Jardins d'enfant
+                              - R - Lycee public
+                              - R - Collège public
+                              - R - Lycee privé
+                              - R - Collège privé
+                              - R - École élémentaire
+                              - REF - Refuges de montagne
+                              - S - Bibliothèques
+                              - S - Centres de documentation et de consultation d'archives
+                              - SG - Structures gonflables
+                              - T - Etablissements à vocation commerciale destinés à des expositions
+                              - T - Foires-expositions
+                              - T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon
+                              - T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables
+                              - T - Salons à caractère temporaire
+                              - U - Etablissements de cure thermale ou de thalassothérapie
+                              - U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique
+                              - U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante
+                              - U - Pouponnières (enfants de moins de 3 ans)
+                              - V - Eglises
+                              - V - Mosquées
+                              - V - Synagogues
+                              - V - Temples
+                              - W - Administrations
+                              - W - Banques
+                              - W - Bureaux
+                              - X - Manèges
+                              - X - Patinoires
+                              - X - Piscines couvertes, transformables et mixtes
+                              - X - Salles d'éducation physique et sportive
+                              - X - Salles omnisports
+                              - X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres
+                              - X - Salles sportives spécialisées
+                              - Y - Musées
+                              - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                            description: |-
+                              Un ERP est associé à un type d'activité selon la nature de leur exploitation.
+                              Il est codifié par une ou plusieurs lettres, en fonction de la nature et de l'activité de l'exploitation (GN 1 du règlement de sécurité incendie dans les ERP).
+                              Voir : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045143487.
+
+                              Valeurs possibles :
+                              * AUTRE - En attente de classement : AUTRE - En attente de classement.
+                              * CTS - Châpiteaux : CTS - Châpiteaux.
+                              * CTS - Structures : CTS - Structures.
+                              * CTS - Tentes : CTS - Tentes.
+                              * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                              * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                              * EF - Etablissements flottants : EF - Etablissements flottants.
+                              * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                              * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                              * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                              * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                              * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                              * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                              * GA - Gares : GA - Gares.
+                              * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                              * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                              * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                              * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                              * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                              * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                              * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                              * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                              * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                              * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                              * IGH - ITGH : IGH - ITGH.
+                              * IGH - IMH : IGH - IMH.
+                              * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                              * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                              * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                              * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                              * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                              * L - Cabarets : L - Cabarets.
+                              * L - Salles d'audition : L - Salles d'audition.
+                              * L - Salle de conférences : L - Salle de conférences.
+                              * L - Salles de pari : L - Salles de pari.
+                              * L - Salles de projection : L - Salles de projection.
+                              * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                              * L - Salles de réunions : L - Salles de réunions.
+                              * L - Salles de spectacles : L - Salles de spectacles.
+                              * L - Salles multimédia : L - Salles multimédia.
+                              * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                              * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                              * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                              * M - Aires de vente : M - Aires de vente.
+                              * M - Centres commerciaux : M - Centres commerciaux.
+                              * M - Locaux de vente : M - Locaux de vente.
+                              * M - Magasin de vente : M - Magasin de vente.
+                              * N - Bars : N - Bars.
+                              * N - Brasseries : N - Brasseries.
+                              * N - Cafétaria : N - Cafétaria.
+                              * N - Cafés : N - Cafés.
+                              * N - Cantines : N - Cantines.
+                              * N - Débits de boissons : N - Débits de boissons.
+                              * N - Restaurants : N - Restaurants.
+                              * O - Hôtels : O - Hôtels.
+                              * O - Pensions de famille : O - Pensions de famille.
+                              * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                              * P - Salle de bals : P - Salle de bals.
+                              * P - Dancing / discothèque : P - Dancing / discothèque.
+                              * P - Salles de jeux : P - Salles de jeux.
+                              * PA - Arènes : PA - Arènes.
+                              * PA - Hippodromes : PA - Hippodromes.
+                              * PA - Piscines : PA - Piscines.
+                              * PA - Pistes de patinage : PA - Pistes de patinage.
+                              * PA - Stades : PA - Stades.
+                              * PA - Terrains de sport : PA - Terrains de sport.
+                              * PA - Parc d'attraction : PA - Parc d'attraction.
+                              * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                              * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                              * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                              * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                              * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
+                              * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                              * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                              * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                              * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                              * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                              * R - Auto-écoles : R - Auto-écoles.
+                              * R - Centres aérés : R - Centres aérés.
+                              * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                              * R - Centres de vacances : R - Centres de vacances.
+                              * R - Colonies de vacances : R - Colonies de vacances.
+                              * R - Crèches : R - Crèches.
+                              * R - Ecoles maternelles : R - Ecoles maternelles.
+                              * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                              * R - Etablissements de formation : R - Etablissements de formation.
+                              * R - Haltes-garderies : R - Haltes-garderies.
+                              * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                              * R - Jardins d'enfant : R - Jardins d'enfant.
+                              * R - Lycee public : R - Lycee public.
+                              * R - Collège public : R - Collège public.
+                              * R - Lycee privé : R - Lycee privé.
+                              * R - Collège privé : R - Collège privé.
+                              * R - École élémentaire : R - École élémentaire.
+                              * REF - Refuges de montagne : REF - Refuges de montagne.
+                              * S - Bibliothèques : S - Bibliothèques.
+                              * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                              * SG - Structures gonflables : SG - Structures gonflables.
+                              * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                              * T - Foires-expositions : T - Foires-expositions.
+                              * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                              * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                              * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                              * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                              * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                              * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                              * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                              * V - Eglises : V - Eglises.
+                              * V - Mosquées : V - Mosquées.
+                              * V - Synagogues : V - Synagogues.
+                              * V - Temples : V - Temples.
+                              * W - Administrations : W - Administrations.
+                              * W - Banques : W - Banques.
+                              * W - Bureaux : W - Bureaux.
+                              * X - Manèges : X - Manèges.
+                              * X - Patinoires : X - Patinoires.
+                              * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                              * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                              * X - Salles omnisports : X - Salles omnisports.
+                              * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                              * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                              * Y - Musées : Y - Musées.
+                              * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
+                          maxItems: 10
+                          uniqueItems: true
+                          nullable: true
+                        categorie:
+                          description: |-
+                            La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
+                            Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+
+                            Valeurs possibles :
+                            * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                            * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                            * 3 : 3ème catégorie (de 301 à 700 personnes).
+                            * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                            * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+                          type: integer
+                          minimum: 1
+                          maximum: 5
+                          format: int32
+                          enum:
+                            - 1
+                            - 2
+                            - 3
+                            - 4
+                            - 5
+                          nullable: true
+                        groupement_etablissement:
+                          description: |-
+                            Le groupement d'établissement est un ensemble d'établissements qui sont regroupés pour former un seul établissement.
+
+                            Valeurs possibles :
+                            * Non concerné : Non concerné.
+                            * Groupement d'établissement isolé (GN3) : Les bâtiments d'un même établissement et les établissements groupés dans un même bâtiment, qui répondent aux conditions d'isolement, sont considérés comme autant d'établissements pour l'application du règlement.
+                            * Groupement d'établissement non isolé (GN2) : Les bâtiments d'une même exploitation et les exploitations groupées dans un même bâtiment ou dans des bâtiments voisins, qui ne répondent pas aux conditions d'isolement du règlement, sont considérés comme un seul établissement recevant du public.
+                            * Bâtiment unique : Bâtiment unique.
+                          type: string
+                          enum:
+                            - Non concerné
+                            - Groupement d'établissement isolé (GN3)
+                            - Groupement d'établissement non isolé (GN2)
+                            - Bâtiment unique
+                          nullable: true
+                        tableau_des_effectifs:
+                          description: Le tableau des effectifs recense le nombre de personnes présentes dans un établissement à un instant donné. Il est organisé par niveaux, et tient en compte du type d'activité, ainsi que de modes de calculs.
+                          type: array
+                          maxItems: 50
+                          items:
+                            type: object
+                            title: Objet Effectifs du Niveau
+                            description: Recensement du nombre de personnes présentes dans un niveau à un instant donné.
+                            properties:
+                              niveau:
+                                description: Le niveau dans lequel les personnes sont présentes.
+                                type: integer
+                                format: int32
+                                minimum: -999999
+                                maximum: 999999
+                              local:
+                                description: La description du local dans lequel les personnes sont présentes.
+                                type: string
+                                maxLength: 256
+                              activite_principale:
+                                type: string
+                                enum:
+                                  - AUTRE - En attente de classement
+                                  - CTS - Châpiteaux
+                                  - CTS - Structures
+                                  - CTS - Tentes
+                                  - EF - Bateaux en stationnement sur les eaux intérieures
+                                  - EF - Bateaux stationnaires
+                                  - EF - Etablissements flottants
+                                  - EP - Maison d'arrêt
+                                  - EP - Maison centrale et centre de détention
+                                  - EP - Centre pénitentiaire
+                                  - EP - Centre de semi-liberté et centres pour peines aménagées
+                                  - EP - Établissement pénitentiaire pour mineurs
+                                  - EP - Centre de rétention administrative
+                                  - GA - Gares
+                                  - GEEM - Grands établissements à exploitation multiple
+                                  - IGH - GHA (Habitation)
+                                  - IGH - GHO (Hôtel)
+                                  - IGH - GHR (Enseignement)
+                                  - IGH - GHS (Dépôt d'archives)
+                                  - IGH - GHU (Sanitaire)
+                                  - IGH - GHW1 (Bureau)
+                                  - IGH - GHW2 (Bureau)
+                                  - IGH - GHZ (Mixte)
+                                  - IGH - GHTC (Tour de contrôle)
+                                  - IGH - ITGH
+                                  - IGH - IMH
+                                  - J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés
+                                  - J - Etablissements d'hébergement pour adultes handicapés
+                                  - J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés
+                                  - J - Structures d'accueil pour personnes âgées
+                                  - J - Structures d'accueil pour personnes handicapées
+                                  - L - Cabarets
+                                  - L - Salles d'audition
+                                  - L - Salle de conférences
+                                  - L - Salles de pari
+                                  - L - Salles de projection
+                                  - L - Salles de quartier (ou assimilée)
+                                  - L - Salles de réunions
+                                  - L - Salles de spectacles
+                                  - L - Salles multimédia
+                                  - L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2
+                                  - L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique)
+                                  - L - Salles réservées aux associations
+                                  - M - Aires de vente
+                                  - M - Centres commerciaux
+                                  - M - Locaux de vente
+                                  - M - Magasin de vente
+                                  - N - Bars
+                                  - N - Brasseries
+                                  - N - Cafétaria
+                                  - N - Cafés
+                                  - N - Cantines
+                                  - N - Débits de boissons
+                                  - N - Restaurants
+                                  - O - Hôtels
+                                  - O - Pensions de famille
+                                  - OA - Hôtels-restaurants d'altitude
+                                  - P - Salle de bals
+                                  - P - Dancing / discothèque
+                                  - P - Salles de jeux
+                                  - PA - Arènes
+                                  - PA - Hippodromes
+                                  - PA - Piscines
+                                  - PA - Pistes de patinage
+                                  - PA - Stades
+                                  - PA - Terrains de sport
+                                  - PA - Parc d'attraction
+                                  - PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective
+                                  - PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile
+                                  - PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs
+                                  - PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants
+                                  - PE 2_2 - Autre petit établissement
+                                  - PS - Parcs de stationnement couverts
+                                  - PS - Parc de stationnement mixte
+                                  - PS - Parc de stationnement largement ventilé
+                                  - PS - Parc de stationnement à rangement automatisé
+                                  - R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil)
+                                  - R - Auto-écoles
+                                  - R - Centres aérés
+                                  - R - Centres de loisirs (sans hébergement)
+                                  - R - Centres de vacances
+                                  - R - Colonies de vacances
+                                  - R - Crèches
+                                  - R - Ecoles maternelles
+                                  - R - Etablissements d'enseignement
+                                  - R - Etablissements de formation
+                                  - R - Haltes-garderies
+                                  - R - Internats des établissements de l'enseignement primaire et secondaire
+                                  - R - Jardins d'enfant
+                                  - R - Lycee public
+                                  - R - Collège public
+                                  - R - Lycee privé
+                                  - R - Collège privé
+                                  - R - École élémentaire
+                                  - REF - Refuges de montagne
+                                  - S - Bibliothèques
+                                  - S - Centres de documentation et de consultation d'archives
+                                  - SG - Structures gonflables
+                                  - T - Etablissements à vocation commerciale destinés à des expositions
+                                  - T - Foires-expositions
+                                  - T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon
+                                  - T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables
+                                  - T - Salons à caractère temporaire
+                                  - U - Etablissements de cure thermale ou de thalassothérapie
+                                  - U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique
+                                  - U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante
+                                  - U - Pouponnières (enfants de moins de 3 ans)
+                                  - V - Eglises
+                                  - V - Mosquées
+                                  - V - Synagogues
+                                  - V - Temples
+                                  - W - Administrations
+                                  - W - Banques
+                                  - W - Bureaux
+                                  - X - Manèges
+                                  - X - Patinoires
+                                  - X - Piscines couvertes, transformables et mixtes
+                                  - X - Salles d'éducation physique et sportive
+                                  - X - Salles omnisports
+                                  - X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres
+                                  - X - Salles sportives spécialisées
+                                  - Y - Musées
+                                  - Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire
+                                description: |-
+                                  L'activité exercée dans le local.
+
+                                  Valeurs possibles :
+                                  * AUTRE - En attente de classement : AUTRE - En attente de classement.
+                                  * CTS - Châpiteaux : CTS - Châpiteaux.
+                                  * CTS - Structures : CTS - Structures.
+                                  * CTS - Tentes : CTS - Tentes.
+                                  * EF - Bateaux en stationnement sur les eaux intérieures : EF - Bateaux en stationnement sur les eaux intérieures.
+                                  * EF - Bateaux stationnaires : EF - Bateaux stationnaires.
+                                  * EF - Etablissements flottants : EF - Etablissements flottants.
+                                  * EP - Maison d'arrêt : EP - Maison d'arrêt.
+                                  * EP - Maison centrale et centre de détention : EP - Maison centrale et centre de détention.
+                                  * EP - Centre pénitentiaire : EP - Centre pénitentiaire.
+                                  * EP - Centre de semi-liberté et centres pour peines aménagées : EP - Centre de semi-liberté et centres pour peines aménagées.
+                                  * EP - Établissement pénitentiaire pour mineurs : EP - Établissement pénitentiaire pour mineurs.
+                                  * EP - Centre de rétention administrative : EP - Centre de rétention administrative.
+                                  * GA - Gares : GA - Gares.
+                                  * GEEM - Grands établissements à exploitation multiple : GEEM - Grands établissements à exploitation multiple.
+                                  * IGH - GHA (Habitation) : IGH - GHA (Habitation).
+                                  * IGH - GHO (Hôtel) : IGH - GHO (Hôtel).
+                                  * IGH - GHR (Enseignement) : IGH - GHR (Enseignement).
+                                  * IGH - GHS (Dépôt d'archives) : IGH - GHS (Dépôt d'archives).
+                                  * IGH - GHU (Sanitaire) : IGH - GHU (Sanitaire).
+                                  * IGH - GHW1 (Bureau) : IGH - GHW1 (Bureau).
+                                  * IGH - GHW2 (Bureau) : IGH - GHW2 (Bureau).
+                                  * IGH - GHZ (Mixte) : IGH - GHZ (Mixte).
+                                  * IGH - GHTC (Tour de contrôle) : IGH - GHTC (Tour de contrôle).
+                                  * IGH - ITGH : IGH - ITGH.
+                                  * IGH - IMH : IGH - IMH.
+                                  * J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés : J - Etablissements d'enseignement avec internat pour jeunes handicapés ou inadaptés.
+                                  * J - Etablissements d'hébergement pour adultes handicapés : J - Etablissements d'hébergement pour adultes handicapés.
+                                  * J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés : J - Etablissements médico-éducatifs avec internat pour jeunes handicapés ou inadaptés.
+                                  * J - Structures d'accueil pour personnes âgées : J - Structures d'accueil pour personnes âgées.
+                                  * J - Structures d'accueil pour personnes handicapées : J - Structures d'accueil pour personnes handicapées.
+                                  * L - Cabarets : L - Cabarets.
+                                  * L - Salles d'audition : L - Salles d'audition.
+                                  * L - Salle de conférences : L - Salle de conférences.
+                                  * L - Salles de pari : L - Salles de pari.
+                                  * L - Salles de projection : L - Salles de projection.
+                                  * L - Salles de quartier (ou assimilée) : L - Salles de quartier (ou assimilée).
+                                  * L - Salles de réunions : L - Salles de réunions.
+                                  * L - Salles de spectacles : L - Salles de spectacles.
+                                  * L - Salles multimédia : L - Salles multimédia.
+                                  * L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2 : L - Salles polyvalentes à dominante sportive, dont la superficie unitaire est supérieure ou égale à 1 200 m2.
+                                  * L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique) : L - Salles polyvalentes non visée par le Type X (salle polyvalente qui n'a pas une destination unique).
+                                  * L - Salles réservées aux associations : L - Salles réservées aux associations.
+                                  * M - Aires de vente : M - Aires de vente.
+                                  * M - Centres commerciaux : M - Centres commerciaux.
+                                  * M - Locaux de vente : M - Locaux de vente.
+                                  * M - Magasin de vente : M - Magasin de vente.
+                                  * N - Bars : N - Bars.
+                                  * N - Brasseries : N - Brasseries.
+                                  * N - Cafétaria : N - Cafétaria.
+                                  * N - Cafés : N - Cafés.
+                                  * N - Cantines : N - Cantines.
+                                  * N - Débits de boissons : N - Débits de boissons.
+                                  * N - Restaurants : N - Restaurants.
+                                  * O - Hôtels : O - Hôtels.
+                                  * O - Pensions de famille : O - Pensions de famille.
+                                  * OA - Hôtels-restaurants d'altitude : OA - Hôtels-restaurants d'altitude.
+                                  * P - Salle de bals : P - Salle de bals.
+                                  * P - Dancing / discothèque : P - Dancing / discothèque.
+                                  * P - Salles de jeux : P - Salles de jeux.
+                                  * PA - Arènes : PA - Arènes.
+                                  * PA - Hippodromes : PA - Hippodromes.
+                                  * PA - Piscines : PA - Piscines.
+                                  * PA - Pistes de patinage : PA - Pistes de patinage.
+                                  * PA - Stades : PA - Stades.
+                                  * PA - Terrains de sport : PA - Terrains de sport.
+                                  * PA - Parc d'attraction : PA - Parc d'attraction.
+                                  * PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective : PE 2_2 - Locaux à usage collectif d'une surface unitaire supérieure à 50 mètres carrés des logements-foyers et de l'habitat de loisirs à gestion collective.
+                                  * PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile : PE 2_2 - Bâtiments ou locaux à usage d'hébergement qui ne relèvent d'aucun type défini à l'article GN 1 et qui permettent d'accueillir plus de 15 et moins de 100 personnes n'y élisant pas domicile.
+                                  * PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs : PE 2_2 - Hébergement de mineurs en dehors de leurs familles, le seuil de l'effectif est fixé à 7 mineurs.
+                                  * PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants : PE 2_2 - Maisons d'assistants maternels (MAM) dont les locaux accessibles au public sont strictement limités à un seul étage sur rez-de-chaussée et dont l'effectif ne dépasse pas 16 enfants.
+                                  * PE 2_2 - Autre petit établissement : PE 2_2 - Autre petit établissement.
+                                  * PS - Parcs de stationnement couverts : PS - Parcs de stationnement couverts.
+                                  * PS - Parc de stationnement mixte : PS - Parc de stationnement mixte.
+                                  * PS - Parc de stationnement largement ventilé : PS - Parc de stationnement largement ventilé.
+                                  * PS - Parc de stationnement à rangement automatisé : PS - Parc de stationnement à rangement automatisé.
+                                  * R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil) : R - Auberges de jeunesse (comprenant au moins un local collectif à sommeil).
+                                  * R - Auto-écoles : R - Auto-écoles.
+                                  * R - Centres aérés : R - Centres aérés.
+                                  * R - Centres de loisirs (sans hébergement) : R - Centres de loisirs (sans hébergement).
+                                  * R - Centres de vacances : R - Centres de vacances.
+                                  * R - Colonies de vacances : R - Colonies de vacances.
+                                  * R - Crèches : R - Crèches.
+                                  * R - Ecoles maternelles : R - Ecoles maternelles.
+                                  * R - Etablissements d'enseignement : R - Etablissements d'enseignement.
+                                  * R - Etablissements de formation : R - Etablissements de formation.
+                                  * R - Haltes-garderies : R - Haltes-garderies.
+                                  * R - Internats des établissements de l'enseignement primaire et secondaire : R - Internats des établissements de l'enseignement primaire et secondaire.
+                                  * R - Jardins d'enfant : R - Jardins d'enfant.
+                                  * R - Lycee public : R - Lycee public.
+                                  * R - Collège public : R - Collège public.
+                                  * R - Lycee privé : R - Lycee privé.
+                                  * R - Collège privé : R - Collège privé.
+                                  * R - École élémentaire : R - École élémentaire.
+                                  * REF - Refuges de montagne : REF - Refuges de montagne.
+                                  * S - Bibliothèques : S - Bibliothèques.
+                                  * S - Centres de documentation et de consultation d'archives : S - Centres de documentation et de consultation d'archives.
+                                  * SG - Structures gonflables : SG - Structures gonflables.
+                                  * T - Etablissements à vocation commerciale destinés à des expositions : T - Etablissements à vocation commerciale destinés à des expositions.
+                                  * T - Foires-expositions : T - Foires-expositions.
+                                  * T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon : T - Salles d'expositions à caractère permanent n'ayant pas une vocation de foire ou de salon.
+                                  * T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables : T - Salles d'expositions à caractère permanent de véhicules automobiles, bateaux, machines et autres volumineux biens d'équipements assimilables.
+                                  * T - Salons à caractère temporaire : T - Salons à caractère temporaire.
+                                  * U - Etablissements de cure thermale ou de thalassothérapie : U - Etablissements de cure thermale ou de thalassothérapie.
+                                  * U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique : U - Etablissements de santé publics ou privés dispensant des soins de courte durée en médecine, chirurgie, obstétrique.
+                                  * U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante : U - Etablissements de santé publics ou privés dispensant des soins de psychiatrie, de suite ou de réadaptation, des soins de longue durée, à des personnes n'ayant pas leur autonomie de vie dont l'état nécessite une surveillance médicale constante.
+                                  * U - Pouponnières (enfants de moins de 3 ans) : U - Pouponnières (enfants de moins de 3 ans).
+                                  * V - Eglises : V - Eglises.
+                                  * V - Mosquées : V - Mosquées.
+                                  * V - Synagogues : V - Synagogues.
+                                  * V - Temples : V - Temples.
+                                  * W - Administrations : W - Administrations.
+                                  * W - Banques : W - Banques.
+                                  * W - Bureaux : W - Bureaux.
+                                  * X - Manèges : X - Manèges.
+                                  * X - Patinoires : X - Patinoires.
+                                  * X - Piscines couvertes, transformables et mixtes : X - Piscines couvertes, transformables et mixtes.
+                                  * X - Salles d'éducation physique et sportive : X - Salles d'éducation physique et sportive.
+                                  * X - Salles omnisports : X - Salles omnisports.
+                                  * X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres : X - Salles polyvalentes à dominante sportive, dont l'aire d'activité est inférieure à 1200 m² et la hauteur sous plafond supérieure ou égale à 6,50 mètres.
+                                  * X - Salles sportives spécialisées : X - Salles sportives spécialisées.
+                                  * Y - Musées : Y - Musées.
+                                  * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
+                                nullable: true
+                              surface_totale:
+                                description: La surface totale est la surface totale du local à ce niveau. La surface est exprimée en mètres carrés.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                                nullable: true
+                              surface_accessible_au_public:
+                                description: La surface accessible au public est la surface totale du local accessible au public. La surface est exprimée en mètres carrés.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                                nullable: true
+                              effectif_public:
+                                description: L'effectif du public est le nombre de personnes pouvant être accueillies dans le local.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                                nullable: true
+                              effectif_personnel:
+                                description: L'effectif du personnel est le nombre de personnes travaillant dans le local.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                                nullable: true
+                            required:
+                              - niveau
+                              - local
+                          nullable: true
+                        effectif_public:
+                          description: L'effectif du public est le nombre de personnes pouvant être accueillies dans l'établissement.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        effectif_personnel:
+                          description: L'effectif du personnel est le nombre de personnes travaillant dans l'établissement.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        presence_locaux_sommeil:
+                          description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
+                          type: boolean
+                          nullable: true
+                        presence_locaux_sommeil_au_dessus_r1:
+                          description: Les ERP avec locaux à sommeil sont des établissements qui comportent des locaux réservés au sommeil du public la nuit.
+                          type: boolean
+                          nullable: true
+                        niveau_total:
+                          description: Le nombre total de niveaux est le nombre total de niveaux de l'établissement.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        surface_totale:
+                          description: La surface totale est la surface totale des locaux.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        surface_accessible_au_public:
+                          description: La surface accessible au public est la surface totale des locaux accessibles au public.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        r143_20:
+                          description: 'Les établissements recevant du public qui ne correspondent à aucun des types définis par le règlement de sécurité sont néanmoins assujettis aux prescriptions du présent chapitre via l''activation du R143-20. Les mesures de sécurité à y appliquer sont précisées, après avis de la commission de sécurité compétente, en tenant compte de celles qui sont imposées aux types d''établissements dont la nature d''exploitation se rapproche le plus de celle qui est envisagée. Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818979'
+                          type: boolean
+                          nullable: true
+                        batiment_etages_en_superstructure:
+                          description: Le nombre d'étages en superstructure est le nombre d'étages situés au-dessus du sol.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        batiment_etages_en_infrastructure:
+                          description: Le nombre d'étages en infrastructure est le nombre d'étages situés en dessous du sol.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        etablissement_de_plain_pied:
+                          description: Un établissement de plain-pied est un établissement qui ne comporte pas d'étage.
+                          type: boolean
+                          nullable: true
+                        plancher_bas_du_dernier_niveau:
+                          description: |-
+                            Le plancher bas du dernier niveau est le plancher le plus bas de la construction.
+
+                            Valeurs possibles :
+                            * <8m : Le plancher bas du dernier niveau est inférieur à 8 mètres.
+                            * =>8m : Le plancher bas du dernier niveau est égal ou supérieur à 8 mètres.
+                          type: string
+                          enum:
+                            - <8m
+                            - '=>8m'
+                          nullable: true
+                        plancher_bas_du_dernier_niveau_accessible_au_public:
+                          description: |-
+                            Le plancher bas du dernier niveau accessible au public est le plancher le plus bas accessible au public.
+
+                            Valeurs possibles :
+                            * <8m : Le plancher bas du dernier niveau accessible au public est inférieur à 8 mètres.
+                            * =>8m : Le plancher bas du dernier niveau accessible au public est égal ou supérieur à 8 mètres.
+                          type: string
+                          enum:
+                            - <8m
+                            - '=>8m'
+                          nullable: true
+                        voie_engin:
+                          description: La voie des engins de pompiers est la voie facilitant l'accès des engins de pompiers.
+                          type: boolean
+                          nullable: true
+                        nombre_voies_engins:
+                          description: Le nombre de voies d'accès pour les engins de pompiers.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        voie_echelle:
+                          description: La voie des échelles est la voie facilitant l'accès des échelles.
+                          type: boolean
+                          nullable: true
+                        nombre_facades_accessibles:
+                          description: Le nombre de façades accessibles aux engins de pompiers.
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 999999
+                          nullable: true
+                        informations_acces_facades:
+                          description: Les informations d'accès aux façades.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        espace_libre:
+                          description: L'espace libre est la distance minimale entre les façades de l'établissement et les limites de la voie publique.
+                          type: boolean
+                          nullable: true
+                        desserte_informations_complementaires:
+                          description: Les informations complémentaires sur la desserte.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        presence_erp_ou_tiers_contigus:
+                          description: La présence d'ERP ou de tiers contigus.
+                          type: boolean
+                          nullable: true
+                        isolement_contigus_realise_degre_cf:
+                          description: |-
+                            Le degré CF (Coupe Feu) de l'isolement entre les tiers.
+
+                            Valeurs possibles :
+                            * 1h : Le degré CF (Coupe Feu) de l'isolement entre les tiers est de 1 heure.
+                            * 2h : Le degré CF (Coupe Feu) de l'isolement entre les tiers est de 2 heures.
+                            * 3h : Le degré CF (Coupe Feu) de l'isolement entre les tiers est de 3 heures.
+                            * Autre : Le degré CF (Coupe Feu) de l'isolement entre les tiers est d'une autre valeur.
+                            * Non concerné : Non concerné.
+                          type: string
+                          enum:
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                            - Non concerné
+                          nullable: true
+                        isolement_contigus_realise_degre_cf_autre_precision:
+                          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        isolement_contigus_informations_complementaires:
+                          description: Les informations complémentaires sur l'isolement entre les tiers.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        air_libre:
+                          description: |-
+                            Distance d'air libre entre les tiers en vis à vis.
+
+                            Valeurs possibles :
+                            * - de 4m : La distance d'air libre entre les tiers en vis à vis est inférieure à 4 mètres.
+                            * 4m ou plus : La distance d'air libre entre les tiers en vis à vis est égale ou supérieure à 4 mètres.
+                            * 5m ou plus : La distance d'air libre entre les tiers en vis à vis est égale ou supérieure à 5 mètres.
+                            * - de 8m : La distance d'air libre entre les tiers en vis à vis est inférieure à 8 mètres.
+                            * 8m ou plus : La distance d'air libre entre les tiers en vis à vis est égale ou supérieure à 8 mètres.
+                            * Non concerné : Non concerné.
+                          type: string
+                          enum:
+                            - '- de 4m'
+                            - 4m ou plus
+                            - 5m ou plus
+                            - '- de 8m'
+                            - 8m ou plus
+                            - Non concerné
+                          nullable: true
+                        vis_a_vis:
+                          description: |-
+                            La distance entre les deux tiers en vis à vis.
+
+                            Valeurs possibles :
+                            * - de 5m : La distance entre les deux tiers en vis à vis est inférieure à 5 mètres.
+                            * 5m ou plus : La distance entre les deux tiers en vis à vis est égale ou supérieure à 5 mètres.
+                            * 8m ou plus : La distance entre les deux tiers en vis à vis est égale ou supérieure à 8 mètres.
+                            * - de 8m : La distance entre les deux tiers en vis à vis est inférieure à 8 mètres.
+                            * Non concerné : Non concerné.
+                          type: string
+                          enum:
+                            - '- de 5m'
+                            - 5m ou plus
+                            - 8m ou plus
+                            - '- de 8m'
+                            - Non concerné
+                          nullable: true
+                        isolement_vis_a_vis_informations_complementaires:
+                          description: Les informations complémentaires sur l'isolement vis à vis.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        presence_erp_ou_tiers_superpose:
+                          description: La présence d'ERP ou de tiers superposés.
+                          type: boolean
+                          nullable: true
+                        isolement_superpose_realise_degre_cf:
+                          description: |-
+                            Le degré CF de l'isolement entre les tiers superposés.
+
+                            Valeurs possibles :
+                            * 1h : Le degré CF de l'isolement entre les tiers superposés est de 1 heure.
+                            * 2h : Le degré CF de l'isolement entre les tiers superposés est de 2 heures.
+                            * 3h : Le degré CF de l'isolement entre les tiers superposés est de 3 heures.
+                            * Autre : Le degré CF de l'isolement entre les tiers superposés est d'une autre valeur.
+                            * Non concerné : Non concerné.
+                          type: string
+                          enum:
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                            - Non concerné
+                          nullable: true
+                        isolement_superpose_realise_degre_cf_autre_precision:
+                          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        isolement_superpose_informations_complementaires:
+                          description: Les informations complémentaires sur l'isolement entre les tiers superposés.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        structure_sf:
+                          description: |-
+                            La stabilité au feu de la structure.
+
+                            Valeurs possibles :
+                            * 1/2h : La stabilité au feu de la structure est de 30 minutes.
+                            * 1h : La stabilité au feu de la structure est de 1 heure.
+                            * 2h : La stabilité au feu de la structure est de 2 heures.
+                            * 3h : La stabilité au feu de la structure est de 3 heures.
+                            * Autre : La stabilité au feu de la structure est d'une autre valeur.
+                          type: string
+                          enum:
+                            - 1/2h
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                          nullable: true
+                        plancher_sf:
+                          description: |-
+                            La stabilité au feu du plancher.
+
+                            Valeurs possibles :
+                            * 1/2h : La stabilité au feu du plancher est de 30 minutes.
+                            * 1h : La stabilité au feu du plancher est de 1 heure.
+                            * 2h : La stabilité au feu du plancher est de 2 heures.
+                            * 3h : La stabilité au feu du plancher est de 3 heures.
+                            * Autre : La stabilité au feu du plancher est d'une autre valeur.
+                          type: string
+                          enum:
+                            - 1/2h
+                            - 1h
+                            - 2h
+                            - 3h
+                            - Autre
+                          nullable: true
+                        stabilite_au_feu_informations_complementaires:
+                          description: Les informations complémentaires sur la stabilité au feu.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        isolement_autre_description:
+                          description: Description d'un autre type d'isolement.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        construction_structures_description:
+                          description: Description des structures de construction.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        construction_couverture_description:
+                          description: Description de la couverture de construction.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        construction_facades_description:
+                          description: Description des façades de construction.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        type_cloisonnement:
+                          description: Les cloisons sont des éléments de construction verticaux pour limiter la propagation du feu et des fumées à travers la construction.
+                          type: array
+                          items:
+                            description: |-
+                              Type de cloisonnement
+
+                              Valeurs possibles :
+                              * Traditionnels : cloisonnement traditionnel.
+                              * Secteurs : par secteurs.
+                              * Compartiments : par compartiment.
+                            type: string
+                            enum:
+                              - Traditionnels
+                              - Secteurs
+                              - Compartiments
+                          maxItems: 3
+                          uniqueItems: true
+                          nullable: true
+                        construction_distribution_interieure_informations_complementaires:
+                          description: Les informations complémentaires sur la distribution intérieure de la construction.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        locaux:
+                          description: Les locaux sont des espaces délimités par des cloisons.
+                          type: array
+                          maxItems: 5
+                          items:
+                            type: object
+                            title: Objet Local
+                            description: Objet représentant un local dans un bâtiment.
+                            properties:
+                              nom_du_local:
+                                description: Le nom du local
+                                type: string
+                                maxLength: 256
+                                nullable: true
+                              etage_du_local:
+                                description: L'étage du local
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                                nullable: true
+                              type_de_risque:
+                                description: |-
+                                  Le type de risque du local.
+
+                                  Valeurs possibles :
+                                  * Risque Courant : Local présentant un risque courant.
+                                  * Risque Moyen : Local présentant un risque moyen.
+                                  * Risque Important : Local présentant un risque important.
+                                type: string
+                                enum:
+                                  - Risque Courant
+                                  - Risque Moyen
+                                  - Risque Important
+                                nullable: true
+                              local_informations_complementaires:
+                                description: Les informations complémentaires du local
+                                type: string
+                                maxLength: 65536
+                                nullable: true
+                          nullable: true
+                        construction_conduits_et_gaines_description:
+                          description: Description des conduits et des gaines.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        construction_amenagements_interieurs_description:
+                          description: Description des aménagements intérieurs.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        degagement_normaux:
+                          description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+                          type: array
+                          maxItems: 10
+                          items:
+                            type: object
+                            title: Objet Dégagement
+                            description: 'Un dégagement est toute partie de la construction permettant le cheminement d''évacuation des occupants : porte, sortie, issue, circulation horizontale, zone de circulation, escalier, couloir, rampe ... Il est important de prendre en considération que leur nombre diffère de celui du nombre d''unités de passage. En effet, le nombre d''occupants qui empruntent le cheminement, à son point de départ ou après la jonction de plusieurs dégagements, dépend le plus souvent de la largeur initiale de ce cheminement. Celle-ci se calcule en fonction d''une largeur type appelée « unité de passage » (UP) de 0,60 m.'
+                            properties:
+                              nombre_degagements:
+                                description: Nombre de dégagements.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                              nombre_unite_passage:
+                                description: Nombre d'unités de passage.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                          nullable: true
+                        degagements_accessoires:
+                          description: Dégagements imposés lorsque exceptionnellement les dégagements normaux ne sont pas judicieusement répartis dans le local, l'étage, le secteur, le compartiment ou l'établissement.
+                          type: array
+                          maxItems: 10
+                          items:
+                            type: object
+                            title: Objet Dégagement
+                            description: 'Un dégagement est toute partie de la construction permettant le cheminement d''évacuation des occupants : porte, sortie, issue, circulation horizontale, zone de circulation, escalier, couloir, rampe ... Il est important de prendre en considération que leur nombre diffère de celui du nombre d''unités de passage. En effet, le nombre d''occupants qui empruntent le cheminement, à son point de départ ou après la jonction de plusieurs dégagements, dépend le plus souvent de la largeur initiale de ce cheminement. Celle-ci se calcule en fonction d''une largeur type appelée « unité de passage » (UP) de 0,60 m.'
+                            properties:
+                              nombre_degagements:
+                                description: Nombre de dégagements.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                              nombre_unite_passage:
+                                description: Nombre d'unités de passage.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                          nullable: true
+                        degagement_exigibles_informations_complementaires:
+                          description: Les informations complémentaires sur les dégagements exigibles.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        degagement_supplementaires:
+                          description: Dégagements en surnombres des autres dégagements (ou qui n'est pas utilisé en permanence par le public).
+                          type: array
+                          maxItems: 10
+                          items:
+                            type: object
+                            title: Objet Dégagement
+                            description: 'Un dégagement est toute partie de la construction permettant le cheminement d''évacuation des occupants : porte, sortie, issue, circulation horizontale, zone de circulation, escalier, couloir, rampe ... Il est important de prendre en considération que leur nombre diffère de celui du nombre d''unités de passage. En effet, le nombre d''occupants qui empruntent le cheminement, à son point de départ ou après la jonction de plusieurs dégagements, dépend le plus souvent de la largeur initiale de ce cheminement. Celle-ci se calcule en fonction d''une largeur type appelée « unité de passage » (UP) de 0,60 m.'
+                            properties:
+                              nombre_degagements:
+                                description: Nombre de dégagements.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                              nombre_unite_passage:
+                                description: Nombre d'unités de passage.
+                                type: integer
+                                format: int32
+                                minimum: 0
+                                maximum: 999999
+                          nullable: true
+                        degagement_escaliers_description:
+                          description: Description du dégagement des escaliers.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description:
+                          description: Description du dégagement des ascenseurs, escaliers mécaniques et trottoirs roulants.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        presence_eas_ou_equivalents:
+                          description: Les espaces d'attente sécurisés prévus à l'article GN 8 peuvent être aménagés dans tous les espaces accessibles au public ou au personnel, à l'exception des locaux à risques particuliers. Ils peuvent ne pas être exclusivement destinés à cette fonction, sous réserve de ne pas contenir d'éléments pouvant remettre en cause l'objectif de sécurité attendu.
+                          type: boolean
+                          nullable: true
+                        evacuation_personnes_situation_handicap_observation:
+                          description: Les observations sur l'évacuation des personnes en situation de handicap.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        degagement_espaces_attente_securises_informations_complementaires:
+                          description: Les informations complémentaires sur les espaces d'attente sécurisés.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        degagement_tribunes_et_gradins_non_demontables_description:
+                          description: Description des dégagements des tribunes et gradins non démontables.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        enfouissement:
+                          description: Information sur la présence d'un enfouissement.
+                          type: boolean
+                          nullable: true
+                        degagement_enfouissement_informations_complementaires:
+                          description: Les informations complémentaires au sujet de l'enfouissement.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        presence_desenfumage_mécanique:
+                          description: Le désenfumage mécanique est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
+                          type: boolean
+                          nullable: true
+                        presence_desenfumage_naturel:
+                          description: Le désenfumage naturel est un système de ventilation qui permet d'évacuer les fumées et les gaz toxiques en cas d'incendie.
+                          type: boolean
+                          nullable: true
+                        ventilation_desenfumage_informations_complementaires:
+                          description: Les informations complémentaires sur la ventilation et le désenfumage.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        groupe_electrogene:
+                          description: Information sur la presence d'un groupe électrogène.
+                          type: boolean
+                          nullable: true
+                        batteries_accumulateurs_et_materiels_associes:
+                          description: Information sur la présence de batteries, accumulateurs et matériels associés.
+                          type: boolean
+                          nullable: true
+                        photovoltaique:
+                          description: Information sur la présence de panneaux photovoltaïques.
+                          type: boolean
+                          nullable: true
+                        parafoudre:
+                          description: Information sur la présence de parafoudres.
+                          type: boolean
+                          nullable: true
+                        electricite_eclairage_informations_complementaires:
+                          description: Les informations complémentaires au sujet de l'électricité et l'éclairage.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        puissance_chaufferie:
+                          description: |-
+                            Puissance de la chaufferie.
+
+                            Valeurs possibles :
+                            * <=70kW : La puissance de la chaufferie est inférieure ou égale à 70 kW.
+                            * >70kW : La puissance de la chaufferie est supérieure à 70 kW.
+                            * Non : Il n'y a pas de chaufferie.
+                          type: string
+                          enum:
+                            - <=70kW
+                            - '>70kW'
+                            - Non
+                          nullable: true
+                        presence_gaz_chaufferie:
+                          description: Présence de gaz en chaufferie
+                          type: boolean
+                          nullable: true
+                        type_de_chauffage:
+                          description: Information sur le type de chauffage present dans le batiment.
+                          type: array
+                          items:
+                            description: |-
+                              Type de chauffage
+
+                              Valeurs possibles :
+                              * Sous-station : chauffage par sous-station.
+                              * Chaufferie : chauffage par chaufferie.
+                              * Climatisation : chauffage par climatisation.
+                              * Aerothermique : chauffage par aérothermique.
+                              * Rooftop : chauffage par rooftop.
+                              * Chauffage urbain : chauffage par chauffage urbain.
+                              * Autre : autre type de chauffage.
+                            type: string
+                            enum:
+                              - Sous-station
+                              - Chaufferie
+                              - Climatisation
+                              - Aerothermique
+                              - Rooftop
+                              - Chauffage urbain
+                              - Autre
+                          maxItems: 7
+                          uniqueItems: true
+                          nullable: true
+                        chauffage_ventilation_informations_complementaires:
+                          description: Les informations complémentaires au sujet du chauffage et de la ventilation.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        puissance_cuisine:
+                          description: |-
+                            Puissance de la cuisine.
+
+                            Valeurs possibles :
+                            * <=20kW : La puissance de la cuisine est inférieure ou égale à 20 kW.
+                            * >20kW : La puissance de la cuisine est supérieure à 20 kW.
+                            * Non : Il n'y a pas de cuisine.
+                          type: string
+                          enum:
+                            - <=20kW
+                            - '>20kW'
+                            - Non
+                          nullable: true
+                        type_de_cuisine:
+                          description: |-
+                            Information sur le type de cuisine present dans le batiment.
+
+                            Valeurs possibles :
+                            * Ouverte : Cuisine ouverte sur un ou des locaux accessibles au public.
+                            * Fermée : Cuisine isolée.
+                          type: string
+                          enum:
+                            - Ouverte
+                            - Fermée
+                          nullable: true
+                        presence_gaz_cuisine:
+                          description: Présence de gaz en cuisine
+                          type: boolean
+                          nullable: true
+                        systeme_ventilation:
+                          description: |-
+                            Information sur le système de ventilation present dans la cuisine.
+
+                            Valeurs possibles :
+                            * Mécanique : Système de ventilation mécanique.
+                            * Naturelle : Système de ventilation naturelle.
+                            * Ventilateur d'extraction : Système de ventilation avec ventilateur d'extraction.
+                          type: string
+                          enum:
+                            - Mécanique
+                            - Naturelle
+                            - Ventilateur d'extraction
+                          nullable: true
+                        risques_spéciaux_informations_complementaires:
+                          description: Les informations complémentaires sur les risques spéciaux.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        presence_extincteur:
+                          description: Présence d'extincteurs.
+                          type: boolean
+                          nullable: true
+                        presence_ria:
+                          description: Les RIA sont des robinets d'incendie armés. Ils sont des équipements de lutte contre l'incendie.
+                          type: boolean
+                          nullable: true
+                        deversoirs_ponctuels:
+                          description: Les déversoirs servent à pouvoir inonder instantanément les locaux où ils sont installés.
+                          type: boolean
+                          nullable: true
+                        elements_de_constructions_irrigues:
+                          description: Des rideaux d'eau composés de canalisations munies de diffuseurs adaptés peuvent être imposés pour améliorer la résistance au feu de certains éléments de construction (cloisons, rideaux, portes, etc.). Ils constituent des éléments de construction irrigués.
+                          type: boolean
+                          nullable: true
+                        presence_deci:
+                          description: Dispositif DECI présent et suffisant
+                          type: boolean
+                          nullable: true
+                        presence_colonnes_seches:
+                          description: Colonnes sèches
+                          type: boolean
+                          nullable: true
+                        presence_colonnes_en_charge:
+                          description: Colonnes en charge (ou colonnes humides)
+                          type: boolean
+                          nullable: true
+                        installation_extinction:
+                          description: |-
+                            Information sur l'installation d'extinction présente dans le bâtiment.
+
+                            Valeurs possibles :
+                            * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+                            * Manuelle : Système d'extinction manuelle.
+                            * Brouillard d'eau : Système de brouillard d'eau.
+                            * Autre : Autre type de système d'extinction.
+                          type: string
+                          enum:
+                            - Automatique sprinkler
+                            - Manuelle
+                            - Brouillard d'eau
+                            - Autre
+                          nullable: true
+                        moyens_de_secours_informations_complementaires:
+                          description: Les informations complémentaires sur les moyens de secours.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        deci_description:
+                          description: Description du dispositif DECI.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        affichage_des_plans_intervention:
+                          description: Présence d'affichage des plans d'intervention.
+                          type: boolean
+                          nullable: true
+                        affichage_des_consignes_de_securite:
+                          description: Présence d'affichage des consignes de sécurité.
+                          type: boolean
+                          nullable: true
+                        tour_incendie:
+                          description: Présence d'une tour d'incendie.
+                          type: boolean
+                          nullable: true
+                        tremie_attaque:
+                          description: Présence de tremie d'attaque.
+                          type: boolean
+                          nullable: true
+                        service_de_securite_incendie:
+                          description: |-
+                            Types de service de sécurité incendie.
+
+                            Valeurs possibles :
+                            * Personnel désigné et formé : Personnel de l'établissement désigné et formé pour assurer la sécurité incendie.
+                            * SSIAP : Service de Sécurité Incendie et d'Assistance à Personnes.
+                            * Sapeurs-pompiers : Intervention des sapeurs-pompiers.
+                            * Combinaison des différentes possibilités : Combinaison des différentes possibilités.
+                          type: string
+                          enum:
+                            - Personnel désigné et formé
+                            - SSIAP
+                            - Sapeurs-pompiers
+                            - Combinaison des différentes possibilités
+                          nullable: true
+                        presence_pc_securite:
+                          description: Présence d'un PC sécurité.
+                          type: boolean
+                          nullable: true
+                        service_de_securite_incendie_informations_complementaires:
+                          description: Les informations complémentaires sur le service de sécurité incendie.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        systeme_de_securite_incendie:
+                          description: Présence d'un système de sécurité incendie.
+                          type: boolean
+                          nullable: true
+                        type_ssi:
+                          description: |-
+                            Il existe 5 types de SSI.
+
+                            Valeurs possibles :
+                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
+                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                            * B : un centralisateur de mise en sécurité incendie (CMSI).
+                            * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                          type: string
+                          enum:
+                            - E
+                            - D
+                            - C
+                            - B
+                            - A
+                          nullable: true
+                        type_alarme:
+                          description: |-
+                            Il existe 5 types d’alarme incendie.
+
+                            Valeurs possibles :
+                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
+                            * 3 : Les alarmes incendie Type 3.
+                            * 2B : Les alarmes incendie Type 2B.
+                            * 2A : Les alarmes incendie Type 2A.
+                            * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                          type: string
+                          enum:
+                            - '4'
+                            - '3'
+                            - 2B
+                            - 2A
+                            - '1'
+                          nullable: true
+                        temporisation_alarme_en_minutes:
+                          description: Temporisation de l'alarme en minutes
+                          type: integer
+                          format: int32
+                          minimum: 0
+                          maximum: 255
+                          nullable: true
+                        desenfumage_commande_par_le_ssi:
+                          description: Désenfumage commandé par le SSI
+                          type: boolean
+                          nullable: true
+                        ligne_telephonique_reliee_au_cta:
+                          description: La ligne téléphonique est reliée au CTA
+                          type: boolean
+                          nullable: true
+                        autre_systeme_alerte:
+                          description: |-
+                            Autre système d'alerte.
+
+                            Valeurs possibles :
+                            * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
+                            * GSM : Téléphone mobile.
+                          type: string
+                          enum:
+                            - Telephone urbain fixe ou box secourue
+                            - GSM
+                          nullable: true
+                        systeme_securite_incendie_informations_complementaires:
+                          description: Les informations complémentaires sur le système de sécurité incendie.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                        defibrillateur:
+                          description: Présence d'un défibrillateur.
+                          type: boolean
+                          nullable: true
+                        specificites_informations_complementaires:
+                          description: Les informations complémentaires sur les spécificités.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
+                observations:
+                  description: Observations sur l'analyse de risque.
+                  type: string
+                  maxLength: 65536
+                  nullable: true
+                prise_de_note_interne:
+                  description: Prise de note interne.
+                  type: string
+                  maxLength: 65536
+                  nullable: true
+                proposition_avis:
+                  type: string
+                  enum:
+                    - favorable
+                    - defavorable
+                  description: |-
+                    Proposition d'avis du préventionniste.
+
+                    Valeurs possibles :
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
+                  nullable: true
+                proposition_avis_observations:
+                  description: Observations sur l'avis du préventionniste.
+                  type: string
+                  maxLength: 65536
+                facteur_dangerosite:
+                  description: 'Facteur de dangerosité de la prescription. Il est déterminé par l''analyse de risque, et est classifié comme suit : - 0 : DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ ELEVÉE'
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 3
+                  nullable: true
+                documents_techniques:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Document Technique
+                    description: Un dossier permettant de vérifier la conformité d'un établissement recevant le public avec les règles de sécurité, prévu par le b de l'article R. 122-11, comprend des documents techniques. Voir https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818985.
+                    properties:
+                      libelle:
+                        description: Libellé du document technique.
+                        type: string
+                        maxLength: 256
+                      reference:
+                        description: Référence du document technique.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: |-
+                          Type du document technique.
+
+                          Valeurs possibles :
+                          * CERFA : Document CERFA.
+                          * courrier_de_la_mairie : Courrier de la mairie.
+                          * notice_descriptive : Notice descriptive.
+                          * plan : Plan.
+                          * certificat_de_verification : Certificat de vérification.
+                          * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
+                          * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
+                          * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
+                          * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
+                          * divers : Divers.
+                        type: string
+                        enum:
+                          - CERFA
+                          - courrier_de_la_mairie
+                          - notice_descriptive
+                          - plan
+                          - certificat_de_verification
+                          - RVRAT
+                          - RVRE
+                          - RVRMD
+                          - lettre_accompagnement_RUS
+                          - divers
+                      date_de_reception:
+                        description: Date de réception du document technique.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      date_de_consultation:
+                        description: Date de consultation du document technique.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      est_manquant:
+                        description: Indique si le document technique est manquant.
+                        type: boolean
+                    required:
+                      - libelle
+                      - type
+                textes_applicables:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Texte Applicable
+                    description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+                    properties:
+                      texte:
+                        description: Texte réglementaire ou normatif applicable.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: |-
+                          Type du texte applicable.
+
+                          Valeurs possibles :
+                          * Dispositions générales : Dispositions générales.
+                          * Dispositions particulières : Dispositions particulières.
+                          * Dispositions spéciales : Dispositions spéciales.
+                          * Textes relatifs aux bâtiments d'habitation : Textes relatifs aux bâtiments d'habitation.
+                          * ERP : Établissements Recevant du Public.
+                          * ERP du 2ème groupe : ERP du 2ème groupe.
+                          * Instructions techniques ERP : Instructions techniques ERP.
+                          * IGH / IMH : Immeubles de Grande Hauteur / Immeubles de Moyenne Hauteur.
+                          * Habitation : Habitation.
+                          * Rubriques ICPE : Rubriques ICPE.
+                          * Etablissements pénitentiaires : Établissements pénitentiaires.
+                          * Pyrotechnie : Pyrotechnie.
+                          * Guides : Guides.
+                          * Arrêtés préfectoraux : Arrêtés préfectoraux.
+                        type: string
+                        enum:
+                          - Dispositions générales
+                          - Dispositions particulières
+                          - Dispositions spéciales
+                          - Textes relatifs aux bâtiments d'habitation
+                          - ERP
+                          - ERP du 2ème groupe
+                          - Instructions techniques ERP
+                          - IGH / IMH
+                          - Habitation
+                          - Rubriques ICPE
+                          - Etablissements pénitentiaires
+                          - Pyrotechnie
+                          - Guides
+                          - Arrêtés préfectoraux
+                    required:
+                      - texte
+                      - type
+                descriptif_dossier:
+                  description: Descriptif du dossier d'analyse de risque.
+                  type: string
+                  maxLength: 65536
+                  nullable: true
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportEtude'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RapportEtude'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: patch-rapport-etude-dossier
     post:
       tags:
         - Dossiers API
@@ -17824,6 +19838,397 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: get-rapport-visite-dossier
+    patch:
+      tags:
+        - Dossiers API
+      summary: Mise à jour du rapport de visite avec un patch
+      description: Mise à jour du rapport de visite en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PatchRapportVisiteDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: 'Objet : Analyse de Risque'
+              description: Gestion de l'analyse de risque.
+              properties:
+                observations:
+                  description: Observations sur l'analyse de risque.
+                  type: string
+                  maxLength: 65536
+                  nullable: true
+                prise_de_note_interne:
+                  description: Prise de note interne.
+                  type: string
+                  maxLength: 65536
+                  nullable: true
+                proposition_avis:
+                  type: string
+                  enum:
+                    - favorable
+                    - defavorable
+                  description: |-
+                    Proposition d'avis du préventionniste.
+
+                    Valeurs possibles :
+                    * favorable : Avis favorable.
+                    * defavorable : Avis défavorable.
+                  nullable: true
+                proposition_avis_observations:
+                  description: Observations sur l'avis du préventionniste.
+                  type: string
+                  maxLength: 65536
+                facteur_dangerosite:
+                  description: 'Facteur de dangerosité de la prescription. Il est déterminé par l''analyse de risque, et est classifié comme suit : - 0 : DANGEROSITÉ BASSE - 1 : DANGEROSITÉ MOYENNE - 2 : DANGEROSITÉ ELEVÉE'
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 3
+                  nullable: true
+                documents_techniques:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Document Technique
+                    description: Un dossier permettant de vérifier la conformité d'un établissement recevant le public avec les règles de sécurité, prévu par le b de l'article R. 122-11, comprend des documents techniques. Voir https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818985.
+                    properties:
+                      libelle:
+                        description: Libellé du document technique.
+                        type: string
+                        maxLength: 256
+                      reference:
+                        description: Référence du document technique.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: |-
+                          Type du document technique.
+
+                          Valeurs possibles :
+                          * CERFA : Document CERFA.
+                          * courrier_de_la_mairie : Courrier de la mairie.
+                          * notice_descriptive : Notice descriptive.
+                          * plan : Plan.
+                          * certificat_de_verification : Certificat de vérification.
+                          * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
+                          * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
+                          * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
+                          * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
+                          * divers : Divers.
+                        type: string
+                        enum:
+                          - CERFA
+                          - courrier_de_la_mairie
+                          - notice_descriptive
+                          - plan
+                          - certificat_de_verification
+                          - RVRAT
+                          - RVRE
+                          - RVRMD
+                          - lettre_accompagnement_RUS
+                          - divers
+                      date_de_reception:
+                        description: Date de réception du document technique.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      date_de_consultation:
+                        description: Date de consultation du document technique.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      est_manquant:
+                        description: Indique si le document technique est manquant.
+                        type: boolean
+                    required:
+                      - libelle
+                      - type
+                essais:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Essai
+                    description: Objet représentant un essai réalisé dans le cadre d'une visite d'un ERP.
+                    properties:
+                      localisation:
+                        description: Localisation de l'essai. Cela peut être un local, un étage, un bâtiment, etc.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                      libelle:
+                        description: Le libellé de l'essai. C'est un texte court qui décrit le type d'essai réalisé.
+                        type: string
+                        maxLength: 256
+                      concluant:
+                        description: Indique si l'essai est concluant ou non.
+                        type: boolean
+                        nullable: true
+                      observations_sur_les_resultats:
+                        description: Observations sur les résultats de l'essai. C'est un texte court qui contextualise le résultat de l'essai réalisé.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                    required:
+                      - libelle
+                descriptif_dossier:
+                  description: Descriptif du dossier d'un rapport de visite.
+                  type: string
+                  maxLength: 65536
+                  nullable: true
+                textes_applicables:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    title: Objet Texte Applicable
+                    description: Un texte applicable est une référence à un texte réglementaire ou normatif qui s'applique à un ERP.
+                    properties:
+                      texte:
+                        description: Texte réglementaire ou normatif applicable.
+                        type: string
+                        maxLength: 256
+                      type:
+                        description: |-
+                          Type du texte applicable.
+
+                          Valeurs possibles :
+                          * Dispositions générales : Dispositions générales.
+                          * Dispositions particulières : Dispositions particulières.
+                          * Dispositions spéciales : Dispositions spéciales.
+                          * Textes relatifs aux bâtiments d'habitation : Textes relatifs aux bâtiments d'habitation.
+                          * ERP : Établissements Recevant du Public.
+                          * ERP du 2ème groupe : ERP du 2ème groupe.
+                          * Instructions techniques ERP : Instructions techniques ERP.
+                          * IGH / IMH : Immeubles de Grande Hauteur / Immeubles de Moyenne Hauteur.
+                          * Habitation : Habitation.
+                          * Rubriques ICPE : Rubriques ICPE.
+                          * Etablissements pénitentiaires : Établissements pénitentiaires.
+                          * Pyrotechnie : Pyrotechnie.
+                          * Guides : Guides.
+                          * Arrêtés préfectoraux : Arrêtés préfectoraux.
+                        type: string
+                        enum:
+                          - Dispositions générales
+                          - Dispositions particulières
+                          - Dispositions spéciales
+                          - Textes relatifs aux bâtiments d'habitation
+                          - ERP
+                          - ERP du 2ème groupe
+                          - Instructions techniques ERP
+                          - IGH / IMH
+                          - Habitation
+                          - Rubriques ICPE
+                          - Etablissements pénitentiaires
+                          - Pyrotechnie
+                          - Guides
+                          - Arrêtés préfectoraux
+                    required:
+                      - texte
+                      - type
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/RapportVisite'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RapportVisite'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: patch-rapport-visite-dossier
     post:
       tags:
         - Dossiers API
