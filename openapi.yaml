@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-08-2026.1
+  version: 1.0/feature/sr-obsolete/05-08-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -51364,6 +51364,10 @@ paths:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
                   type: string
                   maxLength: 256
+                obsolete:
+                  description: Indique si le support réglementaire est obsolète ou non. Un support réglementaire obsolète n'est plus utilisé dans les prescriptions.
+                  type: boolean
+                  nullable: true
               required:
                 - nature
                 - contenu
@@ -52039,6 +52043,9 @@ paths:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
                   type: string
                   maxLength: 256
+                obsolete:
+                  description: Indique si le support réglementaire est obsolète ou non. Un support réglementaire obsolète n'est plus utilisé dans les prescriptions.
+                  type: boolean
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
               x-extension-metarisc-codegen-context: update
@@ -61677,6 +61684,10 @@ components:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
           type: string
           maxLength: 256
+        obsolete:
+          description: Indique si le support réglementaire est obsolète ou non. Un support réglementaire obsolète n'est plus utilisé dans les prescriptions.
+          type: boolean
+          nullable: true
       required:
         - id
         - nature
