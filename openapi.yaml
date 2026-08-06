@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/03-08-2026.1
+  version: 1.0/main/06-08-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -51311,32 +51311,36 @@ paths:
                     Nature du support réglementaire.
 
                     Valeurs possibles :
-                    * arrete : Arrêté.
-                    * article : Article.
-                    * arretes_prefectoraux : Ensemble d'arrêtés préfectoraux.
-                    * articles : Ensemble d'articles.
-                    * guides : Guides.
-                    * local_autre_texte : Texte réglementaire local.
-                    * doctrine : Doctrine.
-                    * textes_nationaux_autre_texte : Texte réglementaire national.
-                    * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
-                    * instructions_techniques : Instructions techniques.
+                    * article : Article (Code - L. et R.).
                     * decret : Décret.
+                    * arrete : Arrêté.
+                    * instructions_techniques : Instructions techniques.
                     * circulaire : Circulaire.
+                    * avis_ccs : Avis CCS.
+                    * guides : Guide national.
+                    * arretes_prefectoraux : Arrêté préfectoral.
+                    * arretes_municipaux : Arrêté municipal.
+                    * doctrine : Doctrine.
+                    * cahiers_des_charges : Cahier des charges.
+                    * articles : Ensemble d'articles.
+                    * local_autre_texte : Texte réglementaire local.
+                    * textes_nationaux_autre_texte : Texte réglementaire national.
                   type: string
                   enum:
-                    - arrete
                     - article
-                    - arretes_prefectoraux
-                    - articles
-                    - guides
-                    - local_autre_texte
-                    - doctrine
-                    - textes_nationaux_autre_texte
-                    - avis_ccs
-                    - instructions_techniques
                     - decret
+                    - arrete
+                    - instructions_techniques
                     - circulaire
+                    - avis_ccs
+                    - guides
+                    - arretes_prefectoraux
+                    - arretes_municipaux
+                    - doctrine
+                    - cahiers_des_charges
+                    - articles
+                    - local_autre_texte
+                    - textes_nationaux_autre_texte
                 legifrance_cid:
                   type: string
                   maxLength: 256
@@ -51357,9 +51361,11 @@ paths:
 
                     Valeurs possibles :
                     * en_vigueur : Le support réglementaire est en vigueur.
+                    * abroge : Le support réglementaire est abrogé.
                   type: string
                   enum:
                     - en_vigueur
+                    - abroge
                 reference:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
                   type: string
@@ -51992,32 +51998,36 @@ paths:
                     Nature du support réglementaire.
 
                     Valeurs possibles :
-                    * arrete : Arrêté.
-                    * article : Article.
-                    * arretes_prefectoraux : Ensemble d'arrêtés préfectoraux.
-                    * articles : Ensemble d'articles.
-                    * guides : Guides.
-                    * local_autre_texte : Texte réglementaire local.
-                    * doctrine : Doctrine.
-                    * textes_nationaux_autre_texte : Texte réglementaire national.
-                    * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
-                    * instructions_techniques : Instructions techniques.
+                    * article : Article (Code - L. et R.).
                     * decret : Décret.
+                    * arrete : Arrêté.
+                    * instructions_techniques : Instructions techniques.
                     * circulaire : Circulaire.
+                    * avis_ccs : Avis CCS.
+                    * guides : Guide national.
+                    * arretes_prefectoraux : Arrêté préfectoral.
+                    * arretes_municipaux : Arrêté municipal.
+                    * doctrine : Doctrine.
+                    * cahiers_des_charges : Cahier des charges.
+                    * articles : Ensemble d'articles.
+                    * local_autre_texte : Texte réglementaire local.
+                    * textes_nationaux_autre_texte : Texte réglementaire national.
                   type: string
                   enum:
-                    - arrete
                     - article
-                    - arretes_prefectoraux
-                    - articles
-                    - guides
-                    - local_autre_texte
-                    - doctrine
-                    - textes_nationaux_autre_texte
-                    - avis_ccs
-                    - instructions_techniques
                     - decret
+                    - arrete
+                    - instructions_techniques
                     - circulaire
+                    - avis_ccs
+                    - guides
+                    - arretes_prefectoraux
+                    - arretes_municipaux
+                    - doctrine
+                    - cahiers_des_charges
+                    - articles
+                    - local_autre_texte
+                    - textes_nationaux_autre_texte
                 contenu:
                   description: Contenu du support réglementaire.
                   type: string
@@ -52032,9 +52042,11 @@ paths:
 
                     Valeurs possibles :
                     * en_vigueur : Le support réglementaire est en vigueur.
+                    * abroge : Le support réglementaire est abrogé.
                   type: string
                   enum:
                     - en_vigueur
+                    - abroge
                 reference:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
                   type: string
@@ -61623,32 +61635,36 @@ components:
             Nature du support réglementaire.
 
             Valeurs possibles :
-            * arrete : Arrêté.
-            * article : Article.
-            * arretes_prefectoraux : Ensemble d'arrêtés préfectoraux.
-            * articles : Ensemble d'articles.
-            * guides : Guides.
-            * local_autre_texte : Texte réglementaire local.
-            * doctrine : Doctrine.
-            * textes_nationaux_autre_texte : Texte réglementaire national.
-            * avis_ccs : Avis du Conseil Consultatif de la Sécurité.
-            * instructions_techniques : Instructions techniques.
+            * article : Article (Code - L. et R.).
             * decret : Décret.
+            * arrete : Arrêté.
+            * instructions_techniques : Instructions techniques.
             * circulaire : Circulaire.
+            * avis_ccs : Avis CCS.
+            * guides : Guide national.
+            * arretes_prefectoraux : Arrêté préfectoral.
+            * arretes_municipaux : Arrêté municipal.
+            * doctrine : Doctrine.
+            * cahiers_des_charges : Cahier des charges.
+            * articles : Ensemble d'articles.
+            * local_autre_texte : Texte réglementaire local.
+            * textes_nationaux_autre_texte : Texte réglementaire national.
           type: string
           enum:
-            - arrete
             - article
-            - arretes_prefectoraux
-            - articles
-            - guides
-            - local_autre_texte
-            - doctrine
-            - textes_nationaux_autre_texte
-            - avis_ccs
-            - instructions_techniques
             - decret
+            - arrete
+            - instructions_techniques
             - circulaire
+            - avis_ccs
+            - guides
+            - arretes_prefectoraux
+            - arretes_municipaux
+            - doctrine
+            - cahiers_des_charges
+            - articles
+            - local_autre_texte
+            - textes_nationaux_autre_texte
         legifrance_cid:
           type: string
           maxLength: 256
@@ -61670,9 +61686,11 @@ components:
 
             Valeurs possibles :
             * en_vigueur : Le support réglementaire est en vigueur.
+            * abroge : Le support réglementaire est abrogé.
           type: string
           enum:
             - en_vigueur
+            - abroge
         reference:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
           type: string
