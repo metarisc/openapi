@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/06-08-2026.1
+  version: 1.0/main/10-08-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -51076,6 +51076,20 @@ paths:
           schema:
             type: string
             maxLength: 256
+        - name: etat
+          in: query
+          description: Filtre sur l'état du support réglementaire
+          schema:
+            type: string
+            enum:
+              - en_vigueur
+              - abroge
+            description: |-
+              Etat juridique d’un support réglementaire.
+
+              Valeurs possibles :
+              * en_vigueur : Le support réglementaire est en vigueur.
+              * abroge : Le support réglementaire est abrogé.
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
