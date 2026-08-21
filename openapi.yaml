@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/10-08-2026.1
+  version: 1.0/feature/tri-sur-les-statuts-des-erp/21-08-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -24355,26 +24355,50 @@ paths:
               * erp : ERP principal.
         - name: statut
           in: query
+          x-extension-metarisc-param-multiple: true
           description: Filtre sur le statut de l'ERP.
           schema:
-            type: string
-            enum:
-              - reprise_de_donnees
-              - ouvert
-              - projet
-              - ferme
-              - itinerant_periodique
-              - erreur_saisie
-            description: |-
-              Statut de l'ERP lors de l'établissement de son descriptif technique.
+            oneOf:
+              - type: string
+                enum:
+                  - reprise_de_donnees
+                  - ouvert
+                  - projet
+                  - ferme
+                  - itinerant_periodique
+                  - erreur_saisie
+                description: |-
+                  Statut de l'ERP lors de l'établissement de son descriptif technique.
 
-              Valeurs possibles :
-              * reprise_de_donnees : Reprise de données.
-              * ouvert : Ouvert.
-              * projet : Projet.
-              * ferme : Fermé.
-              * itinerant_periodique : Itinérant périodique.
-              * erreur_saisie : Erreur de saisie.
+                  Valeurs possibles :
+                  * reprise_de_donnees : Reprise de données.
+                  * ouvert : Ouvert.
+                  * projet : Projet.
+                  * ferme : Fermé.
+                  * itinerant_periodique : Itinérant périodique.
+                  * erreur_saisie : Erreur de saisie.
+              - type: array
+                items:
+                  type: string
+                  enum:
+                    - reprise_de_donnees
+                    - ouvert
+                    - projet
+                    - ferme
+                    - itinerant_periodique
+                    - erreur_saisie
+                  description: |-
+                    Statut de l'ERP lors de l'établissement de son descriptif technique.
+
+                    Valeurs possibles :
+                    * reprise_de_donnees : Reprise de données.
+                    * ouvert : Ouvert.
+                    * projet : Projet.
+                    * ferme : Fermé.
+                    * itinerant_periodique : Itinérant périodique.
+                    * erreur_saisie : Erreur de saisie.
+                maxItems: 6
+                uniqueItems: true
         - name: metarisc_erp_id
           in: query
           description: Filtre sur l'identifiant Metarisc de l'ERP.
@@ -49722,24 +49746,47 @@ paths:
                     * cellule : Cellule commerciale.
                     * erp : ERP principal.
                 statut:
-                  type: string
-                  enum:
-                    - reprise_de_donnees
-                    - ouvert
-                    - projet
-                    - ferme
-                    - itinerant_periodique
-                    - erreur_saisie
-                  description: |-
-                    Statut de l'ERP lors de l'établissement de son descriptif technique.
+                  oneOf:
+                    - type: string
+                      enum:
+                        - reprise_de_donnees
+                        - ouvert
+                        - projet
+                        - ferme
+                        - itinerant_periodique
+                        - erreur_saisie
+                      description: |-
+                        Statut de l'ERP lors de l'établissement de son descriptif technique.
 
-                    Valeurs possibles :
-                    * reprise_de_donnees : Reprise de données.
-                    * ouvert : Ouvert.
-                    * projet : Projet.
-                    * ferme : Fermé.
-                    * itinerant_periodique : Itinérant périodique.
-                    * erreur_saisie : Erreur de saisie.
+                        Valeurs possibles :
+                        * reprise_de_donnees : Reprise de données.
+                        * ouvert : Ouvert.
+                        * projet : Projet.
+                        * ferme : Fermé.
+                        * itinerant_periodique : Itinérant périodique.
+                        * erreur_saisie : Erreur de saisie.
+                    - type: array
+                      items:
+                        type: string
+                        enum:
+                          - reprise_de_donnees
+                          - ouvert
+                          - projet
+                          - ferme
+                          - itinerant_periodique
+                          - erreur_saisie
+                        description: |-
+                          Statut de l'ERP lors de l'établissement de son descriptif technique.
+
+                          Valeurs possibles :
+                          * reprise_de_donnees : Reprise de données.
+                          * ouvert : Ouvert.
+                          * projet : Projet.
+                          * ferme : Fermé.
+                          * itinerant_periodique : Itinérant périodique.
+                          * erreur_saisie : Erreur de saisie.
+                      maxItems: 6
+                      uniqueItems: true
                 metarisc_erp_id:
                   type: string
                   maxLength: 8
