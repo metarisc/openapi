@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/21-08-2026.1
+  version: 1.0/main/31-08-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -39251,6 +39251,9 @@ paths:
                 avis_differe:
                   description: La commission de sécurité peut décider de reporter son avis à une date ultérieure. Dans ce cas, la date de passage est reportée et un avis différé est émis.
                   type: boolean
+                na_pu_se_prononcer:
+                  description: La commission de sécurité peut décider de ne pas se prononcer sur le dossier (en absence des documents visés aux articles 46 et 47 du décret du 8 mars 1995, art). Dans ce cas, la date de passage est reportée.
+                  type: boolean
                 observations:
                   description: La commission de sécurité émet soit un avis favorable soit un avis défavorable. Afin de motiver les décisions prises, la commission peut émettre des observations.
                   type: string
@@ -61279,6 +61282,10 @@ components:
           description: La commission de sécurité peut décider de reporter son avis à une date ultérieure. Dans ce cas, la date de passage est reportée et un avis différé est émis.
           type: boolean
           nullable: true
+        na_pu_se_prononcer:
+          description: La commission de sécurité peut décider de ne pas se prononcer sur le dossier (en absence des documents visés aux articles 46 et 47 du décret du 8 mars 1995, art). Dans ce cas, la date de passage est reportée.
+          type: boolean
+          nullable: true
         observations:
           description: La commission de sécurité émet soit un avis favorable soit un avis défavorable. Afin de motiver les décisions prises, la commission peut émettre des observations.
           type: string
@@ -61304,6 +61311,7 @@ components:
         - ge4_3
         - date_de_passage
         - avis_differe
+        - na_pu_se_prononcer
         - observations
         - duree_minutes
         - membres_avis
