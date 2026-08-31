@@ -19894,6 +19894,13 @@ paths:
                     * favorable : Avis favorable.
                     * defavorable : Avis défavorable.
                   nullable: true
+                periodicite_modifiee:
+                  description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 60
+                  multipleOf: 12
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
                   type: string
@@ -20285,6 +20292,13 @@ paths:
                     * favorable : Avis favorable.
                     * defavorable : Avis défavorable.
                   nullable: true
+                periodicite_modifiee:
+                  description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 60
+                  multipleOf: 12
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
                   type: string
@@ -59189,6 +59203,14 @@ components:
           maximum: 60
           multipleOf: 12
           nullable: true
+        periodicite_modifiee:
+          description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 60
+          multipleOf: 12
+          nullable: true
         libelle:
           description: Le nom commercial vise l'entreprise individuelle, le fonds de commerce ou l'activité exercée, c'est le nom sous lequel l'établissement est connu du grand public.
           type: string
@@ -61865,6 +61887,14 @@ components:
             Valeurs possibles :
             * favorable : Avis favorable.
             * defavorable : Avis défavorable.
+          nullable: true
+        periodicite_modifiee:
+          description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 60
+          multipleOf: 12
           nullable: true
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
