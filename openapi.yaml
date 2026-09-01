@@ -39253,7 +39253,6 @@ paths:
                     Valeurs possibles :
                     * favorable : Avis favorable.
                     * defavorable : Avis défavorable.
-                  nullable: true
                 ge4_3:
                   description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
                   type: boolean
