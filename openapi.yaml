@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/01-09-2026.2
+  version: 1.0/feature/main-courante-update/04-09-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -31841,14 +31841,299 @@ paths:
                     Valeurs possibles :
                     * REUNION : Réunion.
                     * INTERVENTION : Intervention.
-                    * RCCI : Recherche des Causes et des Circonstances de l'Incendie.
-                    * RETEX : Retour d'expérience.
+                    * COURRIEL_COURRIEL : Courriel.
+                    * ARRETE : Arrêté.
                   type: string
                   enum:
                     - REUNION
                     - INTERVENTION
-                    - RCCI
-                    - RETEX
+                    - COURRIEL_COURRIEL
+                    - ARRETE
+                main_courante_intervention:
+                  description: Main courante spécifique aux interventions.
+                  items:
+                    type: object
+                    title: Objet Main Courante Intervention
+                    description: Main courante spécifique aux interventions. Elle représente une liste d'événements d'intervention enregistrés dans un registre. Elle est utilisée pour suivre l'évolution informelle des interventions.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature de l'intervention.
+
+                          Valeurs possibles :
+                          * INCENDIE : Intervention liée à un incendie.
+                          * SAP : Intervention liée au SAP.
+                          * INTERVENTION_DIVERSE : Intervention diverse.
+                        type: string
+                        enum:
+                          - INCENDIE
+                          - SAP
+                          - INTERVENTION_DIVERSE
+                      InterventionSDIS:
+                        description: Indique si l'intervention est liée au SDIS.
+                        type: boolean
+                        nullable: true
+                      RCCI:
+                        description: Indique si l'intervention est liée au RCCI.
+                        type: boolean
+                        nullable: true
+                      RetEx:
+                        description: Retour d'expérience sur l'intervention.
+                        type: boolean
+                        nullable: true
+                      numero_intervention:
+                        description: Numéro de l'intervention.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                      date_heure_intervention:
+                        description: Date et heure de début de l'intervention.
+                        type: string
+                        format: date-time
+                        maxLength: 50
+                        minLength: 20
+                        nullable: true
+                      date_heure_fin_intervention:
+                        description: Date et heure de fin de l'intervention.
+                        type: string
+                        format: date-time
+                        maxLength: 50
+                        minLength: 20
+                        nullable: true
+                    required:
+                      - nature
+                  nullable: true
+                main_courante_reunion:
+                  description: Main courante spécifique aux réunions.
+                  items:
+                    type: object
+                    title: Objet Main Courante Réunion
+                    description: Main courante spécifique aux réunions. Elle représente une liste d'événements de réunion enregistrés dans un registre. Elle est utilisée pour suivre l'évolution informelle des réunions.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature de la réunion.
+
+                          Valeurs possibles :
+                          * LOCAUX_SDIS : Réunion tenue dans les locaux du SDIS.
+                          * EXTERIEUR_SDIS : Réunion tenue en dehors des locaux du SDIS.
+                          * TELEPHONIQUE : Réunion tenue par téléphone.
+                        type: string
+                        enum:
+                          - LOCAUX_SDIS
+                          - EXTERIEUR_SDIS
+                          - TELEPHONIQUE
+                      date_creation:
+                        description: Date de création de l'événement.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      objet:
+                        description: Objet de la réunion.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                      demandeur:
+                        description: Demandeur de la réunion.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                      observations:
+                        description: Observations relatives à la réunion.
+                        type: string
+                        maxLength: 65536
+                        nullable: true
+                      date_reunion:
+                        description: Date de tenue de la réunion.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      preventionnistes:
+                        description: Préventionnistes en charge de la réunion.
+                        type: array
+                        maxItems: 10
+                        items:
+                          type: object
+                          title: Objet Utilisateur
+                          properties: {}
+                        nullable: true
+                      lieu_reunion:
+                        description: |-
+                          Lieu de la réunion.
+                          Renseigné uniquement lorsque la nature est EXTERIEUR_SDIS.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                    required:
+                      - nature
+                      - date_creation
+                  nullable: true
+                main_courante_courriel:
+                  description: Main courante spécifique aux courriels.
+                  items:
+                    type: object
+                    title: Objet Main Courante Courriel/Courrier
+                    description: Main courante spécifique aux courriers et courriels.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature du courrier / courriel.
+
+                          Valeurs possibles :
+                          * LETTRE : Lettre simple.
+                          * MISE_EN_DEMEURE : Mise en demeure.
+                          * AVIS_ECRIT_MOTIVE : Avis écrit motivé.
+                          * CONSULTATION_PLU : Consultation PLU.
+                          * RAPPORT_ORGANISME_AGREE : Rapport d'organisme agréé.
+                          * DEMANDE_RENSEIGNEMENT : Demande de renseignement.
+                          * DEMANDE_VISITE_PERIODIQUE : Demande de visite périodique.
+                          * DEMANDE_VISITE_TECHNIQUE : Demande de visite technique.
+                          * DEMANDE_VISITE_INOPINEE : Demande de visite inopinée.
+                          * DEMANDE_VISITE_HORS_PROGRAMME : Demande de visite hors programme.
+                          * DEMANDE_VISITE_RECEPTION : Demande de visite de réception.
+                          * AUTORISATION_TRAVAUX : Autorisation de travaux.
+                        type: string
+                        enum:
+                          - LETTRE
+                          - MISE_EN_DEMEURE
+                          - AVIS_ECRIT_MOTIVE
+                          - CONSULTATION_PLU
+                          - RAPPORT_ORGANISME_AGREE
+                          - DEMANDE_RENSEIGNEMENT
+                          - DEMANDE_VISITE_PERIODIQUE
+                          - DEMANDE_VISITE_TECHNIQUE
+                          - DEMANDE_VISITE_INOPINEE
+                          - DEMANDE_VISITE_HORS_PROGRAMME
+                          - DEMANDE_VISITE_RECEPTION
+                          - AUTORISATION_TRAVAUX
+                      date_creation_dossier:
+                        description: Date de création du dossier.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      objet:
+                        description: Objet du courrier / courriel.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                      demandeur:
+                        description: Demandeur à l'origine du courrier / courriel.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                      date_reception_mairie:
+                        description: Date de réception en mairie.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      date_envoi_transit:
+                        description: Date d'envoi / transit du courrier.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      date_reception_sdis:
+                        description: Date de réception au SDIS.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      observations:
+                        description: Observations relatives au courrier / courriel.
+                        type: string
+                        maxLength: 65536
+                        nullable: true
+                      date_reponse:
+                        description: Date de réponse.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      date_transfert_commission_competente:
+                        description: Date de transfert à la commission compétente.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      date_reception_commission_competente:
+                        description: Date de réception à la commission compétente.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      preventionnistes:
+                        description: Préventionniste(s) en charge du dossier.
+                        type: array
+                        maxItems: 10
+                        items:
+                          type: object
+                          title: Objet Utilisateur
+                          properties: {}
+                        nullable: true
+                    required:
+                      - nature
+                      - date_creation_dossier
+                  nullable: true
+                main_courante_arrete:
+                  description: Main courante spécifique aux arrêtés.
+                  items:
+                    type: object
+                    title: Objet Main Courante Arrêté
+                    description: Main courante spécifique aux arrêtés.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature de l'événement lié aux arrêtés.
+
+                          Valeurs possibles :
+                          * OUVERTURE : Ouverture de l'arrêté.
+                          * FERMETURE : Fermeture de l'arrêté.
+                          * MISE_EN_DEMEURE : Mise en demeure.
+                          * UTILISATION_EXCEPTIONNELLE_LOCAUX : Utilisation exceptionnelle de l'arrêté.
+                        type: string
+                        enum:
+                          - OUVERTURE
+                          - FERMETURE
+                          - MISE_EN_DEMEURE
+                          - UTILISATION_EXCEPTIONNELLE_LOCAUX
+                      date_creation:
+                        description: Date de création de l'événement.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      observations:
+                        description: Observations relatives à l'événement.
+                        type: string
+                        maxLength: 65536
+                        nullable: true
+                      date_signature:
+                        description: Date de signature de l'acte.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                        nullable: true
+                      preventionniste:
+                        description: Préventionniste en charge du dossier.
+                        type: string
+                        maxLength: 256
+                        nullable: true
+                    required:
+                      - nature
+                      - date_creation
+                  nullable: true
               required:
                 - objet
                 - type
@@ -36025,14 +36310,335 @@ paths:
                     Valeurs possibles :
                     * REUNION : Réunion.
                     * INTERVENTION : Intervention.
-                    * RCCI : Recherche des Causes et des Circonstances de l'Incendie.
-                    * RETEX : Retour d'expérience.
+                    * COURRIEL_COURRIEL : Courriel.
+                    * ARRETE : Arrêté.
                   type: string
                   enum:
                     - REUNION
                     - INTERVENTION
-                    - RCCI
-                    - RETEX
+                    - COURRIEL_COURRIEL
+                    - ARRETE
+                main_courante_intervention:
+                  description: Main courante spécifique aux interventions.
+                  items:
+                    type: object
+                    title: Objet Main Courante Intervention
+                    description: Main courante spécifique aux interventions. Elle représente une liste d'événements d'intervention enregistrés dans un registre. Elle est utilisée pour suivre l'évolution informelle des interventions.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature de l'intervention.
+
+                          Valeurs possibles :
+                          * INCENDIE : Intervention liée à un incendie.
+                          * SAP : Intervention liée au SAP.
+                          * INTERVENTION_DIVERSE : Intervention diverse.
+                        type: string
+                        enum:
+                          - INCENDIE
+                          - SAP
+                          - INTERVENTION_DIVERSE
+                      InterventionSDIS:
+                        description: Indique si l'intervention est liée au SDIS.
+                        type: boolean
+                      RCCI:
+                        description: Indique si l'intervention est liée au RCCI.
+                        type: boolean
+                      RetEx:
+                        description: Retour d'expérience sur l'intervention.
+                        type: boolean
+                      numero_intervention:
+                        description: Numéro de l'intervention.
+                        type: string
+                        maxLength: 256
+                      date_heure_intervention:
+                        description: Date et heure de début de l'intervention.
+                        type: string
+                        format: date-time
+                        maxLength: 50
+                        minLength: 20
+                      date_heure_fin_intervention:
+                        description: Date et heure de fin de l'intervention.
+                        type: string
+                        format: date-time
+                        maxLength: 50
+                        minLength: 20
+                main_courante_reunion:
+                  description: Main courante spécifique aux réunions.
+                  items:
+                    type: object
+                    title: Objet Main Courante Réunion
+                    description: Main courante spécifique aux réunions. Elle représente une liste d'événements de réunion enregistrés dans un registre. Elle est utilisée pour suivre l'évolution informelle des réunions.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature de la réunion.
+
+                          Valeurs possibles :
+                          * LOCAUX_SDIS : Réunion tenue dans les locaux du SDIS.
+                          * EXTERIEUR_SDIS : Réunion tenue en dehors des locaux du SDIS.
+                          * TELEPHONIQUE : Réunion tenue par téléphone.
+                        type: string
+                        enum:
+                          - LOCAUX_SDIS
+                          - EXTERIEUR_SDIS
+                          - TELEPHONIQUE
+                      date_creation:
+                        description: Date de création de l'événement.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      objet:
+                        description: Objet de la réunion.
+                        type: string
+                        maxLength: 256
+                      demandeur:
+                        description: Demandeur de la réunion.
+                        type: string
+                        maxLength: 256
+                      observations:
+                        description: Observations relatives à la réunion.
+                        type: string
+                        maxLength: 65536
+                      date_reunion:
+                        description: Date de tenue de la réunion.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      preventionnistes:
+                        description: Préventionnistes en charge de la réunion.
+                        type: array
+                        maxItems: 10
+                        items:
+                          type: object
+                          title: Objet Utilisateur
+                          properties:
+                            avatar_url:
+                              description: Lien URL vers l'avatar de l'utilisateur.
+                              type: string
+                              format: uri
+                              maxLength: 512
+                              nullable: true
+                            roles:
+                              description: Liste des rôles de l'utilisateur.
+                              type: array
+                              maxItems: 10
+                              uniqueItems: true
+                              items:
+                                type: string
+                                enum:
+                                  - administrateur_fonctionnel
+                                  - valideur
+                                  - visionneur_simple
+                                  - visionneur_complet
+                                  - attributeur
+                                  - relecteur
+                                  - rapporteur
+                                  - preventionniste
+                                  - secretariat_commission_securite
+                                  - secretariat
+                                description: |-
+                                  Le rôle de l'utilisateur.
+
+                                  Valeurs possibles :
+                                  * administrateur_fonctionnel : Administrateur fonctionnel.
+                                  * valideur : Valideur.
+                                  * visionneur_simple : Visionneur simple.
+                                  * visionneur_complet : Visionneur complet.
+                                  * attributeur : Attributeur.
+                                  * relecteur : Relecteur.
+                                  * rapporteur : Rapporteur.
+                                  * preventionniste : Préventionniste.
+                                  * secretariat_commission_securite : Secrétariat commission de sécurité.
+                                  * secretariat : Secrétariat.
+                      lieu_reunion:
+                        description: |-
+                          Lieu de la réunion.
+                          Renseigné uniquement lorsque la nature est EXTERIEUR_SDIS.
+                        type: string
+                        maxLength: 256
+                main_courante_courriel:
+                  description: Main courante spécifique aux courriels.
+                  items:
+                    type: object
+                    title: Objet Main Courante Courriel/Courrier
+                    description: Main courante spécifique aux courriers et courriels.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature du courrier / courriel.
+
+                          Valeurs possibles :
+                          * LETTRE : Lettre simple.
+                          * MISE_EN_DEMEURE : Mise en demeure.
+                          * AVIS_ECRIT_MOTIVE : Avis écrit motivé.
+                          * CONSULTATION_PLU : Consultation PLU.
+                          * RAPPORT_ORGANISME_AGREE : Rapport d'organisme agréé.
+                          * DEMANDE_RENSEIGNEMENT : Demande de renseignement.
+                          * DEMANDE_VISITE_PERIODIQUE : Demande de visite périodique.
+                          * DEMANDE_VISITE_TECHNIQUE : Demande de visite technique.
+                          * DEMANDE_VISITE_INOPINEE : Demande de visite inopinée.
+                          * DEMANDE_VISITE_HORS_PROGRAMME : Demande de visite hors programme.
+                          * DEMANDE_VISITE_RECEPTION : Demande de visite de réception.
+                          * AUTORISATION_TRAVAUX : Autorisation de travaux.
+                        type: string
+                        enum:
+                          - LETTRE
+                          - MISE_EN_DEMEURE
+                          - AVIS_ECRIT_MOTIVE
+                          - CONSULTATION_PLU
+                          - RAPPORT_ORGANISME_AGREE
+                          - DEMANDE_RENSEIGNEMENT
+                          - DEMANDE_VISITE_PERIODIQUE
+                          - DEMANDE_VISITE_TECHNIQUE
+                          - DEMANDE_VISITE_INOPINEE
+                          - DEMANDE_VISITE_HORS_PROGRAMME
+                          - DEMANDE_VISITE_RECEPTION
+                          - AUTORISATION_TRAVAUX
+                      date_creation_dossier:
+                        description: Date de création du dossier.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      objet:
+                        description: Objet du courrier / courriel.
+                        type: string
+                        maxLength: 256
+                      demandeur:
+                        description: Demandeur à l'origine du courrier / courriel.
+                        type: string
+                        maxLength: 256
+                      date_reception_mairie:
+                        description: Date de réception en mairie.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      date_envoi_transit:
+                        description: Date d'envoi / transit du courrier.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      date_reception_sdis:
+                        description: Date de réception au SDIS.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      observations:
+                        description: Observations relatives au courrier / courriel.
+                        type: string
+                        maxLength: 65536
+                      date_reponse:
+                        description: Date de réponse.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      date_transfert_commission_competente:
+                        description: Date de transfert à la commission compétente.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      date_reception_commission_competente:
+                        description: Date de réception à la commission compétente.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      preventionnistes:
+                        description: Préventionniste(s) en charge du dossier.
+                        type: array
+                        maxItems: 10
+                        items:
+                          type: object
+                          title: Objet Utilisateur
+                          properties:
+                            avatar_url:
+                              description: Lien URL vers l'avatar de l'utilisateur.
+                              type: string
+                              format: uri
+                              maxLength: 512
+                              nullable: true
+                            roles:
+                              description: Liste des rôles de l'utilisateur.
+                              type: array
+                              maxItems: 10
+                              uniqueItems: true
+                              items:
+                                type: string
+                                enum:
+                                  - administrateur_fonctionnel
+                                  - valideur
+                                  - visionneur_simple
+                                  - visionneur_complet
+                                  - attributeur
+                                  - relecteur
+                                  - rapporteur
+                                  - preventionniste
+                                  - secretariat_commission_securite
+                                  - secretariat
+                                description: |-
+                                  Le rôle de l'utilisateur.
+
+                                  Valeurs possibles :
+                                  * administrateur_fonctionnel : Administrateur fonctionnel.
+                                  * valideur : Valideur.
+                                  * visionneur_simple : Visionneur simple.
+                                  * visionneur_complet : Visionneur complet.
+                                  * attributeur : Attributeur.
+                                  * relecteur : Relecteur.
+                                  * rapporteur : Rapporteur.
+                                  * preventionniste : Préventionniste.
+                                  * secretariat_commission_securite : Secrétariat commission de sécurité.
+                                  * secretariat : Secrétariat.
+                main_courante_arrete:
+                  description: Main courante spécifique aux arrêtés.
+                  items:
+                    type: object
+                    title: Objet Main Courante Arrêté
+                    description: Main courante spécifique aux arrêtés.
+                    properties:
+                      nature:
+                        description: |-
+                          Nature de l'événement lié aux arrêtés.
+
+                          Valeurs possibles :
+                          * OUVERTURE : Ouverture de l'arrêté.
+                          * FERMETURE : Fermeture de l'arrêté.
+                          * MISE_EN_DEMEURE : Mise en demeure.
+                          * UTILISATION_EXCEPTIONNELLE_LOCAUX : Utilisation exceptionnelle de l'arrêté.
+                        type: string
+                        enum:
+                          - OUVERTURE
+                          - FERMETURE
+                          - MISE_EN_DEMEURE
+                          - UTILISATION_EXCEPTIONNELLE_LOCAUX
+                      date_creation:
+                        description: Date de création de l'événement.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      observations:
+                        description: Observations relatives à l'événement.
+                        type: string
+                        maxLength: 65536
+                      date_signature:
+                        description: Date de signature de l'acte.
+                        type: string
+                        format: date
+                        maxLength: 10
+                        minLength: 10
+                      preventionniste:
+                        description: Préventionniste en charge du dossier.
+                        type: string
+                        maxLength: 256
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCourante'
               x-extension-metarisc-codegen-context: update
@@ -60778,14 +61384,34 @@ components:
             Valeurs possibles :
             * REUNION : Réunion.
             * INTERVENTION : Intervention.
-            * RCCI : Recherche des Causes et des Circonstances de l'Incendie.
-            * RETEX : Retour d'expérience.
+            * COURRIEL_COURRIEL : Courriel.
+            * ARRETE : Arrêté.
           type: string
           enum:
             - REUNION
             - INTERVENTION
-            - RCCI
-            - RETEX
+            - COURRIEL_COURRIEL
+            - ARRETE
+        main_courante_intervention:
+          description: Main courante spécifique aux interventions.
+          items:
+            $ref: '#/components/schemas/MainCouranteIntervention'
+          nullable: true
+        main_courante_reunion:
+          description: Main courante spécifique aux réunions.
+          items:
+            $ref: '#/components/schemas/MainCouranteReunion'
+          nullable: true
+        main_courante_courriel:
+          description: Main courante spécifique aux courriels.
+          items:
+            $ref: '#/components/schemas/MainCouranteCourriel'
+          nullable: true
+        main_courante_arrete:
+          description: Main courante spécifique aux arrêtés.
+          items:
+            $ref: '#/components/schemas/MainCouranteArrete'
+          nullable: true
       required:
         - id
         - objet
@@ -60793,6 +61419,225 @@ components:
         - compte_rendu
         - type
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCourante'
+      x-extension-metarisc-codegen-context: query
+    MainCouranteArrete:
+      type: object
+      title: Objet Main Courante Arrêté
+      description: Main courante spécifique aux arrêtés.
+      properties:
+        nature:
+          description: |-
+            Nature de l'événement lié aux arrêtés.
+
+            Valeurs possibles :
+            * OUVERTURE : Ouverture de l'arrêté.
+            * FERMETURE : Fermeture de l'arrêté.
+            * MISE_EN_DEMEURE : Mise en demeure.
+            * UTILISATION_EXCEPTIONNELLE_LOCAUX : Utilisation exceptionnelle de l'arrêté.
+          type: string
+          enum:
+            - OUVERTURE
+            - FERMETURE
+            - MISE_EN_DEMEURE
+            - UTILISATION_EXCEPTIONNELLE_LOCAUX
+        date_creation:
+          description: Date de création de l'événement.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        observations:
+          description: Observations relatives à l'événement.
+          type: string
+          maxLength: 65536
+          nullable: true
+        date_signature:
+          description: Date de signature de l'acte.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        preventionniste:
+          description: Préventionniste en charge du dossier.
+          type: string
+          maxLength: 256
+          nullable: true
+      required:
+        - nature
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCouranteArrete'
+      x-extension-metarisc-codegen-context: query
+    MainCouranteCourriel:
+      type: object
+      title: Objet Main Courante Courriel/Courrier
+      description: Main courante spécifique aux courriers et courriels.
+      properties:
+        nature:
+          description: |-
+            Nature du courrier / courriel.
+
+            Valeurs possibles :
+            * LETTRE : Lettre simple.
+            * MISE_EN_DEMEURE : Mise en demeure.
+            * AVIS_ECRIT_MOTIVE : Avis écrit motivé.
+            * CONSULTATION_PLU : Consultation PLU.
+            * RAPPORT_ORGANISME_AGREE : Rapport d'organisme agréé.
+            * DEMANDE_RENSEIGNEMENT : Demande de renseignement.
+            * DEMANDE_VISITE_PERIODIQUE : Demande de visite périodique.
+            * DEMANDE_VISITE_TECHNIQUE : Demande de visite technique.
+            * DEMANDE_VISITE_INOPINEE : Demande de visite inopinée.
+            * DEMANDE_VISITE_HORS_PROGRAMME : Demande de visite hors programme.
+            * DEMANDE_VISITE_RECEPTION : Demande de visite de réception.
+            * AUTORISATION_TRAVAUX : Autorisation de travaux.
+          type: string
+          enum:
+            - LETTRE
+            - MISE_EN_DEMEURE
+            - AVIS_ECRIT_MOTIVE
+            - CONSULTATION_PLU
+            - RAPPORT_ORGANISME_AGREE
+            - DEMANDE_RENSEIGNEMENT
+            - DEMANDE_VISITE_PERIODIQUE
+            - DEMANDE_VISITE_TECHNIQUE
+            - DEMANDE_VISITE_INOPINEE
+            - DEMANDE_VISITE_HORS_PROGRAMME
+            - DEMANDE_VISITE_RECEPTION
+            - AUTORISATION_TRAVAUX
+        date_creation_dossier:
+          description: Date de création du dossier.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        objet:
+          description: Objet du courrier / courriel.
+          type: string
+          maxLength: 256
+          nullable: true
+        demandeur:
+          description: Demandeur à l'origine du courrier / courriel.
+          type: string
+          maxLength: 256
+          nullable: true
+        date_reception_mairie:
+          description: Date de réception en mairie.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        date_envoi_transit:
+          description: Date d'envoi / transit du courrier.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        date_reception_sdis:
+          description: Date de réception au SDIS.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        observations:
+          description: Observations relatives au courrier / courriel.
+          type: string
+          maxLength: 65536
+          nullable: true
+        date_reponse:
+          description: Date de réponse.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        date_transfert_commission_competente:
+          description: Date de transfert à la commission compétente.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        date_reception_commission_competente:
+          description: Date de réception à la commission compétente.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        preventionnistes:
+          description: Préventionniste(s) en charge du dossier.
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Utilisateur'
+          nullable: true
+      required:
+        - nature
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCouranteCourriel'
+      x-extension-metarisc-codegen-context: query
+    MainCouranteIntervention:
+      type: object
+      title: Objet Main Courante Intervention
+      description: Main courante spécifique aux interventions. Elle représente une liste d'événements d'intervention enregistrés dans un registre. Elle est utilisée pour suivre l'évolution informelle des interventions.
+      properties:
+        nature:
+          description: |-
+            Nature de l'intervention.
+
+            Valeurs possibles :
+            * INCENDIE : Intervention liée à un incendie.
+            * SAP : Intervention liée au SAP.
+            * INTERVENTION_DIVERSE : Intervention diverse.
+          type: string
+          enum:
+            - INCENDIE
+            - SAP
+            - INTERVENTION_DIVERSE
+        InterventionSDIS:
+          description: Indique si l'intervention est liée au SDIS.
+          type: boolean
+          nullable: true
+        RCCI:
+          description: Indique si l'intervention est liée au RCCI.
+          type: boolean
+          nullable: true
+        RetEx:
+          description: Retour d'expérience sur l'intervention.
+          type: boolean
+          nullable: true
+        numero_intervention:
+          description: Numéro de l'intervention.
+          type: string
+          maxLength: 256
+          nullable: true
+        date_heure_intervention:
+          description: Date et heure de début de l'intervention.
+          type: string
+          format: date-time
+          maxLength: 50
+          minLength: 20
+          nullable: true
+        date_heure_fin_intervention:
+          description: Date et heure de fin de l'intervention.
+          type: string
+          format: date-time
+          maxLength: 50
+          minLength: 20
+          nullable: true
+        duree_intervention:
+          description: |-
+            Durée calculée de l'intervention entre sa date de début et sa date de fin,
+            exprimée en jours, heures et minutes.
+          type: string
+          maxLength: 255
+          nullable: true
+      required:
+        - nature
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCouranteIntervention'
       x-extension-metarisc-codegen-context: query
     MainCouranteParticipation:
       type: object
@@ -60813,6 +61658,71 @@ components:
         - id
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCouranteParticipation'
+      x-extension-metarisc-codegen-context: query
+    MainCouranteReunion:
+      type: object
+      title: Objet Main Courante Réunion
+      description: Main courante spécifique aux réunions. Elle représente une liste d'événements de réunion enregistrés dans un registre. Elle est utilisée pour suivre l'évolution informelle des réunions.
+      properties:
+        nature:
+          description: |-
+            Nature de la réunion.
+
+            Valeurs possibles :
+            * LOCAUX_SDIS : Réunion tenue dans les locaux du SDIS.
+            * EXTERIEUR_SDIS : Réunion tenue en dehors des locaux du SDIS.
+            * TELEPHONIQUE : Réunion tenue par téléphone.
+          type: string
+          enum:
+            - LOCAUX_SDIS
+            - EXTERIEUR_SDIS
+            - TELEPHONIQUE
+        date_creation:
+          description: Date de création de l'événement.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        objet:
+          description: Objet de la réunion.
+          type: string
+          maxLength: 256
+          nullable: true
+        demandeur:
+          description: Demandeur de la réunion.
+          type: string
+          maxLength: 256
+          nullable: true
+        observations:
+          description: Observations relatives à la réunion.
+          type: string
+          maxLength: 65536
+          nullable: true
+        date_reunion:
+          description: Date de tenue de la réunion.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        preventionnistes:
+          description: Préventionnistes en charge de la réunion.
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Utilisateur'
+        lieu_reunion:
+          description: |-
+            Lieu de la réunion.
+            Renseigné uniquement lorsque la nature est EXTERIEUR_SDIS.
+          type: string
+          maxLength: 256
+          nullable: true
+      required:
+        - nature
+        - preventionnistes
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/MainCouranteReunion'
       x-extension-metarisc-codegen-context: query
     MembreAvis:
       type: object
