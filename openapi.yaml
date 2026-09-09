@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/09-09-2026.1
+  version: 1.0/feature/periodicite-prop/09-09-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -39744,6 +39744,9 @@ paths:
                         description: Justification de l'avis rendu par le membre de la commission sur le dossier.
                         type: string
                         maxLength: 65536
+                periodicite_accordee:
+                  description: Périodicité accordée pour le suivi de l'ERP pendant la visite.
+                  type: boolean
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -62084,6 +62087,15 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/MembreAvis'
+          nullable: true
+        periodicite_proposee:
+          description: Périodicité proposée pour le suivi de l'ERP pendant la visite.
+          type: string
+          maxLength: 255
+          nullable: true
+        periodicite_accordee:
+          description: Périodicité accordée pour le suivi de l'ERP pendant la visite.
+          type: boolean
           nullable: true
       required:
         - id
