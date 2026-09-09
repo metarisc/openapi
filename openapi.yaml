@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-09-2026.1
+  version: 1.0/main/09-09-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -19917,44 +19917,23 @@ paths:
                   maxItems: 50
                   items:
                     type: object
-                    title: Objet Document Technique
-                    description: Un dossier permettant de vérifier la conformité d'un établissement recevant le public avec les règles de sécurité, prévu par le b de l'article R. 122-11, comprend des documents techniques. Voir https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818985.
+                    title: Objet Document Technique Visite
+                    description: Objet représentant un document technique lors d'une visite.
                     properties:
                       libelle:
-                        description: Libellé du document technique.
+                        description: >-
+                          Libellé du document technique. La liste des types de documents techniques est la suivante : * registre_de_securite : Registre de sécurité. * desenfumage_naturel : Désenfumage naturel : Tous les ans par un technicien compétent (DF 10). * desenfumage_mecanique_releve : Désenfumage mécanique : Relevé de vérification du désenfumage (DF 10). * chauffage_releve : Chauffage : Relevé de vérification du chauffage-ventilation (CH 58). * traitement_air_vmc : Traitement air VMC : Tous les ans par un technicien compétent (CH 58) (CH 57). * electricite_releve_ou_rvre : Électricité : Relevé ou RVRE des installations électriques et/ou des paratonnerres ou protection contre la foudre (EL 19). * eclairage_releve : Éclairage : Tous les ans par un technicien compétent (EC 15). * ascenseurs_monte_charges_annuel : Ascenseurs Monte-charges : Tous les ans (AS 11). * ssi_alarme_detection_releve : Système de sécurité incendie Alarme Détection : Relevé de vérification du SSI ou
+                          d'équipement d'alarme, détection, portes, clapets coupe-feu (MS 73). * ssi_alarme_detection_rvre_triennal : Système de sécurité incendie Alarme Détection : RVRE triennal du SSI A ou B (MS 73). * ssi_alarme_detection_contrat_entretien : Système de sécurité incendie Alarme Détection : Contrat d'entretien du Système de Sécurité Incendie (MS 58). * extinction_auto_eau_releve : Installation fixe d'extinction automatique à eau : Relevé de vérification du système d'extinction automatique du type sprinkleur (MS 29/73) ou déversoirs et rideaux d'eau (L 57). * extinction_auto_eau_rvre_triennal : Installation fixe d'extinction automatique à eau : RVRE triennal du sprinkleur (MS 73). * ria_releve : RIA : Relevé de vérification des R.I.A. (MS 73). * extincteurs_releve : Extincteurs : Relevé de vérification des extincteurs (MS 38). * formation_exercice_personnels : Formation Exercice : Formation des personnels à l'utilisation des moyens de secours. *
+                          dossier_technique_amiante : Dossier technique amiante. * portes_automatiques_releve_verification : Portes automatiques : Relevé de vérification des portes automatiques en façade (CO 48). * portes_automatiques_contrat_entretien : Portes automatiques : Contrat d'entretien des portes automatiques en façade (CO 48). * desenfumage_mecanique_rvre_triennal : Désenfumage mécanique : RVRE triennal du désenfumage mécanique associé à un SSI A ou B. * etancheite_gaz_liquide_frigorigene : Étanchéité (gaz liquide frigorigène) : Tous les ans par un technicien compétent (CH 58) (CH 57). * ramonage_attestation : Ramonage : Attestation de ramonage ou visite des conduits (CH 57). * gaz_releve : Gaz : Relevé de vérification du gaz (GZ 30) (GZ 29). * groupe_electrogene : Groupe électrogène : TC/15j / 1/mois (EL 18). * installations_exterieures_protection_foudre : Installations extérieures de protection contre la foudre : Tous les ans par un technicien compétent (EL 19). *
+                          ascenseurs_monte_charges_rvre_quinquennal : Ascenseurs Monte-charges : RVRE quinquennal des ascenseurs (AS 9). * ascenseurs_monte_charges_contrat_entretien : Ascenseurs Monte-charges : Contrat d'entretien des ascenseurs, escaliers mécaniques et trottoirs roulants (AS 8). * escaliers_mecaniques_annuel_oa : Escaliers mécaniques : Annuel OA (AS 10). * appareils_cuisson_releve : Appareils de cuisson : Relevé de vérification des appareils de cuisson (GC 22). * hotte_attestation_nettoyage : Hotte : Attestation de nettoyage du circuit d'extraction (GC 21). * ssi_alarme_detection_dossier_identite : Système de sécurité incendie Alarme Détection : Dossier d'identité du Système de Sécurité Incendie (MS 73). * extincteurs_revision_decennale : Extincteurs : Révision décennale des extincteurs (MS 38). * formation_exercice_evacuation : Formation Exercice : Exercice d'évacuation réalisé. * pi_bi_releve : Relevé de vérification des PI/BI (MS 73). *
+                          communication_radioelectrique_attestation : Communication radioélectrique : Attestation de vérification des communications radioélectriques (MS 71). * communication_radioelectrique_rvre_triennal : Communication radioélectrique : RVRE triennal des moyens de communications radioélectriques mode relayés (MS 71). * gaz_medicaux_releve : Gaz médicaux : Relevé de vérification des fluides médicaux (U 64 / J 33). * espaces_sceniques_rvre_levage : Espaces scéniques : RVRE des équipements de levage des salles avec espace scénique (L 57). * espaces_sceniques_rvre_triennal : Espaces scéniques : RVRE triennal des salles de spectacles avec espace scénique (L 57). * reglage_luminosite_son : Réglage luminosité et son (L 13 OA 1 an). * cinquieme_avec_hebergement : 5ème avec hébergement : PE4 PO1 - 2 ans TC ; SSI DF manuel CH GC GZ - 1 an TC ; EL/détection + contrat. * autres_installations_colonnes_seches : Autres installations : Relevé de vérification des colonnes sèches (MS
+                          73).
                         type: string
                         maxLength: 256
                       reference:
                         description: Référence du document technique.
                         type: string
                         maxLength: 256
-                      type:
-                        description: |-
-                          Type du document technique.
-
-                          Valeurs possibles :
-                          * CERFA : Document CERFA.
-                          * courrier_de_la_mairie : Courrier de la mairie.
-                          * notice_descriptive : Notice descriptive.
-                          * plan : Plan.
-                          * certificat_de_verification : Certificat de vérification.
-                          * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
-                          * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
-                          * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
-                          * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
-                          * divers : Divers.
-                        type: string
-                        enum:
-                          - CERFA
-                          - courrier_de_la_mairie
-                          - notice_descriptive
-                          - plan
-                          - certificat_de_verification
-                          - RVRAT
-                          - RVRE
-                          - RVRMD
-                          - lettre_accompagnement_RUS
-                          - divers
                       date_de_reception:
                         description: Date de réception du document technique.
                         type: string
@@ -19967,12 +19946,8 @@ paths:
                         format: date
                         maxLength: 10
                         minLength: 10
-                      est_manquant:
-                        description: Indique si le document technique est manquant.
-                        type: boolean
                     required:
                       - libelle
-                      - type
                 essais:
                   type: array
                   maxItems: 50
@@ -20315,44 +20290,23 @@ paths:
                   maxItems: 50
                   items:
                     type: object
-                    title: Objet Document Technique
-                    description: Un dossier permettant de vérifier la conformité d'un établissement recevant le public avec les règles de sécurité, prévu par le b de l'article R. 122-11, comprend des documents techniques. Voir https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818985.
+                    title: Objet Document Technique Visite
+                    description: Objet représentant un document technique lors d'une visite.
                     properties:
                       libelle:
-                        description: Libellé du document technique.
+                        description: >-
+                          Libellé du document technique. La liste des types de documents techniques est la suivante : * registre_de_securite : Registre de sécurité. * desenfumage_naturel : Désenfumage naturel : Tous les ans par un technicien compétent (DF 10). * desenfumage_mecanique_releve : Désenfumage mécanique : Relevé de vérification du désenfumage (DF 10). * chauffage_releve : Chauffage : Relevé de vérification du chauffage-ventilation (CH 58). * traitement_air_vmc : Traitement air VMC : Tous les ans par un technicien compétent (CH 58) (CH 57). * electricite_releve_ou_rvre : Électricité : Relevé ou RVRE des installations électriques et/ou des paratonnerres ou protection contre la foudre (EL 19). * eclairage_releve : Éclairage : Tous les ans par un technicien compétent (EC 15). * ascenseurs_monte_charges_annuel : Ascenseurs Monte-charges : Tous les ans (AS 11). * ssi_alarme_detection_releve : Système de sécurité incendie Alarme Détection : Relevé de vérification du SSI ou
+                          d'équipement d'alarme, détection, portes, clapets coupe-feu (MS 73). * ssi_alarme_detection_rvre_triennal : Système de sécurité incendie Alarme Détection : RVRE triennal du SSI A ou B (MS 73). * ssi_alarme_detection_contrat_entretien : Système de sécurité incendie Alarme Détection : Contrat d'entretien du Système de Sécurité Incendie (MS 58). * extinction_auto_eau_releve : Installation fixe d'extinction automatique à eau : Relevé de vérification du système d'extinction automatique du type sprinkleur (MS 29/73) ou déversoirs et rideaux d'eau (L 57). * extinction_auto_eau_rvre_triennal : Installation fixe d'extinction automatique à eau : RVRE triennal du sprinkleur (MS 73). * ria_releve : RIA : Relevé de vérification des R.I.A. (MS 73). * extincteurs_releve : Extincteurs : Relevé de vérification des extincteurs (MS 38). * formation_exercice_personnels : Formation Exercice : Formation des personnels à l'utilisation des moyens de secours. *
+                          dossier_technique_amiante : Dossier technique amiante. * portes_automatiques_releve_verification : Portes automatiques : Relevé de vérification des portes automatiques en façade (CO 48). * portes_automatiques_contrat_entretien : Portes automatiques : Contrat d'entretien des portes automatiques en façade (CO 48). * desenfumage_mecanique_rvre_triennal : Désenfumage mécanique : RVRE triennal du désenfumage mécanique associé à un SSI A ou B. * etancheite_gaz_liquide_frigorigene : Étanchéité (gaz liquide frigorigène) : Tous les ans par un technicien compétent (CH 58) (CH 57). * ramonage_attestation : Ramonage : Attestation de ramonage ou visite des conduits (CH 57). * gaz_releve : Gaz : Relevé de vérification du gaz (GZ 30) (GZ 29). * groupe_electrogene : Groupe électrogène : TC/15j / 1/mois (EL 18). * installations_exterieures_protection_foudre : Installations extérieures de protection contre la foudre : Tous les ans par un technicien compétent (EL 19). *
+                          ascenseurs_monte_charges_rvre_quinquennal : Ascenseurs Monte-charges : RVRE quinquennal des ascenseurs (AS 9). * ascenseurs_monte_charges_contrat_entretien : Ascenseurs Monte-charges : Contrat d'entretien des ascenseurs, escaliers mécaniques et trottoirs roulants (AS 8). * escaliers_mecaniques_annuel_oa : Escaliers mécaniques : Annuel OA (AS 10). * appareils_cuisson_releve : Appareils de cuisson : Relevé de vérification des appareils de cuisson (GC 22). * hotte_attestation_nettoyage : Hotte : Attestation de nettoyage du circuit d'extraction (GC 21). * ssi_alarme_detection_dossier_identite : Système de sécurité incendie Alarme Détection : Dossier d'identité du Système de Sécurité Incendie (MS 73). * extincteurs_revision_decennale : Extincteurs : Révision décennale des extincteurs (MS 38). * formation_exercice_evacuation : Formation Exercice : Exercice d'évacuation réalisé. * pi_bi_releve : Relevé de vérification des PI/BI (MS 73). *
+                          communication_radioelectrique_attestation : Communication radioélectrique : Attestation de vérification des communications radioélectriques (MS 71). * communication_radioelectrique_rvre_triennal : Communication radioélectrique : RVRE triennal des moyens de communications radioélectriques mode relayés (MS 71). * gaz_medicaux_releve : Gaz médicaux : Relevé de vérification des fluides médicaux (U 64 / J 33). * espaces_sceniques_rvre_levage : Espaces scéniques : RVRE des équipements de levage des salles avec espace scénique (L 57). * espaces_sceniques_rvre_triennal : Espaces scéniques : RVRE triennal des salles de spectacles avec espace scénique (L 57). * reglage_luminosite_son : Réglage luminosité et son (L 13 OA 1 an). * cinquieme_avec_hebergement : 5ème avec hébergement : PE4 PO1 - 2 ans TC ; SSI DF manuel CH GC GZ - 1 an TC ; EL/détection + contrat. * autres_installations_colonnes_seches : Autres installations : Relevé de vérification des colonnes sèches (MS
+                          73).
                         type: string
                         maxLength: 256
                       reference:
                         description: Référence du document technique.
                         type: string
                         maxLength: 256
-                      type:
-                        description: |-
-                          Type du document technique.
-
-                          Valeurs possibles :
-                          * CERFA : Document CERFA.
-                          * courrier_de_la_mairie : Courrier de la mairie.
-                          * notice_descriptive : Notice descriptive.
-                          * plan : Plan.
-                          * certificat_de_verification : Certificat de vérification.
-                          * RVRAT : Le rapport de vérifications réglementaires après travaux (RVRAT). Le RVRAT comporte au minimum deux parties : des renseignements d'ordre général et administratif concernant l'établissement et les avis émis par le(s) vérificateur(s) technique(s) en application du référentiel cité à l'article GE 8, §1.
-                          * RVRE : Après la réalisation d’une ou plusieurs vérifications par un organisme agréé, un rapport de vérification réglementaire en exploitation (RVRE) est rédigé et remis à l’exploitant.
-                          * RVRMD : Rapport de vérifications réglementaires sur mise en demeure.
-                          * lettre_accompagnement_RUS : Lettre d'accompagnement du RUS.
-                          * divers : Divers.
-                        type: string
-                        enum:
-                          - CERFA
-                          - courrier_de_la_mairie
-                          - notice_descriptive
-                          - plan
-                          - certificat_de_verification
-                          - RVRAT
-                          - RVRE
-                          - RVRMD
-                          - lettre_accompagnement_RUS
-                          - divers
                       date_de_reception:
                         description: Date de réception du document technique.
                         type: string
@@ -20365,12 +20319,8 @@ paths:
                         format: date
                         maxLength: 10
                         minLength: 10
-                      est_manquant:
-                        description: Indique si le document technique est manquant.
-                        type: boolean
                     required:
                       - libelle
-                      - type
                 essais:
                   type: array
                   maxItems: 50
@@ -59919,6 +59869,46 @@ components:
         - est_manquant
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/DocumentTechnique'
       x-extension-metarisc-codegen-context: query
+    DocumentTechniqueVisite:
+      type: object
+      title: Objet Document Technique Visite
+      description: Objet représentant un document technique lors d'une visite.
+      properties:
+        libelle:
+          description: >-
+            Libellé du document technique. La liste des types de documents techniques est la suivante : * registre_de_securite : Registre de sécurité. * desenfumage_naturel : Désenfumage naturel : Tous les ans par un technicien compétent (DF 10). * desenfumage_mecanique_releve : Désenfumage mécanique : Relevé de vérification du désenfumage (DF 10). * chauffage_releve : Chauffage : Relevé de vérification du chauffage-ventilation (CH 58). * traitement_air_vmc : Traitement air VMC : Tous les ans par un technicien compétent (CH 58) (CH 57). * electricite_releve_ou_rvre : Électricité : Relevé ou RVRE des installations électriques et/ou des paratonnerres ou protection contre la foudre (EL 19). * eclairage_releve : Éclairage : Tous les ans par un technicien compétent (EC 15). * ascenseurs_monte_charges_annuel : Ascenseurs Monte-charges : Tous les ans (AS 11). * ssi_alarme_detection_releve : Système de sécurité incendie Alarme Détection : Relevé de vérification du SSI ou d'équipement d'alarme,
+            détection, portes, clapets coupe-feu (MS 73). * ssi_alarme_detection_rvre_triennal : Système de sécurité incendie Alarme Détection : RVRE triennal du SSI A ou B (MS 73). * ssi_alarme_detection_contrat_entretien : Système de sécurité incendie Alarme Détection : Contrat d'entretien du Système de Sécurité Incendie (MS 58). * extinction_auto_eau_releve : Installation fixe d'extinction automatique à eau : Relevé de vérification du système d'extinction automatique du type sprinkleur (MS 29/73) ou déversoirs et rideaux d'eau (L 57). * extinction_auto_eau_rvre_triennal : Installation fixe d'extinction automatique à eau : RVRE triennal du sprinkleur (MS 73). * ria_releve : RIA : Relevé de vérification des R.I.A. (MS 73). * extincteurs_releve : Extincteurs : Relevé de vérification des extincteurs (MS 38). * formation_exercice_personnels : Formation Exercice : Formation des personnels à l'utilisation des moyens de secours. * dossier_technique_amiante : Dossier technique amiante. *
+            portes_automatiques_releve_verification : Portes automatiques : Relevé de vérification des portes automatiques en façade (CO 48). * portes_automatiques_contrat_entretien : Portes automatiques : Contrat d'entretien des portes automatiques en façade (CO 48). * desenfumage_mecanique_rvre_triennal : Désenfumage mécanique : RVRE triennal du désenfumage mécanique associé à un SSI A ou B. * etancheite_gaz_liquide_frigorigene : Étanchéité (gaz liquide frigorigène) : Tous les ans par un technicien compétent (CH 58) (CH 57). * ramonage_attestation : Ramonage : Attestation de ramonage ou visite des conduits (CH 57). * gaz_releve : Gaz : Relevé de vérification du gaz (GZ 30) (GZ 29). * groupe_electrogene : Groupe électrogène : TC/15j / 1/mois (EL 18). * installations_exterieures_protection_foudre : Installations extérieures de protection contre la foudre : Tous les ans par un technicien compétent (EL 19). * ascenseurs_monte_charges_rvre_quinquennal : Ascenseurs Monte-charges : RVRE
+            quinquennal des ascenseurs (AS 9). * ascenseurs_monte_charges_contrat_entretien : Ascenseurs Monte-charges : Contrat d'entretien des ascenseurs, escaliers mécaniques et trottoirs roulants (AS 8). * escaliers_mecaniques_annuel_oa : Escaliers mécaniques : Annuel OA (AS 10). * appareils_cuisson_releve : Appareils de cuisson : Relevé de vérification des appareils de cuisson (GC 22). * hotte_attestation_nettoyage : Hotte : Attestation de nettoyage du circuit d'extraction (GC 21). * ssi_alarme_detection_dossier_identite : Système de sécurité incendie Alarme Détection : Dossier d'identité du Système de Sécurité Incendie (MS 73). * extincteurs_revision_decennale : Extincteurs : Révision décennale des extincteurs (MS 38). * formation_exercice_evacuation : Formation Exercice : Exercice d'évacuation réalisé. * pi_bi_releve : Relevé de vérification des PI/BI (MS 73). * communication_radioelectrique_attestation : Communication radioélectrique : Attestation de vérification des
+            communications radioélectriques (MS 71). * communication_radioelectrique_rvre_triennal : Communication radioélectrique : RVRE triennal des moyens de communications radioélectriques mode relayés (MS 71). * gaz_medicaux_releve : Gaz médicaux : Relevé de vérification des fluides médicaux (U 64 / J 33). * espaces_sceniques_rvre_levage : Espaces scéniques : RVRE des équipements de levage des salles avec espace scénique (L 57). * espaces_sceniques_rvre_triennal : Espaces scéniques : RVRE triennal des salles de spectacles avec espace scénique (L 57). * reglage_luminosite_son : Réglage luminosité et son (L 13 OA 1 an). * cinquieme_avec_hebergement : 5ème avec hébergement : PE4 PO1 - 2 ans TC ; SSI DF manuel CH GC GZ - 1 an TC ; EL/détection + contrat. * autres_installations_colonnes_seches : Autres installations : Relevé de vérification des colonnes sèches (MS 73).
+          type: string
+          maxLength: 256
+        reference:
+          description: Référence du document technique.
+          type: string
+          maxLength: 256
+          nullable: true
+        date_de_reception:
+          description: Date de réception du document technique.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+        date_de_consultation:
+          description: Date de consultation du document technique.
+          type: string
+          format: date
+          maxLength: 10
+          minLength: 10
+          nullable: true
+      required:
+        - libelle
+        - reference
+        - date_de_reception
+        - date_de_consultation
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/DocumentTechniqueVisite'
+      x-extension-metarisc-codegen-context: query
     DonneesHydrauliques:
       type: object
       title: Objet Données Hydrauliques
@@ -62680,7 +62670,7 @@ components:
           type: array
           maxItems: 50
           items:
-            $ref: '#/components/schemas/DocumentTechnique'
+            $ref: '#/components/schemas/DocumentTechniqueVisite'
         essais:
           type: array
           maxItems: 50
