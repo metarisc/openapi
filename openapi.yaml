@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-09-2026.1
+  version: 1.0/main/16-09-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -31852,6 +31852,11 @@ paths:
                         maxLength: 50
                         minLength: 20
                         nullable: true
+                      observations:
+                        description: Observations générales sur l'intervention.
+                        type: string
+                        maxLength: 65536
+                        nullable: true
                     required:
                       - nature
                   nullable: true
@@ -36290,6 +36295,10 @@ paths:
                         format: date-time
                         maxLength: 50
                         minLength: 20
+                      observations:
+                        description: Observations générales sur l'intervention.
+                        type: string
+                        maxLength: 65536
                 main_courante_reunion:
                   description: Main courante spécifique aux réunions.
                   type: array
@@ -62425,6 +62434,11 @@ components:
             exprimée en jours, heures et minutes.
           type: string
           maxLength: 255
+          nullable: true
+        observations:
+          description: Observations générales sur l'intervention.
+          type: string
+          maxLength: 65536
           nullable: true
       required:
         - nature
