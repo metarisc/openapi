@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/15-09-2026.1
+  version: 1.0/main/16-09-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -31791,13 +31791,13 @@ paths:
                     Valeurs possibles :
                     * REUNION : Réunion.
                     * INTERVENTION : Intervention.
-                    * COURRIEL_COURRIEL : Courriel.
+                    * COURRIER_COURRIEL : Courriel.
                     * ARRETE : Arrêté.
                   type: string
                   enum:
                     - REUNION
                     - INTERVENTION
-                    - COURRIEL_COURRIEL
+                    - COURRIER_COURRIEL
                     - ARRETE
                 main_courante_intervention:
                   description: Main courante spécifique aux interventions.
@@ -36235,13 +36235,13 @@ paths:
                     Valeurs possibles :
                     * REUNION : Réunion.
                     * INTERVENTION : Intervention.
-                    * COURRIEL_COURRIEL : Courriel.
+                    * COURRIER_COURRIEL : Courriel.
                     * ARRETE : Arrêté.
                   type: string
                   enum:
                     - REUNION
                     - INTERVENTION
-                    - COURRIEL_COURRIEL
+                    - COURRIER_COURRIEL
                     - ARRETE
                 main_courante_intervention:
                   description: Main courante spécifique aux interventions.
@@ -62184,13 +62184,13 @@ components:
             Valeurs possibles :
             * REUNION : Réunion.
             * INTERVENTION : Intervention.
-            * COURRIEL_COURRIEL : Courriel.
+            * COURRIER_COURRIEL : Courriel.
             * ARRETE : Arrêté.
           type: string
           enum:
             - REUNION
             - INTERVENTION
-            - COURRIEL_COURRIEL
+            - COURRIER_COURRIEL
             - ARRETE
         main_courante_intervention:
           description: Main courante spécifique aux interventions.
