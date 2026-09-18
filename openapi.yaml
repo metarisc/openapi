@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-09-2026.1
+  version: 1.0/main/18-09-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -24316,6 +24316,7 @@ paths:
                 uniqueItems: true
         - name: erp_rattache_a
           in: query
+          x-extension-metarisc-param-multiple: true
           description: Filtre sur les ERP rattachés à l'identifiant donné.
           schema:
             type: string
