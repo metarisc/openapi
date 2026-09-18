@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/16-09-2026.2
+  version: 1.0/main/18-09-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -24269,26 +24269,51 @@ paths:
           in: query
           description: Filtre sur la catégorie de l'ERP.
           schema:
-            type: integer
-            format: int32
-            maximum: 5
-            minimum: 1
-            enum:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-            description: |-
-              La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
-              Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+            oneOf:
+              - type: integer
+                format: int32
+                maximum: 5
+                minimum: 1
+                enum:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                description: |-
+                  La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
+                  Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
-              Valeurs possibles :
-              * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
-              * 2 : 2ème catégorie (de 701 à 1 500 personnes).
-              * 3 : 3ème catégorie (de 301 à 700 personnes).
-              * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
-              * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+                  Valeurs possibles :
+                  * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                  * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                  * 3 : 3ème catégorie (de 301 à 700 personnes).
+                  * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                  * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+              - type: array
+                items:
+                  type: integer
+                  format: int32
+                  maximum: 5
+                  minimum: 1
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 5
+                  description: |-
+                    La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
+                    Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+
+                    Valeurs possibles :
+                    * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                    * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                    * 3 : 3ème catégorie (de 301 à 700 personnes).
+                    * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                    * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+                maxItems: 5
+                uniqueItems: true
         - name: erp_rattache_a
           in: query
           description: Filtre sur les ERP rattachés à l'identifiant donné.
@@ -51063,26 +51088,51 @@ paths:
                   maxLength: 36
                   minLength: 36
                 categorie:
-                  type: integer
-                  format: int32
-                  maximum: 5
-                  minimum: 1
-                  enum:
-                    - 1
-                    - 2
-                    - 3
-                    - 4
-                    - 5
-                  description: |-
-                    La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
-                    Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+                  oneOf:
+                    - type: integer
+                      format: int32
+                      maximum: 5
+                      minimum: 1
+                      enum:
+                        - 1
+                        - 2
+                        - 3
+                        - 4
+                        - 5
+                      description: |-
+                        La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
+                        Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
 
-                    Valeurs possibles :
-                    * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
-                    * 2 : 2ème catégorie (de 701 à 1 500 personnes).
-                    * 3 : 3ème catégorie (de 301 à 700 personnes).
-                    * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
-                    * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+                        Valeurs possibles :
+                        * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                        * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                        * 3 : 3ème catégorie (de 301 à 700 personnes).
+                        * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                        * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                        maximum: 5
+                        minimum: 1
+                        enum:
+                          - 1
+                          - 2
+                          - 3
+                          - 4
+                          - 5
+                        description: |-
+                          La catégorie d'un ERP est déterminée par le type d'activité principale exercée dans l'établissement.
+                          Voir : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043818977
+
+                          Valeurs possibles :
+                          * 1 : 1ère catégorie (au-dessus de 1 500 personnes).
+                          * 2 : 2ème catégorie (de 701 à 1 500 personnes).
+                          * 3 : 3ème catégorie (de 301 à 700 personnes).
+                          * 4 : 4ème catégorie (300 personnes et au-dessous, à l'exception des établissements compris dans la 5e catégorie).
+                          * 5 : 5ème catégorie (établissements faisant l'objet de l'article R. 143-14 dans lesquels l'effectif du public n'atteint pas le chiffre minimum fixé par le règlement de sécurité pour chaque type d'exploitation).
+                      maxItems: 5
+                      uniqueItems: true
                 erp_rattache_a:
                   type: string
                   format: uuid
