@@ -31840,12 +31840,6 @@ paths:
                           - LOCAUX_SDIS
                           - EXTERIEUR_SDIS
                           - TELEPHONIQUE
-                      date_creation:
-                        description: Date de création de l'événement.
-                        type: string
-                        format: date
-                        maxLength: 10
-                        minLength: 10
                       demandeur:
                         description: Demandeur de la réunion.
                         type: string
@@ -31872,7 +31866,6 @@ paths:
                         nullable: true
                     required:
                       - nature
-                      - date_creation
                   nullable: true
                 main_courante_courriel:
                   description: Main courante spécifique aux courriels.
@@ -31914,12 +31907,6 @@ paths:
                           - DEMANDE_VISITE_HORS_PROGRAMME
                           - DEMANDE_VISITE_RECEPTION
                           - AUTORISATION_TRAVAUX
-                      date_creation_dossier:
-                        description: Date de création du dossier.
-                        type: string
-                        format: date
-                        maxLength: 10
-                        minLength: 10
                       demandeur:
                         description: Demandeur à l'origine du courrier / courriel.
                         type: string
@@ -31974,7 +31961,6 @@ paths:
                         nullable: true
                     required:
                       - nature
-                      - date_creation_dossier
                   nullable: true
                 main_courante_arrete:
                   description: Main courante spécifique aux arrêtés.
@@ -32000,12 +31986,6 @@ paths:
                           - FERMETURE
                           - MISE_EN_DEMEURE
                           - UTILISATION_EXCEPTIONNELLE_LOCAUX
-                      date_creation:
-                        description: Date de création de l'événement.
-                        type: string
-                        format: date
-                        maxLength: 10
-                        minLength: 10
                       observations:
                         description: Observations relatives à l'événement.
                         type: string
@@ -32020,7 +32000,6 @@ paths:
                         nullable: true
                     required:
                       - nature
-                      - date_creation
                   nullable: true
               required:
                 - objet
@@ -36279,12 +36258,6 @@ paths:
                           - LOCAUX_SDIS
                           - EXTERIEUR_SDIS
                           - TELEPHONIQUE
-                      date_creation:
-                        description: Date de création de l'événement.
-                        type: string
-                        format: date
-                        maxLength: 10
-                        minLength: 10
                       demandeur:
                         description: Demandeur de la réunion.
                         type: string
@@ -36345,12 +36318,6 @@ paths:
                           - DEMANDE_VISITE_HORS_PROGRAMME
                           - DEMANDE_VISITE_RECEPTION
                           - AUTORISATION_TRAVAUX
-                      date_creation_dossier:
-                        description: Date de création du dossier.
-                        type: string
-                        format: date
-                        maxLength: 10
-                        minLength: 10
                       demandeur:
                         description: Demandeur à l'origine du courrier / courriel.
                         type: string
@@ -36419,12 +36386,6 @@ paths:
                           - FERMETURE
                           - MISE_EN_DEMEURE
                           - UTILISATION_EXCEPTIONNELLE_LOCAUX
-                      date_creation:
-                        description: Date de création de l'événement.
-                        type: string
-                        format: date
-                        maxLength: 10
-                        minLength: 10
                       observations:
                         description: Observations relatives à l'événement.
                         type: string
@@ -62196,13 +62157,6 @@ components:
             - FERMETURE
             - MISE_EN_DEMEURE
             - UTILISATION_EXCEPTIONNELLE_LOCAUX
-        date_creation:
-          description: Date de création de l'événement.
-          type: string
-          format: date
-          maxLength: 10
-          minLength: 10
-          nullable: true
         observations:
           description: Observations relatives à l'événement.
           type: string
@@ -62255,13 +62209,6 @@ components:
             - DEMANDE_VISITE_HORS_PROGRAMME
             - DEMANDE_VISITE_RECEPTION
             - AUTORISATION_TRAVAUX
-        date_creation_dossier:
-          description: Date de création du dossier.
-          type: string
-          format: date
-          maxLength: 10
-          minLength: 10
-          nullable: true
         demandeur:
           description: Demandeur à l'origine du courrier / courriel.
           type: string
@@ -62421,13 +62368,6 @@ components:
             - LOCAUX_SDIS
             - EXTERIEUR_SDIS
             - TELEPHONIQUE
-        date_creation:
-          description: Date de création de l'événement.
-          type: string
-          format: date
-          maxLength: 10
-          minLength: 10
-          nullable: true
         demandeur:
           description: Demandeur de la réunion.
           type: string
