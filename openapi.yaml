@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/24-09-2026.1
+  version: 1.0/main/30-09-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -20787,12 +20787,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - ne_se_prononce_pas
+                    - avis_differe
                   description: |-
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
                     * favorable : Avis favorable.
                     * defavorable : Avis défavorable.
+                    * ne_se_prononce_pas : Avis pour lequel il n'est pas possible de se prononcer.
+                    * avis_differe : Avis différé.
                   nullable: true
                 periodicite_modifiee:
                   description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
@@ -21160,12 +21164,16 @@ paths:
                   enum:
                     - favorable
                     - defavorable
+                    - ne_se_prononce_pas
+                    - avis_differe
                   description: |-
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
                     * favorable : Avis favorable.
                     * defavorable : Avis défavorable.
+                    * ne_se_prononce_pas : Avis pour lequel il n'est pas possible de se prononcer.
+                    * avis_differe : Avis différé.
                   nullable: true
                 periodicite_modifiee:
                   description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
@@ -66610,12 +66618,16 @@ components:
           enum:
             - favorable
             - defavorable
+            - ne_se_prononce_pas
+            - avis_differe
           description: |-
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
             * favorable : Avis favorable.
             * defavorable : Avis défavorable.
+            * ne_se_prononce_pas : Avis pour lequel il n'est pas possible de se prononcer.
+            * avis_differe : Avis différé.
           nullable: true
         periodicite_modifiee:
           description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
