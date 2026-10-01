@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/01-10-2026.2
+  version: 1.0/main/01-10-2026.3
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -20796,8 +20796,7 @@ paths:
                     * favorable : Favorable.
                     * defavorable : Défavorable.
                     * ne_se_prononce_pas : Ne se prononce pas.
-                    * avis_differe : D
-                    ifféré.
+                    * avis_differe : Différé.
                   nullable: true
                 periodicite_modifiee:
                   description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
@@ -21174,8 +21173,7 @@ paths:
                     * favorable : Favorable.
                     * defavorable : Défavorable.
                     * ne_se_prononce_pas : Ne se prononce pas.
-                    * avis_differe : D
-                    ifféré.
+                    * avis_differe : Différé.
                   nullable: true
                 periodicite_modifiee:
                   description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
@@ -66629,8 +66627,7 @@ components:
             * favorable : Favorable.
             * defavorable : Défavorable.
             * ne_se_prononce_pas : Ne se prononce pas.
-            * avis_differe : D
-            ifféré.
+            * avis_differe : Différé.
           nullable: true
         periodicite_modifiee:
           description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
