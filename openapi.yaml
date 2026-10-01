@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/30-09-2026.2
+  version: 1.0/main/01-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -17483,8 +17483,8 @@ paths:
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
                   nullable: true
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
@@ -19495,8 +19495,8 @@ paths:
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
                   nullable: true
                 proposition_avis_observations:
                   description: Observations sur l'avis du préventionniste.
@@ -20793,10 +20793,10 @@ paths:
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
-                    * ne_se_prononce_pas : Avis pour lequel il n'est pas possible de se prononcer.
-                    * avis_differe : Avis différé.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
+                    * ne_se_prononce_pas : Ne se prononce pas.
+                    * avis_differe : différé.
                   nullable: true
                 periodicite_modifiee:
                   description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
@@ -21170,10 +21170,10 @@ paths:
                     Proposition d'avis du préventionniste.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
-                    * ne_se_prononce_pas : Avis pour lequel il n'est pas possible de se prononcer.
-                    * avis_differe : Avis différé.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
+                    * ne_se_prononce_pas : Ne se prononce pas.
+                    * avis_differe : différé.
                   nullable: true
                 periodicite_modifiee:
                   description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
@@ -25146,8 +25146,8 @@ paths:
               Avis favorable ou défavorable.
 
               Valeurs possibles :
-              * favorable : Avis favorable.
-              * defavorable : Avis défavorable.
+              * favorable : Favorable.
+              * defavorable : Défavorable.
         - name: a_visiter_en
           in: query
           description: Filtre sur l'année pour laquelle les ERP doivent être visités.
@@ -27300,8 +27300,8 @@ paths:
                     Avis d'exploitation de l'ERP.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
                 date_pc_initial:
                   description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
                   type: string
@@ -28776,8 +28776,8 @@ paths:
                         Proposition d'avis du préventionniste.
 
                         Valeurs possibles :
-                        * favorable : Avis favorable.
-                        * defavorable : Avis défavorable.
+                        * favorable : Favorable.
+                        * defavorable : Défavorable.
                     avis_sis:
                       type: string
                       enum:
@@ -28787,8 +28787,8 @@ paths:
                         Avis du membre représentant le SIS.
 
                         Valeurs possibles :
-                        * favorable : Avis favorable.
-                        * defavorable : Avis défavorable.
+                        * favorable : Favorable.
+                        * defavorable : Défavorable.
                     avis_commission:
                       type: string
                       enum:
@@ -28798,8 +28798,8 @@ paths:
                         Avis rendu par la commission.
 
                         Valeurs possibles :
-                        * favorable : Avis favorable.
-                        * defavorable : Avis défavorable.
+                        * favorable : Favorable.
+                        * defavorable : Défavorable.
                     avis_differe:
                       description: La commission de sécurité peut décider de reporter son avis à une date ultérieure. Dans ce cas, la date de passage est reportée et un avis différé est émis.
                       type: boolean
@@ -42683,8 +42683,8 @@ paths:
                     Avis rendu de la commission sur le dossier.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
                   nullable: true
                 ge4_3:
                   description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
@@ -42735,8 +42735,8 @@ paths:
                           Proposition d'avis de membre.
 
                           Valeurs possibles :
-                          * favorable : Avis favorable.
-                          * defavorable : Avis défavorable.
+                          * favorable : Favorable.
+                          * defavorable : Défavorable.
                       motivation_avis:
                         description: Justification de l'avis rendu par le membre de la commission sur le dossier.
                         type: string
@@ -54032,8 +54032,8 @@ paths:
                     Avis favorable ou défavorable.
 
                     Valeurs possibles :
-                    * favorable : Avis favorable.
-                    * defavorable : Avis défavorable.
+                    * favorable : Favorable.
+                    * defavorable : Défavorable.
                 a_visiter_en:
                   type: string
                   format: year
@@ -64056,8 +64056,8 @@ components:
             Avis rendu de la commission sur le dossier.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Favorable.
+            * defavorable : Défavorable.
           nullable: true
         enveloppe:
           description: Enveloppe du dossier.
@@ -64441,8 +64441,8 @@ components:
             Avis d'exploitation de l'ERP.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Favorable.
+            * defavorable : Défavorable.
           nullable: true
         date_pc_initial:
           description: Date de l'établissement du permis de construire initial. Cette date permet de déterminer la réglementation applicable à l'ERP.
@@ -65559,8 +65559,8 @@ components:
             Proposition d'avis de membre.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Favorable.
+            * defavorable : Défavorable.
         motivation_avis:
           description: Justification de l'avis rendu par le membre de la commission sur le dossier.
           type: string
@@ -66015,8 +66015,8 @@ components:
             Avis rendu de la commission sur le dossier.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Favorable.
+            * defavorable : Défavorable.
           nullable: true
         ge4_3:
           description: Sur proposition de la commission de sécurité compétente, et lorsqu'un établissement ne comportant pas de locaux d'hébergement fait l'objet d'une visite périodique conclue par un avis favorable à la poursuite de son exploitation et que la visite précédente, effectuée dans les délais réglementaires, avait conduit à la même conclusion, le délai fixé pour sa prochaine visite peut être prolongé dans la limite de cinq ans.
@@ -66559,8 +66559,8 @@ components:
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
+            * favorable : Favorable.
+            * defavorable : Défavorable.
           nullable: true
         proposition_avis_observations:
           description: Observations sur l'avis du préventionniste.
@@ -66624,10 +66624,10 @@ components:
             Proposition d'avis du préventionniste.
 
             Valeurs possibles :
-            * favorable : Avis favorable.
-            * defavorable : Avis défavorable.
-            * ne_se_prononce_pas : Avis pour lequel il n'est pas possible de se prononcer.
-            * avis_differe : Avis différé.
+            * favorable : Favorable.
+            * defavorable : Défavorable.
+            * ne_se_prononce_pas : Ne se prononce pas.
+            * avis_differe : différé.
           nullable: true
         periodicite_modifiee:
           description: La périodicité modifiée est la périodicité qui a été modifiée par la commission de sécurité. La périodicité est en mois. Si à la création ou modification, la périodicité modifiée est spécifiée à "null", le tableau des périodicités est utilisé pour déterminer la périodicité par défaut.
