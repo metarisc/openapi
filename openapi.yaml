@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/08-10-2026.1
+  version: 1.0/main/08-10-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -55485,12 +55485,12 @@ paths:
           schema:
             type: string
             maxLength: 65536
-        - name: reference
+        - name: titre
           in: query
           description: Filtre sur la référence du support réglementaire
           schema:
             type: string
-            maxLength: 256
+            maxLength: 512
         - name: etat
           in: query
           description: Filtre sur l'état du support réglementaire
