@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-10-2026.2
+  version: 1.0/main/08-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -52096,12 +52096,12 @@ paths:
           schema:
             type: string
             maxLength: 65536
-        - name: support_reglementaire_reference
+        - name: support_reglementaire_article
           in: query
-          description: Filtre sur les références des supports réglementaires de la prescription
+          description: Filtre sur les articles des supports réglementaires de la prescription
           schema:
             type: string
-            maxLength: 256
+            maxLength: 512
         - name: chemin
           in: query
           description: Chemin dans lequel explorer les prescriptions
@@ -52333,12 +52333,12 @@ paths:
           schema:
             type: string
             maxLength: 65536
-        - name: support_reglementaire_reference
+        - name: support_reglementaire_article
           in: query
-          description: Filtre sur les références des supports réglementaires de la prescription
+          description: Filtre sur les articles des supports réglementaires de la prescription
           schema:
             type: string
-            maxLength: 256
+            maxLength: 512
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -55799,12 +55799,12 @@ paths:
                   description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
                   type: string
                   maxLength: 256
+                  nullable: true
               required:
                 - nature
                 - contenu
                 - titre
                 - etat
-                - reference
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
               x-extension-metarisc-codegen-context: create
@@ -66526,12 +66526,12 @@ components:
           description: Une chaîne de caractères arbitraire rattachée à l'objet. Utile pour rechercher le support réglementaire.
           type: string
           maxLength: 256
+          nullable: true
       required:
         - id
         - nature
         - legifrance_cid
         - etat
-        - reference
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PrescriptionSupportReglementaire'
       x-extension-metarisc-codegen-context: query
     RapportEtude:
