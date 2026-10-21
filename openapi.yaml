@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-10-2026.1
+  version: 1.0/feature/appliquer-avis/21-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -13300,6 +13300,9 @@ paths:
                           description: Observations dans le cas d'un dossier incomplet.
                           type: string
                           maxLength: 262144
+                        appliquer_avis_sur_erp:
+                          description: Indique si l'avis doit être appliqué sur l'ERP.
+                          type: boolean
                       required:
                         - type
                 - type: object
@@ -13356,7 +13359,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 17
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -28761,6 +28764,9 @@ paths:
                           description: Observations dans le cas d'un dossier incomplet.
                           type: string
                           maxLength: 262144
+                        appliquer_avis_sur_erp:
+                          description: Indique si l'avis doit être appliqué sur l'ERP.
+                          type: boolean
                       required:
                         - type
                 - type: object
@@ -28894,7 +28900,7 @@ paths:
                         required:
                           - type_passage_commission
               additionalProperties: {}
-              maxProperties: 22
+              maxProperties: 23
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/DossierEnhanced'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -29670,6 +29676,9 @@ paths:
                           description: Observations dans le cas d'un dossier incomplet.
                           type: string
                           maxLength: 262144
+                        appliquer_avis_sur_erp:
+                          description: Indique si l'avis doit être appliqué sur l'ERP.
+                          type: boolean
                       required:
                         - type
                 - type: object
@@ -29712,7 +29721,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 17
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -50566,6 +50575,9 @@ paths:
                           description: Observations dans le cas d'un dossier incomplet.
                           type: string
                           maxLength: 262144
+                        appliquer_avis_sur_erp:
+                          description: Indique si l'avis doit être appliqué sur l'ERP.
+                          type: boolean
                       required:
                         - type
                 - type: object
@@ -50608,7 +50620,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 17
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: create
       responses:
@@ -64302,6 +64314,10 @@ components:
               description: Observations dans le cas d'un dossier incomplet.
               type: string
               maxLength: 262144
+              nullable: true
+            appliquer_avis_sur_erp:
+              description: Indique si l'avis doit être appliqué sur l'ERP.
+              type: boolean
               nullable: true
           required:
             - type
