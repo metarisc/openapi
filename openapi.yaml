@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/20-10-2026.1
+  version: 1.0/main/23-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -25301,6 +25301,40 @@ paths:
           schema:
             type: string
             maxLength: 8
+        - name: erp_lie_type
+          in: query
+          x-extension-metarisc-param-multiple: true
+          description: Filtre sur le type de relation des erps liés.
+          schema:
+            oneOf:
+              - type: string
+                enum:
+                  - CELLULE
+                  - BATIMENT_NON_ISOLE
+                  - CODE_DU_TRAVAIL
+                description: |-
+                  Type de la relation entre les ERP.
+
+                  Valeurs possibles :
+                  * CELLULE : Cellule commerciale.
+                  * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                  * CODE_DU_TRAVAIL : Code du travail.
+              - type: array
+                items:
+                  type: string
+                  enum:
+                    - CELLULE
+                    - BATIMENT_NON_ISOLE
+                    - CODE_DU_TRAVAIL
+                  description: |-
+                    Type de la relation entre les ERP.
+
+                    Valeurs possibles :
+                    * CELLULE : Cellule commerciale.
+                    * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                    * CODE_DU_TRAVAIL : Code du travail.
+                maxItems: 3
+                uniqueItems: true
         - in: header
           name: Metarisc-Org-Id
           description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
@@ -27368,10 +27402,12 @@ paths:
                             Valeurs possibles :
                             * CELLULE : Cellule commerciale.
                             * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                            * CODE_DU_TRAVAIL : Code du travail.
                           type: string
                           enum:
                             - CELLULE
                             - BATIMENT_NON_ISOLE
+                            - CODE_DU_TRAVAIL
                       required:
                         - erp_lie_id
                         - type
@@ -31954,10 +31990,12 @@ paths:
                             Valeurs possibles :
                             * CELLULE : Cellule commerciale.
                             * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                            * CODE_DU_TRAVAIL : Code du travail.
                           type: string
                           enum:
                             - CELLULE
                             - BATIMENT_NON_ISOLE
+                            - CODE_DU_TRAVAIL
                       required:
                         - erp_lie_id
                         - type
@@ -34055,10 +34093,12 @@ paths:
                             Valeurs possibles :
                             * CELLULE : Cellule commerciale.
                             * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                            * CODE_DU_TRAVAIL : Code du travail.
                           type: string
                           enum:
                             - CELLULE
                             - BATIMENT_NON_ISOLE
+                            - CODE_DU_TRAVAIL
                       required:
                         - erp_lie_id
                         - type
@@ -54158,6 +54198,36 @@ paths:
                 metarisc_erp_id:
                   type: string
                   maxLength: 8
+                erp_lie_type:
+                  oneOf:
+                    - type: string
+                      enum:
+                        - CELLULE
+                        - BATIMENT_NON_ISOLE
+                        - CODE_DU_TRAVAIL
+                      description: |-
+                        Type de la relation entre les ERP.
+
+                        Valeurs possibles :
+                        * CELLULE : Cellule commerciale.
+                        * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                        * CODE_DU_TRAVAIL : Code du travail.
+                    - type: array
+                      items:
+                        type: string
+                        enum:
+                          - CELLULE
+                          - BATIMENT_NON_ISOLE
+                          - CODE_DU_TRAVAIL
+                        description: |-
+                          Type de la relation entre les ERP.
+
+                          Valeurs possibles :
+                          * CELLULE : Cellule commerciale.
+                          * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+                          * CODE_DU_TRAVAIL : Code du travail.
+                      maxItems: 3
+                      uniqueItems: true
       responses:
         '200':
           description: OK
@@ -64389,10 +64459,12 @@ components:
             Valeurs possibles :
             * CELLULE : Cellule commerciale.
             * BATIMENT_NON_ISOLE : Bâtiment dont l'isolation ne correspond pas aux conditions d'isolement du règlement.
+            * CODE_DU_TRAVAIL : Code du travail.
           type: string
           enum:
             - CELLULE
             - BATIMENT_NON_ISOLE
+            - CODE_DU_TRAVAIL
       required:
         - erp_lie
         - type
