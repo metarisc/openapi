@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/23-10-2026.1
+  version: 1.0/feature/appliquer-avis/26-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -32055,6 +32055,9 @@ paths:
                   description: Résumé de l'historique de l'ERP.
                   type: string
                   maxLength: 65536
+                appliquer_avis_exploitation:
+                  description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
+                  type: boolean
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -34158,6 +34161,9 @@ paths:
                   description: Résumé de l'historique de l'ERP.
                   type: string
                   maxLength: 65536
+                appliquer_avis_exploitation:
+                  description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
+                  type: boolean
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -64608,6 +64614,10 @@ components:
           description: Résumé de l'historique de l'ERP.
           type: string
           maxLength: 65536
+          nullable: true
+        appliquer_avis_exploitation:
+          description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
+          type: boolean
           nullable: true
       required:
         - id
