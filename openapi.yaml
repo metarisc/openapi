@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-10-2026.1
+  version: 1.0/main/27-10-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -8716,11 +8716,6 @@ paths:
               title: Objet Membre dans les passages en commission
               description: Représentation d'un membre amené à siéger au sein d'une commission.
               properties:
-                entite:
-                  description: Entité à laquelle le membre appartient.
-                  type: string
-                  maxLength: 256
-                  nullable: true
                 titre:
                   description: Civilité du membre (ex. Monsieur, Madame).
                   type: string
@@ -9164,11 +9159,6 @@ paths:
               title: Objet Membre dans les passages en commission
               description: Représentation d'un membre amené à siéger au sein d'une commission.
               properties:
-                entite:
-                  description: Entité à laquelle le membre appartient.
-                  type: string
-                  maxLength: 256
-                  nullable: true
                 titre:
                   description: Civilité du membre (ex. Monsieur, Madame).
                   type: string
@@ -9184,6 +9174,12 @@ paths:
                   type: string
                   maxLength: 256
                   nullable: true
+                commission_membre_id:
+                  description: Identifiant du passage en commission auquel le membre est associé.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPassageMembre'
               x-extension-metarisc-codegen-context: update
@@ -63270,11 +63266,6 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        entite:
-          description: Entité à laquelle le membre appartient.
-          type: string
-          maxLength: 256
-          nullable: true
         titre:
           description: Civilité du membre (ex. Monsieur, Madame).
           type: string
@@ -63290,19 +63281,13 @@ components:
           type: string
           maxLength: 256
           nullable: true
-        passage_id:
-          description: Identifiant du passage en commission auquel le membre est associé.
-          type: string
-          format: uuid
-          maxLength: 36
-          minLength: 36
-        passage_en_commission:
+        commission_membre_entite:
+          description: Entité à laquelle le membre appartient au sein de la commission.
           allOf:
-            - $ref: '#/components/schemas/PassageCommission'
+            - $ref: '#/components/schemas/CommissionMembre'
+          nullable: true
       required:
         - id
-        - passage_id
-        - passage_en_commission
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPassageMembre'
       x-extension-metarisc-codegen-context: query
     CommissionPreferences:
