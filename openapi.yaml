@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-10-2026.1
+  version: 1.0/main/27-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -8716,8 +8716,13 @@ paths:
               title: Objet Membre dans les passages en commission
               description: Représentation d'un membre amené à siéger au sein d'une commission.
               properties:
+                entite:
+                  description: Entité à laquelle le membre appartient.
+                  type: string
+                  maxLength: 256
+                  nullable: true
                 titre:
-                  description: Le titre du membre au sein de la commission.
+                  description: Civilité du membre (ex. Monsieur, Madame).
                   type: string
                   maxLength: 256
                   nullable: true
@@ -8730,10 +8735,6 @@ paths:
                   description: Prénom du contact.
                   type: string
                   maxLength: 256
-                  nullable: true
-                presence_obligatoire:
-                  description: Le membre doit siéger obligatoirement lors des passages en commission.
-                  type: boolean
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPassageMembre'
@@ -9163,8 +9164,13 @@ paths:
               title: Objet Membre dans les passages en commission
               description: Représentation d'un membre amené à siéger au sein d'une commission.
               properties:
+                entite:
+                  description: Entité à laquelle le membre appartient.
+                  type: string
+                  maxLength: 256
+                  nullable: true
                 titre:
-                  description: Le titre du membre au sein de la commission.
+                  description: Civilité du membre (ex. Monsieur, Madame).
                   type: string
                   maxLength: 256
                   nullable: true
@@ -9178,9 +9184,6 @@ paths:
                   type: string
                   maxLength: 256
                   nullable: true
-                presence_obligatoire:
-                  description: Le membre doit siéger obligatoirement lors des passages en commission.
-                  type: boolean
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPassageMembre'
               x-extension-metarisc-codegen-context: update
@@ -63267,8 +63270,13 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        entite:
+          description: Entité à laquelle le membre appartient.
+          type: string
+          maxLength: 256
+          nullable: true
         titre:
-          description: Le titre du membre au sein de la commission.
+          description: Civilité du membre (ex. Monsieur, Madame).
           type: string
           maxLength: 256
           nullable: true
@@ -63282,15 +63290,18 @@ components:
           type: string
           maxLength: 256
           nullable: true
-        presence_obligatoire:
-          description: Le membre doit siéger obligatoirement lors des passages en commission.
-          type: boolean
-          nullable: true
+        passage_id:
+          description: Identifiant du passage en commission auquel le membre est associé.
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
         passage_en_commission:
           allOf:
             - $ref: '#/components/schemas/PassageCommission'
       required:
         - id
+        - passage_id
         - passage_en_commission
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPassageMembre'
       x-extension-metarisc-codegen-context: query
