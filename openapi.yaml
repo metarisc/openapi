@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/27-10-2026.2
+  version: 1.0/feature/workflow-sec/30-10-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -11106,7 +11106,7 @@ paths:
               - arrivee_secretariat_commission
               - consultation_sis
               - passage_commission
-              - relecture
+              - relecture_secretariat
               - visite
               - arrivee_secretariat
               - workflow
@@ -11122,7 +11122,7 @@ paths:
               * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
               * consultation_sis : Consultation SIS.
               * passage_commission : Passage en commission.
-              * relecture : Relecture.
+              * relecture_secretariat : Relecture par le secrétariat.
               * visite : Visite.
               * arrivee_secretariat : Arrivée au secrétariat.
               * workflow : Workflow générique.
@@ -29301,7 +29301,7 @@ paths:
               - arrivee_secretariat_commission
               - consultation_sis
               - passage_commission
-              - relecture
+              - relecture_secretariat
               - visite
               - arrivee_secretariat
               - workflow
@@ -29317,7 +29317,7 @@ paths:
               * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
               * consultation_sis : Consultation SIS.
               * passage_commission : Passage en commission.
-              * relecture : Relecture.
+              * relecture_secretariat : Relecture par le secrétariat.
               * visite : Visite.
               * arrivee_secretariat : Arrivée au secrétariat.
               * workflow : Workflow générique.
@@ -64152,7 +64152,7 @@ components:
               - arrivee_secretariat_commission
               - consultation_sis
               - passage_commission
-              - relecture
+              - relecture_secretariat
               - visite
               - arrivee_secretariat
               - workflow
@@ -64168,7 +64168,7 @@ components:
               * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
               * consultation_sis : Consultation SIS.
               * passage_commission : Passage en commission.
-              * relecture : Relecture.
+              * relecture_secretariat : Relecture par le secrétariat.
               * visite : Visite.
               * arrivee_secretariat : Arrivée au secrétariat.
               * workflow : Workflow générique.
@@ -67343,7 +67343,7 @@ components:
             - arrivee_secretariat_commission
             - consultation_sis
             - passage_commission
-            - relecture
+            - relecture_secretariat
             - visite
             - arrivee_secretariat
             - workflow
@@ -67359,7 +67359,7 @@ components:
             * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
             * consultation_sis : Consultation SIS.
             * passage_commission : Passage en commission.
-            * relecture : Relecture.
+            * relecture_secretariat : Relecture par le secrétariat.
             * visite : Visite.
             * arrivee_secretariat : Arrivée au secrétariat.
             * workflow : Workflow générique.
@@ -67495,7 +67495,7 @@ components:
             * arrivee_secretariat_commission : Arrivée au secrétariat de la commission.
             * consultation_sis : Consultation SIS.
             * passage_commission : Passage en commission.
-            * relecture : Relecture.
+            * relecture_secretariat : Relecture par le secrétariat.
             * visite : Visite.
             * arrivee_secretariat : Arrivée au secrétariat.
             * workflow : Workflow générique.
@@ -67509,7 +67509,7 @@ components:
             - arrivee_secretariat_commission
             - consultation_sis
             - passage_commission
-            - relecture
+            - relecture_secretariat
             - visite
             - arrivee_secretariat
             - workflow
