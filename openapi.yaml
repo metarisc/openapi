@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-11-2026.1
+  version: 1.0/main/04-11-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -8730,6 +8730,13 @@ paths:
                   description: Prénom du contact.
                   type: string
                   maxLength: 256
+                  nullable: true
+                commission_membre_id:
+                  description: Identifiant du passage en commission auquel le membre est associé.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
                   nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/CommissionPassageMembre'
