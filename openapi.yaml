@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-11-2026.2
+  version: 1.0/feature/odj-array/05-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -9625,12 +9625,16 @@ paths:
               type: object
               title: Objet Passage en Commission Dossier
               properties:
-                dossier_id:
-                  description: Identifiant du dossier incrit à l'ordre du jour d'une date de passage en commission.
-                  type: string
-                  format: uuid
-                  maxLength: 36
-                  minLength: 36
+                dossiers_ids:
+                  description: Liste des identifiants des dossiers inscrits à l'ordre du jour d'une date de passage en commission.
+                  type: array
+                  maxItems: 120
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
+                  nullable: true
                 date_de_passage:
                   description: Heure à laquelle le passage du dossier est prévue à l'ordre du jour.
                   type: string
@@ -9638,7 +9642,6 @@ paths:
                   maxLength: 50
                   minLength: 20
               required:
-                - dossier_id
                 - date_de_passage
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
@@ -43658,6 +43661,15 @@ paths:
               type: object
               title: Objet Passage en Commission Dossier
               properties:
+                dossiers_ids:
+                  description: Liste des identifiants des dossiers inscrits à l'ordre du jour d'une date de passage en commission.
+                  type: array
+                  maxItems: 120
+                  items:
+                    type: string
+                    format: uuid
+                    maxLength: 36
+                    minLength: 36
                 avis:
                   type: string
                   enum:
@@ -66997,10 +67009,16 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        dossier:
-          description: Dossier incrit à l'ordre du jour d'une date de passage en commission.
-          allOf:
-            - $ref: '#/components/schemas/Dossier'
+        dossiers:
+          description: Liste des dossiers inscrits à l'ordre du jour d'une date de passage en commission.
+          type: array
+          maxItems: 120
+          items:
+            type: string
+            format: uuid
+            maxLength: 36
+            minLength: 36
+          nullable: true
         avis:
           type: string
           enum:
@@ -67053,7 +67071,6 @@ components:
           nullable: true
       required:
         - id
-        - dossier
         - avis
         - ge4_3
         - date_de_passage
