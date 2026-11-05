@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/04-11-2026.2
+  version: 1.0/main/05-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -10051,7 +10051,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-ispagination: true
       x-extension-metarisc-codegen-name: dates_passage_commission
-      x-extension-metarisc-codegen-operation: paginate-commission-date-membres
+      x-extension-metarisc-codegen-operation: paginate-date-ordre-du-jour-odj-membres
     post:
       tags:
         - Dates Passage Commission API
@@ -10093,6 +10093,12 @@ paths:
               title: Objet Membre Avis
               description: Objet représentant l'avis rendu par un membre de la commission lors d'une commission.
               properties:
+                odj_id:
+                  description: Identifiant de l'ordre du jour.
+                  type: string
+                  format: uuid
+                  maxLength: 36
+                  minLength: 36
                 avis:
                   type: string
                   enum:
@@ -10105,6 +10111,8 @@ paths:
                     * favorable : Favorable.
                     * defavorable : Défavorable.
                   nullable: true
+              required:
+                - odj_id
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/MembreAvis'
               x-extension-metarisc-codegen-context: create
@@ -10500,7 +10508,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dates_passage_commission
-      x-extension-metarisc-codegen-operation: delete-commission-date-membre
+      x-extension-metarisc-codegen-operation: delete-membre-odj-membres-odj-ordre-du-jour-date
     patch:
       tags:
         - Dates Passage Commission API
@@ -10749,7 +10757,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       x-extension-metarisc-codegen-name: dates_passage_commission
-      x-extension-metarisc-codegen-operation: patch-commission-date-membre
+      x-extension-metarisc-codegen-operation: patch-membre-odj-membres-odj-ordre-du-jour-date
   /dates_passage_commission/{date_id}/reprogrammer:
     post:
       tags:
