@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/05-11-2026.2
+  version: 1.0/main/06-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -12044,6 +12044,7 @@ paths:
               - consultation_sis
               - passage_commission
               - relecture_secretariat
+              - validation_rapporteur
               - visite
               - arrivee_secretariat
               - workflow
@@ -12060,6 +12061,7 @@ paths:
               * consultation_sis : Consultation SIS.
               * passage_commission : Passage en commission.
               * relecture_secretariat : Relecture par le secrétariat.
+              * validation_rapporteur : Validation par le rapporteur.
               * visite : Visite.
               * arrivee_secretariat : Arrivée au secrétariat.
               * workflow : Workflow générique.
@@ -30239,6 +30241,7 @@ paths:
               - consultation_sis
               - passage_commission
               - relecture_secretariat
+              - validation_rapporteur
               - visite
               - arrivee_secretariat
               - workflow
@@ -30255,6 +30258,7 @@ paths:
               * consultation_sis : Consultation SIS.
               * passage_commission : Passage en commission.
               * relecture_secretariat : Relecture par le secrétariat.
+              * validation_rapporteur : Validation par le rapporteur.
               * visite : Visite.
               * arrivee_secretariat : Arrivée au secrétariat.
               * workflow : Workflow générique.
@@ -65060,6 +65064,7 @@ components:
               - consultation_sis
               - passage_commission
               - relecture_secretariat
+              - validation_rapporteur
               - visite
               - arrivee_secretariat
               - workflow
@@ -65076,11 +65081,12 @@ components:
               * consultation_sis : Consultation SIS.
               * passage_commission : Passage en commission.
               * relecture_secretariat : Relecture par le secrétariat.
+              * validation_rapporteur : Validation par le rapporteur.
               * visite : Visite.
               * arrivee_secretariat : Arrivée au secrétariat.
               * workflow : Workflow générique.
               * reception_de_travaux_en_attente : Réception de travaux en attente.
-          maxItems: 12
+          maxItems: 13
           uniqueItems: true
         nb_messages_fil_rouge:
           description: Nombre de messages dans le fil rouge du dossier.
@@ -68250,6 +68256,7 @@ components:
             - consultation_sis
             - passage_commission
             - relecture_secretariat
+            - validation_rapporteur
             - visite
             - arrivee_secretariat
             - workflow
@@ -68266,6 +68273,7 @@ components:
             * consultation_sis : Consultation SIS.
             * passage_commission : Passage en commission.
             * relecture_secretariat : Relecture par le secrétariat.
+            * validation_rapporteur : Validation par le rapporteur.
             * visite : Visite.
             * arrivee_secretariat : Arrivée au secrétariat.
             * workflow : Workflow générique.
@@ -68402,6 +68410,7 @@ components:
             * consultation_sis : Consultation SIS.
             * passage_commission : Passage en commission.
             * relecture_secretariat : Relecture par le secrétariat.
+            * validation_rapporteur : Validation par le rapporteur.
             * visite : Visite.
             * arrivee_secretariat : Arrivée au secrétariat.
             * workflow : Workflow générique.
@@ -68416,6 +68425,7 @@ components:
             - consultation_sis
             - passage_commission
             - relecture_secretariat
+            - validation_rapporteur
             - visite
             - arrivee_secretariat
             - workflow
