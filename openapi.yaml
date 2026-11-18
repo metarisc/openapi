@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-11-2026.1
+  version: 1.0/feature/affectation-passage/18-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -28177,6 +28177,12 @@ paths:
                   description: Résumé de l'historique de l'ERP.
                   type: string
                   maxLength: 65536
+                duree_visite_estimee:
+                  description: Durée estimée de la visite de l'ERP, jour.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 14
               required:
                 - implantation
                 - descriptif_technique
@@ -32771,6 +32777,13 @@ paths:
                 appliquer_avis_exploitation:
                   description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
                   type: boolean
+                duree_visite_estimee:
+                  description: Durée estimée de la visite de l'ERP, jour.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 14
+                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -34877,6 +34890,13 @@ paths:
                 appliquer_avis_exploitation:
                   description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
                   type: boolean
+                duree_visite_estimee:
+                  description: Durée estimée de la visite de l'ERP, jour.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 14
+                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -67314,6 +67334,13 @@ components:
           description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
           type: boolean
           nullable: true
+        duree_visite_estimee:
+          description: Durée estimée de la visite de l'ERP, jour.
+          type: number
+          format: double
+          minimum: 0
+          maximum: 14
+          nullable: true
       required:
         - id
         - metarisc_erp_id
@@ -68693,6 +68720,10 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+        passage_commission:
+          description: Passage en commission auquel l'affectation est liée.
+          allOf:
+            - $ref: '#/components/schemas/PassageCommission'
         role:
           description: |-
             Role sur le traitement du dossier.
@@ -68708,6 +68739,7 @@ components:
             - $ref: '#/components/schemas/Utilisateur'
       required:
         - id
+        - passage_commission
         - role
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageAffectation'
