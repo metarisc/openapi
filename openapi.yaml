@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/17-11-2026.1
+  version: 1.0/main/18-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -68693,10 +68693,6 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
-        passage_commission:
-          description: Passage en commission auquel l'affectation est liée.
-          allOf:
-            - $ref: '#/components/schemas/PassageCommission'
         role:
           description: |-
             Role sur le traitement du dossier.
@@ -68712,7 +68708,6 @@ components:
             - $ref: '#/components/schemas/Utilisateur'
       required:
         - id
-        - passage_commission
         - role
         - utilisateur
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageAffectation'
