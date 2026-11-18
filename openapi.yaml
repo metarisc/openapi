@@ -28177,6 +28177,12 @@ paths:
                   description: Résumé de l'historique de l'ERP.
                   type: string
                   maxLength: 65536
+                duree_visite_estimee:
+                  description: Durée estimée de la visite de l'ERP, jour.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 14
               required:
                 - implantation
                 - descriptif_technique
@@ -32771,6 +32777,13 @@ paths:
                 appliquer_avis_exploitation:
                   description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
                   type: boolean
+                duree_visite_estimee:
+                  description: Durée estimée de la visite de l'ERP, jour.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 14
+                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -34877,6 +34890,13 @@ paths:
                 appliquer_avis_exploitation:
                   description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
                   type: boolean
+                duree_visite_estimee:
+                  description: Durée estimée de la visite de l'ERP, jour.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 14
+                  nullable: true
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/ERP'
               x-extension-metarisc-codegen-context: update
@@ -67313,6 +67333,13 @@ components:
         appliquer_avis_exploitation:
           description: Indique si l'avis doit être appliqué sur les cellules rattachées à l'ERP.
           type: boolean
+          nullable: true
+        duree_visite_estimee:
+          description: Durée estimée de la visite de l'ERP, jour.
+          type: number
+          format: double
+          minimum: 0
+          maximum: 14
           nullable: true
       required:
         - id
