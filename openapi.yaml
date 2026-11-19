@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/18-11-2026.1
+  version: 1.0/feature/fix-reference-circulaire/19-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -47798,6 +47798,20 @@ paths:
                   format: uri
                   maxLength: 512
                   nullable: true
+                format_documents:
+                  description: |-
+                    Format des documents générés pour l'organisation (convocations, rapports, PV, comptes rendus…).
+
+                    Valeurs possibles :
+                    * odt : Document ODT uniquement.
+                    * pdf : Document PDF uniquement.
+                    * odt_pdf : Archive ZIP contenant le document ODT et le document PDF.
+                  type: string
+                  enum:
+                    - odt
+                    - pdf
+                    - odt_pdf
+                  default: odt
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
               x-extension-metarisc-codegen-context: update
@@ -68485,11 +68499,26 @@ components:
           type: string
           enum:
             - sis
+        format_documents:
+          description: |-
+            Format des documents générés pour l'organisation (convocations, rapports, PV, comptes rendus…).
+
+            Valeurs possibles :
+            * odt : Document ODT uniquement.
+            * pdf : Document PDF uniquement.
+            * odt_pdf : Archive ZIP contenant le document ODT et le document PDF.
+          type: string
+          enum:
+            - odt
+            - pdf
+            - odt_pdf
+          default: odt
       required:
         - id
         - nom
         - logo_url
         - type
+        - format_documents
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
       x-extension-metarisc-codegen-context: query
     OrganisationGeoservice:
