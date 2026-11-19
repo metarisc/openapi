@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-11-2026.1
+  version: 1.0/feature/fix-format_documents/19-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -47805,12 +47805,10 @@ paths:
                     Valeurs possibles :
                     * odt : Document ODT uniquement.
                     * pdf : Document PDF uniquement.
-                    * odt_pdf : Archive ZIP contenant le document ODT et le document PDF.
                   type: string
                   enum:
                     - odt
                     - pdf
-                    - odt_pdf
                   default: odt
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Organisation'
@@ -68506,12 +68504,10 @@ components:
             Valeurs possibles :
             * odt : Document ODT uniquement.
             * pdf : Document PDF uniquement.
-            * odt_pdf : Archive ZIP contenant le document ODT et le document PDF.
           type: string
           enum:
             - odt
             - pdf
-            - odt_pdf
           default: odt
       required:
         - id
