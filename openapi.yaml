@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/19-11-2026.1
+  version: 1.0/feature/fix-format_documents/25-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -14011,6 +14011,26 @@ paths:
                           description: Observations dans le cas d'un dossier incomplet.
                           type: string
                           maxLength: 262144
+                        inculre_annexes_dans_le_rapport:
+                          description: Indique si les annexes doivent être incluses dans le rapport du dossier.
+                          type: boolean
+                        annexes:
+                          description: Annexes associées au dossier.
+                          type: array
+                          items:
+                            type: object
+                            title: Objet Annexes
+                            description: Une annexe est un champs lexical dans un dossier ou dans une proces verbal. Elle contient des informations complémentaires ou des références utiles pour le traitement du dossier.
+                            properties:
+                              titre:
+                                description: Titre de l'annexe.
+                                type: string
+                                maxLength: 256
+                              annexe:
+                                description: Contenu de l'annexe.
+                                type: string
+                                maxLength: 262144
+                          maxItems: 30
                       required:
                         - type
                 - type: object
@@ -14067,7 +14087,7 @@ paths:
                       required:
                         - type
               additionalProperties: {}
-              maxProperties: 16
+              maxProperties: 18
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/Dossier'
               x-extension-metarisc-codegen-context: update
       responses:
@@ -64368,6 +64388,23 @@ components:
         - complement
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/AdressePostale'
       x-extension-metarisc-codegen-context: query
+    Annexes:
+      type: object
+      title: Objet Annexes
+      description: Une annexe est un champs lexical dans un dossier ou dans une proces verbal. Elle contient des informations complémentaires ou des références utiles pour le traitement du dossier.
+      properties:
+        titre:
+          description: Titre de l'annexe.
+          type: string
+          maxLength: 256
+          nullable: true
+        annexe:
+          description: Contenu de l'annexe.
+          type: string
+          maxLength: 262144
+          nullable: true
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/Annexes'
+      x-extension-metarisc-codegen-context: query
     AnomalieDECI:
       type: object
       title: Objet Anomalie DECI
@@ -67105,6 +67142,17 @@ components:
               description: Observations dans le cas d'un dossier incomplet.
               type: string
               maxLength: 262144
+              nullable: true
+            inculre_annexes_dans_le_rapport:
+              description: Indique si les annexes doivent être incluses dans le rapport du dossier.
+              type: boolean
+              nullable: true
+            annexes:
+              description: Annexes associées au dossier.
+              type: array
+              items:
+                $ref: '#/components/schemas/Annexes'
+              maxItems: 30
               nullable: true
           required:
             - type
