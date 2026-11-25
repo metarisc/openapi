@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-11-2026.1
+  version: 1.0/main/25-11-2026.2
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -14011,7 +14011,7 @@ paths:
                           description: Observations dans le cas d'un dossier incomplet.
                           type: string
                           maxLength: 262144
-                        inculre_annexes_dans_le_rapport:
+                        inclure_annexes_dans_le_rapport:
                           description: Indique si les annexes doivent être incluses dans le rapport du dossier.
                           type: boolean
                         annexes:
@@ -67163,7 +67163,7 @@ components:
               type: string
               maxLength: 262144
               nullable: true
-            inculre_annexes_dans_le_rapport:
+            inclure_annexes_dans_le_rapport:
               description: Indique si les annexes doivent être incluses dans le rapport du dossier.
               type: boolean
               nullable: true
