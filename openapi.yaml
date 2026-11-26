@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-11-2026.2
+  version: 1.0/feature/fix-champs-clic/26-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -17469,8 +17469,8 @@ paths:
                             * Y - Musées : Y - Musées.
                             * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                           nullable: true
-                        activites_secondaire:
-                          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+                        autres_activites:
+                          description: Les autres activités sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 autres activités recensées.
                           type: array
                           items:
                             type: string
@@ -18218,8 +18218,8 @@ paths:
                             - Autre
                             - Non concerné
                           nullable: true
-                        isolement_contigus_realise_degre_cf_autre_precision:
-                          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                        isolement_contigus_realise_degre_cf_informations_complementaires:
+                          description: Les informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                           type: string
                           maxLength: 65536
                           nullable: true
@@ -18293,8 +18293,8 @@ paths:
                             - Autre
                             - Non concerné
                           nullable: true
-                        isolement_superpose_realise_degre_cf_autre_precision:
-                          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                        isolement_superpose_realise_degre_cf_informations_complementaires:
+                          description: Les informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                           type: string
                           maxLength: 65536
                           nullable: true
@@ -18383,6 +18383,11 @@ paths:
                           maxItems: 3
                           uniqueItems: true
                           nullable: true
+                        type_cloisonnement_observation:
+                          description: Les observations sur le type de cloisonnement.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
                         construction_distribution_interieure_informations_complementaires:
                           description: Les informations complémentaires sur la distribution intérieure de la construction.
                           type: string
@@ -18439,8 +18444,8 @@ paths:
                           type: string
                           maxLength: 65536
                           nullable: true
-                        degagement_normaux:
-                          description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+                        degagements_normaux:
+                          description: Dégagements normaux comptant dans le nombre minimal de dégagements imposés par la réglementation.
                           type: array
                           maxItems: 10
                           items:
@@ -18454,7 +18459,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
-                              nombre_unite_passage:
+                              nombre_unites_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
@@ -18476,14 +18481,14 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
-                              nombre_unite_passage:
+                              nombre_unites_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
                           nullable: true
-                        degagement_exigibles_informations_complementaires:
+                        degagements_exigibles_informations_complementaires:
                           description: Les informations complémentaires sur les dégagements exigibles.
                           type: string
                           maxLength: 65536
@@ -18503,7 +18508,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
-                              nombre_unite_passage:
+                              nombre_unites_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
@@ -18714,13 +18719,13 @@ paths:
                             Information sur l'installation d'extinction présente dans le bâtiment.
 
                             Valeurs possibles :
-                            * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+                            * Automatique à eau : Système d'extinction automatique à eau.
                             * Manuelle : Système d'extinction manuelle.
                             * Brouillard d'eau : Système de brouillard d'eau.
                             * Autre : Autre type de système d'extinction.
                           type: string
                           enum:
-                            - Automatique sprinkler
+                            - Automatique à eau
                             - Manuelle
                             - Brouillard d'eau
                             - Autre
@@ -18782,39 +18787,41 @@ paths:
                           nullable: true
                         type_ssi:
                           description: |-
-                            Il existe 5 types de SSI.
+                            Il existe 5 types de SSI (le type A pouvant être complété par l'option IGH).
 
                             Valeurs possibles :
-                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                            * B : un centralisateur de mise en sécurité incendie (CMSI).
                             * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                            * A option IGH : SSI de catégorie A répondant aux exigences spécifiques des Immeubles de Grande Hauteur (IGH).
+                            * B : un centralisateur de mise en sécurité incendie (CMSI).
+                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                           type: string
                           enum:
-                            - E
-                            - D
-                            - C
-                            - B
                             - A
+                            - A option IGH
+                            - B
+                            - C
+                            - D
+                            - E
                           nullable: true
                         type_alarme:
                           description: |-
                             Il existe 5 types d’alarme incendie.
 
                             Valeurs possibles :
-                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                            * 3 : Les alarmes incendie Type 3.
-                            * 2B : Les alarmes incendie Type 2B.
-                            * 2A : Les alarmes incendie Type 2A.
                             * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                            * 2A : Les alarmes incendie Type 2A.
+                            * 2B : Les alarmes incendie Type 2B.
+                            * 3 : Les alarmes incendie Type 3.
+                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                           type: string
                           enum:
-                            - '4'
-                            - '3'
-                            - 2B
-                            - 2A
                             - '1'
+                            - 2A
+                            - 2B
+                            - '3'
+                            - '4'
                           nullable: true
                         temporisation_alarme_en_minutes:
                           description: Temporisation de l'alarme en minutes
@@ -18838,10 +18845,12 @@ paths:
                             Valeurs possibles :
                             * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                             * GSM : Téléphone mobile.
+                            * Téléphone direct relié au PCS : Ligne téléphonique directe reliée au Poste Central de Sécurité (PCS).
                           type: string
                           enum:
                             - Telephone urbain fixe ou box secourue
                             - GSM
+                            - Téléphone direct relié au PCS
                           nullable: true
                         systeme_securite_incendie_informations_complementaires:
                           description: Les informations complémentaires sur le système de sécurité incendie.
@@ -19481,8 +19490,8 @@ paths:
                             * Y - Musées : Y - Musées.
                             * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                           nullable: true
-                        activites_secondaire:
-                          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+                        autres_activites:
+                          description: Les autres activités sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 autres activités recensées.
                           type: array
                           items:
                             type: string
@@ -20230,8 +20239,8 @@ paths:
                             - Autre
                             - Non concerné
                           nullable: true
-                        isolement_contigus_realise_degre_cf_autre_precision:
-                          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                        isolement_contigus_realise_degre_cf_informations_complementaires:
+                          description: Les informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                           type: string
                           maxLength: 65536
                           nullable: true
@@ -20305,8 +20314,8 @@ paths:
                             - Autre
                             - Non concerné
                           nullable: true
-                        isolement_superpose_realise_degre_cf_autre_precision:
-                          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                        isolement_superpose_realise_degre_cf_informations_complementaires:
+                          description: Les informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                           type: string
                           maxLength: 65536
                           nullable: true
@@ -20395,6 +20404,11 @@ paths:
                           maxItems: 3
                           uniqueItems: true
                           nullable: true
+                        type_cloisonnement_observation:
+                          description: Les observations sur le type de cloisonnement.
+                          type: string
+                          maxLength: 65536
+                          nullable: true
                         construction_distribution_interieure_informations_complementaires:
                           description: Les informations complémentaires sur la distribution intérieure de la construction.
                           type: string
@@ -20451,8 +20465,8 @@ paths:
                           type: string
                           maxLength: 65536
                           nullable: true
-                        degagement_normaux:
-                          description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+                        degagements_normaux:
+                          description: Dégagements normaux comptant dans le nombre minimal de dégagements imposés par la réglementation.
                           type: array
                           maxItems: 10
                           items:
@@ -20466,7 +20480,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
-                              nombre_unite_passage:
+                              nombre_unites_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
@@ -20488,14 +20502,14 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
-                              nombre_unite_passage:
+                              nombre_unites_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
                           nullable: true
-                        degagement_exigibles_informations_complementaires:
+                        degagements_exigibles_informations_complementaires:
                           description: Les informations complémentaires sur les dégagements exigibles.
                           type: string
                           maxLength: 65536
@@ -20515,7 +20529,7 @@ paths:
                                 format: int32
                                 minimum: 0
                                 maximum: 999999
-                              nombre_unite_passage:
+                              nombre_unites_passage:
                                 description: Nombre d'unités de passage.
                                 type: integer
                                 format: int32
@@ -20726,13 +20740,13 @@ paths:
                             Information sur l'installation d'extinction présente dans le bâtiment.
 
                             Valeurs possibles :
-                            * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+                            * Automatique à eau : Système d'extinction automatique à eau.
                             * Manuelle : Système d'extinction manuelle.
                             * Brouillard d'eau : Système de brouillard d'eau.
                             * Autre : Autre type de système d'extinction.
                           type: string
                           enum:
-                            - Automatique sprinkler
+                            - Automatique à eau
                             - Manuelle
                             - Brouillard d'eau
                             - Autre
@@ -20794,39 +20808,41 @@ paths:
                           nullable: true
                         type_ssi:
                           description: |-
-                            Il existe 5 types de SSI.
+                            Il existe 5 types de SSI (le type A pouvant être complété par l'option IGH).
 
                             Valeurs possibles :
-                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                            * B : un centralisateur de mise en sécurité incendie (CMSI).
                             * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                            * A option IGH : SSI de catégorie A répondant aux exigences spécifiques des Immeubles de Grande Hauteur (IGH).
+                            * B : un centralisateur de mise en sécurité incendie (CMSI).
+                            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                           type: string
                           enum:
-                            - E
-                            - D
-                            - C
-                            - B
                             - A
+                            - A option IGH
+                            - B
+                            - C
+                            - D
+                            - E
                           nullable: true
                         type_alarme:
                           description: |-
                             Il existe 5 types d’alarme incendie.
 
                             Valeurs possibles :
-                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                            * 3 : Les alarmes incendie Type 3.
-                            * 2B : Les alarmes incendie Type 2B.
-                            * 2A : Les alarmes incendie Type 2A.
                             * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                            * 2A : Les alarmes incendie Type 2A.
+                            * 2B : Les alarmes incendie Type 2B.
+                            * 3 : Les alarmes incendie Type 3.
+                            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                           type: string
                           enum:
-                            - '4'
-                            - '3'
-                            - 2B
-                            - 2A
                             - '1'
+                            - 2A
+                            - 2B
+                            - '3'
+                            - '4'
                           nullable: true
                         temporisation_alarme_en_minutes:
                           description: Temporisation de l'alarme en minutes
@@ -20850,10 +20866,12 @@ paths:
                             Valeurs possibles :
                             * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                             * GSM : Téléphone mobile.
+                            * Téléphone direct relié au PCS : Ligne téléphonique directe reliée au Poste Central de Sécurité (PCS).
                           type: string
                           enum:
                             - Telephone urbain fixe ou box secourue
                             - GSM
+                            - Téléphone direct relié au PCS
                           nullable: true
                         systeme_securite_incendie_informations_complementaires:
                           description: Les informations complémentaires sur le système de sécurité incendie.
@@ -27329,8 +27347,8 @@ paths:
                                         * Y - Musées : Y - Musées.
                                         * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       nullable: true
-                                    activites_secondaire:
-                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+                                    autres_activites:
+                                      description: Les autres activités sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 autres activités recensées.
                                       type: array
                                       items:
                                         type: string
@@ -28078,8 +28096,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_contigus_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                                    isolement_contigus_realise_degre_cf_informations_complementaires:
+                                      description: Les informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                                       type: string
                                       maxLength: 65536
                                       nullable: true
@@ -28153,8 +28171,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_superpose_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                                    isolement_superpose_realise_degre_cf_informations_complementaires:
+                                      description: Les informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                                       type: string
                                       maxLength: 65536
                                       nullable: true
@@ -28243,6 +28261,11 @@ paths:
                                       maxItems: 3
                                       uniqueItems: true
                                       nullable: true
+                                    type_cloisonnement_observation:
+                                      description: Les observations sur le type de cloisonnement.
+                                      type: string
+                                      maxLength: 65536
+                                      nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
                                       type: string
@@ -28299,8 +28322,8 @@ paths:
                                       type: string
                                       maxLength: 65536
                                       nullable: true
-                                    degagement_normaux:
-                                      description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+                                    degagements_normaux:
+                                      description: Dégagements normaux comptant dans le nombre minimal de dégagements imposés par la réglementation.
                                       type: array
                                       maxItems: 10
                                       items:
@@ -28314,7 +28337,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
@@ -28336,14 +28359,14 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
                                       nullable: true
-                                    degagement_exigibles_informations_complementaires:
+                                    degagements_exigibles_informations_complementaires:
                                       description: Les informations complémentaires sur les dégagements exigibles.
                                       type: string
                                       maxLength: 65536
@@ -28363,7 +28386,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
@@ -28574,13 +28597,13 @@ paths:
                                         Information sur l'installation d'extinction présente dans le bâtiment.
 
                                         Valeurs possibles :
-                                        * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+                                        * Automatique à eau : Système d'extinction automatique à eau.
                                         * Manuelle : Système d'extinction manuelle.
                                         * Brouillard d'eau : Système de brouillard d'eau.
                                         * Autre : Autre type de système d'extinction.
                                       type: string
                                       enum:
-                                        - Automatique sprinkler
+                                        - Automatique à eau
                                         - Manuelle
                                         - Brouillard d'eau
                                         - Autre
@@ -28642,39 +28665,41 @@ paths:
                                       nullable: true
                                     type_ssi:
                                       description: |-
-                                        Il existe 5 types de SSI.
+                                        Il existe 5 types de SSI (le type A pouvant être complété par l'option IGH).
 
                                         Valeurs possibles :
-                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
                                         * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                                        * A option IGH : SSI de catégorie A répondant aux exigences spécifiques des Immeubles de Grande Hauteur (IGH).
+                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
+                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                                       type: string
                                       enum:
-                                        - E
-                                        - D
-                                        - C
-                                        - B
                                         - A
+                                        - A option IGH
+                                        - B
+                                        - C
+                                        - D
+                                        - E
                                       nullable: true
                                     type_alarme:
                                       description: |-
                                         Il existe 5 types d’alarme incendie.
 
                                         Valeurs possibles :
-                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                                        * 3 : Les alarmes incendie Type 3.
-                                        * 2B : Les alarmes incendie Type 2B.
-                                        * 2A : Les alarmes incendie Type 2A.
                                         * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                                        * 2A : Les alarmes incendie Type 2A.
+                                        * 2B : Les alarmes incendie Type 2B.
+                                        * 3 : Les alarmes incendie Type 3.
+                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                                       type: string
                                       enum:
-                                        - '4'
-                                        - '3'
-                                        - 2B
-                                        - 2A
                                         - '1'
+                                        - 2A
+                                        - 2B
+                                        - '3'
+                                        - '4'
                                       nullable: true
                                     temporisation_alarme_en_minutes:
                                       description: Temporisation de l'alarme en minutes
@@ -28698,10 +28723,12 @@ paths:
                                         Valeurs possibles :
                                         * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                                         * GSM : Téléphone mobile.
+                                        * Téléphone direct relié au PCS : Ligne téléphonique directe reliée au Poste Central de Sécurité (PCS).
                                       type: string
                                       enum:
                                         - Telephone urbain fixe ou box secourue
                                         - GSM
+                                        - Téléphone direct relié au PCS
                                       nullable: true
                                     systeme_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le système de sécurité incendie.
@@ -31946,8 +31973,8 @@ paths:
                                         * Y - Musées : Y - Musées.
                                         * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       nullable: true
-                                    activites_secondaire:
-                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+                                    autres_activites:
+                                      description: Les autres activités sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 autres activités recensées.
                                       type: array
                                       items:
                                         type: string
@@ -32695,8 +32722,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_contigus_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                                    isolement_contigus_realise_degre_cf_informations_complementaires:
+                                      description: Les informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                                       type: string
                                       maxLength: 65536
                                       nullable: true
@@ -32770,8 +32797,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_superpose_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                                    isolement_superpose_realise_degre_cf_informations_complementaires:
+                                      description: Les informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                                       type: string
                                       maxLength: 65536
                                       nullable: true
@@ -32860,6 +32887,11 @@ paths:
                                       maxItems: 3
                                       uniqueItems: true
                                       nullable: true
+                                    type_cloisonnement_observation:
+                                      description: Les observations sur le type de cloisonnement.
+                                      type: string
+                                      maxLength: 65536
+                                      nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
                                       type: string
@@ -32916,8 +32948,8 @@ paths:
                                       type: string
                                       maxLength: 65536
                                       nullable: true
-                                    degagement_normaux:
-                                      description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+                                    degagements_normaux:
+                                      description: Dégagements normaux comptant dans le nombre minimal de dégagements imposés par la réglementation.
                                       type: array
                                       maxItems: 10
                                       items:
@@ -32931,7 +32963,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
@@ -32953,14 +32985,14 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
                                       nullable: true
-                                    degagement_exigibles_informations_complementaires:
+                                    degagements_exigibles_informations_complementaires:
                                       description: Les informations complémentaires sur les dégagements exigibles.
                                       type: string
                                       maxLength: 65536
@@ -32980,7 +33012,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
@@ -33191,13 +33223,13 @@ paths:
                                         Information sur l'installation d'extinction présente dans le bâtiment.
 
                                         Valeurs possibles :
-                                        * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+                                        * Automatique à eau : Système d'extinction automatique à eau.
                                         * Manuelle : Système d'extinction manuelle.
                                         * Brouillard d'eau : Système de brouillard d'eau.
                                         * Autre : Autre type de système d'extinction.
                                       type: string
                                       enum:
-                                        - Automatique sprinkler
+                                        - Automatique à eau
                                         - Manuelle
                                         - Brouillard d'eau
                                         - Autre
@@ -33259,39 +33291,41 @@ paths:
                                       nullable: true
                                     type_ssi:
                                       description: |-
-                                        Il existe 5 types de SSI.
+                                        Il existe 5 types de SSI (le type A pouvant être complété par l'option IGH).
 
                                         Valeurs possibles :
-                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
                                         * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                                        * A option IGH : SSI de catégorie A répondant aux exigences spécifiques des Immeubles de Grande Hauteur (IGH).
+                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
+                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                                       type: string
                                       enum:
-                                        - E
-                                        - D
-                                        - C
-                                        - B
                                         - A
+                                        - A option IGH
+                                        - B
+                                        - C
+                                        - D
+                                        - E
                                       nullable: true
                                     type_alarme:
                                       description: |-
                                         Il existe 5 types d’alarme incendie.
 
                                         Valeurs possibles :
-                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                                        * 3 : Les alarmes incendie Type 3.
-                                        * 2B : Les alarmes incendie Type 2B.
-                                        * 2A : Les alarmes incendie Type 2A.
                                         * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                                        * 2A : Les alarmes incendie Type 2A.
+                                        * 2B : Les alarmes incendie Type 2B.
+                                        * 3 : Les alarmes incendie Type 3.
+                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                                       type: string
                                       enum:
-                                        - '4'
-                                        - '3'
-                                        - 2B
-                                        - 2A
                                         - '1'
+                                        - 2A
+                                        - 2B
+                                        - '3'
+                                        - '4'
                                       nullable: true
                                     temporisation_alarme_en_minutes:
                                       description: Temporisation de l'alarme en minutes
@@ -33315,10 +33349,12 @@ paths:
                                         Valeurs possibles :
                                         * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                                         * GSM : Téléphone mobile.
+                                        * Téléphone direct relié au PCS : Ligne téléphonique directe reliée au Poste Central de Sécurité (PCS).
                                       type: string
                                       enum:
                                         - Telephone urbain fixe ou box secourue
                                         - GSM
+                                        - Téléphone direct relié au PCS
                                       nullable: true
                                     systeme_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le système de sécurité incendie.
@@ -34059,8 +34095,8 @@ paths:
                                         * Y - Musées : Y - Musées.
                                         * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
                                       nullable: true
-                                    activites_secondaire:
-                                      description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+                                    autres_activites:
+                                      description: Les autres activités sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 autres activités recensées.
                                       type: array
                                       items:
                                         type: string
@@ -34808,8 +34844,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_contigus_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+                                    isolement_contigus_realise_degre_cf_informations_complementaires:
+                                      description: Les informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
                                       type: string
                                       maxLength: 65536
                                       nullable: true
@@ -34883,8 +34919,8 @@ paths:
                                         - Autre
                                         - Non concerné
                                       nullable: true
-                                    isolement_superpose_realise_degre_cf_autre_precision:
-                                      description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+                                    isolement_superpose_realise_degre_cf_informations_complementaires:
+                                      description: Les informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
                                       type: string
                                       maxLength: 65536
                                       nullable: true
@@ -34973,6 +35009,11 @@ paths:
                                       maxItems: 3
                                       uniqueItems: true
                                       nullable: true
+                                    type_cloisonnement_observation:
+                                      description: Les observations sur le type de cloisonnement.
+                                      type: string
+                                      maxLength: 65536
+                                      nullable: true
                                     construction_distribution_interieure_informations_complementaires:
                                       description: Les informations complémentaires sur la distribution intérieure de la construction.
                                       type: string
@@ -35029,8 +35070,8 @@ paths:
                                       type: string
                                       maxLength: 65536
                                       nullable: true
-                                    degagement_normaux:
-                                      description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+                                    degagements_normaux:
+                                      description: Dégagements normaux comptant dans le nombre minimal de dégagements imposés par la réglementation.
                                       type: array
                                       maxItems: 10
                                       items:
@@ -35044,7 +35085,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
@@ -35066,14 +35107,14 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
                                       nullable: true
-                                    degagement_exigibles_informations_complementaires:
+                                    degagements_exigibles_informations_complementaires:
                                       description: Les informations complémentaires sur les dégagements exigibles.
                                       type: string
                                       maxLength: 65536
@@ -35093,7 +35134,7 @@ paths:
                                             format: int32
                                             minimum: 0
                                             maximum: 999999
-                                          nombre_unite_passage:
+                                          nombre_unites_passage:
                                             description: Nombre d'unités de passage.
                                             type: integer
                                             format: int32
@@ -35304,13 +35345,13 @@ paths:
                                         Information sur l'installation d'extinction présente dans le bâtiment.
 
                                         Valeurs possibles :
-                                        * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+                                        * Automatique à eau : Système d'extinction automatique à eau.
                                         * Manuelle : Système d'extinction manuelle.
                                         * Brouillard d'eau : Système de brouillard d'eau.
                                         * Autre : Autre type de système d'extinction.
                                       type: string
                                       enum:
-                                        - Automatique sprinkler
+                                        - Automatique à eau
                                         - Manuelle
                                         - Brouillard d'eau
                                         - Autre
@@ -35372,39 +35413,41 @@ paths:
                                       nullable: true
                                     type_ssi:
                                       description: |-
-                                        Il existe 5 types de SSI.
+                                        Il existe 5 types de SSI (le type A pouvant être complété par l'option IGH).
 
                                         Valeurs possibles :
-                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
                                         * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+                                        * A option IGH : SSI de catégorie A répondant aux exigences spécifiques des Immeubles de Grande Hauteur (IGH).
+                                        * B : un centralisateur de mise en sécurité incendie (CMSI).
+                                        * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+                                        * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+                                        * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
                                       type: string
                                       enum:
-                                        - E
-                                        - D
-                                        - C
-                                        - B
                                         - A
+                                        - A option IGH
+                                        - B
+                                        - C
+                                        - D
+                                        - E
                                       nullable: true
                                     type_alarme:
                                       description: |-
                                         Il existe 5 types d’alarme incendie.
 
                                         Valeurs possibles :
-                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-                                        * 3 : Les alarmes incendie Type 3.
-                                        * 2B : Les alarmes incendie Type 2B.
-                                        * 2A : Les alarmes incendie Type 2A.
                                         * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+                                        * 2A : Les alarmes incendie Type 2A.
+                                        * 2B : Les alarmes incendie Type 2B.
+                                        * 3 : Les alarmes incendie Type 3.
+                                        * 4 : Les alarmes incendie Type 4 (Système le plus simple).
                                       type: string
                                       enum:
-                                        - '4'
-                                        - '3'
-                                        - 2B
-                                        - 2A
                                         - '1'
+                                        - 2A
+                                        - 2B
+                                        - '3'
+                                        - '4'
                                       nullable: true
                                     temporisation_alarme_en_minutes:
                                       description: Temporisation de l'alarme en minutes
@@ -35428,10 +35471,12 @@ paths:
                                         Valeurs possibles :
                                         * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
                                         * GSM : Téléphone mobile.
+                                        * Téléphone direct relié au PCS : Ligne téléphonique directe reliée au Poste Central de Sécurité (PCS).
                                       type: string
                                       enum:
                                         - Telephone urbain fixe ou box secourue
                                         - GSM
+                                        - Téléphone direct relié au PCS
                                       nullable: true
                                     systeme_securite_incendie_informations_complementaires:
                                       description: Les informations complémentaires sur le système de sécurité incendie.
@@ -65468,8 +65513,8 @@ components:
             * Y - Musées : Y - Musées.
             * Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire : Y - Salles destinées à recevoir des expositions à vocation culturelle, scientifique, technique, artistique, etc. ayant un caractère temporaire.
           nullable: true
-        activites_secondaire:
-          description: Les activités secondaires sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 activités secondaires recensées.
+        autres_activites:
+          description: Les autres activités sont les activités exercées dans l'établissement en plus de l'activité principale. Il ne peut y avoir qu'une seule activité principale, et au maximum 10 autres activités recensées.
           type: array
           items:
             type: string
@@ -65933,8 +65978,8 @@ components:
             - Autre
             - Non concerné
           nullable: true
-        isolement_contigus_realise_degre_cf_autre_precision:
-          description: Précision sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
+        isolement_contigus_realise_degre_cf_informations_complementaires:
+          description: Les informations complémentaires sur le degré CF (Coupe Feu) de l'isolement entre les tiers choisi.
           type: string
           maxLength: 65536
           nullable: true
@@ -66008,8 +66053,8 @@ components:
             - Autre
             - Non concerné
           nullable: true
-        isolement_superpose_realise_degre_cf_autre_precision:
-          description: Précision sur le degré CF de l'isolement entre les tiers superposés choisi.
+        isolement_superpose_realise_degre_cf_informations_complementaires:
+          description: Les informations complémentaires sur le degré CF de l'isolement entre les tiers superposés choisi.
           type: string
           maxLength: 65536
           nullable: true
@@ -66098,6 +66143,11 @@ components:
           maxItems: 3
           uniqueItems: true
           nullable: true
+        type_cloisonnement_observation:
+          description: Les observations sur le type de cloisonnement.
+          type: string
+          maxLength: 65536
+          nullable: true
         construction_distribution_interieure_informations_complementaires:
           description: Les informations complémentaires sur la distribution intérieure de la construction.
           type: string
@@ -66120,8 +66170,8 @@ components:
           type: string
           maxLength: 65536
           nullable: true
-        degagement_normaux:
-          description: Dégagements comptants dans le nombre minimal de dégagements imposés par la réglementation.
+        degagements_normaux:
+          description: Dégagements normaux comptant dans le nombre minimal de dégagements imposés par la réglementation.
           type: array
           maxItems: 10
           items:
@@ -66134,7 +66184,7 @@ components:
           items:
             $ref: '#/components/schemas/Degagement'
           nullable: true
-        degagement_exigibles_informations_complementaires:
+        degagements_exigibles_informations_complementaires:
           description: Les informations complémentaires sur les dégagements exigibles.
           type: string
           maxLength: 65536
@@ -66350,13 +66400,13 @@ components:
             Information sur l'installation d'extinction présente dans le bâtiment.
 
             Valeurs possibles :
-            * Automatique sprinkler : Système d'extinction automatique par sprinklers.
+            * Automatique à eau : Système d'extinction automatique à eau.
             * Manuelle : Système d'extinction manuelle.
             * Brouillard d'eau : Système de brouillard d'eau.
             * Autre : Autre type de système d'extinction.
           type: string
           enum:
-            - Automatique sprinkler
+            - Automatique à eau
             - Manuelle
             - Brouillard d'eau
             - Autre
@@ -66418,39 +66468,41 @@ components:
           nullable: true
         type_ssi:
           description: |-
-            Il existe 5 types de SSI.
+            Il existe 5 types de SSI (le type A pouvant être complété par l'option IGH).
 
             Valeurs possibles :
-            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
-            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
-            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
-            * B : un centralisateur de mise en sécurité incendie (CMSI).
             * A : un système de détection incendie (SDI) et un centralisateur de mise en sécurité incendie (CMSI).
+            * A option IGH : SSI de catégorie A répondant aux exigences spécifiques des Immeubles de Grande Hauteur (IGH).
+            * B : un centralisateur de mise en sécurité incendie (CMSI).
+            * C : des dispositifs de commandes avec signalisation DCS (si le système comporte des DAS dont la position d’attente et/ou de sécurité doit être surveillée : cas du désenfumage mécanique).
+            * D : comprend au minimum un dispositif de commandes manuelles regroupés DCMR (de désenfumage naturel).
+            * E : comprend éventuellement un dispositif de commande manuel DCM (de désenfumage naturel).
           type: string
           enum:
-            - E
-            - D
-            - C
-            - B
             - A
+            - A option IGH
+            - B
+            - C
+            - D
+            - E
           nullable: true
         type_alarme:
           description: |-
             Il existe 5 types d’alarme incendie.
 
             Valeurs possibles :
-            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
-            * 3 : Les alarmes incendie Type 3.
-            * 2B : Les alarmes incendie Type 2B.
-            * 2A : Les alarmes incendie Type 2A.
             * 1 : Les alarmes incendie Type 1 (Système le plus complexe).
+            * 2A : Les alarmes incendie Type 2A.
+            * 2B : Les alarmes incendie Type 2B.
+            * 3 : Les alarmes incendie Type 3.
+            * 4 : Les alarmes incendie Type 4 (Système le plus simple).
           type: string
           enum:
-            - '4'
-            - '3'
-            - 2B
-            - 2A
             - '1'
+            - 2A
+            - 2B
+            - '3'
+            - '4'
           nullable: true
         temporisation_alarme_en_minutes:
           description: Temporisation de l'alarme en minutes
@@ -66474,10 +66526,12 @@ components:
             Valeurs possibles :
             * Telephone urbain fixe ou box secourue : Ligne téléphonique classique (fixe) ou box internet avec système de secours (batterie, 4G...).
             * GSM : Téléphone mobile.
+            * Téléphone direct relié au PCS : Ligne téléphonique directe reliée au Poste Central de Sécurité (PCS).
           type: string
           enum:
             - Telephone urbain fixe ou box secourue
             - GSM
+            - Téléphone direct relié au PCS
           nullable: true
         systeme_securite_incendie_informations_complementaires:
           description: Les informations complémentaires sur le système de sécurité incendie.
@@ -66495,7 +66549,7 @@ components:
           nullable: true
       required:
         - activite_principale
-        - activites_secondaire
+        - autres_activites
         - categorie
         - groupement_etablissement
         - tableau_des_effectifs
@@ -66523,14 +66577,14 @@ components:
         - desserte_informations_complementaires
         - presence_erp_ou_tiers_contigus
         - isolement_contigus_realise_degre_cf
-        - isolement_contigus_realise_degre_cf_autre_precision
+        - isolement_contigus_realise_degre_cf_informations_complementaires
         - isolement_contigus_informations_complementaires
         - air_libre
         - vis_a_vis
         - isolement_vis_a_vis_informations_complementaires
         - presence_erp_ou_tiers_superpose
         - isolement_superpose_realise_degre_cf
-        - isolement_superpose_realise_degre_cf_autre_precision
+        - isolement_superpose_realise_degre_cf_informations_complementaires
         - isolement_superpose_informations_complementaires
         - structure_sf
         - plancher_sf
@@ -66540,13 +66594,14 @@ components:
         - construction_couverture_description
         - construction_facades_description
         - type_cloisonnement
+        - type_cloisonnement_observation
         - construction_distribution_interieure_informations_complementaires
         - locaux
         - construction_conduits_et_gaines_description
         - construction_amenagements_interieurs_description
-        - degagement_normaux
+        - degagements_normaux
         - degagements_accessoires
-        - degagement_exigibles_informations_complementaires
+        - degagements_exigibles_informations_complementaires
         - degagement_supplementaires
         - degagement_escaliers_description
         - degagement_ascenseurs_escaliers_mecaniques_trottoirs_roulants_description
@@ -66951,7 +67006,7 @@ components:
           format: int32
           minimum: 0
           maximum: 999999
-        nombre_unite_passage:
+        nombre_unites_passage:
           description: Nombre d'unités de passage.
           type: integer
           format: int32
@@ -66959,7 +67014,7 @@ components:
           maximum: 999999
       required:
         - nombre_degagements
-        - nombre_unite_passage
+        - nombre_unites_passage
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Degagement'
       x-extension-metarisc-codegen-context: query
     Derogation:
