@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/26-11-2026.1
+  version: 1.0/feature/porte-connaissance-membre/26-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -11705,6 +11705,7 @@ paths:
                   - erp:schema_general_organisation_securite
                   - erp:etude_ingenierie
                   - erp:manifestation_temporaire
+                  - erp:porte_connaissance_membre
                 description: |-
                   Type du dossier.
 
@@ -11737,6 +11738,7 @@ paths:
                   * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                   * erp:etude_ingenierie : Dossier d'étude ingénierie.
                   * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                  * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
               - type: array
                 items:
                   type: string
@@ -11769,6 +11771,7 @@ paths:
                     - erp:schema_general_organisation_securite
                     - erp:etude_ingenierie
                     - erp:manifestation_temporaire
+                    - erp:porte_connaissance_membre
                   description: |-
                     Type du dossier.
 
@@ -11801,6 +11804,7 @@ paths:
                     * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                     * erp:etude_ingenierie : Dossier d'étude ingénierie.
                     * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                    * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
                 maxItems: 10
                 uniqueItems: true
         - name: workflow_actif
@@ -13946,6 +13950,7 @@ paths:
                             * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                             * erp:etude_ingenierie : Dossier d'étude ingénierie.
                             * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                            * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
                           type: string
                           enum:
                             - erp:autorisation_de_travaux
@@ -13976,6 +13981,7 @@ paths:
                             - erp:schema_general_organisation_securite
                             - erp:etude_ingenierie
                             - erp:manifestation_temporaire
+                            - erp:porte_connaissance_membre
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -16308,6 +16314,662 @@ paths:
       x-extension-metarisc-codegen-islist: true
       x-extension-metarisc-codegen-name: dossiers
       x-extension-metarisc-codegen-operation: get-permissions-dossier
+  /dossiers/{dossier_id}/porte_connaissance_membre:
+    get:
+      tags:
+        - Dossiers API
+      summary: Détails du porté à connaissance des membres
+      description: Récupération des détails du porté à connaissance des membres d'un dossier de type erp:porte_connaissance_membre.
+      operationId: GetPorteConnaissanceMembreDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PorteConnaissanceMembre'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: get-porte-connaissance-membre-dossier
+    patch:
+      tags:
+        - Dossiers API
+      summary: Mise à jour du porté à connaissance des membres avec un patch
+      description: Mise à jour du porté à connaissance des membres d'un dossier de type erp:porte_connaissance_membre en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PatchPorteConnaissanceMembreDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: 'Objet : Porté à connaissance des membres'
+              description: Il s'agit du document permettant de porter à connaissance des informations d'un erp spécifique aux membres concernés.
+              properties:
+                numero_sequentiel:
+                  description: Numéro séquentiel du document porté à connaissance.
+                  type: string
+                  maxLength: 256
+                description:
+                  description: Description du document porté à connaissance.
+                  type: string
+                  maxLength: 65536
+                observations_commission:
+                  description: Observations faites par la commission concernant le document porté à connaissance.
+                  type: string
+                  maxLength: 65536
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/PorteConnaissanceMembre'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PorteConnaissanceMembre'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: patch-porte-connaissance-membre-dossier
+    post:
+      tags:
+        - Dossiers API
+      summary: Mise à jour du porté à connaissance des membres
+      description: Mise à jour du porté à connaissance des membres d'un dossier de type erp:porte_connaissance_membre en définissant les valeurs des paramètres transmis. Tous les paramètres non fournis resteront inchangés.
+      operationId: PostPorteConnaissanceMembreDossierDossiers
+      security:
+        - IdMetariscFr:
+            - openid
+            - email
+            - profile
+      parameters:
+        - name: dossier_id
+          in: path
+          required: true
+          description: Dossier Id
+          schema:
+            type: string
+            maxLength: 255
+        - in: header
+          name: Metarisc-Org-Id
+          description: Identifiant de l'organisation Metarisc sur laquelle réaliser l'appel.
+          schema:
+            type: string
+            format: uuid
+            maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: 'Objet : Porté à connaissance des membres'
+              description: Il s'agit du document permettant de porter à connaissance des informations d'un erp spécifique aux membres concernés.
+              properties:
+                numero_sequentiel:
+                  description: Numéro séquentiel du document porté à connaissance.
+                  type: string
+                  maxLength: 256
+                description:
+                  description: Description du document porté à connaissance.
+                  type: string
+                  maxLength: 65536
+                observations_commission:
+                  description: Observations faites par la commission concernant le document porté à connaissance.
+                  type: string
+                  maxLength: 65536
+              additionalProperties: false
+              x-extension-metarisc-codegen-schema-src: '#/components/schemas/PorteConnaissanceMembre'
+              x-extension-metarisc-codegen-context: update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PorteConnaissanceMembre'
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                enum:
+                  - '*'
+        '400':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          headers:
+            Retry-After:
+              description: Indique combien de temps le client doit attendre avant de faire une nouvelle requête.
+              schema:
+                type: string
+                maxLength: 256
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Bad Request
+          headers:
+            RateLimit-Limit:
+              description: Header pour afficher la limite autorisée jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Reset:
+              description: Header pour afficher le temps restant (en secondes) jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            RateLimit-Remaining:
+              description: Header pour afficher le nombre de requêtes disponibles jusqu'à ce que le quota soit réinitialisé
+              schema:
+                type: integer
+                format: int32
+                minimum: 1
+                maximum: 50
+            Access-Control-Allow-Origin:
+              description: Indique si la réponse peut être partagée avec la requête provenant d'une origine donnée.
+              schema:
+                type: string
+                enum:
+                  - '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-extension-metarisc-codegen-name: dossiers
+      x-extension-metarisc-codegen-operation: post-porte-connaissance-membre-dossier
   /dossiers/{dossier_id}/rapport_etude:
     get:
       tags:
@@ -29469,6 +30131,7 @@ paths:
                             * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                             * erp:etude_ingenierie : Dossier d'étude ingénierie.
                             * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                            * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
                           type: string
                           enum:
                             - erp:autorisation_de_travaux
@@ -29499,6 +30162,7 @@ paths:
                             - erp:schema_general_organisation_securite
                             - erp:etude_ingenierie
                             - erp:manifestation_temporaire
+                            - erp:porte_connaissance_membre
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -29928,6 +30592,7 @@ paths:
                   - erp:schema_general_organisation_securite
                   - erp:etude_ingenierie
                   - erp:manifestation_temporaire
+                  - erp:porte_connaissance_membre
                 description: |-
                   Type du dossier.
 
@@ -29960,6 +30625,7 @@ paths:
                   * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                   * erp:etude_ingenierie : Dossier d'étude ingénierie.
                   * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                  * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
               - type: array
                 items:
                   type: string
@@ -29992,6 +30658,7 @@ paths:
                     - erp:schema_general_organisation_securite
                     - erp:etude_ingenierie
                     - erp:manifestation_temporaire
+                    - erp:porte_connaissance_membre
                   description: |-
                     Type du dossier.
 
@@ -30024,6 +30691,7 @@ paths:
                     * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                     * erp:etude_ingenierie : Dossier d'étude ingénierie.
                     * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                    * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
                 maxItems: 10
                 uniqueItems: true
         - name: workflow_actif
@@ -30380,6 +31048,7 @@ paths:
                             * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                             * erp:etude_ingenierie : Dossier d'étude ingénierie.
                             * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                            * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
                           type: string
                           enum:
                             - erp:autorisation_de_travaux
@@ -30410,6 +31079,7 @@ paths:
                             - erp:schema_general_organisation_securite
                             - erp:etude_ingenierie
                             - erp:manifestation_temporaire
+                            - erp:porte_connaissance_membre
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -53316,6 +53986,7 @@ paths:
                             * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                             * erp:etude_ingenierie : Dossier d'étude ingénierie.
                             * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                            * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
                           type: string
                           enum:
                             - erp:autorisation_de_travaux
@@ -53346,6 +54017,7 @@ paths:
                             - erp:schema_general_organisation_securite
                             - erp:etude_ingenierie
                             - erp:manifestation_temporaire
+                            - erp:porte_connaissance_membre
                         numero_urbanisme:
                           description: Numéro d'urbanisme.
                           type: string
@@ -67091,6 +67763,7 @@ components:
                 * erp:schema_general_organisation_securite : Dossier de schéma général d'organisation de sécurité.
                 * erp:etude_ingenierie : Dossier d'étude ingénierie.
                 * erp:manifestation_temporaire : Dossier de manifestation temporaire.
+                * erp:porte_connaissance_membre : Dossier de porté à connaissance des membres.
               type: string
               enum:
                 - erp:autorisation_de_travaux
@@ -67121,6 +67794,7 @@ components:
                 - erp:schema_general_organisation_securite
                 - erp:etude_ingenierie
                 - erp:manifestation_temporaire
+                - erp:porte_connaissance_membre
             erp:
               allOf:
                 - $ref: '#/components/schemas/ERP'
@@ -69294,6 +69968,28 @@ components:
           maxLength: 256
           default: pong
       x-extension-metarisc-codegen-schema-src: '#/components/schemas/Ping'
+      x-extension-metarisc-codegen-context: query
+    PorteConnaissanceMembre:
+      type: object
+      title: 'Objet : Porté à connaissance des membres'
+      description: Il s'agit du document permettant de porter à connaissance des informations d'un erp spécifique aux membres concernés.
+      properties:
+        numero_sequentiel:
+          description: Numéro séquentiel du document porté à connaissance.
+          type: string
+          maxLength: 256
+          nullable: true
+        description:
+          description: Description du document porté à connaissance.
+          type: string
+          maxLength: 65536
+          nullable: true
+        observations_commission:
+          description: Observations faites par la commission concernant le document porté à connaissance.
+          type: string
+          maxLength: 65536
+          nullable: true
+      x-extension-metarisc-codegen-schema-src: '#/components/schemas/PorteConnaissanceMembre'
       x-extension-metarisc-codegen-context: query
     Prescription:
       type: object
