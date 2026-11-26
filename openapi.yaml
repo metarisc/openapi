@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0/main/25-11-2026.2
+  version: 1.0/feature/numero_proces_verbal/26-11-2026.1
   title: Metarisc API
   description: API REST Metarisc. Consultez https://docs.metarisc.fr pour plus de détails.
   contact:
@@ -43535,6 +43535,10 @@ paths:
                 inclure_annexes_dans_le_proces_verbal:
                   description: Indique si les annexes doivent être incluses dans le procès-verbal du passage en commission.
                   type: boolean
+                numero_proces_verbal:
+                  description: Numéro du procès-verbal de la commission.
+                  type: string
+                  maxLength: 12
               additionalProperties: false
               x-extension-metarisc-codegen-schema-src: '#/components/schemas/PassageCommissionDossier'
               x-extension-metarisc-codegen-context: update
@@ -69010,6 +69014,11 @@ components:
         inclure_annexes_dans_le_proces_verbal:
           description: Indique si les annexes doivent être incluses dans le procès-verbal du passage en commission.
           type: boolean
+          nullable: true
+        numero_proces_verbal:
+          description: Numéro du procès-verbal de la commission.
+          type: string
+          maxLength: 12
           nullable: true
       required:
         - id
